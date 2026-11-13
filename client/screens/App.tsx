@@ -51,6 +51,7 @@ import PixelIcon from "../components/PixelIcon.tsx";
 import PixelPortrait from "../components/PixelPortrait.tsx";
 import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
+import { lifePackCardCount } from "../../chain/pack-count.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { modelNote, sourceScope, sourceSummary } from "../models/source-copy.ts";
 import CompactSkillPanel from "../components/CompactSkillPanel.tsx";
@@ -594,15 +595,20 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
               <header><strong>After your choice</strong><button type="button" aria-label="Dismiss progress update" onClick={() => setProgressFeedback(null)}>×</button></header>
               {progressFeedback.accomplishments.map(record => <p key={record.id}><strong>{record.name}</strong> · {record.title}</p>)}
             </section>}
-            {life.phase === "ended" && <section className="decision-area streamlined-decision is-ended" aria-label="Life summary">
-              <div className="choice-list">
-                  <div className="memorial-summary"><span className="eyebrow">{characterName.toLocaleUpperCase()} OF ALEXANDRIA</span>{deathCause && <p className="memorial-cause"><span>CAUSE OF DEATH</span><strong>{deathCause.title}</strong></p>}{life.deathCauseContext && <p className="death-context"><strong>{life.deathCauseKind === "condition" ? "Health history" : "What led to it"}</strong>{displayProse(life.deathCauseContext)}</p>}<p className="memorial-dates">{formatYear(world.startYear)} <span>—</span> {formatYear(life.year)}</p><strong>{yearsLived(life.age)}</strong>{!deathCause && <p>{ending?.kind === "chapter" ? displayProse(ending.text) : life.age === 0 ? "You died before your first birthday." : life.age < 18 ? "You died before reaching adulthood." : life.flags.parent ? "Your children and household are listed in the character record." : "Read the chronicle to review this life."}</p>}</div>
-                  <button className="primary-button" onClick={openChronicle}>Read your life’s chronicle <Icon name="book" size={19} /></button>
-                  {!ranked && <button className="secondary-button freeplay-booster-trigger" type="button" onClick={() => setFreePlayBoosterOpen(true)}>Open booster pack preview <Icon name="sun" size={18} /></button>}
-                  {!ranked && <button className="text-button" onClick={() => setRestartOpen(true)}>Begin another life <Icon name="arrow" size={17} /></button>}
-                  <SourceLinks ids={ending?.sourceIds} />
-              </div>
-            </section>}
+            {life.phase === "ended" && (() => {
+              const freePlayCards = !ranked ? lifePackCardCount(life, world) : 0;
+              return <section className="decision-area streamlined-decision is-ended" aria-label="Life summary">
+                <div className="choice-list">
+                    <div className="memorial-summary"><span className="eyebrow">{characterName.toLocaleUpperCase()} OF ALEXANDRIA</span>{deathCause && <p className="memorial-cause"><span>CAUSE OF DEATH</span><strong>{deathCause.title}</strong></p>}{life.deathCauseContext && <p className="death-context"><strong>{life.deathCauseKind === "condition" ? "Health history" : "What led to it"}</strong>{displayProse(life.deathCauseContext)}</p>}<p className="memorial-dates">{formatYear(world.startYear)} <span>—</span> {formatYear(life.year)}</p><strong>{yearsLived(life.age)}</strong>{!deathCause && <p>{ending?.kind === "chapter" ? displayProse(ending.text) : life.age === 0 ? "You died before your first birthday." : life.age < 18 ? "You died before reaching adulthood." : life.flags.parent ? "Your children and household are listed in the character record." : "Read the chronicle to review this life."}</p>}</div>
+                    <button className="primary-button" onClick={openChronicle}>Read your life’s chronicle <Icon name="book" size={19} /></button>
+                    {!ranked && (freePlayCards > 0
+                      ? <button className="secondary-button freeplay-booster-trigger" type="button" onClick={() => setFreePlayBoosterOpen(true)}>You could have gotten {freePlayCards} {freePlayCards === 1 ? "card" : "cards"} <Icon name="sun" size={18} /></button>
+                      : <p className="hint-text">No fate cards unlocked (died before age 18).</p>)}
+                    {!ranked && <button className="text-button" onClick={() => setRestartOpen(true)}>Begin another life <Icon name="arrow" size={17} /></button>}
+                    <SourceLinks ids={ending?.sourceIds} />
+                </div>
+              </section>;
+            })()}
           </>}
         </section>
       </div>

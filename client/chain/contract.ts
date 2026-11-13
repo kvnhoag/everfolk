@@ -43,7 +43,7 @@ const PAGE = 100;
 
 type Method = keyof typeof CALL_GAS;
 function assertSlot(slot: number) {
-  if (!Number.isInteger(slot) || slot < 0 || slot > 2) throw new Error("Choose one of the three mint slots.");
+  if (!Number.isInteger(slot) || slot < 0 || slot > 4) throw new Error("Choose one of the available mint slots (1 to 5).");
 }
 
 function accessFor(method: Method, deposit: string): CallAccess {

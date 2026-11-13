@@ -82,16 +82,38 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
         )}
 
         {session && !loading && !error && (
-          <MintPack
-            practice
-            walletPath={false}
-            initialPack={session.pack}
-            evidence={session.evidence}
-            contract={session.contract}
-            careerGroup={session.evidence.career_group}
-            onChoose={slot => session.contract.chooseMintSlot(session.pack.life_id, slot)}
-            onClose={onClose}
-          />
+          session.pack.cards.length === 0 ? (
+            <section className="chain-card mint-pack">
+              <div className="mint-pack-header">
+                <p className="chain-kicker">Free Play preview · no NFT minted</p>
+                <h1>No fate cards earned</h1>
+                <p>
+                  This life ended at age {session.evidence.death_age}, before adulthood (age 18), so no
+                  booster cards are drawn. Reach adulthood and collect titles to draw 1–5 cards, or play
+                  Weave Mode to mint real NFTs on NEAR.
+                </p>
+              </div>
+              <div className="chain-actions">
+                <a className="chain-primary" href="#weave" onClick={onClose}>
+                  Play Weave Mode to get real NFTs <span aria-hidden="true">→</span>
+                </a>
+                <button className="chain-secondary" type="button" onClick={onClose}>
+                  Close
+                </button>
+              </div>
+            </section>
+          ) : (
+            <MintPack
+              practice
+              freePlay
+              walletPath={false}
+              initialPack={session.pack}
+              evidence={session.evidence}
+              contract={session.contract}
+              careerGroup={session.evidence.career_group}
+              onClose={onClose}
+            />
+          )
         )}
       </div>
     </dialog>

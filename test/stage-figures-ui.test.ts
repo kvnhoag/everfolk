@@ -27,6 +27,7 @@ const hooks = registerHooks({
 const { TokenPageBody } = await import("../client/chain/TokenPage.tsx");
 const { MarketBody } = await import("../client/chain/Market.tsx");
 const { default: MintPack } = await import("../client/chain/MintPack.tsx");
+const { default: LifeReport } = await import("../client/chain/LifeReport.tsx");
 hooks.deregister();
 
 const stageExtra = (patch: Partial<TokenExtra> = {}): TokenExtra => ({
@@ -189,4 +190,35 @@ test("MintPack renders booster pack seal and stage figure choices", () => {
   );
   assert.ok(htmlUnopened.includes("booster-pack"), "Should render booster pack button");
   assert.ok(htmlUnopened.includes("Open your pack"), "Should show open prompt");
+
+  const htmlFreePlay = renderToStaticMarkup(
+    createElement(MintPack, {
+      practice: true,
+      freePlay: true,
+      walletPath: false,
+      initialPack: pack,
+      contract: mockContract,
+      onClose: () => {},
+    }),
+  );
+  assert.ok(htmlFreePlay.includes("You could have gotten 2 cards"), "Free Play should frame pack as what you could have gotten");
+  assert.ok(htmlFreePlay.includes("Play Weave Mode to get real NFTs"), "Free Play should link to Weave Mode for NFT minting");
+  assert.ok(!htmlFreePlay.includes("Mint selected card"), "Free Play should not render NFT mint CTA");
+  assert.ok(!htmlFreePlay.includes("Total paid:"), "Free Play should not render paid NEAR receipt");
+
+  const htmlEarlyReport = renderToStaticMarkup(
+    createElement(LifeReport, {
+      packMode: true,
+      cardCount: 0,
+      report: { rows: [] },
+      feeText: "0.001",
+      menu: [],
+      selectedAction: "",
+      onSelectAction: () => {},
+      onMint: () => {},
+      onDecline: () => {},
+    }),
+  );
+  assert.ok(htmlEarlyReport.includes("No fate pack for this life"));
+  assert.ok(!htmlEarlyReport.includes("Open pack"));
 });

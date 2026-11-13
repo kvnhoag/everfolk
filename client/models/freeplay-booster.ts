@@ -2,6 +2,7 @@ import { sha256Hex } from "../../chain/hash.ts";
 import { FIGURE_ACTIONS, NPC_ACTIONS, type FigureId } from "../../chain/ids.ts";
 import { figuresForWorld } from "../../chain/catalog/demo-figures.ts";
 import { careerGroupOf, matchFigures, peakJobOf } from "../../chain/match.ts";
+import { packCardCount } from "../../chain/pack-count.ts";
 import type { Evidence, MintCard, MintPack, MintResult } from "../../chain/types.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { DEFAULT_MARKET_TERMS } from "../chain/payout-preview.ts";
@@ -90,9 +91,10 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
   const defaultAction = NPC_ACTIONS[evidence.career_group]?.actions[0] ?? "letters.teach";
   const evidenceHash = await sha256Hex(JSON.stringify(evidence));
   const seed = evidence.seed;
+  const cardCount = packCardCount(evidence);
 
   const cards: MintCard[] = [];
-  for (let slot = 0; slot < 3; slot++) {
+  for (let slot = 0; slot < cardCount; slot++) {
     cards.push(await generatePackCard(seed, evidenceHash, slot, false, evidence, defaultAction));
   }
 
@@ -128,22 +130,14 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
     },
     async rerollMintSlot(lifeId: string, slot: number) {
       if (lifeId !== packRef.view.life_id) throw new Error("Unknown pack");
-      if (slot < 0 || slot > 2) throw new Error("Unknown slot");
+      if (!Number.isInteger(slot) || slot < 0 || slot >= packRef.view.cards.length) throw new Error("Unknown slot");
       if (packRef.view.cards[slot].rerolled) throw new Error("Slot already rerolled");
       const newCard = await generatePackCard(seed, evidenceHash, slot, true, evidence, defaultAction);
       packRef.view.cards[slot] = newCard;
       return structuredClone(packRef.view);
     },
-    async chooseMintSlot(lifeId: string, slot: number): Promise<MintResult> {
-      if (lifeId !== packRef.view.life_id) throw new Error("Unknown pack");
-      const card = packRef.view.cards[slot];
-      return {
-        token_id: `freeplay-token-${slot}`,
-        kind: card.kind,
-        figure_id: card.figure_id,
-        rarity: card.rarity,
-        affection: card.affection,
-      };
+    async chooseMintSlot(): Promise<MintResult> {
+      throw new Error("Only Weave Mode can mint cards to NFT.");
     },
     async mintLife(): Promise<MintResult> {
       throw new Error("Free-play lives are not minted to NEAR. Play Weave Mode to mint on chain.");

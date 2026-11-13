@@ -170,7 +170,7 @@ export const WEAVE_PRESETS: readonly WeavePresetMeta[] = [
     id: "nft",
     label: "3. NFT: Verify, Pack, Royalties & Market",
     shortLabel: "3. NFT & Market",
-    summary: "Completed Weave life ready to verify, pick a deed, open a 3-card booster pack, reroll, mint, claim NEAR royalties, and trade on the market.",
+    summary: "Completed Weave life ready to verify, pick a deed, open a 1–5 card booster pack, reroll, mint, claim NEAR royalties, and trade on the market.",
   },
   {
     id: "economy",
@@ -186,9 +186,9 @@ export const WEAVE_PRESETS: readonly WeavePresetMeta[] = [
   },
   {
     id: "pack",
-    label: "6. NFT: 3-Card Booster Pack",
+    label: "6. NFT: Booster Pack",
     shortLabel: "6. Pack & Rerolls",
-    summary: "Completed Weave life with the 3-card booster pack already opened for slot rerolls and minting.",
+    summary: "Completed Weave life with the 1–5 card booster pack already opened for slot rerolls and minting.",
   },
   {
     id: "market",

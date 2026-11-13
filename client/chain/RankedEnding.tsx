@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { LifeView, MintResult, MintPack as Pack, MintTerms, StageMintResult } from "../../chain/types.ts";
+import { packCardCount } from "../../chain/pack-count.ts";
 import type { OwnersByToken } from "./born-into-model.ts";
 import { errorText } from "./chain-backend.ts";
 import LifeReport from "./LifeReport.tsx";
@@ -112,6 +113,7 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
     <div className="chain-actions"><button className="chain-primary" type="button" onClick={() => { setStage({ kind: "verifying" }); setAttempt(value => value + 1); }}>Try again<span aria-hidden="true">→</span></button><button className="chain-secondary" type="button" onClick={onClose}>Back to Everfolk</button></div>
   </section>;
   const evidence = stage.signed.evidence;
+  const cardCount = packCardCount(evidence);
   if (stage.kind === "declining") return <DeclineChoice cooldownMinutes={COOLDOWN_MINUTES} busy={busy} error={error}
     onKeep={onClose} onClose={() => { void closeLife(); }} onBack={() => { setError(""); setStage({ kind: "report", signed: stage.signed }); }} />;
   if (stage.kind === "pack") return <MintPack walletPath={walletPath} practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;
@@ -128,10 +130,12 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
     busy={busy}
     error={error}
     packMode
+    cardCount={cardCount}
     rerollFeeText={formatNear(terms?.reroll_fee ?? REROLL_FEE_YOCTO)}
     sourceSharePercent={(terms?.source_share_bps ?? 5000) / 100}
     onSelectAction={setSelected}
     onMint={() => { void mint(stage.signed); }}
     onDecline={() => { setError(""); setStage({ kind: "declining", signed: stage.signed }); }}
+    onCloseTooEarly={() => { void closeLife(); }}
   />;
 }

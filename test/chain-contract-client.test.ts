@@ -505,7 +505,36 @@ test("the real pack client quotes chain fees and requires wallet approval for ev
   await contract.chooseMintSlot(life.life_id, 1);
   assert.deepEqual(recorder.calls.map(c => c.deposit), [terms.mint_fee, terms.reroll_fee, "1"]);
   for (const call of recorder.calls) { assert.equal(call.access, "wallet"); assert.ok(BigInt(call.gas) >= 150n * TGAS); }
-  await assert.rejects(contract.rerollMintSlot(life.life_id, 3, terms.reroll_fee), /three mint slots/);
-  await assert.rejects(contract.chooseMintSlot(life.life_id, -1), /three mint slots/);
+  await assert.rejects(contract.rerollMintSlot(life.life_id, 5, terms.reroll_fee), /available mint slots/);
+  await assert.rejects(contract.chooseMintSlot(life.life_id, -1), /available mint slots/);
   assert.equal(recorder.calls.length, 3);
+});
+
+test("mock contract pack sizes scale 1-5 by duration and titles, and reject early death", async () => {
+  const contract = createMockContract({ nobodyWeightBps: 0 });
+  const earlyLife = await contract.startLife(RANKED_WORLD_VERSION);
+  const earlySigned = await signedEvidenceFor(earlyLife, { death_age: 15, accomplishments: [{ id: "childhood", age: 10 }] });
+  await assert.rejects(contract.openMintPack(earlyLife.life_id, earlySigned, "letters.teach"), /too early/);
+
+  const adultContract = contract.as("adult.testnet");
+  const adultLife = await adultContract.startLife(RANKED_WORLD_VERSION);
+  const adultPack = await adultContract.openMintPack(adultLife.life_id, await signedEvidenceFor(adultLife, { death_age: 24, accomplishments: [], matched_figures: [] }), "letters.teach");
+  assert.equal(adultPack.cards.length, 1);
+  await assert.rejects(adultContract.chooseMintSlot(adultLife.life_id, 1), /Unknown mint slot/);
+  await adultContract.chooseMintSlot(adultLife.life_id, 0);
+
+  const cappedContract = contract.as("capped.testnet");
+  const cappedLife = await cappedContract.startLife(RANKED_WORLD_VERSION);
+  const cappedPack = await cappedContract.openMintPack(
+    cappedLife.life_id,
+    await signedEvidenceFor(cappedLife, {
+      death_age: 68,
+      accomplishments: [{ id: "a", age: 20 }, { id: "b", age: 40 }],
+      matched_figures: ["euclid", "alexander"],
+    }),
+    "letters.teach",
+  );
+  assert.equal(cappedPack.cards.length, 5);
+  const res = await cappedContract.chooseMintSlot(cappedLife.life_id, 4);
+  assert.ok(res.token_id);
 });

@@ -15,6 +15,8 @@ export interface MintPackProps {
   initialPack: Pack;
   evidence?: Evidence;
   practice?: boolean;
+  /** Non-Weave preview only: flips cards to show "You could have gotten…" with no NFT minting. */
+  freePlay?: boolean;
   walletPath?: boolean;
   contract: LivesContract;
   careerGroup?: CareerGroup;
@@ -29,6 +31,7 @@ export default function MintPack({
   evidence,
   walletPath = true,
   practice = false,
+  freePlay = false,
   contract,
   careerGroup,
   onChoose,
@@ -62,13 +65,15 @@ export default function MintPack({
   const group = careerGroup ?? groupOfAction(pack?.cards?.find(c => c.kind === "npc")?.action_id ?? null) ?? "letters";
 
   const totalCards = pack?.cards?.length ?? 0;
+  const cardNoun = totalCards === 1 ? "card" : "cards";
+  const otherCards = totalCards - 1;
   const revealedCount = Object.values(flippedCards).filter(Boolean).length;
   const allRevealed = totalCards > 0 && revealedCount >= totalCards;
 
   function flipCard(slot: number) {
     setFlippedCards(prev => ({ ...prev, [slot]: true }));
     // Auto-select if nothing is selected yet
-    if (selected === null) {
+    if (!freePlay && selected === null) {
       setSelected(slot);
     }
   }
@@ -80,7 +85,7 @@ export default function MintPack({
     });
     setFlippedCards(revealed);
     audioManager.playClickSound();
-    if (selected === null && (pack?.cards?.length ?? 0) > 0) {
+    if (!freePlay && selected === null && (pack?.cards?.length ?? 0) > 0) {
       setSelected(0);
     }
   }
@@ -110,7 +115,7 @@ export default function MintPack({
   }
 
   async function choose() {
-    if (selected === null) return;
+    if (freePlay || selected === null) return;
     setBusy("mint");
     setError("");
     try {
@@ -158,21 +163,39 @@ export default function MintPack({
       <div className="mint-pack-header">
         <p className="chain-kicker">
           <span className="cr-index">№ {pack.life_id}</span>
-          {practice ? "Practice pack · not recorded on NEAR" : "Booster pack recorded on NEAR"}
+          {freePlay
+            ? "Free Play preview · no NFT minted"
+            : practice
+              ? "Practice pack · not recorded on NEAR"
+              : "Booster pack recorded on NEAR"}
         </p>
         <h1 id="pack-title" tabIndex={-1}>
-          {opened
-            ? allRevealed
-              ? "Choose who weaves forward"
-              : "Reveal your fate"
-            : "A life. Three possibilities."}
+          {freePlay
+            ? opened
+              ? allRevealed
+                ? "You could have gotten these cards"
+                : "See what you could have gotten"
+              : `You could have gotten ${totalCards} ${cardNoun}`
+            : opened
+              ? allRevealed
+                ? "Choose who weaves forward"
+                : "Reveal your fate"
+              : `A life. ${totalCards} ${totalCards === 1 ? "possibility" : "possibilities"}.`}
         </h1>
         <p>
-          {opened
-            ? allRevealed
-              ? "All fates revealed. Select one card to keep as your permanent Life NFT. The other two return to the story."
-              : `Tap each card to reveal what echoes forward (${revealedCount} of ${totalCards} revealed).`
-            : "Your booster pack is ready. Break the seal to reveal your three fate cards."}
+          {freePlay
+            ? opened
+              ? allRevealed
+                ? `These ${totalCards} fate ${cardNoun} come from this life’s duration and titles. Only Weave Mode can mint cards to NFT.`
+                : `Tap each card to see what you could have gotten (${revealedCount} of ${totalCards} revealed).`
+              : `Break the seal to preview ${totalCards} ${cardNoun} based on this life’s age and titles. Play Weave Mode to mint NFTs.`
+            : opened
+              ? allRevealed
+                ? totalCards === 1
+                  ? "Fate revealed. Mint this card as your permanent Life NFT."
+                  : `All fates revealed. Select one card to keep as your permanent Life NFT. The other ${otherCards === 1 ? "one returns" : `${otherCards} return`} to the story.`
+                : `Tap each card to reveal what echoes forward (${revealedCount} of ${totalCards} revealed).`
+              : `Your booster pack is ready. Break the seal to reveal ${totalCards === 1 ? "your fate card" : `your ${totalCards} fate cards`}.`}
         </p>
       </div>
 
@@ -189,10 +212,12 @@ export default function MintPack({
               ✦
             </span>
             <strong>EVERFOLK</strong>
-            <span>Weaving fates</span>
+            <span>{freePlay ? "Free Play preview" : "Weaving fates"}</span>
             <small>{opening ? "Breaking the golden seal…" : "Open your pack →"}</small>
           </button>
-          <p className="chain-fine">Three cards are sealed within. Each echoes a different chapter and deed.</p>
+          <p className="chain-fine">
+            {totalCards} {cardNoun} {totalCards === 1 ? "is" : "are"} sealed within. Each echoes a chapter and deed.
+          </p>
         </div>
       ) : (
         <>
@@ -201,7 +226,9 @@ export default function MintPack({
             <span className="mint-pack-reveal-counter">
               <span className="cr-index">{revealedCount}/{totalCards}</span>
               {allRevealed
-                ? `All cards revealed · Slot ${selected !== null ? selected + 1 : "—"} selected`
+                ? freePlay
+                  ? "All preview cards revealed · Weave Mode required to mint NFTs"
+                  : `All cards revealed · Slot ${selected !== null ? selected + 1 : "—"} selected`
                 : "Click each card to flip and reveal its deed"}
             </span>
             {!allRevealed && (
@@ -246,8 +273,10 @@ export default function MintPack({
                   <EverfolkCard
                     isFaceDown={!isFlipped}
                     onFlip={() => flipCard(slot)}
-                    onClick={() => setSelected(slot)}
-                    selected={isSelected}
+                    onClick={() => {
+                      if (!freePlay) setSelected(slot);
+                    }}
+                    selected={!freePlay && isSelected}
                     slotNumber={slot + 1}
                     title={cardTitle}
                     subtitle={cardSubtitle}
@@ -261,7 +290,7 @@ export default function MintPack({
                     actionDescription={actionDescription(card.action_id)}
                     affection={card.affection}
                     actions={
-                      isFlipped ? (
+                      !freePlay && isFlipped ? (
                         <div className="ef-booster-card-controls">
                           <button
                             type="button"
@@ -298,22 +327,27 @@ export default function MintPack({
           </div>
 
           <p className="chain-fine">
-            Click any face-down card to reveal its identity and deed. One optional reroll per slot.
-            {practice
-              ? " Practice rerolls update this local ledger; no NEAR is spent."
-              : " Every paid reroll is saved on NEAR and added to your total mint fee."}
+            {freePlay
+              ? "Click any face-down card to reveal what you could have gotten. Only Weave Mode can mint cards to NFT."
+              : `Click any face-down card to reveal its identity and deed. One optional reroll per slot.${
+                  practice
+                    ? " Practice rerolls update this local ledger; no NEAR is spent."
+                    : " Every paid reroll is saved on NEAR and added to your total mint fee."
+                }`}
           </p>
         </>
       )}
 
-      <div className="pack-receipt">
-        <strong>Total paid: {formatNear(pack.total_fee)} NEAR</strong>
-        <span>
-          {pack.source_share_bps / 100}% to source lives by impact; remainder to the protocol treasury. If no
-          sources shaped this life, the treasury receives the fee. Fees are split when you mint or close this
-          life. {walletPath && "Network gas is separate."}
-        </span>
-      </div>
+      {!freePlay && (
+        <div className="pack-receipt">
+          <strong>Total paid: {formatNear(pack.total_fee)} NEAR</strong>
+          <span>
+            {pack.source_share_bps / 100}% to source lives by impact; remainder to the protocol treasury. If no
+            sources shaped this life, the treasury receives the fee. Fees are split when you mint or close this
+            life. {walletPath && "Network gas is separate."}
+          </span>
+        </div>
+      )}
 
       {busy && (
         <p role="status" className="chain-notice">
@@ -332,35 +366,50 @@ export default function MintPack({
       )}
 
       <div className="chain-actions">
-        {opened && (
-          <button
-            className="chain-primary"
-            type="button"
-            disabled={Boolean(busy) || selected === null || !flippedCards[selected]}
-            onClick={() => {
-              void choose();
-            }}
-          >
-            {busy === "mint"
-              ? "Minting…"
-              : selected === null || !flippedCards[selected]
-                ? "Select a revealed card above"
-                : `Mint selected card · Slot ${selected + 1}`}
-            <span aria-hidden="true">→</span>
-          </button>
+        {freePlay ? (
+          <>
+            <a className="chain-primary" href="#weave" onClick={onClose}>
+              Play Weave Mode to get real NFTs <span aria-hidden="true">→</span>
+            </a>
+            <button className="chain-secondary" type="button" disabled={Boolean(busy)} onClick={onClose}>
+              Close preview
+            </button>
+          </>
+        ) : (
+          <>
+            {opened && (
+              <button
+                className="chain-primary"
+                type="button"
+                disabled={Boolean(busy) || selected === null || !flippedCards[selected]}
+                onClick={() => {
+                  void choose();
+                }}
+              >
+                {busy === "mint"
+                  ? "Minting…"
+                  : selected === null || !flippedCards[selected]
+                    ? "Select a revealed card above"
+                    : `Mint selected card · Slot ${selected + 1}`}
+                <span aria-hidden="true">→</span>
+              </button>
+            )}
+            <button className="chain-secondary" type="button" disabled={Boolean(busy)} onClick={onClose}>
+              Save pack & leave
+            </button>
+          </>
         )}
-        <button className="chain-secondary" type="button" disabled={Boolean(busy)} onClick={onClose}>
-          Save pack & leave
-        </button>
       </div>
 
       <p className="chain-fine">
-        {practice
-          ? "This practice pack lasts while this page stays open. No NEAR is spent."
-          : `Your pack is saved on NEAR. Return from My lives at any time. ${walletPath ? "Final selection asks for wallet approval with 1 yoctoNEAR, plus network gas." : "You’ll confirm your choice first."}`}
+        {freePlay
+          ? "Free Play never mints on NEAR. Start a ranked life in Weave Mode to collect and trade real NFTs."
+          : practice
+            ? "This practice pack lasts while this page stays open. No NEAR is spent."
+            : `Your pack is saved on NEAR. Return from My lives at any time. ${walletPath ? "Final selection asks for wallet approval with 1 yoctoNEAR, plus network gas." : "You’ll confirm your choice first."}`}
       </p>
 
-      {!practice && (
+      {!practice && !freePlay && (
         <details className="pack-proof">
           <summary>Verify this pack</summary>
           <p>
