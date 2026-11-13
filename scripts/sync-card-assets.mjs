@@ -6,6 +6,7 @@ import { createRequire } from "node:module";
 import { isAbsolute, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeActiveCardArtReplacements } from "./lib/card-art-replacements.mjs";
+import figurePromotions from "../chain/catalog/figure-promotions.json" with { type: "json" };
 
 const repo = fileURLToPath(new URL("../", import.meta.url));
 const require = createRequire(import.meta.url);
@@ -70,13 +71,15 @@ need(new Set(assets.map(a => a.id)).size === 117, "Card IDs must be unique");
 const ranks = ["common", "uncommon", "rare", "epic", "legendary"];
 const limits = { common: null, uncommon: null, rare: 100, epic: 25, legendary: 10 };
 const chainFigures = new Set(["alexander", "aristotle", "euclid", "cleomenes"]);
-const parentVariants = assets.filter(asset => asset.kind === "parent" && chainFigures.has(asset.figureId)).flatMap(base =>
-  ranks.filter(rarity => rarity !== base.rarity).map(rarity => {
+const promotedFigures = new Set(["demetrius", "zeno", "ptolemy"]);
+const parentVariants = assets.filter(asset => asset.kind === "parent" && (chainFigures.has(asset.figureId) || promotedFigures.has(asset.figureId))).flatMap(base =>
+  (chainFigures.has(base.figureId) ? ranks : ["legendary"]).filter(rarity => rarity !== base.rarity).map(rarity => {
     const id = base.id + "-" + rarity;
-    return { ...base, ...(base.figureId === "cleomenes" && rarity === "legendary" ? { bodyText: "Appointed by Alexander to administer Egyptian revenue, Cleomenes became a powerful financial official. His control of grain and taxation amassed wealth, alongside ancient accusations of exploitation and profiteering." } : {}), id, slug: id, variantOf: base.id, rarity, rarityCharacteristics: require(resolve(library, "source/frame-design.cjs")).PALETTE[rarity].character, editionLimit: limits[rarity], exampleEdition: `001/${limits[rarity] === null ? "∞" : String(limits[rarity]).padStart(3, "0")}`, frameLayout: rarity === "legendary" ? "full-art" : "standard", src: prefix + id + "-footerless.webp", footerlessSrc: prefix + id + "-footerless.webp", thumbnailSrc: prefix + id + "-footerless.webp", sha256: existsSync(resolve(destination, id + "-footerless.webp")) ? hash(readFileSync(resolve(destination, id + "-footerless.webp"))) : "" };
+    const promotion = rarity === "legendary" ? figurePromotions[base.figureId] : undefined;
+    return { ...base, ...(base.figureId === "cleomenes" && rarity === "legendary" ? { bodyText: "Appointed by Alexander to administer Egyptian revenue, Cleomenes became a powerful financial official. His control of grain and taxation amassed wealth, alongside ancient accusations of exploitation and profiteering." } : {}), ...(promotion ? { bodyText: promotion.biography } : {}), id, slug: id, variantOf: base.id, rarity, rarityCharacteristics: require(resolve(library, "source/frame-design.cjs")).PALETTE[rarity].character, editionLimit: limits[rarity], exampleEdition: `001/${limits[rarity] === null ? "∞" : String(limits[rarity]).padStart(3, "0")}`, frameLayout: rarity === "legendary" ? "full-art" : "standard", src: prefix + id + "-footerless.webp", footerlessSrc: prefix + id + "-footerless.webp", thumbnailSrc: prefix + id + "-footerless.webp", sha256: existsSync(resolve(destination, id + "-footerless.webp")) ? hash(readFileSync(resolve(destination, id + "-footerless.webp"))) : "" };
   })
 );
-need(parentVariants.length === 16, "Expected 16 live-token parent rarity variants");
+need(parentVariants.length === 19, "Expected 16 live-token variants and three Legendary promotions");
 const common = {
   schemaVersion: 1,
   libraryId: catalog.libraryId,
@@ -293,10 +296,10 @@ async function syncParentVariants() {
     }
   });
   const manifest = { ...existing, ...common, parentVariants, parentVariantDeliveries: variantDeliveries, totalBytes: existing.deliveries.reduce((total, asset) => total + asset.full.bytes + asset.thumbnail.bytes + asset.footerless.bytes + asset.portrait.bytes, 0) + variantDeliveries.reduce((total, variant) => total + variant.footerless.bytes, 0) };
-  need(readdirSync(destination).filter(file => file.endsWith(".webp")).length === 484, "Expected 484 base and parent-variant WebPs");
+  need(readdirSync(destination).filter(file => file.endsWith(".webp")).length === 487, "Expected 487 base and parent-variant WebPs");
   writeChanged(registryPath, json(common));
   writeChanged(manifestFile, json(manifest));
   need(relative(resolve(repo, "artifacts"), temporary) === "card-assets-v14", "Unexpected variant cleanup target");
   rmSync(temporary, { recursive: true, force: true });
-  console.log(JSON.stringify({ parentVariants: variantDeliveries.length, totalWebPFiles: 484, bytes: manifest.totalBytes, allLosslessRGBAExact: true }));
+  console.log(JSON.stringify({ parentVariants: variantDeliveries.length, totalWebPFiles: 487, bytes: manifest.totalBytes, allLosslessRGBAExact: true }));
 }

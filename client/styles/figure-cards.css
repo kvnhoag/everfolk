@@ -4,3 +4,8 @@
 .figure-tcg-card--common{--card-accent:#7b7a70;--card-soft:#e6e4db;--card-deep:#55554b;border-width:2px;padding:13px;background:linear-gradient(145deg,#faf8ed,#dfddd1 65%,#f2efe5)}.figure-tcg-card--common .figure-tcg-stones i{box-sizing:border-box;border:1px solid var(--card-accent);border-radius:50%;background:transparent;box-shadow:none;transform:none}
 
 .figure-tcg-title{min-height:2.24em;max-height:2.24em;flex-shrink:0;padding-bottom:0;margin-bottom:5px}
+
+/* Approved card faces supply their own frame, text and portrait. */
+.figure-tcg-card.figure-tcg-card--approved,.figure-preview-layer .figure-tcg-card.figure-tcg-card--approved,.figure-card-float .figure-tcg-card.figure-tcg-card--approved{aspect-ratio:5/7;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible}
+.figure-tcg-card.figure-tcg-card--approved:before{display:none}
+.figure-tcg-card--approved>.collection-card-art{flex:none;height:100%}

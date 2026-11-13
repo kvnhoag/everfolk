@@ -23,7 +23,7 @@ To try the whole fitting workflow using the included approved art, run `node exa
 
 PNG compositing uses the supplied transparent overlays and needs no font installation. To edit the SVG typography, install **Source Serif 4** and **Inter**. Inter's WOFF2 and license are bundled; Source Serif 4 is not bundled. Official source links and font details are in `licenses/fonts/fonts.json`.
 
-The catalogue has **117 designs**: 13 main figures plus 52 professions × two genders. It includes 34 newer v14 illustrations and 83 retained approved v12 illustrations. There are also 16 main-card rarity-frame variants used by saved game/contract records; they reuse four existing main portraits, not 16 extra paintings.
+The catalogue has **117 designs**: 13 main figures plus 52 professions × two genders. It includes 34 newer v14 illustrations and 83 retained approved v12 illustrations. There were originally 16 main-card rarity-frame variants used by saved game/contract records; they reuse four existing main portraits, not 16 extra paintings.
 
 ## Prepare two art-only fitting assets
 
@@ -135,3 +135,5 @@ The import installs versioned outputs and updates the active manifest. Keep the 
 Keep card IDs, figure identity, role, gender, copy, rarity and edition limits intact during an art replacement. Do not infer gender from a name, replace a saved custom portrait, award a new contributor card or resolve a historical promotion gate. Actual NFT serials and ownership remain runtime data, never part of the painting.
 
 The frame's professionally drawn symbols and their licenses/credits remain separate assets. Preserve attribution when distributing the system. Main biographies and contributor copy are English; a contributor paragraph describes a profession, its duty and its value as connected prose. No “Player Contribution,” “Art Preview,” generic “Historical Figure” subtitle or gender label belongs on the card face.
+
+The runtime set now includes 19 alternate parent frames: the 16 retained onchain variants plus full-art Legendary promotions for Demetrius, Zeno and Ptolemy. Each promotion reuses its approved main portrait; no additional illustration is required.

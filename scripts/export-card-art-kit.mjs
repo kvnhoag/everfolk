@@ -76,7 +76,7 @@ function blankSvg(svg) {
 }
 
 need(catalog.complete && catalog.assets.length === 117, 'Reviewed 117-card catalogue required');
-need(registry.assets.length === 117 && registry.parentVariants.length === 16, 'Current production registry required');
+need(registry.assets.length === 117 && registry.parentVariants.length === 19, 'Current production registry required');
 need(hash(catalogBytes) === registry.sourceCatalogSha256, 'Production registry is not from the reviewed catalogue');
 for (const directory of ['data', 'frames/cards', 'frames/svg', 'frames/blank', 'frames/masks', 'reference/portraits', 'reference/cards', 'reference/symbols', 'licenses/fonts']) mkdirSync(output(directory), { recursive: true });
 
@@ -283,6 +283,6 @@ if (proof) {
     originalArtwork: 'Approved existing artwork is included as visual reference. Replacing a portrait never requires regenerating the frame, symbols or biography.',
   };
   json('data/cards.json', manifest);
-  json('data/verification.json', { passed: true, count: all.length, baseCards: 117, runtimeParentVariants: 16, blankFrames: 5, nativeRenderer: 'VectorCraft', nativeWorkerClosed: true, results: verification });
-  console.log(JSON.stringify({ exported: all.length, baseCards: 117, runtimeParentVariants: 16, blankFrames: 5, verified: true }));
+  json('data/verification.json', { passed: true, count: all.length, baseCards: 117, runtimeParentVariants: registry.parentVariants.length, blankFrames: 5, nativeRenderer: 'VectorCraft', nativeWorkerClosed: true, results: verification });
+  console.log(JSON.stringify({ exported: all.length, baseCards: 117, runtimeParentVariants: registry.parentVariants.length, blankFrames: 5, verified: true }));
 }

@@ -46,3 +46,5 @@ The original v14 masters, artwork sources and review provenance remain in their 
 ## PixelOE provenance
 
 The optional Python helpers are copied from this project's existing Everfolk asset workflow. They invoke upstream PixelOE 1.0.0's legacy CPU outline/contrast pipeline, verify repeated renders, keep source hashes, and export QA. The observed runtime is Python 3.12.14, OpenCV headless 5.0.0.93, NumPy 2.5.4 and Torch 2.7.1+cpu. Package availability varies by platform; the native pixel workflow needs none of these packages. PixelOE's Apache 2.0 license is included. No AI credentials, generator subscription, model or Python runtime is bundled.
+
+The runtime set now includes 19 alternate parent frames: the 16 retained onchain variants plus full-art Legendary promotions for Demetrius, Zeno and Ptolemy. Each promotion reuses its approved main portrait; no additional illustration is required.

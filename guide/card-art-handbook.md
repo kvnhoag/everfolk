@@ -30,7 +30,7 @@ The current v14 collection adds **34 illustrations** and reuses **83 approved v1
 
 The inventory is authoritative for exact card IDs, canonical titles and display titles. Short display titles fit the card face; canonical titles preserve existing gameplay names.
 
-There are also **16 runtime main-card frame variants**. The four retained onchain figure IDs—Alexander, Aristotle, Euclid and Cleomenes—need the other four rarity frames in addition to their catalogue base frame. These reuse the same main illustration. They are not another 16 characters or a request for 16 paintings. The saved card's rarity selects its frame; the catalogue base rank does not override a recorded rarity.
+The original set has **16 runtime main-card frame variants**. The four retained onchain figure IDs—Alexander, Aristotle, Euclid and Cleomenes—need the other four rarity frames in addition to their catalogue base frame. These reuse the same main illustration. They are not another 16 characters or a request for 16 paintings. The saved card's rarity selects its frame; the catalogue base rank does not override a recorded rarity.
 
 ## Divide the work into layers
 
@@ -149,3 +149,5 @@ Preview cards intentionally show numerator **001**. In a live owned-card view, u
 | `scripts/sync-card-assets.mjs` | Production derivative/registry pipeline |
 
 An artist can use the portable kit without the game source, a wallet, VectorCraft or an image-generation API. The kit supplies editable SVG layers for optional layout work; the original native VectorCraft masters remain in the repository. Replacing an illustration only needs art-only PNGs and the kit's render tools. Keep the exported handoff portable: use relative paths, retain the relevant credits, and do not include machine-local skill instructions, secrets or dependency installations.
+
+The runtime set now includes 19 alternate parent frames: the 16 retained onchain variants plus full-art Legendary promotions for Demetrius, Zeno and Ptolemy. Each promotion reuses its approved main portrait; no additional illustration is required.

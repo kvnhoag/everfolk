@@ -10,8 +10,8 @@ import ts from "typescript";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
 const TOKEN_FILE = "client/styles/typography.css";
-/** Stylesheets that keep their own font stacks: the admin studio. */
-const ALLOWLIST = new Set(["client/styles/admin.css"]);
+/** The admin studio and card artwork use independent font stacks. */
+const ALLOWLIST = new Set(["client/styles/admin.css", "client/styles/card-body-typography.css"]);
 const FAMILY_NAMES = /"[^"]+"|'[^']+'|\b(Georgia|Arial|Consolas|Courier|Eczar|monospace|serif|sans-serif|system-ui)\b/;
 
 function cssFiles(dir: string): string[] {

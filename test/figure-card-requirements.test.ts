@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { FIGURE_ROSTER, figureRosterEntry } from "../chain/catalog/figure-roster.ts";
+import { figureContributionTitleCopy } from "../chain/catalog/figure-contribution-copy.ts";
 import { buildFigureCardRequirements, changedRequirementIds } from "../client/models/figure-card-requirements.ts";
 import { getFigureCardProgress } from "../src/figures/card-progress.ts";
 import { createEngine } from "../src/engine.ts";
@@ -73,7 +74,7 @@ test("every authored contribution grade includes its exact project and prerequis
     for (const path of pack.figurePaths!) {
       for (const stage of [...path.stages, ...(path.legendaryContribution ? [path.legendaryContribution] : [])]) {
         const rows = buildFigureCardRequirements({ figure: figure(path.id), mode: "contribution", rank: stage.rank, world: pack });
-        assert.ok(rows[0].label.includes(stage.title));
+        assert.ok(rows[0].label.includes(figureContributionTitleCopy(stage.title)));
         assert.equal(rows[0].detail, stage.description);
         assert.ok(rows.some(row => row.id === "contribution:accepted"));
         if ("workYears" in stage) assert.match(text(rows), new RegExp(`Complete ${stage.workYears} qualifying work year`));

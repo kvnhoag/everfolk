@@ -1,8 +1,8 @@
 {
   "passed": true,
-  "count": 133,
+  "count": 136,
   "baseCards": 117,
-  "runtimeParentVariants": 16,
+  "runtimeParentVariants": 19,
   "blankFrames": 5,
   "nativeRenderer": "VectorCraft",
   "nativeWorkerClosed": true,
@@ -22,88 +22,88 @@
       "id": "alexander-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "4ee99853ada662d9fc54e27bf2c692cac842ac418fd68e350f114519bdae1c06"
+        "rgbaSha256": "3d7f90f1bdc4d6902fb6aa59f7fcfce966897630b5c54de4c817bd6d01f238c7"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "2446a1e4c7b0e63f13062a37acf8859ab69163a23454201407c19e74e0bb992d"
+        "rgbaSha256": "e933fec7b742756d0d22621d5be9dc5a43f45250adbdbe7c1e0f158c0923aa6c"
       }
     },
     {
       "id": "alexander-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "757420a0576e7882e74f7bada69726750c499710870fab5a7fcde93fd20565df"
+        "rgbaSha256": "96d81b05d20c472f28b93862aeb91992bd61adf03fa930b57e43240d21fe2fb9"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0c4635bef6a343f4f623269b25605e465606a7645ba2e31d7dd3864cb5fa7f8d"
+        "rgbaSha256": "263815d238ae359162b37e52cbd811b078a4102c855b35fb869f2bc6ef2719b4"
       }
     },
     {
       "id": "alexander-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "368e0caeb211715e4268785cb4ef104e253256b5303c448c0d0ea8aaafe2db4e"
+        "rgbaSha256": "dcb328e44fffe08196e441f8c6aabe2ea9c68d0eb347867436e2d8dbd4f9ee3c"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "1fd61a74671c76c22b204f1f6597e64458008f84da6096b0412fd0c2424bdd34"
+        "rgbaSha256": "1ea14e7b495369eecd1172e296ce81474f56f956681b932fd1e7d162107b11c3"
       }
     },
     {
       "id": "alexander-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "463c485b89cbe0ad49d321f9af9eb3ee61473b11e8bd4baafbd504dd49ede2b5"
+        "rgbaSha256": "d56df3784114e88224a5db7332ba40edc3df937ac11b7b3588191d7c7ac78404"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d9e9fdba331bbabf5dbdfbca173ccbe211ebe24ffe85bfeab6f4dcead3764475"
+        "rgbaSha256": "ba547c2c193312460a9c21d667cb2bd935ff4aa876505357291afed94f03c46a"
       }
     },
     {
       "id": "alexander-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c148cb6c2e8a829fad52a8747a366dc2e235e68f9cd927f878c4a0d0036769aa"
+        "rgbaSha256": "b6e7721782a46b696f649ffbd5d900fd27b85f02a28c6f1dcf375378f4afb74d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "dd1465e17918d3fc3341a697cf594e2ba69eefe90e6835a1661272f1db2d75bc"
+        "rgbaSha256": "042996a661b0ac6cf03c0b7b32bb6598b8c8913ba0b764c4a2a5a314c11e50ba"
       }
     },
     {
       "id": "alexander-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6009a4a9c91040cfb9d11aa17e969fc39a6e46a309adcd14010906d006359513"
+        "rgbaSha256": "53433d0dfab9ee4296e5ebd9f1d55b03069bf5aa745075457d21bbd188bc307b"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "3569bde17ae9c507e96708d71d6fa70b3eac768b9e4cce4cd160c4544ac13f6c"
+        "rgbaSha256": "0657ff6c9f41e4f14ea106feccd4848b61226cd8a4f38bbc6fc1e793850f4cdc"
       }
     },
     {
       "id": "alexander-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "a6c1c3a32f79068e42ae2972da86e144ff81f566fa5e9a2639332bed62f5192a"
+        "rgbaSha256": "808c80fd2b4051c273e8dd0d279d67f4b2420ec61e38385916e3ca4883ec37c5"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d9419487873b5db559b568dc700c2a5f779aa608694f7385fc9cff3cad3832e8"
+        "rgbaSha256": "a2c60daaed557b51574eee9dd220c87a9f05ebbae7199a2170faa434f2ce4e84"
       }
     },
     {
       "id": "alexander-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "299783ed826e2976ba2fda32c9da8e238f41bc8beef956ca968699cda431f380"
+        "rgbaSha256": "89c514a0fe3dacb99067c241c0ba63376b49151344b76f3ee42364f4c4f646da"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "dc43b2e981c20554fa9624aa20d923330df214880d9762a642815e54cc4f07e9"
+        "rgbaSha256": "6b69ef9d83a23129408e86677d761d8e79eaedd8ddb9b4e234e08bd349fb41ba"
       }
     },
     {
@@ -121,88 +121,88 @@
       "id": "aristotle-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "543c8c3947a37dc712340cbde923cdfdb3c078c666c4d171901501a4997fdf7e"
+        "rgbaSha256": "bd94d368050cebd59da02332deffe1e0b9df93f12c636def88d225db3bf7d40e"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "1eacf649eed1a19861e1c022184ea9801bec90a003f1f719f8d11ac02fea544f"
+        "rgbaSha256": "d1e0e7e023922c3bbf1e9f8ac54079328843cef34a93a774d454fd54538f4a32"
       }
     },
     {
       "id": "aristotle-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "335996ac2e259f5f1020cb267ff905d01a152ee1765d77f7adb9724bef381196"
+        "rgbaSha256": "1148948529ea8e810eb6194b335b4063e264d4e9a39959b0ffc2eed4576220db"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "87e66a19822bae3571864cfdd63d6080aa947bb53c236e2add5b51ff383d0ff4"
+        "rgbaSha256": "f0d6d81c193163b53df4163fc37032464e5267ac7ddc8377c8360bcf941cca37"
       }
     },
     {
       "id": "aristotle-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c6ea78b1c3d52f76303126812c865ff377b975d63ef8b945a957d32f78e81397"
+        "rgbaSha256": "647b01951b0493ce4ceefcf6a367146ff1856b0756af6ba7cc371696d65088b3"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "9cdeae2b9e275a24d50dbb390b4d380ac72d9e9cfd4efbcd9cfd46a4da744968"
+        "rgbaSha256": "5aec069f4a460328391156f216f44643d1dc6a268bab91757c87b39bebcf734c"
       }
     },
     {
       "id": "aristotle-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "02c44b18a297cf42c4bff238d8a282e87b8c77ad4be027ddd929122cf32dc499"
+        "rgbaSha256": "19ffa0502bdcf57e8e4e5137d71566ce9b6363e0ae9ebbe7aeacd1d2e697ee79"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d4c2c868e06fe29463375fecef19f5302baadd2658a58d26161a727de06e047b"
+        "rgbaSha256": "8492d3c6bda7e7fda5296828c3969d6fecb8f7b82ac5b4c2c251452143ac0c19"
       }
     },
     {
       "id": "aristotle-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c56f6cd31ef1c1d63bb0a9f109f425d0d745741d73e25f43a06f6c63b9c77bd0"
+        "rgbaSha256": "b883b052db58a7089e4c8091b5025cf9f769e6d80ffdc3bbec08fb5bd6baa080"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "61e5b4f9238d4785fad0e12f70a257348e2834fd2877caa670e722b641f7972b"
+        "rgbaSha256": "906af23f114b08ff7b7c177c32277676f250b5d590a41fb68654b1e94949e1b0"
       }
     },
     {
       "id": "aristotle-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6a0a9c8f48ad52cd29559b4b1b41f4c0a7ef848de7e98a6147931d8973eadce1"
+        "rgbaSha256": "753cb8535aa013bd9b171fd46d0290b6a872028371e2da711b58109d043b8c38"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "17f35d3dbc5604487e5562ccb726305fa1434bd06d4af882c3ac8cb75b6fd395"
+        "rgbaSha256": "705e0c3872c507c69df5221adcffa8fa5721eb6338c9f30bf7626a7955eddbad"
       }
     },
     {
       "id": "aristotle-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "bf7a25934b20d5db492641bdf564748c618539cab0dc8375df055587c2828ecf"
+        "rgbaSha256": "11227c58e6708fdbad730a11a716f7606570ee0ee5a1e351aa5b567c69947380"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f0d92f8f95e6651796cd661a4a4ea1329cc545de133f4221fc43c17f351ef943"
+        "rgbaSha256": "299c7948270cda0bd471178452abdf54955ab1ed9822f5e98611fd881df98b36"
       }
     },
     {
       "id": "aristotle-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "626df3fe208aeb5d94751a5cdeab4ce7fdb3145fa6193f35303dfbe17877728d"
+        "rgbaSha256": "748ae9c86392bedddca06cbe7b36d93c275644b73828fb8d21319cdfbb761b8e"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "bf75b8bfed12b640e86f2da643c61ee938facd75580f0b703885d10628f14747"
+        "rgbaSha256": "ee6b758bc80785ca2d6893a447d35ff998cd503c0c083734fed56aecc90c914e"
       }
     },
     {
@@ -220,88 +220,88 @@
       "id": "euclid-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0a568e575b9f556c191aa447081d9a24c663b97862e0a6552d51cbf0251eaaef"
+        "rgbaSha256": "f9cb06fcc09f987809fa1fa4fa67def0761e600ed8980c51824da86dd1c5b61d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "a7ae731adef9fd06454701232a887a0c869bcf7b3afaf10888f770be9072c907"
+        "rgbaSha256": "d5b9c87edadfffea343e95d41ef7e8ea898700a0aaba433f92c58f230e0330da"
       }
     },
     {
       "id": "euclid-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "5e08551078457db1e85405710e2febbcbe902d3ce11b7898843d440c6f35c5bb"
+        "rgbaSha256": "07910e6026ee8fb13fcc8e8fca020b96864e7d36ab0a02b2982fcb1482b6cf9d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "73e7c00b2f800ffdcc7379d299cc608410543b9ed92ddd6135d255f50be5ab91"
+        "rgbaSha256": "ce2afa6c65cb3e7ef44b29e785ad96261ff99f7560b0abb0efe22b6d887481c1"
       }
     },
     {
       "id": "euclid-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "ba04d1865531d74b78d34a7d2361c9874bd0e2bf27cfeaf3e4486e1645e04c17"
+        "rgbaSha256": "7095cbe6de8ecc502544c2c4d9cc1c73aa37dbb0bf5ec7eb9b95fcbb406b7b2c"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "60810380f1c89cee86547a15d204a4eae1cb10db0d95fe044aea10578a38c22d"
+        "rgbaSha256": "dcf81434e90994dc9450302815b0e19f2c56e44f856eebcb48b28af2b8e2ce93"
       }
     },
     {
       "id": "euclid-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "fde4d88d5c33abdd2f5cc62e77f5bdc5a9dd838308d5f81da1720cf8edd1a6be"
+        "rgbaSha256": "d9fa983977cfb47201b31a4348eca6d2d7eb4ae17e9c3f0d5726df6e3a4c2f41"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "371cfbc047829491ce9d5d1c95d20e7d1d6d935ac9145161714bb2e4394b58c6"
+        "rgbaSha256": "8e2f4fa306afd1d63709a3dd4b71211c65d4aa78643f0c67986f67b9f518a02d"
       }
     },
     {
       "id": "euclid-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0f56636a4b049627c3d9ab95283184ef44a2d34a92bed44f2b8c9092dec54c03"
+        "rgbaSha256": "dac9a914b1696e2a5bdb710cc34ea65ee2321a5f80c024690297fa6087b55102"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "df3d8d7c419320fb27b48e1084fffde30c997a3414d633ba4906322d69e95343"
+        "rgbaSha256": "13a3a0bf444fa1588b2e376ed26e456dc87c0e3b3cc7db7f21c969d23fc26add"
       }
     },
     {
       "id": "euclid-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b669c7dbc1898919d9b94d2d677624d61dab128d68a9c51c6fefdaad08a17f25"
+        "rgbaSha256": "e9cf6702a215fb4bfb186948eb7ed6f9ef53a614e959d4a2c1d1437072f13c15"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c2603299c5f569260c26810307e73c2751232aee2684c5a8c8d1b6e82951838b"
+        "rgbaSha256": "887c845c69e3ed0784b1bff13da88643890cb8863c22dcb49730fd3de3517a65"
       }
     },
     {
       "id": "euclid-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c78cf05915f708db1bc2a8768e3beaf7e19920f68acf4724914e6580dd7e8eaa"
+        "rgbaSha256": "eb1b715527dec906905a2de92b1211488c35e6f6ad394e32d458589a38c58925"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "ff7e1d9a14082babc3336a73c1c81b439d8d199787b3c2fdb330bfda6e4db8ac"
+        "rgbaSha256": "ac42e4ee63de915defe5364a9c4b2f563f14fce16e140c40a075a658e8106c3a"
       }
     },
     {
       "id": "euclid-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "1ac4812d9339b5e123679a69038d545569d45b7c7d7e42cbf691c680c9b5a459"
+        "rgbaSha256": "166662fca287908e33b1c53c945b67f104fcadb7ff60d0d53ed59e7192634cb9"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "8d4015413d586ba75ced6549f08901de416ecb5f01c45ff063eb29bdef0f1f39"
+        "rgbaSha256": "4fb178fccafa6fd425446979ec02d74f16b19776ef67b5c8ecd559815df46956"
       }
     },
     {
@@ -319,88 +319,88 @@
       "id": "lysippos-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "53c9acee36079cc2b71b197c4ad70061d4b45aee3eaabbaf5f58c8b15261694a"
+        "rgbaSha256": "3a9e57988fd5b569cd535a9b6ab4b484d6c78992ce744e548fdbd36876967b0e"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "53dd65d6c222689b07ef4c6e89846578f5f91850907f4856e692a8ffb0292005"
+        "rgbaSha256": "4ad18d4f970c2d1a1f246db424df2fd438054e29c834c686843332855be56000"
       }
     },
     {
       "id": "lysippos-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c72051e12454648faf7f7663897591eb9ac20c1710f82261bd46c7ae401c22f7"
+        "rgbaSha256": "679455215da5faf166d1088f91feef6e242f54fd8693a6cf495500626f5e559d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "366021498f70e311591dac4d5b6bf9fe704b9d39dbc95dc1c4695f13707acae4"
+        "rgbaSha256": "d6cfbd69c65be0e780f6929b610982ea20d395883c079d9bbecc6fc3df307ae8"
       }
     },
     {
       "id": "lysippos-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b87f869bca74015a386f3f30bbab942d2a43acb09f34ea49b2cfa434f994d161"
+        "rgbaSha256": "62d8549957e90c7b6fa187cb8a49b93a088c18a236a9ccd95432b3e027236ced"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b1b4dfeb5f2bd259c612e48e36f599ff7cba082d7786519e33c92623ccb5f553"
+        "rgbaSha256": "8f642890442ec99e989549861b9f27b5abcff5892be2813f493a666b80adcb6e"
       }
     },
     {
       "id": "lysippos-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c4c83923766645fa796959cd158527a7ec49fe011b78a716bfbb4f1e172b54d3"
+        "rgbaSha256": "a1cde7d9caaaa81540793f96183e0c66111dc0e876cf890c1f6e44f2a650a2e4"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "a908e93b554b82e9018de346eb5f31dcd50cbf95946a2d99d840107d93ef8f62"
+        "rgbaSha256": "92b4f06ada072edcd17f3a2483903159a9cc3fdea862ec976026ac7450107af8"
       }
     },
     {
       "id": "lysippos-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "4be8043ba6689fbefe6c3084ace38fcc3cd0511f1fa4a11415960e8e2130a7ab"
+        "rgbaSha256": "4f83f12f43a5c5e075b5ca3828660d36eb8ed75d2a7573f55a8ffa9482d63183"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "8ac9fcd09028bc352bccd7ac917714d7a55b0be4139a53960f6038a5272760c7"
+        "rgbaSha256": "4b536ace462f31e519067589c0b98abbe335d2b631a60d7356a083bb24ff3beb"
       }
     },
     {
       "id": "lysippos-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "259ddf90a493f9f4efc9cd57da9d290504f887e2b71c75c3a0be072d2331d0f7"
+        "rgbaSha256": "36c00097b778149baf31d13bc077f8d6b301679ddcaa3074b54113b6378b9c9d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "5d591ab95e93e382f911f982ae4aca5cabb8a68b82a4e4afff03bc27d61eaaea"
+        "rgbaSha256": "32e30e0852bbcf8fd0dbb7962868ea43ae2dcfed18ef539c3944f5552dd93e9a"
       }
     },
     {
       "id": "lysippos-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "1cbbc4eaeb15687e9765a852611e811c08acc16e88d5471bf75d6203f50df655"
+        "rgbaSha256": "ea87b17fd0af169bc7b450bb369b0a214f6bd95fbb00b67397b9b57e2f551cc2"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f4a5d193de0146e0f6cc8d3903a4aae71b28018b17e2584911e875aed66526b8"
+        "rgbaSha256": "e9ad9375c10aca4f0820b4c9dbab7ff220fd760a0f9f83197e64f9fe776752c1"
       }
     },
     {
       "id": "lysippos-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "35a1e13bad55e9d2d321d24730bd38dbf3bc75e92b2b1a7c7f6cfe9c18e875b1"
+        "rgbaSha256": "535810c770fcf47246d012d012649c785c5ea84319642d44d7ab6382b678f615"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e45256f710fc28ac55c8abab62ef2e64bf84366448a0be95fb29486d2967642c"
+        "rgbaSha256": "e2bb5b4938e627aacf1ffe707409ce91104ab3a69f345ef827b3bbbdf94176a6"
       }
     },
     {
@@ -418,88 +418,88 @@
       "id": "pytheas-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0ef59df6cbb337a3786fb0afd6119d0668107969af2f96400d5d733b8a514c34"
+        "rgbaSha256": "aaff8a23f84682e9cfb1d33c2ca4d9a9bbede0efc46ce61aff0e5e59f8e4dfb4"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f9acc12c83a4b72d734ec466b18980b2a8d4d82c9a22d870f7dba633fed5e66a"
+        "rgbaSha256": "e74be8eac2eb98b3a655bb288363235aa78b71b0be613d98a44f4097fc1fcd8d"
       }
     },
     {
       "id": "pytheas-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e0782778b5c33eecd91018d643f51cf457744831ccaf78ed4515651875d171d2"
+        "rgbaSha256": "284d65b531cc7850de0ad8c4de2f12b14c7c7ee68078f646f831d7c835aa7f1d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0dc02ec47b7877541391395101821f7f0abbcde5586661536407f7765f2d8dec"
+        "rgbaSha256": "49c63a261f0813e2b65bc30d898ade0e994d3b227ebb83250d1780e15bf70537"
       }
     },
     {
       "id": "pytheas-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "62316519e06686c9cabe24faa2dee7710e599d6f009a4029050fac64b76689b1"
+        "rgbaSha256": "8f616eecd255babb6db6288b7996867f92a79630aa9f66d60e0fd4bd3b49c5a7"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "a2e54dc357070b866f458133271d548bc0a82ee0d7e21b35dbf4007387a4540f"
+        "rgbaSha256": "72ff2ccd91765c409e3539ac8bc8669ad412b80c76ccbec4b908ca77fff0e99a"
       }
     },
     {
       "id": "pytheas-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d5567325626d4178b7a622090d80a0adf1090c55c8a7733909d49abc921b2f7f"
+        "rgbaSha256": "1daa648cd718af9c6a04a9f058b6604cecade698e8a278ca7a6b1832c1d30f24"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "ebc6be699bf5bfe903702e668b02d71141065f431829a60221feb77c0147310a"
+        "rgbaSha256": "cace48bb76b3c536fe293c6fa83e9239629aa25773bb4a17c6b9575e98e29d8d"
       }
     },
     {
       "id": "pytheas-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "cfd5f2f76dcc1fe7773108ecae57341c544cc2d2bed6d92b2e4a60b6c4e8eed0"
+        "rgbaSha256": "b529b5b6ab071c3d362ae77277e3b46ed65b9c97ca58ed9890800ea1461a5444"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "47ee0d375967dfcefea506cc234bee4ea52e8dbb0c4d366e943634318fc2e3ff"
+        "rgbaSha256": "fa174a53145d9e672eb79720d40d1eeeb5e5cc92e601a9ed762420cc8d1befe8"
       }
     },
     {
       "id": "pytheas-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "00ca375a3ac54fa8583a9ad5db799f698485efb44e2a8d35dd407cc78ab8c3fd"
+        "rgbaSha256": "5e9a4e5dcbd75b18fd28b81ff39696bd41660c24812e8db5503dc98254a4f68e"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "5bfcca7f452343bee361571b3429b42c15bf2f88c21b109b4503e283d5ffe581"
+        "rgbaSha256": "c364d0795cc87e732e309ee521a5758b7dc47d903943f13be3e442909b2ee33e"
       }
     },
     {
       "id": "pytheas-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "72b2323047f46cc6a24e4fb6ba53849ad72a3bf8a2b675d6ca52390a9d2b33bd"
+        "rgbaSha256": "fb278bf30a68eee44b449e340a4c50cd0c616c24b4f929eaa3720ed050fc14db"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "11e0f7bd1c9ae35378e1ba22f46b65e7c21f7de451261fbff2a8bfbac6721b7c"
+        "rgbaSha256": "5f79511337bf56faac5df0f9c0360f49e5929662dd7d9ff152665097de893ac6"
       }
     },
     {
       "id": "pytheas-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "9f80b61f05a0d2600e829eaf411a9a8673b74d368c2cddaee14a9837513cb8a0"
+        "rgbaSha256": "d74080f741e6182e5e00b58fd1f7f9ffb9fcfed07f3f24d0b4a467002e096618"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "bb83f64f0b58fc5fc15d9c5f5aa53f1b27a7292d5ee65e5ce847802a60f55599"
+        "rgbaSha256": "fcb0b954f97bd487d98be9942867bfe2599ea802d9a0b11449344333f4808f57"
       }
     },
     {
@@ -517,88 +517,88 @@
       "id": "menander-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "37545dd5a8773d26d4e0f3303b95433db8209dab4dc588de0863e68f18ec4a8a"
+        "rgbaSha256": "47c15e87b960da414c0fef158de1d6a3d071af8b912b52f77e2cef64da3f5f68"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "85d6386f0bafd0f1c3fdaa74f0e56f40cf749fb282b89b25245f20cbb88f94b2"
+        "rgbaSha256": "38bb23605b6d05e3aba48e3095ed8f0ef3134276ee84e46b33fc667ebff11dc8"
       }
     },
     {
       "id": "menander-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "7ec5d1f502b2291305e5fd8bd6e94ad2864dcbabde2527ad020d767e2cdbefbe"
+        "rgbaSha256": "feea4de51733171664a100d93533bccc44ff4184e9771b847942593494210716"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "39f1ce7e1dd455bb11eec9da3077433fcd2c04a25928073fd1c3d2a52410e0e2"
+        "rgbaSha256": "8e5d7d7da004c924ceb1c6bf0f1f690a8dee375c10a0d0f9e51333fed0396a49"
       }
     },
     {
       "id": "menander-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d772dfe24c5a40b19441d241b4eaae1844b975a3244edbdc0c80a6eb27f7764a"
+        "rgbaSha256": "ce54ba8c4fabc0f4aef8464c574ac6f867bc37ee67e4caf98413ebae6ccdc679"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "72e1702362ec90543657bfbb6cf02599c5c9ee2f632295652c3351a6b6393a9e"
+        "rgbaSha256": "076b50d6a88e99db8e58b79af93945d64bae85e2fc4d1d2fe9714ab0f6f509e4"
       }
     },
     {
       "id": "menander-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6460bbae2461701f1ab986681433ea725dbd4547cc68dccee4e67123de23276f"
+        "rgbaSha256": "1538a90efb376dfa65af01c8b91c55457217102e758042a2a52bb65b17d08e0c"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "3efa34613d7b218da3e6c5ef954562fff299a75e27af9f67c05de56abe847170"
+        "rgbaSha256": "1d5484656df93afa841524997fcebeb2b5ef3bd297f7020dce5ae5eab5077eba"
       }
     },
     {
       "id": "menander-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "79b5856f45bdda5074deca96e0a5cbb94ce4be48d094c44c66496c5378f00820"
+        "rgbaSha256": "a7a23d8c00066b858166dc4393a4909d9a768d3858c281b4b1c5022bbf8d639c"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b911e1025da22a208a5e3b898f200ab6751147dada8dd52571c0b32fa3560596"
+        "rgbaSha256": "39a417fdb2b28b6d9e797ca97de1319002d8a3ac2a7bf3696839910895dbc1b7"
       }
     },
     {
       "id": "menander-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "89d045d158f389bd8ccb2dd40d713ad25c5e2ea9f8e5686ab87990b570521f6b"
+        "rgbaSha256": "0f00ec99433ac8ea79510c8c45764ebbb3e4c5a67e9f14734f84c506d08e79d1"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "9cb04902fd5805cbeb92269142395007d59465e515227b7662bccdc6a1d44e44"
+        "rgbaSha256": "8ca0b66d8550ada800f3f670000e515f0b7eaa1f605d8744b19a76da12f613de"
       }
     },
     {
       "id": "menander-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "24d28d267e5a9025979a1c3f02e1b11f3105f784251af9ee6a1cb835304089e8"
+        "rgbaSha256": "0f228bae159d423e9a32fdf4502a156287faacfeb877d17f294fc25fbb71f7d3"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f0682475d38056bea305f5772268cd0894d4c228b9c32af62b135bd1a14d483f"
+        "rgbaSha256": "a358cd36d4b07312a8ad21067a0eaf5de69366b42bc03befe07e1d943b4d3632"
       }
     },
     {
       "id": "menander-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "8eedfa718404d85327e1f7e8028be3c269f69979b6e33ed655b0ceb8f803edb2"
+        "rgbaSha256": "2d511586645c3736f08901c67da0533f864322a01db324764a0090398370c061"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "3fedeb32208a8454ac9a4d70f5434033317afcf4f01da6be69b35836c0125ee5"
+        "rgbaSha256": "3053755fc1be513f5d49e714d1439944a095ff5fec8d7ddbe31c3811e2662fb0"
       }
     },
     {
@@ -616,88 +616,88 @@
       "id": "demetrius-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "4f412a872c5c2ac6f2d4dda02ddfef078c5d412615303dd6eba0e6b8e168079b"
+        "rgbaSha256": "bd5dff20c625d522ff7c8b1ebbb6ffd08e6f139b8394a107ce8d4c0b6ffa0263"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b883937573f37a42302d45c28abede3952b7b98ebf503665fa1628038df2b86e"
+        "rgbaSha256": "2b364262940f18bf5607aedd8c9579fa08371ccfa055da1c2d38371004ab2dc9"
       }
     },
     {
       "id": "demetrius-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "be949e16ca8c6f9b7aa90deacc30c1fb6c89d3233922fec6163186e1fb09dbc7"
+        "rgbaSha256": "cb563e84bafb7269b23ce1592aa48d338c4951a6072c08cad4a94888b2fb34f2"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "314f84e646e658a4f16f848b75cf6440501de68d9393dd53b8ab57f931a431dc"
+        "rgbaSha256": "ce9b9d719f4831be16d67fa3f5cb967618859f7ff448c6c5af2accc68e1049fe"
       }
     },
     {
       "id": "demetrius-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "fd98b5291cff5393340f0239d5154fa1d4c078d354e92f061f1ff84b04aaa345"
+        "rgbaSha256": "012bad94e8919f4d9725830706e59380fd2143810286b5ee93e67ea6f704fb19"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "726fab656c54e17cd44462f4da320b527c2c0476c872564133fa4931afe3d3ab"
+        "rgbaSha256": "3b5bd4dbe33cb08e60afd43c39a7e3c81806198b876b66cc6e1306ddefb03ef1"
       }
     },
     {
       "id": "demetrius-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "1143b47583f64ff77e150c87ee8eff65b864fd9cac27a55a5bc76d57b9374e86"
+        "rgbaSha256": "9b62753dd670685f135d37686b53daa195c755abab27cf80185a97f30603453c"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b3c6394ed4a2758020648655da8f39c41ba6845fa3f67b288c491f3430bbf0fb"
+        "rgbaSha256": "8318b3b736d1d467b3a9b601f85ae79c3430a53e05b965dc96a7c59662cd02a3"
       }
     },
     {
       "id": "demetrius-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f3f182f4d9ead7d1b0aa241bd580eab741238c6a98fab3cedc037772a4730908"
+        "rgbaSha256": "8abe12945787ee555a122bf5fe1913a48cde0ca259ab24d692721e5bf35a68b7"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6ac4d34ebda99f7979bd63368d35c9265390423859cdf00d1fbaf4793d602e4a"
+        "rgbaSha256": "80fa1ee5bdc22ecd425fae08ff3770c3344eb12c51146884a7ac261a31c372ba"
       }
     },
     {
       "id": "demetrius-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "745f1dcca07698b9bb172a9fd1b85589497f0516a2416fd34b472dfb09e9ebfc"
+        "rgbaSha256": "244fb6829226fa27c5635768d3986b3c8e998a6055d257d1bf2bb30e034325bf"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "80bd575d0015cd978e06809f0e1cfd45c9122e1438183c535b26be185a1500c6"
+        "rgbaSha256": "077c678dc503c68f76c7b2b25655c0d5bf2b66ea086b786b2323c8e5ef39c2ba"
       }
     },
     {
       "id": "demetrius-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d5691cb68c0f08f1bd68f1e6719f54c00f7128071bf5b96472ad940253e9649d"
+        "rgbaSha256": "6bba5daee4de844197e982de4196a6085fcc65eb4a0acab5f50f313e303ac787"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6f0e0871519a589e6ad179029f510ca6b3d137d4d069c70dff3952610e304161"
+        "rgbaSha256": "17bcfd9b7d2f35a607ab739a673bd77a65d6069580a015d70aee95ce459d22a8"
       }
     },
     {
       "id": "demetrius-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "4b3397158c81b9b209590f94f7ec7035dccb1cefdcaadb90d781f2a2b0a61ea0"
+        "rgbaSha256": "cf1ed88d86a45824f1b237f4898480159ac44123f00f004715e03e096a34d9fb"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "016ee4e8d0d25c90e93d5b95a80c4174a459b2075e4969c9afa71834d6e7bca9"
+        "rgbaSha256": "c7359fecf0f12930a0311c96a4400fa9e2e114f8f050baff8715cb17b8725a30"
       }
     },
     {
@@ -715,88 +715,88 @@
       "id": "theophrastus-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "79fc9efe32f9f3f018df51ad7d1ad499b7224642fead99bf4cb64ae87a439306"
+        "rgbaSha256": "7baa7e3982173002ae69f2232f1ae0e2b83ee00490f80e08379c88fcb4e3a0fb"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "453703a4fb9080b3ea038199798fee8bd94764d56717cbe240e6ac3acc0771c1"
+        "rgbaSha256": "4d805bb39d2208e7f127138bac92637407e23f8560a6450efa7def3489734f8f"
       }
     },
     {
       "id": "theophrastus-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6defac015a6686f0ab2c3027b2886a5e3a3be5a6afb66f3de0b2dbc3f89c8eda"
+        "rgbaSha256": "d5d413af6554a525351dd093c47dde8385690b5b52487cb34b5e13eeac8c15be"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "efdabcd79efb3e5bd5b3e53e6bcd8cc8e4b12efb85985f093c452ee48123d384"
+        "rgbaSha256": "ef28c6e6c2cb3d99feb4d19b11de5d3cf4c230917061c10846f30d17ba6b0b9b"
       }
     },
     {
       "id": "theophrastus-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "9f3d61d43fa3c132f14ef5d5d26b3dd6cc95599d42e541e52351f7789609fea0"
+        "rgbaSha256": "25d8a1e181be91257c67ddb3d6e937986bc971c44f606d02cbd156b22a5df2bf"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "94fe8290241bdc102faaead056699de6e73b06f2b5ef49d4b46f761d83783689"
+        "rgbaSha256": "22ae2d16ae1c73a46ed2c5c2d7e1f343cf2f02dd2ffbbf57b9cb8560002291a0"
       }
     },
     {
       "id": "theophrastus-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b3b80eeb2fe98f75cb628c20fcda15bc88a5fc5e575c6383447819255a4bd997"
+        "rgbaSha256": "2f06c3140f8232a06f2607f54e3db87c5ecc647840bf8a9d6f6f2656c05c0749"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "efdb320990ee589f4da23cf21bfa7c53e69a6bd3dd0cb6869579ed54e65c60b5"
+        "rgbaSha256": "87c2a70eb6ade7a32b8c29bd470849b69cb232db0fe4ce6ff3362f0fa83eabef"
       }
     },
     {
       "id": "theophrastus-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e5769367f9f9f0e78707cf556e8885628ff4e1f98a878cf4cbb741416997f304"
+        "rgbaSha256": "de451266458806bd6fdc17c19c822f476124883ec8978dc3bef712333eb204e6"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6531601a25a646f16749b23d6a136c1ba81def073aa077d1c3e4ae836e2d2fa4"
+        "rgbaSha256": "40df57268b832fe88a4f52b9f1b51b27cda96d36393a4a07350a89df38a291a7"
       }
     },
     {
       "id": "theophrastus-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "10803877e359dcab7e35a6639f2eb976d47449d7e2de12503e2ba3989359b45a"
+        "rgbaSha256": "ecd2d16da8f5a0d3a0fadcb6dde31980de48217ac09e937fc5f547192fd70b41"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "3ff1f234303c7dd3ffb23d3091f89816a83a4e96ce2ab21c4608965e17f50bf9"
+        "rgbaSha256": "6d31fbf272ac19b3dbaef9c01278299cc03e07d7057fe57c5276165ac1294ce4"
       }
     },
     {
       "id": "theophrastus-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e5b5357baada492ced2079801b8ac776d3e3b8a9e8958930434567886b7ff09d"
+        "rgbaSha256": "c48c82b108e2c470a9776c7c3e4d727b6a435b6ee9cd4f3b0a9bc4c68e0a9dc2"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6a56770b86cd493cbae2c2b3a5810acebd8aab935ef0d498c177ba54db2db0c6"
+        "rgbaSha256": "2467a0cb73a09d5b57f7e9b446b7b9240480f493a4d25cc9119b9301c0d8c10b"
       }
     },
     {
       "id": "theophrastus-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "cf4c6dd5ce3801ba86fb8ec33df4cb53a718f977bd76547691092396215fada8"
+        "rgbaSha256": "4c08b497aabd4b2338c4d5ce9ec44d466d4dd3b93a64d7a0432c0d086fa89936"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "51f78000f699c3bff71cc101eb81e6aeb18a75b264e585edbe3bcce83ec509b4"
+        "rgbaSha256": "83a0cfd08175f1f1f2361ba980f7e74bed8bb01d72975ca716c1568190290c4c"
       }
     },
     {
@@ -814,88 +814,88 @@
       "id": "zeno-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f6db4c81181362e463a4d400c8de93ec91309f07c9787c5569f3417c2fe789ab"
+        "rgbaSha256": "2541db45f9e709bcd8d4c984173aa9368fe217379542d19e9c5992fbb915cdef"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "b143815a1d51638c0e6963df5ebe06a5be417cc11462fc75b0660ba3ca4e2af1"
+        "rgbaSha256": "3daffbd3b2b449e6d064ed2da043b89baea63173173775168942ef7ace126abb"
       }
     },
     {
       "id": "zeno-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0d561aae95e2889860944eaa3a37cc44f2ee60104b99a49b25e06da8f324f804"
+        "rgbaSha256": "87a328c7fa576bd8c38d2264a096f4252d343859c4c3c2fb322464a510917d8d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c084d7b3c2197feb2599c4cb4ef8c15ba531d008701d83be72e706257a41d19e"
+        "rgbaSha256": "169bb564ab33ce054025ad424c0d4fa96deea9d40e39d34c94c236c865ce8cfc"
       }
     },
     {
       "id": "zeno-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "78179742596210837aa589218b61ade9fa80b7c8d3da6225c1848958ebf71ac2"
+        "rgbaSha256": "1cc759d405a4370016d04c13b960ed0c752a2d695fdd392c603932443e719486"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "8f44e236ff23285d7922f024abfc1f80ac035db36b853adf303d6ca14b4d2682"
+        "rgbaSha256": "43797f265fbe55b1d02e1b6db813c57114bb0334a4a765ac70d7900692141ede"
       }
     },
     {
       "id": "zeno-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "880bc3d9ffa3922645e47207aa5e2692efddd2d1f9eef358965bfd1c11aeb41e"
+        "rgbaSha256": "1156097d8644fabdf0d4544e6d45b94e0315f49c62770e079f18309761e252f1"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "5341b295e2ea33169aaa0688f6e75fe86417312fd19e557ae515d96940b0ecdf"
+        "rgbaSha256": "b75dc91c0d9f677650371c8bbe129b860c2bf3ee9ba092d96851de1c7a4138e8"
       }
     },
     {
       "id": "zeno-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "ae7444ff445734f6bb919e4c148a9391740e4a6feaca4031ce6299eeb674b94c"
+        "rgbaSha256": "5262efe0ef9813e7650d0e6f227c715155efac54d3a3473d892ff4af98aa50ca"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "76b05d351c47d476988c7e14c90b8abc346510120260d120db8d5fa183c8d71d"
+        "rgbaSha256": "3279aa1e80e699e44ab34ddc712fdd02c27c3d19fb765bff88b107421e33094e"
       }
     },
     {
       "id": "zeno-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d353a423411364cceccf12863768ec20d6418b6562c90eb390ca0c208cbe9e87"
+        "rgbaSha256": "637a865a52a070c21ab719d574af7101d03bb9bfafa26902120373aeb042fc38"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d2b0fb5410dadb0d5b736427535c2b491f690ec2ccd8c2fe59cbfd4c0be2f2df"
+        "rgbaSha256": "fb825d6dc819aea63993502eeadecc45ab9ffe6c1d56ee2eb89d7ed5d92fd829"
       }
     },
     {
       "id": "zeno-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "ab1404caf96522180491433b5eb45ce6c491db8a9953080e89355700467630fa"
+        "rgbaSha256": "8f319062f7c8a207df5bee20aea7d351529774b8ef70272d0ba9e7ef87850b3a"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "29559caca893cf5a7730ab9327adc1cbf5a925f17a17caee2943e9ab0f7706b1"
+        "rgbaSha256": "616f935927fe9f851c82575ce823267d4336cf2eff3e043820c149ac3399be80"
       }
     },
     {
       "id": "zeno-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "2d4a9cb771b266efc97b34402530e5ea9c0d6c66666d3a394ca913d5be56e013"
+        "rgbaSha256": "5b5c3559dbd0476ec02089a0d5e7b30e25c8a640f387878b51bd008fe7b3435e"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "30170558b47af6621a16b9dbe8123bb4f68dff8bf413b73a65c90d94ed7bd4c5"
+        "rgbaSha256": "c627d5c2ca198a3db6731590c986440a6f60769cff2baacda3e756e25263853e"
       }
     },
     {
@@ -913,88 +913,88 @@
       "id": "ptolemy-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "4c1012530e44cffa9e19b99303281d63e3e65e12118fb86a8de0587913c5421f"
+        "rgbaSha256": "c440137478c3843d8d32acd344eead75eb3497637f939e1f6908b75cafaf0c6b"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "3c0099ba189e98439be78c643476f9b7fef40798f2b7711f2cde2c9f954908f7"
+        "rgbaSha256": "0cde931fe03bc389a87acaedea3d39b84679bb5e608a1ea6dc6b89ac5cd09cab"
       }
     },
     {
       "id": "ptolemy-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0d152dddc1911a4a5699ebed31a9d61aa8d2dd83a60724f7e864ea16534c6287"
+        "rgbaSha256": "0b67de78e5b194a29949e07f67afe49a28a29018635a2619dba6b6a39e2847e7"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d1561c8fece0881f4ec289b06b37b47547b971691110bdda50188e65ad8e5abc"
+        "rgbaSha256": "da423001f93dd15d6b450d8cd0d30ee1703a10a55ab1bebf8ebcd304ed4abf58"
       }
     },
     {
       "id": "ptolemy-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "29ed740d80abcfed55ee5381054eaf3fbda87c58f72529125b9d6da72eeae7b1"
+        "rgbaSha256": "aba49527b9e5e5d48b9c9272d9577c23c1b90e6bea9c6b1436664571f68a9e05"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "29ca5498d5dc1343b24ecdb8790091c60e3a957b6a27c50025eca64fe19b4ca3"
+        "rgbaSha256": "d82dbe1664b04031a80548ee0a874efe3e401db7b76af1352d4765892338a5b1"
       }
     },
     {
       "id": "ptolemy-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c6d98e9d2ac5d2c5f4d456f2993f0c475d3277c4d2fc6f5becbcc3ed2aca5d84"
+        "rgbaSha256": "4348ab4a771ccc3c52a4ca30943719230f6f889e2f5a34e65bce9cde8baec932"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "4f6ab7fa6b44da80ae95cc6e9e3cc63a6de9f90f2faefa5ee3deb6abaa2d39ff"
+        "rgbaSha256": "75e80bc3e0d57f949ee148127bf5af4f28374340c3d1597109b9fcf8b4aa0fc4"
       }
     },
     {
       "id": "ptolemy-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "9d46133bf0ce038ddf02d81e124ee1e285735a245d45c4748bbd3ae16cd3656c"
+        "rgbaSha256": "d05d7b2eb42839b8cbbd8b231fb9fc6149eadfa7e19ba0ccb99ceddffa803ec9"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "9805e41f28e7273eb344a9e74d242e91c9ceef5b47464357c69c6ab2574e5118"
+        "rgbaSha256": "06b19a6950129d25cfb54f7056d31c1415f173d6af33e85c7bf877eb773e5617"
       }
     },
     {
       "id": "ptolemy-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "75b0f002cbc7b830c50cf092e5a46e35605582c7123133d9f744897c726a857f"
+        "rgbaSha256": "2da7977fefe0cc0f262fc60778da14fe9e8288b0803a9b9acb4605d798cbc555"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f1f589501b916efa09b45d4d217d0cb0ef138aee89bdd09dcd6850417c3c7e08"
+        "rgbaSha256": "78d4453efe54b821efc9516030eb5771b82eb67cdec870f18a35aeebf8f9d742"
       }
     },
     {
       "id": "ptolemy-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e25162c66849f3ffbabc001da029fe34112e159a264c20d088cf88ee50b32e28"
+        "rgbaSha256": "2f0f07215440bc6fb874358fc18f25f43f5635f91788f5221c23376d23a5b2e9"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "daa36c6a0c26f7d3a16d338e857f75d1512d8a26977750103cc5b42368e2bd04"
+        "rgbaSha256": "4a414571be8cf19c44e8bd95f20819d3c48de56023c2b72ba6230093bdc0293e"
       }
     },
     {
       "id": "ptolemy-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "831e8fd7723c4e3830ec8d8a4a88403e54aa833b6e2485995d48c445211ac0a9"
+        "rgbaSha256": "2cbc95c2095bea809261407002a4f6863b1b18b8ae766bcfea5be184c01c487d"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "c051fa2e4ebb5ead0fd167f5401eccc09ba4ec8be4753c2ed82b7bbcb70fa056"
+        "rgbaSha256": "683f96278d5b922ee3751f31b01c6a37b17d97d41f111ecf895b67b2420e0de6"
       }
     },
     {
@@ -1012,88 +1012,88 @@
       "id": "cleomenes-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6b483b275f308d35e19f8427a3af667196b8a94cfc2fe74789b6a7965d5d537a"
+        "rgbaSha256": "bc034eebfb5500d73686bb11bf3bea21a04cec819205f4b32848357ef2753d74"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "ca6d09480750df04ac1506307c6c593718f8bbca97dda2ed8bfd307bc7f2a9d0"
+        "rgbaSha256": "09bf435d6260043ab6c16b175528b31cce17e61a29888edace5b9b54784cc939"
       }
     },
     {
       "id": "cleomenes-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "153c26d68582496848a6fed8465521a04a6f3963833e0def5e1e55c4ddfedff5"
+        "rgbaSha256": "319907be0e4fe5f10012b0d8b343b221278e9e30f48d111ea25313656d0cd127"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f7ff6270d4fa70bfd5cf7fc1e29e4b8c310c39911b1c7b8070c58362d29c4ea2"
+        "rgbaSha256": "8381857abb9d17e7337c991370d584aaebe7fd32998052ea5ab89ef0d31d883d"
       }
     },
     {
       "id": "cleomenes-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e3a29a0ce40ae98d66f4a2935b44e1af4f96c3f2ddce96e33628a7d6e67e6dc7"
+        "rgbaSha256": "2c2ca95bdf20eaa88a65a648e3a5820bdfd7a94ed9bfc6cc620ab4f291072311"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "3a929ed0b59e00520b10be975c27673f825bfe37c02bf4d696896c45244d7905"
+        "rgbaSha256": "e49ac4acd09a1e9a89a86a00a1df91b7706cedb036b579c69474d2bea5cfa006"
       }
     },
     {
       "id": "cleomenes-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d97e573b9724f953b345b7f1dc0cf27611ea90525f72a3ae2486b531be55e508"
+        "rgbaSha256": "caa97c19ab30721030ca4344d0cb56d6b0b5a56d4ddeded8f2cacaa62f45d411"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "70ea166091cd942512f99798f0a443196e5158621491287abd5f97a96b77914f"
+        "rgbaSha256": "8d123498746869298989eefd57c12058ae06d0ac820d3b0406e8a5b66144e0ac"
       }
     },
     {
       "id": "cleomenes-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "087b5635c3e52c727b4e7760d0fe24d2374ab232b92c78274ccc8c57b8932025"
+        "rgbaSha256": "11b71394e0d9ce76a1841094f33e64a884cd405bbaec83944a3ce895b15a7839"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "4903553da19f2e355d5ba1348ece43fe0ecddeed2e3658baad485d8fe11769b7"
+        "rgbaSha256": "087f85476b9882fb7dadbb3d65737d29a49d3c65cb978196a2b1306c2c768e8c"
       }
     },
     {
       "id": "cleomenes-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "358e83933bf8fdab9dcbe1e812163afcbc4bcd4b161beaf5eee842cf255c2b80"
+        "rgbaSha256": "4b7071e96ec2d410d1ecfa5c23a7b9058f2b5cf0673d3bf01578dea25f573d58"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d278004ebc64d214ffa8a5080000a99fe647298418388f480865acb67bf7637b"
+        "rgbaSha256": "eec02aed9b7302622bf3533c107613b4b18566a4af047d3e297670b4a5217137"
       }
     },
     {
       "id": "cleomenes-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "ac9164e248d2d9fc50ad6b4cea4e8a58cf544fc6b8d2f67a760773992c39393e"
+        "rgbaSha256": "85a8b249227596b2bca2925004790fab8a1ac51c96ccf739eedffc7d04725ba0"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e1970635dfbbd114440ceac6151e6efb29a6bc28d94e76ec4ae2384fa9bd05ef"
+        "rgbaSha256": "95f7bccac18d5489a3de2d60991280196065aacb8744fbbaec5a2b18c5933acd"
       }
     },
     {
       "id": "cleomenes-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "1da4920a224808d97d5cfe49eaf7f3cbee88b50420c557d3aa4f1df746164ae3"
+        "rgbaSha256": "b9382c386f23541e3e4415fe5532ba296f3a4ae1e9da7ff9304cceb665ad0e4b"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "046502cb9d9e5ca05a8cd67253b091a7075e4abd9d7c3ddf808310fce4bebe84"
+        "rgbaSha256": "5459afe8485d3e4503d6b311e95a7d7f09f40562c9f1762134ac1a187d767638"
       }
     },
     {
@@ -1111,88 +1111,88 @@
       "id": "nearchus-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f0ab0f38d96bd4c3f09736cb8740948ab2f3240230fe8610f18b6d5011a0c735"
+        "rgbaSha256": "8a7149352ae30728d85dae6a1aeeabdf48686487d31ca3cd06a0b349ab10c3a6"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "a3652bb006fe8d9a1b8e83b8344db3c2fd855f13035befa4bfa65b78249b8f5f"
+        "rgbaSha256": "2346d92155a38a4f0619ff108f03b3ca60b5cb341d018900754ca1fe8f8a6354"
       }
     },
     {
       "id": "nearchus-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6c97e1d755cfdd31b66b9cf1d9c7a600dd7ed7524e3189ec26332765decc1590"
+        "rgbaSha256": "08086275447bc6eca333f7be7cf7fbb09876f75fb551917a7a44dff6d75d434f"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "45cdaa47ed0ddf8824e446ae23b64c0ab2df8f5dc075cb647a6677947caa40a9"
+        "rgbaSha256": "28f78913033cf53b053ac85d5390b5db7ed56bd1f03afefd716c97b9616482b8"
       }
     },
     {
       "id": "nearchus-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "8b4083a159831001f507b31f3cdd2b3ec7ce369ca7e5bec329abfe86c0952373"
+        "rgbaSha256": "1e1ea2f774e0eb1059939ffef1726877673abbd806de7f15961ede1e87111db5"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "8f026be49bf3c4d9ed30450dde6e08d8ce8e4805c919203b621677068d739aa7"
+        "rgbaSha256": "19f91dda0284a77337412deff16c1291ac7f5e9ca3dadee83c4c00233e4e3557"
       }
     },
     {
       "id": "nearchus-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "2cb4183c667f97126b37dda0b91be70a5ef698778e579f9a0820a7821db97fbf"
+        "rgbaSha256": "502a5955b537f374bdac3c248f9292865b3f3773165cdc3e4faeaf802790b8fc"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e0ee2b9af34ab83d28e135b0a197339a93eb72a1b241ab93fd472ee89e2aeaf4"
+        "rgbaSha256": "e05b27503576578b1c26a3b00a84b442b452ec373816368876a67e94b0e0d7de"
       }
     },
     {
       "id": "nearchus-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e36d2daa0f1e21535c4d87d2f795696516dd886f0be9e73d22124c703194a891"
+        "rgbaSha256": "b200a637fad83ccc1d80f98fc2671ea0979ac762192c51137dcfe5da7d70d832"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "01fc9b610ad8f24efa85f25834612a8f461fdc31d5509638aba477ab939944a8"
+        "rgbaSha256": "e8edabec09c63286a285919aa6ccc536697f9108d961a8772807cea39ebae556"
       }
     },
     {
       "id": "nearchus-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "ef3fad5bb29ea4db767e9f698664ce2102b3a6281db93a8db9cb59c54c12b266"
+        "rgbaSha256": "6fcc7d17d94b14c383d97f17eed815171b280003ff13b08609a70ebd872c8297"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6b836ae9658ee2e4cd95dc57c1d2f0395d0e8b188ff72547eaaff85074300f61"
+        "rgbaSha256": "8342ae7f22eb3bc5d5d58d616fd6c699f819c90c5e37b9c988bc4e1283f095a3"
       }
     },
     {
       "id": "nearchus-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "883bf0f3500efc713ae34845fa1c61df7f68d0ce028e60c94457fcadcfad9316"
+        "rgbaSha256": "c8b2d1a1b3f2a5a8b7352660b35d95056a486b2a8c22aa3e2e90333aec808266"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "08b864e5d89c4757c6e8655ee11829728eda75cb9faf294b0da6bfdf5c27db3f"
+        "rgbaSha256": "972b87cd0d8318fccc31e2e50a210b771bb9df75131e1b4633e94ccbc2feb724"
       }
     },
     {
       "id": "nearchus-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6f214ef81ead12aa611588af0985847088b7fcdd45dd0fc3689bd0ca1b31fcb4"
+        "rgbaSha256": "535892f3ceda40ed0e323a9402ed1b70937941e4705f114e511380612ff005b0"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "e4d3c37ac734ea338a951e79b052a732b507ac7a52a34660eb16d313d4d5bc7d"
+        "rgbaSha256": "04987ffa0a8f3a3baa2fec1366e07fdb996dc2c8d97befbede568b6ea927a7b8"
       }
     },
     {
@@ -1210,88 +1210,88 @@
       "id": "eumenes-common-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "1f2880bb879f30114b453a124d15b79d1cacc37c855d7786c47be15ad14671a6"
+        "rgbaSha256": "cebb0edb93dbed74cf5f8435a2641db80683cb666d08b47d485077c93f0da999"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "d63937dc6a201645bee5df8ac08b54729368b4ef107dfa79022540a53ee870b8"
+        "rgbaSha256": "c957932df24a50835531080b965b88a0747e20657b32c0a090166d5462df545a"
       }
     },
     {
       "id": "eumenes-common-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6eb4e7d8ebb7855e110aeb552e7960702a11e5b054f596a673c1f779d16155d6"
+        "rgbaSha256": "704f903640c1be1ff432d4602f2f3c97534116cc629be758f0e539199c785a85"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "2a4afd6489ff2683b6908e8905ff36df63ceb4803e88763c258cd24c399d3a80"
+        "rgbaSha256": "c900c907e7c35db6d59148b299eb75dbfa43c6a63a92fc1cde48ca8d575a1012"
       }
     },
     {
       "id": "eumenes-uncommon-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "8dc79f885b67d322de54e1ed8ec73f1d182ebb5359933d32290a879c34475342"
+        "rgbaSha256": "150868b594d151a08d909023e31e9d1ea39ce10567e6d32a03482fb7c4888f43"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "6f3e452ec651887eb338df12f5ac7553ee13f9f128b77c716710f643840b9756"
+        "rgbaSha256": "49aefd11673e92524605ec6256b2d216f5e7664634c85f4622dde7685164e71b"
       }
     },
     {
       "id": "eumenes-uncommon-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "f4dfa48401ab433c874b6a019025b031b6b7708a7e7f34a8231888b52089b394"
+        "rgbaSha256": "6d3c18aca768ef54b117027b3959bc933b40bc57dd0f4b6cab021df6f85c2118"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0084560f104de7bf6226752e1ccf66ea6cadb7be3074bce7cfcd58f58c482d79"
+        "rgbaSha256": "df02bbd93cfb83cec2b46d0d53568d68eb133c85f0c929a1488f7b8308965f2d"
       }
     },
     {
       "id": "eumenes-rare-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "3fd7c77f874415b696c6ba0e753b9959c10dfeb1330d4beb4a7c3f0daa6bab0b"
+        "rgbaSha256": "8502aa7febc86791202014a8f625962b5535f6878c1d60a7bd4881dbb86ef912"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0fd68150c05e4271b98cc6e1ec55a66397b2d7de1445a297b1317196d739e97b"
+        "rgbaSha256": "0ca70b6a694aa8ae574decbcabd1aac0445b0a5e3238accf13a181a42e74258d"
       }
     },
     {
       "id": "eumenes-rare-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "0e77d8e5cdd0b6b2d75e6868283d890a6f2c49f4bd37f670502281c0bb83ecc6"
+        "rgbaSha256": "eb91ba4fe07710c4b6e7867bc0424abcf279674bda82716429b7b88ae18e0a69"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "973aa342af4d323144add7dca40ad7a1238d3175bc0691eebb536e765843141a"
+        "rgbaSha256": "b22b55a4e0fb887f2f9796ee98f30d6c374f1de5555b8d25ff1655d5f2c6f9f1"
       }
     },
     {
       "id": "eumenes-epic-male",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "de1eac5ac7c24f888913d90d6c84bbfc9b057411c218677e13c1a67e968fe58c"
+        "rgbaSha256": "d9f07a0577dd37568ea234ec6a616cbde4d3a8c07936616315b1fcae41e8f1cd"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "bf2fdd25e734e1ff9c0ea36820a9ec0d872a9e6d3c1f68f49ce57585be4e8552"
+        "rgbaSha256": "5090527ed365fd02a3c92beb1cb646e9758e8c896f896cb24760a1bcd5955f54"
       }
     },
     {
       "id": "eumenes-epic-female",
       "frame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "db8b49af13e41a61caa6d9a3baeb24ef79caa57f884636832ce97c9e24e36bf3"
+        "rgbaSha256": "ead79860be005aef3b86e81b40355d7212387eef419682572aedb405445e6870"
       },
       "footerlessFrame": {
         "exactProductionPixels": true,
-        "rgbaSha256": "7c21374de7d5b074a69357532e393bd81486a2d4f5d4fde2b2e40db730a358ea"
+        "rgbaSha256": "6ddf44bf18f7c8a5f7c9f8950f89812beb8e047cd6af602cdc06b83217916bd5"
       }
     },
     {
@@ -1415,6 +1415,36 @@
       }
     },
     {
+      "id": "demetrius-parent-legendary",
+      "frame": {
+        "nativeExport": true
+      },
+      "footerlessFrame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "a4c03893d57aa28b35663d2b748eddf51769119d4191cc723be42a52a07e0ce8"
+      }
+    },
+    {
+      "id": "zeno-parent-legendary",
+      "frame": {
+        "nativeExport": true
+      },
+      "footerlessFrame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "6a0235fe8f43e95fe5199b758dcce91d4eeba11fdb642c8c321a1b7be7372451"
+      }
+    },
+    {
+      "id": "ptolemy-parent-legendary",
+      "frame": {
+        "nativeExport": true
+      },
+      "footerlessFrame": {
+        "exactProductionPixels": true,
+        "rgbaSha256": "44988caa034ea34faf68344a447602760eacb5633280a58b82d47bcd17184faa"
+      }
+    },
+    {
       "id": "cleomenes-parent-common",
       "frame": {
         "nativeExport": true
@@ -1454,5 +1484,7 @@
         "rgbaSha256": "76508d9ec4e20eeeee222bc27c59d2ac8196ae37decc913ff8f8bc5dcc13c61d"
       }
     }
-  ]
+  ],
+  "editorialRoleRevision": "role-progression-v1",
+  "headerSpacingRevision": "subtitle-spacing-v1"
 }

@@ -1,16 +1,16 @@
-# Expedition Provisioner — pytheas-uncommon-female
+# Navigation Assistant — pytheas-uncommon-female
 
 **Figure family:** Pytheas of Massalia · **Type:** contribution · **Gender:** female · **Frame:** uncommon
 
 Look first at [approved art](../reference/portraits/pytheas-uncommon-female.webp) and the [framed preview](../reference/cards/pytheas-uncommon-female.webp). The exact card copy below supplies the profession, duty and tone. It is reference context only: do not draw any text into the illustration.
 
-> Expedition Provisioner — Keeper of Pytheas' Stores
+> Navigation Assistant — Learning the Northern Route
 >
-> Endurance for the Unknown. An expedition provisioner measures food, water, and the demands of another day at sea. Careful stores give the crew room to endure uncertainty, supporting discovery with the practical strength of preparation.
+> A Course Made Legible. A navigation assistant checks bearings, compares coastal landmarks, and records the observations needed to keep an expedition on course. Practical work beside experienced navigators prepares the eye and judgment for independent observation.
 
 ## Generation / drawing brief
 
-Create an art-only historical card illustration for **Expedition Provisioner**, belonging to the Pytheas of Massalia family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult woman; left three-quarter view from just above eye level. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
+Create an art-only historical card illustration for **Navigation Assistant**, belonging to the Pytheas of Massalia family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult woman; left three-quarter view from just above eye level. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
 
 Keep the ancient Mediterranean setting consistent with this figure. Fit clothing, armour, status and equipment to this character and profession. Military contributors use lower-status kit than the main commander; nonmilitary contributors use work-appropriate clothes and tools. Use the supplied character reference for Alexander's armour rather than searching for another character's set. Match identity, lighting and palette to this family's approved art while translating its finish into deliberate pixel clusters.
 

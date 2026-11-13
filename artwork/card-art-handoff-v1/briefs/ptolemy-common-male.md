@@ -1,16 +1,16 @@
-# Palace Messenger — ptolemy-common-male
+# Court Records Apprentice — ptolemy-common-male
 
 **Figure family:** Ptolemy I Soter · **Type:** contribution · **Gender:** male · **Frame:** common
 
 Look first at [approved art](../reference/portraits/ptolemy-common-male.webp) and the [framed preview](../reference/cards/ptolemy-common-male.webp). The exact card copy below supplies the profession, duty and tone. It is reference context only: do not draw any text into the illustration.
 
-> Palace Messenger — Bearer of Ptolemy's Dispatches
+> Court Records Apprentice — Learning the Court's Accounts
 >
-> The Seal Reaches Its Hand. A palace messenger carries sealed orders through crowded courtyards and unfamiliar streets. Dependability gives distant officials a common purpose, keeping the first threads of government joined by a message delivered intact and on time.
+> Order Begins in the Record. A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government.
 
 ## Generation / drawing brief
 
-Create an art-only historical card illustration for **Palace Messenger**, belonging to the Ptolemy I Soter family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult man; left three-quarter view, looking slightly past the viewer. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
+Create an art-only historical card illustration for **Court Records Apprentice**, belonging to the Ptolemy I Soter family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult man; left three-quarter view, looking slightly past the viewer. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
 
 Keep the ancient Mediterranean setting consistent with this figure. Fit clothing, armour, status and equipment to this character and profession. Military contributors use lower-status kit than the main commander; nonmilitary contributors use work-appropriate clothes and tools. Use the supplied character reference for Alexander's armour rather than searching for another character's set. Match identity, lighting and palette to this family's approved art while translating its finish into deliberate pixel clusters.
 

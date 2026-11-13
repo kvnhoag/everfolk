@@ -1,16 +1,16 @@
-# Camp Runner — alexander-common-male
+# Campaign Soldier — alexander-common-male
 
 **Figure family:** Alexander the Great · **Type:** contribution · **Gender:** male · **Frame:** common
 
 Look first at [approved art](../reference/portraits/alexander-common-male.webp) and the [framed preview](../reference/cards/alexander-common-male.webp). The exact card copy below supplies the profession, duty and tone. It is reference context only: do not draw any text into the illustration.
 
-> Camp Runner — Messenger of the Host
+> Campaign Soldier — In the King's Ranks
 >
-> The Order Arrives. A camp runner carries dispatches between scattered tents and marching units. Speed and dependable memory turn a commander's distant intention into action, keeping the great host moving as one.
+> Discipline in the Line. A campaign soldier drills with spear and shield, keeps equipment ready, and holds position beside the rest of the unit. Dependable service under orders lays the foundation for the judgment and responsibility of command.
 
 ## Generation / drawing brief
 
-Create an art-only historical card illustration for **Camp Runner**, belonging to the Alexander the Great family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult man; left three-quarter view, looking slightly past the viewer. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
+Create an art-only historical card illustration for **Campaign Soldier**, belonging to the Alexander the Great family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult man; left three-quarter view, looking slightly past the viewer. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
 
 Keep the ancient Mediterranean setting consistent with this figure. Fit clothing, armour, status and equipment to this character and profession. Military contributors use lower-status kit than the main commander; nonmilitary contributors use work-appropriate clothes and tools. Use the supplied character reference for Alexander's armour rather than searching for another character's set. Match identity, lighting and palette to this family's approved art while translating its finish into deliberate pixel clusters.
 

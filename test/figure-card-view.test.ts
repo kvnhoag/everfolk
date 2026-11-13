@@ -7,6 +7,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { FIGURE_ROSTER, figureRosterEntry } from "../chain/catalog/figure-roster.ts";
 import type { FigureCardRank } from "../chain/catalog/figure-roster.ts";
+import { findCardArt, cardArtRank } from "../client/models/card-art.ts";
 import { createEngine } from "../src/engine.ts";
 import type { AccomplishmentRecord, LifeState, WorldPack } from "../src/types.ts";
 import { yearAtAge } from "../src/calendar.ts";
@@ -33,17 +34,21 @@ test("all eleven figure cards render a portrait, readable identity and their all
     assert.match(html, new RegExp('data-figure-card="' + entry.id + '"'));
     assert.match(html, new RegExp('data-rarity="' + entry.baseRank.toLowerCase() + '"'));
     assert.ok(html.includes(entry.name));
-    assert.ok(html.includes(entry.art.src));
+    assert.ok(html.includes(findCardArt({ figureId: entry.id, kind: "parent", tier: cardArtRank(entry.baseRank) })!.footerlessSrc));
+    assert.ok(!html.includes(entry.art.src), "legacy sprite must not replace approved card art");
     assert.ok(html.includes(entry.archetype));
     assert.equal((html.match(/<img /g) ?? []).length, 1);
     assert.equal((html.match(/<button /g) ?? []).length, 0);
   }
 });
 
-test("the seven temporary portraits carry a visible placeholder label", () => {
+test("approved artwork replaces all seven legacy placeholder portraits", () => {
   const temporary = FIGURE_ROSTER.filter(entry => entry.art.placeholder);
   assert.equal(temporary.length, 7);
-  for (const entry of temporary) assert.match(renderCard(entry.id), /Placeholder art/);
+  for (const entry of temporary) {
+    assert.doesNotMatch(renderCard(entry.id), /Placeholder art/);
+    assert.match(renderCard(entry.id), /collection-card-art-image/);
+  }
   assert.doesNotMatch(renderCard("alexander"), /Placeholder art/);
 });
 
@@ -64,14 +69,49 @@ test("a requested principal grade cannot invent a Legendary Pytheas or a Rare Al
 });
 
 test("contribution cards include Common through Epic and cannot become Legendary", () => {
-  for (const [rank, count] of [["Common", 1], ["Uncommon", 1], ["Rare", 2], ["Epic", 3]] as const) {
+  for (const rank of ["Common", "Uncommon", "Rare", "Epic"] as const) {
     const html = renderCard("aristotle", rank, "contribution");
     assert.match(html, new RegExp('data-rarity="' + rank.toLowerCase() + '"'));
     assert.match(html, /Contribution/);
-    const stones = html.match(/class="figure-tcg-stones"[\s\S]*?<\/span>/)?.[0] ?? "";
-    assert.equal((stones.match(/<i>/g) ?? []).length, count);
+    assert.ok(html.includes(findCardArt({ figureId: "aristotle", kind: "contribution", tier: cardArtRank(rank) })!.footerlessSrc));
   }
   assert.equal(displayedFigureCardRank(figure("aristotle"), "Legendary", "contribution"), "Common");
+});
+
+test("contributor faces use their recorded gender and never invent an issued edition", () => {
+  for (const gender of ["male", "female"] as const) {
+    const html = renderToStaticMarkup(createElement(HistoricalFigureCard, { figure: figure("alexander"), mode: "contribution", rank: "Common", gender }));
+    assert.ok(html.includes(findCardArt({ figureId: "alexander", kind: "contribution", tier: "common", gender })!.footerlessSrc));
+    assert.match(html, /Edition —\/∞/);
+    assert.doesNotMatch(html, /figure-tcg-architecture|alexander-front\.png/);
+  }
+});
+
+test("catalogue contributors default to male regardless of the life seed", () => {
+  for (const seed of ["", "old-save", "female-life", "alexander", "1"]) {
+    const art = findCardArt({ figureId: "alexander", kind: "contribution", tier: "common", seed });
+    assert.equal(art?.gender, "male");
+  }
+  assert.equal(findCardArt({ figureId: "alexander", kind: "contribution", tier: "common", gender: "female" })?.gender, "female");
+});
+
+test("all three promotable figures have approved Epic and full-art Legendary faces", () => {
+  for (const id of ["demetrius", "zeno", "ptolemy"]) {
+    const epic = renderCard(id, "Epic"), legendary = renderCard(id, "Legendary");
+    assert.match(epic, new RegExp(`data-card-art="${id}-parent"`));
+    assert.match(legendary, new RegExp(`data-card-art="${id}-parent-legendary"`));
+    assert.doesNotMatch(legendary, /figure-tcg-placeholder|figure-tcg-architecture|figure-placeholders/);
+    assert.match(legendary, /Edition —\/010/);
+  }
+});
+
+test("only Legendary card faces receive decorative foil and edge light, with their edition still readable", () => {
+  const legendary = renderCard("ptolemy", "Legendary");
+  assert.match(legendary, /class="collection-card-foil" aria-hidden="true"/);
+  assert.match(legendary, /class="collection-card-aura" aria-hidden="true"/);
+  assert.match(legendary, /aria-label="Edition —\/010"/);
+  assert.doesNotMatch(renderCard("ptolemy", "Epic"), /collection-card-(foil|aura)/);
+  assert.doesNotMatch(renderCard("ptolemy", "Rare", "contribution"), /collection-card-(foil|aura)/);
 });
 
 test("the viewer is a labelled native modal with close controls and no mint action", () => {

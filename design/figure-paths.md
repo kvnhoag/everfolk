@@ -42,6 +42,8 @@ The revision also adds **22 once-only development decisions**, two per figure. T
 
 Demetrius, Ptolemy and Zeno each have a separate, one-shot success/failure resolution. Attempt records block rerolling; failed outcomes preserve the earlier Epic work without awarding the promotion achievement. Dates alone cannot promote a figure.
 
+A promoted Legendary figure's biography must name the successful feat and explain its rise from Epic to Legendary. The card face and selected figure biography use the same promotion story. Any departure from recorded history is explicit: Legendary Demetrius recounts the alternate-history capture of Rhodes, while his Epic biography retains the historical negotiated settlement. Historical research and contributor biographies retain their original account.
+
 - **Demetrius:** `rhodes-captured` is expressly alternate history.
 - **Ptolemy:** `ptolemaic-dynasty-founded` requires the funded founding programme and a successful independence/succession result, not centuries of later history.
 - **Zeno:** `stoic-school-established` requires a sustained functioning school. This remains the working interpretation of “could push Legend.”

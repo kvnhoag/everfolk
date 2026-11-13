@@ -130,7 +130,7 @@
       {
         "bounds": {
           "height": 110.904,
-          "width": 613.7280000000002,
+          "width": 647.9039999999999,
           "x": 96,
           "y": 1015.136
         },
@@ -160,13 +160,13 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "A Lyceum attendant prepares tablets, gathers scrolls, and\nmakes room for the next discussion. Quiet attention gives\nthe school its daily rhythm, allowing greater questions to\nbegin without needless interruption.",
+        "text": "A Lyceum student records questions, studies arguments, and\nchecks simple observations with the school. Careful notes\nand a willingness to test an explanation begin the habits\nthat later support independent research and teaching.",
         "visible": true
       },
       {
         "bounds": {
           "height": 39.759000000000015,
-          "width": 244.12200000000007,
+          "width": 339.2130000000001,
           "x": 96,
           "y": 964.956
         },
@@ -196,15 +196,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "A Place for Inquiry",
+        "text": "Learning Through Inquiry",
         "visible": true
       },
       {
         "bounds": {
           "height": 22.9892578125,
-          "width": 351.65234375,
-          "x": 274.173828125,
-          "y": 144.59375
+          "width": 378.21240234375,
+          "x": 260.893798828125,
+          "y": 152.59375
         },
         "fill": "#d3d4c7",
         "id": 43,
@@ -232,15 +232,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "AT THE THRESHOLD OF WISDOM",
+        "text": "FIRST QUESTIONS OF THE LYCEUM",
         "visible": true
       },
       {
         "bounds": {
           "height": 87.744,
-          "width": 523.392,
-          "x": 188.30400000000003,
-          "y": 64.21600000000001
+          "width": 459.20000000000005,
+          "x": 220.39999999999998,
+          "y": 54.21600000000001
         },
         "fill": "#f0e6cf",
         "id": 42,
@@ -268,7 +268,7 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Lyceum Attendant",
+        "text": "Lyceum Student",
         "visible": true
       }
     ],
@@ -291,7 +291,7 @@
     "title": "aristotle-common-female.svg",
     "tool": "selection",
     "total": 7,
-    "uid": 35,
+    "uid": 5,
     "units": "Pixels"
   },
   "art": {
@@ -355,7 +355,7 @@
     "title": "aristotle-common-female.svg",
     "tool": "selection",
     "total": 1,
-    "uid": 35,
+    "uid": 5,
     "units": "Pixels"
   }
 }

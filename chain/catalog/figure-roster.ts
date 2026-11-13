@@ -2,12 +2,15 @@ import { FIGURE_IDS, type FigureId } from "../ids.ts";
 import { biographyFor, type FigureBiography } from "./figure-biographies.ts";
 import { FIGURE_RANK_POLICY, type RosterFigureId, type RosterRank } from "./figure-ranks.ts";
 import { deepFreeze } from "./content.ts";
+import promotionRecords from "./figure-promotions.json" with { type: "json" };
 
 export type FigureCardRank = "Common" | "Uncommon" | "Rare" | "Epic" | "Legendary";
 export interface FigureCardVariant {
   rank: RosterRank;
   title: string;
   condition: string;
+  /** The achieved promotion story; historical research remains in the base biography. */
+  biography?: string;
   requiredMilestone?: "rhodes-captured" | "ptolemaic-dynasty-founded" | "stoic-school-established";
 }
 export interface FigureRosterEntry {
@@ -37,11 +40,7 @@ const presentation: Record<RosterFigureId, { name: string; archetype: string; ta
   ptolemy: { name: "Ptolemy I Soter", archetype: "Dynastic Statesman", tags: ["Administration", "Public Supply", "Succession"] },
   cleomenes: { name: "Cleomenes of Naucratis", archetype: "Revenue Administrator", tags: ["Grain Accounts", "Audit", "Supply"] },
 };
-const promotions = {
-  demetrius: { title: "Demetrius, Captor of Rhodes", condition: "Earn the siege capstone and successfully capture Rhodes in the alternate-history outcome.", requiredMilestone: "rhodes-captured" },
-  ptolemy: { title: "Ptolemy I Soter, Dynasty Founder", condition: "Earn the government capstone and successfully found the Ptolemaic dynasty.", requiredMilestone: "ptolemaic-dynasty-founded" },
-  zeno: { title: "Zeno, Stoic School Founder", condition: "Earn the ethical-inquiry capstone and establish an independently functioning Stoic school. This remains the working Legendary criterion.", requiredMilestone: "stoic-school-established" },
-} as const;
+const promotions = promotionRecords as Record<keyof typeof promotionRecords, Omit<FigureCardVariant, "rank">>;
 
 /** Complete presentation roster. It does not expand contract IDs or rewrite a kept token's rarity. */
 export const FIGURE_ROSTER: readonly FigureRosterEntry[] = deepFreeze(FIGURE_RANK_POLICY.map(policy => {
@@ -63,4 +62,9 @@ export const FIGURE_ROSTER: readonly FigureRosterEntry[] = deepFreeze(FIGURE_RAN
 
 export function figureRosterEntry(id: string): FigureRosterEntry | undefined {
   return FIGURE_ROSTER.find(figure => figure.id === id);
+}
+
+/** Principal previews tell the selected variant story without changing historical records. */
+export function figureCardBiography(figure: FigureRosterEntry, rank: FigureCardRank): string {
+  return figure.variants.find(variant => variant.rank === rank)?.biography ?? figure.biography.biography;
 }

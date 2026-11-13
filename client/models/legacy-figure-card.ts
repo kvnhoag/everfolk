@@ -10,6 +10,7 @@ export interface LegacyFigureCard {
   title: string;
   mode: "principal" | "contribution";
   contributionRanks?: readonly FigureCardRank[];
+  gender?: "male" | "female";
 }
 const sameRecord = (saved: AccomplishmentRecord, recorded?: AccomplishmentRecord) => recorded !== undefined &&
   saved.id === recorded.id && saved.achievementId === recorded.achievementId && saved.routeId === recorded.routeId &&

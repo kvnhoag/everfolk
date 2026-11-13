@@ -130,7 +130,7 @@
       {
         "bounds": {
           "height": 110.904,
-          "width": 626.424,
+          "width": 658.7760000000001,
           "x": 96,
           "y": 1015.136
         },
@@ -160,13 +160,13 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "A stagehand sets props and prepares the space before an\nactor steps into view. Quiet readiness makes each entrance\npossible, giving the playwright's imagined household a\nconvincing place to come alive.",
+        "text": "A rehearsal assistant follows scene copies, records cues,\nand helps the company try a comic exchange in performance.\nAttention to dialogue and timing gives early practice in\nthe dramatic work that will grow into writing and staging.",
         "visible": true
       },
       {
         "bounds": {
           "height": 39.759000000000015,
-          "width": 323.69800000000004,
+          "width": 297.192,
           "x": 96,
           "y": 964.956
         },
@@ -196,15 +196,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Before the First Entrance",
+        "text": "The Scene Takes Shape",
         "visible": true
       },
       {
         "bounds": {
           "height": 22.9892578125,
-          "width": 336.0234375,
-          "x": 281.98828125,
-          "y": 144.59375
+          "width": 317.62060546875,
+          "x": 291.189697265625,
+          "y": 152.59375
         },
         "fill": "#d3d4c7",
         "id": 46,
@@ -232,15 +232,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "BEHIND MENANDER'S CURTAIN",
+        "text": "LEARNING THE COMIC STAGE",
         "visible": true
       },
       {
         "bounds": {
           "height": 87.744,
-          "width": 295.16800000000006,
-          "x": 302.416,
-          "y": 64.21600000000001
+          "width": 553.7280000000001,
+          "x": 173.13599999999997,
+          "y": 54.21600000000001
         },
         "fill": "#f0e6cf",
         "id": 45,
@@ -268,7 +268,7 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Stagehand",
+        "text": "Rehearsal Assistant",
         "visible": true
       }
     ],
@@ -291,7 +291,7 @@
     "title": "menander-common-female.svg",
     "tool": "selection",
     "total": 7,
-    "uid": 143,
+    "uid": 11,
     "units": "Pixels"
   },
   "art": {
@@ -355,7 +355,7 @@
     "title": "menander-common-female.svg",
     "tool": "selection",
     "total": 1,
-    "uid": 143,
+    "uid": 11,
     "units": "Pixels"
   }
 }

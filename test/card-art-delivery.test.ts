@@ -110,15 +110,15 @@ test("the shipped card set covers every figure and all four male/female contribu
   }
 });
 
-test("all 484 production images have intact hashes, lossless encoding and approved dimensions", () => {
+test("all 487 production images have intact hashes, lossless encoding and approved dimensions", () => {
   assert.equal(deliveries.length, 117);
-  assert.equal(variantDeliveries.length, 16);
+  assert.equal(variantDeliveries.length, 19);
   assert.equal(manifest.sourceCatalogSha256, registry.sourceCatalogSha256);
   assert.equal(manifest.losslessRGBAReadbackVerified, true);
   const files = deliveries.flatMap(asset => [asset.full, asset.thumbnail, asset.footerless, asset.portrait]).concat(variantDeliveries.map(variant => variant.footerless));
-  assert.equal(files.length, 484);
-  assert.equal(new Set(files.map(file => file.src)).size, 484);
-  assert.equal(readdirSync(new URL("../public/assets/cards/collection-v14/", import.meta.url)).filter(name => name.endsWith(".webp")).length, 484);
+  assert.equal(files.length, 487);
+  assert.equal(new Set(files.map(file => file.src)).size, 487);
+  assert.equal(readdirSync(new URL("../public/assets/cards/collection-v14/", import.meta.url)).filter(name => name.endsWith(".webp")).length, 487);
   for (const file of files) {
     const bytes = readFileSync(new URL("../public" + file.src, import.meta.url));
     assert.equal(bytes.length, file.bytes, file.src);
@@ -151,7 +151,7 @@ test("live edition surfaces remove only the example serial and retain the review
 });
 
 test("owned historical NFTs have a parent frame for their actual rarity", () => {
-  assert.equal(variants.length, 16);
+  assert.equal(variants.length, 19);
   for (const figureId of ["alexander", "aristotle", "euclid", "cleomenes"]) for (const rarity of ranks) {
     const candidates = [...assets, ...variants].filter(asset => asset.kind === "parent" && asset.figureId === figureId && asset.rarity === rarity);
     assert.equal(candidates.length, 1, `${figureId}/${rarity}`);

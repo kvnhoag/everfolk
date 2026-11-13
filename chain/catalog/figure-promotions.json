@@ -1,0 +1,20 @@
+{
+  "demetrius": {
+    "title": "Demetrius, Captor of Rhodes",
+    "condition": "Earn the siege capstone and successfully capture Rhodes in the alternate-history outcome.",
+    "requiredMilestone": "rhodes-captured",
+    "biography": "In this alternate history, Demetrius captured Rhodes after a campaign of siegecraft. The conquest raised the Epic Besieger to Legendary renown as the Captor of Rhodes."
+  },
+  "ptolemy": {
+    "title": "Ptolemy I Soter, Dynasty Founder",
+    "condition": "Earn the government capstone and successfully found the Ptolemaic dynasty.",
+    "requiredMilestone": "ptolemaic-dynasty-founded",
+    "biography": "After securing Egypt, Alexander's former general Ptolemy established an independent hereditary kingdom. Founding the Ptolemaic dynasty elevated the Epic statesman to Legendary renown."
+  },
+  "zeno": {
+    "title": "Zeno, Stoic School Founder",
+    "condition": "Earn the ethical-inquiry capstone and establish an independently functioning Stoic school. This remains the working Legendary criterion.",
+    "requiredMilestone": "stoic-school-established",
+    "biography": "Teaching virtue and reason at Athens' Painted Porch, Zeno established an independently functioning Stoic school. That sustained foundation elevated the Epic teacher to Legendary renown."
+  }
+}

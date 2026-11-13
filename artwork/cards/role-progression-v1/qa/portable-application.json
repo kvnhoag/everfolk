@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "everfolk-role-progression-v1",
+  "target": "/home/wdrag/workspace/kvn_hoag/everfolk",
+  "applied": true,
+  "changedCards": [
+    "alexander-common-male",
+    "alexander-common-female",
+    "alexander-uncommon-male",
+    "alexander-uncommon-female",
+    "pytheas-uncommon-male",
+    "pytheas-uncommon-female",
+    "aristotle-common-male",
+    "aristotle-common-female",
+    "menander-common-male",
+    "menander-common-female",
+    "ptolemy-common-male",
+    "ptolemy-common-female",
+    "cleomenes-common-male",
+    "cleomenes-common-female"
+  ],
+  "copiedFiles": 325,
+  "skippedBodylessFiles": 14,
+  "sourceCatalogSha256": "081a5ed0e0c66136bed59d4d2d63c4330e6b3270a7b96b164eba60a0ecc76f6c",
+  "preservedActiveOverrides": [
+    "alexander-epic-male",
+    "demetrius-rare-male"
+  ],
+  "parentVariantsUnchanged": true,
+  "unselectedRegistryAndKitRowsUnchanged": true,
+  "retainedWorldsUnchanged": true,
+  "kitManifestSha256": "d5030f95a085f8434f00172d10e1aef7e188a189985ea7574c63f3dee5de274d"
+}

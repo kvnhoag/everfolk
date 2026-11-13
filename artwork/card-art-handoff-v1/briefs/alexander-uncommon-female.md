@@ -1,16 +1,16 @@
-# Campaign Provisioner — alexander-uncommon-female
+# Campaign Squad Leader — alexander-uncommon-female
 
 **Figure family:** Alexander the Great · **Type:** contribution · **Gender:** female · **Frame:** uncommon
 
 Look first at [approved art](../reference/portraits/alexander-uncommon-female.webp) and the [framed preview](../reference/cards/alexander-uncommon-female.webp). The exact card copy below supplies the profession, duty and tone. It is reference context only: do not draw any text into the illustration.
 
-> Campaign Provisioner — Keeper of the King's Stores
+> Campaign Squad Leader — Steadying a Small Command
 >
-> Strength Before Battle. A campaign provisioner gathers grain, checks pack animals, and keeps the stores ready for departure. Behind every celebrated advance stands this patient discipline, giving hungry soldiers the strength to follow their king.
+> Orders Into Action. A campaign squad leader directs a small group of soldiers on the march and in the field. Clear instructions, shared discipline, and care for the unit turn individual service into the first responsibility of command.
 
 ## Generation / drawing brief
 
-Create an art-only historical card illustration for **Campaign Provisioner**, belonging to the Alexander the Great family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult woman; left three-quarter view from just above eye level. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
+Create an art-only historical card illustration for **Campaign Squad Leader**, belonging to the Alexander the Great family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult woman; left three-quarter view from just above eye level. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
 
 Keep the ancient Mediterranean setting consistent with this figure. Fit clothing, armour, status and equipment to this character and profession. Military contributors use lower-status kit than the main commander; nonmilitary contributors use work-appropriate clothes and tools. Use the supplied character reference for Alexander's armour rather than searching for another character's set. Match identity, lighting and palette to this family's approved art while translating its finish into deliberate pixel clusters.
 

@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import type { FigureCardRank, FigureRosterEntry } from "../../chain/catalog/figure-roster.ts";
+import { figureCardBiography, type FigureCardRank, type FigureRosterEntry } from "../../chain/catalog/figure-roster.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { getFigureCardProgress } from "../../src/figures/card-progress.ts";
 import HistoricalFigureCard, { displayedFigureCardRank, type FigureCardMode } from "./HistoricalFigureCard.tsx";
 import { stepVariantIndex, initialWheelGesture, reduceVariantWheel, swipeVariantStep, variantStackSlot } from "../models/figure-card-carousel.ts";
 import { contributionCardRanks, figureCardRanks } from "../models/figure-contribution-ranks.ts";
+import { findCardArt, cardArtRank, type CardArtGender } from "../models/card-art.ts";
 import { buildFigureCardRequirements, changedRequirementIds, type FigureCardRequirement } from "../models/figure-card-requirements.ts";
 import "../styles/figure-cards.css";
 import "../styles/figure-card-viewer.css";
@@ -17,6 +18,7 @@ export interface FigureCardViewerProps {
   life?: LifeState;
   mode?: FigureCardMode;
   contributionTitle?: string;
+  gender?: CardArtGender;
   upgradeAction?: { label: string; enabled: boolean; reason?: string; onActivate(): void };
 }
 
@@ -25,7 +27,7 @@ export default function FigureCardViewer(props: FigureCardViewerProps) {
   if (!props.figure) return null;
   return <OpenFigureCardViewer key={props.figure.id + "-" + (props.initialRank ?? "") + "-" + (props.mode ?? "principal")} {...props} figure={props.figure} />;
 }
-function OpenFigureCardViewer({ figure, initialRank, onClose, world, life, mode = "principal", contributionTitle, upgradeAction }: Omit<FigureCardViewerProps, "figure"> & { figure: FigureRosterEntry }) {
+function OpenFigureCardViewer({ figure, initialRank, onClose, world, life, mode = "principal", contributionTitle, upgradeAction, gender }: Omit<FigureCardViewerProps, "figure"> & { figure: FigureRosterEntry }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -164,7 +166,7 @@ function OpenFigureCardViewer({ figure, initialRank, onClose, world, life, mode 
               const current = slot === 0;
               return <div key={option} className={`figure-card-stack-item${current ? " is-current" : ""}`} data-stack-slot={slot} data-stack-side={slot < 0 ? "left" : slot > 0 ? "right" : "active"} data-variant-rank={option} style={{ "--stack-slot": slot, "--stack-depth": Math.abs(slot), zIndex: options.length - Math.abs(slot) } as CSSProperties}>
                 <div className="figure-card-float" aria-hidden={!current || undefined}>
-                  <HistoricalFigureCard figure={figure} rank={option} mode={mode} contributionRanks={options} title={mode === "contribution" ? titleFor(option) : figure.name} traits={shownTraits.length ? shownTraits : undefined} />
+                  <HistoricalFigureCard figure={figure} rank={option} mode={mode} contributionRanks={options} title={mode === "contribution" ? titleFor(option) : figure.name} traits={shownTraits.length ? shownTraits : undefined} gender={gender} />
                 </div>
                 {!current && <button type="button" className="figure-card-stack-select" aria-label={`Preview ${option} variant`} onClick={() => { stageRef.current?.focus({ preventScroll: true }); selectVariant(option); }}><span>{option}</span><span aria-hidden="true">↗</span></button>}
               </div>;
@@ -185,8 +187,8 @@ function OpenFigureCardViewer({ figure, initialRank, onClose, world, life, mode 
         <div className="figure-card-detail-header"><p className="figure-card-eyebrow">{mode === "contribution" ? "Contributor card" : "Historical figure card"} · {rank}</p><h2 id={id + "-title"}>{title}</h2>
         <p className={earned ? "figure-card-status is-earned" : "figure-card-status"} id={id + "-status"}>{earned ? "Earned in this life" : world && life ? "Preview · Not earned in this life" : "Catalogue preview"}</p>
         <p className="figure-card-viewer-period">{figure.biography.period}</p></div>
-        <p className="figure-card-viewer-summary">{figure.biography.biography}</p>
-        {figure.art.placeholder && <p className="figure-card-art-note">Temporary game artwork stands in for this portrait.</p>}
+        <p className="figure-card-viewer-summary">{mode === "principal" ? figureCardBiography(figure, rank) : figure.biography.biography}</p>
+        {figure.art.placeholder && !findCardArt({ figureId: figure.id, kind: mode === "contribution" ? "contribution" : "parent", tier: cardArtRank(rank) }) && <p className="figure-card-art-note">Temporary game artwork stands in for this portrait.</p>}
         <section className="figure-card-conditions" aria-label="Rarity conditions"><h3>{earned ? "Achievement recorded" : `Earn the ${rank} ${mode === "contribution" ? "contribution" : "figure"} card`}</h3>
           {mode === "contribution" && <p>Contribution ranks reflect work completed for the figure or tradition.{progress?.pathProgress?.definition.contributionTiering === "below-principal" && progress.pathProgress.principalRank === "Epic" && " Contributions are capped at Rare while this figure is Epic."}</p>}
           <p className="figure-card-comparison-note" aria-live="polite">{comparison ? <>Compared with {comparison.from} · {comparison.changed.length} changed requirement{comparison.changed.length === 1 ? "" : "s"}{comparison.removed.length > 0 && ` · ${comparison.removed.length} only in ${comparison.from}`}.</> : "Unlock requirements for this rarity"}</p>

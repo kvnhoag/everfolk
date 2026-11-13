@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "version": "siege-engineer-gaze-v1",
+  "bundleSha256": "605cf3aa582848674eb690b7f6b5b12e6f4535e31f153694022c5811e1820bad",
+  "kitManifestSha256": "6531a7f407d727b6fb281e43cf1082cb31be4ee3b7907c4f7a1180dd86a13863",
+  "cards": [
+    "demetrius-rare-male"
+  ],
+  "installed": true,
+  "sourceLibraryUnchanged": true,
+  "identityCopyRanksAndEditionCapsUnchanged": true,
+  "liveEditionPreserved": true,
+  "changedFields": [
+    "src",
+    "footerlessSrc",
+    "thumbnailSrc",
+    "portraitSrc",
+    "sha256",
+    "artworkVersion"
+  ],
+  "stagePath": "artifacts/card-art-import/siege-engineer-gaze-v1-605cf3aa5828",
+  "publicPath": "/assets/cards/siege-engineer-gaze-v1/",
+  "entries": [
+    {
+      "id": "demetrius-rare-male",
+      "artMode": "finished",
+      "inputSha256": "f33ac9b966f7a639b0eaca06a49688541695caaa4394418bda79bd44de36a8f0",
+      "inputSize": [
+        840,
+        1050
+      ],
+      "portraitSha256": "324029ca444b465cecafc7f0ad0de0ad82520076ffbaa2880133f748ef934b20",
+      "frameSha256": "d78571cd9d3cff48e2ed37e74bcc7af151f14bb2c1ade3c522aea073a2c35bd3",
+      "footerlessFrameSha256": "4d969f0d753e52fc014a1e09019c02c7f33f82b070155d519e41ad3b65e08a6a",
+      "fit": {
+        "layout": "standard",
+        "rect": {
+          "x": 154,
+          "y": 190,
+          "width": 592,
+          "height": 740
+        },
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "standardGridPreserved": false,
+        "logicalEnlargement": 1,
+        "note": "840×1050 to 592×740 is fractional nearest fitting. Supply --standard-art for a separately finished, regular pixel grid."
+      },
+      "qa": {
+        "uncoveredPixelsChecked": 582609,
+        "uncoveredPixelDifferences": 0,
+        "transparentOuterCorners": true,
+        "losslessRGBAReadback": true
+      },
+      "version": "siege-engineer-gaze-v1",
+      "files": {
+        "footerless": {
+          "sha256": "ab84e5b96aa93943b4068088dfbd58303273a61e0205d0cfd063679b9e635c1b",
+          "rgbaSha256": "7d44743f1c6a0b39d53fa419d9be32fe7a256fb38aabae36582b7880f8f06b9f",
+          "width": 900,
+          "height": 1260,
+          "bytes": 245442,
+          "src": "/assets/cards/siege-engineer-gaze-v1/demetrius-rare-male-footerless.webp"
+        },
+        "full": {
+          "sha256": "55890c5e6da99b6a1a427e582121a61c11916cd99dd23ddf1446d6d425a75eb8",
+          "rgbaSha256": "c1414b51ca23aa85a74eb8b51059887bf5b5d672c2cc93e51fb436a46bf91485",
+          "width": 900,
+          "height": 1260,
+          "bytes": 246190,
+          "src": "/assets/cards/siege-engineer-gaze-v1/demetrius-rare-male.webp"
+        },
+        "thumbnail": {
+          "sha256": "3c9fb11676b6981bd6f29c42a35ec051dbe30b76a17ae7c12874cc1096f4c43b",
+          "rgbaSha256": "5977387c4629cb4cf24456b83d55e6ae925f6916f44cde4bcb2e27074e33d419",
+          "width": 450,
+          "height": 630,
+          "bytes": 191166,
+          "src": "/assets/cards/siege-engineer-gaze-v1/demetrius-rare-male-thumb.webp"
+        },
+        "portrait": {
+          "sha256": "324029ca444b465cecafc7f0ad0de0ad82520076ffbaa2880133f748ef934b20",
+          "rgbaSha256": "689be6bd0825c75e2975b900024742febd78badf8b5fba45e6f860f8c8321542",
+          "width": 840,
+          "height": 1050,
+          "bytes": 228912,
+          "src": "/assets/cards/siege-engineer-gaze-v1/demetrius-rare-male-portrait.webp"
+        }
+      },
+      "bundleSha256": "605cf3aa582848674eb690b7f6b5b12e6f4535e31f153694022c5811e1820bad",
+      "kitManifestSha256": "6531a7f407d727b6fb281e43cf1082cb31be4ee3b7907c4f7a1180dd86a13863"
+    }
+  ]
+}

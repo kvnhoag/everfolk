@@ -1,5 +1,7 @@
 import type { FigureCardRank, FigureRosterEntry } from "../../chain/catalog/figure-roster.ts";
 import { figureCardRanks } from "../models/figure-contribution-ranks.ts";
+import { findCardArt, cardArtRank, type CardArtGender } from "../models/card-art.ts";
+import CollectionCardArtwork from "./CollectionCardArtwork.tsx";
 import "../styles/figure-cards.css";
 
 export type FigureCardMode = "principal" | "contribution";
@@ -15,6 +17,8 @@ export interface HistoricalFigureCardProps {
   onInspect?(rank: FigureCardRank): void;
   compact?: boolean;
   className?: string;
+  gender?: CardArtGender;
+  artSeed?: string;
 }
 const rankStones: Record<FigureCardRank, number> = { Common: 1, Uncommon: 1, Rare: 2, Epic: 3, Legendary: 4 };
 
@@ -25,12 +29,19 @@ export function displayedFigureCardRank(figure: FigureRosterEntry, requested?: F
 }
 
 /** Editable frame/type stay separate from the approved or temporary portrait image. */
-export default function HistoricalFigureCard({ figure, rank: requested, mode = "principal", contributionRanks, title, traits, onInspect, compact = false, className = "" }: HistoricalFigureCardProps) {
+export default function HistoricalFigureCard({ figure, rank: requested, mode = "principal", contributionRanks, title, traits, onInspect, compact = false, className = "", gender, artSeed }: HistoricalFigureCardProps) {
   const rank = displayedFigureCardRank(figure, requested, mode, contributionRanks);
   const cardTitle = title ?? (mode === "contribution" ? `${figure.name} · Contributor` : figure.name);
   const cardTraits: readonly FigureCardTrait[] = traits ?? figure.tags.slice(0, 3).map((label, index) => ({ id: "tag-" + index, label }));
-  const classes = `figure-tcg-card figure-tcg-card--${rank.toLowerCase()}${compact ? " figure-tcg-card--compact" : ""}${onInspect ? " figure-tcg-card--interactive" : ""}${className ? " " + className : ""}`;
-  const content = <>
+  const art = findCardArt({ figureId: figure.id, kind: mode === "contribution" ? "contribution" : "parent", tier: cardArtRank(rank), gender, seed: artSeed });
+  const classes = `figure-tcg-card figure-tcg-card--${rank.toLowerCase()}${art ? " figure-tcg-card--approved" : ""}${compact ? " figure-tcg-card--compact" : ""}${onInspect ? " figure-tcg-card--interactive" : ""}${className ? " " + className : ""}`;
+  const content = art ? <>
+    <CollectionCardArtwork art={art} />
+    <span className="figure-card-sr-only">{cardTitle}. {figure.archetype}. {mode === "contribution" ? "Contribution" : "Historical figure"}. <span>{rank}</span>.
+      {cardTraits.map(trait => <span key={trait.id}>{trait.earned === false ? "Requires proof: " : ""}{trait.label}. </span>)}
+    </span>
+    {onInspect && <span className="figure-tcg-inspect figure-card-sr-only">Inspect</span>}
+  </> : <>
     <span className="figure-tcg-topline"><span className="figure-tcg-series">{mode === "contribution" ? "Contribution" : "Historical figure"}</span><span className="figure-tcg-stones" aria-hidden="true">{Array.from({ length: rankStones[rank] }, (_, index) => <i key={index} />)}</span></span>
     <span className="figure-tcg-title">{cardTitle}</span>
     <span className="figure-tcg-art">

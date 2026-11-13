@@ -1,16 +1,16 @@
-# Campaign Provisioner — alexander-uncommon-male
+# Campaign Squad Leader — alexander-uncommon-male
 
 **Figure family:** Alexander the Great · **Type:** contribution · **Gender:** male · **Frame:** uncommon
 
 Look first at [approved art](../reference/portraits/alexander-uncommon-male.webp) and the [framed preview](../reference/cards/alexander-uncommon-male.webp). The exact card copy below supplies the profession, duty and tone. It is reference context only: do not draw any text into the illustration.
 
-> Campaign Provisioner — Keeper of the King's Stores
+> Campaign Squad Leader — Steadying a Small Command
 >
-> Strength Before Battle. A campaign provisioner gathers grain, checks pack animals, and keeps the stores ready for departure. Behind every celebrated advance stands this patient discipline, giving hungry soldiers the strength to follow their king.
+> Orders Into Action. A campaign squad leader directs a small group of soldiers on the march and in the field. Clear instructions, shared discipline, and care for the unit turn individual service into the first responsibility of command.
 
 ## Generation / drawing brief
 
-Create an art-only historical card illustration for **Campaign Provisioner**, belonging to the Alexander the Great family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult man; near frontal view with a slight upward chin tilt. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
+Create an art-only historical card illustration for **Campaign Squad Leader**, belonging to the Alexander the Great family. Show one readable professional action that demonstrates the responsibility in the biography. Select the actual task and tool from that responsibility; keep the scene concise enough to read at card size. A clearly adult man; near frontal view with a slight upward chin tilt. Give this contributor an individual face, hair, age, expression and silhouette. Do not reuse the main figure's face or copy a neighbouring contributor's pose.
 
 Keep the ancient Mediterranean setting consistent with this figure. Fit clothing, armour, status and equipment to this character and profession. Military contributors use lower-status kit than the main commander; nonmilitary contributors use work-appropriate clothes and tools. Use the supplied character reference for Alexander's armour rather than searching for another character's set. Match identity, lighting and palette to this family's approved art while translating its finish into deliberate pixel clusters.
 

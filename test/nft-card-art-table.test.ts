@@ -43,7 +43,7 @@ test("the contract's card table covers every reachable card with an absolute ima
   }
   assert.equal(new Set(table.map(entry => entry.card_id)).size, table.length);
   assert.equal(table.find(entry => entry.card_id === "alexander-parent")?.title, "Alexander the Great");
-  assert.equal(table.find(entry => entry.card_id === "alexander-common-male")?.title, "Camp Runner");
+  assert.equal(table.find(entry => entry.card_id === "alexander-common-male")?.title, "Campaign Soldier");
 });
 
 test("the table rejects a relative image base, which wallets cannot load", () => {

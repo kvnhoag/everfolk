@@ -152,8 +152,8 @@ test("readable Common titles agree across paths, cards and requirements without 
   const life = createEngine(world).start("clear-common-titles");
   const beforeWorld = JSON.stringify(world), beforeLife = JSON.stringify(life);
   for (const [id, title, oldTitle] of [
-    ["alexander", "Army Supply Assistant", "Campaign Stores Aide"],
-    ["aristotle", "Student of the Lyceum", "Inquiry Note Keeper"],
+    ["alexander", "Campaign Soldier", "Campaign Stores Aide"],
+    ["aristotle", "Lyceum Student", "Inquiry Note Keeper"],
     ["euclid", "Geometry Assistant", "Diagram Aide"],
     ["lysippos", "Workshop Assistant", "Bronze Workshop Aide"],
     ["menander", "Rehearsal Assistant", "Rehearsal Aide"],
@@ -167,10 +167,26 @@ test("readable Common titles agree across paths, cards and requirements without 
   }
   for (const path of world.figurePaths!.filter(path => path.baseRank === "Epic")) {
     const common = getFigurePathProgress(world, path, life).stages[0].definition;
-    assert.equal(common.title, path.stages[0].title, path.id + " retains its existing Common title");
+    assert.equal(common.title, path.id === "pytheas" ? "Navigation Assistant" : path.stages[0].title, path.id + " uses the reviewed profession label");
     assert.equal(common.traditionTitle, path.stages[0].traditionTitle);
   }
   assert.equal(JSON.stringify(world), beforeWorld);
   assert.equal(JSON.stringify(life), beforeLife);
   assert.deepEqual(createEngine(world).load(createEngine(world).save(life)), life);
+});
+
+test("military and navigation labels progress within their profession without mutating retained rules", () => {
+  const world = currentCommon as unknown as WorldPack;
+  const life = createEngine(world).start("coherent-profession-labels");
+  const before = JSON.stringify(world);
+  const army = world.figurePaths!.find(path => path.id === "alexander")!;
+  const navigation = world.figurePaths!.find(path => path.id === "pytheas")!;
+  assert.deepEqual(getFigurePathProgress(world, army, life).stages.slice(0, 2).map(stage => stage.definition.title),
+    ["Campaign Soldier", "Campaign Squad Leader"]);
+  assert.equal(getFigurePathProgress(world, navigation, life).stages[0].definition.title, "Navigation Assistant");
+  const html = renderToStaticMarkup(createElement(FigurePaths, { world, life, activities: [], onActivity() {}, initialFigureId: "alexander" }));
+  assert.match(html, /Campaign Soldier/);
+  assert.match(html, /Campaign Squad Leader/);
+  assert.doesNotMatch(html, /Camp Runner|Campaign Provisioner|Campaign Stores Aide/);
+  assert.equal(JSON.stringify(world), before);
 });

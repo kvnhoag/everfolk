@@ -3,6 +3,7 @@ import { getFigureCardProgress } from "../../src/figures/card-progress.ts";
 import FigureCardStack from "./FigureCardStack.tsx";
 import { contributionCardRanks } from "../models/figure-contribution-ranks.ts";
 import { figureRarityLabel } from "../models/figure-card-labels.ts";
+import { getFigureCardArt } from "../models/card-art.ts";
 import FigureCardViewer from "./FigureCardViewer.tsx";
 import { matchesCondition } from "../../src/conditions.ts";
 import { useMemo, useState } from "react";
@@ -58,7 +59,7 @@ export default function FigurePaths({ world, life, activities, onActivity, readO
   const entry = selected.encounterMode === "tradition" ? "Through the later tradition" : selected.encounterMode === "circle" ? "Through a teaching circle" : selected.encounterMode ? "Personal encounter recorded" : null;
   return <section className="figure-paths" aria-label="Historical figures and earned titles">
     <header className="figure-paths-heading"><div><p className="figure-eyebrow">Historical paths</p><h3>Work that earns a place in history</h3></div><p>Develop a figure's craft, inquiry or public work. Your contribution earns its own rank; the figure's special title requires a separate defining achievement.</p></header>
-    <nav className="figure-roster" aria-label="Choose a historical figure">{paths.map(item => <button key={item.definition.id} type="button" aria-pressed={item.definition.id === path.id} onClick={() => setSelectedId(item.definition.id)}><img src={figureRosterEntry(item.definition.id)?.art.src} alt="" width={38} height={52} loading="lazy" /><strong>{item.definition.name}</strong><span>{figureRosterEntry(item.definition.id) ? figureRarityLabel(figureRosterEntry(item.definition.id)!) : item.principalRank}{item.associationRank ? ` · Your contribution: ${item.associationRank}` : ""}</span></button>)}</nav>
+    <nav className="figure-roster" aria-label="Choose a historical figure">{paths.map(item => <button key={item.definition.id} type="button" aria-pressed={item.definition.id === path.id} onClick={() => setSelectedId(item.definition.id)}><img src={getFigureCardArt(item.definition.id)?.portraitSrc ?? figureRosterEntry(item.definition.id)?.art.src} alt="" width={38} height={52} loading="lazy" /><strong>{item.definition.name}</strong><span>{figureRosterEntry(item.definition.id) ? figureRarityLabel(figureRosterEntry(item.definition.id)!) : item.principalRank}{item.associationRank ? ` · Your contribution: ${item.associationRank}` : ""}</span></button>)}</nav>
     <article className="figure-path-detail" data-figure-path={path.id}>
       <header><div><p className="figure-eyebrow">Figure · {card ? figureRarityLabel(card) : selected.principalRank}{card && card.variants.length > 1 ? ` · Current: ${selected.principalRank}` : ""}{selected.alternateHistory ? " · Alternate history" : ""}</p><h4>{selected.principalTitle}</h4></div><span className="figure-contribution-rank">{selected.associationRank ?? "No contribution title yet"}</span></header>
       <p>{path.summary}</p>

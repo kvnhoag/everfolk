@@ -57,6 +57,6 @@ function inventory(directory) {
   });
 }
 const files = inventory(root).sort((a, b) => a.path.localeCompare(b.path));
-json('package-manifest.json', { schemaVersion: 1, id: kit.id, kitManifestSha256: sha256(readFileSync(resolve(root, 'data/cards.json'))), cards: 117, runtimeVariants: 16, blankFrames: 5, perCardBriefs: 117, userReferenceImages: anchorRecords.length, totalBytes: files.reduce((n, file) => n + file.bytes, 0), files });
+json('package-manifest.json', { schemaVersion: 1, id: kit.id, kitManifestSha256: sha256(readFileSync(resolve(root, 'data/cards.json'))), cards: 117, runtimeVariants: kit.parentVariants.length, blankFrames: 5, perCardBriefs: 117, userReferenceImages: anchorRecords.length, totalBytes: files.reduce((n, file) => n + file.bytes, 0), files });
 text('package-checksums.sha256', files.map(file => `${file.sha256}  ${file.path}`).join('\n') + '\n');
-console.log(JSON.stringify({ kit: relative(repo, root), cards: 117, runtimeVariants: 16, briefs: 117, anchors: anchorRecords.length, files: files.length, bytes: files.reduce((n, file) => n + file.bytes, 0) }));
+console.log(JSON.stringify({ kit: relative(repo, root), cards: 117, runtimeVariants: kit.parentVariants.length, briefs: 117, anchors: anchorRecords.length, files: files.length, bytes: files.reduce((n, file) => n + file.bytes, 0) }));

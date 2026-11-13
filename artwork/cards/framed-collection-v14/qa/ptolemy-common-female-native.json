@@ -129,8 +129,8 @@
       },
       {
         "bounds": {
-          "height": 136.904,
-          "width": 633.6959999999999,
+          "height": 110.904,
+          "width": 647.2799999999999,
           "x": 96,
           "y": 1015.136
         },
@@ -160,13 +160,13 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "A palace messenger carries sealed orders through crowded\ncourtyards and unfamiliar streets. Dependability gives\ndistant officials a common purpose, keeping the first\nthreads of government joined by a message delivered intact\nand on time.",
+        "text": "A court records apprentice copies entries, checks names and\nquantities, and helps reconcile the day's administrative\npapers. Precise records are the first practical lesson in\nthe wider duties of supply, revenue, and government.",
         "visible": true
       },
       {
         "bounds": {
           "height": 39.759000000000015,
-          "width": 339.387,
+          "width": 349.595,
           "x": 96,
           "y": 964.956
         },
@@ -196,15 +196,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "The Seal Reaches Its Hand",
+        "text": "Order Begins in the Record",
         "visible": true
       },
       {
         "bounds": {
           "height": 22.9892578125,
-          "width": 393.8876953125,
-          "x": 253.05615234375,
-          "y": 144.59375
+          "width": 393.8447265625,
+          "x": 253.07763671875,
+          "y": 152.59375
         },
         "fill": "#d3d4c7",
         "id": 41,
@@ -232,15 +232,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "BEARER OF PTOLEMY'S DISPATCHES",
+        "text": "LEARNING THE COURT'S ACCOUNTS",
         "visible": true
       },
       {
         "bounds": {
-          "height": 87.744,
-          "width": 508.3519999999999,
-          "x": 195.824,
-          "y": 64.21600000000001
+          "height": 82.25999999999999,
+          "width": 691.3799999999999,
+          "x": 104.31,
+          "y": 56.640000000000015
         },
         "fill": "#f0e6cf",
         "id": 40,
@@ -268,7 +268,7 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Palace Messenger",
+        "text": "Court Records Apprentice",
         "visible": true
       }
     ],
@@ -291,7 +291,7 @@
     "title": "ptolemy-common-female.svg",
     "tool": "selection",
     "total": 7,
-    "uid": 251,
+    "uid": 17,
     "units": "Pixels"
   },
   "art": {
@@ -355,7 +355,7 @@
     "title": "ptolemy-common-female.svg",
     "tool": "selection",
     "total": 1,
-    "uid": 251,
+    "uid": 17,
     "units": "Pixels"
   }
 }

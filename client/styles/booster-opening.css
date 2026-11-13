@@ -11,6 +11,6 @@ dialog.freeplay-booster-screen{position:fixed;inset:0;width:100vw;max-width:none
 .booster-collection{margin:28px 0;padding:24px;border:1px solid #b8ab8b;background:#f5edda}
 .booster-collection h2{margin-top:0}.booster-collection-packs{display:flex;flex-wrap:wrap;gap:16px}
 .booster-collection-packs button{display:flex;align-items:center;gap:14px;max-width:280px;padding:12px;text-align:left;background:#123e40;color:#f4efe5;border:1px solid #597b72}
-.booster-collection-packs img{width:52px;height:72px;object-fit:contain;image-rendering:pixelated;background:#dfcfaa}
+.booster-collection-packs img{width:52px;height:72px;object-fit:contain;image-rendering:auto;background:#dfcfaa}
 .booster-collection-packs small{display:block;margin-top:8px}
 .booster-review-dialog{position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:#f4efe5}

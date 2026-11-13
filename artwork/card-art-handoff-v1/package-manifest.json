@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "id": "everfolk-card-art-handoff-v1",
-  "kitManifestSha256": "730fbfded3c7654f94ffcc0f39a3b2b6be1c538f29a8c3baf416715955b7966a",
+  "kitManifestSha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
   "cards": 117,
-  "runtimeVariants": 16,
+  "runtimeVariants": 19,
   "blankFrames": 5,
   "perCardBriefs": 117,
   "userReferenceImages": 3,
-  "totalBytes": 71779972,
+  "totalBytes": 73078332,
   "files": [
     {
       "path": ".gitignore",
@@ -16,13 +16,13 @@
     },
     {
       "path": "briefs/alexander-common-female.md",
-      "bytes": 3880,
-      "sha256": "3a42cbb4e6e707f28ee2d7177555a705161c3489aa72f8c719f24ac00b6e588e"
+      "bytes": 3925,
+      "sha256": "a5af3e4e2e04ee215c2b9e8e5a28fab4da9a14b03b10623be2538486cb5f834d"
     },
     {
       "path": "briefs/alexander-common-male.md",
-      "bytes": 3866,
-      "sha256": "834b33af5bb81ba2684396f8f9e1ca14d6d0da0e00901663e99b4374e428738c"
+      "bytes": 3911,
+      "sha256": "7412c1d5a73abc0d1af62df08dca313184e5380c8938313dc5f4b3cbb13d33fb"
     },
     {
       "path": "briefs/alexander-epic-female.md",
@@ -51,23 +51,23 @@
     },
     {
       "path": "briefs/alexander-uncommon-female.md",
-      "bytes": 3964,
-      "sha256": "f24b1c298b65b3869515782436fc2a5ff09502ea46827cf8fa5c7413ee462f3f"
+      "bytes": 3954,
+      "sha256": "9249ef2aba426bf293a91ed339f427d38366b43c4433784df0906967f00ba77d"
     },
     {
       "path": "briefs/alexander-uncommon-male.md",
-      "bytes": 3943,
-      "sha256": "9db1e015d8e6b25ad1f2cbe4301cb586f8cc90972cb1356378223e7724b2681a"
+      "bytes": 3933,
+      "sha256": "efa01950f4d6ebadfad91f30b3485b7e62334cad7bbdf06e7bb5e88c431ed141"
     },
     {
       "path": "briefs/aristotle-common-female.md",
-      "bytes": 3901,
-      "sha256": "7ac74af79d998b24c13e833c26ac553b422fd540b0a637f44b37f91728c50ba8"
+      "bytes": 3920,
+      "sha256": "79458fd1d7ef9e8de4145633a54a4ec6f1c7135590ddf1fdb882b305d931702b"
     },
     {
       "path": "briefs/aristotle-common-male.md",
-      "bytes": 3887,
-      "sha256": "7de8da985e2771c7197f3005ef40d130b63c022e3b10ee1c7f252895a912130a"
+      "bytes": 3906,
+      "sha256": "2dace60ca350d67f03979fd23b0bb9e9a7f4775bcfffa103a017a5e1e152303d"
     },
     {
       "path": "briefs/aristotle-epic-female.md",
@@ -106,13 +106,13 @@
     },
     {
       "path": "briefs/cleomenes-common-female.md",
-      "bytes": 3923,
-      "sha256": "7aa9be202e80cf10dd06328bca720d8f2cfcf3f00446ecf3f3560e1fb0cb586c"
+      "bytes": 3962,
+      "sha256": "c043320d165c4b164b479ed09fc24c1f8a96f9cc6e2c2b15b8fe695683a2b984"
     },
     {
       "path": "briefs/cleomenes-common-male.md",
-      "bytes": 3909,
-      "sha256": "f47418e3672e1aab34f29658b6849a7dd6b073f366cfd7dfa6a878b7cdda3c71"
+      "bytes": 3948,
+      "sha256": "e10d6bdf45d0a0477755f0ff9d87b537fc1ff308c2f8fd653955ddbed434030a"
     },
     {
       "path": "briefs/cleomenes-epic-female.md",
@@ -331,13 +331,13 @@
     },
     {
       "path": "briefs/menander-common-female.md",
-      "bytes": 3865,
-      "sha256": "42371fcc4041aa9303c038c2c2b05549f018fcb20644abd936b84a7b13f82603"
+      "bytes": 3921,
+      "sha256": "450487daeb27eed6486e50ce717b8dfc5fde2d7e4173dd3c4739603af942ad74"
     },
     {
       "path": "briefs/menander-common-male.md",
-      "bytes": 3851,
-      "sha256": "2ff9119898fbade1070fb76db570d833f71deca8165abe6235d100de9879730e"
+      "bytes": 3907,
+      "sha256": "3e5e9757fbee1e042eb4daba06c394d8d7fb2e9e4965d87b4e8059ba2b08fb55"
     },
     {
       "path": "briefs/menander-epic-female.md",
@@ -421,13 +421,13 @@
     },
     {
       "path": "briefs/ptolemy-common-female.md",
-      "bytes": 3933,
-      "sha256": "0ff383c663ebc91f9da8cb3018fcebfbedf59ecf2e48c14b203252461b7b8fc0"
+      "bytes": 3947,
+      "sha256": "fc09c2b17af717916dbda86788b52a981c3050f874ec8ecdea6f0ab685f3c56b"
     },
     {
       "path": "briefs/ptolemy-common-male.md",
-      "bytes": 3919,
-      "sha256": "ec06770d6c3e7ee88d4b507a52260122df3e3efc9031f60818773962ce207f6c"
+      "bytes": 3933,
+      "sha256": "0a7fda8a1887c89e29c348ca68aad6ac11586979b9d50935311e5abb8c18e60d"
     },
     {
       "path": "briefs/ptolemy-epic-female.md",
@@ -501,13 +501,13 @@
     },
     {
       "path": "briefs/pytheas-uncommon-female.md",
-      "bytes": 3941,
-      "sha256": "fd63760873a40f74d63d240ce83fad42ed9209f6b2779785648100f70d7bf185"
+      "bytes": 3965,
+      "sha256": "2f2eaf4c08dc5a7a558f13d50a765c549658328288b255fba85b69c9bb209f35"
     },
     {
       "path": "briefs/pytheas-uncommon-male.md",
-      "bytes": 3920,
-      "sha256": "dcedfbd717226725bcf24e5faebba52eeb596b05cfbf268f0d24d4f79d3854f2"
+      "bytes": 3944,
+      "sha256": "53db63d1acf49edf4cd5a3f5537489e03a5e3ac81e5cad3202f7794c360163b7"
     },
     {
       "path": "briefs/theophrastus-common-female.md",
@@ -601,13 +601,13 @@
     },
     {
       "path": "data/cards.csv",
-      "bytes": 62213,
-      "sha256": "dbb54378982438515f429f843acf265eb19ff1ef409e36b3f1c525cf60b4ad3a"
+      "bytes": 62471,
+      "sha256": "be610440e1b5cef23fcaa4e316e7dc08611b09720de99d4cd350ade46b4c66d9"
     },
     {
       "path": "data/cards.json",
-      "bytes": 439008,
-      "sha256": "730fbfded3c7654f94ffcc0f39a3b2b6be1c538f29a8c3baf416715955b7966a"
+      "bytes": 479600,
+      "sha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a"
     },
     {
       "path": "data/geometry.json",
@@ -621,13 +621,13 @@
     },
     {
       "path": "data/verification.json",
-      "bytes": 47297,
-      "sha256": "36158c344139a3d77b1640224b8d34d103110e5930ce6a8f996ac0664c4a690c"
+      "bytes": 48209,
+      "sha256": "4a0174434a0114d6911c3171ec7640f6c156de1f438339cc148d6f24bdf0444d"
     },
     {
       "path": "docs/artist-quickstart.md",
-      "bytes": 7583,
-      "sha256": "736f2f06782d5dc780041d224003769f33252428b5b00955c62e08b476be07de"
+      "bytes": 7835,
+      "sha256": "ef645adcd31a301376c4b210990dcc12febb715fff68eff1dead4090dd14b3dc"
     },
     {
       "path": "docs/prompt-templates.md",
@@ -636,8 +636,8 @@
     },
     {
       "path": "docs/system-map.md",
-      "bytes": 6030,
-      "sha256": "f47ef86d0129f3e1a111bd5f016a11b4fd31df0f44c9df404361ce0ce81fcb9f"
+      "bytes": 6279,
+      "sha256": "c2e1e36de7d2cf80e6c3aadc2388374467b78c076ab89d7eefa385a096f89f64"
     },
     {
       "path": "examples/replacements.json",
@@ -701,43 +701,43 @@
     },
     {
       "path": "frames/cards/alexander-common-female-footerless.png",
-      "bytes": 47742,
-      "sha256": "63c077ac2ace0b7be4f982e199f350af20cd5b658e5c67bcd0ccee576a358b3b"
+      "bytes": 54471,
+      "sha256": "dc2a3e06020689b01ad2b256ceb908afcad8ccd5edb7f4d7326fcbfa83d03410"
     },
     {
       "path": "frames/cards/alexander-common-female.png",
-      "bytes": 48653,
-      "sha256": "862a3c36d2c2ac6d071af9198d61d5d4d80cd7fecddeccd5e7d2c4e2d8a85e77"
+      "bytes": 55005,
+      "sha256": "b60a2bbb10219e94bae0593144c1db77a36165314f3d3b067863000416913c4a"
     },
     {
       "path": "frames/cards/alexander-common-male-footerless.png",
-      "bytes": 47740,
-      "sha256": "00891b5d7a1a1eea187f0bff1cdb0ee17c9a9842a82e73a6db5caf928a12489b"
+      "bytes": 54471,
+      "sha256": "dc2a3e06020689b01ad2b256ceb908afcad8ccd5edb7f4d7326fcbfa83d03410"
     },
     {
       "path": "frames/cards/alexander-common-male.png",
-      "bytes": 48651,
-      "sha256": "a88fce8f568edd9197735f503b9e6e3803c2bdf19b90be200a215e0d03d8b605"
+      "bytes": 55005,
+      "sha256": "b60a2bbb10219e94bae0593144c1db77a36165314f3d3b067863000416913c4a"
     },
     {
       "path": "frames/cards/alexander-epic-female-footerless.png",
-      "bytes": 58290,
-      "sha256": "16a3813c711035731c1fc24594ca4912832b1e2c9b9e28314f2c24f4ec413948"
+      "bytes": 58072,
+      "sha256": "14e44cfc3b4ba5a5e90a4e27b0047f4bf314636f822d979aeea19c13b38d75ce"
     },
     {
       "path": "frames/cards/alexander-epic-female.png",
-      "bytes": 59368,
-      "sha256": "b527d12a80d2844c408b62cf1030b76624c5b7a9d3c1e4a6298f5b134d5d6a9b"
+      "bytes": 58696,
+      "sha256": "7599d85922123472b092a9fd0e510fa09b6c100bf0c14156c020beb5a33328d5"
     },
     {
       "path": "frames/cards/alexander-epic-male-footerless.png",
-      "bytes": 58288,
-      "sha256": "68d65918b69f66c3980f59125ebad15b796fe8951aaabf35976fa5c701eddd97"
+      "bytes": 58072,
+      "sha256": "14e44cfc3b4ba5a5e90a4e27b0047f4bf314636f822d979aeea19c13b38d75ce"
     },
     {
       "path": "frames/cards/alexander-epic-male.png",
-      "bytes": 59366,
-      "sha256": "e0759efa49fa358ca6c0da88316f01fdc85d6da97d5ed220fd517eaf6e03bba0"
+      "bytes": 58696,
+      "sha256": "7599d85922123472b092a9fd0e510fa09b6c100bf0c14156c020beb5a33328d5"
     },
     {
       "path": "frames/cards/alexander-parent-common-footerless.png",
@@ -791,83 +791,83 @@
     },
     {
       "path": "frames/cards/alexander-rare-female-footerless.png",
-      "bytes": 55481,
-      "sha256": "ca1da51b02a00897d2992adb13f33182f0b23d1bcefa89a5322604ccb2e2d205"
+      "bytes": 57292,
+      "sha256": "2c04d0d82078ff855acd8e36a444103b03f74c69914ab24e857335a880063667"
     },
     {
       "path": "frames/cards/alexander-rare-female.png",
-      "bytes": 56514,
-      "sha256": "aa4a075c148f10f035cfff376f0ff2ec48c0f5fa586a6f142776ea431878e883"
+      "bytes": 57947,
+      "sha256": "5f9b2686af4a5c5ae7dd4d8e775629b1b1e347ace7776be76598c7f6f66445c2"
     },
     {
       "path": "frames/cards/alexander-rare-male-footerless.png",
-      "bytes": 55479,
-      "sha256": "c18fed58e8a877215fd6488a871a6b1c7da9d10fbad92a7beecec029f0c7b947"
+      "bytes": 57292,
+      "sha256": "2c04d0d82078ff855acd8e36a444103b03f74c69914ab24e857335a880063667"
     },
     {
       "path": "frames/cards/alexander-rare-male.png",
-      "bytes": 56512,
-      "sha256": "ddd6325d419a695de8800442eb6b6e9f184a714caad8d096d389a8620107353d"
+      "bytes": 57947,
+      "sha256": "5f9b2686af4a5c5ae7dd4d8e775629b1b1e347ace7776be76598c7f6f66445c2"
     },
     {
       "path": "frames/cards/alexander-uncommon-female-footerless.png",
-      "bytes": 60230,
-      "sha256": "474aa61b036171cc343615dd4f9030304657236b126c9f095cf4b93a8e5a1684"
+      "bytes": 58354,
+      "sha256": "03e9f20fa51306b69d3eb38c15b4774c033f2761ee3c16da461c001ea7eddec3"
     },
     {
       "path": "frames/cards/alexander-uncommon-female.png",
-      "bytes": 61132,
-      "sha256": "8c2517cd1effe9ff3870976fd56471d10217fba7292fbc3b1586a5264ca94a97"
+      "bytes": 58862,
+      "sha256": "2a5a38c285d9f081560fcfe6a6462a4f43e0461b381ced1e8bb156afca1f2300"
     },
     {
       "path": "frames/cards/alexander-uncommon-male-footerless.png",
-      "bytes": 60228,
-      "sha256": "ee527749423b956dab56d9ecdb92d4edc31f7188d647d95bf5e84dd639d00c11"
+      "bytes": 58354,
+      "sha256": "03e9f20fa51306b69d3eb38c15b4774c033f2761ee3c16da461c001ea7eddec3"
     },
     {
       "path": "frames/cards/alexander-uncommon-male.png",
-      "bytes": 61130,
-      "sha256": "f9815823cb5431fed4420de31b4c232064f987e7321c72e0d297240eb243c6dd"
+      "bytes": 58862,
+      "sha256": "2a5a38c285d9f081560fcfe6a6462a4f43e0461b381ced1e8bb156afca1f2300"
     },
     {
       "path": "frames/cards/aristotle-common-female-footerless.png",
-      "bytes": 51091,
-      "sha256": "c8831aad6f5513515489f3c1dc3fa8eb83e5e124357521764a92ebcd7d021357"
+      "bytes": 55078,
+      "sha256": "825bf5d21b39f9ff35a083f85e160525fe8940360861dfe41208e73349b027bb"
     },
     {
       "path": "frames/cards/aristotle-common-female.png",
-      "bytes": 51998,
-      "sha256": "a613ef60779151b1e73bf0cd6ab365337cbcc295aa69493166553f9000c15f71"
+      "bytes": 55618,
+      "sha256": "5fe986b24d3b81bc67e4d29dc1e3e8f6af2837acd2827d17746b0e8b75844a01"
     },
     {
       "path": "frames/cards/aristotle-common-male-footerless.png",
-      "bytes": 51089,
-      "sha256": "b8e04ee36ef0220014b75348e1d29b533238fe5106aeef5ac46343439a46341a"
+      "bytes": 55078,
+      "sha256": "825bf5d21b39f9ff35a083f85e160525fe8940360861dfe41208e73349b027bb"
     },
     {
       "path": "frames/cards/aristotle-common-male.png",
-      "bytes": 51996,
-      "sha256": "a555d18e381efac78d963946f4d2ef16dcb81f0df69a60dd52282979da66b17e"
+      "bytes": 55618,
+      "sha256": "5fe986b24d3b81bc67e4d29dc1e3e8f6af2837acd2827d17746b0e8b75844a01"
     },
     {
       "path": "frames/cards/aristotle-epic-female-footerless.png",
-      "bytes": 58845,
-      "sha256": "ae91b37423e225fb3a76fbf0d3887ddedf9dc0cdb8480ab42ec0ee590193b284"
+      "bytes": 58503,
+      "sha256": "f3d88d462920e7ad80049d46a28200cdb4260a7630efe12bfcaa33d22cfa84dd"
     },
     {
       "path": "frames/cards/aristotle-epic-female.png",
-      "bytes": 59902,
-      "sha256": "b75f34c5e7b51d30706da3e906e71660755df5c0ee2de806c5dcc63308e99ced"
+      "bytes": 59131,
+      "sha256": "3243659e81456cbdb68048dd883c6bdcd2ea7b9b281ce46d9a517716036476b8"
     },
     {
       "path": "frames/cards/aristotle-epic-male-footerless.png",
-      "bytes": 58843,
-      "sha256": "a9056660df171f7f55c492a80ad8aada4a19d0ed1e04927214bff681ce3c87c7"
+      "bytes": 58503,
+      "sha256": "f3d88d462920e7ad80049d46a28200cdb4260a7630efe12bfcaa33d22cfa84dd"
     },
     {
       "path": "frames/cards/aristotle-epic-male.png",
-      "bytes": 59900,
-      "sha256": "1cd604d3687b38e986c56ba9ce412206159bdda931fcc6a562e1ce01ba4f31b5"
+      "bytes": 59131,
+      "sha256": "3243659e81456cbdb68048dd883c6bdcd2ea7b9b281ce46d9a517716036476b8"
     },
     {
       "path": "frames/cards/aristotle-parent-common-footerless.png",
@@ -921,83 +921,83 @@
     },
     {
       "path": "frames/cards/aristotle-rare-female-footerless.png",
-      "bytes": 57406,
-      "sha256": "d2166994b4841fbc01bab2be7e31f446797d06032923b6dcd18571526666106f"
+      "bytes": 57883,
+      "sha256": "4cb2c7e156c735baa3d0061e9d690c932d1df14b560f01277f19ca212cfa789f"
     },
     {
       "path": "frames/cards/aristotle-rare-female.png",
-      "bytes": 58426,
-      "sha256": "7da3d817b3ed5e55398e09511470ed05a475c975edb305a568ac3186305d9786"
+      "bytes": 58532,
+      "sha256": "83d355dd8bd77a8ef3c3ddb2f5462161a1a420a6affc27f8515d55dbd23bb5ae"
     },
     {
       "path": "frames/cards/aristotle-rare-male-footerless.png",
-      "bytes": 57404,
-      "sha256": "00ef5a218e7a91b783f310ecfdd9d2ac13562e833445ac5931f925ac0c4aa110"
+      "bytes": 57883,
+      "sha256": "4cb2c7e156c735baa3d0061e9d690c932d1df14b560f01277f19ca212cfa789f"
     },
     {
       "path": "frames/cards/aristotle-rare-male.png",
-      "bytes": 58424,
-      "sha256": "b728f559c8ec70ad5ddf83f6e4a7c642a8370533368cfe92a79f6283fd1e5d16"
+      "bytes": 58532,
+      "sha256": "83d355dd8bd77a8ef3c3ddb2f5462161a1a420a6affc27f8515d55dbd23bb5ae"
     },
     {
       "path": "frames/cards/aristotle-uncommon-female-footerless.png",
-      "bytes": 56886,
-      "sha256": "242537d652b75aa1213cdd9fdef72a604d640c52389f6e44f7f0e1a81e185977"
+      "bytes": 57127,
+      "sha256": "f2236fbfb85ce487258cb49c12c3f18384fe562b8ca09fa44901db6ffcecd17f"
     },
     {
       "path": "frames/cards/aristotle-uncommon-female.png",
-      "bytes": 57807,
-      "sha256": "0d69ccbfe98da7553d14ece09aa15ff06cc2cbd59a691553e991fb3c0dd7de4b"
+      "bytes": 57641,
+      "sha256": "b3ccd9727472b58ef0284751985f257f620622e3cca0591b4d70a332022b1b5f"
     },
     {
       "path": "frames/cards/aristotle-uncommon-male-footerless.png",
-      "bytes": 56884,
-      "sha256": "2bce5abec10113b9348bfc4f42bb3981d8a454ca0dd20d65a5eac7c49981d366"
+      "bytes": 57127,
+      "sha256": "f2236fbfb85ce487258cb49c12c3f18384fe562b8ca09fa44901db6ffcecd17f"
     },
     {
       "path": "frames/cards/aristotle-uncommon-male.png",
-      "bytes": 57805,
-      "sha256": "f4248851ef21a3bf2467c54b1f26c67279ed0fe1eccb09185b99f8d7cf01fb42"
+      "bytes": 57641,
+      "sha256": "b3ccd9727472b58ef0284751985f257f620622e3cca0591b4d70a332022b1b5f"
     },
     {
       "path": "frames/cards/cleomenes-common-female-footerless.png",
-      "bytes": 51371,
-      "sha256": "25e7f21a574763bfcd4ff5c3e6876d242a44a08d23b6c742cc5b3ac002de2d38"
+      "bytes": 57578,
+      "sha256": "271d8374c7551547521500b6d2874d1524f4cf6545026de5b8aa6caade30eb6e"
     },
     {
       "path": "frames/cards/cleomenes-common-female.png",
-      "bytes": 52271,
-      "sha256": "084432fd8f5e1d8a0c65ce48ea92548dcb3d1ed53aae36d6f86bcc300fa1975f"
+      "bytes": 58055,
+      "sha256": "9a8b95834917838b6f7d64e837b7389aaddacf920d82812d8b57caa38d4c97dc"
     },
     {
       "path": "frames/cards/cleomenes-common-male-footerless.png",
-      "bytes": 51369,
-      "sha256": "7fc48d53dbf06c8b8b557c308c8f38ba0f908205ba12ff6440f1c969d41eed02"
+      "bytes": 57578,
+      "sha256": "271d8374c7551547521500b6d2874d1524f4cf6545026de5b8aa6caade30eb6e"
     },
     {
       "path": "frames/cards/cleomenes-common-male.png",
-      "bytes": 52269,
-      "sha256": "a7c5a87ef3976e37a7ff0e78a2f6eec59148d46ecfd73e4a4ba010e987e83797"
+      "bytes": 58055,
+      "sha256": "9a8b95834917838b6f7d64e837b7389aaddacf920d82812d8b57caa38d4c97dc"
     },
     {
       "path": "frames/cards/cleomenes-epic-female-footerless.png",
-      "bytes": 60454,
-      "sha256": "498541e57576d82b8dbefe09477f0ded01a0b301dabc74b13947093c23e8abec"
+      "bytes": 59608,
+      "sha256": "5933602f03514967f51650d7e634a732c7e008bf21993e50d372297f29040a8e"
     },
     {
       "path": "frames/cards/cleomenes-epic-female.png",
-      "bytes": 61512,
-      "sha256": "c9b609f71409a63ed079d0887e3df1854cfcd550be5c49e680280325c4ae256b"
+      "bytes": 60246,
+      "sha256": "5af925e03754a9fad18d2074c3350b307a76a15e4a69814343b86496fc5160e7"
     },
     {
       "path": "frames/cards/cleomenes-epic-male-footerless.png",
-      "bytes": 60452,
-      "sha256": "26085414ae4306adc9c944370afa983ab8bc605c1e71192fb1a1e9cf45d9011a"
+      "bytes": 59608,
+      "sha256": "5933602f03514967f51650d7e634a732c7e008bf21993e50d372297f29040a8e"
     },
     {
       "path": "frames/cards/cleomenes-epic-male.png",
-      "bytes": 61510,
-      "sha256": "fda288f492a023e2427482fb7fcf8f9b4cb05003d74232fddf15f93f6afb2f94"
+      "bytes": 60246,
+      "sha256": "5af925e03754a9fad18d2074c3350b307a76a15e4a69814343b86496fc5160e7"
     },
     {
       "path": "frames/cards/cleomenes-parent-common-footerless.png",
@@ -1051,88 +1051,98 @@
     },
     {
       "path": "frames/cards/cleomenes-rare-female-footerless.png",
-      "bytes": 59536,
-      "sha256": "e7f9f77c92535bc1c0d0da571a40d7a2f860f41601b9574e87e12f5b4ab5d934"
+      "bytes": 59630,
+      "sha256": "42db250d02c1c481ee184c840839cee5ba3971b0f6612e8285ff1ebe1da271b5"
     },
     {
       "path": "frames/cards/cleomenes-rare-female.png",
-      "bytes": 60527,
-      "sha256": "90f53342553b5077fb8764e92dbb89c1f567e73b33afb67f6bfeaee767f1a6b9"
+      "bytes": 60279,
+      "sha256": "9eb27601767a255e2acf10c6817464b85e3e3945f494d99db2837a806a3c348a"
     },
     {
       "path": "frames/cards/cleomenes-rare-male-footerless.png",
-      "bytes": 59534,
-      "sha256": "8c9afebbbeebfe8246205765bd77c134764800a02a3fa5136b72749f76e9c22c"
+      "bytes": 59630,
+      "sha256": "42db250d02c1c481ee184c840839cee5ba3971b0f6612e8285ff1ebe1da271b5"
     },
     {
       "path": "frames/cards/cleomenes-rare-male.png",
-      "bytes": 60525,
-      "sha256": "376df06a3110bf209e50f974d056900d49201103c70d7b8089f989451ec4b9d1"
+      "bytes": 60279,
+      "sha256": "9eb27601767a255e2acf10c6817464b85e3e3945f494d99db2837a806a3c348a"
     },
     {
       "path": "frames/cards/cleomenes-uncommon-female-footerless.png",
-      "bytes": 60604,
-      "sha256": "4a5dd50d958dd42c7442d0b765e2a9b09094c5abd6c963bb0633d90636d238e0"
+      "bytes": 59224,
+      "sha256": "c890b311709fb9317609b09647dfc7d6f1eb581a4fbc5ca65078319ca2e1334d"
     },
     {
       "path": "frames/cards/cleomenes-uncommon-female.png",
-      "bytes": 61495,
-      "sha256": "21a43f648c9d12c75b99a1d8d150d56652a70154973130b1ac3bfc74918bd2cb"
+      "bytes": 59722,
+      "sha256": "e8381364c92e1deb6bafa75c29c663f3c4b174b8c92193bf2136cdddb4c95fe8"
     },
     {
       "path": "frames/cards/cleomenes-uncommon-male-footerless.png",
-      "bytes": 60602,
-      "sha256": "befeac509e38f2b924c38aa4f28fe3edce1b72845cc8c2c0b6f7304289d21aeb"
+      "bytes": 59224,
+      "sha256": "c890b311709fb9317609b09647dfc7d6f1eb581a4fbc5ca65078319ca2e1334d"
     },
     {
       "path": "frames/cards/cleomenes-uncommon-male.png",
-      "bytes": 61493,
-      "sha256": "4d1dc01bd78537f00e6c1bd90052d0ba97265622af577b8154e594da63d6d04d"
+      "bytes": 59722,
+      "sha256": "e8381364c92e1deb6bafa75c29c663f3c4b174b8c92193bf2136cdddb4c95fe8"
     },
     {
       "path": "frames/cards/demetrius-common-female-footerless.png",
-      "bytes": 50607,
-      "sha256": "1449ab4d81772510eb44f69e78e6d38f9688bb2f2c2c720b689845e4f878f2c7"
+      "bytes": 53167,
+      "sha256": "4bd7aff9e8e3d78b12bb7a4ca28dd7ae6169ec3a92f0f92c3178ce512b7bb7b9"
     },
     {
       "path": "frames/cards/demetrius-common-female.png",
-      "bytes": 51529,
-      "sha256": "c78b2b47c6200841241445efd1af865928a3b7048b1577e6fb5d34923ad34536"
+      "bytes": 53705,
+      "sha256": "330fdd5dcc927832036f9a6fb4814c5d7c9a5e33cd3731a8fe3629aa010fa669"
     },
     {
       "path": "frames/cards/demetrius-common-male-footerless.png",
-      "bytes": 50605,
-      "sha256": "bbfebd1eed468648948f95fdfa48acb24e788e19ad19cb27f7ed10c8bb51a645"
+      "bytes": 53167,
+      "sha256": "4bd7aff9e8e3d78b12bb7a4ca28dd7ae6169ec3a92f0f92c3178ce512b7bb7b9"
     },
     {
       "path": "frames/cards/demetrius-common-male.png",
-      "bytes": 51527,
-      "sha256": "78eccf7d052769fbf56c8720844bdf4e269265db39761d1cc8e5669f2319b5bf"
+      "bytes": 53705,
+      "sha256": "330fdd5dcc927832036f9a6fb4814c5d7c9a5e33cd3731a8fe3629aa010fa669"
     },
     {
       "path": "frames/cards/demetrius-epic-female-footerless.png",
-      "bytes": 62279,
-      "sha256": "66136fdcad15aa56be7e053559aee121b3664cf04012a8985a7f481e003f0b66"
+      "bytes": 60580,
+      "sha256": "3d3ebb2e834d2ef1c75e7cc6f6f575b16acb18773533b7cf1c044f5530afbaaa"
     },
     {
       "path": "frames/cards/demetrius-epic-female.png",
-      "bytes": 63322,
-      "sha256": "94c8f8583618c6ba7c57b7a018412ddf0e4cbef6388d6f8f455f2ca0937a4893"
+      "bytes": 61269,
+      "sha256": "93a2f177ebc7c54fe55f310cee34f4ff50e104fbbc12c4df9c7d76f0c8d1861d"
     },
     {
       "path": "frames/cards/demetrius-epic-male-footerless.png",
-      "bytes": 62277,
-      "sha256": "10d400ad25ceb2784d0801f2be4bf6553222f7a8d8798062781b458a9a688e33"
+      "bytes": 60580,
+      "sha256": "3d3ebb2e834d2ef1c75e7cc6f6f575b16acb18773533b7cf1c044f5530afbaaa"
     },
     {
       "path": "frames/cards/demetrius-epic-male.png",
-      "bytes": 63320,
-      "sha256": "01121824ab93df51c645bc92b25293d28d4c83c914b723e947bed5d81d075ab0"
+      "bytes": 61269,
+      "sha256": "93a2f177ebc7c54fe55f310cee34f4ff50e104fbbc12c4df9c7d76f0c8d1861d"
     },
     {
       "path": "frames/cards/demetrius-parent-footerless.png",
       "bytes": 58431,
       "sha256": "62e4905d00baecec6e8616ccaff8bb1586fedc3c6e69acc5627c7bf15bb4ffab"
+    },
+    {
+      "path": "frames/cards/demetrius-parent-legendary-footerless.png",
+      "bytes": 135618,
+      "sha256": "c010ee55be23dab13fd750c3ad22bc60e816888d4127eb00722ccbdd406bbe5e"
+    },
+    {
+      "path": "frames/cards/demetrius-parent-legendary.png",
+      "bytes": 136828,
+      "sha256": "f20962add97aeef13bddd15e104dbfe7df48b8eb56bca5c8d0a13643e1705ad5"
     },
     {
       "path": "frames/cards/demetrius-parent.png",
@@ -1141,83 +1151,83 @@
     },
     {
       "path": "frames/cards/demetrius-rare-female-footerless.png",
-      "bytes": 53393,
-      "sha256": "fbdf341ae2110d1b2ac9f824addc31c440b31375b07e2ba591b35c2b6e973c01"
+      "bytes": 55096,
+      "sha256": "da6a524f967745318ff23d88d83bb1b081d6b8cb9d4a61842897d6194bb3d6b9"
     },
     {
       "path": "frames/cards/demetrius-rare-female.png",
-      "bytes": 54426,
-      "sha256": "47d7d88c924c29f91b1f9ae8f1dac651124338d7d03296db54e2db68972f512b"
+      "bytes": 55787,
+      "sha256": "d53158a055024eae74b6549cff916958bafbd434468c361e0a45fece4c01742e"
     },
     {
       "path": "frames/cards/demetrius-rare-male-footerless.png",
-      "bytes": 53391,
-      "sha256": "4d969f0d753e52fc014a1e09019c02c7f33f82b070155d519e41ad3b65e08a6a"
+      "bytes": 55096,
+      "sha256": "da6a524f967745318ff23d88d83bb1b081d6b8cb9d4a61842897d6194bb3d6b9"
     },
     {
       "path": "frames/cards/demetrius-rare-male.png",
-      "bytes": 54424,
-      "sha256": "d78571cd9d3cff48e2ed37e74bcc7af151f14bb2c1ade3c522aea073a2c35bd3"
+      "bytes": 55787,
+      "sha256": "d53158a055024eae74b6549cff916958bafbd434468c361e0a45fece4c01742e"
     },
     {
       "path": "frames/cards/demetrius-uncommon-female-footerless.png",
-      "bytes": 59913,
-      "sha256": "8cd31ce7bb9ae22ce5cfb869c248638cc8aeda8658c6beb821755af247852e57"
+      "bytes": 59075,
+      "sha256": "0a69df896956af5b6247f85edf830e1b964c1275ae8d50d7723f4d2c58f60c76"
     },
     {
       "path": "frames/cards/demetrius-uncommon-female.png",
-      "bytes": 60827,
-      "sha256": "17b4420384c635eb8ddea4b8d60885e94c89dc9722199af14585014b0edb7fcf"
+      "bytes": 59564,
+      "sha256": "3e1b63ad9b41c894edf8f1bbd33fd7c40c232cb28a2cfe7aa9bb668ec839df99"
     },
     {
       "path": "frames/cards/demetrius-uncommon-male-footerless.png",
-      "bytes": 59911,
-      "sha256": "146c5050c10255168706f00f923acc3fbe44d151d45135631c0a87e4ee56b227"
+      "bytes": 59075,
+      "sha256": "0a69df896956af5b6247f85edf830e1b964c1275ae8d50d7723f4d2c58f60c76"
     },
     {
       "path": "frames/cards/demetrius-uncommon-male.png",
-      "bytes": 60825,
-      "sha256": "e14835b3575f1ff77d712bc023c0b8cddde627b91ae49bb4bedc11f6c3772b81"
+      "bytes": 59564,
+      "sha256": "3e1b63ad9b41c894edf8f1bbd33fd7c40c232cb28a2cfe7aa9bb668ec839df99"
     },
     {
       "path": "frames/cards/euclid-common-female-footerless.png",
-      "bytes": 49483,
-      "sha256": "354dcca8154737a8ae9987b21023bb01f1675a43d6cddad036b87e4a4972f4cc"
+      "bytes": 52657,
+      "sha256": "f2fd9848fca901c0fb99d2e8e80f8d5d471227098b4d0db628c36370adfe2e79"
     },
     {
       "path": "frames/cards/euclid-common-female.png",
-      "bytes": 50406,
-      "sha256": "2ff2ace06b5df915db25cd75fd26d94c70daa845607b98c970fed85801ef77a0"
+      "bytes": 53208,
+      "sha256": "a0e4eeb5387f3f009832b0be99f4fd31b6aa08c251f6fbafb6bd276dcbb04a0f"
     },
     {
       "path": "frames/cards/euclid-common-male-footerless.png",
-      "bytes": 49481,
-      "sha256": "73fa164fab8806ba4108ceddfaa2f28f471ee574061e228dacf41e84821f1489"
+      "bytes": 52657,
+      "sha256": "f2fd9848fca901c0fb99d2e8e80f8d5d471227098b4d0db628c36370adfe2e79"
     },
     {
       "path": "frames/cards/euclid-common-male.png",
-      "bytes": 50404,
-      "sha256": "38cabd483ece5473198e86ecbdf529050d10759e24b781284cc5c9f9f0747433"
+      "bytes": 53208,
+      "sha256": "a0e4eeb5387f3f009832b0be99f4fd31b6aa08c251f6fbafb6bd276dcbb04a0f"
     },
     {
       "path": "frames/cards/euclid-epic-female-footerless.png",
-      "bytes": 54259,
-      "sha256": "e72a56e53b149533b941f2beaecbdcbe330df117609b59030fdec8019337d307"
+      "bytes": 56078,
+      "sha256": "6fefe16a64a12c6ca05749f70009c3bf2d040a341f71fddfda8b986b0ce06b06"
     },
     {
       "path": "frames/cards/euclid-epic-female.png",
-      "bytes": 55359,
-      "sha256": "eb1ab647911e65ffde3db3ea2aa7205ff57ad6e6b5208df79f65db3209640355"
+      "bytes": 56739,
+      "sha256": "72c8dc6e4099c7c07e62b0cd9e575171922cd8f7b5c7062e3a272a25fb6b2742"
     },
     {
       "path": "frames/cards/euclid-epic-male-footerless.png",
-      "bytes": 54257,
-      "sha256": "5d36779ed34480c1442a61520d1fa8447f6811c7ff7fe3af7145b421b9422357"
+      "bytes": 56078,
+      "sha256": "6fefe16a64a12c6ca05749f70009c3bf2d040a341f71fddfda8b986b0ce06b06"
     },
     {
       "path": "frames/cards/euclid-epic-male.png",
-      "bytes": 55357,
-      "sha256": "19a65a3c5e752795d0f0de65696166391f544454ceaeba34cb1c9b06c1fc4dd6"
+      "bytes": 56739,
+      "sha256": "72c8dc6e4099c7c07e62b0cd9e575171922cd8f7b5c7062e3a272a25fb6b2742"
     },
     {
       "path": "frames/cards/euclid-parent-common-footerless.png",
@@ -1271,83 +1281,83 @@
     },
     {
       "path": "frames/cards/euclid-rare-female-footerless.png",
-      "bytes": 51976,
-      "sha256": "9b0c8d8d3782cf80c3c5cadefafe02b749f346d4a35181b1ffc5dc00b04263fc"
+      "bytes": 54738,
+      "sha256": "2ad31986f71e5689a30b014e0a9162fc0a1b99ae55f4f9a7c633214d2a97e34f"
     },
     {
       "path": "frames/cards/euclid-rare-female.png",
-      "bytes": 53042,
-      "sha256": "f1b05d6cfc7f7a3e349dd5db82e25c11dd04170bb1b31a628e7bb0787e94af69"
+      "bytes": 55433,
+      "sha256": "b23ad812442ad3d848332d183bb0a23856375d38312c39aa11b5657925a4498d"
     },
     {
       "path": "frames/cards/euclid-rare-male-footerless.png",
-      "bytes": 51974,
-      "sha256": "b2ba7655882804605e0941e487d9ae31deae01da32c516aa0076563c8b6105ac"
+      "bytes": 54738,
+      "sha256": "2ad31986f71e5689a30b014e0a9162fc0a1b99ae55f4f9a7c633214d2a97e34f"
     },
     {
       "path": "frames/cards/euclid-rare-male.png",
-      "bytes": 53040,
-      "sha256": "88eae35b2ab068705cb28f212d35cccf2c0f05e5198009b7d00696e25efed4d5"
+      "bytes": 55433,
+      "sha256": "b23ad812442ad3d848332d183bb0a23856375d38312c39aa11b5657925a4498d"
     },
     {
       "path": "frames/cards/euclid-uncommon-female-footerless.png",
-      "bytes": 56573,
-      "sha256": "6a9b224f516151348e4f016e4091eeac2cae87bd4c95f8c147e6c73b663b467f"
+      "bytes": 57300,
+      "sha256": "167f27b6c9aaf4a28e2029b1c08e92e626990303ab0de80b36c6bb0545c55ede"
     },
     {
       "path": "frames/cards/euclid-uncommon-female.png",
-      "bytes": 57509,
-      "sha256": "bce93263a612d0cc80fa4eb289dd2933a5e184f772683404222fd39681da0d0d"
+      "bytes": 57812,
+      "sha256": "357ab08a261733e81e0ace244666ccb729ea9e279dc9f13c6d33b066517fd60b"
     },
     {
       "path": "frames/cards/euclid-uncommon-male-footerless.png",
-      "bytes": 56571,
-      "sha256": "f274f8b6c19f5ac7810497cee481c0555a1a99b0a79d5af8bfe6f44fdf8e2cf1"
+      "bytes": 57300,
+      "sha256": "167f27b6c9aaf4a28e2029b1c08e92e626990303ab0de80b36c6bb0545c55ede"
     },
     {
       "path": "frames/cards/euclid-uncommon-male.png",
-      "bytes": 57507,
-      "sha256": "0ee34011a717017dac428809b2379750ca1740ae5e8b2f6ad642ce872af1ecfe"
+      "bytes": 57812,
+      "sha256": "357ab08a261733e81e0ace244666ccb729ea9e279dc9f13c6d33b066517fd60b"
     },
     {
       "path": "frames/cards/eumenes-common-female-footerless.png",
-      "bytes": 52084,
-      "sha256": "524d0cf66555fa4aef9eac208bea115967d1a2353411d2b6df1c1287b78f1c15"
+      "bytes": 54486,
+      "sha256": "56cfb79bc1782ddc0b2dc7546a41d86020239dd035b351bfa8055a9a60f36a86"
     },
     {
       "path": "frames/cards/eumenes-common-female.png",
-      "bytes": 52957,
-      "sha256": "f2190a5c1ba87279dd7743b755b96776df5b38e76860089b3bebd33427d157b9"
+      "bytes": 55015,
+      "sha256": "9ddc03b00223992f0cc24cf045f58576f5d24c3386796d633befda83a667b6bd"
     },
     {
       "path": "frames/cards/eumenes-common-male-footerless.png",
-      "bytes": 52082,
-      "sha256": "cf45a9551ec9b608d6ba63e378621dab58e589e37fca89a92bef7353ed589857"
+      "bytes": 54486,
+      "sha256": "56cfb79bc1782ddc0b2dc7546a41d86020239dd035b351bfa8055a9a60f36a86"
     },
     {
       "path": "frames/cards/eumenes-common-male.png",
-      "bytes": 52955,
-      "sha256": "34c331bb2eb94fb820f5528aaf88004b0f37208d479e8aafb004bcc72886d60b"
+      "bytes": 55015,
+      "sha256": "9ddc03b00223992f0cc24cf045f58576f5d24c3386796d633befda83a667b6bd"
     },
     {
       "path": "frames/cards/eumenes-epic-female-footerless.png",
-      "bytes": 57164,
-      "sha256": "eda3ae740d8391b9ca43caec18453c1fbbbd4fe8dd542897f3e637726dd9e961"
+      "bytes": 57357,
+      "sha256": "8fba013e14280f3b1972dff9c5c76df74bb7786096cd07fe6217c4ba4f5f6897"
     },
     {
       "path": "frames/cards/eumenes-epic-female.png",
-      "bytes": 58238,
-      "sha256": "ca1ba54c7a4017acb559f5edfa22c9da9c6f3cab05f1649287b47cd47e466f6f"
+      "bytes": 57990,
+      "sha256": "4a876c2e8eaa2c5482417dac5738a6e5b9b2de5ad30954ac0672e01c54e87808"
     },
     {
       "path": "frames/cards/eumenes-epic-male-footerless.png",
-      "bytes": 57162,
-      "sha256": "bd8ec6b78221d10675643811295d545d7ca4c49043c8b8b15d8231278a8b588a"
+      "bytes": 57357,
+      "sha256": "8fba013e14280f3b1972dff9c5c76df74bb7786096cd07fe6217c4ba4f5f6897"
     },
     {
       "path": "frames/cards/eumenes-epic-male.png",
-      "bytes": 58236,
-      "sha256": "a01a026906770877ddfdd65313d13673719e7d75e3b48d235b01228807ef773b"
+      "bytes": 57990,
+      "sha256": "4a876c2e8eaa2c5482417dac5738a6e5b9b2de5ad30954ac0672e01c54e87808"
     },
     {
       "path": "frames/cards/eumenes-parent-footerless.png",
@@ -1361,83 +1371,83 @@
     },
     {
       "path": "frames/cards/eumenes-rare-female-footerless.png",
-      "bytes": 59407,
-      "sha256": "7fb775f4fd9d06369c62765967fa7f567e12c7a19225aa4c81ca2ce4e822f5b4"
+      "bytes": 59751,
+      "sha256": "d5241ad272ac48d3d3fb5e7f7d9f8d793fc80664259c470dd50c712238a5b759"
     },
     {
       "path": "frames/cards/eumenes-rare-female.png",
-      "bytes": 60408,
-      "sha256": "a9b51f4d270588ebf5dc4b78b34cf91453de77a615fe8217827045c5dff8ee05"
+      "bytes": 60397,
+      "sha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35"
     },
     {
       "path": "frames/cards/eumenes-rare-male-footerless.png",
-      "bytes": 59405,
-      "sha256": "210ec2c7a2f1e9152e8f6fecffc7dcb81314ef64fc1c25bcedf99e7ad68123ca"
+      "bytes": 59751,
+      "sha256": "d5241ad272ac48d3d3fb5e7f7d9f8d793fc80664259c470dd50c712238a5b759"
     },
     {
       "path": "frames/cards/eumenes-rare-male.png",
-      "bytes": 60406,
-      "sha256": "51d5f3a4b51efb93a3711639ed5fec87ef9e57b031ce5d0ea247e3c7d1d9736c"
+      "bytes": 60397,
+      "sha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35"
     },
     {
       "path": "frames/cards/eumenes-uncommon-female-footerless.png",
-      "bytes": 59809,
-      "sha256": "aabc1534ffac027d90752310bac41f3aa04732714c5735ecd323e557fc963497"
+      "bytes": 59319,
+      "sha256": "e180ddbcddadf6dfd06a79f5473e86837066675dfc0d45732159c4383a8e9195"
     },
     {
       "path": "frames/cards/eumenes-uncommon-female.png",
-      "bytes": 60722,
-      "sha256": "0599acd615bb45f2cb087413bdf87d484e2e8288c056f507780ea653693280bf"
+      "bytes": 59810,
+      "sha256": "20020e41b60cdb4ff9a4bcd3781d641f2e6c7d1b10716d4c2b46921124dfe762"
     },
     {
       "path": "frames/cards/eumenes-uncommon-male-footerless.png",
-      "bytes": 59807,
-      "sha256": "c3382646b665c04e71030fd5e5f5e9d0d587aa18acadcdee595bdbc8b3d35fc1"
+      "bytes": 59319,
+      "sha256": "e180ddbcddadf6dfd06a79f5473e86837066675dfc0d45732159c4383a8e9195"
     },
     {
       "path": "frames/cards/eumenes-uncommon-male.png",
-      "bytes": 60720,
-      "sha256": "857afc2a121a3a257012400f9b617a504a78fdf31bdf6ef723af2272df0ef164"
+      "bytes": 59810,
+      "sha256": "20020e41b60cdb4ff9a4bcd3781d641f2e6c7d1b10716d4c2b46921124dfe762"
     },
     {
       "path": "frames/cards/lysippos-common-female-footerless.png",
-      "bytes": 54544,
-      "sha256": "a87563a4d5336871b0311f69e4dc85bd024f56a11b95242449198f994e151c86"
+      "bytes": 55770,
+      "sha256": "586aeeb779631b29d8cbd79893be3c3956ebf542b49d6420c13b55b7b93664b8"
     },
     {
       "path": "frames/cards/lysippos-common-female.png",
-      "bytes": 55406,
-      "sha256": "65bf7cda1222e56f9d72ee015b00a17d380d15b9c60e080e9d2645945061f9c7"
+      "bytes": 56311,
+      "sha256": "f9c7318290719a3cd702a98175781b54b04b034adbeb97463ff482b40e1ce934"
     },
     {
       "path": "frames/cards/lysippos-common-male-footerless.png",
-      "bytes": 54542,
-      "sha256": "36e13e334b41e33564a6d5193c2ebff8c0e958052a1ddef1b2bdd58ddbec28e3"
+      "bytes": 55770,
+      "sha256": "586aeeb779631b29d8cbd79893be3c3956ebf542b49d6420c13b55b7b93664b8"
     },
     {
       "path": "frames/cards/lysippos-common-male.png",
-      "bytes": 55404,
-      "sha256": "73238b93a13a7a0ce912dd4a7b737ddab9d7d23c890116bf19b4dcad83d51645"
+      "bytes": 56311,
+      "sha256": "f9c7318290719a3cd702a98175781b54b04b034adbeb97463ff482b40e1ce934"
     },
     {
       "path": "frames/cards/lysippos-epic-female-footerless.png",
-      "bytes": 59243,
-      "sha256": "5d93ee74e6b6fb25b6c3a73a079849800ce3c1986cb4b41f0cd939c096ba2879"
+      "bytes": 58991,
+      "sha256": "bbb2d8f756ddb14a3fdfb45a16aafdf69f3b4ffd4ddb1b1eae81aead70f77cdb"
     },
     {
       "path": "frames/cards/lysippos-epic-female.png",
-      "bytes": 60320,
-      "sha256": "eb529b9f9a24d9044366e639fa2f4ea1012346f0f712db13d62559bc5ba07435"
+      "bytes": 59625,
+      "sha256": "6c226f4c49553a48d03bdac6292815d4ffdc4d07883841c20832306050f67a8a"
     },
     {
       "path": "frames/cards/lysippos-epic-male-footerless.png",
-      "bytes": 59241,
-      "sha256": "b5ddcea2c4f31969d64e16de31f7beb2e602cbb56402c79d220e424af51bff14"
+      "bytes": 58991,
+      "sha256": "bbb2d8f756ddb14a3fdfb45a16aafdf69f3b4ffd4ddb1b1eae81aead70f77cdb"
     },
     {
       "path": "frames/cards/lysippos-epic-male.png",
-      "bytes": 60318,
-      "sha256": "aaae2fea7451298db606cb38a9d2e187a1c9ad3e6a66564d62f94c15d5a49d80"
+      "bytes": 59625,
+      "sha256": "6c226f4c49553a48d03bdac6292815d4ffdc4d07883841c20832306050f67a8a"
     },
     {
       "path": "frames/cards/lysippos-parent-footerless.png",
@@ -1451,83 +1461,83 @@
     },
     {
       "path": "frames/cards/lysippos-rare-female-footerless.png",
-      "bytes": 50585,
-      "sha256": "c5de0f3ce6c8f285723011bb7ece8570c0bf8a0ccef76e9403fea9333d51d991"
+      "bytes": 54036,
+      "sha256": "84e938b30c2e72cbeedf5af1826d605b344223a140cbd3a095a917e9578d5fc7"
     },
     {
       "path": "frames/cards/lysippos-rare-female.png",
-      "bytes": 51646,
-      "sha256": "0d2845da540fa65f88d42415eeeb2dba1e2cfd7c69ecee726d05cd0d3d7b31b5"
+      "bytes": 54733,
+      "sha256": "9d4a9c6a1b6320b1913ddd3cd80baede133b5297ada26fd316b605ad22ab56d6"
     },
     {
       "path": "frames/cards/lysippos-rare-male-footerless.png",
-      "bytes": 50583,
-      "sha256": "9f80471d77227773664136f4e584d9e7c6e458501490158557eda119e75fcb3f"
+      "bytes": 54036,
+      "sha256": "84e938b30c2e72cbeedf5af1826d605b344223a140cbd3a095a917e9578d5fc7"
     },
     {
       "path": "frames/cards/lysippos-rare-male.png",
-      "bytes": 51644,
-      "sha256": "650b440a0e52d579df450973deb8c8b4eaf2cc6e13dc6a4fef0997fccdb6c234"
+      "bytes": 54733,
+      "sha256": "9d4a9c6a1b6320b1913ddd3cd80baede133b5297ada26fd316b605ad22ab56d6"
     },
     {
       "path": "frames/cards/lysippos-uncommon-female-footerless.png",
-      "bytes": 60021,
-      "sha256": "2a3c5661c79639d8eb2872b5e30320e0303d7175d6852a368442db6df416d38c"
+      "bytes": 59275,
+      "sha256": "faf1647676722c877886b7918181f1533c11cdde7f8290e0770aaebe8c07572b"
     },
     {
       "path": "frames/cards/lysippos-uncommon-female.png",
-      "bytes": 60926,
-      "sha256": "d6c9cf5f5f27587c2765037e7d6a9f83120b73fb6140ca1dd9e0acf77841a8c3"
+      "bytes": 59767,
+      "sha256": "7a77eeb8139cf84ba0a5d5d723d9328de0d77c398df41b6a3d3c3f7d3d24450a"
     },
     {
       "path": "frames/cards/lysippos-uncommon-male-footerless.png",
-      "bytes": 60019,
-      "sha256": "7bb84898e9eff05fbc06294e3002ae30a58604d1a38f8a571123ce8979ec854f"
+      "bytes": 59275,
+      "sha256": "faf1647676722c877886b7918181f1533c11cdde7f8290e0770aaebe8c07572b"
     },
     {
       "path": "frames/cards/lysippos-uncommon-male.png",
-      "bytes": 60924,
-      "sha256": "037bc58582be4e301f18ceed6f16697df8d470b21e9b53b1e88294a2131eb2bb"
+      "bytes": 59767,
+      "sha256": "7a77eeb8139cf84ba0a5d5d723d9328de0d77c398df41b6a3d3c3f7d3d24450a"
     },
     {
       "path": "frames/cards/menander-common-female-footerless.png",
-      "bytes": 51427,
-      "sha256": "5282df8f0b5f1ba19e4f3fd57a63f3efadcb0ca72b2ec6cf069663b6f1a5aab4"
+      "bytes": 56682,
+      "sha256": "e5b0a08fb87aebf950f07bea356fd730717c942617e82fec9d0d0161bf480452"
     },
     {
       "path": "frames/cards/menander-common-female.png",
-      "bytes": 52309,
-      "sha256": "ed306008f1550f8bc59f8b8dadcb34090cabcd83e518e5dfd1dc71d2bfe82e1b"
+      "bytes": 57232,
+      "sha256": "36552c25c28e7e7d0164fbb5eaa68a45b591bc27a6d9afc51e12055c5727ef31"
     },
     {
       "path": "frames/cards/menander-common-male-footerless.png",
-      "bytes": 51425,
-      "sha256": "a76f15c469d94ebfc4e8cc03860ea659d5c5263578cc51184e52c3239c29087c"
+      "bytes": 56682,
+      "sha256": "e5b0a08fb87aebf950f07bea356fd730717c942617e82fec9d0d0161bf480452"
     },
     {
       "path": "frames/cards/menander-common-male.png",
-      "bytes": 52307,
-      "sha256": "b003dddbdcbf8e72de1165feb238f7efbc32f7d901fbc005bdd5c3e0d8b5d424"
+      "bytes": 57232,
+      "sha256": "36552c25c28e7e7d0164fbb5eaa68a45b591bc27a6d9afc51e12055c5727ef31"
     },
     {
       "path": "frames/cards/menander-epic-female-footerless.png",
-      "bytes": 61109,
-      "sha256": "0a7e4648b88cb206314f1e873e5308ac9efd1c54b7abe8e3c6aefcf3e45edf17"
+      "bytes": 60499,
+      "sha256": "eb20cf82ff5a98275bbdd33a2c97e1ebc48eab352bc324108fc2b87d1a11a9b7"
     },
     {
       "path": "frames/cards/menander-epic-female.png",
-      "bytes": 62154,
-      "sha256": "4d0d954b2eb268a877dbf864b2ff6ed854f0b4d427e4a96c1ca0ce03cc0817d5"
+      "bytes": 61186,
+      "sha256": "9c6549e4622612f8844c1d43fb19d8b2a401208e7f6ecc40ec4a5fc9cdf60b7a"
     },
     {
       "path": "frames/cards/menander-epic-male-footerless.png",
-      "bytes": 61107,
-      "sha256": "ad5d84570f17b4cdce9274d909bfeab58ec34a96d34c5f4ddac7eb7b249e1979"
+      "bytes": 60499,
+      "sha256": "eb20cf82ff5a98275bbdd33a2c97e1ebc48eab352bc324108fc2b87d1a11a9b7"
     },
     {
       "path": "frames/cards/menander-epic-male.png",
-      "bytes": 62152,
-      "sha256": "373f6fef4d26e6404262385cda13b3acbc7d11a6bd41bb452650e456da511ea7"
+      "bytes": 61186,
+      "sha256": "9c6549e4622612f8844c1d43fb19d8b2a401208e7f6ecc40ec4a5fc9cdf60b7a"
     },
     {
       "path": "frames/cards/menander-parent-footerless.png",
@@ -1541,83 +1551,83 @@
     },
     {
       "path": "frames/cards/menander-rare-female-footerless.png",
-      "bytes": 58223,
-      "sha256": "a922a1a215019c17d46c48ed39c73569583e331d7a58fa683d403b1591e7f67e"
+      "bytes": 58638,
+      "sha256": "e8f1d4fb7c2c480209a0fe121154352bedf1d518582530b71379c4a384e8c908"
     },
     {
       "path": "frames/cards/menander-rare-female.png",
-      "bytes": 59233,
-      "sha256": "94d9b3f57d097eb9e6c2f4d2f95c8e0cdaf3160c6a128d1a08406795df3f3972"
+      "bytes": 59285,
+      "sha256": "82da9909cb544bfa96c70792264d4a4df838c654cade1189b9186d23fd902f51"
     },
     {
       "path": "frames/cards/menander-rare-male-footerless.png",
-      "bytes": 58221,
-      "sha256": "71e1d35ecdb6e1900559dbf09f4f69cc6c9482ba9c24a169fb9f0c7a3ddb1fc1"
+      "bytes": 58638,
+      "sha256": "e8f1d4fb7c2c480209a0fe121154352bedf1d518582530b71379c4a384e8c908"
     },
     {
       "path": "frames/cards/menander-rare-male.png",
-      "bytes": 59231,
-      "sha256": "e427d57a79d3ce2b6e03033ef1ed2bc0a24219471dbdf978b0ff00e61fdda9c6"
+      "bytes": 59285,
+      "sha256": "82da9909cb544bfa96c70792264d4a4df838c654cade1189b9186d23fd902f51"
     },
     {
       "path": "frames/cards/menander-uncommon-female-footerless.png",
-      "bytes": 58479,
-      "sha256": "1077f54fe369149a0af21b5dc29cdca984d91d24735f45b786e4ee528d1a1c7b"
+      "bytes": 57708,
+      "sha256": "0172b6c91838a22ba414b6a0e8fc2d5e37b2215f417211e410cbe46385a23b50"
     },
     {
       "path": "frames/cards/menander-uncommon-female.png",
-      "bytes": 59398,
-      "sha256": "574aad38989c9d975f038ffc33f7ec70c0ad01a3f57a3dace3b87dc2ab440bbf"
+      "bytes": 58207,
+      "sha256": "a8112dde697078dfab73efb1c642330adf4d042993ed5acba34e87fde9024775"
     },
     {
       "path": "frames/cards/menander-uncommon-male-footerless.png",
-      "bytes": 58477,
-      "sha256": "5190687e0cd6a0fd9beb6242c27a48715d48a1cc0b566970d44ac22b92a2eb1d"
+      "bytes": 57708,
+      "sha256": "0172b6c91838a22ba414b6a0e8fc2d5e37b2215f417211e410cbe46385a23b50"
     },
     {
       "path": "frames/cards/menander-uncommon-male.png",
-      "bytes": 59396,
-      "sha256": "c7b2ae3e230e18a6d35d26bd77a276dafee6705c05bc514379efd1ba065ac3ad"
+      "bytes": 58207,
+      "sha256": "a8112dde697078dfab73efb1c642330adf4d042993ed5acba34e87fde9024775"
     },
     {
       "path": "frames/cards/nearchus-common-female-footerless.png",
-      "bytes": 51186,
-      "sha256": "c4a9340a8dd5d0a5d7c7b2e538b5ceea49a8d2b375ee3317b4f23c7c7845b80c"
+      "bytes": 53774,
+      "sha256": "95710c19cb75ba02cecd351690067a09c56a24520b73d524bdf7c6a6d884dec7"
     },
     {
       "path": "frames/cards/nearchus-common-female.png",
-      "bytes": 52077,
-      "sha256": "88a7c55eaf460b62c5e9103c1d50bd94b04f263784f13b4136b89012e29e86f1"
+      "bytes": 54312,
+      "sha256": "8e842998af965dbaac6a5fac229067e80cca1e5354918da9197febdd539c1651"
     },
     {
       "path": "frames/cards/nearchus-common-male-footerless.png",
-      "bytes": 51184,
-      "sha256": "0ec1b91c0e4d1b569971349212fc024ccfcb75fecf32041e20d030df3e756148"
+      "bytes": 53774,
+      "sha256": "95710c19cb75ba02cecd351690067a09c56a24520b73d524bdf7c6a6d884dec7"
     },
     {
       "path": "frames/cards/nearchus-common-male.png",
-      "bytes": 52075,
-      "sha256": "247676ba2d004392543c64994e4cf73deef23304486f62dfaedc94d0241f54d1"
+      "bytes": 54312,
+      "sha256": "8e842998af965dbaac6a5fac229067e80cca1e5354918da9197febdd539c1651"
     },
     {
       "path": "frames/cards/nearchus-epic-female-footerless.png",
-      "bytes": 60532,
-      "sha256": "fe91709c849fffb174bbfab20d544dc2acbfa37fa6abf7f0bcfed82cd62566e8"
+      "bytes": 59680,
+      "sha256": "efe299d2c8ea5734f7302054dc654e6389a3f58c5a29ddb7b0e334dde129912c"
     },
     {
       "path": "frames/cards/nearchus-epic-female.png",
-      "bytes": 61581,
-      "sha256": "4a03c14f8f0352847dacc9622a541f532994d821b9b04d056a3256067b474ea9"
+      "bytes": 60352,
+      "sha256": "b876e31acc7765071e3a79587a462e37400a09e26d8e7e6147b9522a2c9f209b"
     },
     {
       "path": "frames/cards/nearchus-epic-male-footerless.png",
-      "bytes": 60530,
-      "sha256": "629f26ea1507f2d3ca4649b94326d3e2d12d41af9f3334ee69d88dde0a0f7f89"
+      "bytes": 59680,
+      "sha256": "efe299d2c8ea5734f7302054dc654e6389a3f58c5a29ddb7b0e334dde129912c"
     },
     {
       "path": "frames/cards/nearchus-epic-male.png",
-      "bytes": 61579,
-      "sha256": "c114602f1a575bb1c5d221bd0c94ac671e80cc5dda0ab7d37b1212e367d516fa"
+      "bytes": 60352,
+      "sha256": "b876e31acc7765071e3a79587a462e37400a09e26d8e7e6147b9522a2c9f209b"
     },
     {
       "path": "frames/cards/nearchus-parent-footerless.png",
@@ -1631,88 +1641,98 @@
     },
     {
       "path": "frames/cards/nearchus-rare-female-footerless.png",
-      "bytes": 56358,
-      "sha256": "e87f886bbbbf9904e9f482ccb4c0ff28448e78bb0a58e3f3d6e6d0203cc3a5c0"
+      "bytes": 57663,
+      "sha256": "2edf18c4091cbae48ee5e376f24029f7d17a9e0ef2e3b038ca5f9cbe9c8b446f"
     },
     {
       "path": "frames/cards/nearchus-rare-female.png",
-      "bytes": 57378,
-      "sha256": "78c5fe60bc5f574fa8a3d9cab63bde7803f0a908e5f991c943c5c2522589a021"
+      "bytes": 58299,
+      "sha256": "6b85e91bfb29a82d360488935d9c15683eda1b44d66f44247ea8b1216ccbe3e6"
     },
     {
       "path": "frames/cards/nearchus-rare-male-footerless.png",
-      "bytes": 56356,
-      "sha256": "386a8d2351a69713e4c4a18edacc4c91168b466d774c5177e7b4f5e93c1b0c0e"
+      "bytes": 57663,
+      "sha256": "2edf18c4091cbae48ee5e376f24029f7d17a9e0ef2e3b038ca5f9cbe9c8b446f"
     },
     {
       "path": "frames/cards/nearchus-rare-male.png",
-      "bytes": 57376,
-      "sha256": "e95aa10dce97f07997e488d2b2e033884e0bfa6bda54f7b7b52fe4e42a32395a"
+      "bytes": 58299,
+      "sha256": "6b85e91bfb29a82d360488935d9c15683eda1b44d66f44247ea8b1216ccbe3e6"
     },
     {
       "path": "frames/cards/nearchus-uncommon-female-footerless.png",
-      "bytes": 54602,
-      "sha256": "c2ab9d867b5cdb7a20047609173fee1c0e96cda99c247c928bfde01e9b90127a"
+      "bytes": 55556,
+      "sha256": "ce49ada52a136a88071483f2f2a94a375e6b1aa0118e45b5dc1236c97b893154"
     },
     {
       "path": "frames/cards/nearchus-uncommon-female.png",
-      "bytes": 55537,
-      "sha256": "29f78bae2c839e23413bf7329e7255e5d0f40d360529af7962c4eb44a3bc1905"
+      "bytes": 56094,
+      "sha256": "fff46c4548d342c07c27884660ba5912cbdeb8b37ed4ea69c9ef2d62d4a7bd53"
     },
     {
       "path": "frames/cards/nearchus-uncommon-male-footerless.png",
-      "bytes": 54600,
-      "sha256": "ab54f1cace825eec654b508e063285cd2b6bb573f7f9c3387da8bebfa379998e"
+      "bytes": 55556,
+      "sha256": "ce49ada52a136a88071483f2f2a94a375e6b1aa0118e45b5dc1236c97b893154"
     },
     {
       "path": "frames/cards/nearchus-uncommon-male.png",
-      "bytes": 55535,
-      "sha256": "f87b42c649916cfc8f6ca28d9038437555b48f518ae6581771bfad7877e0c4fd"
+      "bytes": 56094,
+      "sha256": "fff46c4548d342c07c27884660ba5912cbdeb8b37ed4ea69c9ef2d62d4a7bd53"
     },
     {
       "path": "frames/cards/ptolemy-common-female-footerless.png",
-      "bytes": 57595,
-      "sha256": "3c38950da1b50b5686bcb4a5b959a4b6fdeffca3525df9270eeebb0f2f43e158"
+      "bytes": 57065,
+      "sha256": "d6f7f2328e9fd3f9a94bd84de7a6c494819fe378ce9becaea35692ae64f8db7c"
     },
     {
       "path": "frames/cards/ptolemy-common-female.png",
-      "bytes": 58445,
-      "sha256": "763c02ca146fa1b815f28634360edd6e4119db22a15c672da58f79d04cc418ce"
+      "bytes": 57628,
+      "sha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac"
     },
     {
       "path": "frames/cards/ptolemy-common-male-footerless.png",
-      "bytes": 57593,
-      "sha256": "5f2c300bfa6aca52686fc9b262f9d8b6e61c5c3fcd5a52648f89206fb1210645"
+      "bytes": 57065,
+      "sha256": "d6f7f2328e9fd3f9a94bd84de7a6c494819fe378ce9becaea35692ae64f8db7c"
     },
     {
       "path": "frames/cards/ptolemy-common-male.png",
-      "bytes": 58443,
-      "sha256": "c6850c5f94ffa89b169c8284d30dc26dbe4dafe436e104b770df3af2b628ca03"
+      "bytes": 57628,
+      "sha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac"
     },
     {
       "path": "frames/cards/ptolemy-epic-female-footerless.png",
-      "bytes": 60303,
-      "sha256": "5227df846f79559c111231e2583f9efe2a86686f8c1afd72562e92746063b1b1"
+      "bytes": 59075,
+      "sha256": "f18e2d76df83209b662c98d9add3a7a187f0eec140767d7463e7e44b9a8e2893"
     },
     {
       "path": "frames/cards/ptolemy-epic-female.png",
-      "bytes": 61356,
-      "sha256": "15c352864c3ae882055ce13511bf8430591033bc4ee75dc08bbb487e4b10cf34"
+      "bytes": 59718,
+      "sha256": "37f06aa5076a0c5927ccc1fbd06f547dde58ca777d8e95e27a38a7c96ffcb2a9"
     },
     {
       "path": "frames/cards/ptolemy-epic-male-footerless.png",
-      "bytes": 60301,
-      "sha256": "7f99a24aa0ca7c58e1f3a376db4406fc388697a3b019a06062bb15e60b27f259"
+      "bytes": 59075,
+      "sha256": "f18e2d76df83209b662c98d9add3a7a187f0eec140767d7463e7e44b9a8e2893"
     },
     {
       "path": "frames/cards/ptolemy-epic-male.png",
-      "bytes": 61354,
-      "sha256": "f209ec53321303a8e01bf1335e2bd43478da28786dfed9aad24b63b9da70f9fa"
+      "bytes": 59718,
+      "sha256": "37f06aa5076a0c5927ccc1fbd06f547dde58ca777d8e95e27a38a7c96ffcb2a9"
     },
     {
       "path": "frames/cards/ptolemy-parent-footerless.png",
       "bytes": 53097,
       "sha256": "00378fa8e3045b87bfdc1f08e51bf64d05726a4aef0c1c6519b7facccc3e777d"
+    },
+    {
+      "path": "frames/cards/ptolemy-parent-legendary-footerless.png",
+      "bytes": 135097,
+      "sha256": "73593f07df02de69c43f75115247d3178dc68b09d595b9d732a349b71328318b"
+    },
+    {
+      "path": "frames/cards/ptolemy-parent-legendary.png",
+      "bytes": 136284,
+      "sha256": "312f61d259d5784efd5a16c859d8c95b33152b32ec0b8fba5b3c3ea16a43998b"
     },
     {
       "path": "frames/cards/ptolemy-parent.png",
@@ -1721,83 +1741,83 @@
     },
     {
       "path": "frames/cards/ptolemy-rare-female-footerless.png",
-      "bytes": 60583,
-      "sha256": "c606de1493f8d062c783ca99e685397c88e494b79940a59207e55c25a99268c5"
+      "bytes": 59458,
+      "sha256": "8dd5252a458eb1d650972b11f465ae1cda557a020cfc9aec896bf127d600de30"
     },
     {
       "path": "frames/cards/ptolemy-rare-female.png",
-      "bytes": 61569,
-      "sha256": "7706fc1c608eb4092d37b6bcfdc6f02503ab029c1b15793d5be87a5835f99e4c"
+      "bytes": 60091,
+      "sha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c"
     },
     {
       "path": "frames/cards/ptolemy-rare-male-footerless.png",
-      "bytes": 60581,
-      "sha256": "402951abf90b0f03cb895abd56389256b351a404bccfa6251d1ee9d217e8e346"
+      "bytes": 59458,
+      "sha256": "8dd5252a458eb1d650972b11f465ae1cda557a020cfc9aec896bf127d600de30"
     },
     {
       "path": "frames/cards/ptolemy-rare-male.png",
-      "bytes": 61567,
-      "sha256": "8a0c755038453578cb8da714ad8f4337823854fff52156f7eaed7aed24c7ae22"
+      "bytes": 60091,
+      "sha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c"
     },
     {
       "path": "frames/cards/ptolemy-uncommon-female-footerless.png",
-      "bytes": 58716,
-      "sha256": "75da83d3623a2311089c53810dced638ca9ca3bade9c43ac2c6dc65e7b4312f2"
+      "bytes": 57896,
+      "sha256": "16df1d3490cbc1775e538893a97134f3af2089f69fe5ed95c43efeaebf1f703b"
     },
     {
       "path": "frames/cards/ptolemy-uncommon-female.png",
-      "bytes": 59629,
-      "sha256": "ae7d3be88d2a3340cacd935ba1c94a68b5a33fefaece78d80120cb378c6c3da0"
+      "bytes": 58384,
+      "sha256": "6ced65c189e339290008f5f929b88115fbc55104e2723bb83e8bdd00b72fab93"
     },
     {
       "path": "frames/cards/ptolemy-uncommon-male-footerless.png",
-      "bytes": 58714,
-      "sha256": "f7fe19f3636ed6b666106a48b9c15c53d1602b05d53f39584907cdb81da23e18"
+      "bytes": 57896,
+      "sha256": "16df1d3490cbc1775e538893a97134f3af2089f69fe5ed95c43efeaebf1f703b"
     },
     {
       "path": "frames/cards/ptolemy-uncommon-male.png",
-      "bytes": 59627,
-      "sha256": "01a56d90d397a30ba34c82b507ec1d255d1736afc48f58d7d58a3d4b3d334700"
+      "bytes": 58384,
+      "sha256": "6ced65c189e339290008f5f929b88115fbc55104e2723bb83e8bdd00b72fab93"
     },
     {
       "path": "frames/cards/pytheas-common-female-footerless.png",
-      "bytes": 52998,
-      "sha256": "11d30261d9070b5f65834c72697cf6585f272eaeab8d65dac28f0a4252bda39b"
+      "bytes": 55277,
+      "sha256": "70def66ae8569341ba311a1fefb7cf41a1d31a1a163dd9cb263605b5f93ce4f8"
     },
     {
       "path": "frames/cards/pytheas-common-female.png",
-      "bytes": 53899,
-      "sha256": "d62347209c965eb12704690728c8f181b2b4a6b899c9446a093bf23ccaa947aa"
+      "bytes": 55819,
+      "sha256": "9b825451614d9af47d8cdccfb56e33d02481bfe2b8dfcd959744ef6d1afb02a3"
     },
     {
       "path": "frames/cards/pytheas-common-male-footerless.png",
-      "bytes": 52996,
-      "sha256": "137e10efbcf2607bac896f159a048d9b9b629edd9b59fab2c7b530f3a8c14e97"
+      "bytes": 55277,
+      "sha256": "70def66ae8569341ba311a1fefb7cf41a1d31a1a163dd9cb263605b5f93ce4f8"
     },
     {
       "path": "frames/cards/pytheas-common-male.png",
-      "bytes": 53897,
-      "sha256": "b95aa880aabc26e79f784ea54d463eed65c173573ededff58bc1e8556e7a035b"
+      "bytes": 55819,
+      "sha256": "9b825451614d9af47d8cdccfb56e33d02481bfe2b8dfcd959744ef6d1afb02a3"
     },
     {
       "path": "frames/cards/pytheas-epic-female-footerless.png",
-      "bytes": 61443,
-      "sha256": "0e23f6124b9cc226da2a38e9c49d068514639dc9c054930f9920e1225da454fd"
+      "bytes": 59852,
+      "sha256": "b16b2ee661064d15b639a97f39bd2531dc12912f3b3f8397a17ce29509935759"
     },
     {
       "path": "frames/cards/pytheas-epic-female.png",
-      "bytes": 62484,
-      "sha256": "89aa724eea9414aacf5291ea9acb14603d41d1a2d54baca74cbf07289dbb45fa"
+      "bytes": 60542,
+      "sha256": "1af2e2e139bd74c63d840c10cf7595bc99bba0eac2d659cfa4a090bf3b455898"
     },
     {
       "path": "frames/cards/pytheas-epic-male-footerless.png",
-      "bytes": 61441,
-      "sha256": "f53602766644b76075b495b5ebdfee61b97ca19cf7db0e6b824a96b4e4fbde8d"
+      "bytes": 59852,
+      "sha256": "b16b2ee661064d15b639a97f39bd2531dc12912f3b3f8397a17ce29509935759"
     },
     {
       "path": "frames/cards/pytheas-epic-male.png",
-      "bytes": 62482,
-      "sha256": "8d183b92a18562e509db7c629c5d5c3dcefd50cb00552bc2a14358e7d5562a0a"
+      "bytes": 60542,
+      "sha256": "1af2e2e139bd74c63d840c10cf7595bc99bba0eac2d659cfa4a090bf3b455898"
     },
     {
       "path": "frames/cards/pytheas-parent-footerless.png",
@@ -1811,83 +1831,83 @@
     },
     {
       "path": "frames/cards/pytheas-rare-female-footerless.png",
-      "bytes": 58525,
-      "sha256": "edaf310364ec718c90740a8e5394842ebb72044dca3b316b48392f7ec201d5a0"
+      "bytes": 58894,
+      "sha256": "1d39522e35e09e2357908eb538ed52d838839b913c9f7baa2e353f27efb95531"
     },
     {
       "path": "frames/cards/pytheas-rare-female.png",
-      "bytes": 59526,
-      "sha256": "93a76aaa665f6f15830ef232a7826079513714be14978d5606b3a44676c504c1"
+      "bytes": 59533,
+      "sha256": "a4478e68760e5abc334b4983fbe3aa8383d92db54c475830b706d24e188e446a"
     },
     {
       "path": "frames/cards/pytheas-rare-male-footerless.png",
-      "bytes": 58523,
-      "sha256": "b62b3dc82f6c6e93c1e08fda76cc4adede7728e059916ce1f91012fc5ca8e96e"
+      "bytes": 58894,
+      "sha256": "1d39522e35e09e2357908eb538ed52d838839b913c9f7baa2e353f27efb95531"
     },
     {
       "path": "frames/cards/pytheas-rare-male.png",
-      "bytes": 59524,
-      "sha256": "16eeec7bd2454f14f518c9e169dda903e8cbc52423b8472530407d26c4012545"
+      "bytes": 59533,
+      "sha256": "a4478e68760e5abc334b4983fbe3aa8383d92db54c475830b706d24e188e446a"
     },
     {
       "path": "frames/cards/pytheas-uncommon-female-footerless.png",
-      "bytes": 57879,
-      "sha256": "f04c9598f940c709dae9a8b220cc7bd3f00fdf10af35ccbf70d3deb5969eb244"
+      "bytes": 60039,
+      "sha256": "a3c3f0dd620cfd246e62a0ecd6a722e2f2b6343f83ba2275d666d54c30559b08"
     },
     {
       "path": "frames/cards/pytheas-uncommon-female.png",
-      "bytes": 58810,
-      "sha256": "4a3feef030e0b4d8e44732817011390920bf492fc9edc82d1a659e478be70d78"
+      "bytes": 60589,
+      "sha256": "643de8a252f02afdc7f990c672d4aba500c010499ab7ddd62c9f66e4d41b8c11"
     },
     {
       "path": "frames/cards/pytheas-uncommon-male-footerless.png",
-      "bytes": 57877,
-      "sha256": "beeaa4dd96625c6be542227aafb55694dea4be7afff389b2139146b1ad4b06a5"
+      "bytes": 60039,
+      "sha256": "a3c3f0dd620cfd246e62a0ecd6a722e2f2b6343f83ba2275d666d54c30559b08"
     },
     {
       "path": "frames/cards/pytheas-uncommon-male.png",
-      "bytes": 58808,
-      "sha256": "523b5d19b23c224fdd9d1735ee2c1737e7461b33b9e475f7426ea9b0c5b4aa73"
+      "bytes": 60589,
+      "sha256": "643de8a252f02afdc7f990c672d4aba500c010499ab7ddd62c9f66e4d41b8c11"
     },
     {
       "path": "frames/cards/theophrastus-common-female-footerless.png",
-      "bytes": 54523,
-      "sha256": "459114ba0cc8d10713685ba1879b54955db944d175f3b84ca44f719396484d95"
+      "bytes": 55543,
+      "sha256": "65fc5cbedee108e32bfd7687803acb3fa559863536bc0ffda65ce78f35ee4460"
     },
     {
       "path": "frames/cards/theophrastus-common-female.png",
-      "bytes": 55396,
-      "sha256": "d51d959eb091379d07a88d1962375a008d05be8f366f58b9ca03bbec2b529923"
+      "bytes": 56078,
+      "sha256": "3e90ba7875fb1516f140cf44ae21df6c9f3ddadac2d268426ac5b88ce4e67463"
     },
     {
       "path": "frames/cards/theophrastus-common-male-footerless.png",
-      "bytes": 54521,
-      "sha256": "0ed533d355239ae12230fc9322a0eb2c5fc31dd6a0724b2343aea8c0b98b4b13"
+      "bytes": 55543,
+      "sha256": "65fc5cbedee108e32bfd7687803acb3fa559863536bc0ffda65ce78f35ee4460"
     },
     {
       "path": "frames/cards/theophrastus-common-male.png",
-      "bytes": 55394,
-      "sha256": "f14cf39bbef8004b00df9a306d423dc44d04b7d3ed8d627615311bb7bc943b13"
+      "bytes": 56078,
+      "sha256": "3e90ba7875fb1516f140cf44ae21df6c9f3ddadac2d268426ac5b88ce4e67463"
     },
     {
       "path": "frames/cards/theophrastus-epic-female-footerless.png",
-      "bytes": 61094,
-      "sha256": "226e9069376408900fa31333eb78568d733e4c7070e21122a9cd7551b7874d9f"
+      "bytes": 59853,
+      "sha256": "2b7a28098aecefe56fd70819d7d79b9668b265016727085c14ab72b50b30afe9"
     },
     {
       "path": "frames/cards/theophrastus-epic-female.png",
-      "bytes": 62150,
-      "sha256": "17c07c011286635d50dccb4eab7c1d50ab0ddf57a26b13b2c40c441195f0abf2"
+      "bytes": 60545,
+      "sha256": "e7534eddb3c4966137ffc235cdbd7b4b5681690a48e2cddd2b1a56d8b6ae4011"
     },
     {
       "path": "frames/cards/theophrastus-epic-male-footerless.png",
-      "bytes": 61092,
-      "sha256": "67783f15a9f116c13a866cbfedadf5506a3114afea09f8e30d12942ca4d2f56e"
+      "bytes": 59853,
+      "sha256": "2b7a28098aecefe56fd70819d7d79b9668b265016727085c14ab72b50b30afe9"
     },
     {
       "path": "frames/cards/theophrastus-epic-male.png",
-      "bytes": 62148,
-      "sha256": "d2c43377b406eeab9c726c5cabccab0d7137c0ee77ab8b88e6b4ecd169299665"
+      "bytes": 60545,
+      "sha256": "e7534eddb3c4966137ffc235cdbd7b4b5681690a48e2cddd2b1a56d8b6ae4011"
     },
     {
       "path": "frames/cards/theophrastus-parent-footerless.png",
@@ -1901,88 +1921,98 @@
     },
     {
       "path": "frames/cards/theophrastus-rare-female-footerless.png",
-      "bytes": 58648,
-      "sha256": "59e59fc8ed85d8b7033e7d17730fba987237e8240b71d068a9e06169b4ff173a"
+      "bytes": 58305,
+      "sha256": "0c4206c83ea6785206aa9757498ec10152fd3191f34ced05072977a2d3581ce6"
     },
     {
       "path": "frames/cards/theophrastus-rare-female.png",
-      "bytes": 59638,
-      "sha256": "b94299e5082f9fc4bbb77ae3ce7cea7f045407ee6c82779036a6db57ed4465fc"
+      "bytes": 58948,
+      "sha256": "288b58512cea68e6b134fc0cf2ceed1dad5338894fd2850c9ad05683ea52fde9"
     },
     {
       "path": "frames/cards/theophrastus-rare-male-footerless.png",
-      "bytes": 58646,
-      "sha256": "dfd5312fd7652f0378477e0d0b5d4eb0d6c4cbaebae514d4db13db79782e8b31"
+      "bytes": 58305,
+      "sha256": "0c4206c83ea6785206aa9757498ec10152fd3191f34ced05072977a2d3581ce6"
     },
     {
       "path": "frames/cards/theophrastus-rare-male.png",
-      "bytes": 59636,
-      "sha256": "bcdcf973b1776b96eef2af02b20dc1812d35d89c73164e67e84c44e3697ef67a"
+      "bytes": 58948,
+      "sha256": "288b58512cea68e6b134fc0cf2ceed1dad5338894fd2850c9ad05683ea52fde9"
     },
     {
       "path": "frames/cards/theophrastus-uncommon-female-footerless.png",
-      "bytes": 59594,
-      "sha256": "0f08f70af17214bd900fd9a83081bcd06550d6295bb8bbda2c1d20da96c1dcba"
+      "bytes": 58919,
+      "sha256": "0637d32b9f70c16e1b06412de83d6bc27ca094c11fa9bf374d8668452b03f554"
     },
     {
       "path": "frames/cards/theophrastus-uncommon-female.png",
-      "bytes": 60509,
-      "sha256": "553808961c94593116b5ca2bc38636e17bea61cd89f7733f648a7a5f510e5ac7"
+      "bytes": 59419,
+      "sha256": "c738f0e09055183a5222b5192f7350bc2f32e199562b89e364410a1697f24ab4"
     },
     {
       "path": "frames/cards/theophrastus-uncommon-male-footerless.png",
-      "bytes": 59592,
-      "sha256": "d391339093b13d08104783855ebf96700071956eda330657b68093fe07e13ed5"
+      "bytes": 58919,
+      "sha256": "0637d32b9f70c16e1b06412de83d6bc27ca094c11fa9bf374d8668452b03f554"
     },
     {
       "path": "frames/cards/theophrastus-uncommon-male.png",
-      "bytes": 60507,
-      "sha256": "01e930d459c3df806425129cb894d8bce9287988e953b9c9fb932b009d4a7d98"
+      "bytes": 59419,
+      "sha256": "c738f0e09055183a5222b5192f7350bc2f32e199562b89e364410a1697f24ab4"
     },
     {
       "path": "frames/cards/zeno-common-female-footerless.png",
-      "bytes": 48031,
-      "sha256": "29a868cd02782172e1fc821ed87ab78722e00c494617908873c5f21ea93587ec"
+      "bytes": 51805,
+      "sha256": "d9e625d830275495dd2dadbe2c470370e680a8291f54cc53436c79bead1e33b6"
     },
     {
       "path": "frames/cards/zeno-common-female.png",
-      "bytes": 48936,
-      "sha256": "c89a94cad987ae656dfdd362075ca12378b69938ad18b80053ff520966e8a1a1"
+      "bytes": 52334,
+      "sha256": "fea08e24b02ee12b8d00adb3ad73519d350dd796691902051d2fc8c1d9c5e0f6"
     },
     {
       "path": "frames/cards/zeno-common-male-footerless.png",
-      "bytes": 48029,
-      "sha256": "3e39f6d425214c241a26811436b79b3c34b6f1abfee17449f5ed3176ebc8520c"
+      "bytes": 51805,
+      "sha256": "d9e625d830275495dd2dadbe2c470370e680a8291f54cc53436c79bead1e33b6"
     },
     {
       "path": "frames/cards/zeno-common-male.png",
-      "bytes": 48934,
-      "sha256": "25b0cd8106588dc7a33e77943439ea78fc09a24fa53c55cb9c9193f3cfc90361"
+      "bytes": 52334,
+      "sha256": "fea08e24b02ee12b8d00adb3ad73519d350dd796691902051d2fc8c1d9c5e0f6"
     },
     {
       "path": "frames/cards/zeno-epic-female-footerless.png",
-      "bytes": 57028,
-      "sha256": "b5a3e9097f5fcd29088f349640efc088fc1687104365dbaed2e4fb526b058567"
+      "bytes": 57472,
+      "sha256": "6883a6aa088fefa946fa2184a0425d88041c91e3f54da95022cc18b94aa4daca"
     },
     {
       "path": "frames/cards/zeno-epic-female.png",
-      "bytes": 58106,
-      "sha256": "ac6f0062f5a39133d343419557e4499fa9271e7e2f5f0740eb085968a0a4477f"
+      "bytes": 58112,
+      "sha256": "d08555db0545698ccee9e8d262597fd9b0b41d093722081dfaeeedb7a8d2ed4b"
     },
     {
       "path": "frames/cards/zeno-epic-male-footerless.png",
-      "bytes": 57026,
-      "sha256": "9c903eec552d9ae1248a46b046737595fd1d4383e7f1ce21ca16ad306bd462c4"
+      "bytes": 57472,
+      "sha256": "6883a6aa088fefa946fa2184a0425d88041c91e3f54da95022cc18b94aa4daca"
     },
     {
       "path": "frames/cards/zeno-epic-male.png",
-      "bytes": 58104,
-      "sha256": "02e508200345231ef3766b34ff9f9984e3d7bfa61b9bf174a0e2834921d695cb"
+      "bytes": 58112,
+      "sha256": "d08555db0545698ccee9e8d262597fd9b0b41d093722081dfaeeedb7a8d2ed4b"
     },
     {
       "path": "frames/cards/zeno-parent-footerless.png",
       "bytes": 51247,
       "sha256": "8e4af56e888f29ed617ef3486b30b7a1d825db0f7a541bc3289f8383f8a5dd89"
+    },
+    {
+      "path": "frames/cards/zeno-parent-legendary-footerless.png",
+      "bytes": 133312,
+      "sha256": "d8f63d999063ffbf9e6c2a7cc6c0ce25b63e12aac004d863a2ab7d5ec9a72735"
+    },
+    {
+      "path": "frames/cards/zeno-parent-legendary.png",
+      "bytes": 134467,
+      "sha256": "fd4401eac1ec8b3f8fc05fef6a37c49119717616992c725dd2270d47a644eedb"
     },
     {
       "path": "frames/cards/zeno-parent.png",
@@ -1991,43 +2021,43 @@
     },
     {
       "path": "frames/cards/zeno-rare-female-footerless.png",
-      "bytes": 56581,
-      "sha256": "9be7465e742758c039192c3d9861e4ed14721ef90785640cbd6b4f4a62746e69"
+      "bytes": 57869,
+      "sha256": "f5b36813372d3ef7200fe4e14169b8f1b2e3130294cf0febc44d86e879b193d8"
     },
     {
       "path": "frames/cards/zeno-rare-female.png",
-      "bytes": 57604,
-      "sha256": "63410aa6e7d23a04c824857b0a907aa20feaa6b9f13ffee03a13d68470447292"
+      "bytes": 58508,
+      "sha256": "52f90c0d6c888a68b91453874b4bc0de0edfb77305106a1202539309c1b31f95"
     },
     {
       "path": "frames/cards/zeno-rare-male-footerless.png",
-      "bytes": 56579,
-      "sha256": "a88c69d5b6fab3894b8e4f7b2bdbee3dbfc2c8117004e871f3664360d8d114b8"
+      "bytes": 57869,
+      "sha256": "f5b36813372d3ef7200fe4e14169b8f1b2e3130294cf0febc44d86e879b193d8"
     },
     {
       "path": "frames/cards/zeno-rare-male.png",
-      "bytes": 57602,
-      "sha256": "f698384c52b6384f0490bac62a15c5e209ad40dcac699a08cae0776b20929ab6"
+      "bytes": 58508,
+      "sha256": "52f90c0d6c888a68b91453874b4bc0de0edfb77305106a1202539309c1b31f95"
     },
     {
       "path": "frames/cards/zeno-uncommon-female-footerless.png",
-      "bytes": 55735,
-      "sha256": "600bd4c4cf6ae4a28dc2db398d60cb3ab37c5ba177caecfcba97d67f8205176d"
+      "bytes": 56674,
+      "sha256": "212f71ba43d9056dbb4437d49c11869579da1d0dd02ebe864fa11f962da69da8"
     },
     {
       "path": "frames/cards/zeno-uncommon-female.png",
-      "bytes": 56665,
-      "sha256": "4812f779a1a945d45412ded102d43695eabdb0d2334fcc7dc7edf04bbbaa052b"
+      "bytes": 57167,
+      "sha256": "030d73cfd5f8852989472b0b013d0c006dc53de5187d9101ba3fb4d23612c957"
     },
     {
       "path": "frames/cards/zeno-uncommon-male-footerless.png",
-      "bytes": 55733,
-      "sha256": "79139546de591852ee42c1991813c3251bdb6f527c8a6fedbcbb60ae1ae05e57"
+      "bytes": 56674,
+      "sha256": "212f71ba43d9056dbb4437d49c11869579da1d0dd02ebe864fa11f962da69da8"
     },
     {
       "path": "frames/cards/zeno-uncommon-male.png",
-      "bytes": 56663,
-      "sha256": "4c387f03aafdd16f8a9c0704d5eaad37d2627fccaaf68d0908f4cb615de04e8f"
+      "bytes": 57167,
+      "sha256": "030d73cfd5f8852989472b0b013d0c006dc53de5187d9101ba3fb4d23612c957"
     },
     {
       "path": "frames/masks/legendary-card.svg",
@@ -2041,43 +2071,43 @@
     },
     {
       "path": "frames/svg/alexander-common-female-footerless.svg",
-      "bytes": 8199,
-      "sha256": "70527d2d25cf3d101fa62b3b7a1d5b4f8a7e839fb08defd4e9409d1ef8aafd46"
+      "bytes": 8239,
+      "sha256": "7b6d5bb0ed680e69e686c421a228fb68b60bda7431b696eeefe17f3dafb5b6ae"
     },
     {
       "path": "frames/svg/alexander-common-female.svg",
-      "bytes": 8440,
-      "sha256": "8f8ed96568a6b8758a7fe68b63e7bf7f0a2434d1d635557d545949fd6d2a036e"
+      "bytes": 8480,
+      "sha256": "6028fe4c13d38accad69d7db1418054021d72619014d2699fa3ff5f147479609"
     },
     {
       "path": "frames/svg/alexander-common-male-footerless.svg",
-      "bytes": 8199,
-      "sha256": "70527d2d25cf3d101fa62b3b7a1d5b4f8a7e839fb08defd4e9409d1ef8aafd46"
+      "bytes": 8239,
+      "sha256": "7b6d5bb0ed680e69e686c421a228fb68b60bda7431b696eeefe17f3dafb5b6ae"
     },
     {
       "path": "frames/svg/alexander-common-male.svg",
-      "bytes": 8440,
-      "sha256": "8f8ed96568a6b8758a7fe68b63e7bf7f0a2434d1d635557d545949fd6d2a036e"
+      "bytes": 8480,
+      "sha256": "6028fe4c13d38accad69d7db1418054021d72619014d2699fa3ff5f147479609"
     },
     {
       "path": "frames/svg/alexander-epic-female-footerless.svg",
       "bytes": 10936,
-      "sha256": "3618e982cc44ae9738a985b6ca79f2fd482f5a52082bd7ace71a87a6be176052"
+      "sha256": "9685fab4aa9af51616e503b56cb1146a8103f5f3076cfd4944753e5164d0fb79"
     },
     {
       "path": "frames/svg/alexander-epic-female.svg",
       "bytes": 11177,
-      "sha256": "3ee3853eac7c8e837f87adadcce8f54a01c4450d8a3337a06babd4b48f959192"
+      "sha256": "d8008fe571887dafb26ecf30241ee4c95a70486fbd97c33c309256886a67d7c5"
     },
     {
       "path": "frames/svg/alexander-epic-male-footerless.svg",
       "bytes": 10936,
-      "sha256": "3618e982cc44ae9738a985b6ca79f2fd482f5a52082bd7ace71a87a6be176052"
+      "sha256": "9685fab4aa9af51616e503b56cb1146a8103f5f3076cfd4944753e5164d0fb79"
     },
     {
       "path": "frames/svg/alexander-epic-male.svg",
       "bytes": 11177,
-      "sha256": "3ee3853eac7c8e837f87adadcce8f54a01c4450d8a3337a06babd4b48f959192"
+      "sha256": "d8008fe571887dafb26ecf30241ee4c95a70486fbd97c33c309256886a67d7c5"
     },
     {
       "path": "frames/svg/alexander-parent-common-footerless.svg",
@@ -2132,82 +2162,82 @@
     {
       "path": "frames/svg/alexander-rare-female-footerless.svg",
       "bytes": 9995,
-      "sha256": "f2619fa486c03ae7bbb744ff999059616c9c95bb6526f2876e9de490e5936ae0"
+      "sha256": "b57fe188c87916ddf08e7c304536566efcbea306d8e18de8bf8b5aca174de1cf"
     },
     {
       "path": "frames/svg/alexander-rare-female.svg",
       "bytes": 10236,
-      "sha256": "e6db5b11285c817166e8cad5e3dd9b7a4e450f6de050059724a00684897fc317"
+      "sha256": "802709e1828023d054dc3952964c90cd6bb2b008353070246a43487970bbc032"
     },
     {
       "path": "frames/svg/alexander-rare-male-footerless.svg",
       "bytes": 9995,
-      "sha256": "f2619fa486c03ae7bbb744ff999059616c9c95bb6526f2876e9de490e5936ae0"
+      "sha256": "b57fe188c87916ddf08e7c304536566efcbea306d8e18de8bf8b5aca174de1cf"
     },
     {
       "path": "frames/svg/alexander-rare-male.svg",
       "bytes": 10236,
-      "sha256": "e6db5b11285c817166e8cad5e3dd9b7a4e450f6de050059724a00684897fc317"
+      "sha256": "802709e1828023d054dc3952964c90cd6bb2b008353070246a43487970bbc032"
     },
     {
       "path": "frames/svg/alexander-uncommon-female-footerless.svg",
-      "bytes": 9275,
-      "sha256": "fb12bc278914372b7c56f5c212092c80e20b15e4cce01abbd795446ad6436003"
+      "bytes": 9264,
+      "sha256": "f9759187bdba7650f43ee17aa5bfada116c54a64d3820b66ba74bee26cfb8849"
     },
     {
       "path": "frames/svg/alexander-uncommon-female.svg",
-      "bytes": 9516,
-      "sha256": "77775b225075bbdea9f8eef5ef7a0dd483d74889741ee1266ed603c5586da225"
+      "bytes": 9505,
+      "sha256": "800c3482c7e485f5a1fe7af970f30813a0d89842e9d621cf0abcbce1c80c23b3"
     },
     {
       "path": "frames/svg/alexander-uncommon-male-footerless.svg",
-      "bytes": 9275,
-      "sha256": "fb12bc278914372b7c56f5c212092c80e20b15e4cce01abbd795446ad6436003"
+      "bytes": 9264,
+      "sha256": "f9759187bdba7650f43ee17aa5bfada116c54a64d3820b66ba74bee26cfb8849"
     },
     {
       "path": "frames/svg/alexander-uncommon-male.svg",
-      "bytes": 9516,
-      "sha256": "77775b225075bbdea9f8eef5ef7a0dd483d74889741ee1266ed603c5586da225"
+      "bytes": 9505,
+      "sha256": "800c3482c7e485f5a1fe7af970f30813a0d89842e9d621cf0abcbce1c80c23b3"
     },
     {
       "path": "frames/svg/aristotle-common-female-footerless.svg",
-      "bytes": 8948,
-      "sha256": "bee02e1f229045e2ed1ce8040c0aa49ad59277a1441a90a67f643fc48a06e907"
+      "bytes": 8969,
+      "sha256": "72e3ca95938b801aa35b6faca69cd11bb2725706081eb8740e7a6ac0f82f8694"
     },
     {
       "path": "frames/svg/aristotle-common-female.svg",
-      "bytes": 9189,
-      "sha256": "9ea2543b19684fbbc72a99e4cf473c122939453e757b943590284acb878cce87"
+      "bytes": 9210,
+      "sha256": "1227f88df0b44ae1e55d30495f214918381c70a5b8e1ebbfade7ec9a955eec5e"
     },
     {
       "path": "frames/svg/aristotle-common-male-footerless.svg",
-      "bytes": 8948,
-      "sha256": "bee02e1f229045e2ed1ce8040c0aa49ad59277a1441a90a67f643fc48a06e907"
+      "bytes": 8969,
+      "sha256": "72e3ca95938b801aa35b6faca69cd11bb2725706081eb8740e7a6ac0f82f8694"
     },
     {
       "path": "frames/svg/aristotle-common-male.svg",
-      "bytes": 9189,
-      "sha256": "9ea2543b19684fbbc72a99e4cf473c122939453e757b943590284acb878cce87"
+      "bytes": 9210,
+      "sha256": "1227f88df0b44ae1e55d30495f214918381c70a5b8e1ebbfade7ec9a955eec5e"
     },
     {
       "path": "frames/svg/aristotle-epic-female-footerless.svg",
       "bytes": 11699,
-      "sha256": "b940c116784386b3b4a3831a376f060387b91d146cc6220a9b950a9f7b1425b4"
+      "sha256": "ee7a782211c91636c7c07d79983c6de0a0fc036efded00706ea9f45b3460cc5f"
     },
     {
       "path": "frames/svg/aristotle-epic-female.svg",
       "bytes": 11940,
-      "sha256": "80ca1d671755610cb8803448d7396fae5fbd81cfdf2bd716054375b231907ad8"
+      "sha256": "166587562516a9f3af53d3b46f0a1deeba246d30bf2a78667a87966fbdff87ec"
     },
     {
       "path": "frames/svg/aristotle-epic-male-footerless.svg",
       "bytes": 11699,
-      "sha256": "b940c116784386b3b4a3831a376f060387b91d146cc6220a9b950a9f7b1425b4"
+      "sha256": "ee7a782211c91636c7c07d79983c6de0a0fc036efded00706ea9f45b3460cc5f"
     },
     {
       "path": "frames/svg/aristotle-epic-male.svg",
       "bytes": 11940,
-      "sha256": "80ca1d671755610cb8803448d7396fae5fbd81cfdf2bd716054375b231907ad8"
+      "sha256": "166587562516a9f3af53d3b46f0a1deeba246d30bf2a78667a87966fbdff87ec"
     },
     {
       "path": "frames/svg/aristotle-parent-common-footerless.svg",
@@ -2262,82 +2292,82 @@
     {
       "path": "frames/svg/aristotle-rare-female-footerless.svg",
       "bytes": 10755,
-      "sha256": "ab1ece750661cff1b10fc60e92a69249e46652d4b09f1361ea0bb8b858cec851"
+      "sha256": "5a8ccfb215572d6143fc6ebd5c48962603608d89696914f133f3fe2d89870e35"
     },
     {
       "path": "frames/svg/aristotle-rare-female.svg",
       "bytes": 10996,
-      "sha256": "eea4b7631525e461cd7ca7c011da4a4330e70df33adba201bf1799ccf3b1884c"
+      "sha256": "7ac66edcb92b5e4b37d857ae1c9ba966724a122bdb913647608dbca226f29f9b"
     },
     {
       "path": "frames/svg/aristotle-rare-male-footerless.svg",
       "bytes": 10755,
-      "sha256": "ab1ece750661cff1b10fc60e92a69249e46652d4b09f1361ea0bb8b858cec851"
+      "sha256": "5a8ccfb215572d6143fc6ebd5c48962603608d89696914f133f3fe2d89870e35"
     },
     {
       "path": "frames/svg/aristotle-rare-male.svg",
       "bytes": 10996,
-      "sha256": "eea4b7631525e461cd7ca7c011da4a4330e70df33adba201bf1799ccf3b1884c"
+      "sha256": "7ac66edcb92b5e4b37d857ae1c9ba966724a122bdb913647608dbca226f29f9b"
     },
     {
       "path": "frames/svg/aristotle-uncommon-female-footerless.svg",
       "bytes": 9964,
-      "sha256": "2126fe128c6da5735cb64992f489be55594d01790ae54e094397480c000695d5"
+      "sha256": "feed86bea07e8b5994e60dd1795f400056631a5ea5e370e4e1aa4e69bbe28f64"
     },
     {
       "path": "frames/svg/aristotle-uncommon-female.svg",
       "bytes": 10205,
-      "sha256": "43b39e4a26ef0b1d4135938091a3c01168af15c8238f94c6869828a9b4339eb4"
+      "sha256": "4db1de06f35fc937d1d1bd608a9a758d098b8a44df01de605dc4ca74cd0d6470"
     },
     {
       "path": "frames/svg/aristotle-uncommon-male-footerless.svg",
       "bytes": 9964,
-      "sha256": "2126fe128c6da5735cb64992f489be55594d01790ae54e094397480c000695d5"
+      "sha256": "feed86bea07e8b5994e60dd1795f400056631a5ea5e370e4e1aa4e69bbe28f64"
     },
     {
       "path": "frames/svg/aristotle-uncommon-male.svg",
       "bytes": 10205,
-      "sha256": "43b39e4a26ef0b1d4135938091a3c01168af15c8238f94c6869828a9b4339eb4"
+      "sha256": "4db1de06f35fc937d1d1bd608a9a758d098b8a44df01de605dc4ca74cd0d6470"
     },
     {
       "path": "frames/svg/cleomenes-common-female-footerless.svg",
-      "bytes": 11924,
-      "sha256": "0dfe5b020a8469261c956bffa253215deb98a77b24a35764aae0072a8b39a3cc"
+      "bytes": 11954,
+      "sha256": "bedd9624a32c578d2a11695dd30a702fa43d0990be9e8f5cbe82f5a40de3165a"
     },
     {
       "path": "frames/svg/cleomenes-common-female.svg",
-      "bytes": 12165,
-      "sha256": "ca9c46e940c41a190e0c8255ed26044a88dbcce7558a64e467efde865b1a71ec"
+      "bytes": 12195,
+      "sha256": "e61e5891fe9dcf4341f2427451106710b649211326f38f39d7af30565cc7b1d4"
     },
     {
       "path": "frames/svg/cleomenes-common-male-footerless.svg",
-      "bytes": 11924,
-      "sha256": "0dfe5b020a8469261c956bffa253215deb98a77b24a35764aae0072a8b39a3cc"
+      "bytes": 11954,
+      "sha256": "bedd9624a32c578d2a11695dd30a702fa43d0990be9e8f5cbe82f5a40de3165a"
     },
     {
       "path": "frames/svg/cleomenes-common-male.svg",
-      "bytes": 12165,
-      "sha256": "ca9c46e940c41a190e0c8255ed26044a88dbcce7558a64e467efde865b1a71ec"
+      "bytes": 12195,
+      "sha256": "e61e5891fe9dcf4341f2427451106710b649211326f38f39d7af30565cc7b1d4"
     },
     {
       "path": "frames/svg/cleomenes-epic-female-footerless.svg",
       "bytes": 14650,
-      "sha256": "45e3dc6b48d946abc9b16168440b79d527cb3bea788f779d8916023b149bcb52"
+      "sha256": "bc5b4c3ad47b4968ba60a686dd9c8c1e7bccf8cd60bc3c12f0eaf83bc4e016cc"
     },
     {
       "path": "frames/svg/cleomenes-epic-female.svg",
       "bytes": 14891,
-      "sha256": "2e4910224a457d6bffe31ff5da95d63999c5cf5146a31278173690bb19e964bd"
+      "sha256": "7e64e2458e3e893f3a584891cebb72325e98fdd382283d775888cb1c409d0c5f"
     },
     {
       "path": "frames/svg/cleomenes-epic-male-footerless.svg",
       "bytes": 14650,
-      "sha256": "45e3dc6b48d946abc9b16168440b79d527cb3bea788f779d8916023b149bcb52"
+      "sha256": "bc5b4c3ad47b4968ba60a686dd9c8c1e7bccf8cd60bc3c12f0eaf83bc4e016cc"
     },
     {
       "path": "frames/svg/cleomenes-epic-male.svg",
       "bytes": 14891,
-      "sha256": "2e4910224a457d6bffe31ff5da95d63999c5cf5146a31278173690bb19e964bd"
+      "sha256": "7e64e2458e3e893f3a584891cebb72325e98fdd382283d775888cb1c409d0c5f"
     },
     {
       "path": "frames/svg/cleomenes-parent-common-footerless.svg",
@@ -2392,87 +2422,97 @@
     {
       "path": "frames/svg/cleomenes-rare-female-footerless.svg",
       "bytes": 13745,
-      "sha256": "a3f85803e54b19120e0ab945c95698a640ffa6a6377974fd47cdb9e70af7d0be"
+      "sha256": "38fff3a2588e84077a3d8ce208a873e25c30503ee9f0b95a7ffe08759b79373b"
     },
     {
       "path": "frames/svg/cleomenes-rare-female.svg",
       "bytes": 13986,
-      "sha256": "358568a763e317c02eaa2fcdc00a6df462d9700d8f2bc049d910128e0e4aa82e"
+      "sha256": "a8f45fb3b08d705d182cb26654e5baa9095c08d55ed16a5649b6314c936ef4e9"
     },
     {
       "path": "frames/svg/cleomenes-rare-male-footerless.svg",
       "bytes": 13745,
-      "sha256": "a3f85803e54b19120e0ab945c95698a640ffa6a6377974fd47cdb9e70af7d0be"
+      "sha256": "38fff3a2588e84077a3d8ce208a873e25c30503ee9f0b95a7ffe08759b79373b"
     },
     {
       "path": "frames/svg/cleomenes-rare-male.svg",
       "bytes": 13986,
-      "sha256": "358568a763e317c02eaa2fcdc00a6df462d9700d8f2bc049d910128e0e4aa82e"
+      "sha256": "a8f45fb3b08d705d182cb26654e5baa9095c08d55ed16a5649b6314c936ef4e9"
     },
     {
       "path": "frames/svg/cleomenes-uncommon-female-footerless.svg",
       "bytes": 12982,
-      "sha256": "ca4f7290354b05e006b53bd84349c95e29787ba0527ae34cd90788b779c73345"
+      "sha256": "30dc1be743c87e690c6a0b245e591f93e759136ea0a6eee106cf1224fde10117"
     },
     {
       "path": "frames/svg/cleomenes-uncommon-female.svg",
       "bytes": 13223,
-      "sha256": "0578e762313de6f3a3a77594cbbc51134ed80bd1a9a07bc44a6774051b34c4b7"
+      "sha256": "bacb4b4184d7b712900a0605776e1d4cbb1205ddb0cc673a83a424d391fd3be9"
     },
     {
       "path": "frames/svg/cleomenes-uncommon-male-footerless.svg",
       "bytes": 12982,
-      "sha256": "ca4f7290354b05e006b53bd84349c95e29787ba0527ae34cd90788b779c73345"
+      "sha256": "30dc1be743c87e690c6a0b245e591f93e759136ea0a6eee106cf1224fde10117"
     },
     {
       "path": "frames/svg/cleomenes-uncommon-male.svg",
       "bytes": 13223,
-      "sha256": "0578e762313de6f3a3a77594cbbc51134ed80bd1a9a07bc44a6774051b34c4b7"
+      "sha256": "bacb4b4184d7b712900a0605776e1d4cbb1205ddb0cc673a83a424d391fd3be9"
     },
     {
       "path": "frames/svg/demetrius-common-female-footerless.svg",
       "bytes": 8434,
-      "sha256": "6b76f62b00ae7cec1735b60de40e601d711b09b4b25371410d18ff779e7613ef"
+      "sha256": "c0ff1d294e87cb743398dda3fdab25d8856e796aa70e95faf3e1bf13e4d22493"
     },
     {
       "path": "frames/svg/demetrius-common-female.svg",
       "bytes": 8675,
-      "sha256": "eb2adde56fcadde49cab4aa0a0c62c9faf9edf1346227d20a75741f36a4c69e8"
+      "sha256": "bfc5d12b280cd9c782952ee84b2c2ab7bec8ebb04ae6e33005bdbb60e08014bc"
     },
     {
       "path": "frames/svg/demetrius-common-male-footerless.svg",
       "bytes": 8434,
-      "sha256": "6b76f62b00ae7cec1735b60de40e601d711b09b4b25371410d18ff779e7613ef"
+      "sha256": "c0ff1d294e87cb743398dda3fdab25d8856e796aa70e95faf3e1bf13e4d22493"
     },
     {
       "path": "frames/svg/demetrius-common-male.svg",
       "bytes": 8675,
-      "sha256": "eb2adde56fcadde49cab4aa0a0c62c9faf9edf1346227d20a75741f36a4c69e8"
+      "sha256": "bfc5d12b280cd9c782952ee84b2c2ab7bec8ebb04ae6e33005bdbb60e08014bc"
     },
     {
       "path": "frames/svg/demetrius-epic-female-footerless.svg",
       "bytes": 11207,
-      "sha256": "986b9b011cd983216eb29b8d995616212ff7f9f32413a14dc4a4a6856073b808"
+      "sha256": "a9c722d4f32cd07911330a1490f7e9cd61f047fb01f8df83fa3b6ad679e62c37"
     },
     {
       "path": "frames/svg/demetrius-epic-female.svg",
       "bytes": 11448,
-      "sha256": "52f42259267749b0d684886beb6b4205631c827359be079893c40725e38294da"
+      "sha256": "a79b1bf5ea815000622715f1ad0136fa348d2c05d7e6ef5644af2099c9b59b81"
     },
     {
       "path": "frames/svg/demetrius-epic-male-footerless.svg",
       "bytes": 11207,
-      "sha256": "986b9b011cd983216eb29b8d995616212ff7f9f32413a14dc4a4a6856073b808"
+      "sha256": "a9c722d4f32cd07911330a1490f7e9cd61f047fb01f8df83fa3b6ad679e62c37"
     },
     {
       "path": "frames/svg/demetrius-epic-male.svg",
       "bytes": 11448,
-      "sha256": "52f42259267749b0d684886beb6b4205631c827359be079893c40725e38294da"
+      "sha256": "a79b1bf5ea815000622715f1ad0136fa348d2c05d7e6ef5644af2099c9b59b81"
     },
     {
       "path": "frames/svg/demetrius-parent-footerless.svg",
       "bytes": 12687,
       "sha256": "d14210a9a8c9fb800aaa5361e2cfba750b151909d802cbe2d5e7c9052c6bc73d"
+    },
+    {
+      "path": "frames/svg/demetrius-parent-legendary-footerless.svg",
+      "bytes": 8813,
+      "sha256": "c4c387f2c571c17aff85f42ca89a219426c64bfb4fb2c24bcc9cefb558feabd3"
+    },
+    {
+      "path": "frames/svg/demetrius-parent-legendary.svg",
+      "bytes": 9054,
+      "sha256": "edae0a349368b137ac508fd1771b2720f0a7739e1fe2274d9ceaaa506c666f8b"
     },
     {
       "path": "frames/svg/demetrius-parent.svg",
@@ -2482,82 +2522,82 @@
     {
       "path": "frames/svg/demetrius-rare-female-footerless.svg",
       "bytes": 10187,
-      "sha256": "dfbaab9c32accc040a980ee63ca31764e956c533a708ebf821b7f722dfee0de5"
+      "sha256": "c85d6726ed7eee854c84d02ab19a8886ac0b2301f5b786c42829b7dc107ff12b"
     },
     {
       "path": "frames/svg/demetrius-rare-female.svg",
       "bytes": 10428,
-      "sha256": "a832bcdb500edd807af7f74a21f2f854835b3a9b24f5e0068f5ce30ceb220e00"
+      "sha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e"
     },
     {
       "path": "frames/svg/demetrius-rare-male-footerless.svg",
       "bytes": 10187,
-      "sha256": "dfbaab9c32accc040a980ee63ca31764e956c533a708ebf821b7f722dfee0de5"
+      "sha256": "c85d6726ed7eee854c84d02ab19a8886ac0b2301f5b786c42829b7dc107ff12b"
     },
     {
       "path": "frames/svg/demetrius-rare-male.svg",
       "bytes": 10428,
-      "sha256": "a832bcdb500edd807af7f74a21f2f854835b3a9b24f5e0068f5ce30ceb220e00"
+      "sha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e"
     },
     {
       "path": "frames/svg/demetrius-uncommon-female-footerless.svg",
       "bytes": 9477,
-      "sha256": "850d6a030cc48742357d36f062525582fd8a38e1422aea6160696a772c5f58e5"
+      "sha256": "5fcb177a25c88dcb28c78f78563e4ef9fa0c75614735ff61ed9f47f6af65cbcd"
     },
     {
       "path": "frames/svg/demetrius-uncommon-female.svg",
       "bytes": 9718,
-      "sha256": "46f6a1d9c9502b2c649a091ec4f1fb25942f41ddb9a0491d515ccb4a92d8a161"
+      "sha256": "ff2cb1eeb15bcaafc0c10d0175ede81a0ac3678d328922512bdc3f3a83ede82e"
     },
     {
       "path": "frames/svg/demetrius-uncommon-male-footerless.svg",
       "bytes": 9477,
-      "sha256": "850d6a030cc48742357d36f062525582fd8a38e1422aea6160696a772c5f58e5"
+      "sha256": "5fcb177a25c88dcb28c78f78563e4ef9fa0c75614735ff61ed9f47f6af65cbcd"
     },
     {
       "path": "frames/svg/demetrius-uncommon-male.svg",
       "bytes": 9718,
-      "sha256": "46f6a1d9c9502b2c649a091ec4f1fb25942f41ddb9a0491d515ccb4a92d8a161"
+      "sha256": "ff2cb1eeb15bcaafc0c10d0175ede81a0ac3678d328922512bdc3f3a83ede82e"
     },
     {
       "path": "frames/svg/euclid-common-female-footerless.svg",
       "bytes": 7486,
-      "sha256": "8168e5fb44f9ccad8df0f0129c000b0edc624bce11fee1643c775ee4d50ef899"
+      "sha256": "70a82f744e7d88c05aa7a56ac37835fd3313bfce02ffd952c5b662ca74315663"
     },
     {
       "path": "frames/svg/euclid-common-female.svg",
       "bytes": 7727,
-      "sha256": "29fbd225e51f9a74453dcbb169a0eaa708f19c63a2495b374971b383d16743d1"
+      "sha256": "b4f588f4fc37f618d7fd6f7ea37ce78f0aa3b49f0ee1562e55c55209211a98a5"
     },
     {
       "path": "frames/svg/euclid-common-male-footerless.svg",
       "bytes": 7486,
-      "sha256": "8168e5fb44f9ccad8df0f0129c000b0edc624bce11fee1643c775ee4d50ef899"
+      "sha256": "70a82f744e7d88c05aa7a56ac37835fd3313bfce02ffd952c5b662ca74315663"
     },
     {
       "path": "frames/svg/euclid-common-male.svg",
       "bytes": 7727,
-      "sha256": "29fbd225e51f9a74453dcbb169a0eaa708f19c63a2495b374971b383d16743d1"
+      "sha256": "b4f588f4fc37f618d7fd6f7ea37ce78f0aa3b49f0ee1562e55c55209211a98a5"
     },
     {
       "path": "frames/svg/euclid-epic-female-footerless.svg",
       "bytes": 10208,
-      "sha256": "3e0b99c2aae1962c95dc68ee6ce3c4f0cd1e0d43fa81bc91e58d9665eb4e643d"
+      "sha256": "a68dfeb214e40838893fd8cdb1758bf40667d5031e806439c460d293760c5064"
     },
     {
       "path": "frames/svg/euclid-epic-female.svg",
       "bytes": 10449,
-      "sha256": "2ef78dea00438a9f01dfe40749264715f40380dbcfd5aac2fa1a570c2930dc55"
+      "sha256": "1dde80c13f20c194a54f660dca9a8513448ad3089c780f0247e5b47404cfa7f9"
     },
     {
       "path": "frames/svg/euclid-epic-male-footerless.svg",
       "bytes": 10208,
-      "sha256": "3e0b99c2aae1962c95dc68ee6ce3c4f0cd1e0d43fa81bc91e58d9665eb4e643d"
+      "sha256": "a68dfeb214e40838893fd8cdb1758bf40667d5031e806439c460d293760c5064"
     },
     {
       "path": "frames/svg/euclid-epic-male.svg",
       "bytes": 10449,
-      "sha256": "2ef78dea00438a9f01dfe40749264715f40380dbcfd5aac2fa1a570c2930dc55"
+      "sha256": "1dde80c13f20c194a54f660dca9a8513448ad3089c780f0247e5b47404cfa7f9"
     },
     {
       "path": "frames/svg/euclid-parent-common-footerless.svg",
@@ -2612,82 +2652,82 @@
     {
       "path": "frames/svg/euclid-rare-female-footerless.svg",
       "bytes": 9246,
-      "sha256": "bd939aba08eac2127159ef2ecb554c1f77d6d306306d7f3b3fff0e73a5bf1944"
+      "sha256": "a0e9b487ca03ec36466ee41256b6d3d3fa573a6abde10239f2451a39000eb062"
     },
     {
       "path": "frames/svg/euclid-rare-female.svg",
       "bytes": 9487,
-      "sha256": "bfbae05945816b53300eec7cfbc4f22108a38dd8a8b788100dd614af2ef1b76a"
+      "sha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7"
     },
     {
       "path": "frames/svg/euclid-rare-male-footerless.svg",
       "bytes": 9246,
-      "sha256": "bd939aba08eac2127159ef2ecb554c1f77d6d306306d7f3b3fff0e73a5bf1944"
+      "sha256": "a0e9b487ca03ec36466ee41256b6d3d3fa573a6abde10239f2451a39000eb062"
     },
     {
       "path": "frames/svg/euclid-rare-male.svg",
       "bytes": 9487,
-      "sha256": "bfbae05945816b53300eec7cfbc4f22108a38dd8a8b788100dd614af2ef1b76a"
+      "sha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7"
     },
     {
       "path": "frames/svg/euclid-uncommon-female-footerless.svg",
       "bytes": 8524,
-      "sha256": "415d530e158f301d2c6e5c908b93cfdf07d0af8c3e8c4c1f08a19d603acdafb8"
+      "sha256": "494b3bb41e0bf1fa2acc5e714fadc5c1274bae4537de1f0ce5a926ea43b49bd6"
     },
     {
       "path": "frames/svg/euclid-uncommon-female.svg",
       "bytes": 8765,
-      "sha256": "bd1f747b95fb9e1571f1f2f9dbdcdb488e9d1aa6b40da4389f7c78e768b3921f"
+      "sha256": "86e0f4ecbf8b7174d16b174916941ce5c445b970b5c4dd8a2abf3d42e48e1e23"
     },
     {
       "path": "frames/svg/euclid-uncommon-male-footerless.svg",
       "bytes": 8524,
-      "sha256": "415d530e158f301d2c6e5c908b93cfdf07d0af8c3e8c4c1f08a19d603acdafb8"
+      "sha256": "494b3bb41e0bf1fa2acc5e714fadc5c1274bae4537de1f0ce5a926ea43b49bd6"
     },
     {
       "path": "frames/svg/euclid-uncommon-male.svg",
       "bytes": 8765,
-      "sha256": "bd1f747b95fb9e1571f1f2f9dbdcdb488e9d1aa6b40da4389f7c78e768b3921f"
+      "sha256": "86e0f4ecbf8b7174d16b174916941ce5c445b970b5c4dd8a2abf3d42e48e1e23"
     },
     {
       "path": "frames/svg/eumenes-common-female-footerless.svg",
       "bytes": 9596,
-      "sha256": "9ad0284e5965afed28ddd913c2aac9fac5f234a2f69c6d3a2c6c8ff7f7470e4a"
+      "sha256": "ff545ad160bb08511e26f5ccbf85bdc231c1a1f3f97a4ffd4ad5b920a7dc0e9f"
     },
     {
       "path": "frames/svg/eumenes-common-female.svg",
       "bytes": 9837,
-      "sha256": "7ca7cbeb9bb9509c95a59d3c175ba00c7976d9f2fcd972d759ca4a0015dac9ae"
+      "sha256": "8f2829a370476aff142954a6315154b54d59cbbf94d6d1a45598bfa2f36c4c42"
     },
     {
       "path": "frames/svg/eumenes-common-male-footerless.svg",
       "bytes": 9596,
-      "sha256": "9ad0284e5965afed28ddd913c2aac9fac5f234a2f69c6d3a2c6c8ff7f7470e4a"
+      "sha256": "ff545ad160bb08511e26f5ccbf85bdc231c1a1f3f97a4ffd4ad5b920a7dc0e9f"
     },
     {
       "path": "frames/svg/eumenes-common-male.svg",
       "bytes": 9837,
-      "sha256": "7ca7cbeb9bb9509c95a59d3c175ba00c7976d9f2fcd972d759ca4a0015dac9ae"
+      "sha256": "8f2829a370476aff142954a6315154b54d59cbbf94d6d1a45598bfa2f36c4c42"
     },
     {
       "path": "frames/svg/eumenes-epic-female-footerless.svg",
       "bytes": 12302,
-      "sha256": "7bab1cf036574f2d093c8374bab19927ec9ba6fbc3c7f73680ddd1b5111194ba"
+      "sha256": "af49a28b1c0b3fedb5e034cea0095e8e6b0f6fdb34f4aa670628af48dbad350d"
     },
     {
       "path": "frames/svg/eumenes-epic-female.svg",
       "bytes": 12543,
-      "sha256": "ce4e630d37a5865f6a89b06395ed4f72ac7e733d86ca320b304f0af7eeba77f8"
+      "sha256": "f2409c11a7d984b9f2588e84d3c263601042a1501f0ebc616ff795fb6d830ab2"
     },
     {
       "path": "frames/svg/eumenes-epic-male-footerless.svg",
       "bytes": 12302,
-      "sha256": "7bab1cf036574f2d093c8374bab19927ec9ba6fbc3c7f73680ddd1b5111194ba"
+      "sha256": "af49a28b1c0b3fedb5e034cea0095e8e6b0f6fdb34f4aa670628af48dbad350d"
     },
     {
       "path": "frames/svg/eumenes-epic-male.svg",
       "bytes": 12543,
-      "sha256": "ce4e630d37a5865f6a89b06395ed4f72ac7e733d86ca320b304f0af7eeba77f8"
+      "sha256": "f2409c11a7d984b9f2588e84d3c263601042a1501f0ebc616ff795fb6d830ab2"
     },
     {
       "path": "frames/svg/eumenes-parent-footerless.svg",
@@ -2702,82 +2742,82 @@
     {
       "path": "frames/svg/eumenes-rare-female-footerless.svg",
       "bytes": 11375,
-      "sha256": "27092187ae9bc5f131a4b30a6a3f76230655d1e8ce49feb91e5456c6c0bb4600"
+      "sha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6"
     },
     {
       "path": "frames/svg/eumenes-rare-female.svg",
       "bytes": 11616,
-      "sha256": "e6c3a4f3ed74d60de844a5a6c4e462e102d95fb8399ba733f773d00c1a730bb7"
+      "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730"
     },
     {
       "path": "frames/svg/eumenes-rare-male-footerless.svg",
       "bytes": 11375,
-      "sha256": "27092187ae9bc5f131a4b30a6a3f76230655d1e8ce49feb91e5456c6c0bb4600"
+      "sha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6"
     },
     {
       "path": "frames/svg/eumenes-rare-male.svg",
       "bytes": 11616,
-      "sha256": "e6c3a4f3ed74d60de844a5a6c4e462e102d95fb8399ba733f773d00c1a730bb7"
+      "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730"
     },
     {
       "path": "frames/svg/eumenes-uncommon-female-footerless.svg",
       "bytes": 10627,
-      "sha256": "f5f8d7eef587c73e679142bcf1f334ecdb274cc787fc45600736ac50d73a0866"
+      "sha256": "6e4b9e94f9c484ee798d8a88eb4d8bba794937832e2e7fd26c209c159f1d8bc7"
     },
     {
       "path": "frames/svg/eumenes-uncommon-female.svg",
       "bytes": 10868,
-      "sha256": "0e8561377b235ec4be3b56a461c0dafa2ac6b43f59c5ef92d19b448ceec896d0"
+      "sha256": "863397ea89d6ce9013f99dad6e1902a393adf92f7c5219a152a144f5db81aabc"
     },
     {
       "path": "frames/svg/eumenes-uncommon-male-footerless.svg",
       "bytes": 10627,
-      "sha256": "f5f8d7eef587c73e679142bcf1f334ecdb274cc787fc45600736ac50d73a0866"
+      "sha256": "6e4b9e94f9c484ee798d8a88eb4d8bba794937832e2e7fd26c209c159f1d8bc7"
     },
     {
       "path": "frames/svg/eumenes-uncommon-male.svg",
       "bytes": 10868,
-      "sha256": "0e8561377b235ec4be3b56a461c0dafa2ac6b43f59c5ef92d19b448ceec896d0"
+      "sha256": "863397ea89d6ce9013f99dad6e1902a393adf92f7c5219a152a144f5db81aabc"
     },
     {
       "path": "frames/svg/lysippos-common-female-footerless.svg",
       "bytes": 8063,
-      "sha256": "4ab9541d993ffa4c4e080a6d040f8a478d7324215fe39aab1132cedd103ee041"
+      "sha256": "88304b66d7d4962b2c0e8d2a1e15e79b45006886afffe9089180fc03207eebda"
     },
     {
       "path": "frames/svg/lysippos-common-female.svg",
       "bytes": 8304,
-      "sha256": "bca0b6845b12c4ee2a33dd812aee99aa2b29d5441d89c6599e7fdd5236b5e892"
+      "sha256": "684ab7a091734d5cff1a7106b36a0b11568edb3a65ebdacb2dfb8193c538ac07"
     },
     {
       "path": "frames/svg/lysippos-common-male-footerless.svg",
       "bytes": 8063,
-      "sha256": "4ab9541d993ffa4c4e080a6d040f8a478d7324215fe39aab1132cedd103ee041"
+      "sha256": "88304b66d7d4962b2c0e8d2a1e15e79b45006886afffe9089180fc03207eebda"
     },
     {
       "path": "frames/svg/lysippos-common-male.svg",
       "bytes": 8304,
-      "sha256": "bca0b6845b12c4ee2a33dd812aee99aa2b29d5441d89c6599e7fdd5236b5e892"
+      "sha256": "684ab7a091734d5cff1a7106b36a0b11568edb3a65ebdacb2dfb8193c538ac07"
     },
     {
       "path": "frames/svg/lysippos-epic-female-footerless.svg",
       "bytes": 10776,
-      "sha256": "f3543844e17229457d2fa680fde005023d33101ef0a5adfc0938f1b4b3443643"
+      "sha256": "296199b15c9ec87237297eae48a5e3c7ee1028059bd5794a50c44ca58b622b75"
     },
     {
       "path": "frames/svg/lysippos-epic-female.svg",
       "bytes": 11017,
-      "sha256": "1c624dd657f4f77b4c3956ce7015ffa599569682725c3f82e0394c9caa27f2d7"
+      "sha256": "0e4c98cc9b3e6eb7ed45e635ae1923ca03f3d4018b6bfcce7d353d3301bc1c6d"
     },
     {
       "path": "frames/svg/lysippos-epic-male-footerless.svg",
       "bytes": 10776,
-      "sha256": "f3543844e17229457d2fa680fde005023d33101ef0a5adfc0938f1b4b3443643"
+      "sha256": "296199b15c9ec87237297eae48a5e3c7ee1028059bd5794a50c44ca58b622b75"
     },
     {
       "path": "frames/svg/lysippos-epic-male.svg",
       "bytes": 11017,
-      "sha256": "1c624dd657f4f77b4c3956ce7015ffa599569682725c3f82e0394c9caa27f2d7"
+      "sha256": "0e4c98cc9b3e6eb7ed45e635ae1923ca03f3d4018b6bfcce7d353d3301bc1c6d"
     },
     {
       "path": "frames/svg/lysippos-parent-footerless.svg",
@@ -2792,82 +2832,82 @@
     {
       "path": "frames/svg/lysippos-rare-female-footerless.svg",
       "bytes": 9782,
-      "sha256": "42daaab56ea3639b16e89de3fba25132e2bc3df413c123c088b8a73aa50bc812"
+      "sha256": "326e9ced648435fc387817d5ef9d156fe0b9f933d083649235c297bb1a6d16f6"
     },
     {
       "path": "frames/svg/lysippos-rare-female.svg",
       "bytes": 10023,
-      "sha256": "916d6f81fc74e02df7a82229b32bbdbf07b1003424e64d697ebb5e1ed2d7364b"
+      "sha256": "56c093c9e85ac4d7910767320f315534485b7eee6c04e0c7dc5f6b58f62c4ed0"
     },
     {
       "path": "frames/svg/lysippos-rare-male-footerless.svg",
       "bytes": 9782,
-      "sha256": "42daaab56ea3639b16e89de3fba25132e2bc3df413c123c088b8a73aa50bc812"
+      "sha256": "326e9ced648435fc387817d5ef9d156fe0b9f933d083649235c297bb1a6d16f6"
     },
     {
       "path": "frames/svg/lysippos-rare-male.svg",
       "bytes": 10023,
-      "sha256": "916d6f81fc74e02df7a82229b32bbdbf07b1003424e64d697ebb5e1ed2d7364b"
+      "sha256": "56c093c9e85ac4d7910767320f315534485b7eee6c04e0c7dc5f6b58f62c4ed0"
     },
     {
       "path": "frames/svg/lysippos-uncommon-female-footerless.svg",
       "bytes": 9106,
-      "sha256": "4cbbdc86e2d4d5e5d543f4aacb0d50d263f83ab09d3a735455da243ce147affc"
+      "sha256": "4411706a50a7b97c2b7bc15bb6da7438b7a8dea4f84be667d6d4b1b0a3199edf"
     },
     {
       "path": "frames/svg/lysippos-uncommon-female.svg",
       "bytes": 9347,
-      "sha256": "4b2916df0b6fabc4f54781c86384e8c66aaca522a52dc4dbff0837dd4eee9673"
+      "sha256": "37bc80606a2d73d9a9e917f8abee82ee71fc056444901c56a0f2b2b6747a39f1"
     },
     {
       "path": "frames/svg/lysippos-uncommon-male-footerless.svg",
       "bytes": 9106,
-      "sha256": "4cbbdc86e2d4d5e5d543f4aacb0d50d263f83ab09d3a735455da243ce147affc"
+      "sha256": "4411706a50a7b97c2b7bc15bb6da7438b7a8dea4f84be667d6d4b1b0a3199edf"
     },
     {
       "path": "frames/svg/lysippos-uncommon-male.svg",
       "bytes": 9347,
-      "sha256": "4b2916df0b6fabc4f54781c86384e8c66aaca522a52dc4dbff0837dd4eee9673"
+      "sha256": "37bc80606a2d73d9a9e917f8abee82ee71fc056444901c56a0f2b2b6747a39f1"
     },
     {
       "path": "frames/svg/menander-common-female-footerless.svg",
-      "bytes": 9908,
-      "sha256": "a20c25b74b50bba325400de0bb9b64bf047ee3b7b2939c014e4f1daaea20e72e"
+      "bytes": 9954,
+      "sha256": "e7e7030335e8f1c4669a68f586a4430c751176ed3eb4551003fd9a57b82efc0a"
     },
     {
       "path": "frames/svg/menander-common-female.svg",
-      "bytes": 10149,
-      "sha256": "ff798da9710a55aa288355726452ee6520efcc18d559023780a7adcd06a405ae"
+      "bytes": 10195,
+      "sha256": "9c3fc267405b40b796d701ac66fe466c5e34055130f41a9f21e58fcd62233265"
     },
     {
       "path": "frames/svg/menander-common-male-footerless.svg",
-      "bytes": 9908,
-      "sha256": "a20c25b74b50bba325400de0bb9b64bf047ee3b7b2939c014e4f1daaea20e72e"
+      "bytes": 9954,
+      "sha256": "e7e7030335e8f1c4669a68f586a4430c751176ed3eb4551003fd9a57b82efc0a"
     },
     {
       "path": "frames/svg/menander-common-male.svg",
-      "bytes": 10149,
-      "sha256": "ff798da9710a55aa288355726452ee6520efcc18d559023780a7adcd06a405ae"
+      "bytes": 10195,
+      "sha256": "9c3fc267405b40b796d701ac66fe466c5e34055130f41a9f21e58fcd62233265"
     },
     {
       "path": "frames/svg/menander-epic-female-footerless.svg",
       "bytes": 12653,
-      "sha256": "79420c67f6430f5c1c7c79839c278458dbc82f3fae6b57495feb2573112eb8f6"
+      "sha256": "81aca9d75b3d25483efbdbdc7e307891f05d9832f9db095a76c6ebd370fae251"
     },
     {
       "path": "frames/svg/menander-epic-female.svg",
       "bytes": 12894,
-      "sha256": "aa7bf14af898e754cd0a55cf0bbce09f66545096b768300d98c651db8a12e1d1"
+      "sha256": "fa21c3b1493a35f8c91f2585c0d665019618b3d70bb7722a126f7c90aa40e963"
     },
     {
       "path": "frames/svg/menander-epic-male-footerless.svg",
       "bytes": 12653,
-      "sha256": "79420c67f6430f5c1c7c79839c278458dbc82f3fae6b57495feb2573112eb8f6"
+      "sha256": "81aca9d75b3d25483efbdbdc7e307891f05d9832f9db095a76c6ebd370fae251"
     },
     {
       "path": "frames/svg/menander-epic-male.svg",
       "bytes": 12894,
-      "sha256": "aa7bf14af898e754cd0a55cf0bbce09f66545096b768300d98c651db8a12e1d1"
+      "sha256": "fa21c3b1493a35f8c91f2585c0d665019618b3d70bb7722a126f7c90aa40e963"
     },
     {
       "path": "frames/svg/menander-parent-footerless.svg",
@@ -2882,82 +2922,82 @@
     {
       "path": "frames/svg/menander-rare-female-footerless.svg",
       "bytes": 11696,
-      "sha256": "6ef99a74773ac691f19bd38d9a3ba5c29b455907af7a2a78d2cb050096749deb"
+      "sha256": "0fdc22788732283c952be91ea53e7f498a1fe0f26932ff601a1da1055ffdc508"
     },
     {
       "path": "frames/svg/menander-rare-female.svg",
       "bytes": 11937,
-      "sha256": "082359cac8ad60c5e1b0916f6a49148a7365cee988e7b8d46c069b62d04f375a"
+      "sha256": "59c08a5a8a0d94fafe41a4360e135dfb4c80f412d2e97325476387415a2d56d1"
     },
     {
       "path": "frames/svg/menander-rare-male-footerless.svg",
       "bytes": 11696,
-      "sha256": "6ef99a74773ac691f19bd38d9a3ba5c29b455907af7a2a78d2cb050096749deb"
+      "sha256": "0fdc22788732283c952be91ea53e7f498a1fe0f26932ff601a1da1055ffdc508"
     },
     {
       "path": "frames/svg/menander-rare-male.svg",
       "bytes": 11937,
-      "sha256": "082359cac8ad60c5e1b0916f6a49148a7365cee988e7b8d46c069b62d04f375a"
+      "sha256": "59c08a5a8a0d94fafe41a4360e135dfb4c80f412d2e97325476387415a2d56d1"
     },
     {
       "path": "frames/svg/menander-uncommon-female-footerless.svg",
       "bytes": 10939,
-      "sha256": "43e15b06cdbf9411551ea0fed32053f362bf6c0330d4149da5a42a208eb0bd68"
+      "sha256": "2e7af76b72fe23d5f64eb8de1677c7aef707c5487020abaa8ec808965fad71f8"
     },
     {
       "path": "frames/svg/menander-uncommon-female.svg",
       "bytes": 11180,
-      "sha256": "d6c51ca20ccf1cbdf2d461980656d4241f77855be82c485bad7c9d060518ae03"
+      "sha256": "afdec5264d9d904541e7682de01fb770a6e4e48d9589e8ca5849a142074f2624"
     },
     {
       "path": "frames/svg/menander-uncommon-male-footerless.svg",
       "bytes": 10939,
-      "sha256": "43e15b06cdbf9411551ea0fed32053f362bf6c0330d4149da5a42a208eb0bd68"
+      "sha256": "2e7af76b72fe23d5f64eb8de1677c7aef707c5487020abaa8ec808965fad71f8"
     },
     {
       "path": "frames/svg/menander-uncommon-male.svg",
       "bytes": 11180,
-      "sha256": "d6c51ca20ccf1cbdf2d461980656d4241f77855be82c485bad7c9d060518ae03"
+      "sha256": "afdec5264d9d904541e7682de01fb770a6e4e48d9589e8ca5849a142074f2624"
     },
     {
       "path": "frames/svg/nearchus-common-female-footerless.svg",
       "bytes": 9695,
-      "sha256": "705f8391cb17bd5329de813a82d2b49b2d53a81a3d4200a440bb4897287f3a4b"
+      "sha256": "e8ed9db8b9f424aeda3dd0f880a0c14bcc4d3734dec4bd1d3879ddcd6802944c"
     },
     {
       "path": "frames/svg/nearchus-common-female.svg",
       "bytes": 9936,
-      "sha256": "d09f73dcee6fb11a78d9b5acd6f320d91af24b4855b626042e23a421eb7132bc"
+      "sha256": "ca3ca7a0f10008b567864cf923b53b6f56d005df25676a4445f90c4677609dbb"
     },
     {
       "path": "frames/svg/nearchus-common-male-footerless.svg",
       "bytes": 9695,
-      "sha256": "705f8391cb17bd5329de813a82d2b49b2d53a81a3d4200a440bb4897287f3a4b"
+      "sha256": "e8ed9db8b9f424aeda3dd0f880a0c14bcc4d3734dec4bd1d3879ddcd6802944c"
     },
     {
       "path": "frames/svg/nearchus-common-male.svg",
       "bytes": 9936,
-      "sha256": "d09f73dcee6fb11a78d9b5acd6f320d91af24b4855b626042e23a421eb7132bc"
+      "sha256": "ca3ca7a0f10008b567864cf923b53b6f56d005df25676a4445f90c4677609dbb"
     },
     {
       "path": "frames/svg/nearchus-epic-female-footerless.svg",
       "bytes": 12466,
-      "sha256": "ffa4208751f292653fdca39bd63bcaf8147dc1995a55cc2bf5760a2614695246"
+      "sha256": "9ce02fafc500b746198921f6a82f347a2e98eaf2b219c91a39acc6234dcb5c89"
     },
     {
       "path": "frames/svg/nearchus-epic-female.svg",
       "bytes": 12707,
-      "sha256": "26bd876d2796b492fdaf4a034d3272c47860d8f6fc6a583b35d9777314651133"
+      "sha256": "6a3f3ace9b8db90be85d350987d57eaa23fdbed43308acaa3f7f15e0c97f4c6d"
     },
     {
       "path": "frames/svg/nearchus-epic-male-footerless.svg",
       "bytes": 12466,
-      "sha256": "ffa4208751f292653fdca39bd63bcaf8147dc1995a55cc2bf5760a2614695246"
+      "sha256": "9ce02fafc500b746198921f6a82f347a2e98eaf2b219c91a39acc6234dcb5c89"
     },
     {
       "path": "frames/svg/nearchus-epic-male.svg",
       "bytes": 12707,
-      "sha256": "26bd876d2796b492fdaf4a034d3272c47860d8f6fc6a583b35d9777314651133"
+      "sha256": "6a3f3ace9b8db90be85d350987d57eaa23fdbed43308acaa3f7f15e0c97f4c6d"
     },
     {
       "path": "frames/svg/nearchus-parent-footerless.svg",
@@ -2972,87 +3012,97 @@
     {
       "path": "frames/svg/nearchus-rare-female-footerless.svg",
       "bytes": 11497,
-      "sha256": "91315a33180bd3cb46eff8bb73a2569360999232f35859497f5399af935ef1e2"
+      "sha256": "3a45625860139beff9543599402c6c10fa0a451a8e16d3e662adf6994a0b288c"
     },
     {
       "path": "frames/svg/nearchus-rare-female.svg",
       "bytes": 11738,
-      "sha256": "b29ddf2d2f0750ee9b63662cba11b81f45e9cbec36d7f57db96b613e12f9abe5"
+      "sha256": "83f8af1b1dbccbca802be130ce9a50c1266042641e5d312321376e1e401d8f78"
     },
     {
       "path": "frames/svg/nearchus-rare-male-footerless.svg",
       "bytes": 11497,
-      "sha256": "91315a33180bd3cb46eff8bb73a2569360999232f35859497f5399af935ef1e2"
+      "sha256": "3a45625860139beff9543599402c6c10fa0a451a8e16d3e662adf6994a0b288c"
     },
     {
       "path": "frames/svg/nearchus-rare-male.svg",
       "bytes": 11738,
-      "sha256": "b29ddf2d2f0750ee9b63662cba11b81f45e9cbec36d7f57db96b613e12f9abe5"
+      "sha256": "83f8af1b1dbccbca802be130ce9a50c1266042641e5d312321376e1e401d8f78"
     },
     {
       "path": "frames/svg/nearchus-uncommon-female-footerless.svg",
       "bytes": 10711,
-      "sha256": "15923f693be4bd9d639c190c77498b17df27800ee08254419142256fe60ff2f1"
+      "sha256": "10bc0bec4802898f13bd12ce75a10a8bfdbc86c2e083cb12f53efae8d202426e"
     },
     {
       "path": "frames/svg/nearchus-uncommon-female.svg",
       "bytes": 10952,
-      "sha256": "93435a540f3ab5fc56f23adf2c7bfe2dafd38015879ffb83b7d1245cec990aa0"
+      "sha256": "22555ba5761d123f3b485e70fe97eecf20ca68b4f259b7a6424a1ab4f2d6f328"
     },
     {
       "path": "frames/svg/nearchus-uncommon-male-footerless.svg",
       "bytes": 10711,
-      "sha256": "15923f693be4bd9d639c190c77498b17df27800ee08254419142256fe60ff2f1"
+      "sha256": "10bc0bec4802898f13bd12ce75a10a8bfdbc86c2e083cb12f53efae8d202426e"
     },
     {
       "path": "frames/svg/nearchus-uncommon-male.svg",
       "bytes": 10952,
-      "sha256": "93435a540f3ab5fc56f23adf2c7bfe2dafd38015879ffb83b7d1245cec990aa0"
+      "sha256": "22555ba5761d123f3b485e70fe97eecf20ca68b4f259b7a6424a1ab4f2d6f328"
     },
     {
       "path": "frames/svg/ptolemy-common-female-footerless.svg",
-      "bytes": 8519,
-      "sha256": "dae3e29c4719d7cba7610743f29543b1677f73e67ebdebb652acc633073e2904"
+      "bytes": 8493,
+      "sha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5"
     },
     {
       "path": "frames/svg/ptolemy-common-female.svg",
-      "bytes": 8760,
-      "sha256": "be31f5ec8d8378227c6796cc11e228814f3c27fac1c663d3d3d8c225c9510835"
+      "bytes": 8734,
+      "sha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819"
     },
     {
       "path": "frames/svg/ptolemy-common-male-footerless.svg",
-      "bytes": 8519,
-      "sha256": "dae3e29c4719d7cba7610743f29543b1677f73e67ebdebb652acc633073e2904"
+      "bytes": 8493,
+      "sha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5"
     },
     {
       "path": "frames/svg/ptolemy-common-male.svg",
-      "bytes": 8760,
-      "sha256": "be31f5ec8d8378227c6796cc11e228814f3c27fac1c663d3d3d8c225c9510835"
+      "bytes": 8734,
+      "sha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819"
     },
     {
       "path": "frames/svg/ptolemy-epic-female-footerless.svg",
       "bytes": 11202,
-      "sha256": "2526d5857634d639e566ccf539ce80ac0ff004f5f4e7babf7ac054735eaada1a"
+      "sha256": "9df830a8da0eaf9a4def363f4e2453cd7c924d94b5f2225d3e8ab18d42ba1c6b"
     },
     {
       "path": "frames/svg/ptolemy-epic-female.svg",
       "bytes": 11443,
-      "sha256": "fc0352ca7e3e7d8ecea9e5df2c4ddaafb774f29fb532f080a1e1517127c071c7"
+      "sha256": "56f21bc861bd97c2334fb3ceab2e970dd9c1a92c9212274bc79b469cbf5d20bd"
     },
     {
       "path": "frames/svg/ptolemy-epic-male-footerless.svg",
       "bytes": 11202,
-      "sha256": "2526d5857634d639e566ccf539ce80ac0ff004f5f4e7babf7ac054735eaada1a"
+      "sha256": "9df830a8da0eaf9a4def363f4e2453cd7c924d94b5f2225d3e8ab18d42ba1c6b"
     },
     {
       "path": "frames/svg/ptolemy-epic-male.svg",
       "bytes": 11443,
-      "sha256": "fc0352ca7e3e7d8ecea9e5df2c4ddaafb774f29fb532f080a1e1517127c071c7"
+      "sha256": "56f21bc861bd97c2334fb3ceab2e970dd9c1a92c9212274bc79b469cbf5d20bd"
     },
     {
       "path": "frames/svg/ptolemy-parent-footerless.svg",
       "bytes": 12656,
       "sha256": "86815e6dc503963d3db1c51f58e4e15abf7e4264697edefd40d1995f3c6d83d1"
+    },
+    {
+      "path": "frames/svg/ptolemy-parent-legendary-footerless.svg",
+      "bytes": 8850,
+      "sha256": "5c786b64cd9074c62e85f5fda771b0861d84eb105fa130e651bd6a4f1fe40488"
+    },
+    {
+      "path": "frames/svg/ptolemy-parent-legendary.svg",
+      "bytes": 9091,
+      "sha256": "426b1ca78a0086386a6dc5fa1e1ad34c5f2aa5920bd13200e4bfac5958a57475"
     },
     {
       "path": "frames/svg/ptolemy-parent.svg",
@@ -3062,82 +3112,82 @@
     {
       "path": "frames/svg/ptolemy-rare-female-footerless.svg",
       "bytes": 10278,
-      "sha256": "ce4dd6320d13f8feb6f647d201a5b04af052ee4ec97e9dd2df2bd0df0e9a2672"
+      "sha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a"
     },
     {
       "path": "frames/svg/ptolemy-rare-female.svg",
       "bytes": 10519,
-      "sha256": "0a03aa0ababf258f2f92a21df3da06028dbd14e28c31f9c3d6176119fe4a7db1"
+      "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc"
     },
     {
       "path": "frames/svg/ptolemy-rare-male-footerless.svg",
       "bytes": 10278,
-      "sha256": "ce4dd6320d13f8feb6f647d201a5b04af052ee4ec97e9dd2df2bd0df0e9a2672"
+      "sha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a"
     },
     {
       "path": "frames/svg/ptolemy-rare-male.svg",
       "bytes": 10519,
-      "sha256": "0a03aa0ababf258f2f92a21df3da06028dbd14e28c31f9c3d6176119fe4a7db1"
+      "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc"
     },
     {
       "path": "frames/svg/ptolemy-uncommon-female-footerless.svg",
       "bytes": 9489,
-      "sha256": "8fda6ae3f8bce8015ed319f2d158b887cc8a927125ac8ea7731e1c97a6496b74"
+      "sha256": "01256fcba713c6f870cdb4a5f882dcdf33e294e00b745a55dff8fa55741d8c6f"
     },
     {
       "path": "frames/svg/ptolemy-uncommon-female.svg",
       "bytes": 9730,
-      "sha256": "280c6b2145ab62a4383342d4ee924a69ee97fba3fcbb51aabab0631f57d10df5"
+      "sha256": "9b1354a150ff5cfca5ce6441a4dbd9549b87189a4a1ae2df27ed6c2fed080a44"
     },
     {
       "path": "frames/svg/ptolemy-uncommon-male-footerless.svg",
       "bytes": 9489,
-      "sha256": "8fda6ae3f8bce8015ed319f2d158b887cc8a927125ac8ea7731e1c97a6496b74"
+      "sha256": "01256fcba713c6f870cdb4a5f882dcdf33e294e00b745a55dff8fa55741d8c6f"
     },
     {
       "path": "frames/svg/ptolemy-uncommon-male.svg",
       "bytes": 9730,
-      "sha256": "280c6b2145ab62a4383342d4ee924a69ee97fba3fcbb51aabab0631f57d10df5"
+      "sha256": "9b1354a150ff5cfca5ce6441a4dbd9549b87189a4a1ae2df27ed6c2fed080a44"
     },
     {
       "path": "frames/svg/pytheas-common-female-footerless.svg",
       "bytes": 8007,
-      "sha256": "8e0dc0e1f1a30b0104bffc097e9284a1554aba5ca6ae0aff82f1a5ab52086fa7"
+      "sha256": "365e7c753cc383c7f8c83b2d3d799eee476fdfde11008158009db21caa48678b"
     },
     {
       "path": "frames/svg/pytheas-common-female.svg",
       "bytes": 8248,
-      "sha256": "41a065767a64e8c117ac01ab858ce2b3e1f942652976eb861e627d0cde565f67"
+      "sha256": "8ee7a67450081aad0597c04b0a2ff6e8a072ecd24dcfa228c208406bf8586f11"
     },
     {
       "path": "frames/svg/pytheas-common-male-footerless.svg",
       "bytes": 8007,
-      "sha256": "8e0dc0e1f1a30b0104bffc097e9284a1554aba5ca6ae0aff82f1a5ab52086fa7"
+      "sha256": "365e7c753cc383c7f8c83b2d3d799eee476fdfde11008158009db21caa48678b"
     },
     {
       "path": "frames/svg/pytheas-common-male.svg",
       "bytes": 8248,
-      "sha256": "41a065767a64e8c117ac01ab858ce2b3e1f942652976eb861e627d0cde565f67"
+      "sha256": "8ee7a67450081aad0597c04b0a2ff6e8a072ecd24dcfa228c208406bf8586f11"
     },
     {
       "path": "frames/svg/pytheas-epic-female-footerless.svg",
       "bytes": 10742,
-      "sha256": "84f8a4b49de13b66865c67bef18bb475eb78d8c53f68d33220f2e273e92102a4"
+      "sha256": "71f289397e7211aa043bc51efbe23da661ae98c9a0939f7939239144e1f86ee0"
     },
     {
       "path": "frames/svg/pytheas-epic-female.svg",
       "bytes": 10983,
-      "sha256": "4d9661105139034503247a237525c0cb62dab9d872760ba08a1e36e79a414946"
+      "sha256": "478a9c20abd85ef11b8ff6a1bd596881bf63201e5ebb59949af5d9b9cdfe428a"
     },
     {
       "path": "frames/svg/pytheas-epic-male-footerless.svg",
       "bytes": 10742,
-      "sha256": "84f8a4b49de13b66865c67bef18bb475eb78d8c53f68d33220f2e273e92102a4"
+      "sha256": "71f289397e7211aa043bc51efbe23da661ae98c9a0939f7939239144e1f86ee0"
     },
     {
       "path": "frames/svg/pytheas-epic-male.svg",
       "bytes": 10983,
-      "sha256": "4d9661105139034503247a237525c0cb62dab9d872760ba08a1e36e79a414946"
+      "sha256": "478a9c20abd85ef11b8ff6a1bd596881bf63201e5ebb59949af5d9b9cdfe428a"
     },
     {
       "path": "frames/svg/pytheas-parent-footerless.svg",
@@ -3152,82 +3202,82 @@
     {
       "path": "frames/svg/pytheas-rare-female-footerless.svg",
       "bytes": 9791,
-      "sha256": "054f1d4b2b1179f797738a4f0a28ef99dee7ca3756fea3501c2dabd031727b77"
+      "sha256": "cb4d393308bd81fc1e20d8ece99f2e077b68be8641a966fa42d0860f28800638"
     },
     {
       "path": "frames/svg/pytheas-rare-female.svg",
       "bytes": 10032,
-      "sha256": "c4d257d5617325f678e0d40a4cd36811dd7e2d477c8b89d7f8aeeaa9b5bb3246"
+      "sha256": "9c6515deb90f304ab1f482ef5791330a9afeb9d411446c6d87166975ae52e537"
     },
     {
       "path": "frames/svg/pytheas-rare-male-footerless.svg",
       "bytes": 9791,
-      "sha256": "054f1d4b2b1179f797738a4f0a28ef99dee7ca3756fea3501c2dabd031727b77"
+      "sha256": "cb4d393308bd81fc1e20d8ece99f2e077b68be8641a966fa42d0860f28800638"
     },
     {
       "path": "frames/svg/pytheas-rare-male.svg",
       "bytes": 10032,
-      "sha256": "c4d257d5617325f678e0d40a4cd36811dd7e2d477c8b89d7f8aeeaa9b5bb3246"
+      "sha256": "9c6515deb90f304ab1f482ef5791330a9afeb9d411446c6d87166975ae52e537"
     },
     {
       "path": "frames/svg/pytheas-uncommon-female-footerless.svg",
-      "bytes": 9043,
-      "sha256": "0d6763c1f3fc687bb3952947b4dc5ab4b0aa94b51df66843397e35c30e63b0c3"
+      "bytes": 9099,
+      "sha256": "affd231ad39ca9d8a3b5b22fab54a16c6f97737bbb0e3d943b3bcf8d4c97b1a7"
     },
     {
       "path": "frames/svg/pytheas-uncommon-female.svg",
-      "bytes": 9284,
-      "sha256": "24e58257f51699d7363d65d4ddb95bd72689ce3c4122fc0419c9f5388456f5ec"
+      "bytes": 9340,
+      "sha256": "8dbc5a4d07e43b0f17f018a241bdc8dfdfb9df516244ab8fe450e4890c474a6b"
     },
     {
       "path": "frames/svg/pytheas-uncommon-male-footerless.svg",
-      "bytes": 9043,
-      "sha256": "0d6763c1f3fc687bb3952947b4dc5ab4b0aa94b51df66843397e35c30e63b0c3"
+      "bytes": 9099,
+      "sha256": "affd231ad39ca9d8a3b5b22fab54a16c6f97737bbb0e3d943b3bcf8d4c97b1a7"
     },
     {
       "path": "frames/svg/pytheas-uncommon-male.svg",
-      "bytes": 9284,
-      "sha256": "24e58257f51699d7363d65d4ddb95bd72689ce3c4122fc0419c9f5388456f5ec"
+      "bytes": 9340,
+      "sha256": "8dbc5a4d07e43b0f17f018a241bdc8dfdfb9df516244ab8fe450e4890c474a6b"
     },
     {
       "path": "frames/svg/theophrastus-common-female-footerless.svg",
       "bytes": 10485,
-      "sha256": "7a6549b7100dfeec85fcbd435c35f9d3e0ebd1fbc85c5f1515a2862ec06bc25c"
+      "sha256": "60edc0533158bc08b74a32053e5643b883a908ac37591704a03346ef635b3fb4"
     },
     {
       "path": "frames/svg/theophrastus-common-female.svg",
       "bytes": 10726,
-      "sha256": "144a9af38574021be89db631f71ea6d1f08d954c07cfce48c2076d05cb2e30a2"
+      "sha256": "5206707d6802719bfa8e50be2bf88a603624ec75e133be5f333655049d6571bd"
     },
     {
       "path": "frames/svg/theophrastus-common-male-footerless.svg",
       "bytes": 10485,
-      "sha256": "7a6549b7100dfeec85fcbd435c35f9d3e0ebd1fbc85c5f1515a2862ec06bc25c"
+      "sha256": "60edc0533158bc08b74a32053e5643b883a908ac37591704a03346ef635b3fb4"
     },
     {
       "path": "frames/svg/theophrastus-common-male.svg",
       "bytes": 10726,
-      "sha256": "144a9af38574021be89db631f71ea6d1f08d954c07cfce48c2076d05cb2e30a2"
+      "sha256": "5206707d6802719bfa8e50be2bf88a603624ec75e133be5f333655049d6571bd"
     },
     {
       "path": "frames/svg/theophrastus-epic-female-footerless.svg",
       "bytes": 13237,
-      "sha256": "c73c7d2cade770ef1a7a053f162851893b8fe84d8b12b2c407dfa6a365b828a6"
+      "sha256": "25d64b86ba24e1bbffd795092ec834e3de81340d389a256767919a20766f4fb0"
     },
     {
       "path": "frames/svg/theophrastus-epic-female.svg",
       "bytes": 13478,
-      "sha256": "bd8dda215d662f527c7c012f23918e1fa79157f0596e4244bec8d26f6a7d33df"
+      "sha256": "2a3970f152e444ba0ba32ea7ecf361013fa7b4fb8d6fc13fc5f6497c218d3c66"
     },
     {
       "path": "frames/svg/theophrastus-epic-male-footerless.svg",
       "bytes": 13237,
-      "sha256": "c73c7d2cade770ef1a7a053f162851893b8fe84d8b12b2c407dfa6a365b828a6"
+      "sha256": "25d64b86ba24e1bbffd795092ec834e3de81340d389a256767919a20766f4fb0"
     },
     {
       "path": "frames/svg/theophrastus-epic-male.svg",
       "bytes": 13478,
-      "sha256": "bd8dda215d662f527c7c012f23918e1fa79157f0596e4244bec8d26f6a7d33df"
+      "sha256": "2a3970f152e444ba0ba32ea7ecf361013fa7b4fb8d6fc13fc5f6497c218d3c66"
     },
     {
       "path": "frames/svg/theophrastus-parent-footerless.svg",
@@ -3242,87 +3292,97 @@
     {
       "path": "frames/svg/theophrastus-rare-female-footerless.svg",
       "bytes": 12290,
-      "sha256": "1f51c476d51dfc9e0af2443f421a47fcdacf8116bae0dc137b8aae57763b9407"
+      "sha256": "2841641042a5fd10f760bb8fe7ec3dfc9e90bb9053035eb4166495d6f20f7826"
     },
     {
       "path": "frames/svg/theophrastus-rare-female.svg",
       "bytes": 12531,
-      "sha256": "8e78dbb296f1b8a3385467442fc28f4c60f9bf9782a8747b45a06ecb550be796"
+      "sha256": "4c512dd664d934700ba0a9f8a16ea684aab0fee2156b31d2cba0f1a44f617b18"
     },
     {
       "path": "frames/svg/theophrastus-rare-male-footerless.svg",
       "bytes": 12290,
-      "sha256": "1f51c476d51dfc9e0af2443f421a47fcdacf8116bae0dc137b8aae57763b9407"
+      "sha256": "2841641042a5fd10f760bb8fe7ec3dfc9e90bb9053035eb4166495d6f20f7826"
     },
     {
       "path": "frames/svg/theophrastus-rare-male.svg",
       "bytes": 12531,
-      "sha256": "8e78dbb296f1b8a3385467442fc28f4c60f9bf9782a8747b45a06ecb550be796"
+      "sha256": "4c512dd664d934700ba0a9f8a16ea684aab0fee2156b31d2cba0f1a44f617b18"
     },
     {
       "path": "frames/svg/theophrastus-uncommon-female-footerless.svg",
       "bytes": 11509,
-      "sha256": "0b515d37f802d92c12d5be0bc0ecd64e812884c0bd3b60ff1d3cf7a2ef5d7a1d"
+      "sha256": "4b8186327043a18f75b9fec2a33f6d76b650b5aaf0a49adcf94f064f58904410"
     },
     {
       "path": "frames/svg/theophrastus-uncommon-female.svg",
       "bytes": 11750,
-      "sha256": "77ace06b2ef897b339774efb91ef7ba0f1bf72275675d6e2ce0c4119d2f6c86b"
+      "sha256": "00b8b616ab8e957ad79f34adb69c09f55de209a6f4b0bd5113e7f4f15d2314b6"
     },
     {
       "path": "frames/svg/theophrastus-uncommon-male-footerless.svg",
       "bytes": 11509,
-      "sha256": "0b515d37f802d92c12d5be0bc0ecd64e812884c0bd3b60ff1d3cf7a2ef5d7a1d"
+      "sha256": "4b8186327043a18f75b9fec2a33f6d76b650b5aaf0a49adcf94f064f58904410"
     },
     {
       "path": "frames/svg/theophrastus-uncommon-male.svg",
       "bytes": 11750,
-      "sha256": "77ace06b2ef897b339774efb91ef7ba0f1bf72275675d6e2ce0c4119d2f6c86b"
+      "sha256": "00b8b616ab8e957ad79f34adb69c09f55de209a6f4b0bd5113e7f4f15d2314b6"
     },
     {
       "path": "frames/svg/zeno-common-female-footerless.svg",
       "bytes": 7263,
-      "sha256": "471f9489d1b40e73d73407fd330fa09e82bf34ee0e3100d5d93e71695ba5211d"
+      "sha256": "6d2db09f0f277486fa0a53edc40e3f2552d9ac5ee7b6f6be0e6eda65c65c2e0c"
     },
     {
       "path": "frames/svg/zeno-common-female.svg",
       "bytes": 7504,
-      "sha256": "b381e31425d12c676a6810e632b5a5bd4f605fd69faa98d9fd8395bb4df26612"
+      "sha256": "37de6e46b1527ad2b4cc3084bef667da315817afb6603e8bd875fb0b79b5a4c0"
     },
     {
       "path": "frames/svg/zeno-common-male-footerless.svg",
       "bytes": 7263,
-      "sha256": "471f9489d1b40e73d73407fd330fa09e82bf34ee0e3100d5d93e71695ba5211d"
+      "sha256": "6d2db09f0f277486fa0a53edc40e3f2552d9ac5ee7b6f6be0e6eda65c65c2e0c"
     },
     {
       "path": "frames/svg/zeno-common-male.svg",
       "bytes": 7504,
-      "sha256": "b381e31425d12c676a6810e632b5a5bd4f605fd69faa98d9fd8395bb4df26612"
+      "sha256": "37de6e46b1527ad2b4cc3084bef667da315817afb6603e8bd875fb0b79b5a4c0"
     },
     {
       "path": "frames/svg/zeno-epic-female-footerless.svg",
       "bytes": 9999,
-      "sha256": "f99f153299842bd8df887ab550d4e1f1df320de576056b39cf53ce7e90b4c160"
+      "sha256": "99e28812a0ff5117242d8ab57ff06ab728868d444fc2d8c1cb67f7a103147ed6"
     },
     {
       "path": "frames/svg/zeno-epic-female.svg",
       "bytes": 10240,
-      "sha256": "b28b02d516b45a469b46966b57d943b832a1f6944caaeb161e2128c8b985347c"
+      "sha256": "d8f0ea07169f93e8c7b910938c0bd32d0e0df6b0fcff63d3bd37bd05b39a409b"
     },
     {
       "path": "frames/svg/zeno-epic-male-footerless.svg",
       "bytes": 9999,
-      "sha256": "f99f153299842bd8df887ab550d4e1f1df320de576056b39cf53ce7e90b4c160"
+      "sha256": "99e28812a0ff5117242d8ab57ff06ab728868d444fc2d8c1cb67f7a103147ed6"
     },
     {
       "path": "frames/svg/zeno-epic-male.svg",
       "bytes": 10240,
-      "sha256": "b28b02d516b45a469b46966b57d943b832a1f6944caaeb161e2128c8b985347c"
+      "sha256": "d8f0ea07169f93e8c7b910938c0bd32d0e0df6b0fcff63d3bd37bd05b39a409b"
     },
     {
       "path": "frames/svg/zeno-parent-footerless.svg",
       "bytes": 10326,
       "sha256": "9f0dafc4931e01be862fd113f959489f6f450aed569e55e53c40c6b05e693801"
+    },
+    {
+      "path": "frames/svg/zeno-parent-legendary-footerless.svg",
+      "bytes": 7687,
+      "sha256": "39a1419190ae6dac8e9545e4c6dc29ae6a279afe63c0c1782a817c81c853f32a"
+    },
+    {
+      "path": "frames/svg/zeno-parent-legendary.svg",
+      "bytes": 7928,
+      "sha256": "21f46516b5ac8ba0a27fcb7ec520e3d19fcd1b68b6bde29721fbbb1d5ac70f73"
     },
     {
       "path": "frames/svg/zeno-parent.svg",
@@ -3332,42 +3392,42 @@
     {
       "path": "frames/svg/zeno-rare-female-footerless.svg",
       "bytes": 9073,
-      "sha256": "9d892449d956dd95027a6a79395b7383382f565f4b82dd67f9375c8e12c8c631"
+      "sha256": "4543995cc029541eb6e5a6ee33b471329108d4179c4cc085326dc8d56d2f5be0"
     },
     {
       "path": "frames/svg/zeno-rare-female.svg",
       "bytes": 9314,
-      "sha256": "2a55cf917d1c623cbbc4758777d7835c43a05ae902777853e577d41200749821"
+      "sha256": "39ce96422fe8f6bde09a3be681f92db1844b3664fae8ce994d8bd64c01d35103"
     },
     {
       "path": "frames/svg/zeno-rare-male-footerless.svg",
       "bytes": 9073,
-      "sha256": "9d892449d956dd95027a6a79395b7383382f565f4b82dd67f9375c8e12c8c631"
+      "sha256": "4543995cc029541eb6e5a6ee33b471329108d4179c4cc085326dc8d56d2f5be0"
     },
     {
       "path": "frames/svg/zeno-rare-male.svg",
       "bytes": 9314,
-      "sha256": "2a55cf917d1c623cbbc4758777d7835c43a05ae902777853e577d41200749821"
+      "sha256": "39ce96422fe8f6bde09a3be681f92db1844b3664fae8ce994d8bd64c01d35103"
     },
     {
       "path": "frames/svg/zeno-uncommon-female-footerless.svg",
       "bytes": 8309,
-      "sha256": "04fa83347e21d9fcd0916e6c70e2b32fd985921883b6be53a2090bb0f1b8cbab"
+      "sha256": "e682d92204d80d29b4990690b2c391093282dfd642d4ef79d337812bab59f36b"
     },
     {
       "path": "frames/svg/zeno-uncommon-female.svg",
       "bytes": 8550,
-      "sha256": "f769822a9a82e77e3149f66c598aac98016cb9b4ba90a52b6b786f7b442f69f5"
+      "sha256": "e4467fe5fa779bcfa8b94e2e66b0d4f15a29d7a2f14741f3881fc0832a19b06b"
     },
     {
       "path": "frames/svg/zeno-uncommon-male-footerless.svg",
       "bytes": 8309,
-      "sha256": "04fa83347e21d9fcd0916e6c70e2b32fd985921883b6be53a2090bb0f1b8cbab"
+      "sha256": "e682d92204d80d29b4990690b2c391093282dfd642d4ef79d337812bab59f36b"
     },
     {
       "path": "frames/svg/zeno-uncommon-male.svg",
       "bytes": 8550,
-      "sha256": "f769822a9a82e77e3149f66c598aac98016cb9b4ba90a52b6b786f7b442f69f5"
+      "sha256": "e4467fe5fa779bcfa8b94e2e66b0d4f15a29d7a2f14741f3881fc0832a19b06b"
     },
     {
       "path": "licenses/Apache-2.0.txt",
@@ -3401,8 +3461,8 @@
     },
     {
       "path": "licenses/icon-credits.html",
-      "bytes": 10194,
-      "sha256": "381c603120f8cff7b7f096e547d6c4f9929b974712bb5dffbc0b2f1348330cb8"
+      "bytes": 10163,
+      "sha256": "04fa87ba28a740cb6b9993fc4a939ec29a90fe34f40dd659ecfcd2d4db8b15d1"
     },
     {
       "path": "licenses/icon-credits.json",
@@ -3421,8 +3481,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 10090,
-      "sha256": "479370643c0b1665810c3bb4414272a08fdd9beb9ae07965631a293b15145740"
+      "bytes": 10346,
+      "sha256": "fbe95fd72ad65e9931b22507ce832b462a7f064d6059f7836268f94e2f72aa4b"
     },
     {
       "path": "reference/brief/character-armour-reference.png",
@@ -3446,23 +3506,23 @@
     },
     {
       "path": "reference/cards/alexander-common-female.webp",
-      "bytes": 177082,
-      "sha256": "0a70c74d1c1ba35c50e47a0df0fa89df1c6b51a2ee44918cc844f4cecb5d44d7"
+      "bytes": 181052,
+      "sha256": "110d191e120cb37f5794b9884e3bfe88c7e998a7427000dd7028b76b62b2ea71"
     },
     {
       "path": "reference/cards/alexander-common-male.webp",
-      "bytes": 168926,
-      "sha256": "01d8711ee3aae7d9843a927804841b764d687b04493a378894a76037c177ac95"
+      "bytes": 172808,
+      "sha256": "27cffa2eb77c7404ae780d53b39cc2441848a0fc067a8ed1f5879953f7234bee"
     },
     {
       "path": "reference/cards/alexander-epic-female.webp",
-      "bytes": 185926,
-      "sha256": "e4876e81517251495dcdb3e4989559a6d49b3beb3d7f1749e0f5a2499c2635fe"
+      "bytes": 189154,
+      "sha256": "cb10c7745d96b5800b590e895045b66a5ab534150a3ec94cfdafdea0cd076293"
     },
     {
       "path": "reference/cards/alexander-epic-male.webp",
-      "bytes": 190432,
-      "sha256": "74700c3db5e5e474c1a99fa2c2fe6ba2f5e8fa93f79d74e778a72faeeaf9d145"
+      "bytes": 193806,
+      "sha256": "70dd4602b402e75219224f0b7ad73495ee5d5cb81bfc1a908bd5e12c770220c9"
     },
     {
       "path": "reference/cards/alexander-parent.webp",
@@ -3471,43 +3531,43 @@
     },
     {
       "path": "reference/cards/alexander-rare-female.webp",
-      "bytes": 185998,
-      "sha256": "904b6d5f9317861214856617a4c32d09f2e5555d8310c4bde7d251f0fae84dfa"
+      "bytes": 187874,
+      "sha256": "d2f52c808cc8d3cf2275c267d0c192cec8d5d873e36091ed76702029c3a203df"
     },
     {
       "path": "reference/cards/alexander-rare-male.webp",
-      "bytes": 181534,
-      "sha256": "e19c00d9a5f530bf94b6e2467c395983cccb18eaf19e28daa18a263416d2724c"
+      "bytes": 184012,
+      "sha256": "96d192328e3fca47e15c5b602c5f66fd613c2b7ae7ec88bfd8ec065c765e335d"
     },
     {
       "path": "reference/cards/alexander-uncommon-female.webp",
-      "bytes": 188380,
-      "sha256": "2ccb2561baa2843da3b278c1fc31db1e4d7b6db63162ae64bd10cecc02e992df"
+      "bytes": 188512,
+      "sha256": "c36fe9a5c2964d5141b55485546b5bb2ee3c6c36102cc5f8736c96f97dff99e3"
     },
     {
       "path": "reference/cards/alexander-uncommon-male.webp",
-      "bytes": 191346,
-      "sha256": "9ab06517f2ce2de9f732c049ad3e57303e87d091a782147e58ba44134d8245fb"
+      "bytes": 194192,
+      "sha256": "acfdf7c003e4e982c58a988af4299e421ba4ba6d6fdb6c8f1198d892b1250e46"
     },
     {
       "path": "reference/cards/aristotle-common-female.webp",
-      "bytes": 180702,
-      "sha256": "d14835b3c3ad70b35169a4f3d4c4f7fb21d6b3d7667609f6e005006297df3c8b"
+      "bytes": 182668,
+      "sha256": "57e61496736d1eb2595fab80efa04ab3d6ba566d87753ad81f414df0f24c9202"
     },
     {
       "path": "reference/cards/aristotle-common-male.webp",
-      "bytes": 186160,
-      "sha256": "7e8be0e74b8da7b574c1ad7d9db5b0401b49b6c048daa1baa38cd82bbb28c9d9"
+      "bytes": 188632,
+      "sha256": "e07cc19051275d7c0e267d4abdb0659dc63217480c2eeb9900fd6b44a0cf03cd"
     },
     {
       "path": "reference/cards/aristotle-epic-female.webp",
-      "bytes": 189096,
-      "sha256": "6c5ea73511b19c06bf9206b9db214628939470dfb43817843b75f711cc7137a0"
+      "bytes": 190534,
+      "sha256": "9913fe8df4b8c5122390cd318e237c0391d1977075e5d1050e09e2f7c7487d5a"
     },
     {
       "path": "reference/cards/aristotle-epic-male.webp",
-      "bytes": 190600,
-      "sha256": "ae076cc2ec38ed69eae0ade9de2c4472c456228b2b11e9e0af6628c1c01669a7"
+      "bytes": 192080,
+      "sha256": "5df2002b3e3234e32c5d7daf8df0c96daed60fc002b0f184a5e6c8c71804bf54"
     },
     {
       "path": "reference/cards/aristotle-parent.webp",
@@ -3516,43 +3576,43 @@
     },
     {
       "path": "reference/cards/aristotle-rare-female.webp",
-      "bytes": 189752,
-      "sha256": "2f1c26647f7d0157628607c6af66abc6fb6d8199886a203a5c075b591c4da35c"
+      "bytes": 191318,
+      "sha256": "a0cf276f4c56064de7b8da4c88f2549ea47b58a119d43d62cad43ba4f87e31ce"
     },
     {
       "path": "reference/cards/aristotle-rare-male.webp",
-      "bytes": 199890,
-      "sha256": "2b03ea36c08d19997a7ff1fe0f01948526060d7095b3253fff077cb89d4b351c"
+      "bytes": 201766,
+      "sha256": "1a03e13955845774ae9905b7ebb7c82d9dc26f1481fe6e3fb48a74c18aad8c89"
     },
     {
       "path": "reference/cards/aristotle-uncommon-female.webp",
-      "bytes": 179894,
-      "sha256": "63a74a5727c10c3a6746e6589bec73fbeef922b3a5a24f1e89fa5b1f8b0ef9d3"
+      "bytes": 181086,
+      "sha256": "b4e9a6ec8e9fdbddd0a19c3969e7bc507390ce3985edfcd7a8f2c4cb33ffcc8b"
     },
     {
       "path": "reference/cards/aristotle-uncommon-male.webp",
-      "bytes": 183304,
-      "sha256": "fbda993bf6464f473f2eae2e79e4e433607ed546b5056ae9f8df4dc9deb74fe1"
+      "bytes": 185906,
+      "sha256": "2320073eb1e01ad98678e5b9aa71eaee9ef8d119c7ee728141a98dec691cd89b"
     },
     {
       "path": "reference/cards/cleomenes-common-female.webp",
-      "bytes": 178000,
-      "sha256": "a61a79537ce3b52637daf8e8a56dcf45c0b3818759a5355a60f2f3ba270e6579"
+      "bytes": 181216,
+      "sha256": "e99ba524cd9a25e41596a2592cb12b9fa4ad653d8e0a18a2229c62a703beed98"
     },
     {
       "path": "reference/cards/cleomenes-common-male.webp",
-      "bytes": 179646,
-      "sha256": "2394844eb285f85429309bd4a9d2fb8047b2358707b99c68bc18c45e5e4c909d"
+      "bytes": 182724,
+      "sha256": "d0533f2f8bd1005e151c059ff6742d753338a54f5b1de146582be3898b309773"
     },
     {
       "path": "reference/cards/cleomenes-epic-female.webp",
-      "bytes": 184634,
-      "sha256": "04ac0bc7b9c8bcc3e8a82f61af39a45004e8f19b28c820ad0f4780cd07b4ba2d"
+      "bytes": 187072,
+      "sha256": "4fc7fb83a90fe96386c54222d76344740b44de69f17bb062a052370f3c4978f9"
     },
     {
       "path": "reference/cards/cleomenes-epic-male.webp",
-      "bytes": 185198,
-      "sha256": "b4af4939f6dce282329143aa685cbe1ab76793594928cc9bab7b68e11ba3a589"
+      "bytes": 188174,
+      "sha256": "bf223d86c87fd2ce2a929c519cda9593f0474511f204657de02fc10cfa7376ef"
     },
     {
       "path": "reference/cards/cleomenes-parent.webp",
@@ -3561,43 +3621,43 @@
     },
     {
       "path": "reference/cards/cleomenes-rare-female.webp",
-      "bytes": 182170,
-      "sha256": "65bb1f5c8ed240aa88b4c076a8dbd47f5e091b52cfd7e85594a2c0c9cd23bfc5"
+      "bytes": 184312,
+      "sha256": "faaee271d36b1793488fe8d4e2e5e09f8675cc724954b81e3dc71529eee86ea7"
     },
     {
       "path": "reference/cards/cleomenes-rare-male.webp",
-      "bytes": 184306,
-      "sha256": "91eb6a1d592182997f7620d8f159e600f60157f6bb56dbc303649b54e12ba3e0"
+      "bytes": 185600,
+      "sha256": "44501fa25db7c2c00cce7e93d8dc79430ffa05ad00dcd7fbb557985ce6f33c2f"
     },
     {
       "path": "reference/cards/cleomenes-uncommon-female.webp",
-      "bytes": 175214,
-      "sha256": "99c30c2c67185e6846987cf85a074b0ba7708c8f4d2d276c256473e5b85f9132"
+      "bytes": 176990,
+      "sha256": "0753d79f80b8df2bf7efad35b7ac781e8f62ce41c1518e9efbc28a35c855a3fa"
     },
     {
       "path": "reference/cards/cleomenes-uncommon-male.webp",
-      "bytes": 177238,
-      "sha256": "e974802683ea2bfc29214e82c96bc43de29f65fab817b947aa41b54daf5fa7d8"
+      "bytes": 178182,
+      "sha256": "06977dd9910b8310fcc4f8f42a198bdb1b6533bb94dbc1632434e7b8448aba82"
     },
     {
       "path": "reference/cards/demetrius-common-female.webp",
-      "bytes": 195872,
-      "sha256": "8ad1e4d7824361b59ee3832c490d415b37cf1bd67ab404c368091ea9d82bb56a"
+      "bytes": 197496,
+      "sha256": "b66ccc5ce72857d32c7e7ace6c3cd71b8a76df197ba61a84a46d21fd3535bd2e"
     },
     {
       "path": "reference/cards/demetrius-common-male.webp",
-      "bytes": 191550,
-      "sha256": "59dc62d66a49a5410f9727eea661121e23a31cad65dd7a1f223745f26b581e2a"
+      "bytes": 193244,
+      "sha256": "2702cc7a9320a794866f8af59f8ff7b9d40682aa9f38331b65f21256bb7bb5aa"
     },
     {
       "path": "reference/cards/demetrius-epic-female.webp",
-      "bytes": 201848,
-      "sha256": "b13a0aa0e0c4de31f55fefed3389f245efbdf9f31b7bbe69c89fb6697dbd44e2"
+      "bytes": 203490,
+      "sha256": "7a847e1a08daa07b56b7f0b2d583f436ef6ceae2af0e923660380cd071d02064"
     },
     {
       "path": "reference/cards/demetrius-epic-male.webp",
-      "bytes": 201170,
-      "sha256": "5b9d5a8757179190bc0a1a28dd8aca08a8db757719c74816b38d40c30547f6ba"
+      "bytes": 203490,
+      "sha256": "7cdacb345fd3f04f6abbeb7970c9645caddde91d5d605cdd4c70bac4a97a4d5a"
     },
     {
       "path": "reference/cards/demetrius-parent.webp",
@@ -3606,43 +3666,43 @@
     },
     {
       "path": "reference/cards/demetrius-rare-female.webp",
-      "bytes": 189508,
-      "sha256": "1d212dbd5a29e3bf98cccd3a2ce1d0e4b8560ba2bda7b19277b670d435321aaa"
+      "bytes": 191322,
+      "sha256": "1c6e008a996cf92d7955fd38cb1a7aa74fe4705e872c6d958c3f7b013834ad9c"
     },
     {
       "path": "reference/cards/demetrius-rare-male.webp",
-      "bytes": 191432,
-      "sha256": "daada915218fe395f0c09bd85aaf33d059e6b7f7d03f7882b1ad943cb5247075"
+      "bytes": 192890,
+      "sha256": "c9d26286cbda8fc89d4bbd0b0972e59342d1d163fa35b6dbfe45d32a3288f591"
     },
     {
       "path": "reference/cards/demetrius-uncommon-female.webp",
-      "bytes": 193742,
-      "sha256": "cfaaddd26e32f2876a5bbac56a7bd8ab33164161509a2235d811c50871fdbd22"
+      "bytes": 195662,
+      "sha256": "7a251c475e6aaa8902944ecc5977b84e20e5238c9719cdfcc78adc1d3eb97b2a"
     },
     {
       "path": "reference/cards/demetrius-uncommon-male.webp",
-      "bytes": 187984,
-      "sha256": "fb9f9fb8324feb863b5478858082ba08fcbf8ab8a07b4ed4b8eda07461dd13e5"
+      "bytes": 189762,
+      "sha256": "27d00cff34e2c9e365866097bedd64a8af91e56f4b59095e08f39a97379e87c3"
     },
     {
       "path": "reference/cards/euclid-common-female.webp",
-      "bytes": 174370,
-      "sha256": "ad27725f1aff7ca6dc6f354381d1603472f462a5a32bf4ce58ed14b4212f8dd7"
+      "bytes": 176490,
+      "sha256": "8c1c8ed69220fffd50295b74c8c927d547929e091350dec20a694a99dbb9966e"
     },
     {
       "path": "reference/cards/euclid-common-male.webp",
-      "bytes": 178650,
-      "sha256": "f4636b83e0ab1f900dc198d61677c66764c111ec78f29a9be23a50f7b3f798e0"
+      "bytes": 180492,
+      "sha256": "1e4f533cd0263000e83868f60c7cf325c07f9ef1f482bc23c1eaab5b6ce267bf"
     },
     {
       "path": "reference/cards/euclid-epic-female.webp",
-      "bytes": 186352,
-      "sha256": "9afc4ed10bb3ed6318f67e37f9533ddfdbd0d18ba9675683f6a3566ff93404ca"
+      "bytes": 188828,
+      "sha256": "bef89fac26b85af392a00ff242fa97aeb6ee8aade7f2609e405baef13c130baf"
     },
     {
       "path": "reference/cards/euclid-epic-male.webp",
-      "bytes": 183776,
-      "sha256": "c02ef52bcf6019360abb4843e4ca130d89af9fa819732ebd47acaa8fa3befe17"
+      "bytes": 186850,
+      "sha256": "9649d64db0f28d460fea72155452b7c53ce9539b9f446864b539ed05f2ad5b7f"
     },
     {
       "path": "reference/cards/euclid-parent.webp",
@@ -3651,43 +3711,43 @@
     },
     {
       "path": "reference/cards/euclid-rare-female.webp",
-      "bytes": 178758,
-      "sha256": "b7deeb05a684f60ea48ad366710886a3f3e76058b5e38bedd42890ed0436e3b6"
+      "bytes": 180872,
+      "sha256": "c9ad15ef4f07385629e7e7163dfb37ce00d723d26e6e52e849cd32a44695a3f3"
     },
     {
       "path": "reference/cards/euclid-rare-male.webp",
-      "bytes": 178476,
-      "sha256": "a19058d821991ade9ee830f00b75c05cb8287e0a980b3c1cd71dd420360efb3d"
+      "bytes": 180458,
+      "sha256": "d65820927dd80e4551972f96af8be056892757c65213b8ec5b1ed98ed85f4eca"
     },
     {
       "path": "reference/cards/euclid-uncommon-female.webp",
-      "bytes": 183158,
-      "sha256": "37a6b3268da3e3a118a57924cabfb01f4eb19b215aebf01ca2a502cc009b8f4f"
+      "bytes": 185528,
+      "sha256": "c4fca662b6c597f74f194206d43694ddc6b86a498edbc49ed0c12a0a96eb5164"
     },
     {
       "path": "reference/cards/euclid-uncommon-male.webp",
-      "bytes": 178556,
-      "sha256": "ef56c70928f015982c5b653b0c32fdc0056170ef00c79cd67168ab6f2ef5f9ba"
+      "bytes": 180238,
+      "sha256": "120136481187578ee02c6d1449b21b72d3c94cdf8698aefe5a140e9bf1b575d8"
     },
     {
       "path": "reference/cards/eumenes-common-female.webp",
-      "bytes": 182590,
-      "sha256": "974faa078dff75f467fb92abf155c5b27727edeeff46e1eb214e071f7ae74ef8"
+      "bytes": 184032,
+      "sha256": "cf2034bf312cdd4bb3c61133d0ddd1b50d164e075d0ffaa6565e517898d77293"
     },
     {
       "path": "reference/cards/eumenes-common-male.webp",
-      "bytes": 181102,
-      "sha256": "e900e813b06e3c6949a6bfbf53c2f7d1b7825ae1a0724b7dffdb5dea2418e9ba"
+      "bytes": 182848,
+      "sha256": "e45e93787c6a4e5623800d0aa6eff1c9bdff721664c496768159a8065b4c3964"
     },
     {
       "path": "reference/cards/eumenes-epic-female.webp",
-      "bytes": 177150,
-      "sha256": "2b19a12390bb9b9f50de0d5f05434f9fe9a02d622cb652f9a19cf20221c6cd7b"
+      "bytes": 180520,
+      "sha256": "c7f4f4d8bf8c28058034a427e61cc7bb283a83d8b78aa1ee5c75e92a80a7a0a3"
     },
     {
       "path": "reference/cards/eumenes-epic-male.webp",
-      "bytes": 180950,
-      "sha256": "8a972f4d56ee3b1797185e77792a6efaa38436884778b692e2d4ee827a751ce4"
+      "bytes": 182890,
+      "sha256": "a1524eff5da501cfc0c98edcae35ab8f37373f2bd3f6b27798b1db8b22e98b97"
     },
     {
       "path": "reference/cards/eumenes-parent.webp",
@@ -3696,43 +3756,43 @@
     },
     {
       "path": "reference/cards/eumenes-rare-female.webp",
-      "bytes": 190754,
-      "sha256": "4e2188d0851efdebd8662d5f30f68324fd66a2732faedd01339574c2c534c344"
+      "bytes": 192614,
+      "sha256": "68dd8668497cdc255ff0c351d85e6688e9e95a41e20797c251a3b976c8b9c159"
     },
     {
       "path": "reference/cards/eumenes-rare-male.webp",
-      "bytes": 193148,
-      "sha256": "27a91ef8959c4d95e9b3749c33a6b7c580b0c9f95640845d18d7a7e68feae1d9"
+      "bytes": 194972,
+      "sha256": "74cfda6887268a03ff6c340080759b26a0799a4acf57177693e12e5295a2ab73"
     },
     {
       "path": "reference/cards/eumenes-uncommon-female.webp",
-      "bytes": 186418,
-      "sha256": "4fdb3b90fae54463721e656bc800baf450ac94491cbb1f242ae652e4f54f12fa"
+      "bytes": 188666,
+      "sha256": "804a40fd0f4e60c2dfb62600271e04c9b00e061a00f1ed22ec2faf542009d367"
     },
     {
       "path": "reference/cards/eumenes-uncommon-male.webp",
-      "bytes": 184932,
-      "sha256": "43c26031838997eadd7de4c856250e72aff0cdb3e2b641baef09aa80e746d85b"
+      "bytes": 186644,
+      "sha256": "65ec3c8aab54e2b0dc012a8e794f98ca87b02d992275bd31483679e5ac91044e"
     },
     {
       "path": "reference/cards/lysippos-common-female.webp",
-      "bytes": 177246,
-      "sha256": "e53f53518da572b92d9e3e66c807c1f83d4446dc16c3566d9c1a6a8359bcba0c"
+      "bytes": 178734,
+      "sha256": "4cd02a79a80f8b47c88148bb00b5db6ff5b52f86ac6b01ca2dc9b94a671fbc76"
     },
     {
       "path": "reference/cards/lysippos-common-male.webp",
-      "bytes": 173346,
-      "sha256": "bf067e4c1db4df6c0a78c8c0b6ae95518bbcb206a90885dd1c03a3dd0a953812"
+      "bytes": 174998,
+      "sha256": "55455919b34e0701a613fe6fa9f03f79f9b7e31f551b7d33e49db73778b9f401"
     },
     {
       "path": "reference/cards/lysippos-epic-female.webp",
-      "bytes": 182958,
-      "sha256": "3e4acb9bcc041f539c67928054d1acd9ee2f2cb9065cb3a3ce8622bb960bceee"
+      "bytes": 186090,
+      "sha256": "a66cc03fc95d15e8840eb3fd70eeae849a7595585bdc26055cb6849727f6a712"
     },
     {
       "path": "reference/cards/lysippos-epic-male.webp",
-      "bytes": 180068,
-      "sha256": "d0c313220789fecf1fc9c0deb56696f635db5d7334da22a0ff2839f3037391bb"
+      "bytes": 182600,
+      "sha256": "40904622f1487c87af578c32ac827432a831b3dd481dc8aa8d9104e34f8957e9"
     },
     {
       "path": "reference/cards/lysippos-parent.webp",
@@ -3741,43 +3801,43 @@
     },
     {
       "path": "reference/cards/lysippos-rare-female.webp",
-      "bytes": 179656,
-      "sha256": "1dab3d6807fd0e063c72f693e9bb0dd24a678079a0df2f5b2f8f24cc90be439e"
+      "bytes": 183198,
+      "sha256": "658d87f6eb27bbfe527678bdb660f234070af263e4e936905d41065481e3d7f4"
     },
     {
       "path": "reference/cards/lysippos-rare-male.webp",
-      "bytes": 179692,
-      "sha256": "d5788476ec021ef03fec7011c46e44e2aa45b5e66ecb5caa23f08b8d40fc4e2e"
+      "bytes": 181388,
+      "sha256": "83fda27180e1693872af4b5da7164390edc2324124f922fbe31c1426d7f3f91a"
     },
     {
       "path": "reference/cards/lysippos-uncommon-female.webp",
-      "bytes": 177966,
-      "sha256": "1e3826194c8ccac94d2cb8fceda79826fb78731161ae8b884af1b82f436a246c"
+      "bytes": 179092,
+      "sha256": "9360ed7aa4f3544de41abfb470885b5e183d43f7aeed834a492487917d289857"
     },
     {
       "path": "reference/cards/lysippos-uncommon-male.webp",
-      "bytes": 179300,
-      "sha256": "9c6a5dcbf72070bbb0770da6025220ca6f6482a1930ae0df22588fedac81d8e5"
+      "bytes": 180760,
+      "sha256": "6b93cd116c6bb817e2165f14d52918bad0c2c76acad95bc6e8763ccb5586f05c"
     },
     {
       "path": "reference/cards/menander-common-female.webp",
-      "bytes": 179604,
-      "sha256": "206ed3b5bd23d496711b57c7d33968cc2877f2047059f1a6321887617ac9db6d"
+      "bytes": 183178,
+      "sha256": "907fc31dabc6fb52fd3d588a99257fb0945ba9f00be8a63c380cedfd457f71c6"
     },
     {
       "path": "reference/cards/menander-common-male.webp",
-      "bytes": 184582,
-      "sha256": "4158ce75dfe8219a4b41b4ef85cc66acacfb6df2f5a3ccabcb2106ce9b75c9e5"
+      "bytes": 188178,
+      "sha256": "47a15c1a723772011c4b66187a2bff9033c490ffa9b1861c524e9938c0e73135"
     },
     {
       "path": "reference/cards/menander-epic-female.webp",
-      "bytes": 182250,
-      "sha256": "44e09ec4705e717bd45e58f0aac4ec9df30f008a8d626ca50273acf5e4c5026c"
+      "bytes": 184780,
+      "sha256": "f72b4b7195a56b847ce8676b326fa90bc4b92fe3c7de72c7396dc3ce30c7372a"
     },
     {
       "path": "reference/cards/menander-epic-male.webp",
-      "bytes": 181510,
-      "sha256": "a74ff6dd5a209753aabf2dbfbe256651c4c295b75a828bcaba45b79824db96ae"
+      "bytes": 183122,
+      "sha256": "3eb1c98c6b2788bd80d35ab3d239c8fa035e2b266aed73755e78f8be40d4f120"
     },
     {
       "path": "reference/cards/menander-parent.webp",
@@ -3786,43 +3846,43 @@
     },
     {
       "path": "reference/cards/menander-rare-female.webp",
-      "bytes": 188600,
-      "sha256": "f1ed41898d7fa7c1f753e48870a0a305e7c4ae408023520d99d94c9a2355f980"
+      "bytes": 190130,
+      "sha256": "051c53faaa6d6f050f726e3d766529350caaef94a9c369295fd41e180b6bc19c"
     },
     {
       "path": "reference/cards/menander-rare-male.webp",
-      "bytes": 182216,
-      "sha256": "3ea85dbc5fd32ee87a7ff41dcb841169e19d8ff522a7f27d1acfa9383c232913"
+      "bytes": 183750,
+      "sha256": "e2605f970c712b723de1ee0573abecaba8d629bcd1ab54d8669e1f36157e4d38"
     },
     {
       "path": "reference/cards/menander-uncommon-female.webp",
-      "bytes": 173534,
-      "sha256": "b2b2e72e4d635eb1149a3ee04c5db6426b51dffa58e78c6ce5e5e5e15a529870"
+      "bytes": 175272,
+      "sha256": "5b6d9b769328c6102f790ea22890c7c1f119ff934c93564cb8e2e97122c2487f"
     },
     {
       "path": "reference/cards/menander-uncommon-male.webp",
-      "bytes": 172534,
-      "sha256": "ef95ae578d368f8e04001dcc691a787195bdad045213cc24144855285a14c775"
+      "bytes": 174810,
+      "sha256": "28ac5143aacd2c2c5e644d84513ad115791cfc10b572ecf44091a320ff441361"
     },
     {
       "path": "reference/cards/nearchus-common-female.webp",
-      "bytes": 194690,
-      "sha256": "8e98cf829d728f1c8f445e69e31d58dd96073987eb71c80fe36a9b306d9ba304"
+      "bytes": 196246,
+      "sha256": "21b6c5a6bd12f100d33eeae394023d2e644615ed1885f6e4473b30d40dd0a66c"
     },
     {
       "path": "reference/cards/nearchus-common-male.webp",
-      "bytes": 189504,
-      "sha256": "4a9d1fe9454fbb72ebebf33578873012f4256d53cfd6604f50ee0cd57a1b74c0"
+      "bytes": 191754,
+      "sha256": "ba9ad033d7bd4f6a6b26e5b8ad2a29bfae401a0913018afe64dce0e439fc1751"
     },
     {
       "path": "reference/cards/nearchus-epic-female.webp",
-      "bytes": 191424,
-      "sha256": "5f61aa9f23d97e7ade129575f11eadfa462d9761ad8ffb955dafc4024ac15552"
+      "bytes": 193334,
+      "sha256": "05a4fb6044193f30b22ddc30022ca8954c7ef29806adcecfbc3e08d6676d200a"
     },
     {
       "path": "reference/cards/nearchus-epic-male.webp",
-      "bytes": 190250,
-      "sha256": "984d3fc964ba846b7217c5bc2193188ff01f756a3b4b80a094d00d91a6550319"
+      "bytes": 193488,
+      "sha256": "4e05ee79632d9910b7bf5ea12813bc53cebb55398d0f2feeb31d57e66bcc19f7"
     },
     {
       "path": "reference/cards/nearchus-parent.webp",
@@ -3831,43 +3891,43 @@
     },
     {
       "path": "reference/cards/nearchus-rare-female.webp",
-      "bytes": 199692,
-      "sha256": "be3c63378cd57bac174fe6da3242b34d2da4f34d0a417dcc549a5e448cf28a32"
+      "bytes": 201560,
+      "sha256": "a8c397ea786832ee38731eeaec41d2cc7ca6c528f53bb47445e3583ac2752f73"
     },
     {
       "path": "reference/cards/nearchus-rare-male.webp",
-      "bytes": 191814,
-      "sha256": "58dbb6a9433794b89325001805fe62c1a8821539fef436fc0558bf22805ba8ba"
+      "bytes": 192986,
+      "sha256": "42f4a73c7ddb5afddd5345762c5976f9277d7c87b1b8bca7616ace30538d9e73"
     },
     {
       "path": "reference/cards/nearchus-uncommon-female.webp",
-      "bytes": 192984,
-      "sha256": "38f54943d5c27857c20a0f27d51fd6779b5ace4053711b6fe2c5c0bb4d604685"
+      "bytes": 193758,
+      "sha256": "e6e89463620a5f2faf675bb05f6c3d01f94e3bb95c59d17d379436a4cd4d03be"
     },
     {
       "path": "reference/cards/nearchus-uncommon-male.webp",
-      "bytes": 194792,
-      "sha256": "16f966af25f917a70520875a17dc5a65331f824d38b12aa1d1776dd9da96632b"
+      "bytes": 196492,
+      "sha256": "0166c1fc52238da883c30e9ab42d3307dcac04d3d039b06bca4760e7a37823af"
     },
     {
       "path": "reference/cards/ptolemy-common-female.webp",
-      "bytes": 188166,
-      "sha256": "53f14b5389e384ba91955418ddfb6ead524b4a92261e6e3a1042fb8da6c7a423"
+      "bytes": 189370,
+      "sha256": "9192a635b7ec8ec34ce422145c3d0956a43408bbe325e0ecb57fe85dc7a6e404"
     },
     {
       "path": "reference/cards/ptolemy-common-male.webp",
-      "bytes": 186054,
-      "sha256": "5997d02dfe768019b755e79bf31093ddf51c0d9e76788b07840055f78d765115"
+      "bytes": 187598,
+      "sha256": "e626a411e53c11b16ef2e57aa4a32a598671c635b1b68846771df84f3b148c39"
     },
     {
       "path": "reference/cards/ptolemy-epic-female.webp",
-      "bytes": 182674,
-      "sha256": "68452118a202268c0f72af91fcd958a3a2bfdf4cbb50b48f02ed1b5e7c3f23fb"
+      "bytes": 185342,
+      "sha256": "af5a050f2f28e0354c1c27a064a3b35a2cfe4ddcd4b20a99e45bfb1a481a083c"
     },
     {
       "path": "reference/cards/ptolemy-epic-male.webp",
-      "bytes": 183450,
-      "sha256": "95c63bae0cbaa20aa543052e7d9c3f44a33e383c4e65e5e88f68a63f73236218"
+      "bytes": 186094,
+      "sha256": "7671aaf96388dff9176cd24e36c5cbb1a0206fd491e6d3bcb0aa0416442e3839"
     },
     {
       "path": "reference/cards/ptolemy-parent.webp",
@@ -3876,43 +3936,43 @@
     },
     {
       "path": "reference/cards/ptolemy-rare-female.webp",
-      "bytes": 194722,
-      "sha256": "9cc8dac9e05aa249182b47aa6af2e1fb09d9847da56ef135dffbbe52336763a0"
+      "bytes": 196708,
+      "sha256": "57e890ecc2885d1e52306b06f56003c33fa056defca010b2a051c17b1a889cbd"
     },
     {
       "path": "reference/cards/ptolemy-rare-male.webp",
-      "bytes": 192834,
-      "sha256": "75a4b835e1cd7eff2c01c5c4eddf27cab1d8813a72dc00e1c3e3b2df1d404c9e"
+      "bytes": 194330,
+      "sha256": "21f3065e161577dceb47a662e297f3dee37c6ee26cadf7f77084f4ec3dd7de88"
     },
     {
       "path": "reference/cards/ptolemy-uncommon-female.webp",
-      "bytes": 180442,
-      "sha256": "6a39f1332ee09d1263148cc311ffa744f69c45f8adbb56542c449a08c9e1047a"
+      "bytes": 183010,
+      "sha256": "4437c79f7c6d2343e58ce338415157d8cf7aac0660ecea606de4ba04f340be6a"
     },
     {
       "path": "reference/cards/ptolemy-uncommon-male.webp",
-      "bytes": 179250,
-      "sha256": "a62dacb83bfa20c86caa709b55caeac109e18370f4a185c5923da981454d6f83"
+      "bytes": 180900,
+      "sha256": "084dfe4ef33932011489e7a591bd904ae4db3ba15e3f5201e75bbc60f1ea99df"
     },
     {
       "path": "reference/cards/pytheas-common-female.webp",
-      "bytes": 185762,
-      "sha256": "6650daea33336ecac46ac1377afd1706c6869587a2401fa98f78cafb19f24c4a"
+      "bytes": 187626,
+      "sha256": "431240cf6bae124e00dee62f5a0feedb9ede867bc7d69c75747248cc7f2b0b93"
     },
     {
       "path": "reference/cards/pytheas-common-male.webp",
-      "bytes": 189558,
-      "sha256": "6af1d5d25736b3083abfd30dabdf9655515b9e93837ff6e9fb78627dd85d8609"
+      "bytes": 190882,
+      "sha256": "7a2478a7e36fb8de27ae1e8d2711b020444cf46edd636c9dab0bd15f1bd14c1e"
     },
     {
       "path": "reference/cards/pytheas-epic-female.webp",
-      "bytes": 193062,
-      "sha256": "7e8febca29880be240acb6029e54e4e33cd94554cae08f8a69d1def830fcad7f"
+      "bytes": 195076,
+      "sha256": "642f4314fb0042315df983a663c18b9369c7a26faf2dc4e19ab87db217619c6f"
     },
     {
       "path": "reference/cards/pytheas-epic-male.webp",
-      "bytes": 192694,
-      "sha256": "ba3c10e56182e1ce6b0497f8b3f08a8ce2872acb8f412ef509d47ca57ca181ed"
+      "bytes": 194458,
+      "sha256": "d2a4dc3b411a62dfebfd7239d5425c9d6440fc92812e6623f2f286456b05b953"
     },
     {
       "path": "reference/cards/pytheas-parent.webp",
@@ -3921,43 +3981,43 @@
     },
     {
       "path": "reference/cards/pytheas-rare-female.webp",
-      "bytes": 181910,
-      "sha256": "5eb926f2e147a11d2818bc229b48837bfa86faa4b9d1e56abd14e28f47e8cc80"
+      "bytes": 183634,
+      "sha256": "4d7d2b561d811e3e1d63874d5ff4544400a0d3044455f1ad8703b3e48f0bc6f2"
     },
     {
       "path": "reference/cards/pytheas-rare-male.webp",
-      "bytes": 182698,
-      "sha256": "37246ea7e4f25d7efa9e24b32e1be3537a87c4cd113054087cd6b43e62b59682"
+      "bytes": 183882,
+      "sha256": "23f5fc96a1552ed5a9b489da429158de96d9e84319fa616b333080372a0e60f6"
     },
     {
       "path": "reference/cards/pytheas-uncommon-female.webp",
-      "bytes": 187958,
-      "sha256": "9dcedabae68354c9f5591950e31c24518cc2a108d6addcbba39b20d4b0b41281"
+      "bytes": 199606,
+      "sha256": "37672247311b188beccca9353a3066c3afdf5dfba42679c3c80175a43eaf4b80"
     },
     {
       "path": "reference/cards/pytheas-uncommon-male.webp",
-      "bytes": 188124,
-      "sha256": "a85972d76af314357876cbf0a9b9f8fc3f043054b1282d546a4acce4609ea608"
+      "bytes": 198822,
+      "sha256": "320bea3183704ba39743b5f1b69ad9b496857689b7ed1a57f5a9736e6d632841"
     },
     {
       "path": "reference/cards/theophrastus-common-female.webp",
-      "bytes": 200328,
-      "sha256": "55719376c7e7876f9696c1a336d286352d9ca3367a388cfa7f95bf472e5e2b9c"
+      "bytes": 202350,
+      "sha256": "7154db135ba927760608c07638f08a96c2b21e4c13f3b0bb09dbe2f32d87437b"
     },
     {
       "path": "reference/cards/theophrastus-common-male.webp",
-      "bytes": 197090,
-      "sha256": "0b16f557226dbf4b3ea3c2a0ac715a8ddcb92ce81c317d59cde2ca68a1ff6d9d"
+      "bytes": 199218,
+      "sha256": "3559196b06df286bbfc9e508e5d3625ab84d84a9bf0f50489df5607f92565065"
     },
     {
       "path": "reference/cards/theophrastus-epic-female.webp",
-      "bytes": 192410,
-      "sha256": "24b5f9a3b67ec9ab76ce3ac4aa90796a702a8b07532fad539c8d2c06318bec19"
+      "bytes": 195252,
+      "sha256": "0304cf77491d618fbd743bc01b376d84f4a3b46bc8b67af4a43fbf291890d694"
     },
     {
       "path": "reference/cards/theophrastus-epic-male.webp",
-      "bytes": 191586,
-      "sha256": "8f7aed902bff54ceead96557fce3feca74264b2b17a7a1ced0f386e4147f316d"
+      "bytes": 193882,
+      "sha256": "5d654524bfbee58618e4312179dd16c237224b1adcd491271f786bc1c07c9e62"
     },
     {
       "path": "reference/cards/theophrastus-parent.webp",
@@ -3966,43 +4026,43 @@
     },
     {
       "path": "reference/cards/theophrastus-rare-female.webp",
-      "bytes": 201262,
-      "sha256": "b069c9642d975367cc743066920b4df6c45fc550fca05c25f705fb2488a40ecf"
+      "bytes": 203500,
+      "sha256": "c2e4d884c0f8ce712722792dcb5b04ca796a4d724648f7761e5d25fc2bfe39e6"
     },
     {
       "path": "reference/cards/theophrastus-rare-male.webp",
-      "bytes": 199806,
-      "sha256": "1ffef2a523da9e309ec99bdccec61eaa6ab2e4ffd00002a453ce323a1523db07"
+      "bytes": 201818,
+      "sha256": "397890fbe87812c0ae0375223462f34f49b206619e846e861e4d6fd09ea8c6f5"
     },
     {
       "path": "reference/cards/theophrastus-uncommon-female.webp",
-      "bytes": 188632,
-      "sha256": "6b5c7786a4f87146b16c972bd31e2cd07ecb959b3018c5761e1746397f87f8a0"
+      "bytes": 190656,
+      "sha256": "30bc9349cf1f0a5d22b71e83f74b9e402c9a424a1ce0d893911e42a5a839860e"
     },
     {
       "path": "reference/cards/theophrastus-uncommon-male.webp",
-      "bytes": 185420,
-      "sha256": "98ab70d7f9985b2b2244b79596cd08e80f457867b6a5a7e71a4ae4770873fbb6"
+      "bytes": 187332,
+      "sha256": "fa9cca02eaa9fd5e41be992e5ed4bfc22df39abbfcc7c2f66e74b6aa82e72b8e"
     },
     {
       "path": "reference/cards/zeno-common-female.webp",
-      "bytes": 167120,
-      "sha256": "4de53fb99e57fc626654cae8cf6a062fe29f5f2c979e61b8b431006f016328af"
+      "bytes": 168434,
+      "sha256": "a831189c0a460b420e75497466ad8fe9ca53afbe3c4b4320a476126d22d194bd"
     },
     {
       "path": "reference/cards/zeno-common-male.webp",
-      "bytes": 180918,
-      "sha256": "01dd39a811d03d0b8a0a4e4c94820155a0b1719376d585705cf2308f935bb081"
+      "bytes": 182440,
+      "sha256": "a51d32b77c5a5c7eae1f19aae6379d02c88a9afdf1b527efff6110ec664f135c"
     },
     {
       "path": "reference/cards/zeno-epic-female.webp",
-      "bytes": 180958,
-      "sha256": "5a38b68ec948839fe5477f3341ea4d4970e74f6fd10d26949bdee30303bba8e0"
+      "bytes": 182998,
+      "sha256": "67f9575dbc18e82b910707bc3534b69f7975c427c6b6b410020a1d917f62b067"
     },
     {
       "path": "reference/cards/zeno-epic-male.webp",
-      "bytes": 181154,
-      "sha256": "a7dbff89be12e60af3c6b7a92e5c80f26e924092155ab4e270af8f0ba7b46863"
+      "bytes": 183182,
+      "sha256": "b89d1d55513f14272d981b66c05adc47d5b1df688476c2e416adb21ab4b89379"
     },
     {
       "path": "reference/cards/zeno-parent.webp",
@@ -4011,38 +4071,38 @@
     },
     {
       "path": "reference/cards/zeno-rare-female.webp",
-      "bytes": 177126,
-      "sha256": "e5130f1d63ebae90c161743beee33533b583f429953572675f5692824a795064"
+      "bytes": 178860,
+      "sha256": "2ef56ab104f881fe110b0a28381dbd33d8be648dc7a216e4ee9fe7ac76a6e509"
     },
     {
       "path": "reference/cards/zeno-rare-male.webp",
-      "bytes": 177186,
-      "sha256": "08b0a90ba83a050fcfb22ec8def1ad96786a22b1e482c4e543db5049c005a38a"
+      "bytes": 178746,
+      "sha256": "bcdca04e2f8f61d2646e11658a8ee4c6985194458fed757a2b6e85b760b54ca4"
     },
     {
       "path": "reference/cards/zeno-uncommon-female.webp",
-      "bytes": 173432,
-      "sha256": "957aa09e3b5e18ec8c3b33506d3988fd46ac64fbb8fed5c2263cfea9a12ac61d"
+      "bytes": 174846,
+      "sha256": "3990603fb5b84959c2c6a7ff22e079d334b1746eaa1285aa00aca6d341cc8475"
     },
     {
       "path": "reference/cards/zeno-uncommon-male.webp",
-      "bytes": 179568,
-      "sha256": "dbb699f7531ea0fd5701ae73c2d0337d5d11da4efcab3e69e2c1848583f85fd5"
+      "bytes": 180736,
+      "sha256": "52b91a2be23e7611a7e54da52a3eeeb95dc4221deae444f9920fb5e4aea18b96"
     },
     {
       "path": "reference/index.html",
-      "bytes": 162613,
-      "sha256": "295b81ae5e4ad09e5773839d90cc93b90338a18fe3e37b2059c148160f4eb395"
+      "bytes": 163187,
+      "sha256": "23d5a665e1f28c2988e4dfb70e97035818a18c5d0e2d7c7146aaa6688d2ee1e3"
     },
     {
       "path": "reference/portraits/alexander-common-female.webp",
-      "bytes": 216354,
-      "sha256": "603b2c83775cc1eb504f814ed33b5b9915815549aebf1b95263f55618922d22d"
+      "bytes": 215690,
+      "sha256": "de3300068ecc8857c11c847c9bb7a34088b97a97485cb2788c0390f15830746a"
     },
     {
       "path": "reference/portraits/alexander-common-male.webp",
-      "bytes": 206256,
-      "sha256": "b0bd1b5ffcee88da6cff56bc064130de3342df624b93a003fd40337e0915903d"
+      "bytes": 206462,
+      "sha256": "5d0079f7d36f6abd9611a5a3f0a3783bd73e19c7711df15b88b23adde89f125e"
     },
     {
       "path": "reference/portraits/alexander-epic-female.webp",
@@ -4071,13 +4131,13 @@
     },
     {
       "path": "reference/portraits/alexander-uncommon-female.webp",
-      "bytes": 221786,
-      "sha256": "b196ace842712c21ae27ec7d68ae787043b9a058b54f59c872571cd788d05857"
+      "bytes": 220846,
+      "sha256": "463fa3f4e86f1e2bf5d41b2e40377b68271aa82b27c8619a18814174ce7d67ba"
     },
     {
       "path": "reference/portraits/alexander-uncommon-male.webp",
-      "bytes": 225362,
-      "sha256": "0434b645f107f9eebc04ee9c8b63b1b7b251c5b86c5dff899f168bbc55f910fe"
+      "bytes": 226314,
+      "sha256": "ab6f34e835f237ac59ab77e9df6e1f980020127b4f3bdf4246dd5a25a73903ff"
     },
     {
       "path": "reference/portraits/aristotle-common-female.webp",
@@ -4521,13 +4581,13 @@
     },
     {
       "path": "reference/portraits/pytheas-uncommon-female.webp",
-      "bytes": 220284,
-      "sha256": "62e959d42d85ef4ffda5d20009c7aa8a89bbc171c99037b3e8b3240f26e1c309"
+      "bytes": 232984,
+      "sha256": "797e110ba43a916a6866d5d22eaee432373eca2e49c78415e1d749384e31b98a"
     },
     {
       "path": "reference/portraits/pytheas-uncommon-male.webp",
-      "bytes": 220844,
-      "sha256": "29214df9b1c441ff4a53997e78e3db3a5a88f8b7ab74e72017511e16b4bbe347"
+      "bytes": 232696,
+      "sha256": "167584cfe992ccd3733025074b1642d8ff3865b54c55aeb57d6bc5e009dc66b1"
     },
     {
       "path": "reference/portraits/theophrastus-common-female.webp",
@@ -4686,8 +4746,8 @@
     },
     {
       "path": "tools/card-art.mjs",
-      "bytes": 21805,
-      "sha256": "fe37db26e6bda15f8b207373598ce3d3e9798c6ab437971b26f32a6d64937acd"
+      "bytes": 21812,
+      "sha256": "0e5bae8e0128533894753ab46dddcefb861c4ddb952c548524cf7fd48f67e253"
     },
     {
       "path": "tools/pixel-requirements.txt",
