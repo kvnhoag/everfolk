@@ -9,6 +9,7 @@ import lives5 from "../../worlds/demo/alexandria-lives-5.json" with { type: "jso
 import lives6 from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import lives7 from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import lives8 from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import lives9 from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 
 export interface WorldPackIdentity {
   id?: string;
@@ -26,7 +27,7 @@ export interface ActiveWorldSummary {
 const OFFICIAL_DEFAULT_WORLD_IDS = new Set(["alexandria", "alexandria-demo"]);
 const OFFICIAL_DEMO_PACK_ID = "alexandria";
 const OFFICIAL_DEMO_PACKS = new Map<string, unknown>(
-  [demo1, demo2, lives1, lives2, lives3, lives4, lives5, lives6, lives7, lives8]
+  [demo1, demo2, lives1, lives2, lives3, lives4, lives5, lives6, lives7, lives8, lives9]
     .map(pack => [pack.version, pack] as const),
 );
 const officialFingerprints = new Map<string, string>();

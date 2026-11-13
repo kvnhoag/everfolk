@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { createEngine } from "../../src/engine.ts";
 import type { WorldPack } from "../../src/types.ts";
-import current from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import current from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 import CapabilityTree from "../components/CapabilityTree.tsx";
 import FigurePaths from "../components/FigurePaths.tsx";
 import EverfolkBrand from "../components/EverfolkBrand.tsx";

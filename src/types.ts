@@ -612,8 +612,11 @@ export interface WorldPack {
   description: string;
   /** Signed historical years: -1 is 1 BCE, followed by 1 CE. No year zero. */
   startYear: number;
-  /** Births spread across these years (inclusive; `from` is the earliest). Absent: every life starts in `startYear`. */
-  birthYears?: { from: number; to: number };
+  /**
+   * Births spread across these years (inclusive; `from` is the earliest). Absent: every life starts in `startYear`.
+   * `weights` (one whole number per year, from `from`) makes some birth years likelier; absent, every year is equally likely.
+   */
+  birthYears?: { from: number; to: number; weights?: number[] };
   maxAge: number;
   stats: Record<string, StatDefinition>;
   flags: Record<string, { label: string; initial: boolean }>;

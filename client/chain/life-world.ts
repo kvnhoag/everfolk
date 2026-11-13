@@ -1,5 +1,7 @@
-import { LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
-import currentLife from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import { LIVES_FIGURES_WORLD_VERSION, LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
+import currentLife from "../../worlds/demo/alexandria-lives-9.json" with { type: "json" };
+/** NPC sessions run on lives-8, as the server does. */
+import life8 from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import life7 from "../../worlds/demo/alexandria-lives-7.json" with { type: "json" };
 import life6 from "../../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import life5 from "../../worlds/demo/alexandria-lives-5.json" with { type: "json" };
@@ -18,9 +20,9 @@ import legacyDemo from "../../worlds/demo/alexandria-demo-1.json" with { type: "
 import ranked from "../../worlds/ranked/alexandria-ranked-1.json" with { type: "json" };
 /** Resolve the exact revision recorded in the life; never replace retained packs. */
 export async function loadLifeWorld(version: string): Promise<WorldPack> {
-  if (version === NPC_WORLD_VERSION) return buildNpcWorld(currentLife as unknown as WorldPack);
+  if (version === NPC_WORLD_VERSION) return buildNpcWorld(life8 as unknown as WorldPack);
   const packs: Record<string, unknown> = {
-    [LIVES_WORLD_VERSION]: currentLife,
+    [LIVES_WORLD_VERSION]: currentLife, [LIVES_FIGURES_WORLD_VERSION]: life8,
     "alexandria-lives-7": life7, "alexandria-lives-6": life6,
     "alexandria-lives-5": life5, "alexandria-lives-4": life4, "alexandria-lives-3": life3,
     "alexandria-lives-2": life2, "alexandria-lives-1": life1,

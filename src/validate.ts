@@ -151,10 +151,21 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
   string(world.title, "world.title", 300);
   string(world.description, "world.description");
   const startYear = year(world.startYear, "world.startYear");
+  // The calendar runs from the world's start to the latest birth's oldest age.
+  let latestBirthYear = startYear;
   if (Object.hasOwn(world, "birthYears")) {
-    const range = object(world.birthYears, "world.birthYears", ["from", "to"]);
+    const range = object(world.birthYears, "world.birthYears", ["from", "to", "weights"], ["from", "to"]);
     const from = year(range.from, "world.birthYears.from"), to = year(range.to, "world.birthYears.to");
     if (from < startYear || to < from) fail("world.birthYears", "births must run forward from the world's start year");
+    latestBirthYear = to;
+    if (Object.hasOwn(range, "weights")) {
+      const span = (to < 0 ? to + 1 : to) - (from < 0 ? from + 1 : from) + 1;
+      const weights = range.weights;
+      if (!Array.isArray(weights) || weights.length !== span) fail("world.birthYears.weights", `needs one weight for each of the ${span} birth years`);
+      const list = weights as unknown[];
+      list.forEach((weight, index) => integer(weight, `world.birthYears.weights[${index}]`, 0, 1_000_000));
+      if (!list.some(weight => (weight as number) > 0)) fail("world.birthYears.weights", "at least one birth year needs a weight above zero");
+    }
   }
   const maxAge = integer(world.maxAge, "world.maxAge", 1, 10_000);
   if (Object.hasOwn(world, "eventPacing")) {
@@ -176,7 +187,7 @@ export function validateWorld(input: unknown): asserts input is WorldPack {
       }
     }
   }
-  const lastAstronomicalYear = (startYear < 0 ? startYear + 1 : startYear) + maxAge;
+  const lastAstronomicalYear = (latestBirthYear < 0 ? latestBirthYear + 1 : latestBirthYear) + maxAge;
   const lastYear = lastAstronomicalYear <= 0 ? lastAstronomicalYear - 1 : lastAstronomicalYear;
   if (!Number.isSafeInteger(lastAstronomicalYear) || !Number.isSafeInteger(lastYear)) {
     fail("world.startYear", "calendar range through maxAge must remain a safe integer");
