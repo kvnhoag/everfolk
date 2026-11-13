@@ -186,6 +186,9 @@ test("Gap 3: all 45 alexandria-lives-11 job IDs and HowToPlayPages resolve to pr
       { id: "infancy", title: "Infancy", fromAge: 0, toAge: 2, todo: "Stay fed.", state: "done", unlocks: [] },
       { id: "adulthood", title: "Adulthood", fromAge: 18, toAge: 39, todo: "Establish work.", state: "current", unlocks: [] },
     ],
+    guides: [],
+    selected: "adulthood",
+    onSelect() {},
     portrait: { seed: "howtoplay-seed", name: "Alexandros", sex: "male", avatarVariant: 0, jobId: "scientist" },
   }));
   assert.ok(roadmapHtml.includes("/assets/portraits/concept1-v4/infant-c1.png"));
