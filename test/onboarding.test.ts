@@ -9,7 +9,7 @@ import type { WorldPack } from "../src/types.ts";
 import { lifeRoadmap, stageAges, worldUnlocks } from "../client/models/life-roadmap.ts";
 import { nextTodo, yearChecklist, type YearFacts } from "../client/models/year-checklist.ts";
 import { idleNudge, IDLE_NUDGE_MS, type IdleFacts } from "../client/models/idle-nudge.ts";
-import { howToPlaySteps, YEAR_RHYTHM } from "../client/models/how-to-play.ts";
+import { howToPlaySteps, KEY_FACTS, RESOURCE_GUIDE, screenAreas, YEAR_RHYTHM, YEAR_SCRIPT } from "../client/models/how-to-play.ts";
 import { SECTION_STEPS, sectionStep } from "../client/models/section-steps.ts";
 import { HOW_TO_PLAY_STORAGE_KEY, readHowToPlayAtStart, writeHowToPlayAtStart } from "../client/storage/how-to-play-storage.ts";
 
@@ -23,6 +23,7 @@ const hooks = registerHooks({
   },
 });
 const { default: YearChecklist, LockedSection } = await import("../client/components/YearChecklist.tsx");
+const { iconCells } = await import("../client/components/PixelIcon.tsx");
 hooks.deregister();
 
 const world = JSON.parse(readFileSync(new URL("../worlds/demo/alexandria-lives-9.json", import.meta.url), "utf8")) as WorldPack;
@@ -117,4 +118,25 @@ test("How to Play opens at every start unless the player switches it off", () =>
   writeHowToPlayAtStart(true, storage);
   assert.equal(readHowToPlayAtStart(storage), true);
   assert.equal(readHowToPlayAtStart({ getItem() { throw new Error("blocked"); }, setItem() {} }), true);
+});
+
+test("the rule sheet frames play in three facts, warns where people trip, and scripts the year in the engine's order", () => {
+  assert.equal(KEY_FACTS.length, 3);
+  const steps = howToPlaySteps({ focus: 6, action: 6, fields: 0, trade: 10 });
+  assert.ok(steps.filter(step => step.warning).length >= 4, "the common mistakes carry a warning sign");
+  assert.deepEqual(YEAR_SCRIPT.map(beat => beat.title), ["The year opens", "You act", "Turning points", "The harvest is settled", "The town moves", "A year older"]);
+  assert.deepEqual(YEAR_SCRIPT.filter(beat => beat.you).map(beat => beat.title), ["You act", "Turning points"]);
+  const settled = YEAR_SCRIPT.find(beat => beat.title === "The harvest is settled")!.detail;
+  const order = ["Harvest", "rent", "wages", "eats", "spoils", "spun"].map(word => settled.indexOf(word));
+  assert.deepEqual(order, [...order].sort((a, b) => a - b), "settlement reads in the engine's order (src/demo/settle.ts)");
+});
+
+test("the screen map numbers every section once and the lookup covers resources and stats with real icons", () => {
+  assert.deepEqual(screenAreas().map(area => area.step), [1, 2, 3, 4, 5, 6]);
+  assert.ok(RESOURCE_GUIDE.length >= 10);
+  for (const row of RESOURCE_GUIDE) {
+    assert.ok(iconCells(row.icon), `${row.name} has a pixel icon`);
+    assert.ok(row.use && row.gain && row.loss, `${row.name} says what it is for, where it comes from and where it goes`);
+  }
+  for (const beat of YEAR_SCRIPT) assert.ok(iconCells(beat.icon), `${beat.title} has a pixel icon`);
 });

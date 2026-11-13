@@ -1,59 +1,15 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useIdle } from "../hooks/useIdle.ts";
-import { HOW_TO_PLAY_GOAL, YEAR_RHYTHM, type PlayChip, type PlayStep } from "../models/how-to-play.ts";
-import { stageAges, type RoadmapStage } from "../models/life-roadmap.ts";
-import PixelIcon from "./PixelIcon.tsx";
+import type { PlayStep } from "../models/how-to-play.ts";
+import type { RoadmapStage } from "../models/life-roadmap.ts";
+import { BasicsPage, LookupPage, RoadmapPage, ScreenPage, YearPage } from "./HowToPlayPages.tsx";
 import "../styles/how-to-play.css";
 
 /** How long the player may sit on a page before its main button starts to pulse. */
 export const HOW_TO_PLAY_IDLE_MS = 5000;
 
-function Chip({ chip }: { chip: PlayChip }) {
-  return <span className={`htp-chip is-${chip.tone ?? "neutral"}`}><PixelIcon name={chip.icon} size={12} />{chip.text}</span>;
-}
-
-function StepCard({ step }: { step: PlayStep }) {
-  return <li className="htp-step">
-    <span className="htp-step-number" aria-hidden="true">{step.step}</span>
-    <div className="htp-step-copy">
-      <div className="htp-title-row"><h3>{step.title}</h3>{step.opens && <span className="htp-opens"><PixelIcon name="lock" size={10} />{step.opens}</span>}</div>
-      <p>{step.body}</p>
-    </div>
-    <div className="htp-example" aria-label={`Example: ${step.doThis.text} gives ${step.getThat.map(chip => chip.text).join(", ")}`}>
-      <Chip chip={step.doThis} />
-      <span className="htp-arrow" aria-hidden="true">→</span>
-      <span className="htp-results">{step.getThat.map(chip => <Chip key={chip.text} chip={chip} />)}</span>
-    </div>
-  </li>;
-}
-
-function BasicsPage({ steps }: { steps: readonly PlayStep[] }) {
-  return <>
-    <p className="htp-goal"><PixelIcon name="sun" size={14} />{HOW_TO_PLAY_GOAL}</p>
-    <ol className="htp-steps">{steps.map(step => <StepCard key={step.id} step={step} />)}</ol>
-    <p className="htp-rhythm">{YEAR_RHYTHM} <span>The numbers match the sections on screen and the “This year” checklist.</span></p>
-  </>;
-}
-
-function RoadmapPage({ stages }: { stages: readonly RoadmapStage[] }) {
-  return <>
-    <p className="htp-goal"><PixelIcon name="pin" size={14} />Your life opens up as you grow. Each stage brings new things to do; locked parts of the screen say when they open.</p>
-    <ol className="htp-roadmap">
-      {stages.map((stage, index) => <li key={stage.id} className={`htp-stage is-${stage.state}`}>
-        <span className="htp-stage-dot" aria-hidden="true">{index + 1}</span>
-        <div className="htp-stage-body">
-          <div className="htp-title-row"><h3>{stage.title}</h3><small className="htp-ages">{stageAges(stage)}</small>{stage.state === "current" && <span className="htp-here">You are here</span>}</div>
-          <p className="htp-todo">{stage.todo}</p>
-          {stage.unlocks.length > 0 && <ul className="htp-unlocks" aria-label={`Opens in ${stage.title}`}>
-            {stage.unlocks.map(unlock => <li key={`${unlock.age}:${unlock.text}`}><PixelIcon name={unlock.icon} size={11} /><b>{unlock.age}</b>{unlock.text}</li>)}
-          </ul>}
-        </div>
-      </li>)}
-    </ol>
-  </>;
-}
-
-const PAGES = ["How to play", "Your life, stage by stage"] as const;
+/** Learn first (basics, screen, a year), then plan (life stages), then look things up. */
+const PAGES = ["How to play", "Your screen", "A year, in order", "Life stages", "Look it up"] as const;
 
 export interface HowToPlayProps {
   open: boolean;
@@ -68,8 +24,8 @@ export interface HowToPlayProps {
 }
 
 /**
- * The rule sheet shown whenever the game screen starts: page 1 the basics in numbered steps, page 2 the roadmap
- * of life stages. The clock waits while it is open. After a few idle seconds the main button pulses.
+ * The rule sheet shown whenever the game screen starts: the basics in numbered steps, the screen annotated, a year
+ * in order, the roadmap of life stages and a resource lookup. The clock waits while it is open. After a few idle seconds the main button pulses.
  */
 export default function HowToPlay({ open, steps, stages, tipsOn, onTipsChange, showAtStart, onShowAtStartChange, onClose }: HowToPlayProps) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -95,7 +51,13 @@ export default function HowToPlay({ open, steps, stages, tipsOn, onTipsChange, s
       </div>
       <button type="button" className="htp-close" aria-label="Close How to play" onClick={onClose}>×</button>
     </header>
-    <div className="htp-body" role="tabpanel">{page === 0 ? <BasicsPage steps={steps} /> : <RoadmapPage stages={stages} />}</div>
+    <div className="htp-body" role="tabpanel">
+      {page === 0 && <BasicsPage steps={steps} />}
+      {page === 1 && <ScreenPage />}
+      {page === 2 && <YearPage />}
+      {page === 3 && <RoadmapPage stages={stages} />}
+      {page === 4 && <LookupPage />}
+    </div>
     <footer className="htp-footer">
       <div className="htp-switches">
         <label className="htp-tips">
@@ -109,6 +71,7 @@ export default function HowToPlay({ open, steps, stages, tipsOn, onTipsChange, s
       </div>
       <div className="htp-nav">
         {page > 0 && <button type="button" className="htp-back" onClick={() => setPage(page - 1)}>Back</button>}
+        {!last && <button type="button" className="htp-back" onClick={onClose}>Start playing</button>}
         {last
           ? <button type="button" className={`htp-primary${idle ? " is-nudged" : ""}`} onClick={onClose}>Start playing <span aria-hidden="true">▶</span></button>
           : <button type="button" className={`htp-primary${idle ? " is-nudged" : ""}`} onClick={() => setPage(page + 1)}>Next: {PAGES[page + 1]} <span aria-hidden="true">→</span></button>}

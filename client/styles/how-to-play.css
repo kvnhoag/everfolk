@@ -70,3 +70,49 @@ dialog.how-to-play .htp-title-row h3{margin:0;font-size:19px;font-weight:600;lin
 .htp-ages{font-size:12px;font-weight:600;color:#7a6a4d}
 .htp-close{position:absolute;top:12px;right:14px}
 .htp-header{position:relative;padding-right:60px}
+
+/* Key facts: three numbered lines, like a quick-reference card. */
+.htp-facts{display:grid;gap:4px;margin:0 0 12px;padding:10px 12px 10px 34px;border-left:4px solid var(--htp-gold);background:#fdf6e6;font-size:14px;line-height:1.45}
+.htp-facts li::marker{font-weight:700;color:var(--htp-teal)}
+/* The one rule people trip over, with a warning sign. */
+.htp-warning{display:flex;align-items:flex-start;gap:6px;margin:5px 0 0 !important;padding:4px 8px;border-left:3px solid #a3361f;background:#f8e3dc;color:#7a2413 !important;font-size:12.5px !important}
+.htp-warning svg{flex:none;margin-top:2px;color:#a3361f}
+.htp-pages{flex-wrap:wrap}
+/* Your screen: a small map of the dashboard beside a numbered legend. */
+.htp-screen{display:grid;grid-template-columns:minmax(260px,1fr) minmax(260px,1fr);gap:16px;align-items:start}
+.htp-screen-map{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"header header" "time time" "check check" "household household" "scene action" "focus town" "record town";gap:5px;padding:10px;border:2px solid #886447;background:#efe4c8}
+.htp-area{display:flex;align-items:center;gap:6px;min-height:34px;padding:5px 8px;border:1px solid #b9a37a;background:#fbf5e6;font-size:11.5px;font-weight:600;color:#4b3d29}
+.htp-area b{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--htp-teal);color:var(--htp-gold);font-size:11px}
+.htp-area.is-header{grid-area:header;background:#e5d8b8;color:#6d5a37}
+.htp-area.is-time{grid-area:time;background:var(--htp-teal);color:#f8eed8}
+.htp-area.is-time b,.htp-area.is-household b{background:var(--htp-gold);color:var(--htp-teal)}
+.htp-area.is-check{grid-area:check}
+.htp-area.is-household{grid-area:household;background:#3a2c1a;color:#f2e6c8}
+.htp-area.is-scene{grid-area:scene;min-height:70px;color:#8a7b62}
+.htp-area.is-action{grid-area:action;min-height:70px}
+.htp-area.is-focus{grid-area:focus}
+.htp-area.is-town{grid-area:town;min-height:84px}
+.htp-area.is-record{grid-area:record}
+.htp-legend{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.htp-legend li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;align-items:start}
+.htp-legend strong{font-size:13.5px;color:var(--htp-teal)}
+.htp-legend p{margin:1px 0 0;font-size:12.5px;line-height:1.4}
+.htp-step-number.is-small{width:24px;height:24px;font-size:12px}
+.htp-step-number.is-help{background:var(--htp-gold);color:var(--htp-teal)}
+/* A year, in order: a scripted list; the beats that wait for you are marked. */
+.htp-script{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.htp-script>li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;padding:9px 12px;border:1px solid var(--htp-line);background:#fffaf0}
+.htp-script>li.is-you{border-color:#c79a3b;background:#fff6dd}
+.htp-script-step{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--htp-teal);color:var(--htp-gold);font:700 14px/1 var(--ef-font-display)}
+.htp-script p{margin:2px 0 0;font-size:13px;line-height:1.45}
+.htp-script .htp-line{font-style:italic;color:#6d5a37}
+.htp-you{padding:2px 7px;background:#c79a3b;color:#fff;font:700 10px/1.3 var(--ef-font-body);letter-spacing:.06em;text-transform:uppercase}
+/* Look it up: one row per resource. */
+.htp-lookup{width:100%;border-collapse:collapse;font-size:12.5px}
+.htp-lookup th,.htp-lookup td{padding:7px 8px;border-bottom:1px solid var(--htp-line);text-align:left;vertical-align:top}
+.htp-lookup thead th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6d5a37;background:#f3e7cc}
+.htp-lookup tbody th{white-space:nowrap;color:var(--htp-teal)}
+.htp-lookup tbody th svg{margin-right:6px;vertical-align:-2px}
+.htp-lookup td.is-gain{color:#2f6b3c}
+.htp-lookup td.is-loss{color:#a3361f}
+@media(max-width:720px){.htp-screen{grid-template-columns:1fr}.htp-lookup thead{display:none}.htp-lookup tr{display:grid;padding:6px 0;border-bottom:1px solid var(--htp-line)}.htp-lookup th,.htp-lookup td{border:0;padding:2px 4px}}
