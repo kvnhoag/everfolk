@@ -1,0 +1,60 @@
+{
+  "slug": "demetrius-uncommon-male",
+  "figureId": "demetrius",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Siege Workshop Assistant",
+  "subtitle": "Demetrius the Besieger",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-uncommon-male-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 44,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-uncommon-male.svg",
+  "fittedArt": "assets/fitted/demetrius-uncommon-male.png",
+  "overlaySvg": "source/overlays/demetrius-uncommon-male.svg",
+  "titleSize": 60,
+  "sourceArtSha256": "ef3ea66df0f228b286a8169dbbf3c9941db24ebd5f31b3444f6d94ae79588ebf",
+  "master": "masters/demetrius-uncommon-male.vectorcraft",
+  "export": "exports/demetrius-uncommon-male.png",
+  "thumbnail": "assets/demetrius-uncommon-male-thumb.png",
+  "exportSha256": "39ce5409afe8b82079c3f9152729cdf30dfb7703ba56385ad20c08451ca8d090",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

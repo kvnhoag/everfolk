@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\ptolemy-parent.png",
+  "sourceSha256": "1df4f55dd70e09798283dbbf5655042ded0c3a0e31adad939668f2c4510e0ea9",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\ptolemy-parent-coarse.png",
+  "baseSha256": "41c06c397d5a3ca9474fdc1b08793136025cc8b449e404616a67d2e6eb2e5b63",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\ptolemy-parent-coarse.json",
+  "baseQaSha256": "80d7cf3ca433a4c6d51d1a575b16b541e7f814035f6db7ed3fb52d2c3386a443",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\ptolemy-parent-face.json",
+  "configSha256": "6140ed8c752eab197428ad35f7b1f75f3c0a53a27e1f154d95aef3e1ca79b72f",
+  "config": {
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "radius": [
+          102,
+          135
+        ],
+        "center": [
+          385,
+          190
+        ],
+        "inner_scale": 0.82,
+        "name": "face-eyes"
+      }
+    ],
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\ptolemy-parent-pixel.png",
+  "outputSha256": "6d5d30468a32e7659350cc12f612f908e5c13fc25df2beae9fa86eb510a3669f",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "a79d2f8d3e0fbf61290dbad44d67560671d29eea21b5bc6510e165600bcd65d1",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\ptolemy-parent-face-mask.png",
+  "maskSha256": "5a13b450e3df8077563ae5a861b291c0d442f2635777b53e8e76bdd2fc974592",
+  "maskPixelSha256": "415a3a2dedd8be5a3fd4b95f770e11f0ae9c5fa29491c66da90946166442ec29",
+  "selectedDetailCells": 999,
+  "retainedCoarseCells": 23501,
+  "affectedPixels": 35964,
+  "changedPixels": 35708,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

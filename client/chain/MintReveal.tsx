@@ -28,10 +28,12 @@ export default function MintReveal({ view, affection, card, practice = false, on
       <p>{view.lead}</p>
     </header>
     <div className="ledger-body">
-      {view.portraitMedia
+      {view.figureId && (!view.portraitMedia || /\/assets\/figures\/[^/]+\.png(?:[?#].*)?$/.test(view.portraitMedia))
+        ? <FigureArtwork figureId={view.figureId} rarity={card?.rarity ?? view.rarityLabel} editionText={view.rows.find(row => row.label === "Edition")?.value} fullCard />
+        : view.portraitMedia
         ? <div className="mint-reveal-portrait"><img src={view.portraitMedia} alt={view.title} className="stage-reveal-portrait" /></div>
         : view.figureId
-        ? <FigureArtwork figureId={view.figureId} />
+        ? <FigureArtwork figureId={view.figureId} rarity={card?.rarity ?? view.rarityLabel} editionText={view.rows.find(row => row.label === "Edition")?.value} fullCard />
         : <div className="ledger-emblem" aria-hidden="true"><PixelIcon name={view.emblem ?? "sun"} size={64} /><span>{view.kindLabel}</span></div>}
       <ol className="ledger-rows">{view.rows.map(row => <li className="ledger-row" key={row.label}>
         <span className="ledger-label">{row.label}</span>

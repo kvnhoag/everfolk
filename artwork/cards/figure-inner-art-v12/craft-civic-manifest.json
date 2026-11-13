@@ -1,0 +1,524 @@
+{
+  "assets": [
+    {
+      "slug": "lysippos-uncommon-male",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Bronze Workshop Assistant",
+      "source": "source/lysippos-uncommon-male.png",
+      "prompt": "prompts/lysippos-uncommon-male.txt",
+      "final": "assets/lysippos-uncommon-male-pixel.png",
+      "qa": "qa/lysippos-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          356,
+          290
+        ],
+        "radius": [
+          91,
+          105
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-e965ad9b-48bf-4e11-9287-cff0c28ebc93.png"
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Portrait Modeller",
+      "source": "source/lysippos-rare-male.png",
+      "prompt": "prompts/lysippos-rare-male.txt",
+      "final": "assets/lysippos-rare-male-pixel.png",
+      "qa": "qa/lysippos-rare-male-pixel.json",
+      "face": {
+        "center": [
+          590,
+          300
+        ],
+        "radius": [
+          90,
+          105
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-de7703b9-5bb5-4b26-bde3-fa68ee676b2f.png"
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Bronze Workshop Assistant",
+      "source": "source/lysippos-uncommon-female.png",
+      "prompt": "prompts/lysippos-uncommon-female.txt",
+      "final": "assets/lysippos-uncommon-female-pixel.png",
+      "qa": "qa/lysippos-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          339,
+          284
+        ],
+        "radius": [
+          89,
+          102
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-c78d54ac-5fd8-4bac-b8b8-a69765bf4932.png"
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Portrait Modeller",
+      "source": "source/lysippos-rare-female.png",
+      "prompt": "prompts/lysippos-rare-female.txt",
+      "final": "assets/lysippos-rare-female-pixel.png",
+      "qa": "qa/lysippos-rare-female-pixel.json",
+      "face": {
+        "center": [
+          585,
+          322
+        ],
+        "radius": [
+          91,
+          105
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-ede45fb1-eb6d-4fe5-9c48-d9286387f128.png"
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "title": "Master of Lysippan Form",
+      "source": "source/lysippos-epic-female.png",
+      "prompt": "prompts/lysippos-epic-female.txt",
+      "final": "assets/lysippos-epic-female-pixel.png",
+      "qa": "qa/lysippos-epic-female-pixel.json",
+      "face": {
+        "center": [
+          255,
+          337
+        ],
+        "radius": [
+          88,
+          101
+        ]
+      },
+      "viewAngle": "three-quarter",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-3f044f8d-9c5d-4430-811e-bb985a804ed6.png"
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Expedition Provisioner",
+      "source": "source/pytheas-uncommon-male.png",
+      "prompt": "prompts/pytheas-uncommon-male.txt",
+      "final": "assets/pytheas-uncommon-male-pixel.png",
+      "qa": "qa/pytheas-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          363,
+          316
+        ],
+        "radius": [
+          96,
+          108
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-8d9f47a4-8500-4eb3-985b-9ae6bf22d70b.png"
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Navigation Observer",
+      "source": "source/pytheas-rare-male.png",
+      "prompt": "prompts/pytheas-rare-male.txt",
+      "final": "assets/pytheas-rare-male-pixel.png",
+      "qa": "qa/pytheas-rare-male-pixel.json",
+      "face": {
+        "center": [
+          547,
+          316
+        ],
+        "radius": [
+          99,
+          110
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-92486909-eac4-4d65-9cd1-a32daf46e92d.png"
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Expedition Provisioner",
+      "source": "source/pytheas-uncommon-female.png",
+      "prompt": "prompts/pytheas-uncommon-female.txt",
+      "final": "assets/pytheas-uncommon-female-pixel.png",
+      "qa": "qa/pytheas-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          372,
+          290
+        ],
+        "radius": [
+          94,
+          104
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-bca46564-17a5-41ff-94b1-7f513aeede82.png"
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Navigation Observer",
+      "source": "source/pytheas-rare-female.png",
+      "prompt": "prompts/pytheas-rare-female.txt",
+      "final": "assets/pytheas-rare-female-pixel.png",
+      "qa": "qa/pytheas-rare-female-pixel.json",
+      "face": {
+        "center": [
+          515,
+          313
+        ],
+        "radius": [
+          95,
+          105
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-3f833c13-75b8-4a6a-a6e1-40eea97e5721.png"
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "title": "Keeper of the Northern Voyage Log",
+      "source": "source/pytheas-epic-female.png",
+      "prompt": "prompts/pytheas-epic-female.txt",
+      "final": "assets/pytheas-epic-female-pixel.png",
+      "qa": "qa/pytheas-epic-female-pixel.json",
+      "face": {
+        "center": [
+          408,
+          283
+        ],
+        "radius": [
+          95,
+          104
+        ]
+      },
+      "viewAngle": "three-quarter",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-d9d00ff0-9c21-42ef-b701-f1f934839e32.png"
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "figureId": "menander",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Stage Copyist",
+      "source": "source/menander-uncommon-female.png",
+      "prompt": "prompts/menander-uncommon-female.txt",
+      "final": "assets/menander-uncommon-female-pixel.png",
+      "qa": "qa/menander-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          368,
+          275
+        ],
+        "radius": [
+          97,
+          104
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-f2663bbb-85d8-4b9d-b3fd-8ff72b58f39e.png"
+    },
+    {
+      "slug": "menander-rare-female",
+      "figureId": "menander",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "New Comedy Collaborator",
+      "source": "source/menander-rare-female.png",
+      "prompt": "prompts/menander-rare-female.txt",
+      "final": "assets/menander-rare-female-pixel.png",
+      "qa": "qa/menander-rare-female-pixel.json",
+      "face": {
+        "center": [
+          563,
+          274
+        ],
+        "radius": [
+          84,
+          101
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-89c62ab1-2352-4f67-a1f9-2ee9df7baa10.png"
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "figureId": "menander",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Stage Copyist",
+      "source": "source/menander-uncommon-male.png",
+      "prompt": "prompts/menander-uncommon-male.txt",
+      "final": "assets/menander-uncommon-male-pixel.png",
+      "qa": "qa/menander-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          345,
+          265
+        ],
+        "radius": [
+          94,
+          105
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-a1983edb-8b44-47e0-a4f2-b8bbed6d2b66.png"
+    },
+    {
+      "slug": "menander-rare-male",
+      "figureId": "menander",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "New Comedy Collaborator",
+      "source": "source/menander-rare-male.png",
+      "prompt": "prompts/menander-rare-male.txt",
+      "final": "assets/menander-rare-male-pixel.png",
+      "qa": "qa/menander-rare-male-pixel.json",
+      "face": {
+        "center": [
+          579,
+          273
+        ],
+        "radius": [
+          89,
+          103
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-26271602-4da7-4b28-88b0-550b1f773c04.png"
+    },
+    {
+      "slug": "menander-epic-male",
+      "figureId": "menander",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "title": "Dramatist of New Comedy",
+      "source": "source/menander-epic-male.png",
+      "prompt": "prompts/menander-epic-male.txt",
+      "final": "assets/menander-epic-male-pixel.png",
+      "qa": "qa/menander-epic-male-pixel.json",
+      "face": {
+        "center": [
+          334,
+          226
+        ],
+        "radius": [
+          92,
+          103
+        ]
+      },
+      "viewAngle": "three-quarter",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-548bfadc-1afd-42bf-a74f-8e25cc97be63.png"
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Revenue Records Assistant",
+      "source": "source/cleomenes-uncommon-male.png",
+      "prompt": "prompts/cleomenes-uncommon-male.txt",
+      "final": "assets/cleomenes-uncommon-male-pixel.png",
+      "qa": "qa/cleomenes-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          411,
+          249
+        ],
+        "radius": [
+          96,
+          105
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-fe5ce4cc-ea8e-47e5-a677-dfc1fbc17484.png"
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Grain Supply Auditor",
+      "source": "source/cleomenes-rare-male.png",
+      "prompt": "prompts/cleomenes-rare-male.txt",
+      "final": "assets/cleomenes-rare-male-pixel.png",
+      "qa": "qa/cleomenes-rare-male-pixel.json",
+      "face": {
+        "center": [
+          552,
+          252
+        ],
+        "radius": [
+          94,
+          105
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-c8fc5e11-7483-4ea5-8abd-12e639a37d7a.png"
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Revenue Records Assistant",
+      "source": "source/cleomenes-uncommon-female.png",
+      "prompt": "prompts/cleomenes-uncommon-female.txt",
+      "final": "assets/cleomenes-uncommon-female-pixel.png",
+      "qa": "qa/cleomenes-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          400,
+          249
+        ],
+        "radius": [
+          93,
+          103
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-bacbc1a4-eaaa-4a71-9b90-7428515ffb21.png"
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Grain Supply Auditor",
+      "source": "source/cleomenes-rare-female.png",
+      "prompt": "prompts/cleomenes-rare-female.txt",
+      "final": "assets/cleomenes-rare-female-pixel.png",
+      "qa": "qa/cleomenes-rare-female-pixel.json",
+      "face": {
+        "center": [
+          530,
+          250
+        ],
+        "radius": [
+          93,
+          103
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-7bc58b7d-8bba-4b86-8e93-fc23bb92185d.png"
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "title": "Steward of Egyptian Grain Accounts",
+      "source": "source/cleomenes-epic-female.png",
+      "prompt": "prompts/cleomenes-epic-female.txt",
+      "final": "assets/cleomenes-epic-female-pixel.png",
+      "qa": "qa/cleomenes-epic-female-pixel.json",
+      "face": {
+        "center": [
+          414,
+          266
+        ],
+        "radius": [
+          96,
+          108
+        ]
+      },
+      "viewAngle": "three-quarter",
+      "reviewed": true,
+      "provenance": "Built-in generated edit; unnamed player contributor, imagined appearance",
+      "generatedOriginal": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-aea2-7a50-af2d-dab66d12873d\\exec-4804255f-36c7-4a49-b3cf-8a0d9d314f7f.png"
+    }
+  ]
+}

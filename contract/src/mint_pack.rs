@@ -2,7 +2,8 @@
 //! Raw keys extend existing deployments without changing Contract's Borsh layout.
 use crate::mint::Outcome;
 use crate::random::block_seed;
-use crate::rarity_caps::design_key;
+use crate::card_art::{card_design, card_for, design_of, edition_key, CardArt};
+use crate::rarity_caps::{design_key, RARITY_CAPS};
 use crate::shares::{bps_of, compute_shares};
 use crate::types::*;
 use crate::{Contract, ContractExt};
@@ -24,6 +25,19 @@ pub struct MintCard {
     pub rarity: u8,
     pub affection: u8,
     pub action_id: String,
+    /// The v14 collection card this slot shows; absent when the collection has none for it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub card_id: Option<String>,
+    /// `<design>:rarity:<n>`: the design this slot's rarity is held under. Packs opened before card art omit it and use `design_key`.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub edition_key: Option<String>,
+    /// The rarity's cap (null is unlimited), copies already minted and the serial a mint would get now: a preview, not a reservation.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub edition_limit: Option<Option<u32>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub minted: Option<u32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub next_edition_number: Option<u32>,
 }
 #[near(serializers = [json])]
 #[derive(Clone, Debug)]
@@ -138,9 +152,10 @@ impl Contract {
             "This life ended too early to open a mint pack"
         );
         let hash = hex::encode(env::sha256_array(evidence_json.as_bytes()));
+        let art = self.card_art();
         let mut cards = Vec::new();
         for slot in 0..card_count {
-            cards.push(self.pack_card(life_id.0, &hash, slot, &evidence, &npc_action_id));
+            cards.push(self.pack_card(life_id.0, &hash, slot, &evidence, &npc_action_id, &art));
         }
         let pack = StoredPack {
             view: MintPack {
@@ -206,7 +221,7 @@ impl Contract {
         );
         self.credit(&self.treasury_id.clone(), pack.view.total_fee.0 - paid);
         for c in &pack.view.cards {
-            self.release_card(c);
+            self.release_pack_card(c);
         }
         env::storage_remove(&key(life_id.0));
         life.status = LifeStatus::Minted;
@@ -239,8 +254,10 @@ impl Contract {
             .map(|b| u32::from_le_bytes(b.try_into().unwrap()))
             .unwrap_or(0)
     }
-    fn release_card(&self, card: &MintCard) {
-        self.release_rarity(&design_key(card.figure_id.as_deref(), &card.action_id), card.rarity);
+    pub(crate) fn release_pack_card(&self, card: &MintCard) {
+        let design = card.edition_key.as_deref().and_then(|key| design_of(key, card.rarity)).map(str::to_string)
+            .unwrap_or_else(|| design_key(card.figure_id.as_deref(), &card.action_id));
+        self.release_rarity(&design, card.rarity);
         if let Some(id) = &card.figure_id {
             let count = self
                 .pack_reserved(id)
@@ -260,10 +277,15 @@ impl Contract {
         slot: u8,
         evidence: &Evidence,
         npc: &str,
+        art: &[CardArt],
     ) -> MintCard {
         let seed = block_seed(id, format!("mint-pack:{hash}:{slot}").as_bytes());
-        let outcome = self.roll_outcome(&seed, evidence, &self.params, &self.catalog, npc);
-        self.hold_rarity(&design_key(outcome.figure.as_deref(), npc), outcome.rarity);
+        let outcome = self.roll_outcome(&seed, evidence, &self.params, &self.catalog, npc, art);
+        let sex = evidence.sex.as_deref();
+        let card = card_for(art, outcome.figure.as_deref(), outcome.rarity, &evidence.career_group, sex);
+        let design = card_design(art, outcome.figure.as_deref(), outcome.rarity, &evidence.career_group, sex, npc);
+        let minted = self.minted_count(&design, outcome.rarity);
+        self.hold_rarity(&design, outcome.rarity);
         let action_id = outcome
             .figure
             .as_ref()
@@ -291,13 +313,18 @@ impl Contract {
             rarity: outcome.rarity,
             affection: outcome.affection,
             action_id,
+            card_id: card.map(|card| card.card_id.clone()),
+            edition_key: Some(edition_key(&design, outcome.rarity)),
+            edition_limit: Some(RARITY_CAPS[outcome.rarity as usize]),
+            minted: Some(minted),
+            next_edition_number: Some(minted + 1),
         }
     }
     /// Closing an unminted pack forfeits its outcomes and frees their supply; nothing was paid, so nothing is split.
     pub(crate) fn close_mint_pack(&mut self, id: u64) {
         if let Some(pack) = read(id) {
             for c in &pack.view.cards {
-                self.release_card(c);
+                self.release_pack_card(c);
             }
             env::storage_remove(&key(id));
             event(

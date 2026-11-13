@@ -99,6 +99,29 @@ test("collection preserves historical figure attribution alongside older cards a
   assert.doesNotMatch(html, /[0-9]<\/strong> prestige|[0-9]<\/strong> ultimate titles/);
 });
 
+test("earned figure art uses the recorded gender and title tier without replacing the player's provenance", () => {
+  const { world, life, record } = fixture();
+  life.character!.sex = "female";
+  life.character!.name = "Philista";
+  life.accomplishments = [record("alexander-duty"), record("right-hand-of-alexander")];
+  life.accomplishments[1].name = "Philista, Right Hand of Alexander";
+  const entries = collectLegacyEntries(world, life, []);
+  entries[1].nft = { tokenId: "999", explorerUrl: "https://example.com/token/999" };
+  const before = structuredClone(entries);
+  const html = renderToStaticMarkup(createElement(LegacyGallery, { entries }));
+  assert.match(html, /data-card-art="alexander-parent"/);
+  assert.match(html, /data-card-art="alexander-rare-female"/);
+  assert.doesNotMatch(html, /data-card-art="alexander-rare-male"/);
+  assert.doesNotMatch(html, /data-card-art="alexander-epic/);
+  assert.match(html, /alexander-rare-female-footerless\.webp/);
+  assert.match(html, /Philista, Right Hand of Alexander/);
+  assert.match(html, /Age 22/);
+  assert.match(html, /328 BCE/);
+  assert.match(html, /Edition —\/100/);
+  assert.doesNotMatch(html, /999\/|001\/100/);
+  assert.deepEqual(entries, before, "Selecting illustration and live footer data never awards or changes a saved accomplishment.");
+});
+
 test("older worlds without figure metadata do not display historical paths or empty figure filters", () => {
   const { world, life, record } = fixture();
   life.accomplishments = [record("local-work")];

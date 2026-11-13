@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\zeno-rare-female.png",
+  "sourceSha256": "bb1838f5e3f1ff904ff690b31a706885d8afa34293c357533b747785508717eb",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\zeno-rare-female-coarse.png",
+  "baseSha256": "fe3ae937f6f55a242595ed2813c4a6edf63d3314eec24e0e80873736c11d4422",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\zeno-rare-female-coarse.json",
+  "baseQaSha256": "7336d2c244a014d20e27678ed572f9fedf02495c7f3b050863b121cb9a5ea1e6",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\zeno-rare-female-face.json",
+  "configSha256": "b7d5872195d7c6a63a30d8cb9be45e3b6dc1ec89a6e3e72ee543022fd6d7a19c",
+  "config": {
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "center": [
+          410,
+          273
+        ],
+        "name": "face-eyes",
+        "radius": [
+          108,
+          137
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\zeno-rare-female-pixel.png",
+  "outputSha256": "6613d2b52adefd37bb955fbfc28790f48720e57941330333ff6a8ea769f5d746",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "dd7dac0e5c897fbfa318c1f81ac3e8047996fdaf0c8be4a2482fb5d8a93ce5a1",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\zeno-rare-female-face-mask.png",
+  "maskSha256": "2073b64a464bc1a0f720dbbb459d4dd597ce88e2fc115bd11eda228f78c43f2c",
+  "maskPixelSha256": "7b86cc5f1972e2ce6b1d6b6fff39059d208635b05c515acc9e38cbadcbb4610c",
+  "selectedDetailCells": 1070,
+  "retainedCoarseCells": 23430,
+  "affectedPixels": 38520,
+  "changedPixels": 38073,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

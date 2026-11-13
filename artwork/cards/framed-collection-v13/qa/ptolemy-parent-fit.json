@@ -1,0 +1,60 @@
+{
+  "slug": "ptolemy-parent",
+  "figureId": "ptolemy",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Ptolemy I Soter",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-parent-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 64,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-parent.svg",
+  "fittedArt": "assets/fitted/ptolemy-parent.png",
+  "overlaySvg": "source/overlays/ptolemy-parent.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "d5a2be831ca72f21a1d8800130abe31aeea3d415d11deb1df3f4745888f5d839",
+  "master": "masters/ptolemy-parent.vectorcraft",
+  "export": "exports/ptolemy-parent.png",
+  "thumbnail": "assets/ptolemy-parent-thumb.png",
+  "exportSha256": "f042ccd418ad8ce22479897462b644efb7c02c03fe14541838daddc71b569e32",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

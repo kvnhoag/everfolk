@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\menander-rare-female.png",
+  "sourceSha256": "7af523ba7e36588fa74966b09445cb2f7048c4f67e6b9c7b749b69baf9161514",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\menander-rare-female-coarse.png",
+  "baseSha256": "ffeaa127ffc723c856e6194a60d0d40a94a2c25b2f14c027f513fbc4904c76cf",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\menander-rare-female-coarse.json",
+  "baseQaSha256": "59316f415bc7e1543ff39ef27dda22f867ec24fe104fad6316dfe5d584c67fb1",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\menander-rare-female-face.json",
+  "configSha256": "3896d09e21ad706062980c88985095d5786e64cbad8a9627f6fdaf9c7d75e714",
+  "config": {
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "center": [
+          563,
+          274
+        ],
+        "name": "face-eyes",
+        "radius": [
+          84,
+          101
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\menander-rare-female-pixel.png",
+  "outputSha256": "f3fbb1650229d011fdb664271789ababcad1e466ba6b8a2681d2d4d816dcf546",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "992e957516ad5532566522a69290286e8a98964c49e964a5376499db5bbb9781",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\menander-rare-female-face-mask.png",
+  "maskSha256": "ab337620a53b64f59204bd44c0d5f9a1b259c75dc5334b5e728a7f1ea44300f2",
+  "maskPixelSha256": "f05d29b932e2e253aae0776c71b20fc3c1fccba563db03342905eef4dbf5a37b",
+  "selectedDetailCells": 614,
+  "retainedCoarseCells": 23886,
+  "affectedPixels": 22104,
+  "changedPixels": 21828,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

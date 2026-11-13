@@ -1,0 +1,60 @@
+{
+  "slug": "pytheas-rare-male",
+  "figureId": "pytheas",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Navigation Observer",
+  "subtitle": "Pytheas of Massalia",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 32,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-rare-male.svg",
+  "fittedArt": "assets/fitted/pytheas-rare-male.png",
+  "overlaySvg": "source/overlays/pytheas-rare-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "1135ab771cc67bc726f2373f45284ea31888a4ad1de6014d4682987d45a399a6",
+  "master": "masters/pytheas-rare-male.vectorcraft",
+  "export": "exports/pytheas-rare-male.png",
+  "thumbnail": "assets/pytheas-rare-male-thumb.png",
+  "exportSha256": "d8f34117e0cc41acad8a8f68fc92d665db1b0edffa25dc81fbcf4ca6ebf29534",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

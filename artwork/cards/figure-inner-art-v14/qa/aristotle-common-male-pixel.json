@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\aristotle-common-male.png",
+  "sourceSha256": "3699de787a0f51a16ca0cf732cf08e0eb63c5b780ccb7a0dd34eb8af4cd6ad68",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\aristotle-common-male-coarse.png",
+  "baseSha256": "b85dd12ffd2c167e4549151f90c336bfa5586b7ddf0195264878429119bf1ec5",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\aristotle-common-male-coarse.json",
+  "baseQaSha256": "311f869260aa73fbecf163e843f750dc72d93c09fb338d28d6b2ccc5b8284658",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\aristotle-common-male-face.json",
+  "configSha256": "9b7baf66a4f1fab1915de82be59d4f02cbe99b02fb8836d9f8c1e6fa97f7f278",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          423,
+          244
+        ],
+        "radius": [
+          102,
+          132
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\aristotle-common-male-pixel.png",
+  "outputSha256": "01e296d07ce64c618f9ca7f0e0f306ee958de34a01dc17d2860c7c32fe6e417d",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "6452f686dc5419070a00260fbb50c52660124262e09ab231139b28c26cbf6ace",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\aristotle-common-male-face-mask.png",
+  "maskSha256": "49245ecc4f5415f00da3ce6c8d46fdc4e3f90d827a96aa174d36df7ba62dd1aa",
+  "maskPixelSha256": "25a065d1428fc55087d2e610909d301d00d3a4d8d0047d2fd8540805e78bbe53",
+  "selectedDetailCells": 986,
+  "retainedCoarseCells": 23514,
+  "affectedPixels": 35496,
+  "changedPixels": 35320,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

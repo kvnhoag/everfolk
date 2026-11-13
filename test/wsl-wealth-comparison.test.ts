@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
 import type { Effect, LifeState, Origin, WorldPack } from "../src/types.ts";
-import { formatWealthPercentile, getWealthComparison } from "../client/models/wealth-comparison.ts";
+import { formatWealthPercentile, formatWealthStanding, getWealthComparison } from "../client/models/wealth-comparison.ts";
 
 function origin(id: string, weight: number, min?: number, max = min, effects: Effect[] = []): Origin {
   return { id, title: id, text: "A reference household.", weight, effects,
@@ -170,9 +170,27 @@ test("comparison preserves the world, state and RNG and leaves legacy scores alo
 test("percentile labels use whole percentages without rounding partial ranks to endpoints", () => {
   assert.equal(formatWealthPercentile(0), "0%");
   assert.equal(formatWealthPercentile(0.001), "<1%");
-  assert.equal(formatWealthPercentile(0.1), "<1%");
+  assert.equal(formatWealthPercentile(0.9), "<1%");
+  assert.equal(formatWealthPercentile(1), "1%");
+  assert.equal(formatWealthPercentile(75.49), "75%");
+  assert.equal(formatWealthPercentile(75.5), "76%");
   assert.equal(formatWealthPercentile(75.678), "76%");
+  assert.equal(formatWealthPercentile(99), "99%");
+  assert.equal(formatWealthPercentile(0.1), "<1%");
   assert.equal(formatWealthPercentile(99.9), ">99%");
   assert.equal(formatWealthPercentile(99.999), ">99%");
   assert.equal(formatWealthPercentile(100), "100%");
+});
+
+test("wealth standing rounds its displayed share while retaining the exact median", () => {
+  assert.equal(formatWealthStanding(85.1), "Top 15%");
+  assert.equal(formatWealthStanding(84.5), "Top 16%");
+  assert.equal(formatWealthStanding(14.9), "Bottom 15%");
+  assert.equal(formatWealthStanding(49.9), "Bottom 50%");
+  assert.equal(formatWealthStanding(50), "At the median");
+  assert.equal(formatWealthStanding(50.1), "Top 50%");
+  assert.equal(formatWealthStanding(0), "Bottom <1%");
+  assert.equal(formatWealthStanding(0.1), "Bottom <1%");
+  assert.equal(formatWealthStanding(99.9), "Top <1%");
+  assert.equal(formatWealthStanding(100), "Top <1%");
 });

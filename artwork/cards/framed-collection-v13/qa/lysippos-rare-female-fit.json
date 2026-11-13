@@ -1,0 +1,60 @@
+{
+  "slug": "lysippos-rare-female",
+  "figureId": "lysippos",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Portrait Modeller",
+  "subtitle": "Lysippos",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-rare-female-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 26,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/lysippos-rare-female.svg",
+  "fittedArt": "assets/fitted/lysippos-rare-female.png",
+  "overlaySvg": "source/overlays/lysippos-rare-female.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "55440c717a6d88ef729ef107c2180ecd8b52ccfa30fd1a68d58e5fa4cea578ba",
+  "master": "masters/lysippos-rare-female.vectorcraft",
+  "export": "exports/lysippos-rare-female.png",
+  "thumbnail": "assets/lysippos-rare-female-thumb.png",
+  "exportSha256": "6f9be56614ea2090902c52b42e1d1594dac46cc7eeb89f804ed84ad1cc0ed0a8",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

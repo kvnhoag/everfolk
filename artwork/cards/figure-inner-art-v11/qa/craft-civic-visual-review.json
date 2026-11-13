@@ -1,0 +1,24 @@
+{
+  "reviewedBy": "craft_civic_art",
+  "date": "2026-11-13",
+  "count": 16,
+  "sourceReview": "Every generated painting inspected in its native tool output before filtering.",
+  "displayReview": "All 16 filtered finals inspected in four 2x2 sheets; every illustration displayed at 420x525 using nearest-neighbour review scaling.",
+  "filter": "PixelOE verified 3px body and 2px selected face region; no smoothing or colour/alpha blending.",
+  "sheets": ["review/craft-civic-lysippos.png", "review/craft-civic-pytheas.png", "review/craft-civic-menander.png", "review/craft-civic-cleomenes.png"],
+  "findings": [
+    "Named historical parent faces remain distinct from their unnamed contributor identities.",
+    "Each three-stage contribution sequence retains one illustrative contributor and outfit family while changing the work/action.",
+    "Lysippos work emphasizes actual bronze, measured clay models, casting and substantial commissions.",
+    "Pytheas set uses ancient vessels, practical stores, naked-eye observation and retained accounts, without asserting a location of Thule or using modern navigation equipment.",
+    "Menander subcards depict copy/rehearsal/staging with one consistent unnamed female contributor, not an invented historical personal pupil.",
+    "Cleomenes scenes show accounting and grain control without inventing benevolent historical relief policy.",
+    "Faces, primary pupils, hands and primary tools remain readable at card size; no blank eyes, duplicated limbs, conspicuous extra fingers or fused main props identified."
+  ],
+  "limits": [
+    "All historical appearances and unreferenced costume details are imaginative game art, not authenticated portraits or archaeological reconstructions.",
+    "Records use pictorial diagrams/tally-like marks rather than readable historical documents; they do not reproduce actual works.",
+    "Review is visual plus deterministic pixel/source integrity checks, not user approval or historical authentication."
+  ],
+  "backgroundWorkers": "All task-owned filter sessions completed and were collected; Drawing image/font/graphics handles disposed by the review script."
+}

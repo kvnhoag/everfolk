@@ -1,0 +1,80 @@
+{
+  "figureId": "menander",
+  "figureName": "Menander",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "New Comedy Collaborator",
+  "displayTitle": "New Comedy Collaborator",
+  "subtitle": "Partner in Menander's Craft",
+  "bodyTitle": "The Scene Finds Life",
+  "bodyText": "A dramatic collaborator tests dialogue against performance and shapes the movement of a scene. A sharp ear and generous judgment help the company turn a clever script into recognisable, breathing human comedy.",
+  "sourceRoleSlug": "menander-rare",
+  "newArt": false,
+  "slug": "menander-rare-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "New Comedy Collaborator",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-rare-male-pixel.png",
+  "sourceArtSlug": "menander-rare-male",
+  "editionLimit": 100,
+  "collectionIndex": 51,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/menander.svg",
+    "sha256": "2af26272ba054521fd1f6ebb003ed481b90acb418d5b306d555c2aec0cdbb5d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A dramatic collaborator tests dialogue against performance",
+    "and shapes the movement of a scene. A sharp ear and",
+    "generous judgment help the company turn a clever script",
+    "into recognisable, breathing human comedy."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-rare-male.svg",
+  "fittedArt": "assets/fitted/menander-rare-male.png",
+  "overlaySvg": "source/overlays/menander-rare-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "b98ca2d1d620d95526d1861ff252d9801dcb95457951d9f41bf9f56f43a9b310",
+  "master": "masters/menander-rare-male.vectorcraft",
+  "export": "exports/menander-rare-male.png",
+  "thumbnail": "assets/menander-rare-male-thumb.png",
+  "exportSha256": "cfaa95dd8756767ca59deec2e9cf7fdbe6cda448bb3d110cbd883a18461a371b",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582265,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

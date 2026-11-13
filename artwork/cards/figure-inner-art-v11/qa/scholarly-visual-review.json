@@ -1,0 +1,33 @@
+{
+  "assetCount": 16,
+  "reviewDate": "2026-11-13",
+  "fullResolutionSourcesReviewed": true,
+  "cardSizeReview": "Four row sheets, each image shown at 420 x 525 using nearest-neighbour; reviewed after filtering.",
+  "reviewSheets": [
+    "review/scholarly-row-1.png",
+    "review/scholarly-row-2.png",
+    "review/scholarly-row-3.png",
+    "review/scholarly-row-4.png"
+  ],
+  "checks": {
+    "faceAndPupilsReadable": true,
+    "handsAndToolContactsVisuallyReviewed": true,
+    "consistentContributorIdentityWithinEachFigure": true,
+    "parentAndContributorIdentityDistinct": true,
+    "roleSpecificWorkVisible": true,
+    "framesAndTypeExcludedFromArt": true,
+    "allFinalDimensions": [
+      840,
+      1050
+    ],
+    "allSourcesUnchanged": true,
+    "allMixedGridReadbackAndDeterminismChecksPassed": true,
+    "allOutsideFaceMaskChangesZero": true
+  },
+  "provenanceLimits": [
+    "Historical faces, exact garments, architecture and incidental objects are imaginative interpretations, not authenticated reconstructions.",
+    "Some Euclid and Zeno contribution scenes include incidental armillary models as school-workspace props; these do not establish a specific invention or historical possession.",
+    "Contributor scenes depict the player's independent work; they do not claim personal instruction by the associated historical figure."
+  ],
+  "workers": "All filter commands completed; System.Drawing handles disposed."
+}

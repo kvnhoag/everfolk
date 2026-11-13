@@ -1,0 +1,81 @@
+{
+  "figureId": "nearchus",
+  "figureName": "Nearchus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Pilot of the Indus Fleet",
+  "displayTitle": "Pilot of the Indus Fleet",
+  "subtitle": "Guide of Nearchus' Passage",
+  "bodyTitle": "A Passage Worth Trusting",
+  "bodyText": "A fleet pilot weighs currents, shoals, and the shape of the coast before setting a course. Seasoned judgment turns uncertain water into a passage others can follow, protecting the expedition when confidence alone would fail.",
+  "sourceRoleSlug": "nearchus-rare",
+  "newArt": true,
+  "sceneBrief": "An experienced ancient fleet pilot compares a coastal sketch with the ship's bearing and distant shore, no magnetic compass or modern nautical tools.",
+  "slug": "nearchus-rare-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Pilot of the Indus Fleet",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/nearchus-rare-female-pixel.png",
+  "sourceArtSlug": "nearchus-rare-female",
+  "editionLimit": 100,
+  "collectionIndex": 106,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/nearchus.svg",
+    "sha256": "28d24ec879c59f1d29cb2583e7fdcbd8f26521ef8b1f0ed8042ccc8d02e88971",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A fleet pilot weighs currents, shoals, and the shape of the",
+    "coast before setting a course. Seasoned judgment turns",
+    "uncertain water into a passage others can follow,",
+    "protecting the expedition when confidence alone would fail."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/nearchus-rare-female.svg",
+  "fittedArt": "assets/fitted/nearchus-rare-female.png",
+  "overlaySvg": "source/overlays/nearchus-rare-female.svg",
+  "titleSize": 60,
+  "sourceArtSha256": "f27238f4ef3f2648e0f8c5075881db276b7dcffe6d5f3307eaeb8b35ffcd0dd4",
+  "master": "masters/nearchus-rare-female.vectorcraft",
+  "export": "exports/nearchus-rare-female.png",
+  "thumbnail": "assets/nearchus-rare-female-thumb.png",
+  "exportSha256": "a473e0c4501828121b2fcae3c01f71ad063064dd573e07d3e44bf5eb5b6813e5",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582225,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

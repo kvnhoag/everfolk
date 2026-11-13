@@ -433,3 +433,18 @@
   gap: 6px;
   margin-top: 8px;
 }
+
+/* Approved full-face cards retain their own frame, type and native 5:7 fit. */
+.has-collection-art .ef-card-inner { min-height:0; aspect-ratio:5/7; border-radius:4.667%; }
+.has-collection-art .ef-card-face { border-radius:4.667%; }
+.ef-card-front.is-collection-art { padding:0; border:0; background:transparent; box-shadow:none; }
+.ef-card-front.is-collection-art::after { content:none; }
+.ef-card-inner.is-selected .ef-card-front.is-collection-art { border:0; background:transparent; box-shadow:0 0 0 3px #72b29d,0 0 24px #8dc9ad70; }
+.has-collection-art .ef-card-inner:focus-visible { outline:3px solid #6caaa0; outline-offset:5px; }
+.ef-card-front.is-collection-art .collection-card-art { width:100%; height:100%; }
+.ef-card-collection-details { margin-top:9px; padding:10px; background:#f5eddd; border:1px solid #d4c7ad; border-radius:7px; color:#263b43; }
+.ef-card-collection-facts { display:flex; flex-wrap:wrap; gap:7px 12px; font-size:11px; line-height:1.5; }
+.ef-card-collection-facts strong { margin-left:auto; }
+.ef-card-front.rarity-0:not(.is-collection-art) { border-color:#838b82; }
+.ef-card-front.rarity-1:not(.is-collection-art) { border-color:#60896e; }
+.figure-ownership-heading { margin:30px clamp(16px,3vw,40px) 18px; color:#314d3e; font:400 27px/1.25 var(--ef-font-display); }

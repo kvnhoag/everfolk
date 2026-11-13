@@ -1,0 +1,734 @@
+[
+  {
+    "slug": "nearchus-common-male",
+    "roleId": "nearchus-common",
+    "figureId": "nearchus",
+    "figureName": "Nearchus",
+    "title": "Fleet Deckhand",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "male",
+    "desiredViewAngle": "young adult man, open frontal face angled slightly down toward his work, short dark hair, clean shaven",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\nearchus-title-male.png",
+    "prompt": "prompts/nearchus-common-male.txt",
+    "sceneBrief": "A humble fleet deckhand tends rigging on an ancient expedition ship, simple working tunic, salt-worn rope, coastal water behind.",
+    "source": "source/nearchus-common-male.png",
+    "final": "assets/nearchus-common-male-pixel.png",
+    "coarse": "assets/nearchus-common-male-coarse.png",
+    "qa": "qa/nearchus-common-male-pixel.json",
+    "coarseQa": "qa/nearchus-common-male-coarse.json",
+    "faceConfig": "source/nearchus-common-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "c1cbdfe3c9961b9901e90786abed2b1bad67660cb02029ed222a438e1d00e3b6",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          419,
+          247
+        ],
+        "radius": [
+          92,
+          112
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-f298f164-47ef-48d5-85ca-92a3c5d2b170.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "f087744a731eef69176165b3749c0fbf7ec10fb7bae280d7b8fc46aa4df9316f",
+    "coarseSha256": "54e36b3baf27b006a9bd5e291a1b9131790979caaee5e40d61d05af3587229ba",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "nearchus-common-female",
+    "roleId": "nearchus-common",
+    "figureId": "nearchus",
+    "figureName": "Nearchus",
+    "title": "Fleet Deckhand",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "desiredViewAngle": "young adult woman, nearly frontal face with a slight turn to image right, practical tied-back dark hair",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\nearchus-title-female.png",
+    "prompt": "prompts/nearchus-common-female.txt",
+    "sceneBrief": "A humble fleet deckhand tends rigging on an ancient expedition ship, simple working tunic, salt-worn rope, coastal water behind.",
+    "source": "source/nearchus-common-female.png",
+    "final": "assets/nearchus-common-female-pixel.png",
+    "coarse": "assets/nearchus-common-female-coarse.png",
+    "qa": "qa/nearchus-common-female-pixel.json",
+    "coarseQa": "qa/nearchus-common-female-coarse.json",
+    "faceConfig": "source/nearchus-common-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "fcf1b4236f13a6f06485f69592f5d657fea85358c4c656cf2470ab9a88f6525b",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          479,
+          247
+        ],
+        "radius": [
+          96,
+          123
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-29fc221e-5fd5-41d5-9939-8b2ff0356e0d.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "91820282ed875a23617b3df4ec43550e263f1999bdedd81dc24782d1883c5f54",
+    "coarseSha256": "32b50d462d42d5a3942302d109655cce3cbb08bec59fcd32798fe022a0a1d40c",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "nearchus-uncommon-male",
+    "roleId": "nearchus-uncommon",
+    "figureId": "nearchus",
+    "figureName": "Nearchus",
+    "title": "Coastal Scout",
+    "kind": "contribution",
+    "tier": "uncommon",
+    "gender": "male",
+    "desiredViewAngle": "adult man in a clear left-facing profile looking toward a coastal headland, sun-weathered skin, short dark beard",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\nearchus-title-male.png",
+    "prompt": "prompts/nearchus-uncommon-male.txt",
+    "sceneBrief": "A coastal scout studies headland landmarks from a low ancient ship, holds a simple wax note tablet, practical tunic and cloak.",
+    "source": "source/nearchus-uncommon-male.png",
+    "final": "assets/nearchus-uncommon-male-pixel.png",
+    "coarse": "assets/nearchus-uncommon-male-coarse.png",
+    "qa": "qa/nearchus-uncommon-male-pixel.json",
+    "coarseQa": "qa/nearchus-uncommon-male-coarse.json",
+    "faceConfig": "source/nearchus-uncommon-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "a33e7acdf140ec72487e07a718d1f2c3eef04e456d7b5dda7799582a82ec4889",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          479,
+          236
+        ],
+        "radius": [
+          98,
+          123
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-c0aa7083-f30a-4a17-adba-00f616b9f5c8.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "377dccc7e265c35e436249d401d057a30cc5a9c7196ad0b711a8396f5217fb8c",
+    "coarseSha256": "ecb11a2c44f2b4e073c14e8b9284fb54ae8ee762342fc20b7baef2dde96e0be4",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "nearchus-uncommon-female",
+    "roleId": "nearchus-uncommon",
+    "figureId": "nearchus",
+    "figureName": "Nearchus",
+    "title": "Coastal Scout",
+    "kind": "contribution",
+    "tier": "uncommon",
+    "gender": "female",
+    "desiredViewAngle": "adult woman in a clear right-facing profile looking toward a coastal headland, practical braided hair",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\nearchus-title-female.png",
+    "prompt": "prompts/nearchus-uncommon-female.txt",
+    "sceneBrief": "A coastal scout studies headland landmarks from a low ancient ship, holds a simple wax note tablet, practical tunic and cloak.",
+    "source": "source/nearchus-uncommon-female.png",
+    "final": "assets/nearchus-uncommon-female-pixel.png",
+    "coarse": "assets/nearchus-uncommon-female-coarse.png",
+    "qa": "qa/nearchus-uncommon-female-pixel.json",
+    "coarseQa": "qa/nearchus-uncommon-female-coarse.json",
+    "faceConfig": "source/nearchus-uncommon-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "fa36ca29418cc0fa2c0910cacb7c416194e3a0d540a0785ee401e64a65df7a2d",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          449,
+          214
+        ],
+        "radius": [
+          91,
+          113
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-37db3053-36e1-4da7-af9d-1596699c5693.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "b77f4cdbd9d60b49ca45d742567f3d2e85139a3fa14ea45a69fb39c616257798",
+    "coarseSha256": "5bee9c7210f34f9308fbdfd8ee6af8cff6b08a668b7ddd63f9742e21c21c3f3d",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "nearchus-rare-male",
+    "roleId": "nearchus-rare",
+    "figureId": "nearchus",
+    "figureName": "Nearchus",
+    "title": "Pilot of the Indus Fleet",
+    "kind": "contribution",
+    "tier": "rare",
+    "gender": "male",
+    "desiredViewAngle": "mature adult man in a strong right-facing three-quarter view, composed gaze toward the route, close dark beard",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\nearchus-title-male.png",
+    "prompt": "prompts/nearchus-rare-male.txt",
+    "sceneBrief": "An experienced ancient fleet pilot compares a coastal sketch with the ship's bearing and distant shore, no magnetic compass or modern nautical tools.",
+    "source": "source/nearchus-rare-male.png",
+    "final": "assets/nearchus-rare-male-pixel.png",
+    "coarse": "assets/nearchus-rare-male-coarse.png",
+    "qa": "qa/nearchus-rare-male-pixel.json",
+    "coarseQa": "qa/nearchus-rare-male-coarse.json",
+    "faceConfig": "source/nearchus-rare-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "2c4a2e8fd4186c01dd48b13321bf3c3c197ee43951b6903392384678739dff5d",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          389,
+          225
+        ],
+        "radius": [
+          105,
+          125
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-3cbc35ed-3b37-42e4-a53e-def5a1cc08a8.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "76c1ce865cc743406c34eebd0474bd9de87e20165cb6af7d04e1d279a842aa22",
+    "coarseSha256": "84df42074ff01181ff79eda83e8ad3d4e083539c85bd3a2b4436d3bd595c6068",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "nearchus-rare-female",
+    "roleId": "nearchus-rare",
+    "figureId": "nearchus",
+    "figureName": "Nearchus",
+    "title": "Pilot of the Indus Fleet",
+    "kind": "contribution",
+    "tier": "rare",
+    "gender": "female",
+    "desiredViewAngle": "mature adult woman nearly frontal, head tilted slightly up and gaze directed to image left, dark hair tied at the nape",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\nearchus-title-female.png",
+    "prompt": "prompts/nearchus-rare-female.txt",
+    "sceneBrief": "An experienced ancient fleet pilot compares a coastal sketch with the ship's bearing and distant shore, no magnetic compass or modern nautical tools.",
+    "source": "source/nearchus-rare-female.png",
+    "final": "assets/nearchus-rare-female-pixel.png",
+    "coarse": "assets/nearchus-rare-female-coarse.png",
+    "qa": "qa/nearchus-rare-female-pixel.json",
+    "coarseQa": "qa/nearchus-rare-female-coarse.json",
+    "faceConfig": "source/nearchus-rare-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "ad9e4bac3f3e3b40fb4c29990c67e3de0fe03076c58b4e3c117d56bccadcf86c",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          427,
+          202
+        ],
+        "radius": [
+          105,
+          129
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-85843ea4-5779-43bd-8098-669b82321b75.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "f27238f4ef3f2648e0f8c5075881db276b7dcffe6d5f3307eaeb8b35ffcd0dd4",
+    "coarseSha256": "0e73c65a69b8fa3816db00c43c8b13b73913a5e1c8cebf18c974e328e5f5e399",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "eumenes-common-male",
+    "roleId": "eumenes-common",
+    "figureId": "eumenes",
+    "figureName": "Eumenes of Cardia",
+    "title": "Archive Attendant",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "male",
+    "desiredViewAngle": "young adult man in a left-facing three-quarter view looking down toward a scroll bundle, short dark wavy hair, clean shaven",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\eumenes-title-male.png",
+    "prompt": "prompts/eumenes-common-male.txt",
+    "sceneBrief": "A humble archive attendant orders tied papyrus scroll bundles on wooden shelves in a Macedonian royal office, plain tunic and attentive expression.",
+    "source": "source/eumenes-common-male.png",
+    "final": "assets/eumenes-common-male-pixel.png",
+    "coarse": "assets/eumenes-common-male-coarse.png",
+    "qa": "qa/eumenes-common-male-pixel.json",
+    "coarseQa": "qa/eumenes-common-male-coarse.json",
+    "faceConfig": "source/eumenes-common-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "cb41b3e4d319ff87412249d8ac7e0a4cff69ae17915e0e470fb5fdeba7551cba",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          501,
+          258
+        ],
+        "radius": [
+          100,
+          119
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-ccdfce7a-02f1-4d4a-8f5d-87c4331f564c.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "c40d5be871e7072701921152feeceda6d164e3322d10eaf345a822c78c9b7210",
+    "coarseSha256": "8560cbad0f46a40b3f3b6633bb862dfdad15633fb7f3e0601ae80a4003783abd",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "eumenes-common-female",
+    "roleId": "eumenes-common",
+    "figureId": "eumenes",
+    "figureName": "Eumenes of Cardia",
+    "title": "Archive Attendant",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "desiredViewAngle": "young adult woman nearly frontal with chin lowered toward the bundle in her hands, practical dark hair tied up",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\eumenes-title-female.png",
+    "prompt": "prompts/eumenes-common-female.txt",
+    "sceneBrief": "A humble archive attendant orders tied papyrus scroll bundles on wooden shelves in a Macedonian royal office, plain tunic and attentive expression.",
+    "source": "source/eumenes-common-female.png",
+    "final": "assets/eumenes-common-female-pixel.png",
+    "coarse": "assets/eumenes-common-female-coarse.png",
+    "qa": "qa/eumenes-common-female-pixel.json",
+    "coarseQa": "qa/eumenes-common-female-coarse.json",
+    "faceConfig": "source/eumenes-common-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "5e15c8fd501b93faf716974989b432d84db73649687e07fa45e4ccd5eee22a10",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          382,
+          255
+        ],
+        "radius": [
+          94,
+          118
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-e8d90e73-375a-4e00-85a2-818e980f94a5.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "fca02cb9035fbd60ccb1055b16b86045c33628913dc41da6f081afc82b3f69e5",
+    "coarseSha256": "01f5a9155fef9567fc18ff5328921d5f0bea9f2b8d896aa36dc9f030ec6100e5",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "eumenes-uncommon-male",
+    "roleId": "eumenes-uncommon",
+    "figureId": "eumenes",
+    "figureName": "Eumenes of Cardia",
+    "title": "Royal Dispatch Copyist",
+    "kind": "contribution",
+    "tier": "uncommon",
+    "gender": "male",
+    "desiredViewAngle": "adult man in a clear left-facing profile, eyes lowered toward the letter, short straight dark hair, clean shaven",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\eumenes-title-male.png",
+    "prompt": "prompts/eumenes-uncommon-male.txt",
+    "sceneBrief": "A royal dispatch copyist uses a reed pen to copy a letter beside a sealed roll at a modest royal-office desk; no quill pen.",
+    "source": "source/eumenes-uncommon-male.png",
+    "final": "assets/eumenes-uncommon-male-pixel.png",
+    "coarse": "assets/eumenes-uncommon-male-coarse.png",
+    "qa": "qa/eumenes-uncommon-male-pixel.json",
+    "coarseQa": "qa/eumenes-uncommon-male-coarse.json",
+    "faceConfig": "source/eumenes-uncommon-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "ed39f8faae68aa1a42930a02ab71686c24b27923a58b319c1fe203db6093e033",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          427,
+          315
+        ],
+        "radius": [
+          94,
+          118
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-789b3534-878a-492b-9c88-6a626ef7a07d.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "2a80d7784d5f81f8d50be37a47139cbfbc321490756f93fda31f258f8f9ad910",
+    "coarseSha256": "80a4cef5f80f392b620310cd8411c70c4017b18200e2db7690c5d8d8bc5f47f4",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "eumenes-uncommon-female",
+    "roleId": "eumenes-uncommon",
+    "figureId": "eumenes",
+    "figureName": "Eumenes of Cardia",
+    "title": "Royal Dispatch Copyist",
+    "kind": "contribution",
+    "tier": "uncommon",
+    "gender": "female",
+    "desiredViewAngle": "adult woman in a right-facing three-quarter view, eyes lowered toward the letter, loosely bound dark hair",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\eumenes-title-female.png",
+    "prompt": "prompts/eumenes-uncommon-female.txt",
+    "sceneBrief": "A royal dispatch copyist uses a reed pen to copy a letter beside a sealed roll at a modest royal-office desk; no quill pen.",
+    "source": "source/eumenes-uncommon-female.png",
+    "final": "assets/eumenes-uncommon-female-pixel.png",
+    "coarse": "assets/eumenes-uncommon-female-coarse.png",
+    "qa": "qa/eumenes-uncommon-female-pixel.json",
+    "coarseQa": "qa/eumenes-uncommon-female-coarse.json",
+    "faceConfig": "source/eumenes-uncommon-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "61942c74b31503e867517a0b55148c56325269a6e3aadd44018baf64e3bec24d",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          479,
+          285
+        ],
+        "radius": [
+          100,
+          125
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-6a382000-8990-40cf-a06f-b4a92461bc11.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "2d72bdf66ba090c662fdf5e73734b46594daaa002f66157ba85848bdcfb64a71",
+    "coarseSha256": "e2425e89430e9d58da3cc09acd85c0fdbf4b389ce0cedec764cdce955aebfe93",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "eumenes-rare-male",
+    "roleId": "eumenes-rare",
+    "figureId": "eumenes",
+    "figureName": "Eumenes of Cardia",
+    "title": "Campaign Correspondent",
+    "kind": "contribution",
+    "tier": "rare",
+    "gender": "male",
+    "desiredViewAngle": "mature adult man with a frontal face looking slightly upward toward image right, short dark hair and restrained beard",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\eumenes-title-male.png",
+    "prompt": "prompts/eumenes-rare-male.txt",
+    "sceneBrief": "A campaign correspondent compares a simple map and multiple dispatches at a field desk, practical cloak and reed pen, camp visible beyond.",
+    "source": "source/eumenes-rare-male.png",
+    "final": "assets/eumenes-rare-male-pixel.png",
+    "coarse": "assets/eumenes-rare-male-coarse.png",
+    "qa": "qa/eumenes-rare-male-pixel.json",
+    "coarseQa": "qa/eumenes-rare-male-coarse.json",
+    "faceConfig": "source/eumenes-rare-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "f8309aa1fc52a9426eb49b3057f7f76c67f80efe680a6cd48cf133d9582397e0",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          419,
+          202
+        ],
+        "radius": [
+          105,
+          125
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-13028db1-ee75-4ead-a047-443b0dc311bb.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "1962940462c4e362b60e79b8722a1a7522566bd22b41e908383e3d035f95e24b",
+    "coarseSha256": "24591042bef971e2bd04f5ed77fbf872e9f323f7c778aebbfa5d106a951b6930",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  },
+  {
+    "slug": "eumenes-rare-female",
+    "roleId": "eumenes-rare",
+    "figureId": "eumenes",
+    "figureName": "Eumenes of Cardia",
+    "title": "Campaign Correspondent",
+    "kind": "contribution",
+    "tier": "rare",
+    "gender": "female",
+    "desiredViewAngle": "mature adult woman in a left-facing three-quarter view looking up from the dispatch, confident thoughtful gaze, dark hair secured behind the head",
+    "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\eumenes-title-female.png",
+    "prompt": "prompts/eumenes-rare-female.txt",
+    "sceneBrief": "A campaign correspondent compares a simple map and multiple dispatches at a field desk, practical cloak and reed pen, camp visible beyond.",
+    "source": "source/eumenes-rare-female.png",
+    "final": "assets/eumenes-rare-female-pixel.png",
+    "coarse": "assets/eumenes-rare-female-coarse.png",
+    "qa": "qa/eumenes-rare-female-pixel.json",
+    "coarseQa": "qa/eumenes-rare-female-coarse.json",
+    "faceConfig": "source/eumenes-rare-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "46b35b3fe9191f43ad9885f3c5b31b71b55e782778c3aabd4686f23601b7b63d",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          427,
+          225
+        ],
+        "radius": [
+          105,
+          125
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d529-a36a-7322-b82b-2d41d20ff534\\exec-5030d684-7c66-431d-a468-916338614d19.png",
+    "status": "complete",
+    "provenance": "Fictional representative contributor; generated painterly scene in approved Everfolk style, not an authenticated historical portrait.",
+    "finalSha256": "3a9fdf305ea39de9e3f927c1017acec69b50641e8276b409b5caf20bfa999c52",
+    "coarseSha256": "67c07b7df2a211ca6920049d21dd4b160971e6747fc6cbf3f15806aff7e5c1f2",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    }
+  }
+]

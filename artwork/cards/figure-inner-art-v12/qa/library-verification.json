@@ -1,0 +1,12 @@
+{
+  "expected": 83,
+  "complete": 83,
+  "pairedRoles": 35,
+  "totalRoles": 35,
+  "uniqueSourceImages": 83,
+  "uniqueFinalImages": 83,
+  "failures": [],
+  "allComplete": true,
+  "sourceAndFinalHashesVerified": true,
+  "filterMetadataHashesVerified": true
+}

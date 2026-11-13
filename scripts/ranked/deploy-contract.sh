@@ -36,6 +36,9 @@ near_cli contract deploy "$CONTRACT_ID" use-file "$WASM" with-init-call new \
 
 CATALOG="$(node "$ROOT/scripts/ranked/contract-catalog.ts")"
 call "$OWNER_ID" "$CONTRACT_ID" set_catalog "{\"catalog\":$CATALOG}"
+# Minted NFTs show their v14 collection card; images must be live at CARD_MEDIA_BASE_URL (default https://everfolk.life).
+CARDS="$(node "$ROOT/scripts/ranked/card-art-table.ts")"
+call "$OWNER_ID" "$CONTRACT_ID" set_card_art "{\"cards\":$CARDS}"
 # The ranked world, and the demo world the server hands to browser ranked play (/api/ranked/config).
 call "$OWNER_ID" "$CONTRACT_ID" set_world_versions "{\"versions\":[\"$WORLD_VERSION\",\"alexandria-demo-2\"]}"
 PARAMS="{\"mint_fee\":\"1000000000000000000000\",\"drop_rate_bps\":$DROP_RATE_BPS,\"source_mint_share_bps\":5000,\"royalty_sources_bps\":500,\"royalty_treasury_bps\":500,\"nobody_weight_bps\":5000,\"abandon_cooldown_ms\":600000,\"evidence_base_url\":\"$EVIDENCE_BASE_URL\"}"

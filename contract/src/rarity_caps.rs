@@ -1,6 +1,7 @@
 //! Per-design rarity supply: each card design (a historical figure, or a city person's deed) has at most
 //! 10 Legendary, 25 Epic and 100 Rare copies; Common and Uncommon are unlimited. Opened packs hold their
 //! rarity until a card is minted or the pack is closed. Raw keys extend the contract without a Borsh change.
+//! Minted copies are counted for every rarity, so each copy gets a serial within its design.
 use crate::{Contract, ContractExt};
 use near_sdk::{env, near};
 
@@ -69,7 +70,8 @@ impl Contract {
             Some(cap) => read_count(&minted_key(design, rarity)) + read_count(&held_key(design, rarity)) < cap,
         }
     }
-    /// The rarity odds with sold-out tiers removed; the remaining tiers keep their relative odds.
+    /// The rarity odds with sold-out tiers removed for one fixed design (crate::card_art checks each rarity's own card).
+    #[cfg(test)]
     pub(crate) fn open_rarity_weights(&self, design: &str, weights: [u64; 5]) -> [u64; 5] {
         let mut open = weights;
         for (rarity, weight) in open.iter_mut().enumerate() {
@@ -91,10 +93,14 @@ impl Contract {
             write_count(&key, read_count(&key).checked_sub(1).expect("held rarity"));
         }
     }
-    pub(crate) fn count_minted_rarity(&self, design: &str, rarity: u8) {
-        if cap_of(rarity).is_some() {
-            let key = minted_key(design, rarity);
-            write_count(&key, read_count(&key) + 1);
-        }
+    /// Counts one minted copy of every rarity (capped or not) and returns its serial within the design.
+    pub(crate) fn count_minted_rarity(&self, design: &str, rarity: u8) -> u32 {
+        let key = minted_key(design, rarity);
+        let serial = read_count(&key) + 1;
+        write_count(&key, serial);
+        serial
+    }
+    pub(crate) fn minted_count(&self, design: &str, rarity: u8) -> u32 {
+        read_count(&minted_key(design, rarity))
     }
 }

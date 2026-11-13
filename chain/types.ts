@@ -28,16 +28,50 @@ export interface Evidence {
   stage_figures?: MatchedStageFigure[];
   /** Required only for the NPC world; signed with the rest of the finished-life evidence. */
   npc_session?: NpcSessionAttestation;
+  /** The played character's recorded sex; picks a profession card's version (chain/card-art.ts). Older evidence omits it. */
+  sex?: "male" | "female";
 }
 
-export interface StageMintCard {
+export interface StageMintCard extends EditionPreviewFields {
   stage_id: string; figure_id: FigureId | null; title: string; character_name: string;
   portrait_media: string; stage_record: StageRecord; fee: string; action_id: string;
+  rarity?: number;
 }
-export interface StageMintQuote { total_fee: string; source_share_bps: number; cards: StageMintCard[] }
+export interface StageMintQuote {
+  total_fee: string;
+  source_share_bps: number;
+  cards: StageMintCard[];
+  /** Commits the reviewed card identities, rarities and fees, excluding changing serial previews. */
+  quote_hash?: string;
+}
 export interface StageMintResult { life_id: string; evidence_hash: string; total_fee: string; tokens: (MintResult & { stage_id: string })[] }
 
-export interface MintResult {
+/** Immutable edition assigned by the mint transaction. Older tokens may omit all three fields. */
+export interface EditionFields {
+  edition_key?: string;
+  edition_number?: number;
+  /** Null is unlimited (currently Common and Uncommon), never an unknown cap. Minted records retain their original limit. */
+  edition_limit?: number | null;
+}
+
+/** Current supply of one card design and rarity; an unreserved preview of its next serial. */
+export interface EditionSupply {
+  edition_key: string;
+  rarity: number;
+  minted: number;
+  edition_limit: number | null;
+  next_edition_number: number | null;
+}
+
+/** Live supply previews can change before the mint transaction assigns an immutable serial. */
+export interface EditionPreviewFields {
+  edition_key?: string;
+  edition_limit?: number | null;
+  minted?: number;
+  next_edition_number?: number | null;
+}
+
+export interface MintResult extends EditionFields {
   token_id: string;
   kind: "figure" | "npc";
   figure_id: FigureId | null;
@@ -48,7 +82,7 @@ export interface MintResult {
   character_name?: string;
   portrait_media?: string;
 }
-export interface MintCard {
+export interface MintCard extends EditionPreviewFields {
   kind: "figure" | "npc";
   figure_id: FigureId | null;
   rarity: number;
@@ -62,11 +96,13 @@ export interface MintCard {
   tier?: string | number;
   portrait_media?: string;
   stage_record?: StageRecord;
+  /** The v14 collection card this slot shows (chain/card-art.ts); absent when the collection has none. */
+  card_id?: string;
 }
 export interface MintPack { life_id: string; evidence_hash: string; cards: MintCard[]; total_fee: string; source_share_bps: number }
 export interface MintTerms { mint_fee: string; source_share_bps: number; pack_version: number }
 export interface SourceShare { token_id: string; bps: number }
-export interface TokenExtra {
+export interface TokenExtra extends EditionFields {
   kind: "figure" | "npc"; figure_id: FigureId | null; rarity: number; affection: number; action_id: string;
   life_id: string; birth_year: number; death_year: number; career_group: CareerGroup; sources: SourceShare[]; evidence_hash: string;
   stage_id?: string;
@@ -79,6 +115,11 @@ export interface TokenExtra {
   tier?: string | number;
   portrait_media?: string;
   stage_record?: StageRecord;
+  /** The v14 collection card this NFT shows; absent on tokens minted before card art and on stage portraits. */
+  card_id?: string;
+  sex?: "male" | "female";
+  /** Marketplace traits: Card, Rarity, Edition, Career, Born, Died. */
+  attributes?: { trait_type: string; value: string }[];
 }
 /** `earned` is yoctoNEAR as a decimal string. */
 export interface TokenStats { lives_influenced: number; earned: string }

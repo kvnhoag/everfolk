@@ -1,15 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FIGURES } from "../../chain/catalog/index.ts";
+import { FIGURE_ROSTER, type FigureCardRank, type FigureRosterEntry } from "../../chain/catalog/figure-roster.ts";
+import FigureCardStack from "../components/FigureCardStack.tsx";
+import FigureCardViewer from "../components/FigureCardViewer.tsx";
+import { figureRarityLabel } from "../models/figure-card-labels.ts";
+import { matchingFigures } from "./figure-directory-model.ts";
+import referenceWorld from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import type { WorldPack } from "../../src/types.ts";
+import "../styles/figure-directory.css";
 import { FIGURE_ACTIONS } from "../../chain/ids.ts";
 import type { FigureId } from "../../chain/ids.ts";
 import { actionName, actionDescription, rarityLabel } from "./chain-copy.ts";
 import { errorText, type ChainBackend } from "./chain-backend.ts";
 import type { TokenView } from "./types.ts";
+import { editionLabel } from "./edition-label.ts";
 import StorybookMark from "../components/StorybookMark.tsx";
 import EverfolkCard from "./EverfolkCard.tsx";
 import "./web3-navigation.css";
 import "./token-market.css";
 import SectionHelp from "../components/SectionHelp.tsx";
+import CardArtCatalogue from "../components/CardArtCatalogue.tsx";
 
 type Copy = TokenView & { token_id: string };
 type FigureState = { copies: Copy[]; supply: [number, number] };
@@ -18,6 +28,9 @@ type FigureState = { copies: Copy[]; supply: [number, number] };
 export default function Figures({ backend }: { backend: ChainBackend }) {
   const [figures, setFigures] = useState<Partial<Record<FigureId, FigureState>>>({});
   const [error, setError] = useState("");
+  const [query, setQuery] = useState(""), [rarity, setRarity] = useState("all");
+  const [selected, setSelected] = useState<{ figure: FigureRosterEntry; rank: FigureCardRank } | null>(null);
+  const visible = useMemo(() => matchingFigures(query, rarity), [query, rarity]);
   const [expandedFigure, setExpandedFigure] = useState<FigureId | null>(null);
 
   useEffect(() => {
@@ -60,8 +73,8 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
         </div>
         <h1 tabIndex={-1}>Historical figures</h1>
         <p className="ef-market-hero-desc">
-          Meet every legendary figure of Rhakotis. Open a record to see its owners, chosen deeds, and the path a life
-          must follow to qualify.
+          Explore the card collection, then open an onchain figure's record to see its owners, chosen deeds, and
+          the path a life must follow to qualify.
         </p>
         <p className="chain-fine" style={{ color: "#d6bc8e" }}>
           Meeting a figure's requirements makes a life eligible for its drop; it does not guarantee a figure card.
@@ -69,6 +82,29 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
         {error && <p role="alert" className="chain-error">{error}</p>}
       </header>
 
+      <CardArtCatalogue />
+      <section className="figure-roster" aria-label="Historical figure paths">
+        <h2>Historical figure paths</h2>
+        <p className="chain-fine">Catalogue variants are previews. Contributor ranks come from completed work; a figure's defining title has its own achievement. Existing collectibles keep their recorded rarity.</p>
+        <div className="figure-catalogue-filters"><label>Find a figure<input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Name, craft or trait" /></label><label>Rarity<select value={rarity} onChange={event => setRarity(event.target.value)}><option value="all">All variants</option><option value="Epic">Epic</option><option value="Legendary">Legendary</option></select></label><span aria-live="polite">{visible.length} of {FIGURE_ROSTER.length} figures</span></div>
+        <div className="figure-directory-grid">{visible.map(figure => <article key={figure.id} className="chain-card figure-directory-card" data-roster-figure={figure.id}>
+          <FigureCardStack figure={figure} onInspect={rank => setSelected({ figure, rank })} />
+          <h3>{figure.name}</h3><p>{figure.biography.biography}</p>
+          <p className="figure-catalogue-rank">{figureRarityLabel(figure)}{figure.maximumRank !== figure.baseRank ? " · Legendary through its defining achievement" : " figure"}</p>
+          <details><summary>Life, works &amp; card conditions</summary>
+            <h3>Rarity variants</h3>{figure.variants.map(variant => <p key={variant.rank}><strong>{variant.rank} · {variant.title}</strong><br />{variant.condition}</p>)}
+            <h3>Life and work</h3><p>{figure.biography.period}</p>
+            <h4>Authored writings</h4>{figure.biography.authoredWorks.length ? <ul>{figure.biography.authoredWorks.map(work => <li key={work.title}><em>{work.title}</em> — {work.status}. {work.note}</li>)}</ul> : <p>No authored literary work is securely identified in the sources reviewed.</p>}
+            {figure.biography.otherWorks.length > 0 && <><h4>Other works and achievements</h4><ul>{figure.biography.otherWorks.map(work => <li key={work.title}><strong>{work.title}</strong> — {work.note}</li>)}</ul></>}
+            {figure.biography.cautions.map(note => <p className="chain-fine" key={note}>{note}</p>)}
+            <p className="chain-fine">Sources: {figure.biography.sources.map((source, index) => <span key={source.url}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></span>)}</p>
+          </details>
+          {!figure.legacyFigureId && <p className="chain-fine">The historical title path is playable. Collectible minting for this figure is not available yet.</p>}
+        </article>)}</div>
+        {!visible.length && <p className="chain-card">No figures match this search.</p>}
+      </section>
+      <FigureCardViewer figure={selected?.figure ?? null} initialRank={selected?.rank} world={referenceWorld as unknown as WorldPack} onClose={() => setSelected(null)} />
+      <h2 className="figure-ownership-heading">Onchain figures &amp; deeds</h2>
       <div className="ef-market-card-grid ledger-body">
         {FIGURES.map((figure, idx) => {
           const state = figures[figure.figure];
@@ -84,11 +120,9 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
               <EverfolkCard
                 slotNumber={idx + 1}
                 title={figure.title}
-                subtitle="Historical Figure"
                 isFigure={true}
                 figureId={figure.figure}
                 badge={supplyText}
-                rarityLabel="Mythic Figure"
                 actionName="Historic Deeds"
                 actionDescription={figure.summary}
                 actions={
@@ -113,7 +147,7 @@ export default function Figures({ backend }: { backend: ChainBackend }) {
                         {state?.copies?.map(copy => (
                           <div className="figure-owner" key={copy.token_id}>
                             <a href={`#token/${copy.token_id}`}>
-                              Copy #{copy.token_id} · {copy.owner_id}
+                              {editionLabel(copy.extra) ? `Edition ${editionLabel(copy.extra)}` : `Token #${copy.token_id}`} · {copy.owner_id}
                             </a>
                             <p className="chain-fine">
                               {rarityLabel(copy.extra.rarity)} · Affection {copy.extra.affection}

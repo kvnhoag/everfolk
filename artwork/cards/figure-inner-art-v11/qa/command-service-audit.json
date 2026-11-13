@@ -1,0 +1,276 @@
+{
+  "count": 15,
+  "passed": true,
+  "checks": [
+    {
+      "slug": "alexander-uncommon",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "alexander-rare",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "alexander-epic",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "demetrius-parent",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "demetrius-uncommon",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "demetrius-rare",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "demetrius-epic",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "ptolemy-parent",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "ptolemy-uncommon",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "ptolemy-rare",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "ptolemy-epic",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "nearchus-parent",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "nearchus-title",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "eumenes-parent",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    },
+    {
+      "slug": "eumenes-title",
+      "filesExist": true,
+      "sourceHashMatches": true,
+      "finalHashMatches": true,
+      "size": [
+        840,
+        1050
+      ],
+      "coarseDeterministic": true,
+      "mixedDeterministic": true,
+      "pngReadbackExact": true,
+      "sourceUnchanged": true,
+      "registeredExactIntegerBlocks": true,
+      "wholeCommonCells": true,
+      "outsideMaskChangedPixels": 0,
+      "visualReview": true
+    }
+  ]
+}

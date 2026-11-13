@@ -1,7 +1,8 @@
 import type { AccomplishmentRecord, Condition, LifeState, WorldPack } from "../types.ts";
+import { figureContributionStageCopy, figureContributionTitleCopy } from "../../chain/catalog/figure-contribution-copy.ts";
 import { matchesCondition } from "../conditions.ts";
 import { formatYear, yearAtAge } from "../calendar.ts";
-import type { FigurePathDefinition, FigurePathProgress, FigurePathStageProgress } from "./types.ts";
+import type { FigurePathDefinition, FigurePathProgress, FigurePathStageProgress, FigureLegendaryContributionProgress } from "./types.ts";
 
 function authoredRecord(world: WorldPack, life: LifeState, achievementId: string, activityId?: string): AccomplishmentRecord | undefined {
   const definition = world.legacy?.achievements.find(achievement => achievement.id === achievementId);
@@ -28,7 +29,7 @@ function requirementText(world: WorldPack, condition: Condition): string {
       const activity = world.character?.activities.find(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === condition.action)));
       return `Complete ${condition.count} work year${condition.count === 1 ? "" : "s"}: ${activity?.text ?? readable(condition.action)}`;
     }
-    case "accomplishment": return `Earn ${world.legacy?.achievements.find(item => item.id === condition.achievement)?.title ?? readable(condition.achievement)}${condition.minYears ? ` and allow ${condition.minYears} year${condition.minYears === 1 ? "" : "s"} to pass` : ""}`;
+    case "accomplishment": return `Earn ${figureContributionTitleCopy(world.legacy?.achievements.find(item => item.id === condition.achievement)?.title ?? readable(condition.achievement))}${condition.minYears ? ` and allow ${condition.minYears} year${condition.minYears === 1 ? "" : "s"} to pass` : ""}`;
     case "skill": return `${world.character?.skills[condition.skill]?.label ?? readable(condition.skill)} ${comparison(condition.op)} ${condition.value}`;
     case "stat": return `${world.stats[condition.stat]?.label ?? readable(condition.stat)} ${comparison(condition.op)} ${condition.value}`;
     case "cash": return `Cash ${comparison(condition.op)} ${condition.value} ${world.economy?.currency.short ?? ""}`.trim();
@@ -62,7 +63,8 @@ export function getFigurePathProgress(world: WorldPack, path: FigurePathDefiniti
   const encounterRecord = validDirect ?? validTradition;
   const encounterMode = validDirect ? path.encounter.access ?? "direct" : validTradition ? "tradition" : null;
   let previous = encounterRecord;
-  const stages: FigurePathStageProgress[] = path.stages.map(definition => {
+  const stages: FigurePathStageProgress[] = path.stages.map(authoredDefinition => {
+    const definition = figureContributionStageCopy(authoredDefinition);
     const candidate = authoredRecord(world, life, definition.achievementId, definition.activityId);
     const record = candidate && previous && candidate.age >= previous.age ? candidate : undefined;
     const missingRequirements = figurePathMissingRequirements(world, life, definition.requires);
@@ -86,6 +88,20 @@ export function getFigurePathProgress(world: WorldPack, path: FigurePathDefiniti
   if (!previous) missingRequirements.unshift("Complete all contribution stages");
   const capstone = { definition: path.capstone, attempted: capstoneAttempted, failed: capstoneAttempted && !capstoneRecord, earned: Boolean(capstoneRecord), ready: !capstoneAttempted && Boolean(previous) && missingRequirements.length === 0, missingRequirements, ...(capstoneRecord ? { record: capstoneRecord } : {}) };
   const earned = stages.filter(stage => stage.earned).at(-1);
+  let legendaryContribution: FigureLegendaryContributionProgress | null = null;
+  if (path.legendaryContribution) {
+    const definition = path.legendaryContribution;
+    const candidate = authoredRecord(world, life, definition.achievementId, definition.activityId);
+    const senior = stages.at(-1)?.record;
+    const orderedAfter = (record: AccomplishmentRecord, predecessor: AccomplishmentRecord) => record.age >= predecessor.age &&
+      (life.accomplishments?.indexOf(record) ?? -1) > (life.accomplishments?.indexOf(predecessor) ?? -1);
+    const record = candidate && senior && promoted && promotionRecord && orderedAfter(candidate, senior) && orderedAfter(candidate, promotionRecord) ? candidate : undefined;
+    const missingRequirements = figurePathMissingRequirements(world, life, definition.requires);
+    if (!senior) missingRequirements.unshift("Complete and record the senior Rare contribution");
+    if (!promoted) missingRequirements.unshift("Earn this figure's successful Legendary outcome first");
+    legendaryContribution = { definition, earned: Boolean(record), ready: !record && Boolean(senior) && promoted && missingRequirements.length === 0,
+      missingRequirements: [...new Set(missingRequirements)], ...(record ? { record } : {}) };
+  }
   const available = (activityId: string) => {
     const activity = world.character?.activities.find(item => item.id === activityId);
     return Boolean(activity && life.phase === "ready" && life.age >= (activity.minAge ?? 0) && matchesCondition(activity.when, life));
@@ -95,9 +111,9 @@ export function getFigurePathProgress(world: WorldPack, path: FigurePathDefiniti
     directAvailable: !encounterRecord && life.year >= path.encounter.fromYear && (path.encounter.toYear === undefined || life.year <= path.encounter.toYear) && available(path.encounter.activityId),
     traditionAvailable: !encounterRecord && Boolean(path.tradition && life.year >= path.tradition.fromYear && available(path.tradition.activityId)),
     principalRank, principalTitle, promoted, promotionOutcome, alternateHistory, provisionalPromotion: Boolean(path.promotion?.provisional),
-    associationRank: earned?.definition.rank ?? null,
-    associationTitle: earned ? encounterMode === "tradition" ? earned.definition.traditionTitle : earned.definition.title : null,
-    stages, nextStage: stages.find(stage => !stage.earned) ?? null, capstone,
+    associationRank: legendaryContribution?.earned ? "Epic" : earned?.definition.rank ?? null,
+    associationTitle: legendaryContribution?.earned ? encounterMode === "tradition" ? legendaryContribution.definition.traditionTitle : legendaryContribution.definition.title : earned ? encounterMode === "tradition" ? earned.definition.traditionTitle : earned.definition.title : null,
+    stages, legendaryContribution, nextStage: stages.find(stage => !stage.earned) ?? null, capstone,
     specialTitle: capstoneRecord ? { title: promoted ? principalTitle : path.capstone.title, rank: principalRank, alternateHistory, record: capstoneRecord } : null,
   };
 }

@@ -5,7 +5,7 @@ import type { LifeStateWithDemo } from "../src/demo/contracts.ts";
 import { initialHousehold, harvest, payRent, feedHousehold, spoilAndSpin, householdView, applyPlan } from "../src/demo/household.ts";
 import { initialTown, tradeReason, executeTrade } from "../src/demo/market.ts";
 import { demoContext } from "../src/demo/state.ts";
-import { applyFarmWork, farmWorkReason, farmProofProgress, settleFarmCapabilities, farmReserve, farmSaleReason } from "../src/capabilities/farming.ts";
+import { applyFarmWork, farmWorkReason, farmProofProgress, settleFarmCapabilities, farmReserve, farmSaleReason, farmWorkQuote, ordinarySeedGrain, farmCapacityBonus } from "../src/capabilities/farming.ts";
 import design from "../design/skill-tree/catalog.json" with { type: "json" };
 import base from "../worlds/demo/alexandria-demo-2.json" with { type: "json" };
 
@@ -302,4 +302,41 @@ test("ordinary engine actions earn farming nodes only after settlement and repla
   life = engine.advance(life);
   assert.ok(life.capabilities!.learned.F2);
   assert.deepEqual(engine.replay(life.seed, life.commands), life);
+});
+
+
+test("crop-scaled farming preserves ordinary and dense seed ratios without scaling flax seed units", () => {
+  const { world, life } = fixture();
+  assert.equal(ordinarySeedGrain(life, world.demo), 20, "retained worlds keep original seed quantities");
+  world.demo!.resourceScaleDivisor = 10;
+  assert.equal(ordinarySeedGrain(life, world.demo), 2);
+  assert.equal(farmWorkQuote(world, life, "F1").grainSeed, 2);
+  life.capabilities!.learned.FC5 = { age: 19, year: -331 };
+  assert.equal(farmWorkQuote(world, life, "FC5").grainSeed, 4);
+  life.demo.household.flaxPlots = 2;
+  assert.equal(farmWorkQuote(world, life, "FC5").flaxSeed, 4, "purchased flax seed packets remain discrete units");
+});
+
+test("crop-scaled harvest proofs retain full rations and use a proportional reserve threshold", () => {
+  const { world, life } = fixture();
+  world.demo!.resourceScaleDivisor = 10;
+  Object.assign(world.demo!.household, { yieldPerPlot: 65, flaxPerPlot: 12, adultRation: 24, storeCapacity: 150, animalFeed: { ox: 12, donkey: 6 } });
+  life.demo.household.grain = 50;
+  life.demo.household.capacity = 150;
+  work(world, life, "FR5");
+  const receipt = life.capabilities!.evidence.find(e => e.kind === "farm-settlement")!;
+  assert.equal(receipt.data.seedPaid, 2);
+  assert.equal(receipt.data.fullRations, true);
+  assert.equal(receipt.data.reconciled, true);
+  assert.ok(life.demo.household.grain >= 24 && life.demo.household.grain < 240);
+  assert.equal(farmProofProgress(world, life, "FR5").complete, true);
+});
+
+test("store extensions and household previews use the opted-in crop capacity scale", () => {
+  const { world, life } = fixture();
+  life.capabilities!.farm = { extension: true } as NonNullable<typeof life.capabilities>["farm"];
+  assert.equal(farmCapacityBonus(life, life.age, world.demo), 500);
+  world.demo!.resourceScaleDivisor = 10;
+  assert.equal(farmCapacityBonus(life, life.age, world.demo), 50);
+  assert.equal(householdView(world.demo!, life).capacity, life.demo.household.capacity + 50);
 });

@@ -5,8 +5,7 @@ import { playerPortraitState } from "../models/portrait-state.ts";
 import { legacyLifeKey } from "../storage/legacy-store.ts";
 import { readBoosterCollection, resolveBoosterPack } from "../storage/booster-collection.ts";
 import type { BoosterCollectionPack, BoosterSceneOptions } from "../types/booster.ts";
-import { GROUP_TITLE, figureName, actionName } from "./chain-copy.ts";
-import { figureCardArt } from "./nft-card-view.ts";
+import { freePlayCardView } from "./nft-card-view.ts";
 import BoosterOpening from "../components/BoosterOpening.tsx";
 import "./chain.css";
 import "../styles/booster-opening.css";
@@ -39,14 +38,9 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
 
   const options = useMemo<BoosterSceneOptions | null>(() => {
     if (!session) return null;
-    const cards = session.pack.cards.map(card => ({
-      name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[session.evidence.career_group],
-      rarity: card.rarity,
-      // People of the city show this life's own v3 portrait; figures show their card painting.
-      art: card.figure_id ? figureCardArt(card.figure_id) : playerPortraitState(world, life).src,
-      sub: actionName(card.action_id),
-      role: card.figure_id ? "Historical figure" : "Person of the city",
-    }));
+    // Each card shows the v14 card a Weave mint would record, in this life's own sex (client/chain/nft-card-view.ts).
+    const ownPortrait = playerPortraitState(world, life).src;
+    const cards = session.pack.cards.map(card => freePlayCardView(card, session.evidence.career_group, life, ownPortrait));
     const resolve = (selected: number[]) => {
       const collection = resolveBoosterPack(window.localStorage, {
         id: session.pack.evidence_hash, lifeKey: legacyLifeKey(life), characterName: life.character?.name ?? "A life in Alexandria", cards, selected,

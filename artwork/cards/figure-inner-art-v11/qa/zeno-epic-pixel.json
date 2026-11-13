@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\zeno-epic.png",
+  "sourceSha256": "afde4bc191c783eb19e48a9e05cbaa814a89b774627f0ccf400a5641a6d6d3bd",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\zeno-epic-coarse.png",
+  "baseSha256": "471ca48fc5a78196d10b9fa6184bab097e1381a7398e9a05f5771eb36bf391f9",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\zeno-epic-coarse.json",
+  "baseQaSha256": "b4eed2a813c6a6eb2a6b7bf997328146af28cbf492b1bb7e5be6b563aecd498b",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\zeno-epic-face.json",
+  "configSha256": "2cd5c89a74282043099b6402eb5814ddb6d89204f751f93059075094a5e0d43c",
+  "config": {
+    "detail_pixel_size": 2,
+    "critical_boxes": [],
+    "base_pixel_size": 3,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "radius": [
+          108,
+          135
+        ],
+        "inner_scale": 0.82,
+        "center": [
+          353,
+          239
+        ]
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\zeno-epic-pixel.png",
+  "outputSha256": "44f44ed201e96bc462b535ac22c962b74ddd4143e7d6dcd94bbe53a8d026b88a",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "26963abf505962ca3d56872c5102896c3fdc0ba0265f4c936943d766890a9e91",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\zeno-epic-face-mask.png",
+  "maskSha256": "de6555e394fe45886dddfc1bdacda711f144a14913681e1ca43f9409489de35a",
+  "maskPixelSha256": "56d52aeff412eaeb1e659a412d4f4bcf08b3e03a8045adc21511f061b591489a",
+  "selectedDetailCells": 1058,
+  "retainedCoarseCells": 23442,
+  "affectedPixels": 38088,
+  "changedPixels": 37849,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -1,0 +1,80 @@
+{
+  "figureId": "eumenes",
+  "figureName": "Eumenes of Cardia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Secretary of Eumenes",
+  "displayTitle": "Secretary of Eumenes",
+  "subtitle": "Trusted Hand of the Strategist",
+  "bodyTitle": "Intent Into Action",
+  "bodyText": "A senior secretary turns reports and decisions into a record command can rely upon. Discretion, precision, and judgment give Eumenes a trusted hand, preserving the intent that holds an army's separate actions together.",
+  "sourceRoleSlug": "eumenes-title",
+  "newArt": false,
+  "slug": "eumenes-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Secretary of Eumenes",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/eumenes-title-male-pixel.png",
+  "sourceArtSlug": "eumenes-title-male",
+  "editionLimit": 25,
+  "collectionIndex": 116,
+  "gameplayRarity": null,
+  "raritySource": "editorial-four-tier-extension",
+  "iconSource": {
+    "file": "source/icons/eumenes.svg",
+    "sha256": "8dec10d48e8c0012a30d7146b4187e8ed9aa016029de5f87cc254c129dc3c1d6",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A senior secretary turns reports and decisions into a",
+    "record command can rely upon. Discretion, precision, and",
+    "judgment give Eumenes a trusted hand, preserving the intent",
+    "that holds an army's separate actions together."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/eumenes-epic-male.svg",
+  "fittedArt": "assets/fitted/eumenes-epic-male.png",
+  "overlaySvg": "source/overlays/eumenes-epic-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "f9cd417bc74b9a09faf95fb66598b3b552efd3cdc65a203e2110f48e8b286058",
+  "master": "masters/eumenes-epic-male.vectorcraft",
+  "export": "exports/eumenes-epic-male.png",
+  "thumbnail": "assets/eumenes-epic-male-thumb.png",
+  "exportSha256": "51b4c0bed2f7fc6aea76ac9ce37456fda0c50433b7ebeeb4768c7658cc5852e0",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582348,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

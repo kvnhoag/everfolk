@@ -1,0 +1,80 @@
+{
+  "figureId": "alexander",
+  "figureName": "Alexander the Great",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Campaign Staff Officer",
+  "displayTitle": "Campaign Staff Officer",
+  "subtitle": "Right Hand of the Great",
+  "bodyTitle": "The Campaign's Pulse",
+  "bodyText": "A staff officer turns reports, routes, and supply figures into decisions the army can trust. Close to the command tent, careful judgment keeps scattered forces aligned with Alexander's astonishing ambition.",
+  "sourceRoleSlug": "alexander-rare",
+  "newArt": false,
+  "slug": "alexander-rare-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Campaign Staff Officer",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-rare-female-pixel.png",
+  "sourceArtSlug": "alexander-rare-female",
+  "editionLimit": 100,
+  "collectionIndex": 7,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/alexander.svg",
+    "sha256": "d977de17aa347c15a311e96ee4c7194837e47d119d2b5a06bc1dbbd2cd1a92f2",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A staff officer turns reports, routes, and supply figures",
+    "into decisions the army can trust. Close to the command",
+    "tent, careful judgment keeps scattered forces aligned with",
+    "Alexander's astonishing ambition."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/alexander-rare-female.svg",
+  "fittedArt": "assets/fitted/alexander-rare-female.png",
+  "overlaySvg": "source/overlays/alexander-rare-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "23c2f9f17da71ebb080b652bb7328249125ff15bf7a0ae5817c4ae6b3377c906",
+  "master": "masters/alexander-rare-female.vectorcraft",
+  "export": "exports/alexander-rare-female.png",
+  "thumbnail": "assets/alexander-rare-female-thumb.png",
+  "exportSha256": "67bc29ab84fecb860a81b3aea923ea6f0111cbca81e6eae6191de0bad07a45d9",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582480,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

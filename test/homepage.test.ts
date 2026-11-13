@@ -40,7 +40,7 @@ test('homepage renders the historical world with live canvas and retains all men
   assert.doesNotMatch(html, /THE ANCIENT WORLD|350 BCE/);
   assert.doesNotMatch(html, /Cross the ages|Modern coast|meteor|ef-era-button|ef-classical-wordmark/);
   assert.match(html, /<header[^>]*>.*href="\/npc".*href="\/wiki".*<\/header>/);
-  assert.match(html, /<header[^>]*>.*href="#market".*href="#figures".*href="#mine".*<\/header>/);
+  assert.match(html, /<header[^>]*>.*href="#market".*href="\/cards".*href="#mine".*<\/header>/);
   assert.match(html, /ef-home-ranked.*role="switch" aria-checked="true"/);
   assert.match(html, /Connect with NEAR wallet.*ef-home-auth-divider.*Log in with email/);
   assert.doesNotMatch(html, /class="ef-home-auth-button ef-home-auth-email"[^>]*disabled/);

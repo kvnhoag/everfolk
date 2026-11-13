@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\menander-uncommon-male.png",
+  "sourceSha256": "5e59b8136c500b77831f70b029580356c253a1027b3d9c3e8bb0494b8b6c8250",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\menander-uncommon-male-coarse.png",
+  "baseSha256": "c826cbd2b4812ecc7f2c74d956ccf01661a1c049b6054814add359d4324a6c1f",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\menander-uncommon-male-coarse.json",
+  "baseQaSha256": "ff63d23b3a3d7a68e2d2723e00c1cb6e9113ce8dc586230e35cff68932d51bd9",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\menander-uncommon-male-face.json",
+  "configSha256": "7c1059e64625e0433184d3f75b1f4bfd25d0830ee7dfdf54db578c4c450f181f",
+  "config": {
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "center": [
+          345,
+          265
+        ],
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "radius": [
+          94,
+          105
+        ]
+      }
+    ],
+    "critical_boxes": [],
+    "base_pixel_size": 3
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\menander-uncommon-male-pixel.png",
+  "outputSha256": "7b4de156d9caf297460f9a275a938ebcb8aad1d4d091b8630cfd27e2cac370d5",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "281616a20493c5e8631429957b302fc570e581553f96d5be00f1ba7441abd285",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\menander-uncommon-male-face-mask.png",
+  "maskSha256": "31bd07a9cc929eb25772da582208d46ce05469d382ca9f87d04cc92fcdc70706",
+  "maskPixelSha256": "be8cb0f4c01bd3c2fcb92df4d6b09550a24126dcdc9445ddcd4e27e204b1f289",
+  "selectedDetailCells": 718,
+  "retainedCoarseCells": 23782,
+  "affectedPixels": 25848,
+  "changedPixels": 25627,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

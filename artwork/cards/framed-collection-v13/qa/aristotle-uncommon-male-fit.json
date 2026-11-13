@@ -1,0 +1,60 @@
+{
+  "slug": "aristotle-uncommon-male",
+  "figureId": "aristotle",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Lyceum Copyist",
+  "subtitle": "Aristotle",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-uncommon-male-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 9,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/aristotle-uncommon-male.svg",
+  "fittedArt": "assets/fitted/aristotle-uncommon-male.png",
+  "overlaySvg": "source/overlays/aristotle-uncommon-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "aa76fdff4d64ce649b00f5de2447c9619e6e79586488e8a34f598bd6bdc96203",
+  "master": "masters/aristotle-uncommon-male.vectorcraft",
+  "export": "exports/aristotle-uncommon-male.png",
+  "thumbnail": "assets/aristotle-uncommon-male-thumb.png",
+  "exportSha256": "1258da42122f13e672440595801c801c81136d6bafd96ffb3bddc9ae7edfadba",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

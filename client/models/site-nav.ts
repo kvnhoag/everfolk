@@ -8,7 +8,7 @@ export const SITE_LINKS: readonly SiteLink[] = [
   { id: "play", label: "Play", href: "#" },
   { id: "weave", label: "Weave Mode", href: "#weave" },
   { id: "market", label: "Market", href: "#market" },
-  { id: "figures", label: "Figures", href: "#figures" },
+  { id: "figures", label: "Figures", href: "/cards" },
   { id: "mine", label: "My lives", href: "#mine" },
 ];
 

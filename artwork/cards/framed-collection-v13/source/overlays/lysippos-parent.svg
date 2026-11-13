@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="1260" viewBox="0 0 900 1260">
+  <defs>
+    <clipPath id="clip-path-1">
+      <path d="M42 0 L858 0 C881.196 0 900 18.804 900 42 L900 1218 C900 1241.196 881.196 1260 858 1260 L42 1260 C18.804 1260 0 1241.196 0 1218 L0 42 C0 18.804 18.804 0 42 0 Z"/>
+    </clipPath>
+    <linearGradient id="linear-gradient-1" x1="0" y1="0" x2="0" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a1d1c" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#0a1d1c" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0" y1="940" x2="0" y2="1260" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a1d1c" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a1d1c" stop-opacity="0.64"/>
+    </linearGradient>
+  </defs>
+  <title>Lysippos / legendary</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="Legendary___full_art" data-name="Legendary / full art">
+    <g id="LEGENDARY___full-art_frame" data-name="LEGENDARY / full-art frame">
+      <g id="Readability___transparent_fades__no_opaque_panels" data-name="Readability / transparent fades, no opaque panels" clip-path="url(#clip-path-1)">
+        <rect id="Top_transparent_readability_fade" data-name="Top transparent readability fade" x="0" y="0" width="900" height="240" fill="url(#linear-gradient-1)"/>
+        <rect id="Bottom_transparent_readability_fade" data-name="Bottom transparent readability fade" x="0" y="940" width="900" height="320" fill="url(#linear-gradient-2)"/>
+      </g>
+      <path id="Legendary___single_smooth_gold_perimeter_1.5_px" data-name="Legendary / single smooth gold perimeter 1.5 px" d="M48 18 L852 18 C868.569 18 882 31.431 882 48 L882 1212 C882 1228.569 868.569 1242 852 1242 L48 1242 C31.431 1242 18 1228.569 18 1212 L18 48 C18 31.431 31.431 18 48 18 Z" fill="none" stroke="#d7b47a" stroke-width="1.5" stroke-linejoin="round"/>
+      <g id="Corner_laurels___exact_reflected_Bezier_geometry" data-name="Corner laurels / exact reflected Bezier geometry">
+        <g id="Top_left_laurel" data-name="Top left laurel">
+          <path id="Top_left_laurel___curved_stem" data-name="Top left laurel / curved stem" d="M44.19 80.85 C43.46 66.25 53.68 54.57 68.28 49.46" fill="none" stroke="#d7b47a" stroke-width="1.204" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Top_left_laurel___Bezier_leaf_1" data-name="Top left laurel / Bezier leaf 1" d="M44.19 75.01 C39.81 72.82 38.35 67.71 39.81 63.33 C44.19 65.52 46.38 70.63 44.19 75.01 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_2" data-name="Top left laurel / Bezier leaf 2" d="M47.11 67.71 C42.73 64.06 43.46 58.22 46.38 55.3 C50.03 59.68 50.76 64.06 47.11 67.71 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_3" data-name="Top left laurel / Bezier leaf 3" d="M52.95 60.41 C50.03 55.3 52.22 50.19 55.87 48.73 C58.06 53.84 56.6 57.49 52.95 60.41 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_4" data-name="Top left laurel / Bezier leaf 4" d="M59.52 54.57 C59.52 49.46 63.17 46.54 68.28 46.54 C66.82 50.92 63.9 53.84 59.52 54.57 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_5" data-name="Top left laurel / Bezier leaf 5" d="M44.19 78.66 C49.3 77.93 52.95 74.28 53.68 69.9 C48.57 69.9 44.92 72.82 44.19 78.66 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_6" data-name="Top left laurel / Bezier leaf 6" d="M48.57 69.9 C53.68 69.17 58.06 66.25 59.52 61.87 C54.41 61.87 50.03 64.79 48.57 69.9 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_7" data-name="Top left laurel / Bezier leaf 7" d="M55.14 61.14 C60.25 60.41 63.9 57.49 66.09 53.11 C60.98 53.84 57.33 56.76 55.14 61.14 Z" fill="#d7b47a"/>
+        </g>
+        <g id="Top_right_laurel" data-name="Top right laurel">
+          <path id="Top_right_laurel___curved_stem" data-name="Top right laurel / curved stem" d="M855.81 80.85 C856.54 66.25 846.32 54.57 831.72 49.46" fill="none" stroke="#d7b47a" stroke-width="1.204" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Top_right_laurel___Bezier_leaf_1" data-name="Top right laurel / Bezier leaf 1" d="M855.81 75.01 C860.19 72.82 861.65 67.71 860.19 63.33 C855.81 65.52 853.62 70.63 855.81 75.01 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_2" data-name="Top right laurel / Bezier leaf 2" d="M852.89 67.71 C857.27 64.06 856.54 58.22 853.62 55.3 C849.97 59.68 849.24 64.06 852.89 67.71 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_3" data-name="Top right laurel / Bezier leaf 3" d="M847.05 60.41 C849.97 55.3 847.78 50.19 844.13 48.73 C841.94 53.84 843.4 57.49 847.05 60.41 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_4" data-name="Top right laurel / Bezier leaf 4" d="M840.48 54.57 C840.48 49.46 836.83 46.54 831.72 46.54 C833.18 50.92 836.1 53.84 840.48 54.57 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_5" data-name="Top right laurel / Bezier leaf 5" d="M855.81 78.66 C850.7 77.93 847.05 74.28 846.32 69.9 C851.43 69.9 855.08 72.82 855.81 78.66 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_6" data-name="Top right laurel / Bezier leaf 6" d="M851.43 69.9 C846.32 69.17 841.94 66.25 840.48 61.87 C845.59 61.87 849.97 64.79 851.43 69.9 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_7" data-name="Top right laurel / Bezier leaf 7" d="M844.86 61.14 C839.75 60.41 836.1 57.49 833.91 53.11 C839.02 53.84 842.67 56.76 844.86 61.14 Z" fill="#d7b47a"/>
+        </g>
+        <g id="Bottom_left_laurel" data-name="Bottom left laurel">
+          <path id="Bottom_left_laurel___curved_stem" data-name="Bottom left laurel / curved stem" d="M44.19 1179.15 C43.46 1193.75 53.68 1205.43 68.28 1210.54" fill="none" stroke="#d7b47a" stroke-width="1.204" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_1" data-name="Bottom left laurel / Bezier leaf 1" d="M44.19 1184.99 C39.81 1187.18 38.35 1192.29 39.81 1196.67 C44.19 1194.48 46.38 1189.37 44.19 1184.99 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_2" data-name="Bottom left laurel / Bezier leaf 2" d="M47.11 1192.29 C42.73 1195.94 43.46 1201.78 46.38 1204.7 C50.03 1200.32 50.76 1195.94 47.11 1192.29 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_3" data-name="Bottom left laurel / Bezier leaf 3" d="M52.95 1199.59 C50.03 1204.7 52.22 1209.81 55.87 1211.27 C58.06 1206.16 56.6 1202.51 52.95 1199.59 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_4" data-name="Bottom left laurel / Bezier leaf 4" d="M59.52 1205.43 C59.52 1210.54 63.17 1213.46 68.28 1213.46 C66.82 1209.08 63.9 1206.16 59.52 1205.43 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_5" data-name="Bottom left laurel / Bezier leaf 5" d="M44.19 1181.34 C49.3 1182.07 52.95 1185.72 53.68 1190.1 C48.57 1190.1 44.92 1187.18 44.19 1181.34 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_6" data-name="Bottom left laurel / Bezier leaf 6" d="M48.57 1190.1 C53.68 1190.83 58.06 1193.75 59.52 1198.13 C54.41 1198.13 50.03 1195.21 48.57 1190.1 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_7" data-name="Bottom left laurel / Bezier leaf 7" d="M55.14 1198.86 C60.25 1199.59 63.9 1202.51 66.09 1206.89 C60.98 1206.16 57.33 1203.24 55.14 1198.86 Z" fill="#d7b47a"/>
+        </g>
+        <g id="Bottom_right_laurel" data-name="Bottom right laurel">
+          <path id="Bottom_right_laurel___curved_stem" data-name="Bottom right laurel / curved stem" d="M855.81 1179.15 C856.54 1193.75 846.32 1205.43 831.72 1210.54" fill="none" stroke="#d7b47a" stroke-width="1.204" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_1" data-name="Bottom right laurel / Bezier leaf 1" d="M855.81 1184.99 C860.19 1187.18 861.65 1192.29 860.19 1196.67 C855.81 1194.48 853.62 1189.37 855.81 1184.99 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_2" data-name="Bottom right laurel / Bezier leaf 2" d="M852.89 1192.29 C857.27 1195.94 856.54 1201.78 853.62 1204.7 C849.97 1200.32 849.24 1195.94 852.89 1192.29 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_3" data-name="Bottom right laurel / Bezier leaf 3" d="M847.05 1199.59 C849.97 1204.7 847.78 1209.81 844.13 1211.27 C841.94 1206.16 843.4 1202.51 847.05 1199.59 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_4" data-name="Bottom right laurel / Bezier leaf 4" d="M840.48 1205.43 C840.48 1210.54 836.83 1213.46 831.72 1213.46 C833.18 1209.08 836.1 1206.16 840.48 1205.43 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_5" data-name="Bottom right laurel / Bezier leaf 5" d="M855.81 1181.34 C850.7 1182.07 847.05 1185.72 846.32 1190.1 C851.43 1190.1 855.08 1187.18 855.81 1181.34 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_6" data-name="Bottom right laurel / Bezier leaf 6" d="M851.43 1190.1 C846.32 1190.83 841.94 1193.75 840.48 1198.13 C845.59 1198.13 849.97 1195.21 851.43 1190.1 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_7" data-name="Bottom right laurel / Bezier leaf 7" d="M844.86 1198.86 C839.75 1199.59 836.1 1202.51 833.91 1206.89 C839.02 1206.16 842.67 1203.24 844.86 1198.86 Z" fill="#d7b47a"/>
+        </g>
+      </g>
+      <g id="Laurel_wreath___two_mirrored_branches" data-name="Laurel wreath / two mirrored branches">
+        <g id="Wreath___left_branch" data-name="Wreath / left branch">
+          <path id="Left_laurel_stem" data-name="Left laurel stem" d="M806 129 C788 122 781 101 792 85" fill="none" stroke="#d7b47a" stroke-width="1.5" stroke-linecap="round" stroke-miterlimit="10"/>
+          <path id="Left_lower_leaf" data-name="Left lower leaf" d="M798 123 C789 123 785 118 784 112 C791 113 796 117 798 123 Z" fill="#d7b47a"/>
+          <path id="Left_middle_outer_leaf" data-name="Left middle outer leaf" d="M789 112 C781 108 779 101 782 96 C788 100 791 106 789 112 Z" fill="#d7b47a"/>
+          <path id="Left_upper_outer_leaf" data-name="Left upper outer leaf" d="M786 100 C782 92 785 86 790 83 C793 90 791 96 786 100 Z" fill="#d7b47a"/>
+          <path id="Left_top_leaf" data-name="Left top leaf" d="M791 89 C790 82 794 77 799 76 C801 82 797 87 791 89 Z" fill="#d7b47a"/>
+          <path id="Left_lower_inner_leaf" data-name="Left lower inner leaf" d="M796 120 C802 116 803 110 801 105 C795 108 793 114 796 120 Z" fill="#d7b47a"/>
+          <path id="Left_middle_inner_leaf" data-name="Left middle inner leaf" d="M788 108 C795 105 798 99 796 94 C790 97 787 102 788 108 Z" fill="#d7b47a"/>
+          <path id="Left_upper_inner_leaf" data-name="Left upper inner leaf" d="M788 96 C795 93 798 88 797 83 C791 86 788 91 788 96 Z" fill="#d7b47a"/>
+        </g>
+        <g id="Wreath___left_branch-2" data-name="Wreath / left branch">
+          <path id="Left_laurel_stem-2" data-name="Left laurel stem" d="M808 129 C826 122 833 101 822 85" fill="none" stroke="#d7b47a" stroke-width="1.5" stroke-linecap="round" stroke-miterlimit="10"/>
+          <path id="Left_lower_leaf-2" data-name="Left lower leaf" d="M816 123 C825 123 829 118 830 112 C823 113 818 117 816 123 Z" fill="#d7b47a"/>
+          <path id="Left_middle_outer_leaf-2" data-name="Left middle outer leaf" d="M825 112 C833 108 835 101 832 96 C826 100 823 106 825 112 Z" fill="#d7b47a"/>
+          <path id="Left_upper_outer_leaf-2" data-name="Left upper outer leaf" d="M828 100 C832 92 829 86 824 83 C821 90 823 96 828 100 Z" fill="#d7b47a"/>
+          <path id="Left_top_leaf-2" data-name="Left top leaf" d="M823 89 C824 82 820 77 815 76 C813 82 817 87 823 89 Z" fill="#d7b47a"/>
+          <path id="Left_lower_inner_leaf-2" data-name="Left lower inner leaf" d="M818 120 C812 116 811 110 813 105 C819 108 821 114 818 120 Z" fill="#d7b47a"/>
+          <path id="Left_middle_inner_leaf-2" data-name="Left middle inner leaf" d="M826 108 C819 105 816 99 818 94 C824 97 827 102 826 108 Z" fill="#d7b47a"/>
+          <path id="Left_upper_inner_leaf-2" data-name="Left upper inner leaf" d="M826 96 C819 93 816 88 817 83 C823 86 826 91 826 96 Z" fill="#d7b47a"/>
+        </g>
+      </g>
+      <g id="Type___live_editable_placeholders" data-name="Type / live editable placeholders">
+
+
+
+
+      </g>
+      <line id="Legendary_description_hairline" data-name="Legendary description hairline" x1="78" y1="1076" x2="822" y2="1076" fill="none" stroke="#d7b47a" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+      <g id="Footer_type___editable_edition_number" data-name="Footer type / editable edition number">
+
+
+      </g>
+      <line id="Footer_hairline" data-name="Footer hairline" x1="310" y1="1202" x2="620" y2="1202" fill="none" stroke="#a7834f" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g id="Epic___standard_frame" data-name="Epic / standard frame">
+  </g>
+  <g id="Rare___standard_frame" data-name="Rare / standard frame">
+  </g>
+  <g id="Uncommon___standard_frame" data-name="Uncommon / standard frame">
+  </g>
+  <g id="Common___standard_frame" data-name="Common / standard frame">
+  </g>
+<g id="Card_type_editable" data-name="Card type / editable"><text id="Card_title_live" data-name="Card title live" x="78" y="138.06" font-family="Source Serif 4" font-size="72" font-weight="400" fill="#eee4ce" text-anchor="start"><tspan x="78" y="138.06">Lysippos</tspan></text>
+<text id="Affiliation_live" data-name="Affiliation live" x="82" y="170.312" font-family="Inter" font-size="20" font-weight="500" fill="#d7b47a" text-anchor="start" letter-spacing="2.6"><tspan x="82" y="170.312">HISTORICAL FIGURE</tspan></text>
+<text id="Rarity_live" data-name="Rarity live" x="78" y="1057.344" font-family="Inter" font-size="21" font-weight="500" fill="#d7b47a" text-anchor="start" letter-spacing="3.57"><tspan x="78" y="1057.344">LEGENDARY</tspan></text>
+<text id="Collection_live" data-name="Collection live" x="78" y="1128.332" font-family="Source Serif 4" font-size="37" font-weight="400" fill="#eee4ce" text-anchor="start"><tspan x="78" y="1128.332">Historical figure</tspan></text>
+<text id="Preview_status_live" data-name="Preview status live" x="78" y="1159" font-family="Inter" font-size="16" font-weight="400" fill="#d7b47a" text-anchor="start" letter-spacing="1.1"><tspan x="78" y="1159">ART PREVIEW</tspan></text>
+<text id="Everfolk_brand_live" data-name="Everfolk brand live" x="96" y="1209.972" font-family="Source Serif 4" font-size="27" font-weight="400" fill="#eee4ce" text-anchor="start" letter-spacing="1.35"><tspan x="96" y="1209.972">EVERFOLK</tspan></text>
+<text id="Edition_limit_live" data-name="Edition limit live" x="816" y="1207.344" font-family="Inter" font-size="18.5" font-weight="400" fill="#eee4ce" text-anchor="end" letter-spacing="1.5"><tspan x="816" y="1207.344">LIMIT 010</tspan></text></g>
+</svg>

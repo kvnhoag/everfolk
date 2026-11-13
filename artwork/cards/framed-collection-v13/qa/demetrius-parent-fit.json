@@ -1,0 +1,60 @@
+{
+  "slug": "demetrius-parent",
+  "figureId": "demetrius",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Demetrius the Besieger",
+  "subtitle": "HISTORICAL FIGURE",
+  "typeLabel": "HISTORICAL FIGURE",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-parent-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 43,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-parent.svg",
+  "fittedArt": "assets/fitted/demetrius-parent.png",
+  "overlaySvg": "source/overlays/demetrius-parent.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "30c5f78f48416a033866a01a7138317b487aeda8c54457051bc22dd901936ae9",
+  "master": "masters/demetrius-parent.vectorcraft",
+  "export": "exports/demetrius-parent.png",
+  "thumbnail": "assets/demetrius-parent-thumb.png",
+  "exportSha256": "de23d7eb08554169151e548f6bf5ce71db18e690cfbcbc58d80c2c5869d6a5b0",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW"
+}

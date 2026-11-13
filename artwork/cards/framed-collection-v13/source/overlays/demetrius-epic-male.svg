@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="1260" viewBox="0 0 900 1260">
+  <title>Director of Siege Works / epic</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="Legendary___full_art" data-name="Legendary / full art">
+  </g>
+  <g id="Epic___standard_frame" data-name="Epic / standard frame">
+    <g id="EPIC___selected_jade_and_bronze" data-name="EPIC / selected jade and bronze">
+      <g id="Body___live_subtract_artwork_aperture" data-name="Body / live subtract artwork aperture">
+        <path d="M0 42 C0 18.804 18.804 0 42 0 L858 0 C881.196 0 900 18.804 900 42 L900 1218 C900 1241.196 881.196 1260 858 1260 L42 1260 C18.804 1260 0 1241.196 0 1218 Z M84 190 C80 190 76.586 191.414 73.757 194.243 L54.243 213.757 C51.414 216.586 50 220 50 224 L50 896 C50 900 51.414 903.414 54.243 906.243 L73.757 925.757 C76.586 928.586 80 930 84 930 L816 930 C820 930 823.414 928.586 826.243 925.757 L845.757 906.243 C848.586 903.414 850 900 850 896 L850 224 C850 220 848.586 216.586 845.757 213.757 L826.243 194.243 C823.414 191.414 820 190 816 190 Z" fill="none"/>
+        <path d="M0 42 C0 18.804 18.804 0 42 0 L858 0 C881.196 0 900 18.804 900 42 L900 1218 C900 1241.196 881.196 1260 858 1260 L42 1260 C18.804 1260 0 1241.196 0 1218 Z M84 190 C80 190 76.586 191.414 73.757 194.243 L54.243 213.757 C51.414 216.586 50 220 50 224 L50 896 C50 900 51.414 903.414 54.243 906.243 L73.757 925.757 C76.586 928.586 80 930 84 930 L816 930 C820 930 823.414 928.586 826.243 925.757 L845.757 906.243 C848.586 903.414 850 900 850 896 L850 224 C850 220 848.586 216.586 845.757 213.757 L826.243 194.243 C823.414 191.414 820 190 816 190 Z" fill="#0b2523"/>
+      </g>
+      <g id="Borders___exact_offsets_and_shared_corner_centres" data-name="Borders / exact offsets and shared corner centres">
+        <path id="Outer_bronze_rule___2.6_px" data-name="Outer bronze rule / 2.6 px" d="M48 18 L852 18 C868.569 18 882 31.431 882 48 L882 1212 C882 1228.569 868.569 1242 852 1242 L48 1242 C31.431 1242 18 1228.569 18 1212 L18 48 C18 31.431 31.431 18 48 18 Z" fill="none" stroke="#a7834f" stroke-width="2.6" stroke-linejoin="round"/>
+        <path id="Middle_gold_rule___1.3_px" data-name="Middle gold rule / 1.3 px" d="M48 25 L852 25 C864.703 25 875 35.297 875 48 L875 1212 C875 1224.703 864.703 1235 852 1235 L48 1235 C35.297 1235 25 1224.703 25 1212 L25 48 C25 35.297 35.297 25 48 25 Z" fill="none" stroke="#d7b47a" stroke-width="1.3" stroke-linejoin="round"/>
+        <path id="Inner_bronze_rule___1.2_px" data-name="Inner bronze rule / 1.2 px" d="M48 32 L852 32 C860.837 32 868 39.163 868 48 L868 1212 C868 1220.837 860.837 1228 852 1228 L48 1228 C39.163 1228 32 1220.837 32 1212 L32 48 C32 39.163 39.163 32 48 32 Z" fill="none" stroke="#a7834f" stroke-width="1.2" stroke-linejoin="round"/>
+        <path id="Artwork_aperture___continuous_rounded_chamfer_outline" data-name="Artwork aperture / continuous rounded chamfer outline" d="M73.757 194.243 C76.586 191.414 80 190 84 190 L816 190 C820 190 823.414 191.414 826.243 194.243 L845.757 213.757 C848.586 216.586 850 220 850 224 L850 896 C850 900 848.586 903.414 845.757 906.243 L826.243 925.757 C823.414 928.586 820 930 816 930 L84 930 C80 930 76.586 928.586 73.757 925.757 L54.243 906.243 C51.414 903.414 50 900 50 896 L50 224 C50 220 51.414 216.586 54.243 213.757 Z" fill="none" stroke="#d7b47a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g id="Information_panel___independent_native_shapes" data-name="Information panel / independent native shapes">
+        <path id="Ivory_description_panel___softened_clipped_corners" data-name="Ivory description panel / softened clipped corners" d="M63.172 953.828 C65.057 951.943 67.333 951 70 951 L830 951 C832.667 951 834.943 951.943 836.828 953.828 L847.172 964.172 C849.057 966.057 850 968.333 850 971 L850 1140 C850 1142.667 849.057 1144.943 847.172 1146.828 L836.828 1157.172 C834.943 1159.057 832.667 1160 830 1160 L70 1160 C67.333 1160 65.057 1159.057 63.172 1157.172 L52.828 1146.828 C50.943 1144.943 50 1142.667 50 1140 L50 971 C50 968.333 50.943 966.057 52.828 964.172 Z" fill="#eee1c1"/>
+        <line id="Description_label_divider" data-name="Description label divider" x1="96" y1="1017" x2="804" y2="1017" fill="none" stroke="#a7834f" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <g id="Corner_laurels___exact_reflected_Bezier_geometry" data-name="Corner laurels / exact reflected Bezier geometry">
+        <g id="Top_left_laurel" data-name="Top left laurel">
+          <path id="Top_left_laurel___curved_stem" data-name="Top left laurel / curved stem" d="M44.4 84 C43.6 68 54.8 55.2 70.8 49.6" fill="none" stroke="#d7b47a" stroke-width="1.32" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Top_left_laurel___Bezier_leaf_1" data-name="Top left laurel / Bezier leaf 1" d="M44.4 77.6 C39.6 75.2 38 69.6 39.6 64.8 C44.4 67.2 46.8 72.8 44.4 77.6 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_2" data-name="Top left laurel / Bezier leaf 2" d="M47.6 69.6 C42.8 65.6 43.6 59.2 46.8 56 C50.8 60.8 51.6 65.6 47.6 69.6 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_3" data-name="Top left laurel / Bezier leaf 3" d="M54 61.6 C50.8 56 53.2 50.4 57.2 48.8 C59.6 54.4 58 58.4 54 61.6 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_4" data-name="Top left laurel / Bezier leaf 4" d="M61.2 55.2 C61.2 49.6 65.2 46.4 70.8 46.4 C69.2 51.2 66 54.4 61.2 55.2 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_5" data-name="Top left laurel / Bezier leaf 5" d="M44.4 81.6 C50 80.8 54 76.8 54.8 72 C49.2 72 45.2 75.2 44.4 81.6 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_6" data-name="Top left laurel / Bezier leaf 6" d="M49.2 72 C54.8 71.2 59.6 68 61.2 63.2 C55.6 63.2 50.8 66.4 49.2 72 Z" fill="#d7b47a"/>
+          <path id="Top_left_laurel___Bezier_leaf_7" data-name="Top left laurel / Bezier leaf 7" d="M56.4 62.4 C62 61.6 66 58.4 68.4 53.6 C62.8 54.4 58.8 57.6 56.4 62.4 Z" fill="#d7b47a"/>
+        </g>
+        <g id="Top_right_laurel" data-name="Top right laurel">
+          <path id="Top_right_laurel___curved_stem" data-name="Top right laurel / curved stem" d="M855.6 84 C856.4 68 845.2 55.2 829.2 49.6" fill="none" stroke="#d7b47a" stroke-width="1.32" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Top_right_laurel___Bezier_leaf_1" data-name="Top right laurel / Bezier leaf 1" d="M855.6 77.6 C860.4 75.2 862 69.6 860.4 64.8 C855.6 67.2 853.2 72.8 855.6 77.6 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_2" data-name="Top right laurel / Bezier leaf 2" d="M852.4 69.6 C857.2 65.6 856.4 59.2 853.2 56 C849.2 60.8 848.4 65.6 852.4 69.6 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_3" data-name="Top right laurel / Bezier leaf 3" d="M846 61.6 C849.2 56 846.8 50.4 842.8 48.8 C840.4 54.4 842 58.4 846 61.6 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_4" data-name="Top right laurel / Bezier leaf 4" d="M838.8 55.2 C838.8 49.6 834.8 46.4 829.2 46.4 C830.8 51.2 834 54.4 838.8 55.2 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_5" data-name="Top right laurel / Bezier leaf 5" d="M855.6 81.6 C850 80.8 846 76.8 845.2 72 C850.8 72 854.8 75.2 855.6 81.6 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_6" data-name="Top right laurel / Bezier leaf 6" d="M850.8 72 C845.2 71.2 840.4 68 838.8 63.2 C844.4 63.2 849.2 66.4 850.8 72 Z" fill="#d7b47a"/>
+          <path id="Top_right_laurel___Bezier_leaf_7" data-name="Top right laurel / Bezier leaf 7" d="M843.6 62.4 C838 61.6 834 58.4 831.6 53.6 C837.2 54.4 841.2 57.6 843.6 62.4 Z" fill="#d7b47a"/>
+        </g>
+        <g id="Bottom_left_laurel" data-name="Bottom left laurel">
+          <path id="Bottom_left_laurel___curved_stem" data-name="Bottom left laurel / curved stem" d="M44.4 1176 C43.6 1192 54.8 1204.8 70.8 1210.4" fill="none" stroke="#d7b47a" stroke-width="1.32" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_1" data-name="Bottom left laurel / Bezier leaf 1" d="M44.4 1182.4 C39.6 1184.8 38 1190.4 39.6 1195.2 C44.4 1192.8 46.8 1187.2 44.4 1182.4 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_2" data-name="Bottom left laurel / Bezier leaf 2" d="M47.6 1190.4 C42.8 1194.4 43.6 1200.8 46.8 1204 C50.8 1199.2 51.6 1194.4 47.6 1190.4 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_3" data-name="Bottom left laurel / Bezier leaf 3" d="M54 1198.4 C50.8 1204 53.2 1209.6 57.2 1211.2 C59.6 1205.6 58 1201.6 54 1198.4 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_4" data-name="Bottom left laurel / Bezier leaf 4" d="M61.2 1204.8 C61.2 1210.4 65.2 1213.6 70.8 1213.6 C69.2 1208.8 66 1205.6 61.2 1204.8 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_5" data-name="Bottom left laurel / Bezier leaf 5" d="M44.4 1178.4 C50 1179.2 54 1183.2 54.8 1188 C49.2 1188 45.2 1184.8 44.4 1178.4 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_6" data-name="Bottom left laurel / Bezier leaf 6" d="M49.2 1188 C54.8 1188.8 59.6 1192 61.2 1196.8 C55.6 1196.8 50.8 1193.6 49.2 1188 Z" fill="#d7b47a"/>
+          <path id="Bottom_left_laurel___Bezier_leaf_7" data-name="Bottom left laurel / Bezier leaf 7" d="M56.4 1197.6 C62 1198.4 66 1201.6 68.4 1206.4 C62.8 1205.6 58.8 1202.4 56.4 1197.6 Z" fill="#d7b47a"/>
+        </g>
+        <g id="Bottom_right_laurel" data-name="Bottom right laurel">
+          <path id="Bottom_right_laurel___curved_stem" data-name="Bottom right laurel / curved stem" d="M855.6 1176 C856.4 1192 845.2 1204.8 829.2 1210.4" fill="none" stroke="#d7b47a" stroke-width="1.32" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_1" data-name="Bottom right laurel / Bezier leaf 1" d="M855.6 1182.4 C860.4 1184.8 862 1190.4 860.4 1195.2 C855.6 1192.8 853.2 1187.2 855.6 1182.4 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_2" data-name="Bottom right laurel / Bezier leaf 2" d="M852.4 1190.4 C857.2 1194.4 856.4 1200.8 853.2 1204 C849.2 1199.2 848.4 1194.4 852.4 1190.4 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_3" data-name="Bottom right laurel / Bezier leaf 3" d="M846 1198.4 C849.2 1204 846.8 1209.6 842.8 1211.2 C840.4 1205.6 842 1201.6 846 1198.4 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_4" data-name="Bottom right laurel / Bezier leaf 4" d="M838.8 1204.8 C838.8 1210.4 834.8 1213.6 829.2 1213.6 C830.8 1208.8 834 1205.6 838.8 1204.8 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_5" data-name="Bottom right laurel / Bezier leaf 5" d="M855.6 1178.4 C850 1179.2 846 1183.2 845.2 1188 C850.8 1188 854.8 1184.8 855.6 1178.4 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_6" data-name="Bottom right laurel / Bezier leaf 6" d="M850.8 1188 C845.2 1188.8 840.4 1192 838.8 1196.8 C844.4 1196.8 849.2 1193.6 850.8 1188 Z" fill="#d7b47a"/>
+          <path id="Bottom_right_laurel___Bezier_leaf_7" data-name="Bottom right laurel / Bezier leaf 7" d="M843.6 1197.6 C838 1198.4 834 1201.6 831.6 1206.4 C837.2 1205.6 841.2 1202.4 843.6 1197.6 Z" fill="#d7b47a"/>
+        </g>
+      </g>
+      <g id="Type___live_editable_placeholders" data-name="Type / live editable placeholders">
+
+
+
+
+
+      </g>
+      <g id="Footer_type___editable_edition_number" data-name="Footer type / editable edition number">
+
+
+      </g>
+      <line id="Footer_hairline" data-name="Footer hairline" x1="310" y1="1202" x2="620" y2="1202" fill="none" stroke="#a7834f" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g id="Rare___standard_frame" data-name="Rare / standard frame">
+  </g>
+  <g id="Uncommon___standard_frame" data-name="Uncommon / standard frame">
+  </g>
+  <g id="Common___standard_frame" data-name="Common / standard frame">
+  </g>
+<g id="Card_type_editable" data-name="Card type / editable"><g id="Portrait_inlay_rules" data-name="Portrait inlay / fine bronze rules"><path d="M153 191V929M747 191V929" fill="none" stroke="#a7834f" stroke-width="1" opacity="0.8"/><path d="M99 338V446M99 674V782M801 338V446M801 674V782" fill="none" stroke="#a7834f" stroke-width="1" opacity="0.35"/><path d="M99 546L105 560L99 574L93 560ZM801 546L807 560L801 574L795 560Z" fill="none" stroke="#a7834f" stroke-width="1" opacity="0.6"/></g>
+<text id="Card_title_live" data-name="Card title live" x="450" y="133.26" font-family="Source Serif 4" font-size="62" font-weight="400" fill="#eee4ce" text-anchor="middle"><tspan x="450" y="133.26">Director of Siege Works</tspan></text>
+<text id="Affiliation_live" data-name="Affiliation live" x="450" y="166.312" font-family="Inter" font-size="20" font-weight="500" fill="#d7b47a" text-anchor="middle" letter-spacing="2.6"><tspan x="450" y="166.312">DEMETRIUS THE BESIEGER</tspan></text>
+<text id="Rarity_live" data-name="Rarity live" x="804" y="998.344" font-family="Inter" font-size="21" font-weight="500" fill="#1a2b27" text-anchor="end" letter-spacing="3.57"><tspan x="804" y="998.344">EPIC</tspan></text>
+<text id="Collection_live" data-name="Collection live" x="96" y="1083.44" font-family="Source Serif 4" font-size="40" font-weight="400" fill="#1a2b27" text-anchor="start"><tspan x="96" y="1083.44">Demetrius the Besieger</tspan></text>
+<text id="Preview_status_live" data-name="Preview status live" x="96" y="1126" font-family="Inter" font-size="16" font-weight="400" fill="#59604f" text-anchor="start" letter-spacing="1.1"><tspan x="96" y="1126">ART PREVIEW · MALE CONTRIBUTOR</tspan></text>
+<text id="Everfolk_brand_live" data-name="Everfolk brand live" x="96" y="1209.972" font-family="Source Serif 4" font-size="27" font-weight="400" fill="#eee4ce" text-anchor="start" letter-spacing="1.35"><tspan x="96" y="1209.972">EVERFOLK</tspan></text>
+<text id="Edition_limit_live" data-name="Edition limit live" x="816" y="1207.344" font-family="Inter" font-size="18.5" font-weight="400" fill="#eee4ce" text-anchor="end" letter-spacing="1.5"><tspan x="816" y="1207.344">LIMIT 025</tspan></text>
+<text id="Card_type_live" data-name="Card type live" x="96" y="998.344" font-family="Inter" font-size="19" font-weight="500" fill="#1a2b27" text-anchor="start" letter-spacing="2.2"><tspan x="96" y="998.344">PLAYER CONTRIBUTION</tspan></text></g>
+</svg>

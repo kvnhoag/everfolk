@@ -1,0 +1,490 @@
+{
+  "assets": [
+    {
+      "slug": "alexander-uncommon-male",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Campaign Provisioner",
+      "source": "source/alexander-uncommon-male.png",
+      "prompt": "prompts/alexander-uncommon-male.txt",
+      "final": "assets/alexander-uncommon-male-pixel.png",
+      "qa": "qa/alexander-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          350,
+          180
+        ],
+        "radius": [
+          100,
+          125
+        ]
+      },
+      "viewAngle": "frontal",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-852b1698-363c-406f-ba75-5f93f4006992.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "alexander-rare-male",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Campaign Staff Officer",
+      "source": "source/alexander-rare-male.png",
+      "prompt": "prompts/alexander-rare-male.txt",
+      "final": "assets/alexander-rare-male-pixel.png",
+      "qa": "qa/alexander-rare-male-pixel.json",
+      "face": {
+        "center": [
+          360,
+          180
+        ],
+        "radius": [
+          100,
+          130
+        ]
+      },
+      "viewAngle": "left-profile",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-fa98f2c9-d160-4434-8a6a-b24a447dc392.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "alexander-epic-male",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "title": "Trusted Campaign Commander",
+      "source": "source/alexander-epic-male.png",
+      "prompt": "prompts/alexander-epic-male.txt",
+      "final": "assets/alexander-epic-male-pixel.png",
+      "qa": "qa/alexander-epic-male-pixel.json",
+      "face": {
+        "center": [
+          580,
+          180
+        ],
+        "radius": [
+          108,
+          135
+        ]
+      },
+      "viewAngle": "three-quarter-left",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-ef7b1ecf-f085-46ec-b6db-bb3f50687ac1.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "alexander-uncommon-female",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Campaign Provisioner",
+      "source": "source/alexander-uncommon-female.png",
+      "prompt": "prompts/alexander-uncommon-female.txt",
+      "final": "assets/alexander-uncommon-female-pixel.png",
+      "qa": "qa/alexander-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          345,
+          165
+        ],
+        "radius": [
+          98,
+          120
+        ]
+      },
+      "viewAngle": "frontal",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-65315951-24ae-46c4-a424-bca01687c02b.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "alexander-rare-female",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Campaign Staff Officer",
+      "source": "source/alexander-rare-female.png",
+      "prompt": "prompts/alexander-rare-female.txt",
+      "final": "assets/alexander-rare-female-pixel.png",
+      "qa": "qa/alexander-rare-female-pixel.json",
+      "face": {
+        "center": [
+          350,
+          170
+        ],
+        "radius": [
+          98,
+          125
+        ]
+      },
+      "viewAngle": "left-profile",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-77817d4e-aa5e-497d-be67-ef8235d1e0bc.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "alexander-epic-female",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "title": "Trusted Campaign Commander",
+      "source": "source/alexander-epic-female.png",
+      "prompt": "prompts/alexander-epic-female.txt",
+      "final": "assets/alexander-epic-female-pixel.png",
+      "qa": "qa/alexander-epic-female-pixel.json",
+      "face": {
+        "center": [
+          265,
+          188
+        ],
+        "radius": [
+          100,
+          130
+        ]
+      },
+      "viewAngle": "three-quarter-right",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-7dcaf354-657a-48ed-b21a-0a0294b5809f.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "demetrius-uncommon-male",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Siege Workshop Assistant",
+      "source": "source/demetrius-uncommon-male.png",
+      "prompt": "prompts/demetrius-uncommon-male.txt",
+      "final": "assets/demetrius-uncommon-male-pixel.png",
+      "qa": "qa/demetrius-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          435,
+          265
+        ],
+        "radius": [
+          120,
+          145
+        ]
+      },
+      "viewAngle": "frontal",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-1aab93e7-591d-43e0-a18d-46b79858ce45.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "demetrius-rare-male",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Siege Engineer",
+      "source": "source/demetrius-rare-male.png",
+      "prompt": "prompts/demetrius-rare-male.txt",
+      "final": "assets/demetrius-rare-male-pixel.png",
+      "qa": "qa/demetrius-rare-male-pixel.json",
+      "face": {
+        "center": [
+          350,
+          250
+        ],
+        "radius": [
+          105,
+          135
+        ]
+      },
+      "viewAngle": "left-profile",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-97fbdb11-904c-4335-80c1-73e3a5d2aa8e.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "demetrius-uncommon-female",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Siege Workshop Assistant",
+      "source": "source/demetrius-uncommon-female.png",
+      "prompt": "prompts/demetrius-uncommon-female.txt",
+      "final": "assets/demetrius-uncommon-female-pixel.png",
+      "qa": "qa/demetrius-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          445,
+          240
+        ],
+        "radius": [
+          110,
+          140
+        ]
+      },
+      "viewAngle": "frontal",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-65231310-0d5a-4160-98f7-b6dbcf969cee.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "demetrius-rare-female",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Siege Engineer",
+      "source": "source/demetrius-rare-female.png",
+      "prompt": "prompts/demetrius-rare-female.txt",
+      "final": "assets/demetrius-rare-female-pixel.png",
+      "qa": "qa/demetrius-rare-female-pixel.json",
+      "face": {
+        "center": [
+          368,
+          240
+        ],
+        "radius": [
+          100,
+          128
+        ]
+      },
+      "viewAngle": "left-profile",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-83a218a5-09bd-4ff4-830c-0d602b84bcbf.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "demetrius-epic-female",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "title": "Director of Siege Works",
+      "source": "source/demetrius-epic-female.png",
+      "prompt": "prompts/demetrius-epic-female.txt",
+      "final": "assets/demetrius-epic-female-pixel.png",
+      "qa": "qa/demetrius-epic-female-pixel.json",
+      "face": {
+        "center": [
+          290,
+          190
+        ],
+        "radius": [
+          105,
+          128
+        ]
+      },
+      "viewAngle": "three-quarter-right",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-95b3d9fa-7986-41c1-b992-201f0235ba5d.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "ptolemy-uncommon-female",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Egyptian Administration Clerk",
+      "source": "source/ptolemy-uncommon-female.png",
+      "prompt": "prompts/ptolemy-uncommon-female.txt",
+      "final": "assets/ptolemy-uncommon-female-pixel.png",
+      "qa": "qa/ptolemy-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          410,
+          250
+        ],
+        "radius": [
+          115,
+          145
+        ]
+      },
+      "viewAngle": "frontal",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-7ba36c28-8530-461a-bffe-3c111dcbfedd.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "ptolemy-rare-female",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Ptolemaic Supply Commissioner",
+      "source": "source/ptolemy-rare-female.png",
+      "prompt": "prompts/ptolemy-rare-female.txt",
+      "final": "assets/ptolemy-rare-female-pixel.png",
+      "qa": "qa/ptolemy-rare-female-pixel.json",
+      "face": {
+        "center": [
+          390,
+          200
+        ],
+        "radius": [
+          105,
+          130
+        ]
+      },
+      "viewAngle": "left-profile",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-3534e794-0eca-49f7-b5b9-a9e4b91ac719.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "ptolemy-uncommon-male",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Egyptian Administration Clerk",
+      "source": "source/ptolemy-uncommon-male.png",
+      "prompt": "prompts/ptolemy-uncommon-male.txt",
+      "final": "assets/ptolemy-uncommon-male-pixel.png",
+      "qa": "qa/ptolemy-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          400,
+          220
+        ],
+        "radius": [
+          110,
+          140
+        ]
+      },
+      "viewAngle": "frontal",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-4c32b8b4-afe2-4039-98f1-8a745aa6dc1f.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "ptolemy-rare-male",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Ptolemaic Supply Commissioner",
+      "source": "source/ptolemy-rare-male.png",
+      "prompt": "prompts/ptolemy-rare-male.txt",
+      "final": "assets/ptolemy-rare-male-pixel.png",
+      "qa": "qa/ptolemy-rare-male-pixel.json",
+      "face": {
+        "center": [
+          390,
+          200
+        ],
+        "radius": [
+          108,
+          135
+        ]
+      },
+      "viewAngle": "left-profile",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-9641bc11-5612-467e-a390-0ba98272609b.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "ptolemy-epic-male",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "title": "Steward of Egyptian Government",
+      "source": "source/ptolemy-epic-male.png",
+      "prompt": "prompts/ptolemy-epic-male.txt",
+      "final": "assets/ptolemy-epic-male-pixel.png",
+      "qa": "qa/ptolemy-epic-male-pixel.json",
+      "face": {
+        "center": [
+          330,
+          220
+        ],
+        "radius": [
+          120,
+          145
+        ]
+      },
+      "viewAngle": "three-quarter-right",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-c4271d31-7c5e-4e5f-94d0-ea0925134c2a.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "nearchus-title-female",
+      "figureId": "nearchus",
+      "kind": "title",
+      "tier": null,
+      "gender": "female",
+      "title": "Navigator of Nearchus",
+      "source": "source/nearchus-title-female.png",
+      "prompt": "prompts/nearchus-title-female.txt",
+      "final": "assets/nearchus-title-female-pixel.png",
+      "qa": "qa/nearchus-title-female-pixel.json",
+      "face": {
+        "center": [
+          335,
+          220
+        ],
+        "radius": [
+          100,
+          125
+        ]
+      },
+      "viewAngle": "left-profile",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-d591f6e9-6a7d-4232-8cbe-7372eb73715a.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    },
+    {
+      "slug": "eumenes-title-female",
+      "figureId": "eumenes",
+      "kind": "title",
+      "tier": null,
+      "gender": "female",
+      "title": "Secretary of Eumenes",
+      "source": "source/eumenes-title-female.png",
+      "prompt": "prompts/eumenes-title-female.txt",
+      "final": "assets/eumenes-title-female-pixel.png",
+      "qa": "qa/eumenes-title-female-pixel.json",
+      "face": {
+        "center": [
+          375,
+          300
+        ],
+        "radius": [
+          112,
+          140
+        ]
+      },
+      "viewAngle": "frontal-down",
+      "angleVerified": true,
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cd-01e8-7511-82d3-0406ae0f2b3c\\exec-7a15c2c9-ccfa-4ce5-bd2c-d90902cc7377.png",
+      "provenance": "Built-in image edit; fictional representative contributor based on retained v11 task scene. User military equipment sheet informs simple Alexander service armour. Imagined appearance; not a gender-swapped historical figure."
+    }
+  ]
+}

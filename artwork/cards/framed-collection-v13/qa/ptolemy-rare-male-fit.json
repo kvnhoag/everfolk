@@ -1,0 +1,60 @@
+{
+  "slug": "ptolemy-rare-male",
+  "figureId": "ptolemy",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Ptolemaic Supply Commissioner",
+  "subtitle": "Ptolemy I Soter",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 67,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-rare-male.svg",
+  "fittedArt": "assets/fitted/ptolemy-rare-male.png",
+  "overlaySvg": "source/overlays/ptolemy-rare-male.svg",
+  "titleSize": 48,
+  "sourceArtSha256": "01ff40b31057ccb77ebe85e41faa62dc816fd8235dabe00ecdb5a4172d34f1dd",
+  "master": "masters/ptolemy-rare-male.vectorcraft",
+  "export": "exports/ptolemy-rare-male.png",
+  "thumbnail": "assets/ptolemy-rare-male-thumb.png",
+  "exportSha256": "50343bdfb4a863714ea0416df6dd9639147a4118b89d01d9c3dac25be1e7ef40",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

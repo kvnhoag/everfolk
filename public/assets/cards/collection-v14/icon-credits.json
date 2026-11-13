@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-figure-symbols-v1",
+  "date": "2026-11-13",
+  "sourceRepositories": [
+    {
+      "url": "https://github.com/game-icons/icons",
+      "commit": "82d948812bfe3f269ef8f731dcdb07b08160edc4"
+    },
+    {
+      "url": "https://github.com/google/material-design-icons",
+      "commit": "10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7"
+    }
+  ],
+  "attribution": "Icons by Lorc and Delapouite from Game-icons.net, licensed CC BY 3.0. Euclid drafting-compass icon by Google, licensed Apache 2.0. Original SVGs are preserved; card-rendered versions are recolored and have only non-symbol backgrounds removed.",
+  "icons": [
+    {
+      "figureId": "alexander",
+      "iconName": "crossed-swords",
+      "author": "Lorc",
+      "authorUrl": "https://lorcblog.blogspot.com/",
+      "pageUrl": "https://game-icons.net/1x1/lorc/crossed-swords.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/lorc/crossed-swords.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/alexander.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/alexander.svg",
+      "sha256": "d977de17aa347c15a311e96ee4c7194837e47d119d2b5a06bc1dbbd2cd1a92f2",
+      "bytes": 1254,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "aristotle",
+      "iconName": "scroll-unfurled",
+      "author": "Lorc",
+      "authorUrl": "https://lorcblog.blogspot.com/",
+      "pageUrl": "https://game-icons.net/1x1/lorc/scroll-unfurled.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/lorc/scroll-unfurled.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/aristotle.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/aristotle.svg",
+      "sha256": "bbbe367221e46a6d9ad8f1b0c47e8a0db223cd2b9fda67b885e906c6fe72d9c9",
+      "bytes": 1967,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "euclid",
+      "iconName": "architecture (drafting compass)",
+      "author": "Google",
+      "authorUrl": "https://fonts.google.com/icons",
+      "pageUrl": "https://github.com/google/material-design-icons/blob/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/src/social/architecture/materialicons/24px.svg",
+      "downloadUrl": "https://raw.githubusercontent.com/google/material-design-icons/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/src/social/architecture/materialicons/24px.svg",
+      "license": "Apache-2.0",
+      "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+      "path": "icons/euclid.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/euclid.svg",
+      "sha256": "10e07402dc103860c0a31ee5fb79383f906dcc0d05deb66c4d58a24c98124ea8",
+      "bytes": 551,
+      "viewBox": [
+        0,
+        0,
+        24,
+        24
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "lysippos",
+      "iconName": "chisel",
+      "author": "Delapouite",
+      "authorUrl": "https://delapouite.com/",
+      "pageUrl": "https://game-icons.net/1x1/delapouite/chisel.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/delapouite/chisel.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/lysippos.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/lysippos.svg",
+      "sha256": "dccb7bfb45ee2bdc39ab21f9fb1b206a05545a0acef9ea56284dd12c7eec4d52",
+      "bytes": 1073,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "pytheas",
+      "iconName": "galley",
+      "author": "Delapouite",
+      "authorUrl": "https://delapouite.com/",
+      "pageUrl": "https://game-icons.net/1x1/delapouite/galley.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/delapouite/galley.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/pytheas.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/pytheas.svg",
+      "sha256": "1b1d60b0ea0be82b54bd88c7fa80eee18c7d08efa74a1861ca65f6b04319f432",
+      "bytes": 1035,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "menander",
+      "iconName": "drama-masks",
+      "author": "Lorc",
+      "authorUrl": "https://lorcblog.blogspot.com/",
+      "pageUrl": "https://game-icons.net/1x1/lorc/drama-masks.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/lorc/drama-masks.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/menander.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/menander.svg",
+      "sha256": "2af26272ba054521fd1f6ebb003ed481b90acb418d5b306d555c2aec0cdbb5d6",
+      "bytes": 2948,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "demetrius",
+      "iconName": "siege-tower",
+      "author": "Delapouite",
+      "authorUrl": "https://delapouite.com/",
+      "pageUrl": "https://game-icons.net/1x1/delapouite/siege-tower.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/delapouite/siege-tower.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/demetrius.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/demetrius.svg",
+      "sha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+      "bytes": 1460,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "theophrastus",
+      "iconName": "herbs-bundle",
+      "author": "Delapouite",
+      "authorUrl": "https://delapouite.com/",
+      "pageUrl": "https://game-icons.net/1x1/delapouite/herbs-bundle.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/delapouite/herbs-bundle.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/theophrastus.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/theophrastus.svg",
+      "sha256": "e87e67b47664444e21b2a160e112b94338eed4d3ba7963755fd772ceafa01b1a",
+      "bytes": 3492,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "zeno",
+      "iconName": "greek-temple",
+      "author": "Delapouite",
+      "authorUrl": "https://delapouite.com/",
+      "pageUrl": "https://game-icons.net/1x1/delapouite/greek-temple.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/delapouite/greek-temple.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/zeno.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/zeno.svg",
+      "sha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+      "bytes": 312,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "ptolemy",
+      "iconName": "pschent-double-crown",
+      "author": "Delapouite",
+      "authorUrl": "https://delapouite.com/",
+      "pageUrl": "https://game-icons.net/1x1/delapouite/pschent-double-crown.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/delapouite/pschent-double-crown.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/ptolemy.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/ptolemy.svg",
+      "sha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+      "bytes": 1476,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "cleomenes",
+      "iconName": "grain-bundle",
+      "author": "Delapouite",
+      "authorUrl": "https://delapouite.com/",
+      "pageUrl": "https://game-icons.net/1x1/delapouite/grain-bundle.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/delapouite/grain-bundle.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/cleomenes.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/cleomenes.svg",
+      "sha256": "e736547a684a2cd5a090f64a68738fb2d709ad05a76b0a73c2e9adf191ffa385",
+      "bytes": 4946,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "nearchus",
+      "iconName": "trireme",
+      "author": "Delapouite",
+      "authorUrl": "https://delapouite.com/",
+      "pageUrl": "https://game-icons.net/1x1/delapouite/trireme.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/delapouite/trireme.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/nearchus.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/nearchus.svg",
+      "sha256": "28d24ec879c59f1d29cb2583e7fdcbd8f26521ef8b1f0ed8042ccc8d02e88971",
+      "bytes": 2731,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    },
+    {
+      "figureId": "eumenes",
+      "iconName": "tied-scroll",
+      "author": "Lorc",
+      "authorUrl": "https://lorcblog.blogspot.com/",
+      "pageUrl": "https://game-icons.net/1x1/lorc/tied-scroll.html",
+      "downloadUrl": "https://raw.githubusercontent.com/game-icons/icons/82d948812bfe3f269ef8f731dcdb07b08160edc4/lorc/tied-scroll.svg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "path": "icons/eumenes.svg",
+      "publicPath": "/assets/cards/collection-v14/symbols/eumenes.svg",
+      "sha256": "8dec10d48e8c0012a30d7146b4187e8ed9aa016029de5f87cc254c129dc3c1d6",
+      "bytes": 2612,
+      "viewBox": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "originalPreserved": true
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 import type { Category } from "../../chain/ids.ts";
 import type { AccountProof } from "../../chain/npc-proof.ts";
-import type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintTerms, StageMintQuote, StageMintResult, PoolEntry, TokenExtra, TokenStats } from "../../chain/types.ts";
+import type { Draw, EditionSupply, Evidence, LifeView, Listing, MintResult, MintPack, MintTerms, StageMintQuote, StageMintResult, PoolEntry, TokenExtra, TokenStats } from "../../chain/types.ts";
 
 export type { AccountProof } from "../../chain/npc-proof.ts";
-export type { Draw, Evidence, LifeView, Listing, MintResult, MintPack, MintCard, MintTerms, StageMintQuote, StageMintResult, TokenExtra, TokenStats } from "../../chain/types.ts";
+export type { Draw, EditionFields, EditionSupply, Evidence, LifeView, Listing, MintResult, MintPack, MintCard, MintTerms, StageMintQuote, StageMintResult, TokenExtra, TokenStats } from "../../chain/types.ts";
 
 /**
  * What the verifier returns for a finished life. Local stand-in until lane E publishes it from
@@ -33,7 +33,7 @@ export interface LivesContract {
   activeLifeOf(account: string): Promise<LifeView | null>;
   mintLife(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<MintResult>;
   stageMintQuote(lifeId: string, signed: SignedEvidence, npcActionId: string): Promise<StageMintQuote>;
-  mintStageFigures(lifeId: string, signed: SignedEvidence, npcActionId: string, expectedFee?: string): Promise<StageMintResult>;
+  mintStageFigures(lifeId: string, signed: SignedEvidence, npcActionId: string, expectedFee?: string, expectedQuoteHash?: string): Promise<StageMintResult>;
   retryStageMint(lifeId: string): Promise<StageMintResult>;
   stageMintResult(lifeId: string): Promise<StageMintResult | null>;
   mintTerms(): Promise<MintTerms>;
@@ -43,6 +43,8 @@ export interface LivesContract {
   chooseMintSlot(lifeId: string, slot: number): Promise<MintResult>;
   figureCopies(figureId: string): Promise<PoolEntry[]>;
   figureSupply(figureId: string): Promise<[number, number]>;
+  /** Unreserved live count. Mint assigns the next serial atomically and can reject an exhausted edition. */
+  editionSupply(editionKey: string, rarity: number): Promise<EditionSupply>;
   /** Completes an already committed mint without paying its fee again. */
   retryMint(lifeId: string): Promise<MintResult>;
   /** Immutable result keyed by life, independent of the token's current owner. */

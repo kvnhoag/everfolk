@@ -1,3 +1,9 @@
+import { figureRosterEntry, type FigureCardRank } from "../../chain/catalog/figure-roster.ts";
+import { getFigureCardProgress } from "../../src/figures/card-progress.ts";
+import FigureCardStack from "./FigureCardStack.tsx";
+import { contributionCardRanks } from "../models/figure-contribution-ranks.ts";
+import { figureRarityLabel } from "../models/figure-card-labels.ts";
+import FigureCardViewer from "./FigureCardViewer.tsx";
 import { matchesCondition } from "../../src/conditions.ts";
 import { useMemo, useState } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
@@ -11,9 +17,22 @@ interface Props { world: WorldPack; life: LifeState; activities: readonly Activi
 export default function FigurePaths({ world, life, activities, onActivity, readOnly = false, initialFigureId }: Props) {
   const paths = useMemo(() => getFigurePaths(world, life), [world, life]);
   const [selectedId, setSelectedId] = useState(initialFigureId ?? paths[0]?.definition.id);
+  const [cardPreview, setCardPreview] = useState<{ id: string; rank: FigureCardRank; mode: "principal" | "contribution" } | null>(null);
   if (!paths.length) return null;
   const selected = paths.find(path => path.definition.id === selectedId) ?? paths[0];
   const path = selected.definition, inventory = deepInventory(life);
+  const card = figureRosterEntry(path.id), cardProgress = getFigureCardProgress(world, life, path.id);
+  const contributionRanks = card ? contributionCardRanks(card, selected) : undefined;
+  const previewFigure = cardPreview ? figureRosterEntry(cardPreview.id) : undefined;
+  const previewProgress = cardPreview ? getFigureCardProgress(world, life, cardPreview.id) : undefined;
+  const nextCardStage = previewProgress?.contributor.nextStage;
+  const upgradeActivity = nextCardStage ? activities.find(activity => activity.id === nextCardStage.definition.activityId) : undefined;
+  const upgradeAction = !readOnly && cardPreview?.mode === "contribution" && nextCardStage ? {
+    label: `Earn ${nextCardStage.definition.rank} contribution`,
+    enabled: nextCardStage.ready && upgradeActivity?.available === true,
+    reason: upgradeActivity?.available ? previewProgress!.contributor.requirements.join("; ") : upgradeActivity?.reason ?? nextCardStage.missingRequirements.join("; "),
+    onActivate: () => { if (nextCardStage.ready && upgradeActivity?.available) { onActivity(nextCardStage.definition.activityId); setCardPreview(null); } },
+  } : undefined;
   const actionForWork = (workId: string) => activities.find(activity => activity.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "vocation" && effect.action === workId)));
   function Action({ activityId, label }: { activityId?: string; label?: string }) {
     const activity = activities.find(activity => activity.id === activityId);
@@ -39,10 +58,14 @@ export default function FigurePaths({ world, life, activities, onActivity, readO
   const entry = selected.encounterMode === "tradition" ? "Through the later tradition" : selected.encounterMode === "circle" ? "Through a teaching circle" : selected.encounterMode ? "Personal encounter recorded" : null;
   return <section className="figure-paths" aria-label="Historical figures and earned titles">
     <header className="figure-paths-heading"><div><p className="figure-eyebrow">Historical paths</p><h3>Work that earns a place in history</h3></div><p>Develop a figure's craft, inquiry or public work. Your contribution earns its own rank; the figure's special title requires a separate defining achievement.</p></header>
-    <nav className="figure-roster" aria-label="Choose a historical figure">{paths.map(item => <button key={item.definition.id} type="button" aria-pressed={item.definition.id === path.id} onClick={() => setSelectedId(item.definition.id)}><strong>{item.definition.name}</strong><span>{item.principalRank}{item.associationRank ? ` · Your contribution: ${item.associationRank}` : ""}</span></button>)}</nav>
+    <nav className="figure-roster" aria-label="Choose a historical figure">{paths.map(item => <button key={item.definition.id} type="button" aria-pressed={item.definition.id === path.id} onClick={() => setSelectedId(item.definition.id)}><img src={figureRosterEntry(item.definition.id)?.art.src} alt="" width={38} height={52} loading="lazy" /><strong>{item.definition.name}</strong><span>{figureRosterEntry(item.definition.id) ? figureRarityLabel(figureRosterEntry(item.definition.id)!) : item.principalRank}{item.associationRank ? ` · Your contribution: ${item.associationRank}` : ""}</span></button>)}</nav>
     <article className="figure-path-detail" data-figure-path={path.id}>
-      <header><div><p className="figure-eyebrow">Figure · {selected.principalRank}{selected.alternateHistory ? " · Alternate history" : ""}</p><h4>{selected.principalTitle}</h4></div><span className="figure-contribution-rank">{selected.associationRank ?? "No contribution title yet"}</span></header>
+      <header><div><p className="figure-eyebrow">Figure · {card ? figureRarityLabel(card) : selected.principalRank}{card && card.variants.length > 1 ? ` · Current: ${selected.principalRank}` : ""}{selected.alternateHistory ? " · Alternate history" : ""}</p><h4>{selected.principalTitle}</h4></div><span className="figure-contribution-rank">{selected.associationRank ?? "No contribution title yet"}</span></header>
       <p>{path.summary}</p>
+      {card && <div className="figure-path-card-strip">
+        <div><p className="figure-eyebrow">{selected.specialTitle ? "Your figure legacy" : "Figure card preview"}</p><FigureCardStack figure={card} rank={selected.principalRank} traits={cardProgress?.traits.filter(trait => trait.earned)} onInspect={rank => setCardPreview({ id: path.id, rank, mode: "principal" })} /></div>
+        <div><p className="figure-eyebrow">{selected.associationRank ? "Your contribution card" : "Next contribution card"}</p><FigureCardStack figure={card} mode="contribution" contributionRanks={contributionRanks} rank={selected.associationRank ?? selected.nextStage?.definition.rank ?? contributionRanks?.[0]} title={selected.associationTitle ?? (selected.encounterMode === "tradition" ? selected.nextStage?.definition.traditionTitle : selected.nextStage?.definition.title)} traits={cardProgress?.traits.filter(trait => trait.earned)} onInspect={rank => setCardPreview({ id: path.id, rank, mode: "contribution" })} /></div>
+      </div>}
       {selected.associationTitle && <p className="figure-earned-title">Your earned title: <strong>{selected.associationTitle}</strong></p>}
       {selected.specialTitle && <p className="figure-special-title">Special title earned: <strong>{selected.specialTitle.title}</strong> · {selected.specialTitle.rank}{selected.specialTitle.alternateHistory ? " · Alternate history" : ""}</p>}
       {!selected.capstone.earned && !selected.capstone.failed && <div className="figure-preparation"><h5>Develop the foundations</h5><Action activityId={actionForWork(`fig-${path.id}-prepare`)?.id} /></div>}
@@ -63,9 +86,15 @@ export default function FigurePaths({ world, life, activities, onActivity, readO
         {selected.promotionOutcome === "failed" && <p className="figure-failed" role="status">The attempt was unsuccessful. The figure remains Epic, and the attempt cannot be repeated.</p>}
         {path.promotion && path.promotion.activityId !== path.capstone.activityId && selected.promotionOutcome === "not-attempted" && <><Action activityId={actionForWork(`fig-${path.id}-promotion-work`)?.id} /><Action activityId={path.promotion.activityId} /></>}
       </section>
+      {selected.legendaryContribution && selected.principalRank === "Legendary" && <section className="figure-capstone figure-contribution-recognition" aria-label="Legendary contribution recognition">
+        <p className="figure-eyebrow">Contribution · Epic</p><h5>{selected.encounterMode === "tradition" ? selected.legendaryContribution.definition.traditionTitle : selected.legendaryContribution.definition.title}</h5>
+        <p>{selected.legendaryContribution.definition.description}</p>
+        {selected.legendaryContribution.earned ? <p className="figure-earned-title">Epic contribution recorded. Your earlier contribution cards keep their original ranks.</p> : <><Requirements progress={selected.legendaryContribution} /><Action activityId={selected.legendaryContribution.definition.activityId} label="Record Epic contribution title" /></>}
+      </section>}
       {purchases.length > 0 && !readOnly && <details className="figure-supplies"><summary>Project materials</summary><div>{purchases.map(activity => <Action key={activity.id} activityId={activity.id} />)}</div></details>}
       <details className="figure-sources"><summary>Historical basis</summary><p>Encounters, contribution titles and player projects are authored gameplay. The sources support the setting and the figure's work.</p><ul>{path.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}</ul></details>
     </article>
+    <FigureCardViewer figure={previewFigure ?? null} initialRank={cardPreview?.rank} mode={cardPreview?.mode} world={world} life={life} upgradeAction={upgradeAction} onClose={() => setCardPreview(null)} />
   </section>;
 }
 function Requirements({ progress }: { progress: Pick<FigurePathProgress["capstone"], "missingRequirements" | "ready"> }) {

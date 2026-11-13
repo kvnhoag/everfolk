@@ -1,0 +1,788 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-framed-collection-v14",
+  "date": "2026-11-13",
+  "expectedCards": 117,
+  "parentCount": 13,
+  "roleCount": 52,
+  "roleVariants": 104,
+  "newArtRoleCount": 17,
+  "newArtVariantCount": 34,
+  "genderPolicy": "Each role uses identical copy for its male and female artwork variants. These are fictional representative contributors, not newly identified historical people.",
+  "editionExamples": {
+    "common": "UNLIMITED",
+    "uncommon": "UNLIMITED",
+    "rare": "001/100",
+    "epic": "001/025",
+    "legendary": "001/010"
+  },
+  "editionNote": "Numbered examples are display examples requested by the user, not evidence that copies have been issued.",
+  "figures": [
+    {
+      "figureId": "alexander",
+      "parent": {
+        "title": "Alexander the Great",
+        "subtitle": "King of Macedon",
+        "icon": "sword-shield",
+        "rarity": "legendary",
+        "bodyTitle": "An Empire Unbound",
+        "bodyText": "King of Macedon from 336 to 323 BCE, Alexander overthrew the Persian Empire and led his army into India. His conquests reshaped the ancient world and opened the Hellenistic age.",
+        "sources": [
+          {
+            "title": "The Rise of Macedon and the Conquests of Alexander the Great — Metropolitan Museum of Art",
+            "url": "https://www.metmuseum.org/essays/the-rise-of-macedonia-and-the-conquests-of-alexander-the-great"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Camp Runner",
+          "displayTitle": "Camp Runner",
+          "subtitle": "Messenger of the Host",
+          "bodyTitle": "The Order Arrives",
+          "bodyText": "A camp runner carries dispatches between scattered tents and marching units. Speed and dependable memory turn a commander's distant intention into action, keeping the great host moving as one.",
+          "sourceRoleSlug": "alexander-common",
+          "newArt": true,
+          "sceneBrief": "A plainly dressed camp runner carries a sealed dispatch between Macedonian campaign tents; no ornate command armour."
+        },
+        "uncommon": {
+          "title": "Campaign Provisioner",
+          "displayTitle": "Campaign Provisioner",
+          "subtitle": "Keeper of the King's Stores",
+          "bodyTitle": "Strength Before Battle",
+          "bodyText": "A campaign provisioner gathers grain, checks pack animals, and keeps the stores ready for departure. Behind every celebrated advance stands this patient discipline, giving hungry soldiers the strength to follow their king.",
+          "sourceRoleSlug": "alexander-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Campaign Staff Officer",
+          "displayTitle": "Campaign Staff Officer",
+          "subtitle": "Right Hand of the Great",
+          "bodyTitle": "The Campaign's Pulse",
+          "bodyText": "A staff officer turns reports, routes, and supply figures into decisions the army can trust. Close to the command tent, careful judgment keeps scattered forces aligned with Alexander's astonishing ambition.",
+          "sourceRoleSlug": "alexander-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Trusted Campaign Commander",
+          "displayTitle": "Trusted Commander",
+          "subtitle": "The King's Proven Companion",
+          "bodyTitle": "Command Worth Following",
+          "bodyText": "A trusted commander bears responsibility for troops when orders become dust, noise, and danger. Courage joined to judgment makes the king's design hold together, earning loyalty that survives the hardest march.",
+          "sourceRoleSlug": "alexander-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "aristotle",
+      "parent": {
+        "title": "Aristotle",
+        "subtitle": "Philosopher of the Lyceum",
+        "icon": "scroll-stylus",
+        "rarity": "legendary",
+        "bodyTitle": "A Mind Without Bounds",
+        "bodyText": "Aristotle made inquiry a life's work, examining logic, ethics, politics, and the living world. At the Lyceum in Athens, his investigations helped establish enduring ways to observe, classify, and reason.",
+        "sources": [
+          {
+            "title": "Aristotle — Stanford Encyclopedia of Philosophy",
+            "url": "https://plato.stanford.edu/entries/aristotle/"
+          },
+          {
+            "title": "Aristotle's Biology — Stanford Encyclopedia of Philosophy",
+            "url": "https://plato.stanford.edu/entries/aristotle-biology/"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Lyceum Attendant",
+          "displayTitle": "Lyceum Attendant",
+          "subtitle": "At the Threshold of Wisdom",
+          "bodyTitle": "A Place for Inquiry",
+          "bodyText": "A Lyceum attendant prepares tablets, gathers scrolls, and makes room for the next discussion. Quiet attention gives the school its daily rhythm, allowing greater questions to begin without needless interruption.",
+          "sourceRoleSlug": "aristotle-common",
+          "newArt": true,
+          "sceneBrief": "A modest Lyceum attendant sets wax tablets and scrolls beside a shaded teaching bench; listening expression, simple tunic."
+        },
+        "uncommon": {
+          "title": "Lyceum Copyist",
+          "displayTitle": "Lyceum Copyist",
+          "subtitle": "Scribe of Aristotle's School",
+          "bodyTitle": "Thought Given Endurance",
+          "bodyText": "A copyist preserves arguments with a steady hand, protecting distinctions that careless writing could erase. The work carries a lesson beyond the speaker's voice, giving the Lyceum's inquiry a lasting memory.",
+          "sourceRoleSlug": "aristotle-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Lyceum Researcher",
+          "displayTitle": "Lyceum Researcher",
+          "subtitle": "Student of Aristotle",
+          "bodyTitle": "Evidence Before Assent",
+          "bodyText": "A researcher gathers observations and compares the accounts of others, bringing particulars before the school. Patient investigation strengthens the argument, ensuring that confident words remain answerable to the world they describe.",
+          "sourceRoleSlug": "aristotle-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Peripatetic Scholar",
+          "displayTitle": "Peripatetic Scholar",
+          "subtitle": "A Voice of the Lyceum",
+          "bodyTitle": "Inquiry Carried Forward",
+          "bodyText": "A Peripatetic scholar joins observation to disciplined argument and guides others through difficult questions. Independent judgment keeps the school alive, carrying Aristotle's spirit of inquiry into minds capable of challenging it.",
+          "sourceRoleSlug": "aristotle-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "euclid",
+      "parent": {
+        "title": "Euclid",
+        "subtitle": "Geometer of Alexandria",
+        "icon": "compass-triangle",
+        "rarity": "legendary",
+        "bodyTitle": "The Architecture of Proof",
+        "bodyText": "Euclid's Elements organized geometry and number into a powerful sequence of definitions, propositions, and proofs. Associated with Alexandria, this elusive mathematician gave generations a model of knowledge built through reason.",
+        "sources": [
+          {
+            "title": "Euclid — MacTutor, University of St Andrews",
+            "url": "https://mathshistory.st-andrews.ac.uk/Biographies/Euclid/"
+          },
+          {
+            "title": "Who was Euclid? — Princeton University Press",
+            "url": "https://press.princeton.edu/ideas/who-was-euclid"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Geometry Apprentice",
+          "displayTitle": "Geometry Apprentice",
+          "subtitle": "Learner of the First Principles",
+          "bodyTitle": "The First Clear Line",
+          "bodyText": "A geometry apprentice learns to draw a circle and name what a figure contains. Small acts of precision begin a greater discipline, turning a curious eye toward the certainty of proof.",
+          "sourceRoleSlug": "euclid-common",
+          "newArt": true,
+          "sceneBrief": "A young adult apprentice draws one simple circle with dividers on a wax tablet or sand board, plain linen, modest courtyard."
+        },
+        "uncommon": {
+          "title": "Geometrical Copyist",
+          "displayTitle": "Geometrical Copyist",
+          "subtitle": "Scribe of the Elements",
+          "bodyTitle": "Every Mark Matters",
+          "bodyText": "A geometrical copyist preserves diagrams alongside their arguments, keeping each letter faithful to its place. Exact work lets another reader follow the same path, protecting a proof from the smallest careless mark.",
+          "sourceRoleSlug": "euclid-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Proof Checker",
+          "displayTitle": "Proof Checker",
+          "subtitle": "Keeper of Euclid's Reasoning",
+          "bodyTitle": "No Step Unexamined",
+          "bodyText": "A proof checker questions every inference and tests whether a construction truly follows. This exacting reader guards the chain of reasoning, making an elegant conclusion worthy of the certainty it claims.",
+          "sourceRoleSlug": "euclid-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Geometer of the Teaching Circle",
+          "displayTitle": "Geometer of the Circle",
+          "subtitle": "Heir to the Elements",
+          "bodyTitle": "Reason Made Visible",
+          "bodyText": "A teaching geometer leads others from a simple construction to an unexpected truth. Mastery turns difficult reasoning into a path others can follow, extending Euclid's enduring architecture one clear proof at a time.",
+          "sourceRoleSlug": "euclid-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "lysippos",
+      "parent": {
+        "title": "Lysippos",
+        "subtitle": "Master Sculptor of Sikyon",
+        "icon": "chisel-bust",
+        "rarity": "legendary",
+        "bodyTitle": "Bronze Given Presence",
+        "bodyText": "A celebrated sculptor from Sikyon, Lysippos worked chiefly in bronze and portrayed Alexander the Great. His lost originals survive through ancient testimony and later copies, preserving the influence of an extraordinary workshop.",
+        "sources": [
+          {
+            "title": "Lysippos — Getty Union List of Artist Names",
+            "url": "https://www.getty.edu/vow/ULANFullDisplay?find=&nation=&role=&subjectid=500012332"
+          },
+          {
+            "title": "Power and Pathos: exhibition checklist — J. Paul Getty Museum",
+            "url": "https://www.getty.edu/art/exhibitions/power_pathos/BRONZES_EXHIBITION_CHECKLIST.pdf"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Workshop Apprentice",
+          "displayTitle": "Workshop Apprentice",
+          "subtitle": "At the Sculptor's Bench",
+          "bodyTitle": "Hands Learn the Form",
+          "bodyText": "A workshop apprentice prepares clay, tends tools, and watches experienced hands shape a figure. Familiarity with the material slowly becomes judgment, laying the humble foundation from which convincing bronze can rise.",
+          "sourceRoleSlug": "lysippos-common",
+          "newArt": true,
+          "sceneBrief": "A simply dressed workshop apprentice prepares clay or wax at a low bench, bronze casting workshop behind, no master portrait pose."
+        },
+        "uncommon": {
+          "title": "Bronze Workshop Assistant",
+          "displayTitle": "Bronze Workshop Assistant",
+          "subtitle": "Hand of the Lysippan Workshop",
+          "bodyTitle": "Ready for the Casting",
+          "bodyText": "A bronze workshop assistant prepares moulds and materials with care the finished statue will never reveal. Reliable craft protects the sculptor's intention, helping fragile beginnings survive the demanding passage into metal.",
+          "sourceRoleSlug": "lysippos-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Portrait Modeller",
+          "displayTitle": "Portrait Modeller",
+          "subtitle": "Student of Lysippos",
+          "bodyTitle": "A Likeness Takes Shape",
+          "bodyText": "A portrait modeller studies the turn of a head and the balance of a stance. Sensitive hands give character to the clay, finding the living presence that a successful casting must preserve.",
+          "sourceRoleSlug": "lysippos-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Master of Lysippan Form",
+          "displayTitle": "Master of Lysippan Form",
+          "subtitle": "Bearer of the Master's Craft",
+          "bodyTitle": "Presence Beyond the Model",
+          "bodyText": "A master sculptor unites proportion, gesture, and command of bronze into a figure that seems alive. Such judgment carries the workshop's tradition forward, making technical mastery serve an unmistakable human presence.",
+          "sourceRoleSlug": "lysippos-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "pytheas",
+      "parent": {
+        "title": "Pytheas of Massalia",
+        "subtitle": "Explorer of the Northern Seas",
+        "icon": "ship-star",
+        "rarity": "epic",
+        "bodyTitle": "Beyond the Familiar Sea",
+        "bodyText": "An explorer from Massalia, Pytheas described Britain and the distant north in a work now lost. Later writers preserve fragments of his observations, leaving a remarkable voyage whose route remains debated.",
+        "sources": [
+          {
+            "title": "Pytheas — Oxford Dictionary of National Biography",
+            "url": "https://academic.oup.com/oxford-dictionary-of-national-biography/reference/63486/reference-article-abstract/581793426"
+          },
+          {
+            "title": "Pytheas of Massalia — Encyclopedia of Ancient History",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/9781444338386.wbeah21281.pub2"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Deckhand of Massalia",
+          "displayTitle": "Deckhand of Massalia",
+          "subtitle": "Crew of the Northern Venture",
+          "bodyTitle": "The Voyage Begins Here",
+          "bodyText": "A deckhand handles rope, cargo, and the small repairs that keep a vessel ready. Steady labour gives the expedition its footing, making the next unfamiliar coast possible long before it appears.",
+          "sourceRoleSlug": "pytheas-common",
+          "newArt": true,
+          "sceneBrief": "A common deckhand coils hemp rope aboard a simple Massaliot merchant vessel; coarse tunic, harbour or calm sea, no elite equipment."
+        },
+        "uncommon": {
+          "title": "Expedition Provisioner",
+          "displayTitle": "Expedition Provisioner",
+          "subtitle": "Keeper of Pytheas' Stores",
+          "bodyTitle": "Endurance for the Unknown",
+          "bodyText": "An expedition provisioner measures food, water, and the demands of another day at sea. Careful stores give the crew room to endure uncertainty, supporting discovery with the practical strength of preparation.",
+          "sourceRoleSlug": "pytheas-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Navigation Observer",
+          "displayTitle": "Navigation Observer",
+          "subtitle": "Eyes of the Northern Voyage",
+          "bodyTitle": "A Course Through Signs",
+          "bodyText": "A navigation observer records winds, daylight, and the changing outline of the shore. Attentive comparison turns passing impressions into useful knowledge, helping the expedition find order beyond the waters it already knows.",
+          "sourceRoleSlug": "pytheas-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Keeper of the Northern Voyage Log",
+          "displayTitle": "Keeper of the Voyage Log",
+          "subtitle": "Witness to Pytheas' Horizon",
+          "bodyTitle": "Wonder Given a Record",
+          "bodyText": "The keeper of the voyage log joins scattered observations into an account others can examine. Disciplined memory carries the expedition beyond its own lifetime, preserving the difficult boundary between witnessed fact and wonder.",
+          "sourceRoleSlug": "pytheas-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "menander",
+      "parent": {
+        "title": "Menander",
+        "subtitle": "Master of New Comedy",
+        "icon": "comedy-mask",
+        "rarity": "legendary",
+        "bodyTitle": "The Human Stage",
+        "bodyText": "Menander made Athenian New Comedy a theatre of recognisable lives, misunderstandings, and uneasy relationships. His plays shaped later comic drama, giving ordinary human motives a place beside the grand stories of heroes.",
+        "sources": [
+          {
+            "title": "Menander — Oxford Classical Dictionary",
+            "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/549651704?login=false"
+          },
+          {
+            "title": "Menander: author, transmission, and text — Dickinson College Commentaries",
+            "url": "https://dcc.dickinson.edu/menander-epitrepontes/intro/intro"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Stagehand",
+          "displayTitle": "Stagehand",
+          "subtitle": "Behind Menander's Curtain",
+          "bodyTitle": "Before the First Entrance",
+          "bodyText": "A stagehand sets props and prepares the space before an actor steps into view. Quiet readiness makes each entrance possible, giving the playwright's imagined household a convincing place to come alive.",
+          "sourceRoleSlug": "menander-common",
+          "newArt": true,
+          "sceneBrief": "A modest Greek stagehand arranges a theatrical mask and simple household props behind a theatre stage, plain tunic, no celebrity playwright pose."
+        },
+        "uncommon": {
+          "title": "Stage Copyist",
+          "displayTitle": "Stage Copyist",
+          "subtitle": "Scribe of Menander's Stage",
+          "bodyTitle": "The Cue Remembered",
+          "bodyText": "A stage copyist keeps dialogue and cues in dependable order as the company rehearses. Careful words protect the rhythm of an exchange, allowing comic misunderstanding to land exactly where the playwright intended.",
+          "sourceRoleSlug": "menander-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "New Comedy Collaborator",
+          "displayTitle": "New Comedy Collaborator",
+          "subtitle": "Partner in Menander's Craft",
+          "bodyTitle": "The Scene Finds Life",
+          "bodyText": "A dramatic collaborator tests dialogue against performance and shapes the movement of a scene. A sharp ear and generous judgment help the company turn a clever script into recognisable, breathing human comedy.",
+          "sourceRoleSlug": "menander-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Dramatist of New Comedy",
+          "displayTitle": "Dramatist of New Comedy",
+          "subtitle": "Heir to the Comic Stage",
+          "bodyTitle": "Ordinary Lives, Lasting Art",
+          "bodyText": "A dramatist of New Comedy finds the hidden stakes in ordinary households and troubled affection. Command of character gives laughter its depth, carrying the tradition onward through stories audiences recognise as their own.",
+          "sourceRoleSlug": "menander-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "demetrius",
+      "parent": {
+        "title": "Demetrius the Besieger",
+        "subtitle": "King of Siegecraft",
+        "icon": "siege-tower",
+        "rarity": "epic",
+        "bodyTitle": "Ambition Against the Walls",
+        "bodyText": "Demetrius Poliorcetes pursued kingship through bold campaigns and spectacular siege machinery. His famous assault on Rhodes ended in negotiation, yet its scale fixed his enduring reputation as the Besieger of Cities.",
+        "sources": [
+          {
+            "title": "Demetrius I of Macedonia, Poliorcetes — Oxford Classical Dictionary",
+            "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548753179"
+          },
+          {
+            "title": "The Great Siege of Rhodes — Oxford University Press",
+            "url": "https://academic.oup.com/book/40551/chapter-abstract/347966363"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Siege Labourer",
+          "displayTitle": "Siege Labourer",
+          "subtitle": "Hand of the Siege Train",
+          "bodyTitle": "The Timber Must Rise",
+          "bodyText": "A siege labourer moves timber, rope, and stone where the builders need them. Endurance turns the engineer's design into solid material, raising the patient groundwork beneath a machine meant to challenge walls.",
+          "sourceRoleSlug": "demetrius-common",
+          "newArt": true,
+          "sceneBrief": "A plain-clothed siege labourer carries timber or coils of heavy rope at a construction yard, unfinished timber tower behind; no advanced engineering instruments."
+        },
+        "uncommon": {
+          "title": "Siege Workshop Assistant",
+          "displayTitle": "Siege Workshop Assistant",
+          "subtitle": "Artisan of the Besieger",
+          "bodyTitle": "Every Joint Holds",
+          "bodyText": "A workshop assistant shapes fittings and checks the ropes that larger engines depend upon. Exact preparation keeps immense forces under control, making the smallest sound component a quiet ally against the strongest wall.",
+          "sourceRoleSlug": "demetrius-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Siege Engineer",
+          "displayTitle": "Siege Engineer",
+          "subtitle": "Mind of the Siege Train",
+          "bodyTitle": "Force Given Direction",
+          "bodyText": "A siege engineer brings measurement and mechanical judgment to a battlefield problem. By balancing reach, weight, and stability, the engineer turns raw power into a deliberate answer to the enemy's defences.",
+          "sourceRoleSlug": "demetrius-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Director of Siege Works",
+          "displayTitle": "Director of Siege Works",
+          "subtitle": "Right Hand of the Besieger",
+          "bodyTitle": "An Army of Builders",
+          "bodyText": "The director of siege works commands workshops, materials, and crews as parts of one great undertaking. Decisive coordination makes formidable machines possible, giving Demetrius' ambition a structure strong enough to bear its own weight.",
+          "sourceRoleSlug": "demetrius-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "theophrastus",
+      "parent": {
+        "title": "Theophrastus",
+        "subtitle": "Scholar of the Living World",
+        "icon": "botanical-sprig",
+        "rarity": "epic",
+        "bodyTitle": "Nature Closely Observed",
+        "bodyText": "Aristotle's colleague and successor at the Lyceum, Theophrastus explored philosophy and the natural world. His surviving botanical treatises gathered and compared plant knowledge, establishing a foundation for the systematic study of plants.",
+        "sources": [
+          {
+            "title": "Theophrastus — Stanford Encyclopedia of Philosophy",
+            "url": "https://plato.stanford.edu/entries/theophrastus/"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Garden Attendant",
+          "displayTitle": "Garden Attendant",
+          "subtitle": "Tending the Scholar's Garden",
+          "bodyTitle": "Care Before Discovery",
+          "bodyText": "A garden attendant waters specimens and notices the small changes of another growing day. Patient care keeps living examples within reach, giving the school's larger questions roots in plants that can be observed.",
+          "sourceRoleSlug": "theophrastus-common",
+          "newArt": true,
+          "sceneBrief": "A modest garden attendant waters or tends several plant specimens in a Greek courtyard garden; simple tunic, no master scholar's collection of instruments."
+        },
+        "uncommon": {
+          "title": "Plant Records Assistant",
+          "displayTitle": "Plant Records Assistant",
+          "subtitle": "Scribe of Theophrastus' Garden",
+          "bodyTitle": "The Detail Preserved",
+          "bodyText": "A plant records assistant notes where a specimen grows and how it changes through the season. Careful description saves details that memory would blur, giving later comparisons a dependable place to begin.",
+          "sourceRoleSlug": "theophrastus-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Comparative Plant Investigator",
+          "displayTitle": "Plant Investigator",
+          "subtitle": "Student of Theophrastus",
+          "bodyTitle": "Differences Reveal Order",
+          "bodyText": "A plant investigator compares roots, leaves, habitats, and patterns of growth across living specimens. Discerning attention turns a garden of separate examples into evidence, helping the school recognise the order within abundance.",
+          "sourceRoleSlug": "theophrastus-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Peripatetic Botanical Scholar",
+          "displayTitle": "Botanical Scholar",
+          "subtitle": "A Voice of Theophrastus' School",
+          "bodyTitle": "A Living Body of Knowledge",
+          "bodyText": "A botanical scholar brings many observations together and teaches others how to question them. Broad understanding gives the garden a lasting intellectual life, carrying Theophrastus' investigation beyond a single place or season.",
+          "sourceRoleSlug": "theophrastus-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "zeno",
+      "parent": {
+        "title": "Zeno of Citium",
+        "subtitle": "Founder of the Stoa",
+        "icon": "portico",
+        "rarity": "epic",
+        "bodyTitle": "A Life Governed by Reason",
+        "bodyText": "Teaching at Athens' Painted Porch, Zeno founded the Stoic school around 300 BCE. His philosophy placed virtue and reason at the centre of a demanding vision of how a life should be lived.",
+        "sources": [
+          {
+            "title": "Stoicism — Stanford Encyclopedia of Philosophy",
+            "url": "https://plato.stanford.edu/entries/stoicism/"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Listener at the Stoa",
+          "displayTitle": "Listener at the Stoa",
+          "subtitle": "First Steps Beside Zeno",
+          "bodyTitle": "Attention Before Answer",
+          "bodyText": "A listener beneath the porch gives a difficult argument the attention it deserves. Honest willingness to reconsider an easy answer marks the first small victory of reason over habit.",
+          "sourceRoleSlug": "zeno-common",
+          "newArt": true,
+          "sceneBrief": "A plainly dressed adult listener beside the painted colonnade holds a simple wax tablet, thoughtful attentive gaze; not posed as the school's teacher."
+        },
+        "uncommon": {
+          "title": "Student of the Stoa",
+          "displayTitle": "Student of the Stoa",
+          "subtitle": "Pupil of Zeno",
+          "bodyTitle": "Judgment Under Examination",
+          "bodyText": "A student of the Stoa tests inherited opinions against reason and daily conduct. Perseverance gives the lesson substance, beginning the difficult work of making thoughtful judgment stronger than passing fear or appetite.",
+          "sourceRoleSlug": "zeno-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Stoic Discussion Leader",
+          "displayTitle": "Stoic Discussion Leader",
+          "subtitle": "A Steady Voice Beside Zeno",
+          "bodyTitle": "Reason Shared in Public",
+          "bodyText": "A discussion leader brings clarity and patience to the questions gathered beneath the porch. Careful challenge helps others examine their judgments, making philosophy a shared discipline rather than an impressive turn of speech.",
+          "sourceRoleSlug": "zeno-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Scholar of Stoic Ethics",
+          "displayTitle": "Scholar of Stoic Ethics",
+          "subtitle": "Bearer of the Stoa's Teaching",
+          "bodyTitle": "Conviction Made Conduct",
+          "bodyText": "A scholar of Stoic ethics connects rigorous argument with the demands of a human life. Authority grows through consistency, giving the school a persuasive witness that reason can guide action when fortune turns.",
+          "sourceRoleSlug": "zeno-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "ptolemy",
+      "parent": {
+        "title": "Ptolemy I Soter",
+        "subtitle": "Founder of a Dynasty",
+        "icon": "diadem-scroll",
+        "rarity": "epic",
+        "bodyTitle": "A Kingdom Secured",
+        "bodyText": "A general of Alexander, Ptolemy secured Egypt after the conqueror's death and later ruled as king. His dynasty made Alexandria a royal capital and endured until the age of Cleopatra.",
+        "sources": [
+          {
+            "title": "Ptolemy I Soter — Digital Egypt, University College London",
+            "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/chronology/ptolemyi.html"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Palace Messenger",
+          "displayTitle": "Palace Messenger",
+          "subtitle": "Bearer of Ptolemy's Dispatches",
+          "bodyTitle": "The Seal Reaches Its Hand",
+          "bodyText": "A palace messenger carries sealed orders through crowded courtyards and unfamiliar streets. Dependability gives distant officials a common purpose, keeping the first threads of government joined by a message delivered intact and on time.",
+          "sourceRoleSlug": "ptolemy-common",
+          "newArt": true,
+          "sceneBrief": "A modest messenger carries a sealed papyrus dispatch through an Egyptian administrative colonnade, simple pale tunic and satchel, no royal diadem."
+        },
+        "uncommon": {
+          "title": "Egyptian Administration Clerk",
+          "displayTitle": "Administration Clerk",
+          "subtitle": "Scribe of Ptolemy's Court",
+          "bodyTitle": "The Record Can Be Trusted",
+          "bodyText": "An administration clerk keeps petitions, accounts, and orders in a form officials can use. Exact records give authority a memory, allowing the machinery of government to answer practical needs beyond the palace walls.",
+          "sourceRoleSlug": "ptolemy-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Ptolemaic Supply Commissioner",
+          "displayTitle": "Supply Commissioner",
+          "subtitle": "Keeper of Ptolemy's Lifelines",
+          "bodyTitle": "The Realm Remains Supplied",
+          "bodyText": "A supply commissioner coordinates stores and transport across competing demands. Judgment turns figures on a tablet into provisions where they are needed, giving Ptolemy's government the material strength to maintain its hold on Egypt.",
+          "sourceRoleSlug": "ptolemy-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Steward of Egyptian Government",
+          "displayTitle": "Steward of Egypt",
+          "subtitle": "Trusted Adviser of Ptolemy",
+          "bodyTitle": "Power Given Continuity",
+          "bodyText": "A senior steward draws revenue, supply, and official reports into a coherent view of the realm. Trusted judgment turns separate offices into lasting government, helping Ptolemy's authority endure beyond a single command or campaign.",
+          "sourceRoleSlug": "ptolemy-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "cleomenes",
+      "parent": {
+        "title": "Cleomenes of Naucratis",
+        "subtitle": "Financier of Alexander's Egypt",
+        "icon": "grain-scales",
+        "rarity": "epic",
+        "bodyTitle": "Wealth Along the Nile",
+        "bodyText": "Appointed by Alexander to administer Egyptian revenue, Cleomenes became a powerful financial official. His control of grain and taxation amassed wealth, while ancient accounts also preserve accusations of ruthless exploitation and profiteering.",
+        "sources": [
+          {
+            "title": "Cleomenes of Naucratis — Oxford Classical Dictionary",
+            "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548753033"
+          },
+          {
+            "title": "Money and Prices in the Papyri, Ptolemaic Period — Oxford University Press",
+            "url": "https://academic.oup.com/edited-volume/43505/chapter/364128623"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Granary Porter",
+          "displayTitle": "Granary Porter",
+          "subtitle": "Hand of the Nile Granaries",
+          "bodyTitle": "Every Sack Accounted For",
+          "bodyText": "A granary porter moves and checks the sacks that fill the storehouse. Honest attention at the doorway gives distant accounts a solid foundation, making the harvest a quantity that officials can actually find.",
+          "sourceRoleSlug": "cleomenes-common",
+          "newArt": true,
+          "sceneBrief": "A plain linen-clothed granary porter checks a tied grain sack at an Egyptian storehouse doorway, humble work setting and simple tally marks."
+        },
+        "uncommon": {
+          "title": "Revenue Records Assistant",
+          "displayTitle": "Revenue Records Assistant",
+          "subtitle": "Scribe of the Nile Treasury",
+          "bodyTitle": "The Account Holds Together",
+          "bodyText": "A revenue assistant checks receipts and records the passage of money and grain. Patient accuracy makes the treasury's figures traceable, giving its larger decisions a firmer basis than rumour, pressure, or convenient memory.",
+          "sourceRoleSlug": "cleomenes-uncommon",
+          "newArt": false
+        },
+        "rare": {
+          "title": "Grain Supply Auditor",
+          "displayTitle": "Grain Supply Auditor",
+          "subtitle": "Examiner of the Granaries",
+          "bodyTitle": "What the Ledger Conceals",
+          "bodyText": "A grain auditor compares the ledger with the storehouse and questions what fails to agree. Independent scrutiny gives administration its necessary resistance, exposing the costly distance between a promising account and an empty bin.",
+          "sourceRoleSlug": "cleomenes-rare",
+          "newArt": false
+        },
+        "epic": {
+          "title": "Steward of Egyptian Grain Accounts",
+          "displayTitle": "Egyptian Grain Steward",
+          "subtitle": "Keeper of the Harvest Reckoning",
+          "bodyTitle": "The Harvest in Balance",
+          "bodyText": "A senior grain steward reconciles reports from granaries, markets, and transport routes into one accountable picture. Command of the whole system makes this office a powerful guardian of Egypt's reserves and obligations.",
+          "sourceRoleSlug": "cleomenes-epic",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "nearchus",
+      "parent": {
+        "title": "Nearchus",
+        "subtitle": "Admiral of Alexander's Fleet",
+        "icon": "ship-anchor",
+        "rarity": "epic",
+        "raritySource": "editorial-default",
+        "bodyTitle": "The Sea Route Home",
+        "bodyText": "Nearchus commanded Alexander's fleet from the Indus towards the Persian Gulf. His account of the difficult coastal voyage, preserved through later writers, joined practical seamanship to an enduring record of unfamiliar shores.",
+        "sources": [
+          {
+            "title": "Arrian, Indica — Fordham University Ancient History Sourcebook",
+            "url": "https://sourcebooks.fordham.edu/ancient/arrian-bookVIII-India.asp"
+          },
+          {
+            "title": "Arrian on Nearchus' voyage home — Livius",
+            "url": "https://www.livius.org/sources/content/arrian/anabasis/nearchus-voyage-home/"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Fleet Deckhand",
+          "displayTitle": "Fleet Deckhand",
+          "subtitle": "Crew of Nearchus' Ships",
+          "bodyTitle": "The Ship Stays Ready",
+          "bodyText": "A fleet deckhand tends lines, stows gear, and answers the work of another tide. Dependable hands keep the vessel ready for orders, giving the admiral's distant destination a practical beginning on deck.",
+          "sourceRoleSlug": "nearchus-common",
+          "newArt": true,
+          "sceneBrief": "A humble fleet deckhand tends rigging on an ancient expedition ship, simple working tunic, salt-worn rope, coastal water behind."
+        },
+        "uncommon": {
+          "title": "Coastal Scout",
+          "displayTitle": "Coastal Scout",
+          "subtitle": "Eyes Along Nearchus' Shore",
+          "bodyTitle": "The Landing Found",
+          "bodyText": "A coastal scout studies headlands, landing places, and signs of fresh water ahead of the ships. Alert observation gives the fleet its next safe pause, making unfamiliar coastline a place it can approach.",
+          "sourceRoleSlug": "nearchus-uncommon",
+          "newArt": true,
+          "sceneBrief": "A coastal scout studies headland landmarks from a low ancient ship, holds a simple wax note tablet, practical tunic and cloak."
+        },
+        "rare": {
+          "title": "Pilot of the Indus Fleet",
+          "displayTitle": "Pilot of the Indus Fleet",
+          "subtitle": "Guide of Nearchus' Passage",
+          "bodyTitle": "A Passage Worth Trusting",
+          "bodyText": "A fleet pilot weighs currents, shoals, and the shape of the coast before setting a course. Seasoned judgment turns uncertain water into a passage others can follow, protecting the expedition when confidence alone would fail.",
+          "sourceRoleSlug": "nearchus-rare",
+          "newArt": true,
+          "sceneBrief": "An experienced ancient fleet pilot compares a coastal sketch with the ship's bearing and distant shore, no magnetic compass or modern nautical tools."
+        },
+        "epic": {
+          "title": "Navigator of Nearchus",
+          "displayTitle": "Navigator of Nearchus",
+          "subtitle": "Right Hand of the Admiral",
+          "bodyTitle": "The Fleet Finds Its Way",
+          "bodyText": "A senior navigator joins pilots' reports, coastal knowledge, and the needs of the whole fleet. Responsibility reaches beyond one ship, helping Nearchus carry an exhausted expedition through the last demanding miles of its voyage.",
+          "sourceRoleSlug": "nearchus-title",
+          "newArt": false
+        }
+      }
+    },
+    {
+      "figureId": "eumenes",
+      "parent": {
+        "title": "Eumenes of Cardia",
+        "subtitle": "Secretary and Strategist",
+        "icon": "stylus-seal",
+        "rarity": "epic",
+        "raritySource": "editorial-default",
+        "bodyTitle": "From Records to Command",
+        "bodyText": "Eumenes served Philip II and Alexander as a royal secretary before becoming a commander in the wars of the Successors. His career joined administrative skill to striking victories amid the struggle for Alexander's inheritance.",
+        "sources": [
+          {
+            "title": "Eumenes of Cardia — Oxford Classical Dictionary",
+            "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548934031?login=false"
+          }
+        ]
+      },
+      "roles": {
+        "common": {
+          "title": "Archive Attendant",
+          "displayTitle": "Archive Attendant",
+          "subtitle": "Keeper of the Ordered Shelves",
+          "bodyTitle": "Nothing Important Lost",
+          "bodyText": "An archive attendant sorts bundles and returns each document to the place where it can be found. Quiet order gives the royal office a dependable memory, saving crucial words from the confusion of a crowded day.",
+          "sourceRoleSlug": "eumenes-common",
+          "newArt": true,
+          "sceneBrief": "A humble archive attendant orders tied papyrus scroll bundles on wooden shelves in a Macedonian royal office, plain tunic and attentive expression."
+        },
+        "uncommon": {
+          "title": "Royal Dispatch Copyist",
+          "displayTitle": "Royal Dispatch Copyist",
+          "subtitle": "Scribe in Eumenes' Service",
+          "bodyTitle": "The King's Words Intact",
+          "bodyText": "A dispatch copyist preserves the wording of orders before they travel far from court. Exact attention keeps authority from changing with each retelling, giving officials a shared instruction they can read and answer.",
+          "sourceRoleSlug": "eumenes-uncommon",
+          "newArt": true,
+          "sceneBrief": "A royal dispatch copyist uses a reed pen to copy a letter beside a sealed roll at a modest royal-office desk; no quill pen."
+        },
+        "rare": {
+          "title": "Campaign Correspondent",
+          "displayTitle": "Campaign Correspondent",
+          "subtitle": "Voice Across Eumenes' Lines",
+          "bodyTitle": "The Reports Become Clear",
+          "bodyText": "A campaign correspondent compares dispatches with the movement of forces and the needs of command. Clear writing draws scattered events into focus, allowing distant officers to act with a better understanding of one another.",
+          "sourceRoleSlug": "eumenes-rare",
+          "newArt": true,
+          "sceneBrief": "A campaign correspondent compares a simple map and multiple dispatches at a field desk, practical cloak and reed pen, camp visible beyond."
+        },
+        "epic": {
+          "title": "Secretary of Eumenes",
+          "displayTitle": "Secretary of Eumenes",
+          "subtitle": "Trusted Hand of the Strategist",
+          "bodyTitle": "Intent Into Action",
+          "bodyText": "A senior secretary turns reports and decisions into a record command can rely upon. Discretion, precision, and judgment give Eumenes a trusted hand, preserving the intent that holds an army's separate actions together.",
+          "sourceRoleSlug": "eumenes-title",
+          "newArt": false
+        }
+      }
+    }
+  ]
+}

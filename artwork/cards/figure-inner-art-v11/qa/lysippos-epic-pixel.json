@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\lysippos-epic.png",
+  "sourceSha256": "f2b36a6cd4a402341fdebd2fb2ffe6d8afdcc7c498eb55a40616a2ae69671354",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\lysippos-epic-coarse.png",
+  "baseSha256": "4f03fd023125a16c90d276b1cc5647c5691853d4d187a839ead84401c06c3f9b",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\lysippos-epic-coarse.json",
+  "baseQaSha256": "da4fa4066df28f50316f16ae66bd2624d80de83b4d5fccbfee6a7fc474c9904a",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\lysippos-epic-face.json",
+  "configSha256": "bb08603465a166eb657c1240f17e8dd103babc4988d81b40933aa370df8835ca",
+  "config": {
+    "regions": [
+      {
+        "center": [
+          263,
+          325
+        ],
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "radius": [
+          85,
+          103
+        ]
+      }
+    ],
+    "critical_boxes": [],
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\lysippos-epic-pixel.png",
+  "outputSha256": "2b95687fd8c0c75f675c7a3079b5b4339c6c11c5eae6f59aeae950362c3378b9",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "8bfc7853d08add861553d5693edb1315c3c9aa103964b2f0ef12bcd84ddf6966",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\lysippos-epic-face-mask.png",
+  "maskSha256": "a142b2c9abe160966511a3e351ebf1b7e7987be418d661463f65e9e312caf8eb",
+  "maskPixelSha256": "d5a3a19ac9dae0040b1f1d03b67d9171e380a00884f62531131194e5d655a8da",
+  "selectedDetailCells": 637,
+  "retainedCoarseCells": 23863,
+  "affectedPixels": 22932,
+  "changedPixels": 22665,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

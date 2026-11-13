@@ -1,0 +1,60 @@
+{
+  "slug": "menander-rare-male",
+  "figureId": "menander",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "New Comedy Collaborator",
+  "subtitle": "Menander",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 39,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-rare-male.svg",
+  "fittedArt": "assets/fitted/menander-rare-male.png",
+  "overlaySvg": "source/overlays/menander-rare-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "b98ca2d1d620d95526d1861ff252d9801dcb95457951d9f41bf9f56f43a9b310",
+  "master": "masters/menander-rare-male.vectorcraft",
+  "export": "exports/menander-rare-male.png",
+  "thumbnail": "assets/menander-rare-male-thumb.png",
+  "exportSha256": "7ec19c75abe1618697093e934c4c4f75cdda59ae45744f52d1d42ec7c5c7963b",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

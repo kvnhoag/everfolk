@@ -157,6 +157,7 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
     async activeLifeOf() { return null; },
     async figureCopies() { return []; },
     async figureSupply() { return [0, 0]; },
+    async editionSupply() { throw new Error("Free-play collectibles have no onchain edition supply."); },
     async retryMint(): Promise<MintResult> { throw new Error("Not supported in free-play."); },
     async mintResult() { return null; },
     async setAction() {},

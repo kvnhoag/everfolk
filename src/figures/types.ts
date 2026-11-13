@@ -1,6 +1,6 @@
 import type { Condition, AccomplishmentRecord } from "../types.ts";
 
-export type FigureAssociationRank = "Uncommon" | "Rare" | "Epic";
+export type FigureAssociationRank = "Common" | "Uncommon" | "Rare" | "Epic";
 export type FigurePrincipalRank = "Epic" | "Legendary";
 export interface FigurePathEncounter {
   access?: "direct" | "circle";
@@ -44,6 +44,22 @@ export interface FigurePathPromotion {
   alternateHistory: boolean;
   provisional?: boolean;
 }
+export interface FigureLegendaryContribution {
+  rank: "Epic";
+  title: string;
+  traditionTitle: string;
+  description: string;
+  achievementId: string;
+  activityId: string;
+  requires: Condition;
+}
+export interface FigureLegendaryContributionProgress {
+  definition: FigureLegendaryContribution;
+  earned: boolean;
+  ready: boolean;
+  missingRequirements: string[];
+  record?: AccomplishmentRecord;
+}
 /** Frozen, JSON-only route metadata belongs to the world revision that authored its activities. */
 export interface FigurePathDefinition {
   id: string;
@@ -57,6 +73,10 @@ export interface FigurePathDefinition {
   stages: FigurePathStage[];
   capstone: FigurePathCapstone;
   promotion?: FigurePathPromotion;
+  contributionTiering?: "below-principal";
+  /** New revisions may add a separate Common entry project to a fixed Legendary ladder. */
+  contributionStartRank?: "Common";
+  legendaryContribution?: FigureLegendaryContribution;
 }
 export interface FigurePathStageProgress {
   definition: FigurePathStage;
@@ -89,6 +109,7 @@ export interface FigurePathProgress {
   associationRank: FigureAssociationRank | null;
   associationTitle: string | null;
   stages: FigurePathStageProgress[];
+  legendaryContribution: FigureLegendaryContributionProgress | null;
   nextStage: FigurePathStageProgress | null;
   capstone: FigurePathCapstoneProgress;
   specialTitle: { title: string; rank: FigurePrincipalRank; alternateHistory: boolean; record: AccomplishmentRecord } | null;

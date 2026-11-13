@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\nearchus-uncommon-male.png",
+  "sourceSha256": "a33e7acdf140ec72487e07a718d1f2c3eef04e456d7b5dda7799582a82ec4889",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\nearchus-uncommon-male-coarse.png",
+  "baseSha256": "ecb11a2c44f2b4e073c14e8b9284fb54ae8ee762342fc20b7baef2dde96e0be4",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\nearchus-uncommon-male-coarse.json",
+  "baseQaSha256": "0bc641fd2326fb4de591b9121e16a9b343124ebc41ae0f74a870f1b9f6ffe6d4",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\source\\nearchus-uncommon-male-face.json",
+  "configSha256": "1dc7763efe20c2c8b6eac6c98bc4c67f2986db518fe214ff299c97c4f0e17e16",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          479,
+          236
+        ],
+        "radius": [
+          98,
+          123
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\assets\\nearchus-uncommon-male-pixel.png",
+  "outputSha256": "377dccc7e265c35e436249d401d057a30cc5a9c7196ad0b711a8396f5217fb8c",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "07ecf1ab681a009c912626b6e9f92455accb44e532d8cad4c73fb583c3f82a1a",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v14\\qa\\nearchus-uncommon-male-face-mask.png",
+  "maskSha256": "ff5bd547f35167b4f674f32bbef3c86df2b239b83d8d15477991d6dab836d113",
+  "maskPixelSha256": "d9a122a4ae5b1a4246c521333fbccdc5bc8328007027956aff54b0d5e89c4d21",
+  "selectedDetailCells": 880,
+  "retainedCoarseCells": 23620,
+  "affectedPixels": 31680,
+  "changedPixels": 31555,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

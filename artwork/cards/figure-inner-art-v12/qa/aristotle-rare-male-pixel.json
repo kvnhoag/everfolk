@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\aristotle-rare-male.png",
+  "sourceSha256": "eeb8c4c38d639b66f55f04265d77d4cf315847ba9639a094f1ce86e6cd73315c",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\aristotle-rare-male-coarse.png",
+  "baseSha256": "275ea2e37cc109f2e567bbbe0cd9c5dba19de0f0b50dee38c38d0478c9088274",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\aristotle-rare-male-coarse.json",
+  "baseQaSha256": "2d50a6af4efafb1d7b69a3f58315eb181741902eae006696755a3c9e00d89591",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\aristotle-rare-male-face.json",
+  "configSha256": "6efed04e7111917fbe1d0df29fa26b443b087c739493765312c3d67433dec451",
+  "config": {
+    "regions": [
+      {
+        "inner_scale": 0.82,
+        "name": "face-eyes",
+        "radius": [
+          118,
+          138
+        ],
+        "center": [
+          479,
+          236
+        ]
+      }
+    ],
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\aristotle-rare-male-pixel.png",
+  "outputSha256": "98248cd5ce3da291f5b9b35cdfd7d2dced87f422920fd0d6f5ace273fd899e56",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "5441b6696dc5c844a1f3bb0ce3ac9844fe27767f7dc08abf11d5cf89634c454f",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\aristotle-rare-male-face-mask.png",
+  "maskSha256": "c50206484f86f6f51e84e18b0c07ab8981544497f0e6ff3db6c9e48364f0281a",
+  "maskPixelSha256": "de79ada8449e5e70088ac03eb76073f81ed7f381c87296c582363ff0b561a03f",
+  "selectedDetailCells": 1180,
+  "retainedCoarseCells": 23320,
+  "affectedPixels": 42480,
+  "changedPixels": 42256,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

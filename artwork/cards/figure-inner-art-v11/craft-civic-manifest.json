@@ -1,0 +1,412 @@
+{
+  "assets": [
+    {
+      "slug": "lysippos-parent",
+      "figureId": "lysippos",
+      "kind": "parent",
+      "tier": null,
+      "title": "Lysippos",
+      "source": "source/lysippos-parent.png",
+      "prompt": "prompts/lysippos-parent.txt",
+      "final": "assets/lysippos-parent-pixel.png",
+      "qa": "qa/lysippos-parent-pixel.json",
+      "face": {
+        "center": [
+          335,
+          277
+        ],
+        "radius": [
+          82,
+          99
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png"
+      ]
+    },
+    {
+      "slug": "lysippos-uncommon",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Bronze Workshop Assistant",
+      "source": "source/lysippos-uncommon.png",
+      "prompt": "prompts/lysippos-uncommon.txt",
+      "final": "assets/lysippos-uncommon-pixel.png",
+      "qa": "qa/lysippos-uncommon-pixel.json",
+      "face": {
+        "center": [
+          350,
+          333
+        ],
+        "radius": [
+          101,
+          113
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png"
+      ]
+    },
+    {
+      "slug": "lysippos-rare",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Portrait Modeller",
+      "source": "source/lysippos-rare.png",
+      "prompt": "prompts/lysippos-rare.txt",
+      "final": "assets/lysippos-rare-pixel.png",
+      "qa": "qa/lysippos-rare-pixel.json",
+      "face": {
+        "center": [
+          375,
+          334
+        ],
+        "radius": [
+          104,
+          111
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png",
+        "source/lysippos-uncommon.png"
+      ]
+    },
+    {
+      "slug": "lysippos-epic",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Master of Lysippan Form",
+      "source": "source/lysippos-epic.png",
+      "prompt": "prompts/lysippos-epic.txt",
+      "final": "assets/lysippos-epic-pixel.png",
+      "qa": "qa/lysippos-epic-pixel.json",
+      "face": {
+        "center": [
+          263,
+          325
+        ],
+        "radius": [
+          85,
+          103
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png",
+        "source/lysippos-uncommon.png"
+      ]
+    },
+    {
+      "slug": "pytheas-parent",
+      "figureId": "pytheas",
+      "kind": "parent",
+      "tier": null,
+      "title": "Pytheas of Massalia",
+      "source": "source/pytheas-parent.png",
+      "prompt": "prompts/pytheas-parent.txt",
+      "final": "assets/pytheas-parent-pixel.png",
+      "qa": "qa/pytheas-parent-pixel.json",
+      "face": {
+        "center": [
+          388,
+          231
+        ],
+        "radius": [
+          94,
+          108
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png"
+      ]
+    },
+    {
+      "slug": "pytheas-uncommon",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Expedition Provisioner",
+      "source": "source/pytheas-uncommon.png",
+      "prompt": "prompts/pytheas-uncommon.txt",
+      "final": "assets/pytheas-uncommon-pixel.png",
+      "qa": "qa/pytheas-uncommon-pixel.json",
+      "face": {
+        "center": [
+          402,
+          337
+        ],
+        "radius": [
+          95,
+          103
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png"
+      ]
+    },
+    {
+      "slug": "pytheas-rare",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Navigation Observer",
+      "source": "source/pytheas-rare.png",
+      "prompt": "prompts/pytheas-rare.txt",
+      "final": "assets/pytheas-rare-pixel.png",
+      "qa": "qa/pytheas-rare-pixel.json",
+      "face": {
+        "center": [
+          345,
+          340
+        ],
+        "radius": [
+          93,
+          102
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png",
+        "source/pytheas-uncommon.png"
+      ]
+    },
+    {
+      "slug": "pytheas-epic",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Keeper of the Northern Voyage Log",
+      "source": "source/pytheas-epic.png",
+      "prompt": "prompts/pytheas-epic.txt",
+      "final": "assets/pytheas-epic-pixel.png",
+      "qa": "qa/pytheas-epic-pixel.json",
+      "face": {
+        "center": [
+          405,
+          310
+        ],
+        "radius": [
+          98,
+          108
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png",
+        "source/pytheas-uncommon.png"
+      ]
+    },
+    {
+      "slug": "menander-parent",
+      "figureId": "menander",
+      "kind": "parent",
+      "tier": null,
+      "title": "Menander",
+      "source": "source/menander-parent.png",
+      "prompt": "prompts/menander-parent.txt",
+      "final": "assets/menander-parent-pixel.png",
+      "qa": "qa/menander-parent-pixel.json",
+      "face": {
+        "center": [
+          476,
+          257
+        ],
+        "radius": [
+          103,
+          111
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png"
+      ]
+    },
+    {
+      "slug": "menander-uncommon",
+      "figureId": "menander",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Stage Copyist",
+      "source": "source/menander-uncommon.png",
+      "prompt": "prompts/menander-uncommon.txt",
+      "final": "assets/menander-uncommon-pixel.png",
+      "qa": "qa/menander-uncommon-pixel.json",
+      "face": {
+        "center": [
+          385,
+          318
+        ],
+        "radius": [
+          104,
+          111
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png"
+      ]
+    },
+    {
+      "slug": "menander-rare",
+      "figureId": "menander",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "New Comedy Collaborator",
+      "source": "source/menander-rare.png",
+      "prompt": "prompts/menander-rare.txt",
+      "final": "assets/menander-rare-pixel.png",
+      "qa": "qa/menander-rare-pixel.json",
+      "face": {
+        "center": [
+          330,
+          308
+        ],
+        "radius": [
+          91,
+          102
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png",
+        "source/menander-uncommon.png"
+      ]
+    },
+    {
+      "slug": "menander-epic",
+      "figureId": "menander",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Dramatist of New Comedy",
+      "source": "source/menander-epic.png",
+      "prompt": "prompts/menander-epic.txt",
+      "final": "assets/menander-epic-pixel.png",
+      "qa": "qa/menander-epic-pixel.json",
+      "face": {
+        "center": [
+          350,
+          222
+        ],
+        "radius": [
+          94,
+          103
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png",
+        "source/menander-uncommon.png"
+      ]
+    },
+    {
+      "slug": "cleomenes-parent",
+      "figureId": "cleomenes",
+      "kind": "parent",
+      "tier": null,
+      "title": "Cleomenes of Naucratis",
+      "source": "source/cleomenes-parent.png",
+      "prompt": "prompts/cleomenes-parent.txt",
+      "final": "assets/cleomenes-parent-pixel.png",
+      "qa": "qa/cleomenes-parent-pixel.json",
+      "face": {
+        "center": [
+          357,
+          201
+        ],
+        "radius": [
+          103,
+          112
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png"
+      ]
+    },
+    {
+      "slug": "cleomenes-uncommon",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "title": "Revenue Records Assistant",
+      "source": "source/cleomenes-uncommon.png",
+      "prompt": "prompts/cleomenes-uncommon.txt",
+      "final": "assets/cleomenes-uncommon-pixel.png",
+      "qa": "qa/cleomenes-uncommon-pixel.json",
+      "face": {
+        "center": [
+          441,
+          295
+        ],
+        "radius": [
+          98,
+          104
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png"
+      ]
+    },
+    {
+      "slug": "cleomenes-rare",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "tier": "rare",
+      "title": "Grain Supply Auditor",
+      "source": "source/cleomenes-rare.png",
+      "prompt": "prompts/cleomenes-rare.txt",
+      "final": "assets/cleomenes-rare-pixel.png",
+      "qa": "qa/cleomenes-rare-pixel.json",
+      "face": {
+        "center": [
+          417,
+          228
+        ],
+        "radius": [
+          98,
+          105
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png",
+        "source/cleomenes-uncommon.png"
+      ]
+    },
+    {
+      "slug": "cleomenes-epic",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "tier": "epic",
+      "title": "Steward of Egyptian Grain Accounts",
+      "source": "source/cleomenes-epic.png",
+      "prompt": "prompts/cleomenes-epic.txt",
+      "final": "assets/cleomenes-epic-pixel.png",
+      "qa": "qa/cleomenes-epic-pixel.json",
+      "face": {
+        "center": [
+          411,
+          283
+        ],
+        "radius": [
+          96,
+          106
+        ]
+      },
+      "provenance": "Built-in generated illustration; role informed by local authored content, imagined appearance",
+      "references": [
+        "source/alexander-parent.png",
+        "source/cleomenes-uncommon.png"
+      ]
+    }
+  ]
+}

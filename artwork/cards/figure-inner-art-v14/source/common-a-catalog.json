@@ -1,0 +1,746 @@
+[
+  {
+    "slug": "alexander-common-male",
+    "figureId": "alexander",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "male",
+    "title": "Camp Runner",
+    "prompt": "prompts/alexander-common-male.txt",
+    "identity": "Adult man about24, lean angular face, cropped dark-brown hair, clean-shaven, warm olive skin and brown eyes. Clear right-facing THREE-QUARTER face, eyes focused beyond the right of the viewer.",
+    "action": "A dusty Macedonian military camp with canvas tents, distant pikes, low mountains and dawn smoke. The runner has just stopped at a tent rope, one hand cradling a small rolled dispatch bound with a plain red cord, the other hand holding the strap of a small leather message satchel. The scene conveys dependable speed and alertness. The runner wears a plain knee-length off-white linen tunic, simple belt and faded rust-red shoulder cloth, no armour or sword.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/alexander-common-male.png",
+    "final": "assets/alexander-common-male-pixel.png",
+    "coarse": "assets/alexander-common-male-coarse.png",
+    "qa": "qa/alexander-common-male-pixel.json",
+    "coarseQa": "qa/alexander-common-male-coarse.json",
+    "faceConfig": "source/alexander-common-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "c07e7c912fdb18cfb1ba80afc19735b6dc9947503c62c61003a1fab6ea4db67e",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          404,
+          242
+        ],
+        "radius": [
+          105,
+          135
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-410a5f2d-e6a2-4340-aea5-9812ed787f8a.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "b74eac03c0586eb3aa22b6d6908a0ad8e709ebf868a0145ca40c747440467870",
+    "coarseSha256": "d7e6b64e1ff8d68bc8295933357cf426d295b5164767255011a30be2b832edc0",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "alexander-common",
+    "actualViewAngle": "right-three-quarter",
+    "desiredViewAngle": "right-three-quarter"
+  },
+  {
+    "slug": "alexander-common-female",
+    "figureId": "alexander",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "title": "Camp Runner",
+    "prompt": "prompts/alexander-common-female.txt",
+    "identity": "Adult woman about29, strong broad nose, sun-browned olive skin, dark eyes, dark wavy hair tied in a low practical knot. Clear left-facing PROFILE with the near eye and pupil visible; neck and shoulders naturally follow the alert look toward a tent.",
+    "action": "A dusty Macedonian military camp with canvas tents, distant pikes, low mountains and dawn smoke. The runner has just stopped at a tent rope, one hand cradling a small rolled dispatch bound with a plain red cord, the other hand holding the strap of a small leather message satchel. The scene conveys dependable speed and alertness. The runner wears a plain knee-length off-white linen tunic, simple belt and faded rust-red shoulder cloth, no armour or sword.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/alexander-common-female.png",
+    "final": "assets/alexander-common-female-pixel.png",
+    "coarse": "assets/alexander-common-female-coarse.png",
+    "qa": "qa/alexander-common-female-pixel.json",
+    "coarseQa": "qa/alexander-common-female-coarse.json",
+    "faceConfig": "source/alexander-common-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "c9c8e7ae7d5a8295ca8a00ab98fc996ea5d721a6c62ecccbc5abdd1c3bdb054f",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          398,
+          226
+        ],
+        "radius": [
+          100,
+          135
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-7341eef9-b6e6-4ddb-a438-ba0f8aadfc15.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "88da887ec7815fd3b93e32e4b5df3dac438ea44626bfe727aae75f3c9d87f055",
+    "coarseSha256": "1f2b919b1fca37507e08d886280eb8c88dfd54596567439658e556d96a4f6acf",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "alexander-common",
+    "actualViewAngle": "left-profile",
+    "desiredViewAngle": "left-profile"
+  },
+  {
+    "slug": "aristotle-common-male",
+    "figureId": "aristotle",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "male",
+    "title": "Lyceum Attendant",
+    "prompt": "prompts/aristotle-common-male.txt",
+    "identity": "Adult man about35 with a broad thoughtful face, dark close-cropped curls, a short square beard, weathered olive complexion and grey-brown eyes. FRONTAL face with both eyes clearly visible, looking up briefly from preparing the bench.",
+    "action": "An Athenian shaded portico prepared for a modest lesson, shelves and a plane tree in the background. The attendant carefully places a rolled papyrus and a wooden wax tablet on a worn bench while scholars gather in the distant shade. One hand sets down the tablet by its edge; the other carries the single scroll. Plain sand-coloured linen chiton and a faded indigo shoulder wrap, no scholar crown or luxury.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/aristotle-common-male.png",
+    "final": "assets/aristotle-common-male-pixel.png",
+    "coarse": "assets/aristotle-common-male-coarse.png",
+    "qa": "qa/aristotle-common-male-pixel.json",
+    "coarseQa": "qa/aristotle-common-male-coarse.json",
+    "faceConfig": "source/aristotle-common-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "3699de787a0f51a16ca0cf732cf08e0eb63c5b780ccb7a0dd34eb8af4cd6ad68",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          423,
+          244
+        ],
+        "radius": [
+          102,
+          132
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-86fd3f96-23e2-4cde-9514-5f0aa26b9a0c.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "01e296d07ce64c618f9ca7f0e0f306ee958de34a01dc17d2860c7c32fe6e417d",
+    "coarseSha256": "b85dd12ffd2c167e4549151f90c336bfa5586b7ddf0195264878429119bf1ec5",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "aristotle-common",
+    "actualViewAngle": "frontal",
+    "desiredViewAngle": "frontal"
+  },
+  {
+    "slug": "aristotle-common-female",
+    "figureId": "aristotle",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "title": "Lyceum Attendant",
+    "prompt": "prompts/aristotle-common-female.txt",
+    "identity": "Adult woman about26, distinct long face and straight prominent nose, amber-brown eyes, dark auburn hair in a simple braided bun, lightly freckled olive complexion. Clear right-facing THREE-QUARTER face looking toward an arriving scholar.",
+    "action": "An Athenian shaded portico prepared for a modest lesson, shelves and a plane tree in the background. The attendant carefully places a rolled papyrus and a wooden wax tablet on a worn bench while scholars gather in the distant shade. One hand sets down the tablet by its edge; the other carries the single scroll. Plain sand-coloured linen chiton and a faded indigo shoulder wrap, no scholar crown or luxury.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/aristotle-common-female.png",
+    "final": "assets/aristotle-common-female-pixel.png",
+    "coarse": "assets/aristotle-common-female-coarse.png",
+    "qa": "qa/aristotle-common-female-pixel.json",
+    "coarseQa": "qa/aristotle-common-female-coarse.json",
+    "faceConfig": "source/aristotle-common-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "8b707d17cab46c948efc74b00c3072cbb868a195fea62a9dc4b9d14b31b8c6b0",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          420,
+          253
+        ],
+        "radius": [
+          105,
+          138
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-09e2e656-22fc-49a0-b5f3-90285b914629.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "bb488778ee2ae9b46b10d9db5ab67185294c42850413a90b74b85919cf2ccf8d",
+    "coarseSha256": "70a298a64fd150f970a414e7e41b643e8b09b7d3846534e4f2771fff42a14374",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "aristotle-common",
+    "actualViewAngle": "right-three-quarter",
+    "desiredViewAngle": "right-three-quarter"
+  },
+  {
+    "slug": "euclid-common-male",
+    "figureId": "euclid",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "male",
+    "title": "Geometry Apprentice",
+    "prompt": "prompts/euclid-common-male.txt",
+    "identity": "Adult man about27, narrow face, short tightly curled black hair, sparse moustache and short chin beard, deep olive skin and focused dark eyes. Clear left-facing THREE-QUARTER face looking slightly down at the circle, with the near pupil readable.",
+    "action": "A modest Alexandrian teaching court, pale stone columns and baskets of papyrus in soft distance. The apprentice uses a small plain wooden two-legged compass to inscribe one clean circle on a wax-covered board resting flat on a table. One hand naturally grips the compass at its hinge; the other steadies the board near its far edge. The circle and tool contact are clear and simple, no advanced astronomical apparatus. Plain oatmeal linen chiton with a muted green shoulder cloth.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/euclid-common-male.png",
+    "final": "assets/euclid-common-male-pixel.png",
+    "coarse": "assets/euclid-common-male-coarse.png",
+    "qa": "qa/euclid-common-male-pixel.json",
+    "coarseQa": "qa/euclid-common-male-coarse.json",
+    "faceConfig": "source/euclid-common-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "f374429bf7f49a8cc7c2d14f9b4781efe0df18a8727218cd00e58dc42df54d1a",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          454,
+          275
+        ],
+        "radius": [
+          108,
+          140
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-f9862c78-b846-4c54-bd73-aff21cfae59c.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "2ffa9c276d0173492942d5e57cfebfd4087566ce9eb672bba9e2564f8c1e2b4f",
+    "coarseSha256": "b2a9ffe9dee8af03e546a4c3102a8e39f4f35a4adf465c3a00976b66ef6a3d46",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "euclid-common",
+    "actualViewAngle": "left-three-quarter-down",
+    "desiredViewAngle": "left-three-quarter"
+  },
+  {
+    "slug": "euclid-common-female",
+    "figureId": "euclid",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "title": "Geometry Apprentice",
+    "prompt": "prompts/euclid-common-female.txt",
+    "identity": "Adult woman about32, round broad-cheeked face with a strong nose, dark warm eyes, black curls tied low behind the neck, brown-olive complexion. FRONTAL face with both eyes clearly visible as she briefly studies the viewer while holding the compass steady.",
+    "action": "A modest Alexandrian teaching court, pale stone columns and baskets of papyrus in soft distance. The apprentice uses a small plain wooden two-legged compass to inscribe one clean circle on a wax-covered board resting flat on a table. One hand naturally grips the compass at its hinge; the other steadies the board near its far edge. The circle and tool contact are clear and simple, no advanced astronomical apparatus. Plain oatmeal linen chiton with a muted green shoulder cloth.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/euclid-common-female.png",
+    "final": "assets/euclid-common-female-pixel.png",
+    "coarse": "assets/euclid-common-female-coarse.png",
+    "qa": "qa/euclid-common-female-pixel.json",
+    "coarseQa": "qa/euclid-common-female-coarse.json",
+    "faceConfig": "source/euclid-common-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "a4cf35e53c2d11470881479bfd46c229f9fa7c565b33416f5f5dfebfabcbad04",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          415,
+          255
+        ],
+        "radius": [
+          112,
+          142
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-e7f41cff-0c48-4cd9-b81b-bc490d6cc8c7.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "d736d408442079d8caf4340d4f42f2820c801c142327a605944dc9b33db9e82a",
+    "coarseSha256": "176ac26cda41ae5efa79f76df51818bce3de88796ee6b61b6f1dc50cf96c58c3",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "euclid-common",
+    "actualViewAngle": "frontal",
+    "desiredViewAngle": "frontal"
+  },
+  {
+    "slug": "lysippos-common-male",
+    "figureId": "lysippos",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "male",
+    "title": "Workshop Apprentice",
+    "prompt": "prompts/lysippos-common-male.txt",
+    "identity": "Adult man about22, square jaw, broken-looking but healed prominent nose, straight chestnut hair cropped around the ears, no beard, tanned fair-olive skin and light brown eyes. Clear right-facing PROFILE with the near eye and pupil visible, naturally observing a clay form.",
+    "action": "A late-Classical Greek bronze sculptor workshop, rough clay forms, charcoal brazier and a partly finished small clay horse in the background. The apprentice kneads a small piece of soft clay between two natural hands above a modest wooden workbench, preparing material for a master. Clearly clay rather than a finished bronze treasure. Plain sleeveless dusty ochre tunic, light clay stains, simple belt, no rich mantle.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/lysippos-common-male.png",
+    "final": "assets/lysippos-common-male-pixel.png",
+    "coarse": "assets/lysippos-common-male-coarse.png",
+    "qa": "qa/lysippos-common-male-pixel.json",
+    "coarseQa": "qa/lysippos-common-male-coarse.json",
+    "faceConfig": "source/lysippos-common-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "dc0ae2555d939e56d71297cf37bcbe617da3c273654110d3f8dc18ab06339251",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          368,
+          298
+        ],
+        "radius": [
+          100,
+          126
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-b09f7ed2-5f22-47a5-b9f8-ee2449a171dd.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "0ab734e493ace5d4584ed592923418aea3984f32c41255ce2b88e3b1939232ae",
+    "coarseSha256": "8ffcfb7d8a36260a40110ab0acde9cc184d0dd796b7c0ee766df8423d398c9fc",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "lysippos-common",
+    "actualViewAngle": "right-profile",
+    "desiredViewAngle": "right-profile"
+  },
+  {
+    "slug": "lysippos-common-female",
+    "figureId": "lysippos",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "title": "Workshop Apprentice",
+    "prompt": "prompts/lysippos-common-female.txt",
+    "identity": "Adult woman about30, angular face with high cheekbones and a broad nose, dark olive skin, black wavy hair bound in a practical scarf, green-brown eyes. Clear left-facing THREE-QUARTER face looking at the clay in her hands.",
+    "action": "A late-Classical Greek bronze sculptor workshop, rough clay forms, charcoal brazier and a partly finished small clay horse in the background. The apprentice kneads a small piece of soft clay between two natural hands above a modest wooden workbench, preparing material for a master. Clearly clay rather than a finished bronze treasure. Plain sleeveless dusty ochre tunic, light clay stains, simple belt, no rich mantle.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/lysippos-common-female.png",
+    "final": "assets/lysippos-common-female-pixel.png",
+    "coarse": "assets/lysippos-common-female-coarse.png",
+    "qa": "qa/lysippos-common-female-pixel.json",
+    "coarseQa": "qa/lysippos-common-female-coarse.json",
+    "faceConfig": "source/lysippos-common-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "a3f6053e138788adcdae1a9e72c76dbe7e7d2093e72735344f7fc104bc7a2ab7",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          433,
+          289
+        ],
+        "radius": [
+          106,
+          139
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-ddd4395f-be7a-48a1-bc5f-e293c0c95018.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "e3abb00e3ca56e8cb524e8cf7ca5500498ff22267a8d179410a42c61d407fe2f",
+    "coarseSha256": "a1c26786c142483251f1c5d505c848a2ff2adb922ad1edf5bdd21bf479bffc5f",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "lysippos-common",
+    "actualViewAngle": "right-three-quarter-down",
+    "desiredViewAngle": "left-three-quarter"
+  },
+  {
+    "slug": "pytheas-common-male",
+    "figureId": "pytheas",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "male",
+    "title": "Deckhand of Massalia",
+    "prompt": "prompts/pytheas-common-male.txt",
+    "identity": "Adult man about38, weathered long face, short sandy-brown hair and salt-streaked short beard, sunburnt fair skin and clear blue-grey eyes. Clear left-facing THREE-QUARTER face looking toward shore, visible pupils.",
+    "action": "The deck of a fourth-centuryBCE Mediterranean merchant vessel leaving Massalia, rough timber railing, furled linen sail, low sea swell and pale coastline in the distance. The deckhand carefully coils thick natural-fibre rope on the deck: one hand guides a rope loop, the other holds the standing length. Hands separated and easy to trace. Plain weathered blue-grey knee-length tunic with a simple rope belt, bare forearms and a faded brown shoulder cloth.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/pytheas-common-male.png",
+    "final": "assets/pytheas-common-male-pixel.png",
+    "coarse": "assets/pytheas-common-male-coarse.png",
+    "qa": "qa/pytheas-common-male-pixel.json",
+    "coarseQa": "qa/pytheas-common-male-coarse.json",
+    "faceConfig": "source/pytheas-common-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "7a75a7c63b2f808c417f56eab10d35faf0e6004d4ae7484a93aee53c1d8df127",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          391,
+          203
+        ],
+        "radius": [
+          95,
+          123
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-ff8144b1-fe00-4041-b2ce-b756040942c4.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "d2d5ef79909fae8782d84024a9116d4fdd732eea3b51eba651445a0342721730",
+    "coarseSha256": "32171877768454013effa14b17607b66b9b79037e3310c5ec4cdc3b2360eb1d2",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "pytheas-common",
+    "actualViewAngle": "left-three-quarter",
+    "desiredViewAngle": "left-three-quarter"
+  },
+  {
+    "slug": "pytheas-common-female",
+    "figureId": "pytheas",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "title": "Deckhand of Massalia",
+    "prompt": "prompts/pytheas-common-female.txt",
+    "identity": "Adult woman about28, wide face with a blunt nose, tanned olive skin, dark-brown eyes and black curly hair tied at the nape. Clear right-facing PROFILE with readable near eye, looking along the rigging while coiling rope.",
+    "action": "The deck of a fourth-centuryBCE Mediterranean merchant vessel leaving Massalia, rough timber railing, furled linen sail, low sea swell and pale coastline in the distance. The deckhand carefully coils thick natural-fibre rope on the deck: one hand guides a rope loop, the other holds the standing length. Hands separated and easy to trace. Plain weathered blue-grey knee-length tunic with a simple rope belt, bare forearms and a faded brown shoulder cloth.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/pytheas-common-female.png",
+    "final": "assets/pytheas-common-female-pixel.png",
+    "coarse": "assets/pytheas-common-female-coarse.png",
+    "qa": "qa/pytheas-common-female-pixel.json",
+    "coarseQa": "qa/pytheas-common-female-coarse.json",
+    "faceConfig": "source/pytheas-common-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "49d7b1cebd66af9b0ba95f32f5d08947b52adc7b8923b096c20422ca449682ce",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          406,
+          260
+        ],
+        "radius": [
+          105,
+          135
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-df6fa01a-4730-4c25-9482-d6ff579e9573.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "ff24e5457398830f5f4642c217eadbb5a66a84aefe35ee5981d6240a47b06904",
+    "coarseSha256": "d3cc14c49e0ac895cbcd1f003151908c147e93b3a8f08608243ecb6242bb1e11",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "pytheas-common",
+    "actualViewAngle": "right-profile",
+    "desiredViewAngle": "right-profile"
+  },
+  {
+    "slug": "menander-common-male",
+    "figureId": "menander",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "male",
+    "title": "Stagehand",
+    "prompt": "prompts/menander-common-male.txt",
+    "identity": "Adult man about29, round full face, thick dark wavy hair at ear length, neatly trimmed moustache, warm olive skin and hazel eyes. FRONTAL face with both eyes clearly visible as he briefly looks up from the prop.",
+    "action": "Backstage at an early Hellenistic Greek theatre, a timber prop table, folded simple costumes, distant stone seating glimpsed between curtains. The stagehand sets down a single natural pale terracotta comic theatre mask on the table with one hand supporting each side, fingers outside the eye holes. It is a prop with no human head inside. A basket of props rests nearby, no modern stage machinery. Plain unbleached linen tunic and muted wine-brown shawl, no ornate actor costume.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/menander-common-male.png",
+    "final": "assets/menander-common-male-pixel.png",
+    "coarse": "assets/menander-common-male-coarse.png",
+    "qa": "qa/menander-common-male-pixel.json",
+    "coarseQa": "qa/menander-common-male-coarse.json",
+    "faceConfig": "source/menander-common-male-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "6d3665a3c8a019c64d78bedab4aa95efadd1ec4ac50c675a7d6b6a7f1646d5af",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          396,
+          242
+        ],
+        "radius": [
+          105,
+          135
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-92db8c33-18a6-423c-ba5a-862c87b51499.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "1aa098a9aa6c65108e53a066cf87d1c9621eedb96a655a07b05da884f8d1c298",
+    "coarseSha256": "95a63c5060e1851b3bfabcae87c36b47690dee5c4519ced8c303a212be96f8da",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "menander-common",
+    "actualViewAngle": "frontal",
+    "desiredViewAngle": "frontal"
+  },
+  {
+    "slug": "menander-common-female",
+    "figureId": "menander",
+    "kind": "contribution",
+    "tier": "common",
+    "gender": "female",
+    "title": "Stagehand",
+    "prompt": "prompts/menander-common-female.txt",
+    "identity": "Adult woman about40, dignified long face, strong cheekbones, fine smile lines, dark-brown hair with a few grey strands pinned simply, light olive skin and brown eyes. Clear left-facing THREE-QUARTER face looking toward the theatre opening.",
+    "action": "Backstage at an early Hellenistic Greek theatre, a timber prop table, folded simple costumes, distant stone seating glimpsed between curtains. The stagehand sets down a single natural pale terracotta comic theatre mask on the table with one hand supporting each side, fingers outside the eye holes. It is a prop with no human head inside. A basket of props rests nearby, no modern stage machinery. Plain unbleached linen tunic and muted wine-brown shawl, no ornate actor costume.",
+    "reference": "D:/Hustle/Games/Historical Lives/artwork/cards/figure-inner-art-v12/source/aristotle-uncommon-female.png",
+    "source": "source/menander-common-female.png",
+    "final": "assets/menander-common-female-pixel.png",
+    "coarse": "assets/menander-common-female-coarse.png",
+    "qa": "qa/menander-common-female-pixel.json",
+    "coarseQa": "qa/menander-common-female-coarse.json",
+    "faceConfig": "source/menander-common-female-face.json",
+    "sourceSize": [
+      1122,
+      1402
+    ],
+    "finalSize": [
+      840,
+      1050
+    ],
+    "sourceSha256": "ad316cedb9a32429379ae13e13e8f6b1ba0055c3d2923f689482f9477620272e",
+    "faceRegions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          401,
+          237
+        ],
+        "radius": [
+          105,
+          133
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-78c6-7980-852e-754886355823\\exec-d437f77c-24c5-4539-8430-b55ea8454bd9.png",
+    "status": "complete",
+    "provenance": "Fictional adult representative contributor; built-in image generation using an approved Everfolk painting as style-only reference, followed by verified regional PixelOE. No claim of a documented historical person or exact reconstructed costume.",
+    "finalSha256": "871460d9417c71495ac0b70b6c9d3ea9872c2df62c6619af41991cb30d6b3cf8",
+    "coarseSha256": "47275f7b39d04bd4a626a4441014d825e9f57e0fa02989a857b9054a8192d791",
+    "filter": {
+      "tool": "PixelOE1.0.0 legacy CPU",
+      "profile": "mixed-grid:3pxbody/2pxface",
+      "baseGrid": [
+        280,
+        350
+      ],
+      "detailGrid": [
+        420,
+        525
+      ],
+      "outsideMaskRgbDifferences": 0
+    },
+    "roleId": "menander-common",
+    "actualViewAngle": "left-three-quarter",
+    "desiredViewAngle": "left-three-quarter"
+  }
+]

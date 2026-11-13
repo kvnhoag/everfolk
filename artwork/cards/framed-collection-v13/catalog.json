@@ -1,0 +1,4961 @@
+{
+  "libraryId": "everfolk-framed-collection-v13",
+  "date": "2026-11-13",
+  "canvas": [
+    900,
+    1260
+  ],
+  "frameSystem": "frame-system-v5-limits",
+  "expected": 83,
+  "complete": true,
+  "sourceLibrary": "figure-inner-art-v12",
+  "notes": [
+    "Original v12 art is preserved. Standard portrait fits use nearest-neighbour; Legendary portraits remain at native size.",
+    "Artwork is a fitted bitmap; frame paths and type remain editable in each native VectorCraft master.",
+    "Final PNGs composite exact fitted pixels with the native transparent vector/type overlay.",
+    "Six Nearchus/Eumenes assets use editorial Epic styling; gameplay rarity remains unspecified.",
+    "ART PREVIEW and intended edition limits do not assign an issued copy."
+  ],
+  "assets": [
+    {
+      "slug": "alexander-parent",
+      "figureId": "alexander",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Alexander the Great",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "legendary",
+      "gameplayRarity": "legendary",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "full-art",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-parent-pixel.png",
+      "intendedEditionLimit": 10,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 010",
+      "collectionIndex": 1,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "native-size portrait with low-detail source-edge atmosphere",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          30,
+          140,
+          840,
+          1050
+        ],
+        "sourceCropped": false,
+        "kernel": "none for original artwork"
+      },
+      "sourceSvg": "source/cards/alexander-parent.svg",
+      "fittedArt": "assets/fitted/alexander-parent.png",
+      "overlaySvg": "source/overlays/alexander-parent.svg",
+      "titleSize": 68,
+      "sourceArtSha256": "a82bf7399703a2392cae963eb55d8b043f1cfc5a958a3936126a0d850ce64d8e",
+      "master": "masters/alexander-parent.vectorcraft",
+      "export": "exports/alexander-parent.png",
+      "thumbnail": "assets/alexander-parent-thumb.png",
+      "exportSha256": "d0a0f0755e968ac5d3ad25e627a1df7eec94d1c126205474c983eaeba75d0d9d",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 628992,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "alexander-uncommon-male",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Campaign Provisioner",
+      "subtitle": "Alexander the Great",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 2,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/alexander-uncommon-male.svg",
+      "fittedArt": "assets/fitted/alexander-uncommon-male.png",
+      "overlaySvg": "source/overlays/alexander-uncommon-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "bd2da19f09cba801e5ddf469854f0d37f336e395b50b5bf62dbe7f52c5bc9626",
+      "master": "masters/alexander-uncommon-male.vectorcraft",
+      "export": "exports/alexander-uncommon-male.png",
+      "thumbnail": "assets/alexander-uncommon-male-thumb.png",
+      "exportSha256": "39b71e6dfb6ae240210363a792497176b7684668663d08efebeecb4e7832247a",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "alexander-uncommon-female",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Campaign Provisioner",
+      "subtitle": "Alexander the Great",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 3,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/alexander-uncommon-female.svg",
+      "fittedArt": "assets/fitted/alexander-uncommon-female.png",
+      "overlaySvg": "source/overlays/alexander-uncommon-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "924a15e1befd233494db20ff9a2e5775bea8a0cc1744f100a1f58c8bb11372e9",
+      "master": "masters/alexander-uncommon-female.vectorcraft",
+      "export": "exports/alexander-uncommon-female.png",
+      "thumbnail": "assets/alexander-uncommon-female-thumb.png",
+      "exportSha256": "4308d7ac7b99e991d0fc125211a60da5381ece9f34f52374c0acfd52d00e9a99",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "alexander-rare-male",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Campaign Staff Officer",
+      "subtitle": "Alexander the Great",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 4,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/alexander-rare-male.svg",
+      "fittedArt": "assets/fitted/alexander-rare-male.png",
+      "overlaySvg": "source/overlays/alexander-rare-male.svg",
+      "titleSize": 64,
+      "sourceArtSha256": "a9d4730cecffb17bc2ec7ec2b854d3c2812b773e544d043d6a1d29c8d4856d29",
+      "master": "masters/alexander-rare-male.vectorcraft",
+      "export": "exports/alexander-rare-male.png",
+      "thumbnail": "assets/alexander-rare-male-thumb.png",
+      "exportSha256": "ad872d8261681a941444a89ad060179e2d84d26c87a55d717bf45c10c1f589d5",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "alexander-rare-female",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Campaign Staff Officer",
+      "subtitle": "Alexander the Great",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 5,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/alexander-rare-female.svg",
+      "fittedArt": "assets/fitted/alexander-rare-female.png",
+      "overlaySvg": "source/overlays/alexander-rare-female.svg",
+      "titleSize": 64,
+      "sourceArtSha256": "23c2f9f17da71ebb080b652bb7328249125ff15bf7a0ae5817c4ae6b3377c906",
+      "master": "masters/alexander-rare-female.vectorcraft",
+      "export": "exports/alexander-rare-female.png",
+      "thumbnail": "assets/alexander-rare-female-thumb.png",
+      "exportSha256": "f6a587fe0fa058d1a5aa62324eaa1604cf888ff8c88882c35f2ae5134fd30d8d",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "alexander-epic-male",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Trusted Campaign Commander",
+      "subtitle": "Alexander the Great",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 6,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/alexander-epic-male.svg",
+      "fittedArt": "assets/fitted/alexander-epic-male.png",
+      "overlaySvg": "source/overlays/alexander-epic-male.svg",
+      "titleSize": 54,
+      "sourceArtSha256": "ebe11f4609d0095e3c61e8b8c290d92407de81ff30cd858c35589e75b0317205",
+      "master": "masters/alexander-epic-male.vectorcraft",
+      "export": "exports/alexander-epic-male.png",
+      "thumbnail": "assets/alexander-epic-male-thumb.png",
+      "exportSha256": "e21b250dc4ddd067d87f0258b215229d4850614305394e797a85e767ea415a9b",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "alexander-epic-female",
+      "figureId": "alexander",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Trusted Campaign Commander",
+      "subtitle": "Alexander the Great",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/alexander-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 7,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/alexander-epic-female.svg",
+      "fittedArt": "assets/fitted/alexander-epic-female.png",
+      "overlaySvg": "source/overlays/alexander-epic-female.svg",
+      "titleSize": 54,
+      "sourceArtSha256": "a4420b06c5a23ce0d5e753dbeff0a83718617989dd6dfc203c2fea1a659a89d0",
+      "master": "masters/alexander-epic-female.vectorcraft",
+      "export": "exports/alexander-epic-female.png",
+      "thumbnail": "assets/alexander-epic-female-thumb.png",
+      "exportSha256": "42e9e7930ab8295b498f20e8fb10c785983af47b4ca86657614d503e795f9f76",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "aristotle-parent",
+      "figureId": "aristotle",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Aristotle",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "legendary",
+      "gameplayRarity": "legendary",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "full-art",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-parent-pixel.png",
+      "intendedEditionLimit": 10,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 010",
+      "collectionIndex": 8,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "native-size portrait with low-detail source-edge atmosphere",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          30,
+          140,
+          840,
+          1050
+        ],
+        "sourceCropped": false,
+        "kernel": "none for original artwork"
+      },
+      "sourceSvg": "source/cards/aristotle-parent.svg",
+      "fittedArt": "assets/fitted/aristotle-parent.png",
+      "overlaySvg": "source/overlays/aristotle-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "9d03ac92da27c5b6df787e1de91b64c0d557746d7f0dc974ba78eae9defa1d88",
+      "master": "masters/aristotle-parent.vectorcraft",
+      "export": "exports/aristotle-parent.png",
+      "thumbnail": "assets/aristotle-parent-thumb.png",
+      "exportSha256": "197d227778fa0949ad5257eab20a4a68fd97225f1c0f72dc82ee0c636161155f",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 628992,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "aristotle-uncommon-male",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Lyceum Copyist",
+      "subtitle": "Aristotle",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 9,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/aristotle-uncommon-male.svg",
+      "fittedArt": "assets/fitted/aristotle-uncommon-male.png",
+      "overlaySvg": "source/overlays/aristotle-uncommon-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "aa76fdff4d64ce649b00f5de2447c9619e6e79586488e8a34f598bd6bdc96203",
+      "master": "masters/aristotle-uncommon-male.vectorcraft",
+      "export": "exports/aristotle-uncommon-male.png",
+      "thumbnail": "assets/aristotle-uncommon-male-thumb.png",
+      "exportSha256": "1258da42122f13e672440595801c801c81136d6bafd96ffb3bddc9ae7edfadba",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "aristotle-uncommon-female",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Lyceum Copyist",
+      "subtitle": "Aristotle",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 10,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/aristotle-uncommon-female.svg",
+      "fittedArt": "assets/fitted/aristotle-uncommon-female.png",
+      "overlaySvg": "source/overlays/aristotle-uncommon-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "85e85d1954b56c573ac26fc628005e7d373a7d3f12066b85117486f22abde2b2",
+      "master": "masters/aristotle-uncommon-female.vectorcraft",
+      "export": "exports/aristotle-uncommon-female.png",
+      "thumbnail": "assets/aristotle-uncommon-female-thumb.png",
+      "exportSha256": "5de0fe22130a4e801de2b2a52a4497ff26a4c8ea5f056d8324777dbcec916021",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "aristotle-rare-male",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Lyceum Researcher",
+      "subtitle": "Aristotle",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 11,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/aristotle-rare-male.svg",
+      "fittedArt": "assets/fitted/aristotle-rare-male.png",
+      "overlaySvg": "source/overlays/aristotle-rare-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "98248cd5ce3da291f5b9b35cdfd7d2dced87f422920fd0d6f5ace273fd899e56",
+      "master": "masters/aristotle-rare-male.vectorcraft",
+      "export": "exports/aristotle-rare-male.png",
+      "thumbnail": "assets/aristotle-rare-male-thumb.png",
+      "exportSha256": "20f1fa26dda138004a2154cb429d2fcce63f4be293ae687c25c94df28be1bd1d",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "aristotle-rare-female",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Lyceum Researcher",
+      "subtitle": "Aristotle",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 12,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/aristotle-rare-female.svg",
+      "fittedArt": "assets/fitted/aristotle-rare-female.png",
+      "overlaySvg": "source/overlays/aristotle-rare-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "6bfd38423b21105c95436ebd242f8e89a639752971a15bd7216afb1e797f2484",
+      "master": "masters/aristotle-rare-female.vectorcraft",
+      "export": "exports/aristotle-rare-female.png",
+      "thumbnail": "assets/aristotle-rare-female-thumb.png",
+      "exportSha256": "42606879705153a5e15b796470b74f64ef75e84cf1add6c5c1e9a34ab8f3d57c",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "aristotle-epic-male",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Peripatetic Scholar",
+      "subtitle": "Aristotle",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 13,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/aristotle-epic-male.svg",
+      "fittedArt": "assets/fitted/aristotle-epic-male.png",
+      "overlaySvg": "source/overlays/aristotle-epic-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "388822a8017504b3202f97d7ffd1b9d6a676f9fe748498dd1d39af37460ef716",
+      "master": "masters/aristotle-epic-male.vectorcraft",
+      "export": "exports/aristotle-epic-male.png",
+      "thumbnail": "assets/aristotle-epic-male-thumb.png",
+      "exportSha256": "24cf312e6af27cefa0f6bf65b8ac83d5d4142c697fb4b8438cfe0fd2c68c9356",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "aristotle-epic-female",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Peripatetic Scholar",
+      "subtitle": "Aristotle",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/aristotle-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 14,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/aristotle-epic-female.svg",
+      "fittedArt": "assets/fitted/aristotle-epic-female.png",
+      "overlaySvg": "source/overlays/aristotle-epic-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "8e43ab5ba01599a744b296796eb31c15a5cee5c3a506472655cebd9b37ff10cf",
+      "master": "masters/aristotle-epic-female.vectorcraft",
+      "export": "exports/aristotle-epic-female.png",
+      "thumbnail": "assets/aristotle-epic-female-thumb.png",
+      "exportSha256": "690a73d9c6d6c115d1c8aed57fd44d318b91771fd9260d96120899647a4b0983",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "euclid-parent",
+      "figureId": "euclid",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Euclid",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "legendary",
+      "gameplayRarity": "legendary",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "full-art",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-parent-pixel.png",
+      "intendedEditionLimit": 10,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 010",
+      "collectionIndex": 15,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "native-size portrait with low-detail source-edge atmosphere",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          30,
+          140,
+          840,
+          1050
+        ],
+        "sourceCropped": false,
+        "kernel": "none for original artwork"
+      },
+      "sourceSvg": "source/cards/euclid-parent.svg",
+      "fittedArt": "assets/fitted/euclid-parent.png",
+      "overlaySvg": "source/overlays/euclid-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "dcdea4aae2e92d6889507bb0c54daeca32f6fa4118e1bdfe308b424793a80385",
+      "master": "masters/euclid-parent.vectorcraft",
+      "export": "exports/euclid-parent.png",
+      "thumbnail": "assets/euclid-parent-thumb.png",
+      "exportSha256": "a98c8ee5d475af5e52cade1e19723e3d3f78694e05818b79cf8bfa3ba112ce3d",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 628992,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "euclid-uncommon-male",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Geometrical Copyist",
+      "subtitle": "Euclid",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 16,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/euclid-uncommon-male.svg",
+      "fittedArt": "assets/fitted/euclid-uncommon-male.png",
+      "overlaySvg": "source/overlays/euclid-uncommon-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "b67525437cc78f8698cfef0dad03b3b539d6f6e8d276f306d361d72cd23a0f5d",
+      "master": "masters/euclid-uncommon-male.vectorcraft",
+      "export": "exports/euclid-uncommon-male.png",
+      "thumbnail": "assets/euclid-uncommon-male-thumb.png",
+      "exportSha256": "4f905cbb1827c6677914df91930418a9c07f1032115072bb226a0cc717befb40",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "euclid-uncommon-female",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Geometrical Copyist",
+      "subtitle": "Euclid",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 17,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/euclid-uncommon-female.svg",
+      "fittedArt": "assets/fitted/euclid-uncommon-female.png",
+      "overlaySvg": "source/overlays/euclid-uncommon-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "5e53259db601357cf948db37603a9198701f1a238abfe069b5663e0e3589b657",
+      "master": "masters/euclid-uncommon-female.vectorcraft",
+      "export": "exports/euclid-uncommon-female.png",
+      "thumbnail": "assets/euclid-uncommon-female-thumb.png",
+      "exportSha256": "ad190e51f9e2a4c96e9b5033a4c463104a68d928e2111500aed163c82f9963cb",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "euclid-rare-male",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Proof Checker",
+      "subtitle": "Euclid",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 18,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/euclid-rare-male.svg",
+      "fittedArt": "assets/fitted/euclid-rare-male.png",
+      "overlaySvg": "source/overlays/euclid-rare-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "c602290613dea617660aad8a5b3a990dd3b9c054a75e713715c7d277438a52d2",
+      "master": "masters/euclid-rare-male.vectorcraft",
+      "export": "exports/euclid-rare-male.png",
+      "thumbnail": "assets/euclid-rare-male-thumb.png",
+      "exportSha256": "20a5737e9eba3b16d1754cf685fc3589fdc2bdbd086eb4448f602c4484eb74aa",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "euclid-rare-female",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Proof Checker",
+      "subtitle": "Euclid",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 19,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/euclid-rare-female.svg",
+      "fittedArt": "assets/fitted/euclid-rare-female.png",
+      "overlaySvg": "source/overlays/euclid-rare-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "09a20ed16a060e215f05a7cc49dd4069ecc7e236d9997ab5365fbe16de8504b0",
+      "master": "masters/euclid-rare-female.vectorcraft",
+      "export": "exports/euclid-rare-female.png",
+      "thumbnail": "assets/euclid-rare-female-thumb.png",
+      "exportSha256": "a24b47f5faa0649e89c67a7985aeb6f2e37593a956f9a3afb3c32fa20af582aa",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "euclid-epic-male",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Geometer of the Teaching Circle",
+      "subtitle": "Euclid",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 20,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/euclid-epic-male.svg",
+      "fittedArt": "assets/fitted/euclid-epic-male.png",
+      "overlaySvg": "source/overlays/euclid-epic-male.svg",
+      "titleSize": 46,
+      "sourceArtSha256": "42cf2e57719d066b9b755f5ea91daff7210cbc5e81ad265d98bfbca0d252e7f8",
+      "master": "masters/euclid-epic-male.vectorcraft",
+      "export": "exports/euclid-epic-male.png",
+      "thumbnail": "assets/euclid-epic-male-thumb.png",
+      "exportSha256": "0f355b493b170074e5a818d515950ea5765b1444cbf92efd7e70ee2baef2ce26",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "euclid-epic-female",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Geometer of the Teaching Circle",
+      "subtitle": "Euclid",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/euclid-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 21,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/euclid-epic-female.svg",
+      "fittedArt": "assets/fitted/euclid-epic-female.png",
+      "overlaySvg": "source/overlays/euclid-epic-female.svg",
+      "titleSize": 46,
+      "sourceArtSha256": "17bfcabcd482fc0296a0c0b3ce2b6f089d10fa050e1443eb096c5c4838fc9b04",
+      "master": "masters/euclid-epic-female.vectorcraft",
+      "export": "exports/euclid-epic-female.png",
+      "thumbnail": "assets/euclid-epic-female-thumb.png",
+      "exportSha256": "0a61999e2480b89bde04bc5fa1e86f3c6e3162280fda1359a1e0590d93caab2d",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "lysippos-parent",
+      "figureId": "lysippos",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Lysippos",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "legendary",
+      "gameplayRarity": "legendary",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "full-art",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-parent-pixel.png",
+      "intendedEditionLimit": 10,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 010",
+      "collectionIndex": 22,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "native-size portrait with low-detail source-edge atmosphere",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          30,
+          140,
+          840,
+          1050
+        ],
+        "sourceCropped": false,
+        "kernel": "none for original artwork"
+      },
+      "sourceSvg": "source/cards/lysippos-parent.svg",
+      "fittedArt": "assets/fitted/lysippos-parent.png",
+      "overlaySvg": "source/overlays/lysippos-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "f7975434ac5bbb059f6d90e1bda406a20612b61222d46dc9a05b5fddcf07e126",
+      "master": "masters/lysippos-parent.vectorcraft",
+      "export": "exports/lysippos-parent.png",
+      "thumbnail": "assets/lysippos-parent-thumb.png",
+      "exportSha256": "5e2b7512812396f2efbb01c9bb4634b94818eda7d035a8c741a483814523ac9b",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 628992,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "lysippos-uncommon-male",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Bronze Workshop Assistant",
+      "subtitle": "Lysippos",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 23,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/lysippos-uncommon-male.svg",
+      "fittedArt": "assets/fitted/lysippos-uncommon-male.png",
+      "overlaySvg": "source/overlays/lysippos-uncommon-male.svg",
+      "titleSize": 58,
+      "sourceArtSha256": "e839ccb17fb2dbb9b8b70452f261fe2fa0e45059285f2bfab9f5cb13682613a4",
+      "master": "masters/lysippos-uncommon-male.vectorcraft",
+      "export": "exports/lysippos-uncommon-male.png",
+      "thumbnail": "assets/lysippos-uncommon-male-thumb.png",
+      "exportSha256": "fab5962b45675ae6fa7e779dbe884b6a75e94a88614b1b08c93c84052beb4f25",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "lysippos-uncommon-female",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Bronze Workshop Assistant",
+      "subtitle": "Lysippos",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 24,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/lysippos-uncommon-female.svg",
+      "fittedArt": "assets/fitted/lysippos-uncommon-female.png",
+      "overlaySvg": "source/overlays/lysippos-uncommon-female.svg",
+      "titleSize": 58,
+      "sourceArtSha256": "3c2e1953c292d3cdda1389a5f6372c9478d4f81167a2e5ed32298bd0f3a84fd5",
+      "master": "masters/lysippos-uncommon-female.vectorcraft",
+      "export": "exports/lysippos-uncommon-female.png",
+      "thumbnail": "assets/lysippos-uncommon-female-thumb.png",
+      "exportSha256": "0d48902167581fda95d9c321a0c5220d4dd2453171b9764f89e831f97322122b",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "lysippos-rare-male",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Portrait Modeller",
+      "subtitle": "Lysippos",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 25,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/lysippos-rare-male.svg",
+      "fittedArt": "assets/fitted/lysippos-rare-male.png",
+      "overlaySvg": "source/overlays/lysippos-rare-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "c01a384720223f13bf87db260c3e55795e9ed675fd7e1cbebdc5a069a8840c9e",
+      "master": "masters/lysippos-rare-male.vectorcraft",
+      "export": "exports/lysippos-rare-male.png",
+      "thumbnail": "assets/lysippos-rare-male-thumb.png",
+      "exportSha256": "98fa1e183303e16fb4f84ccccef45aae3c47dd0d2a8eae9711048566339390f7",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "lysippos-rare-female",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Portrait Modeller",
+      "subtitle": "Lysippos",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 26,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/lysippos-rare-female.svg",
+      "fittedArt": "assets/fitted/lysippos-rare-female.png",
+      "overlaySvg": "source/overlays/lysippos-rare-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "55440c717a6d88ef729ef107c2180ecd8b52ccfa30fd1a68d58e5fa4cea578ba",
+      "master": "masters/lysippos-rare-female.vectorcraft",
+      "export": "exports/lysippos-rare-female.png",
+      "thumbnail": "assets/lysippos-rare-female-thumb.png",
+      "exportSha256": "6f9be56614ea2090902c52b42e1d1594dac46cc7eeb89f804ed84ad1cc0ed0a8",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "lysippos-epic-male",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Master of Lysippan Form",
+      "subtitle": "Lysippos",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 27,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/lysippos-epic-male.svg",
+      "fittedArt": "assets/fitted/lysippos-epic-male.png",
+      "overlaySvg": "source/overlays/lysippos-epic-male.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "2b95687fd8c0c75f675c7a3079b5b4339c6c11c5eae6f59aeae950362c3378b9",
+      "master": "masters/lysippos-epic-male.vectorcraft",
+      "export": "exports/lysippos-epic-male.png",
+      "thumbnail": "assets/lysippos-epic-male-thumb.png",
+      "exportSha256": "ce2aa54a79fc119bf7d4eaf5e31225863a5465e9cb028fc4e8a49e8095b373a0",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "lysippos-epic-female",
+      "figureId": "lysippos",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Master of Lysippan Form",
+      "subtitle": "Lysippos",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 28,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/lysippos-epic-female.svg",
+      "fittedArt": "assets/fitted/lysippos-epic-female.png",
+      "overlaySvg": "source/overlays/lysippos-epic-female.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "98bc0f8ddf7282e3beddfad6c3aa50b32a4219831a28ec6b3c94a3bdda15a087",
+      "master": "masters/lysippos-epic-female.vectorcraft",
+      "export": "exports/lysippos-epic-female.png",
+      "thumbnail": "assets/lysippos-epic-female-thumb.png",
+      "exportSha256": "b5ca3644fb773528c89328099225db887833b0e92f41d0c0219fc650fa5e3dbc",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "pytheas-parent",
+      "figureId": "pytheas",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Pytheas of Massalia",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-parent-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 29,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/pytheas-parent.svg",
+      "fittedArt": "assets/fitted/pytheas-parent.png",
+      "overlaySvg": "source/overlays/pytheas-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "5570661e9944bc601789e9618ffca42cbe52e27f7571899ac00c5cd62c8a134d",
+      "master": "masters/pytheas-parent.vectorcraft",
+      "export": "exports/pytheas-parent.png",
+      "thumbnail": "assets/pytheas-parent-thumb.png",
+      "exportSha256": "4f33f9b2b9829da1f3064690e722e3891a12deca6d111d5022bbeb96b3376a50",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "pytheas-uncommon-male",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Expedition Provisioner",
+      "subtitle": "Pytheas of Massalia",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 30,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/pytheas-uncommon-male.svg",
+      "fittedArt": "assets/fitted/pytheas-uncommon-male.png",
+      "overlaySvg": "source/overlays/pytheas-uncommon-male.svg",
+      "titleSize": 64,
+      "sourceArtSha256": "2ead1fe820ec5a0bd298f2f14470708c35b15d257e139c4805959aa3c5fc22eb",
+      "master": "masters/pytheas-uncommon-male.vectorcraft",
+      "export": "exports/pytheas-uncommon-male.png",
+      "thumbnail": "assets/pytheas-uncommon-male-thumb.png",
+      "exportSha256": "7fafad0b3007a1bb32c9d98df97472c8f160421720463e1cd0f7bc930892f541",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "pytheas-uncommon-female",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Expedition Provisioner",
+      "subtitle": "Pytheas of Massalia",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 31,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/pytheas-uncommon-female.svg",
+      "fittedArt": "assets/fitted/pytheas-uncommon-female.png",
+      "overlaySvg": "source/overlays/pytheas-uncommon-female.svg",
+      "titleSize": 64,
+      "sourceArtSha256": "000d0ad5a898dd2023a9f47307b4a52859dfc0f975f2dab5c303a25c13936652",
+      "master": "masters/pytheas-uncommon-female.vectorcraft",
+      "export": "exports/pytheas-uncommon-female.png",
+      "thumbnail": "assets/pytheas-uncommon-female-thumb.png",
+      "exportSha256": "5ff72856051070a6b8d5e2a9d9cde9f19f3d5779f7b3def6c19e0c9280c9fddf",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "pytheas-rare-male",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Navigation Observer",
+      "subtitle": "Pytheas of Massalia",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 32,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/pytheas-rare-male.svg",
+      "fittedArt": "assets/fitted/pytheas-rare-male.png",
+      "overlaySvg": "source/overlays/pytheas-rare-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "1135ab771cc67bc726f2373f45284ea31888a4ad1de6014d4682987d45a399a6",
+      "master": "masters/pytheas-rare-male.vectorcraft",
+      "export": "exports/pytheas-rare-male.png",
+      "thumbnail": "assets/pytheas-rare-male-thumb.png",
+      "exportSha256": "d8f34117e0cc41acad8a8f68fc92d665db1b0edffa25dc81fbcf4ca6ebf29534",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "pytheas-rare-female",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Navigation Observer",
+      "subtitle": "Pytheas of Massalia",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 33,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/pytheas-rare-female.svg",
+      "fittedArt": "assets/fitted/pytheas-rare-female.png",
+      "overlaySvg": "source/overlays/pytheas-rare-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "84bbab275809ba5a493946a2e4e80533974cc451ac5ec1d400499c27be040808",
+      "master": "masters/pytheas-rare-female.vectorcraft",
+      "export": "exports/pytheas-rare-female.png",
+      "thumbnail": "assets/pytheas-rare-female-thumb.png",
+      "exportSha256": "3f5a5677d5113795f9bd95d07f16c33d7545779fb832984aa8363693bb56ae74",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "pytheas-epic-male",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Keeper of the Northern Voyage Log",
+      "subtitle": "Pytheas of Massalia",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 34,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/pytheas-epic-male.svg",
+      "fittedArt": "assets/fitted/pytheas-epic-male.png",
+      "overlaySvg": "source/overlays/pytheas-epic-male.svg",
+      "titleSize": 42,
+      "sourceArtSha256": "e6b1116559c6d3a5beac9094dd69c4deaad02c8cac0c0451ce0873baada92e06",
+      "master": "masters/pytheas-epic-male.vectorcraft",
+      "export": "exports/pytheas-epic-male.png",
+      "thumbnail": "assets/pytheas-epic-male-thumb.png",
+      "exportSha256": "1457c1d2a176f2e9c07af34e5dc8c68ea788a9c051584864a7f37f24ac6b1204",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "pytheas-epic-female",
+      "figureId": "pytheas",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Keeper of the Northern Voyage Log",
+      "subtitle": "Pytheas of Massalia",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 35,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/pytheas-epic-female.svg",
+      "fittedArt": "assets/fitted/pytheas-epic-female.png",
+      "overlaySvg": "source/overlays/pytheas-epic-female.svg",
+      "titleSize": 42,
+      "sourceArtSha256": "f29a06a43978ffeadb4bcb129522d2091c414c02b0d67071ad254276c008d60c",
+      "master": "masters/pytheas-epic-female.vectorcraft",
+      "export": "exports/pytheas-epic-female.png",
+      "thumbnail": "assets/pytheas-epic-female-thumb.png",
+      "exportSha256": "542c31940f31f412706a1826a197b38c06338e38d4d4aacb82480c805bcd9e1b",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "menander-parent",
+      "figureId": "menander",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Menander",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "legendary",
+      "gameplayRarity": "legendary",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "full-art",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-parent-pixel.png",
+      "intendedEditionLimit": 10,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 010",
+      "collectionIndex": 36,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "native-size portrait with low-detail source-edge atmosphere",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          30,
+          140,
+          840,
+          1050
+        ],
+        "sourceCropped": false,
+        "kernel": "none for original artwork"
+      },
+      "sourceSvg": "source/cards/menander-parent.svg",
+      "fittedArt": "assets/fitted/menander-parent.png",
+      "overlaySvg": "source/overlays/menander-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "fcf923b3ae08061523028d91e51f03fdba6fd5060cbb7b3d3bbb9873a996ef64",
+      "master": "masters/menander-parent.vectorcraft",
+      "export": "exports/menander-parent.png",
+      "thumbnail": "assets/menander-parent-thumb.png",
+      "exportSha256": "0cc344a9482acf4901e6c7facfcad04f59a399cd416abfcbd5ed437e95aac94d",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 628992,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "menander-uncommon-male",
+      "figureId": "menander",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Stage Copyist",
+      "subtitle": "Menander",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 37,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/menander-uncommon-male.svg",
+      "fittedArt": "assets/fitted/menander-uncommon-male.png",
+      "overlaySvg": "source/overlays/menander-uncommon-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "7b4de156d9caf297460f9a275a938ebcb8aad1d4d091b8630cfd27e2cac370d5",
+      "master": "masters/menander-uncommon-male.vectorcraft",
+      "export": "exports/menander-uncommon-male.png",
+      "thumbnail": "assets/menander-uncommon-male-thumb.png",
+      "exportSha256": "a9cd61b0812fcf330a93e0a652b0bd4a391516492e4bc7307543ec8a1cecfdf6",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "menander-uncommon-female",
+      "figureId": "menander",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Stage Copyist",
+      "subtitle": "Menander",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 38,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/menander-uncommon-female.svg",
+      "fittedArt": "assets/fitted/menander-uncommon-female.png",
+      "overlaySvg": "source/overlays/menander-uncommon-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "970876cdf922222b2a526ea697950e3ab8725e7e090f8e4bb26f57542fdb7250",
+      "master": "masters/menander-uncommon-female.vectorcraft",
+      "export": "exports/menander-uncommon-female.png",
+      "thumbnail": "assets/menander-uncommon-female-thumb.png",
+      "exportSha256": "7a05f6cc65560815e086e2cc5c85dd52b1f76e46354710784449d192e05613d4",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "menander-rare-male",
+      "figureId": "menander",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "New Comedy Collaborator",
+      "subtitle": "Menander",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 39,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/menander-rare-male.svg",
+      "fittedArt": "assets/fitted/menander-rare-male.png",
+      "overlaySvg": "source/overlays/menander-rare-male.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "b98ca2d1d620d95526d1861ff252d9801dcb95457951d9f41bf9f56f43a9b310",
+      "master": "masters/menander-rare-male.vectorcraft",
+      "export": "exports/menander-rare-male.png",
+      "thumbnail": "assets/menander-rare-male-thumb.png",
+      "exportSha256": "7ec19c75abe1618697093e934c4c4f75cdda59ae45744f52d1d42ec7c5c7963b",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "menander-rare-female",
+      "figureId": "menander",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "New Comedy Collaborator",
+      "subtitle": "Menander",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 40,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/menander-rare-female.svg",
+      "fittedArt": "assets/fitted/menander-rare-female.png",
+      "overlaySvg": "source/overlays/menander-rare-female.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "f3fbb1650229d011fdb664271789ababcad1e466ba6b8a2681d2d4d816dcf546",
+      "master": "masters/menander-rare-female.vectorcraft",
+      "export": "exports/menander-rare-female.png",
+      "thumbnail": "assets/menander-rare-female-thumb.png",
+      "exportSha256": "fc7f111a1b365df3a7527ae838524ab3c2f13913d69b8ba34045a05263d89e86",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "menander-epic-male",
+      "figureId": "menander",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Dramatist of New Comedy",
+      "subtitle": "Menander",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 41,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/menander-epic-male.svg",
+      "fittedArt": "assets/fitted/menander-epic-male.png",
+      "overlaySvg": "source/overlays/menander-epic-male.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "2f044b49d10b03ce939489f23f55f149f5ee0a8d6f3c9137c66b7e3ae9cff1e3",
+      "master": "masters/menander-epic-male.vectorcraft",
+      "export": "exports/menander-epic-male.png",
+      "thumbnail": "assets/menander-epic-male-thumb.png",
+      "exportSha256": "564df59e688d5215b68f67a63c07418f82d2067b18f0ade18e0506edcd26c7bc",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "menander-epic-female",
+      "figureId": "menander",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Dramatist of New Comedy",
+      "subtitle": "Menander",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 42,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/menander-epic-female.svg",
+      "fittedArt": "assets/fitted/menander-epic-female.png",
+      "overlaySvg": "source/overlays/menander-epic-female.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "25c3a44b88278e71630f7042edba1d81937a27f3cc48e7d0e71b265904e3da5f",
+      "master": "masters/menander-epic-female.vectorcraft",
+      "export": "exports/menander-epic-female.png",
+      "thumbnail": "assets/menander-epic-female-thumb.png",
+      "exportSha256": "169c83e27562993e6c09870e34484516e2536d0f68bd0bfdc473a2398c5e4390",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "demetrius-parent",
+      "figureId": "demetrius",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Demetrius the Besieger",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-parent-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 43,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/demetrius-parent.svg",
+      "fittedArt": "assets/fitted/demetrius-parent.png",
+      "overlaySvg": "source/overlays/demetrius-parent.svg",
+      "titleSize": 64,
+      "sourceArtSha256": "30c5f78f48416a033866a01a7138317b487aeda8c54457051bc22dd901936ae9",
+      "master": "masters/demetrius-parent.vectorcraft",
+      "export": "exports/demetrius-parent.png",
+      "thumbnail": "assets/demetrius-parent-thumb.png",
+      "exportSha256": "de23d7eb08554169151e548f6bf5ce71db18e690cfbcbc58d80c2c5869d6a5b0",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "demetrius-uncommon-male",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Siege Workshop Assistant",
+      "subtitle": "Demetrius the Besieger",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 44,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/demetrius-uncommon-male.svg",
+      "fittedArt": "assets/fitted/demetrius-uncommon-male.png",
+      "overlaySvg": "source/overlays/demetrius-uncommon-male.svg",
+      "titleSize": 60,
+      "sourceArtSha256": "ef3ea66df0f228b286a8169dbbf3c9941db24ebd5f31b3444f6d94ae79588ebf",
+      "master": "masters/demetrius-uncommon-male.vectorcraft",
+      "export": "exports/demetrius-uncommon-male.png",
+      "thumbnail": "assets/demetrius-uncommon-male-thumb.png",
+      "exportSha256": "39ce5409afe8b82079c3f9152729cdf30dfb7703ba56385ad20c08451ca8d090",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "demetrius-uncommon-female",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Siege Workshop Assistant",
+      "subtitle": "Demetrius the Besieger",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 45,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/demetrius-uncommon-female.svg",
+      "fittedArt": "assets/fitted/demetrius-uncommon-female.png",
+      "overlaySvg": "source/overlays/demetrius-uncommon-female.svg",
+      "titleSize": 60,
+      "sourceArtSha256": "e67b979c076a6add4a6f5b1ac30b7c90cc691732eac95c2216b1a5a08f80deb5",
+      "master": "masters/demetrius-uncommon-female.vectorcraft",
+      "export": "exports/demetrius-uncommon-female.png",
+      "thumbnail": "assets/demetrius-uncommon-female-thumb.png",
+      "exportSha256": "d0ab6b12ae9692399d414b12f6d3672678643ee343dbdb5e7f68e1f7394fa590",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "demetrius-rare-male",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Siege Engineer",
+      "subtitle": "Demetrius the Besieger",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 46,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/demetrius-rare-male.svg",
+      "fittedArt": "assets/fitted/demetrius-rare-male.png",
+      "overlaySvg": "source/overlays/demetrius-rare-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "6776d7912d3d58d7c192f65bbc0fe3eece0b1f9d43d8d15d0f1526ea105c0f97",
+      "master": "masters/demetrius-rare-male.vectorcraft",
+      "export": "exports/demetrius-rare-male.png",
+      "thumbnail": "assets/demetrius-rare-male-thumb.png",
+      "exportSha256": "6a59642b84892fb05e594c108b06c241dbe1afe3427d06c8b73b5e82c6cb4553",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "demetrius-rare-female",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Siege Engineer",
+      "subtitle": "Demetrius the Besieger",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 47,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/demetrius-rare-female.svg",
+      "fittedArt": "assets/fitted/demetrius-rare-female.png",
+      "overlaySvg": "source/overlays/demetrius-rare-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "6ad875cff013cc058bcfdc9602af927ae1ebdd0ef7ea0c30293fefda0502ca31",
+      "master": "masters/demetrius-rare-female.vectorcraft",
+      "export": "exports/demetrius-rare-female.png",
+      "thumbnail": "assets/demetrius-rare-female-thumb.png",
+      "exportSha256": "90836a92301fed1f271569c986ea6c53fe5282d546d260a5bd388df0f83ea759",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "demetrius-epic-male",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Director of Siege Works",
+      "subtitle": "Demetrius the Besieger",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 48,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/demetrius-epic-male.svg",
+      "fittedArt": "assets/fitted/demetrius-epic-male.png",
+      "overlaySvg": "source/overlays/demetrius-epic-male.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "b154f3c2b1719031f2407aad1703d3a7b4e16e77df1cf43e288c274690ef2ee6",
+      "master": "masters/demetrius-epic-male.vectorcraft",
+      "export": "exports/demetrius-epic-male.png",
+      "thumbnail": "assets/demetrius-epic-male-thumb.png",
+      "exportSha256": "bfb27f8ec27f7a082fc8bb665339a6711d95bcfdae98f7da251a04d820d9e877",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "demetrius-epic-female",
+      "figureId": "demetrius",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Director of Siege Works",
+      "subtitle": "Demetrius the Besieger",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 49,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/demetrius-epic-female.svg",
+      "fittedArt": "assets/fitted/demetrius-epic-female.png",
+      "overlaySvg": "source/overlays/demetrius-epic-female.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "6de5605046f7d8bbbfbe8ea31501f57953444026759a44b16f5b6ff594b922c7",
+      "master": "masters/demetrius-epic-female.vectorcraft",
+      "export": "exports/demetrius-epic-female.png",
+      "thumbnail": "assets/demetrius-epic-female-thumb.png",
+      "exportSha256": "bb7a0fcbb6d3a20ee0b94b31c90995fb455c7e63babd8e72448a83071e526ed1",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "theophrastus-parent",
+      "figureId": "theophrastus",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Theophrastus",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-parent-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 50,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/theophrastus-parent.svg",
+      "fittedArt": "assets/fitted/theophrastus-parent.png",
+      "overlaySvg": "source/overlays/theophrastus-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "3c36362f614bb9b06e0f060175913979f4bd04250dd4f3b3ca2ae8156944e431",
+      "master": "masters/theophrastus-parent.vectorcraft",
+      "export": "exports/theophrastus-parent.png",
+      "thumbnail": "assets/theophrastus-parent-thumb.png",
+      "exportSha256": "286a6edc478310824dad5047d1e9e14c09305a378d0ad032bbd75f52db2507b4",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "theophrastus-uncommon-male",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Plant Records Assistant",
+      "subtitle": "Theophrastus",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 51,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/theophrastus-uncommon-male.svg",
+      "fittedArt": "assets/fitted/theophrastus-uncommon-male.png",
+      "overlaySvg": "source/overlays/theophrastus-uncommon-male.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "130d55b5783851c2db9496358041ef5f07267126001179b130049d422d3f1217",
+      "master": "masters/theophrastus-uncommon-male.vectorcraft",
+      "export": "exports/theophrastus-uncommon-male.png",
+      "thumbnail": "assets/theophrastus-uncommon-male-thumb.png",
+      "exportSha256": "7c5e1544c669b6850bc9219eac8ef0ae8e8b63b8da973201c6b08e06333d4c5c",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "theophrastus-uncommon-female",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Plant Records Assistant",
+      "subtitle": "Theophrastus",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 52,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/theophrastus-uncommon-female.svg",
+      "fittedArt": "assets/fitted/theophrastus-uncommon-female.png",
+      "overlaySvg": "source/overlays/theophrastus-uncommon-female.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "04e2b529485f2afe5a8984871bd4a69c9de71ec9f8bab5c08c07f790e1c606ac",
+      "master": "masters/theophrastus-uncommon-female.vectorcraft",
+      "export": "exports/theophrastus-uncommon-female.png",
+      "thumbnail": "assets/theophrastus-uncommon-female-thumb.png",
+      "exportSha256": "ef0f52523b0e71e7d69456461659a60f1f51596ff19e216d5b8511ea768b9685",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "theophrastus-rare-male",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Comparative Plant Investigator",
+      "subtitle": "Theophrastus",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 53,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/theophrastus-rare-male.svg",
+      "fittedArt": "assets/fitted/theophrastus-rare-male.png",
+      "overlaySvg": "source/overlays/theophrastus-rare-male.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "03b2fb99ac7d23bbb58e77139f726d164ba7913cb2cc884617e808349e3e00c9",
+      "master": "masters/theophrastus-rare-male.vectorcraft",
+      "export": "exports/theophrastus-rare-male.png",
+      "thumbnail": "assets/theophrastus-rare-male-thumb.png",
+      "exportSha256": "89e8cc76886c801102e6bb1fdb83fc61ba1bd89333dd1d9e99465689366384db",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "theophrastus-rare-female",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Comparative Plant Investigator",
+      "subtitle": "Theophrastus",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 54,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/theophrastus-rare-female.svg",
+      "fittedArt": "assets/fitted/theophrastus-rare-female.png",
+      "overlaySvg": "source/overlays/theophrastus-rare-female.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "3dfd0084c3fb919a9c116ad58a9c3b3c7d1f98339c6a421f687569b91525da6a",
+      "master": "masters/theophrastus-rare-female.vectorcraft",
+      "export": "exports/theophrastus-rare-female.png",
+      "thumbnail": "assets/theophrastus-rare-female-thumb.png",
+      "exportSha256": "62b6bfdc1824b6c04824b0eeac8544c4d630d534accb59bfb9f8466adcc4b17b",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "theophrastus-epic-male",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Peripatetic Botanical Scholar",
+      "subtitle": "Theophrastus",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 55,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/theophrastus-epic-male.svg",
+      "fittedArt": "assets/fitted/theophrastus-epic-male.png",
+      "overlaySvg": "source/overlays/theophrastus-epic-male.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "157526ad1111cbebc159563e3e10c3b6787a5144305168ed7edf23b876094c29",
+      "master": "masters/theophrastus-epic-male.vectorcraft",
+      "export": "exports/theophrastus-epic-male.png",
+      "thumbnail": "assets/theophrastus-epic-male-thumb.png",
+      "exportSha256": "400231affa69e6ad3c597a324dff39d987db26ce20a797dde9957ab8982abbff",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "theophrastus-epic-female",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Peripatetic Botanical Scholar",
+      "subtitle": "Theophrastus",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 56,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/theophrastus-epic-female.svg",
+      "fittedArt": "assets/fitted/theophrastus-epic-female.png",
+      "overlaySvg": "source/overlays/theophrastus-epic-female.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "87e2c05b21213ce5007b41c7f2dd48bc1637fd417a9e8ee9c57ab0fb612848af",
+      "master": "masters/theophrastus-epic-female.vectorcraft",
+      "export": "exports/theophrastus-epic-female.png",
+      "thumbnail": "assets/theophrastus-epic-female-thumb.png",
+      "exportSha256": "b072520adebdafe92e950936505726ddee700a7fe03213e3e3a6b8a8f22b0ff4",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "zeno-parent",
+      "figureId": "zeno",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Zeno of Citium",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-parent-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 57,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/zeno-parent.svg",
+      "fittedArt": "assets/fitted/zeno-parent.png",
+      "overlaySvg": "source/overlays/zeno-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "c894ead49bfff23b0058483c1964cb01f54ed689b7af738c7a0f8941a27b8801",
+      "master": "masters/zeno-parent.vectorcraft",
+      "export": "exports/zeno-parent.png",
+      "thumbnail": "assets/zeno-parent-thumb.png",
+      "exportSha256": "af4afc11d8727047392979bf0ab6c73652863f63991bdcb2bddf8cf638cc1651",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "zeno-uncommon-male",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Student of the Stoa",
+      "subtitle": "Zeno of Citium",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 58,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/zeno-uncommon-male.svg",
+      "fittedArt": "assets/fitted/zeno-uncommon-male.png",
+      "overlaySvg": "source/overlays/zeno-uncommon-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "08b1c06307efe6dc18a60b9aabac689adc94a8d8b0ccc6b272d3d80062388b08",
+      "master": "masters/zeno-uncommon-male.vectorcraft",
+      "export": "exports/zeno-uncommon-male.png",
+      "thumbnail": "assets/zeno-uncommon-male-thumb.png",
+      "exportSha256": "1e89f32b2bd789809a0625008c750afad43674295a25693095f9a3a2ec539d52",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "zeno-uncommon-female",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Student of the Stoa",
+      "subtitle": "Zeno of Citium",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 59,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/zeno-uncommon-female.svg",
+      "fittedArt": "assets/fitted/zeno-uncommon-female.png",
+      "overlaySvg": "source/overlays/zeno-uncommon-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "2b34cf531ac407f5bc1ab14fcceb8c423190fe782e1b43904f68860c67bb916a",
+      "master": "masters/zeno-uncommon-female.vectorcraft",
+      "export": "exports/zeno-uncommon-female.png",
+      "thumbnail": "assets/zeno-uncommon-female-thumb.png",
+      "exportSha256": "984d2da0f0ef5eceec055b9bb9421f698eb301fd68a3c2eea776c02e8f2d3626",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "zeno-rare-male",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Stoic Discussion Leader",
+      "subtitle": "Zeno of Citium",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 60,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/zeno-rare-male.svg",
+      "fittedArt": "assets/fitted/zeno-rare-male.png",
+      "overlaySvg": "source/overlays/zeno-rare-male.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "1ef7163047ea08d8ed31a492998a9f105f2ebf583e1ac84e5130ce15b6e6247a",
+      "master": "masters/zeno-rare-male.vectorcraft",
+      "export": "exports/zeno-rare-male.png",
+      "thumbnail": "assets/zeno-rare-male-thumb.png",
+      "exportSha256": "e0e39ec54e6d2516902d6ff9494cf140261615eab5d99f5aa9c514428ce9b453",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "zeno-rare-female",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Stoic Discussion Leader",
+      "subtitle": "Zeno of Citium",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 61,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/zeno-rare-female.svg",
+      "fittedArt": "assets/fitted/zeno-rare-female.png",
+      "overlaySvg": "source/overlays/zeno-rare-female.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "6613d2b52adefd37bb955fbfc28790f48720e57941330333ff6a8ea769f5d746",
+      "master": "masters/zeno-rare-female.vectorcraft",
+      "export": "exports/zeno-rare-female.png",
+      "thumbnail": "assets/zeno-rare-female-thumb.png",
+      "exportSha256": "21f5b59790f0b87d3f1e9d742c50e4dcd329dc4c579290669b83c226f24a9503",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "zeno-epic-male",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Scholar of Stoic Ethics",
+      "subtitle": "Zeno of Citium",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 62,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/zeno-epic-male.svg",
+      "fittedArt": "assets/fitted/zeno-epic-male.png",
+      "overlaySvg": "source/overlays/zeno-epic-male.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "44f44ed201e96bc462b535ac22c962b74ddd4143e7d6dcd94bbe53a8d026b88a",
+      "master": "masters/zeno-epic-male.vectorcraft",
+      "export": "exports/zeno-epic-male.png",
+      "thumbnail": "assets/zeno-epic-male-thumb.png",
+      "exportSha256": "82e35037b714ad66758b6b2449be96994018e5c989685ae8cd8e3f06238eaa07",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "zeno-epic-female",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Scholar of Stoic Ethics",
+      "subtitle": "Zeno of Citium",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/zeno-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 63,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/zeno-epic-female.svg",
+      "fittedArt": "assets/fitted/zeno-epic-female.png",
+      "overlaySvg": "source/overlays/zeno-epic-female.svg",
+      "titleSize": 62,
+      "sourceArtSha256": "735e92e7d4f915b7ba2d998c018a3128f949575d97b329d1df3539b9a0712b1f",
+      "master": "masters/zeno-epic-female.vectorcraft",
+      "export": "exports/zeno-epic-female.png",
+      "thumbnail": "assets/zeno-epic-female-thumb.png",
+      "exportSha256": "b5736e956b52bb14b36a4abaaa2c89e8e136f436f4c31b4db6a32030a3b84add",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "ptolemy-parent",
+      "figureId": "ptolemy",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Ptolemy I Soter",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-parent-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 64,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/ptolemy-parent.svg",
+      "fittedArt": "assets/fitted/ptolemy-parent.png",
+      "overlaySvg": "source/overlays/ptolemy-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "d5a2be831ca72f21a1d8800130abe31aeea3d415d11deb1df3f4745888f5d839",
+      "master": "masters/ptolemy-parent.vectorcraft",
+      "export": "exports/ptolemy-parent.png",
+      "thumbnail": "assets/ptolemy-parent-thumb.png",
+      "exportSha256": "f042ccd418ad8ce22479897462b644efb7c02c03fe14541838daddc71b569e32",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "ptolemy-uncommon-male",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Egyptian Administration Clerk",
+      "subtitle": "Ptolemy I Soter",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 65,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/ptolemy-uncommon-male.svg",
+      "fittedArt": "assets/fitted/ptolemy-uncommon-male.png",
+      "overlaySvg": "source/overlays/ptolemy-uncommon-male.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "ab83a7b80b2ba16c81447120efcf88466387645b663bfa163b35426a488ec2bc",
+      "master": "masters/ptolemy-uncommon-male.vectorcraft",
+      "export": "exports/ptolemy-uncommon-male.png",
+      "thumbnail": "assets/ptolemy-uncommon-male-thumb.png",
+      "exportSha256": "8ed0b5ee62f7e6c3ca6cf4266f4ad9e546ef9a6419caf7aee80c90aa85196dde",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "ptolemy-uncommon-female",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Egyptian Administration Clerk",
+      "subtitle": "Ptolemy I Soter",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 66,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/ptolemy-uncommon-female.svg",
+      "fittedArt": "assets/fitted/ptolemy-uncommon-female.png",
+      "overlaySvg": "source/overlays/ptolemy-uncommon-female.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "4028229c73dc2d34266b7eeeb131b43bb1079a444cedaaa2366838745aa64585",
+      "master": "masters/ptolemy-uncommon-female.vectorcraft",
+      "export": "exports/ptolemy-uncommon-female.png",
+      "thumbnail": "assets/ptolemy-uncommon-female-thumb.png",
+      "exportSha256": "e208ad8318a1761f81ace101e78a641e3d4115ce097472e1e5b7f267653a804b",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "ptolemy-rare-male",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Ptolemaic Supply Commissioner",
+      "subtitle": "Ptolemy I Soter",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 67,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/ptolemy-rare-male.svg",
+      "fittedArt": "assets/fitted/ptolemy-rare-male.png",
+      "overlaySvg": "source/overlays/ptolemy-rare-male.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "01ff40b31057ccb77ebe85e41faa62dc816fd8235dabe00ecdb5a4172d34f1dd",
+      "master": "masters/ptolemy-rare-male.vectorcraft",
+      "export": "exports/ptolemy-rare-male.png",
+      "thumbnail": "assets/ptolemy-rare-male-thumb.png",
+      "exportSha256": "50343bdfb4a863714ea0416df6dd9639147a4118b89d01d9c3dac25be1e7ef40",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "ptolemy-rare-female",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Ptolemaic Supply Commissioner",
+      "subtitle": "Ptolemy I Soter",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 68,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/ptolemy-rare-female.svg",
+      "fittedArt": "assets/fitted/ptolemy-rare-female.png",
+      "overlaySvg": "source/overlays/ptolemy-rare-female.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "95690ecdf143d271592028777ffb6a2eeeeb9aad797e2cb0e57fc896e1e148ca",
+      "master": "masters/ptolemy-rare-female.vectorcraft",
+      "export": "exports/ptolemy-rare-female.png",
+      "thumbnail": "assets/ptolemy-rare-female-thumb.png",
+      "exportSha256": "6d25a0670ad7cfebe827691e13eeb032111b992e672e319a63093e539cde3c23",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "ptolemy-epic-male",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Steward of Egyptian Government",
+      "subtitle": "Ptolemy I Soter",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 69,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/ptolemy-epic-male.svg",
+      "fittedArt": "assets/fitted/ptolemy-epic-male.png",
+      "overlaySvg": "source/overlays/ptolemy-epic-male.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "c9581112f78d21e7207bac7b9ca19c9f808f78305a1a00c1b20798fd884918ed",
+      "master": "masters/ptolemy-epic-male.vectorcraft",
+      "export": "exports/ptolemy-epic-male.png",
+      "thumbnail": "assets/ptolemy-epic-male-thumb.png",
+      "exportSha256": "cbf0c3b944d0f39962fc506915bcd3223344ff8182c22f0027836dde1fbc71f0",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "ptolemy-epic-female",
+      "figureId": "ptolemy",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Steward of Egyptian Government",
+      "subtitle": "Ptolemy I Soter",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/ptolemy-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 70,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/ptolemy-epic-female.svg",
+      "fittedArt": "assets/fitted/ptolemy-epic-female.png",
+      "overlaySvg": "source/overlays/ptolemy-epic-female.svg",
+      "titleSize": 48,
+      "sourceArtSha256": "9a2968114c122a637733a694f4fa6423826d8a73be3f855b18dd715785b6fa3f",
+      "master": "masters/ptolemy-epic-female.vectorcraft",
+      "export": "exports/ptolemy-epic-female.png",
+      "thumbnail": "assets/ptolemy-epic-female-thumb.png",
+      "exportSha256": "849c2536281b79beeafb7deb5b943852b97531066131408fa8aa969cbdbe4208",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "cleomenes-parent",
+      "figureId": "cleomenes",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Cleomenes of Naucratis",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "FIGURE_RANK_POLICY.baseRank",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-parent-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 71,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/cleomenes-parent.svg",
+      "fittedArt": "assets/fitted/cleomenes-parent.png",
+      "overlaySvg": "source/overlays/cleomenes-parent.svg",
+      "titleSize": 66,
+      "sourceArtSha256": "f67e44b9b4b3e5c69e953184ab534be70b164a20edba5baeab8f84adb76cac9b",
+      "master": "masters/cleomenes-parent.vectorcraft",
+      "export": "exports/cleomenes-parent.png",
+      "thumbnail": "assets/cleomenes-parent-thumb.png",
+      "exportSha256": "f1e49744f65cd7201d1e4a9a617233507f901cea96c9aab24e641be9368c8457",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "cleomenes-uncommon-male",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Revenue Records Assistant",
+      "subtitle": "Cleomenes of Naucratis",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-uncommon-male-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 72,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/cleomenes-uncommon-male.svg",
+      "fittedArt": "assets/fitted/cleomenes-uncommon-male.png",
+      "overlaySvg": "source/overlays/cleomenes-uncommon-male.svg",
+      "titleSize": 58,
+      "sourceArtSha256": "07579156933da061e8a297f5b42cd83560779ed7a1a2537b244a318576c508d8",
+      "master": "masters/cleomenes-uncommon-male.vectorcraft",
+      "export": "exports/cleomenes-uncommon-male.png",
+      "thumbnail": "assets/cleomenes-uncommon-male-thumb.png",
+      "exportSha256": "42ce6f534004751acaa5f48053b689ce88bdaee20999485f6d269599b39401bf",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "cleomenes-uncommon-female",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Revenue Records Assistant",
+      "subtitle": "Cleomenes of Naucratis",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "uncommon",
+      "gameplayRarity": "uncommon",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-uncommon-female-pixel.png",
+      "intendedEditionLimit": null,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "UNLIMITED",
+      "collectionIndex": 73,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/cleomenes-uncommon-female.svg",
+      "fittedArt": "assets/fitted/cleomenes-uncommon-female.png",
+      "overlaySvg": "source/overlays/cleomenes-uncommon-female.svg",
+      "titleSize": 58,
+      "sourceArtSha256": "29f7ac5660640beb66aa6cf921a5708a140d9000c0ca6e9e4a8a626201f37eaf",
+      "master": "masters/cleomenes-uncommon-female.vectorcraft",
+      "export": "exports/cleomenes-uncommon-female.png",
+      "thumbnail": "assets/cleomenes-uncommon-female-thumb.png",
+      "exportSha256": "9afc183d4fb470dffa76598f92866a892b72d4c74743524f8d696de677e02547",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "cleomenes-rare-male",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Grain Supply Auditor",
+      "subtitle": "Cleomenes of Naucratis",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-rare-male-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 74,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/cleomenes-rare-male.svg",
+      "fittedArt": "assets/fitted/cleomenes-rare-male.png",
+      "overlaySvg": "source/overlays/cleomenes-rare-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "17ee5b4dfee11c0d3839de1df156c8f01628e54f9553a6e616bcb636bef77a95",
+      "master": "masters/cleomenes-rare-male.vectorcraft",
+      "export": "exports/cleomenes-rare-male.png",
+      "thumbnail": "assets/cleomenes-rare-male-thumb.png",
+      "exportSha256": "45a4c2f2b81010e3a3f238bae4edcd0601157e085393a5645a29f0a3e4e7d0ca",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "cleomenes-rare-female",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Grain Supply Auditor",
+      "subtitle": "Cleomenes of Naucratis",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "rare",
+      "gameplayRarity": "rare",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-rare-female-pixel.png",
+      "intendedEditionLimit": 100,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 100",
+      "collectionIndex": 75,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/cleomenes-rare-female.svg",
+      "fittedArt": "assets/fitted/cleomenes-rare-female.png",
+      "overlaySvg": "source/overlays/cleomenes-rare-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "115e0624eb6696a7051d3d38aac3fce6dcb6b2c5d986bfa840c4d78383703653",
+      "master": "masters/cleomenes-rare-female.vectorcraft",
+      "export": "exports/cleomenes-rare-female.png",
+      "thumbnail": "assets/cleomenes-rare-female-thumb.png",
+      "exportSha256": "d12a67dff63171c5e9bcf7009711c2be1b55b3a010865c54393ee0b692d52252",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "cleomenes-epic-male",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "gender": "male",
+      "title": "Steward of Egyptian Grain Accounts",
+      "subtitle": "Cleomenes of Naucratis",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-epic-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 76,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/cleomenes-epic-male.svg",
+      "fittedArt": "assets/fitted/cleomenes-epic-male.png",
+      "overlaySvg": "source/overlays/cleomenes-epic-male.svg",
+      "titleSize": 42,
+      "sourceArtSha256": "d9cb6bddbec66c7354118bde44ea7a360348a1b9b551dad9e31baff6e9d04ba9",
+      "master": "masters/cleomenes-epic-male.vectorcraft",
+      "export": "exports/cleomenes-epic-male.png",
+      "thumbnail": "assets/cleomenes-epic-male-thumb.png",
+      "exportSha256": "76d2b68384a51fb0ddad5f38c5fedac804bcc8259fbb1c9a2c4a4c29eb9036ec",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "cleomenes-epic-female",
+      "figureId": "cleomenes",
+      "kind": "contribution",
+      "gender": "female",
+      "title": "Steward of Egyptian Grain Accounts",
+      "subtitle": "Cleomenes of Naucratis",
+      "typeLabel": "PLAYER CONTRIBUTION",
+      "rarity": "epic",
+      "gameplayRarity": "epic",
+      "raritySource": "figure progression tier",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-epic-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 77,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/cleomenes-epic-female.svg",
+      "fittedArt": "assets/fitted/cleomenes-epic-female.png",
+      "overlaySvg": "source/overlays/cleomenes-epic-female.svg",
+      "titleSize": 42,
+      "sourceArtSha256": "944d4f8b0b16aa1d5d4d1fa522b91753b0c7859f33e62091b45ffc5aa01893e7",
+      "master": "masters/cleomenes-epic-female.vectorcraft",
+      "export": "exports/cleomenes-epic-female.png",
+      "thumbnail": "assets/cleomenes-epic-female-thumb.png",
+      "exportSha256": "f9d41e838007362d11ac873bcf62f7131151ce3cf87193b685c33cdfa14b26a8",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "nearchus-parent",
+      "figureId": "nearchus",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Nearchus",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "epic",
+      "gameplayRarity": null,
+      "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/nearchus-parent-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 78,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/nearchus-parent.svg",
+      "fittedArt": "assets/fitted/nearchus-parent.png",
+      "overlaySvg": "source/overlays/nearchus-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "8500eccc84ad3980f83cbdcef578b3558f70f7df1840884b5eccf3bc40f23157",
+      "master": "masters/nearchus-parent.vectorcraft",
+      "export": "exports/nearchus-parent.png",
+      "thumbnail": "assets/nearchus-parent-thumb.png",
+      "exportSha256": "5c539e4bb4e63891f714d6d7d97257e9128efab51839bdcd916b7c2aedb1fa02",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "nearchus-title-male",
+      "figureId": "nearchus",
+      "kind": "title",
+      "gender": "male",
+      "title": "Navigator of Nearchus",
+      "subtitle": "Nearchus",
+      "typeLabel": "PLAYER TITLE",
+      "rarity": "epic",
+      "gameplayRarity": null,
+      "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/nearchus-title-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 79,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/nearchus-title-male.svg",
+      "fittedArt": "assets/fitted/nearchus-title-male.png",
+      "overlaySvg": "source/overlays/nearchus-title-male.svg",
+      "titleSize": 68,
+      "sourceArtSha256": "f56222c40695ee4e78ee41c8c5a196e5abee7a7549ed9b68a17c2043617d5311",
+      "master": "masters/nearchus-title-male.vectorcraft",
+      "export": "exports/nearchus-title-male.png",
+      "thumbnail": "assets/nearchus-title-male-thumb.png",
+      "exportSha256": "289bfad8f8441eb2cb812a170f149e47c8a1855ddb6a606843f4ecab99a4d455",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "nearchus-title-female",
+      "figureId": "nearchus",
+      "kind": "title",
+      "gender": "female",
+      "title": "Navigator of Nearchus",
+      "subtitle": "Nearchus",
+      "typeLabel": "PLAYER TITLE",
+      "rarity": "epic",
+      "gameplayRarity": null,
+      "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/nearchus-title-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 80,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/nearchus-title-female.svg",
+      "fittedArt": "assets/fitted/nearchus-title-female.png",
+      "overlaySvg": "source/overlays/nearchus-title-female.svg",
+      "titleSize": 68,
+      "sourceArtSha256": "2727507158d184ca5c540686515e4d8aa33a0c1fcf142a807313ac5d333920ea",
+      "master": "masters/nearchus-title-female.vectorcraft",
+      "export": "exports/nearchus-title-female.png",
+      "thumbnail": "assets/nearchus-title-female-thumb.png",
+      "exportSha256": "c118d199fea6758f78e7c375fc4c2df97af44709d687fcbcaf279f6ff9b6d78c",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    },
+    {
+      "slug": "eumenes-parent",
+      "figureId": "eumenes",
+      "kind": "parent",
+      "gender": "male",
+      "title": "Eumenes of Cardia",
+      "subtitle": "HISTORICAL FIGURE",
+      "typeLabel": "HISTORICAL FIGURE",
+      "rarity": "epic",
+      "gameplayRarity": null,
+      "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/eumenes-parent-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 81,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/eumenes-parent.svg",
+      "fittedArt": "assets/fitted/eumenes-parent.png",
+      "overlaySvg": "source/overlays/eumenes-parent.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "c957c17a538e8a8dd174ccdf98f7583677c33d0f8fcdbe3e33306f6d8d053a31",
+      "master": "masters/eumenes-parent.vectorcraft",
+      "export": "exports/eumenes-parent.png",
+      "thumbnail": "assets/eumenes-parent-thumb.png",
+      "exportSha256": "a4ad426452e9787b3d5813163acb717a1dd9a95cacf07707192bfb58d8559b69",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW"
+    },
+    {
+      "slug": "eumenes-title-male",
+      "figureId": "eumenes",
+      "kind": "title",
+      "gender": "male",
+      "title": "Secretary of Eumenes",
+      "subtitle": "Eumenes of Cardia",
+      "typeLabel": "PLAYER TITLE",
+      "rarity": "epic",
+      "gameplayRarity": null,
+      "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/eumenes-title-male-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 82,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/eumenes-title-male.svg",
+      "fittedArt": "assets/fitted/eumenes-title-male.png",
+      "overlaySvg": "source/overlays/eumenes-title-male.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "f9cd417bc74b9a09faf95fb66598b3b552efd3cdc65a203e2110f48e8b286058",
+      "master": "masters/eumenes-title-male.vectorcraft",
+      "export": "exports/eumenes-title-male.png",
+      "thumbnail": "assets/eumenes-title-male-thumb.png",
+      "exportSha256": "62fc4d7057db8e0be028cab9cd99075c537a8f0e905fdd42335f91300c480a68",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+    },
+    {
+      "slug": "eumenes-title-female",
+      "figureId": "eumenes",
+      "kind": "title",
+      "gender": "female",
+      "title": "Secretary of Eumenes",
+      "subtitle": "Eumenes of Cardia",
+      "typeLabel": "PLAYER TITLE",
+      "rarity": "epic",
+      "gameplayRarity": null,
+      "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+      "frameLayout": "standard",
+      "sourceArt": "artwork/cards/figure-inner-art-v12/assets/eumenes-title-female-pixel.png",
+      "intendedEditionLimit": 25,
+      "footerLeft": "EVERFOLK",
+      "footerRight": "LIMIT 025",
+      "collectionIndex": 83,
+      "copySerial": null,
+      "owner": null,
+      "fit": {
+        "method": "nearest-neighbour portrait contain with jade inlay",
+        "source": [
+          840,
+          1050
+        ],
+        "rect": [
+          154,
+          190,
+          592,
+          740
+        ],
+        "aperture": [
+          50,
+          190,
+          800,
+          740
+        ],
+        "sourceCropped": false,
+        "kernel": "nearest",
+        "aspectRatioPreserved": true,
+        "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+      },
+      "sourceSvg": "source/cards/eumenes-title-female.svg",
+      "fittedArt": "assets/fitted/eumenes-title-female.png",
+      "overlaySvg": "source/overlays/eumenes-title-female.svg",
+      "titleSize": 72,
+      "sourceArtSha256": "01d215e0eb2986ae78a3703baab7bb8de6fbd67d496b0aacadd91bf7b96956f7",
+      "master": "masters/eumenes-title-female.vectorcraft",
+      "export": "exports/eumenes-title-female.png",
+      "thumbnail": "assets/eumenes-title-female-thumb.png",
+      "exportSha256": "f57df76dde9b13691a48d07434922328e4cdb3d66e65d5af301e7c9b99e96a23",
+      "qa": {
+        "nativeReopenIdentical": true,
+        "uncoveredPixelsChecked": 583204,
+        "uncoveredRgbDifferences": 0,
+        "transparentOuterCorners": true,
+        "editableText": true
+      },
+      "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+[
+  {
+    "slug": "demetrius-common-male",
+    "ref": "demetrius-uncommon-male",
+    "face": [
+      408,
+      223,
+      93,
+      110
+    ],
+    "angle": "three-quarter right",
+    "prompt": "Use case: historical-scene. Create ONE 4:5 portrait painterly oil INNER CARD illustration for Everfolk, source image at approximately1122×1402. No text, frame, border, watermark or pixelation.\nReference image is STYLE and contributor IDENTITY only; this is a new Common tier task. Keep this unnamed adult male's dark curly hair, olive skin and angular face, but use a different head angle: calm three-quarter view toward image RIGHT, visible pupils, chin slightly lowered toward his work.\nShow a SIEGE LABOURER of Demetrius's Hellenistic campaign in practical plain russet linen tunic, hemp belt and worn ivory shoulder cloth, no armour or rank ornaments. He stands among rough timber and rope at an ancient siege-works yard, one hand naturally gripping the middle of a shoulder-high wooden beam, the other hand holding a short thick rope coil near his waist. Wood fibres, pegs and a distant partly built wooden siege tower show the craft. Everyday disciplined endurance, not royal command.\nMatch reference's dramatic warm amber chiaroscuro, tactile broken oil strokes, convincing skin and material planes, historical Mediterranean atmosphere and serious character design. Mid-thigh portrait: full head with breathing room, all hands, wrists and tools inside the image, foreground task below face, readable gaze. Exactly TWO connected natural arms and hands, five plausible fingers per visible hand, plausible contact and weight, no extra limbs, no detached wrists, no modern tools, no readable pseudo-writing. Single male foreground protagonist. The Common garment is simple and unadorned.",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-8bc6d2e5-8473-4d81-b9f3-765f7f179230.png"
+  },
+  {
+    "slug": "demetrius-common-female",
+    "ref": "demetrius-uncommon-female",
+    "prompt": "Use case: historical-scene. Deliver ONE4:5 portrait painterly oil INNER CARD illustration at approximately1122×1402. No text, frame, border, watermark or pixelation. Input is a STYLE and contributor IDENTITY reference; create a new lower Common-tier task scene. Keep the same unnamed adult contributor's face and hair, not the named historical figure. Practical plain linen tunic, worn cloth, hemp belt, no armour, jewellery, laurel or rank insignia. Match the reference's warm amber chiaroscuro and tactile broken oil strokes, serious historical Mediterranean character design with realistically observed anatomy and visible pupils. Composition mid-thigh portrait: complete head with breathing room and hands/tools entirely inside image. Exactly TWO naturally connected arms and hands, plausible five fingers and object grip, no hidden third arm, no detached wrist, no modern objects or readable pseudo-writing. Female SIEGE LABOURER among rough timber, pegs and rope at Demetrius's ancient siege-works yard. Preserve this woman's dark short curly hair and olive face. Head in a clean LEFT-facing profile, quietly determined. One hand braces a thick vertical wooden beam at chest height, the other carries a hemp rope coil at her waist. Plain ochre linen, ivory shoulder rag. A partly built wooden siege tower and workmen in background; ordinary disciplined endurance, not command.",
+    "face": [
+      419,
+      220,
+      93,
+      116
+    ],
+    "angle": "left profile",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-ebfae6ca-cfb6-473b-856b-443101570bf7.png"
+  },
+  {
+    "slug": "theophrastus-common-male",
+    "ref": "theophrastus-uncommon-male",
+    "prompt": "Use case: historical-scene. Deliver ONE4:5 portrait painterly oil INNER CARD illustration at approximately1122×1402. No text, frame, border, watermark or pixelation. Input is a STYLE and contributor IDENTITY reference; create a new lower Common-tier task scene. Keep the same unnamed adult contributor's face and hair, not the named historical figure. Practical plain linen tunic, worn cloth, hemp belt, no armour, jewellery, laurel or rank insignia. Match the reference's warm amber chiaroscuro and tactile broken oil strokes, serious historical Mediterranean character design with realistically observed anatomy and visible pupils. Composition mid-thigh portrait: complete head with breathing room and hands/tools entirely inside image. Exactly TWO naturally connected arms and hands, plausible five fingers and object grip, no hidden third arm, no detached wrist, no modern objects or readable pseudo-writing. Male GARDEN ATTENDANT tending specimens in a modest Athenian walled teaching garden. Preserve his tousled short dark hair and short beard. Head three-quarter LEFT, gaze down toward a rosemary plant. He stands beside a low potting bench, one hand naturally grips a small terracotta jug by its handle and pours a little water into a planted clay pot, the other steadies that pot's rim. Simple faded brown tunic and ivory cloth. Plants, stone walls and a small basket in background. Humble careful work, no researcher tablet or ornamental status.",
+    "face": [
+      500,
+      223,
+      105,
+      120
+    ],
+    "angle": "three-quarter left",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-5a846d38-4730-43cc-b177-edf08297ca20.png"
+  },
+  {
+    "slug": "theophrastus-common-female",
+    "ref": "theophrastus-uncommon-female",
+    "prompt": "Use case: historical-scene. Deliver ONE4:5 portrait painterly oil INNER CARD illustration at approximately1122×1402. No text, frame, border, watermark or pixelation. Input is a STYLE and contributor IDENTITY reference; create a new lower Common-tier task scene. Keep the same unnamed adult contributor's face and hair, not the named historical figure. Practical plain linen tunic, worn cloth, hemp belt, no armour, jewellery, laurel or rank insignia. Match the reference's warm amber chiaroscuro and tactile broken oil strokes, serious historical Mediterranean character design with realistically observed anatomy and visible pupils. Composition mid-thigh portrait: complete head with breathing room and hands/tools entirely inside image. Exactly TWO naturally connected arms and hands, plausible five fingers and object grip, no hidden third arm, no detached wrist, no modern objects or readable pseudo-writing. Female GARDEN ATTENDANT tending specimen beds in a modest Athenian walled teaching garden. Preserve her dark wavy tied-back hair and strong olive adult face. Head three-quarter RIGHT, gaze toward leaves. She kneels by a raised bed, holding a small ancient terracotta jug with both hands, one supporting its base and one gripping its handle, pouring water around herb roots. Simple russet linen peplos and worn ivory shoulder cloth, unadorned. Pots and stone garden wall in background. Humble skilled care, not a royal garden portrait; no tablet.",
+    "face": [
+      426,
+      228,
+      95,
+      118
+    ],
+    "angle": "three-quarter right",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-622fc12e-57aa-4a36-af8a-55711a1f2ba4.png"
+  },
+  {
+    "slug": "zeno-common-male",
+    "ref": "zeno-uncommon-male",
+    "angle": "three-quarter right",
+    "face": [
+      420,
+      242,
+      105,
+      123
+    ],
+    "prompt": "Use case: historical-scene. Create ONE4:5 portrait painterly oil inner card illustration for Everfolk at approximately1122×1402. No text, frame, border, watermark or pixelation. Reference is contributor IDENTITY and STYLE only: keep the same unnamed adult face/hair, not the historical figure. This is a new COMMON-tier responsibility scene, plain worn linen and modest unadorned cloth, no armour/crown/laurel/jewellery/rank ornament. Match warm amber chiaroscuro and tactile broken oil paint, convincing anatomy and visible pupils. Full head with breathing room, mid-thigh composition with both hands and task tools safely inside the image. Exactly two connected natural arms, plausible five fingers on each visible hand, correct object grip, no extra/detached limbs, modern artefacts or readable pseudo-writing. Male LISTENER AT THE STOA with short curly dark hair and short beard. Head three-quarter RIGHT, eyes attentively following an older philosopher beyond the image right edge. He sits in the shade of Athens's painted colonnade, a closed wax tablet resting across his knees. One hand cradles the tablet's wooden edge, other rests thoughtfully on his own knee; no speaking gesture. Faded blue mantle over plain brown tunic, a few distant listeners and Athenian buildings. Quiet concentration and self-command, a beginning student rather than teacher.",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-b51b1bbb-5307-427a-bcc2-460b925ed1b2.png"
+  },
+  {
+    "slug": "zeno-common-female",
+    "ref": "zeno-uncommon-female",
+    "angle": "left profile",
+    "face": [
+      450,
+      242,
+      112,
+      128
+    ],
+    "prompt": "Use case: historical-scene. Create ONE4:5 portrait painterly oil inner card illustration for Everfolk at approximately1122×1402. No text, frame, border, watermark or pixelation. Reference is contributor IDENTITY and STYLE only: keep the same unnamed adult face/hair, not the historical figure. This is a new COMMON-tier responsibility scene, plain worn linen and modest unadorned cloth, no armour/crown/laurel/jewellery/rank ornament. Match warm amber chiaroscuro and tactile broken oil paint, convincing anatomy and visible pupils. Full head with breathing room, mid-thigh composition with both hands and task tools safely inside the image. Exactly two connected natural arms, plausible five fingers on each visible hand, correct object grip, no extra/detached limbs, modern artefacts or readable pseudo-writing. Female LISTENER AT THE STOA with dark wavy hair simply tied low. Head in clean LEFT-facing profile, one near eye visible, listening beyond the left edge. She sits beneath Athens's painted colonnade, a small closed wax tablet held at waist level with both natural hands, elbows relaxed. Plain weathered blue cloth over russet linen, no ornament. Stone column, some blurred listeners and a quiet view of Athens behind. Quiet thoughtful attention, a beginning student rather than a teacher making an oration.",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-60916525-fab2-492e-9cba-90140cc81277.png"
+  },
+  {
+    "slug": "ptolemy-common-male",
+    "ref": "ptolemy-uncommon-male",
+    "angle": "right profile",
+    "face": [
+      440,
+      169,
+      105,
+      126
+    ],
+    "prompt": "Use case: historical-scene. Create ONE4:5 portrait painterly oil inner card illustration for Everfolk at approximately1122×1402. No text, frame, border, watermark or pixelation. Reference is contributor IDENTITY and STYLE only: keep the same unnamed adult face/hair, not the historical figure. This is a new COMMON-tier responsibility scene, plain worn linen and modest unadorned cloth, no armour/crown/laurel/jewellery/rank ornament. Match warm amber chiaroscuro and tactile broken oil paint, convincing anatomy and visible pupils. Full head with breathing room, mid-thigh composition with both hands and task tools safely inside the image. Exactly two connected natural arms, plausible five fingers on each visible hand, correct object grip, no extra/detached limbs, modern artefacts or readable pseudo-writing. Male PALACE MESSENGER in early Hellenistic Egypt, clean-shaven adult olive face and short dark swept-back hair. Head RIGHT-facing profile, eye looking along a colonnaded palace walkway. He strides carrying one rolled papyrus dispatch securely tied with cord and an unlettered clay seal: own left hand grips its middle near his chest, own right hand naturally gathers a small plain cloth satchel strap at hip. Plain ivory linen tunic and faded ochre shoulder cloth. Palm-lined stone colonnade and distant officials, no throne or royal crown. Reliable urgent service, not a commissioner holding records at a desk.",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-1cf3bd7e-6be0-4cc1-b4f6-d2f00b3cae29.png"
+  },
+  {
+    "slug": "ptolemy-common-female",
+    "ref": "ptolemy-uncommon-female",
+    "angle": "three-quarter left",
+    "face": [
+      377,
+      184,
+      101,
+      120
+    ],
+    "prompt": "Use case: historical-scene. Create ONE4:5 portrait painterly oil inner card illustration for Everfolk at approximately1122×1402. No text, frame, border, watermark or pixelation. Reference is contributor IDENTITY and STYLE only: keep the same unnamed adult face/hair, not the named historical figure. This is a new COMMON-tier responsibility, simple worn linen and practical unadorned cloth, no armour/crown/laurel/jewellery/rank ornament. Warm amber chiaroscuro, tactile broken oil paint, realistic adult anatomy, visible pupils and intent gaze. Mid-thigh task portrait with complete head, breathing room and both working hands/tools safely within the edges. Exactly two connected natural arms and hands, plausible fingers and object grip, no extra/detached limbs, modern objects or readable pseudo-writing. Female PALACE MESSENGER in early Hellenistic Egypt. Preserve her olive face, dark eyes and dark hair in a low practical bun. Head three-quarter LEFT, gaze along a sunlit colonnade. She strides with a tied rolled papyrus dispatch held horizontally at her waist in both natural hands, cord and simple unlettered clay seal visible. Plain ivory linen tunic and faded ochre shoulder cloth. Palm-lined stone walkway with distant officials. Alert reliable service, not a royal lady or a commissioner writing at a desk.",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-43e41393-cdf4-4809-a3fa-bd3e1bd62dd4.png"
+  },
+  {
+    "slug": "cleomenes-common-male",
+    "ref": "cleomenes-uncommon-male",
+    "angle": "nearly frontal, gaze lowered",
+    "face": [
+      440,
+      213,
+      99,
+      120
+    ],
+    "prompt": "Use case: historical-scene. Create ONE4:5 portrait painterly oil inner card illustration for Everfolk at approximately1122×1402. No text, frame, border, watermark or pixelation. Reference is contributor IDENTITY and STYLE only: keep the same unnamed adult face/hair, not the named historical figure. This is a new COMMON-tier responsibility, simple worn linen and practical unadorned cloth, no armour/crown/laurel/jewellery/rank ornament. Warm amber chiaroscuro, tactile broken oil paint, realistic adult anatomy, visible pupils and intent gaze. Mid-thigh task portrait with complete head, breathing room and both working hands/tools safely within the edges. Exactly two connected natural arms and hands, plausible fingers and object grip, no extra/detached limbs, modern objects or readable pseudo-writing. Male GRANARY PORTER in early Hellenistic Egypt, short dense dark curls, olive adult face. Head almost FRONTAL with gaze lowered thoughtfully to grain in his hand. Standing at open granary threshold, one forearm rests naturally against a coarse woven grain sack to steady it, the other hand cups a modest handful of grain above its open mouth. Plain rough ivory linen tunic with a faded brown cloth, no rich blue mantle. Stacked sacks, earthenware jars and a glimpse of a Nile landing in background. Grounded strength and care, not an official writing accounts; all hands have correct five fingers and belong to separate arms.",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-4bbd4e8b-3dee-41f9-9a5e-46b36d97891e.png"
+  },
+  {
+    "slug": "cleomenes-common-female",
+    "ref": "cleomenes-uncommon-female",
+    "angle": "three-quarter right",
+    "face": [
+      428,
+      220,
+      98,
+      119
+    ],
+    "prompt": "Use case: historical-scene. Create ONE4:5 portrait painterly oil inner card illustration for Everfolk at approximately1122×1402. No text, frame, border, watermark or pixelation. Reference is contributor IDENTITY and STYLE only: keep the same unnamed adult face/hair, not the named historical figure. This is a new COMMON-tier responsibility, simple worn linen and practical unadorned cloth, no armour/crown/laurel/jewellery/rank ornament. Warm amber chiaroscuro, tactile broken oil paint, realistic adult anatomy, visible pupils and intent gaze. Mid-thigh task portrait with complete head, breathing room and both working hands/tools safely within the edges. Exactly two connected natural arms and hands, plausible fingers and object grip, no extra/detached limbs, modern objects or readable pseudo-writing. Female GRANARY PORTER in early Hellenistic Egypt. Preserve her olive adult face, thick short dark curls and direct dark eyes. Head three-quarter RIGHT, eyes looking down along the sack she is moving. She uses both anatomically natural hands to gather the strong tied neck of one heavy woven grain sack at waist height, preparing to lift it only slightly from a low wooden bench. Plain rough ivory linen peplos, faded brown shoulder cloth, no expensive blue mantle. Stacked sacks, clay jars and a doorway opening to Nile sunlight. Capable ordinary labour and dependable care, not an official with tablet or ruler. Both working hands visible with plausible grip.",
+    "generatedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d52a-a9e5-71b1-8edd-f022a9e05085\\exec-ad388f02-1d68-4371-b673-cf0afea287d9.png"
+  }
+]

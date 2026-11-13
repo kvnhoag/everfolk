@@ -1,0 +1,81 @@
+EVERFOLK — ALEXANDER INNER ART V10
+Created 13 November 2026.
+
+REQUEST AND OUTPUT
+The user-supplied anchor is preserved in source/user-anchor.png. The request
+was to replace the invented armour with real reference-derived equipment,
+lengthen the blade, and correct the holding hands/grip and blade rotation.
+Final: alexander-inner-art-v10.png. Clean painterly inner art without frame,
+lettering or pixel finish. Earlier card assets and source artwork unchanged.
+
+METHOD
+Built-in image_gen image edit, using the anchor plus the two actual object
+photographs below. Exact prompt: source/generation-prompt.txt. No ArtCraft
+brush pass or separate editable outfit layers are claimed. This is a flattened
+generated illustration. Source output retained by the image generator at:
+C:/Users/Legion/.codex/generated_images/01a1d4bc-ed1b-78c3-a66f-502698e72408/exec-9e39ccb1-b554-48e1-86e1-8d56b24ca9fe.png
+
+ARMOUR — ACTUAL SURVIVING OBJECT
+Iron cuirass with gold decoration from Aigai / Vergina Tomb II, fourth century
+BCE, traditionally attributed to Philip II. Used as a regional/period model,
+not identified here as Alexander's own armour. Its construction informs the
+torso plates, rigid shoulder flaps, geometric gold borders and lion-head/ring
+fastenings. In-use surface, fit to a raised-arm rider, hidden construction,
+underclothes and the lower pteruges are interpretations. The gold-edged lower
+strips are a visual reconstruction, not a documented surviving part of this
+cuirass. The generated torso is not an exact dimensional reproduction.
+
+Official identification and museum display:
+Hellenic Heritage / Hellenic Organization of Cultural Resources Development.
+https://www.hh.gr/en/destinations/aigai/
+https://www.hh.gr/wp-content/uploads/2025/08/24-10-1536x1024.jpg
+Local unchanged photo: references/aigai-tomb-ii-armour-hh.jpg
+Rights: Hellenic Heritage / ODAP; no open licence confirmed. Research reference.
+
+Material corroboration, Greek Ministry of Culture:
+https://culturalegnatia.culture.gov.gr/en/route-stops/aigai/
+
+Clear original-object photograph used in generation and review:
+G. Dagli Orti / DEA / Getty Images, via National Geographic Portugal.
+https://www.nationalgeographic.pt/historia/onde-se-encontra-filipe-ii-da-macedonia_702
+https://content.nationalgeographic.pt/medio/import/attachment/revistas/182/FILIPE/Filipe4.jpg
+Local unchanged photo: references/aigai-cuirass-dagli-orti.jpg
+Copyright photograph; used as a research reference, not a generated photograph.
+
+Additional original-object view retrieved during research, not used in the
+generation or comparison: references/aigai-tomb-ii-cuirass-ng.jpg.
+https://historia.nationalgeographic.com.es/a/fabulosa-tumba-filipo-ii-macedonia-descubrimiento-como-tutankamon_8497
+Photographer not independently confirmed for this additional view.
+
+SWORD — ACTUAL MUSEUM OBJECT, EARLIER TYPE COMPARISON
+Iron xiphos with gold-sheet decoration (MTh 18800), Archaeological Museum of
+Thessaloniki; foreground sword in the photograph. The photographed label gives
+grave goods from Nea Philadelpheia, tombs 39 and 67, late sixth century BCE.
+This earlier object is used only for the straight double-edged sword's form,
+small transverse guard, and coherent axial construction, not as proof of the
+precise sword worn by Alexander. Reconstructed serviceable metal, grip material,
+and visibly increased blade length are artistic choices. The requested longer
+blade is an intentional enlargement, not the dimensions of this museum sword.
+
+Photo: Johnhoplite, 19 April 2017, CC BY-SA 4.0.
+https://commons.wikimedia.org/wiki/File:Iron_xiphos,_Thessaloniki_museum.jpg
+https://upload.wikimedia.org/wikipedia/commons/5/50/Iron_xiphos%2C_Thessaloniki_museum.jpg
+https://creativecommons.org/licenses/by-sa/4.0/
+Local unchanged original: references/iron-xiphos-thessaloniki-johnhoplite.jpg
+The review contains a proportionally resized presentation of this full photo.
+
+The former Met machaira photograph in references was inspected as a possible
+alternative but NOT used as a generation input: the anchor's straight sword
+family was retained. Its source provenance is in the prior v5 reference notes.
+
+VISUAL QA
+Viewed full resolution, at a 420 x 525 card-sized preview, and in a reference
+comparison. Composition/face/horse/cloak and overall chiaroscuro remain close
+to the supplied anchor. Armour's diagnostic borders, shoulder flaps and bosses
+are visible. Blade is longer, fully inside canvas and connected continuously
+to hilt; a closed right-hand grip replaces the anchor grip. Left hand holds
+reins only. This is historically informed game art, not an authenticated full
+panoply reconstruction. No card frame or application code was changed.
+
+Review images are presentation/QA composites of the unmodified saved images,
+with proportional resizing only. Original references remain unchanged.

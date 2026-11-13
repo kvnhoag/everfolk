@@ -1,0 +1,504 @@
+{
+  "assets": [
+    {
+      "slug": "aristotle-uncommon-male",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Lyceum Copyist",
+      "source": "source/aristotle-uncommon-male.png",
+      "prompt": "prompts/aristotle-uncommon-male.txt",
+      "final": "assets/aristotle-uncommon-male-pixel.png",
+      "qa": "qa/aristotle-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          404,
+          243
+        ],
+        "radius": [
+          105,
+          142
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-a90896c5-b77f-409e-810b-11093e35a914.png"
+    },
+    {
+      "slug": "aristotle-rare-male",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Lyceum Researcher",
+      "source": "source/aristotle-rare-male.png",
+      "prompt": "prompts/aristotle-rare-male.txt",
+      "final": "assets/aristotle-rare-male-pixel.png",
+      "qa": "qa/aristotle-rare-male-pixel.json",
+      "face": {
+        "center": [
+          479,
+          236
+        ],
+        "radius": [
+          118,
+          138
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-e8752d2e-08fc-4677-af5a-bf99d43ad0df.png"
+    },
+    {
+      "slug": "aristotle-uncommon-female",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Lyceum Copyist",
+      "source": "source/aristotle-uncommon-female.png",
+      "prompt": "prompts/aristotle-uncommon-female.txt",
+      "final": "assets/aristotle-uncommon-female-pixel.png",
+      "qa": "qa/aristotle-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          404,
+          251
+        ],
+        "radius": [
+          110,
+          140
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-f14b7b92-371a-4164-9540-9255b79277bb.png"
+    },
+    {
+      "slug": "aristotle-rare-female",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Lyceum Researcher",
+      "source": "source/aristotle-rare-female.png",
+      "prompt": "prompts/aristotle-rare-female.txt",
+      "final": "assets/aristotle-rare-female-pixel.png",
+      "qa": "qa/aristotle-rare-female-pixel.json",
+      "face": {
+        "center": [
+          412,
+          187
+        ],
+        "radius": [
+          108,
+          132
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-85657f47-04f3-438a-94bc-d128d6e41ace.png"
+    },
+    {
+      "slug": "aristotle-epic-female",
+      "figureId": "aristotle",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "title": "Peripatetic Scholar",
+      "source": "source/aristotle-epic-female.png",
+      "prompt": "prompts/aristotle-epic-female.txt",
+      "final": "assets/aristotle-epic-female-pixel.png",
+      "qa": "qa/aristotle-epic-female-pixel.json",
+      "face": {
+        "center": [
+          367,
+          225
+        ],
+        "radius": [
+          110,
+          135
+        ]
+      },
+      "viewAngle": "three-quarter",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-7dd3f289-f511-48a1-a057-829f84f756d2.png"
+    },
+    {
+      "slug": "euclid-uncommon-female",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Geometrical Copyist",
+      "source": "source/euclid-uncommon-female.png",
+      "prompt": "prompts/euclid-uncommon-female.txt",
+      "final": "assets/euclid-uncommon-female-pixel.png",
+      "qa": "qa/euclid-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          397,
+          232
+        ],
+        "radius": [
+          107,
+          140
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-fbd0f83d-ce2d-4a19-8537-a18af8655b8b.png"
+    },
+    {
+      "slug": "euclid-rare-female",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Proof Checker",
+      "source": "source/euclid-rare-female.png",
+      "prompt": "prompts/euclid-rare-female.txt",
+      "final": "assets/euclid-rare-female-pixel.png",
+      "qa": "qa/euclid-rare-female-pixel.json",
+      "face": {
+        "center": [
+          363,
+          247
+        ],
+        "radius": [
+          108,
+          138
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-2c77f1b3-86c2-4dc3-86a2-02d17dba7820.png"
+    },
+    {
+      "slug": "euclid-uncommon-male",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Geometrical Copyist",
+      "source": "source/euclid-uncommon-male.png",
+      "prompt": "prompts/euclid-uncommon-male.txt",
+      "final": "assets/euclid-uncommon-male-pixel.png",
+      "qa": "qa/euclid-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          357,
+          221
+        ],
+        "radius": [
+          109,
+          145
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-0ec36a9a-9965-4867-99e3-4aca0cf879ac.png"
+    },
+    {
+      "slug": "euclid-rare-male",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Proof Checker",
+      "source": "source/euclid-rare-male.png",
+      "prompt": "prompts/euclid-rare-male.txt",
+      "final": "assets/euclid-rare-male-pixel.png",
+      "qa": "qa/euclid-rare-male-pixel.json",
+      "face": {
+        "center": [
+          305,
+          213
+        ],
+        "radius": [
+          107,
+          137
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-4af1cd4a-c26c-42c7-a8b3-dad1c3bc5c67.png"
+    },
+    {
+      "slug": "euclid-epic-male",
+      "figureId": "euclid",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "title": "Geometer of the Teaching Circle",
+      "source": "source/euclid-epic-male.png",
+      "prompt": "prompts/euclid-epic-male.txt",
+      "final": "assets/euclid-epic-male-pixel.png",
+      "qa": "qa/euclid-epic-male-pixel.json",
+      "face": {
+        "center": [
+          359,
+          210
+        ],
+        "radius": [
+          105,
+          135
+        ]
+      },
+      "viewAngle": "three-quarter",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-bc76c594-40e2-4407-82f1-ecc3fc1255b6.png"
+    },
+    {
+      "slug": "theophrastus-uncommon-female",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Plant Records Assistant",
+      "source": "source/theophrastus-uncommon-female.png",
+      "prompt": "prompts/theophrastus-uncommon-female.txt",
+      "final": "assets/theophrastus-uncommon-female-pixel.png",
+      "qa": "qa/theophrastus-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          337,
+          202
+        ],
+        "radius": [
+          109,
+          137
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-2978f319-e185-4864-bc4d-ea51668b31fc.png"
+    },
+    {
+      "slug": "theophrastus-rare-female",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Comparative Plant Investigator",
+      "source": "source/theophrastus-rare-female.png",
+      "prompt": "prompts/theophrastus-rare-female.txt",
+      "final": "assets/theophrastus-rare-female-pixel.png",
+      "qa": "qa/theophrastus-rare-female-pixel.json",
+      "face": {
+        "center": [
+          397,
+          172
+        ],
+        "radius": [
+          108,
+          132
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-258f9faa-b97f-442d-a16a-3369d4d57d32.png"
+    },
+    {
+      "slug": "theophrastus-uncommon-male",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Plant Records Assistant",
+      "source": "source/theophrastus-uncommon-male.png",
+      "prompt": "prompts/theophrastus-uncommon-male.txt",
+      "final": "assets/theophrastus-uncommon-male-pixel.png",
+      "qa": "qa/theophrastus-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          312,
+          206
+        ],
+        "radius": [
+          105,
+          140
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-b7c7d743-8a98-481b-b3d4-6bc1730f41f7.png"
+    },
+    {
+      "slug": "theophrastus-rare-male",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Comparative Plant Investigator",
+      "source": "source/theophrastus-rare-male.png",
+      "prompt": "prompts/theophrastus-rare-male.txt",
+      "final": "assets/theophrastus-rare-male-pixel.png",
+      "qa": "qa/theophrastus-rare-male-pixel.json",
+      "face": {
+        "center": [
+          372,
+          176
+        ],
+        "radius": [
+          107,
+          132
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-651c17a1-b84f-4371-801d-a30395e257af.png"
+    },
+    {
+      "slug": "theophrastus-epic-male",
+      "figureId": "theophrastus",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "male",
+      "title": "Peripatetic Botanical Scholar",
+      "source": "source/theophrastus-epic-male.png",
+      "prompt": "prompts/theophrastus-epic-male.txt",
+      "final": "assets/theophrastus-epic-male-pixel.png",
+      "qa": "qa/theophrastus-epic-male-pixel.json",
+      "face": {
+        "center": [
+          325,
+          198
+        ],
+        "radius": [
+          109,
+          135
+        ]
+      },
+      "viewAngle": "three-quarter",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-724c6713-3803-45e1-bd15-c21913776a01.png"
+    },
+    {
+      "slug": "zeno-uncommon-male",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "male",
+      "title": "Student of the Stoa",
+      "source": "source/zeno-uncommon-male.png",
+      "prompt": "prompts/zeno-uncommon-male.txt",
+      "final": "assets/zeno-uncommon-male-pixel.png",
+      "qa": "qa/zeno-uncommon-male-pixel.json",
+      "face": {
+        "center": [
+          369,
+          249
+        ],
+        "radius": [
+          110,
+          140
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-cf4c67b9-c433-4479-9efa-94c68bc90100.png"
+    },
+    {
+      "slug": "zeno-rare-male",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "male",
+      "title": "Stoic Discussion Leader",
+      "source": "source/zeno-rare-male.png",
+      "prompt": "prompts/zeno-rare-male.txt",
+      "final": "assets/zeno-rare-male-pixel.png",
+      "qa": "qa/zeno-rare-male-pixel.json",
+      "face": {
+        "center": [
+          505,
+          269
+        ],
+        "radius": [
+          105,
+          135
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-ce80f5c2-5b4a-49ac-b263-cbb0d86e3e2d.png"
+    },
+    {
+      "slug": "zeno-uncommon-female",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "tier": "uncommon",
+      "gender": "female",
+      "title": "Student of the Stoa",
+      "source": "source/zeno-uncommon-female.png",
+      "prompt": "prompts/zeno-uncommon-female.txt",
+      "final": "assets/zeno-uncommon-female-pixel.png",
+      "qa": "qa/zeno-uncommon-female-pixel.json",
+      "face": {
+        "center": [
+          347,
+          254
+        ],
+        "radius": [
+          108,
+          140
+        ]
+      },
+      "viewAngle": "frontal",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-85067b75-ddca-4475-add4-95909d9b4231.png"
+    },
+    {
+      "slug": "zeno-rare-female",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "tier": "rare",
+      "gender": "female",
+      "title": "Stoic Discussion Leader",
+      "source": "source/zeno-rare-female.png",
+      "prompt": "prompts/zeno-rare-female.txt",
+      "final": "assets/zeno-rare-female-pixel.png",
+      "qa": "qa/zeno-rare-female-pixel.json",
+      "face": {
+        "center": [
+          410,
+          273
+        ],
+        "radius": [
+          108,
+          137
+        ]
+      },
+      "viewAngle": "left-profile",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-87c0047a-a508-48d0-9b3f-9a95287baa1e.png"
+    },
+    {
+      "slug": "zeno-epic-female",
+      "figureId": "zeno",
+      "kind": "contribution",
+      "tier": "epic",
+      "gender": "female",
+      "title": "Scholar of Stoic Ethics",
+      "source": "source/zeno-epic-female.png",
+      "prompt": "prompts/zeno-epic-female.txt",
+      "final": "assets/zeno-epic-female-pixel.png",
+      "qa": "qa/zeno-epic-female-pixel.json",
+      "face": {
+        "center": [
+          359,
+          247
+        ],
+        "radius": [
+          109,
+          140
+        ]
+      },
+      "viewAngle": "three-quarter",
+      "reviewed": true,
+      "generatedSource": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d4cc-6aa0-7f13-8082-b7de51a9dd62\\exec-043f052a-b782-4267-b3de-d706f4cd2e9b.png"
+    }
+  ]
+}

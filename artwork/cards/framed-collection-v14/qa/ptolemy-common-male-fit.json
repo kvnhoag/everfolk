@@ -1,0 +1,82 @@
+{
+  "figureId": "ptolemy",
+  "figureName": "Ptolemy I Soter",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Palace Messenger",
+  "displayTitle": "Palace Messenger",
+  "subtitle": "Bearer of Ptolemy's Dispatches",
+  "bodyTitle": "The Seal Reaches Its Hand",
+  "bodyText": "A palace messenger carries sealed orders through crowded courtyards and unfamiliar streets. Dependability gives distant officials a common purpose, keeping the first threads of government joined by a message delivered intact and on time.",
+  "sourceRoleSlug": "ptolemy-common",
+  "newArt": true,
+  "sceneBrief": "A modest messenger carries a sealed papyrus dispatch through an Egyptian administrative colonnade, simple pale tunic and satchel, no royal diadem.",
+  "slug": "ptolemy-common-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Palace Messenger",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/ptolemy-common-male-pixel.png",
+  "sourceArtSlug": "ptolemy-common-male",
+  "editionLimit": null,
+  "collectionIndex": 83,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/ptolemy.svg",
+    "sha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A palace messenger carries sealed orders through crowded",
+    "courtyards and unfamiliar streets. Dependability gives",
+    "distant officials a common purpose, keeping the first",
+    "threads of government joined by a message delivered intact",
+    "and on time."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/ptolemy-common-male.svg",
+  "fittedArt": "assets/fitted/ptolemy-common-male.png",
+  "overlaySvg": "source/overlays/ptolemy-common-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "fe399787af9ca127d75e11a18affe6d0af34c5fd61295a8186d615a6bd56f3a1",
+  "master": "masters/ptolemy-common-male.vectorcraft",
+  "export": "exports/ptolemy-common-male.png",
+  "thumbnail": "assets/ptolemy-common-male-thumb.png",
+  "exportSha256": "2391182b98a2dfd8daf1037cc591bd6f296879bdbdf993d225190cc57b20406d",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582516,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

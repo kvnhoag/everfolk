@@ -1,0 +1,81 @@
+{
+  "figureId": "theophrastus",
+  "figureName": "Theophrastus",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Comparative Plant Investigator",
+  "displayTitle": "Plant Investigator",
+  "subtitle": "Student of Theophrastus",
+  "bodyTitle": "Differences Reveal Order",
+  "bodyText": "A plant investigator compares roots, leaves, habitats, and patterns of growth across living specimens. Discerning attention turns a garden of separate examples into evidence, helping the school recognise the order within abundance.",
+  "sourceRoleSlug": "theophrastus-rare",
+  "newArt": false,
+  "slug": "theophrastus-rare-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Comparative Plant Investigator",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/theophrastus-rare-female-pixel.png",
+  "sourceArtSlug": "theophrastus-rare-female",
+  "editionLimit": 100,
+  "collectionIndex": 70,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/theophrastus.svg",
+    "sha256": "e87e67b47664444e21b2a160e112b94338eed4d3ba7963755fd772ceafa01b1a",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A plant investigator compares roots, leaves, habitats, and",
+    "patterns of growth across living specimens. Discerning",
+    "attention turns a garden of separate examples into",
+    "evidence, helping the school recognise the order within",
+    "abundance."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/theophrastus-rare-female.svg",
+  "fittedArt": "assets/fitted/theophrastus-rare-female.png",
+  "overlaySvg": "source/overlays/theophrastus-rare-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "3dfd0084c3fb919a9c116ad58a9c3b3c7d1f98339c6a421f687569b91525da6a",
+  "master": "masters/theophrastus-rare-female.vectorcraft",
+  "export": "exports/theophrastus-rare-female.png",
+  "thumbnail": "assets/theophrastus-rare-female-thumb.png",
+  "exportSha256": "b6728fb2660821b146103465090badb35f0754ef17150fa9a097af3127231baa",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582523,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -198,6 +198,9 @@ pub struct Evidence {
     /// Omitted entirely for legacy evidence, preserving its existing JSON shape.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub npc_session: Option<NpcSessionAttestation>,
+    /// The played character's recorded sex ("male" or "female"); picks a profession card's version. Older evidence omits it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub sex: Option<String>,
 }
 
 #[near(serializers = [json, borsh])]
@@ -225,6 +228,32 @@ pub struct TokenExtra {
     pub career_group: String,
     pub sources: Vec<Share>,
     pub evidence_hash: String,
+    /// The v14 collection card this NFT shows, with its serial; absent on tokens minted before card art.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub card_id: Option<String>,
+    #[serde(default, flatten)]
+    pub edition: Option<TokenEdition>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub sex: Option<String>,
+    /// Marketplace traits: Card, Rarity, Edition, Career, Born, Died.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub attributes: Vec<TokenAttribute>,
+}
+
+/// The serial a mint assigned within its card design; `edition_limit: null` is unlimited.
+#[near(serializers = [json])]
+#[derive(Clone, Debug, PartialEq)]
+pub struct TokenEdition {
+    pub edition_key: String,
+    pub edition_number: u32,
+    pub edition_limit: Option<u32>,
+}
+
+#[near(serializers = [json])]
+#[derive(Clone, Debug, PartialEq)]
+pub struct TokenAttribute {
+    pub trait_type: String,
+    pub value: String,
 }
 
 #[near(serializers = [json, borsh])]

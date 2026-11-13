@@ -1,0 +1,86 @@
+{
+  "slug": "demetrius-parent",
+  "figureId": "demetrius",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Demetrius the Besieger",
+  "subtitle": "King of Siegecraft",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-parent-pixel.png",
+  "collectionIndex": 55,
+  "owner": null,
+  "figureName": "Demetrius the Besieger",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "siege-tower",
+  "bodyTitle": "Ambition Against the Walls",
+  "bodyText": "Demetrius Poliorcetes pursued kingship through bold campaigns and spectacular siege machinery. His famous assault on Rhodes ended in negotiation, yet its scale fixed his enduring reputation as the Besieger of Cities.",
+  "sources": [
+    {
+      "title": "Demetrius I of Macedonia, Poliorcetes — Oxford Classical Dictionary",
+      "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548753179"
+    },
+    {
+      "title": "The Great Siege of Rhodes — Oxford University Press",
+      "url": "https://academic.oup.com/book/40551/chapter-abstract/347966363"
+    }
+  ],
+  "canonicalTitle": "Demetrius the Besieger",
+  "editionLimit": 25,
+  "iconSource": {
+    "file": "source/icons/demetrius.svg",
+    "sha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "Demetrius Poliorcetes pursued kingship through bold",
+    "campaigns and spectacular siege machinery. His famous",
+    "assault on Rhodes ended in negotiation, yet its scale fixed",
+    "his enduring reputation as the Besieger of Cities."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-parent.svg",
+  "fittedArt": "assets/fitted/demetrius-parent.png",
+  "overlaySvg": "source/overlays/demetrius-parent.svg",
+  "titleSize": 56,
+  "sourceArtSha256": "30c5f78f48416a033866a01a7138317b487aeda8c54457051bc22dd901936ae9",
+  "master": "masters/demetrius-parent.vectorcraft",
+  "export": "exports/demetrius-parent.png",
+  "thumbnail": "assets/demetrius-parent-thumb.png",
+  "exportSha256": "45a279b2c6c021b41b613154c2765e31eb93ef0f11cfb388266ccd785d1163f7",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582585,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

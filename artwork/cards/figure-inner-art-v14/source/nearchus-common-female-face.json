@@ -1,0 +1,20 @@
+{
+  "base_pixel_size": 3,
+  "detail_pixel_size": 2,
+  "detail_outline_thickness": 0,
+  "regions": [
+    {
+      "name": "face-eyes",
+      "center": [
+        479,
+        247
+      ],
+      "radius": [
+        96,
+        123
+      ],
+      "inner_scale": 0.82
+    }
+  ],
+  "critical_boxes": []
+}

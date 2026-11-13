@@ -1,0 +1,60 @@
+{
+  "slug": "cleomenes-uncommon-female",
+  "figureId": "cleomenes",
+  "kind": "contribution",
+  "gender": "female",
+  "title": "Revenue Records Assistant",
+  "subtitle": "Cleomenes of Naucratis",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "uncommon",
+  "gameplayRarity": "uncommon",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/cleomenes-uncommon-female-pixel.png",
+  "intendedEditionLimit": null,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "UNLIMITED",
+  "collectionIndex": 73,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/cleomenes-uncommon-female.svg",
+  "fittedArt": "assets/fitted/cleomenes-uncommon-female.png",
+  "overlaySvg": "source/overlays/cleomenes-uncommon-female.svg",
+  "titleSize": 58,
+  "sourceArtSha256": "29f7ac5660640beb66aa6cf921a5708a140d9000c0ca6e9e4a8a626201f37eaf",
+  "master": "masters/cleomenes-uncommon-female.vectorcraft",
+  "export": "exports/cleomenes-uncommon-female.png",
+  "thumbnail": "assets/cleomenes-uncommon-female-thumb.png",
+  "exportSha256": "9afc183d4fb470dffa76598f92866a892b72d4c74743524f8d696de677e02547",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createEngine } from "../src/index.ts";
-import type { ActivityAvailability, LifeState } from "../src/types.ts";
+import type { ActivityAvailability, LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import figurePack from "../worlds/demo/alexandria-lives-6.json" with { type: "json" };
 import retained from "../worlds/alexandria-0.41.0.json" with { type: "json" };
 import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../client/models/character-panel-model.ts";
 import { practiceBlockReason } from "../client/models/skill-tree.ts";
@@ -102,4 +103,28 @@ test("minor payments remain clickable after the yearly action without bypassing 
   assert.match(practiceBlockReason(payment, life)!, /pending choice/);
   life.phase = "ended";
   assert.match(practiceBlockReason(payment, life)!, /ended/);
+});
+
+
+test("historical figures have a dedicated section immediately after Skills in figure worlds", () => {
+  const world = figurePack as unknown as WorldPack;
+  const life = createEngine(world).start("dedicated-figure-section");
+  const before = structuredClone(life);
+  const sections = visibleCharacterSections(life, world, false);
+  const skillsIndex = sections.findIndex(section => section.id === "skills");
+  assert.deepEqual(sections[skillsIndex + 1], { id: "figures", label: "Historical Figures" });
+  assert.equal(sections.filter(section => section.id === "figures").length, 1);
+  assert.deepEqual(life, before);
+});
+
+test("worlds without authored figure paths retain their existing management sections", () => {
+  const world = structuredClone(figurePack) as unknown as WorldPack;
+  const life = createEngine(world).start("no-empty-figure-tab");
+  const withFigures = visibleCharacterSections(life, world, false).map(section => section.id);
+  delete world.figurePaths;
+  const withoutFigures = visibleCharacterSections(life, world, false).map(section => section.id);
+  assert.deepEqual(withoutFigures, withFigures.filter(id => id !== "figures"));
+  world.figurePaths = [];
+  assert.deepEqual(visibleCharacterSections(life, world, false).map(section => section.id), withoutFigures);
+  assert.equal(visibleCharacterSections(createEngine(retained).start("old-no-figure-tab"), retained, true).some(section => section.id === "figures"), false);
 });

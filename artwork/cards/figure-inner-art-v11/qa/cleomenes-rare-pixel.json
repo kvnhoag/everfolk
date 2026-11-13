@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\cleomenes-rare.png",
+  "sourceSha256": "9b8231811242ffe611ec748527c2bd1784bc1c82102f1f8ad674494d9605c5d4",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\cleomenes-rare-coarse.png",
+  "baseSha256": "6154cf35411d7761575debd72c1bfecfb83cc8e119c35b8b58f928e51c0c4b33",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\cleomenes-rare-coarse.json",
+  "baseQaSha256": "b1aab470f86d7f9ee0d7ce69b9d8a13da07a5b7e5a0404cf9395c04bfda491f5",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\cleomenes-rare-face.json",
+  "configSha256": "c79c5f7599f5e4da21ebd138b8f6d89bacc3bb5daa65d4df891da0c595b32f91",
+  "config": {
+    "regions": [
+      {
+        "radius": [
+          98,
+          105
+        ],
+        "name": "face-eyes",
+        "center": [
+          417,
+          228
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3,
+    "detail_outline_thickness": 0,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\cleomenes-rare-pixel.png",
+  "outputSha256": "75ab945e2958d1c97fa66edfc65f4c56e7666e72ed49d26166a76ccea8cbd740",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "9200a558db1be9e8f8dae5dbf9667e67aab5e07398c1b6887c25a2ee828e0e7c",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\cleomenes-rare-face-mask.png",
+  "maskSha256": "382f1ff6e2587fadd38de4a473c2ed8f25e819b4c459a727f844e4a989f55b13",
+  "maskPixelSha256": "e0743d23054776f53f0b2e2938aecfde5602d3390e677645a6e5e897448c2ea8",
+  "selectedDetailCells": 749,
+  "retainedCoarseCells": 23751,
+  "affectedPixels": 26964,
+  "changedPixels": 26721,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

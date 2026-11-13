@@ -1,0 +1,60 @@
+{
+  "slug": "nearchus-title-female",
+  "figureId": "nearchus",
+  "kind": "title",
+  "gender": "female",
+  "title": "Navigator of Nearchus",
+  "subtitle": "Nearchus",
+  "typeLabel": "PLAYER TITLE",
+  "rarity": "epic",
+  "gameplayRarity": null,
+  "raritySource": "editorial-default; numeric rarity unspecified in current game policy",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/nearchus-title-female-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 80,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/nearchus-title-female.svg",
+  "fittedArt": "assets/fitted/nearchus-title-female.png",
+  "overlaySvg": "source/overlays/nearchus-title-female.svg",
+  "titleSize": 68,
+  "sourceArtSha256": "2727507158d184ca5c540686515e4d8aa33a0c1fcf142a807313ac5d333920ea",
+  "master": "masters/nearchus-title-female.vectorcraft",
+  "export": "exports/nearchus-title-female.png",
+  "thumbnail": "assets/nearchus-title-female-thumb.png",
+  "exportSha256": "c118d199fea6758f78e7c375fc4c2df97af44709d687fcbcaf279f6ff9b6d78c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · FEMALE CONTRIBUTOR"
+}

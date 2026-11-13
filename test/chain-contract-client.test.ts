@@ -17,7 +17,7 @@ const HASH_B = "b".repeat(64);
 
 const LIFE_KEYS = ["account_id", "checkpoints", "draws", "figure_picks", "life_id", "seed", "started_at_ms", "status", "world_version"];
 const DRAW_KEYS = ["action_id", "category", "commands_hash", "rarity", "step", "token_id"];
-const MINT_KEYS = ["affection", "figure_id", "kind", "rarity", "token_id"];
+const MINT_KEYS = ["affection", "edition_key", "edition_limit", "edition_number", "figure_id", "kind", "rarity", "token_id"];
 
 function assertLifeShape(life: LifeView): void {
   assert.deepEqual(Object.keys(life).sort(), LIFE_KEYS);
@@ -483,7 +483,7 @@ test("mint pack persists opened choices without rerolls and splits the fee once"
   assert.equal(await contract.balanceOf("treasury.testnet"), (BigInt(pack.total_fee) / 2n).toString());
   assert.equal(await contract.mintPack(life.life_id), null);
   assert.equal((await contract.tokensOf(life.account_id)).length, 1);
-  await assert.rejects(contract.chooseMintSlot(life.life_id, 0), /no longer in progress/);
+  assert.deepEqual(await contract.chooseMintSlot(life.life_id, 0), result, "a repeated choice recovers the same immutable mint receipt");
 });
 
 test("the real pack client opens the pack free and pays the quoted fee when minting", async () => {

@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\lysippos-parent.png",
+  "sourceSha256": "de377f679bb4589ea5c77621313ae883a675a839dc32dc25327fbd2ad7e271d1",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\lysippos-parent-coarse.png",
+  "baseSha256": "6eda0355b41b5c63f9bb383a48e299f49a304fb9c94856f2e916415a9900bcfb",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\lysippos-parent-coarse.json",
+  "baseQaSha256": "1384c62a31268f5ef3a1f17ef1b686d1d6e1936fb09437c3acd83d2a3ea6b2ec",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\source\\lysippos-parent-face.json",
+  "configSha256": "b55b6a1cda2e6f829c18f757d64daafd0ba65d968b48830d2fbfa8c25e11b3e2",
+  "config": {
+    "detail_outline_thickness": 0,
+    "base_pixel_size": 3,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "inner_scale": 0.82,
+        "radius": [
+          82,
+          99
+        ],
+        "center": [
+          335,
+          277
+        ]
+      }
+    ],
+    "detail_pixel_size": 2,
+    "critical_boxes": []
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\assets\\lysippos-parent-pixel.png",
+  "outputSha256": "f7975434ac5bbb059f6d90e1bda406a20612b61222d46dc9a05b5fddcf07e126",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "f2315caf30b90046e4a8ad0c1f77815478cc89b211291cb59dbebd3985d9242c",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v11\\qa\\lysippos-parent-face-mask.png",
+  "maskSha256": "61f9659c7dcc1f057e7a1e9ffa443bbb47282ba2608ee7dad6e3262bb885cb56",
+  "maskPixelSha256": "b014124767aebd2dca02655112f87373aab3813463639e93d7381b11a448b49c",
+  "selectedDetailCells": 589,
+  "retainedCoarseCells": 23911,
+  "affectedPixels": 21204,
+  "changedPixels": 21051,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

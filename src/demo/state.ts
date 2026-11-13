@@ -41,6 +41,7 @@ function rollStartingResources(ctx: DemoContext): void {
     else if (item === "ox" || item === "donkey") ctx.demo.household.animals[item] = quantity;
     else ctx.demo.goods[item] = quantity;
   }
+  ctx.demo.household.capacity = config.storeCapacityByOrigin?.[ctx.life.originId] ?? ctx.demo.household.capacity;
 }
 
 /** Called once at birth for demo worlds, after the origin is chosen. */

@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\demetrius-uncommon-male.png",
+  "sourceSha256": "6d5868a288895a80173a83b28a48c1d93d35d680f82f392d365641d5d398b39d",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\demetrius-uncommon-male-coarse.png",
+  "baseSha256": "2dc724b1db6cccdc469adbbca879ff05989f905829b5f8f489ac4a599919efde",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\demetrius-uncommon-male-coarse.json",
+  "baseQaSha256": "714cc950460e28cbde977c68bef70c5717b3969e0d75d79ab82bed9b9f767b3b",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\demetrius-uncommon-male-face.json",
+  "configSha256": "2fd590d852526d36e1ca31c8ee69e10c418518a9cdc307e19ec57a12838a4ec4",
+  "config": {
+    "detail_pixel_size": 2,
+    "regions": [
+      {
+        "center": [
+          435,
+          265
+        ],
+        "radius": [
+          120,
+          145
+        ],
+        "name": "face-eyes",
+        "inner_scale": 0.82
+      }
+    ],
+    "base_pixel_size": 3,
+    "critical_boxes": [],
+    "detail_outline_thickness": 0
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\demetrius-uncommon-male-pixel.png",
+  "outputSha256": "ef3ea66df0f228b286a8169dbbf3c9941db24ebd5f31b3444f6d94ae79588ebf",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "709cc4d6c7ef529a5983eb306e7cb3cefd26b5b1095cff40ae8a0a054e884845",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\demetrius-uncommon-male-face-mask.png",
+  "maskSha256": "9b81ab91c07c177a80ca2128936eae9ac6ce60c80e3ba58cac7753b6190cb1ec",
+  "maskPixelSha256": "4336f2a8210dc7ace5b7aba875d971669c4df95a888a6abc0f6d7b47fffa0fdd",
+  "selectedDetailCells": 1257,
+  "retainedCoarseCells": 23243,
+  "affectedPixels": 45252,
+  "changedPixels": 44921,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

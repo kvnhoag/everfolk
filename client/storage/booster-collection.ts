@@ -16,7 +16,10 @@ function validPack(value: unknown): value is BoosterCollectionPack {
   return typeof pack.id === "string" && typeof pack.lifeKey === "string" && typeof pack.characterName === "string" &&
     Array.isArray(pack.cards) && pack.cards.length >= 1 && pack.cards.length <= 5 && pack.cards.every(card =>
       card && typeof card.name === "string" && typeof card.sub === "string" && typeof card.art === "string" &&
-      /^\/assets\/[a-zA-Z0-9/_-]+\.(png|svg)$/.test(card.art) && Number.isInteger(card.rarity) && card.rarity >= 0 && card.rarity <= 4) &&
+      /^\/assets\/[a-zA-Z0-9/_-]+\.(png|svg|webp)$/.test(card.art) &&
+      (card.framedArt === undefined || typeof card.framedArt === "string" && /^\/assets\/cards\/collection-v14\/[a-zA-Z0-9/_-]+\.webp$/.test(card.framedArt)) &&
+      (card.editionText === undefined || typeof card.editionText === "string" && /^(?:[0-9]{3,}|—)\/(?:[0-9]{3,}|∞)$/.test(card.editionText)) &&
+      Number.isInteger(card.rarity) && card.rarity >= 0 && card.rarity <= 4) &&
     Array.isArray(pack.selected) && new Set(pack.selected).size === pack.selected.length &&
     pack.selected.every(index => Number.isInteger(index) && index >= 0 && index < pack.cards.length);
 }

@@ -1,0 +1,60 @@
+{
+  "slug": "menander-epic-male",
+  "figureId": "menander",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Dramatist of New Comedy",
+  "subtitle": "Menander",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/menander-epic-male-pixel.png",
+  "intendedEditionLimit": 25,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 025",
+  "collectionIndex": 41,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/menander-epic-male.svg",
+  "fittedArt": "assets/fitted/menander-epic-male.png",
+  "overlaySvg": "source/overlays/menander-epic-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "2f044b49d10b03ce939489f23f55f149f5ee0a8d6f3c9137c66b7e3ae9cff1e3",
+  "master": "masters/menander-epic-male.vectorcraft",
+  "export": "exports/menander-epic-male.png",
+  "thumbnail": "assets/menander-epic-male-thumb.png",
+  "exportSha256": "564df59e688d5215b68f67a63c07418f82d2067b18f0ade18e0506edcd26c7bc",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

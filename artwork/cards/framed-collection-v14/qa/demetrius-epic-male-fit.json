@@ -1,0 +1,81 @@
+{
+  "figureId": "demetrius",
+  "figureName": "Demetrius the Besieger",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Director of Siege Works",
+  "displayTitle": "Director of Siege Works",
+  "subtitle": "Right Hand of the Besieger",
+  "bodyTitle": "An Army of Builders",
+  "bodyText": "The director of siege works commands workshops, materials, and crews as parts of one great undertaking. Decisive coordination makes formidable machines possible, giving Demetrius' ambition a structure strong enough to bear its own weight.",
+  "sourceRoleSlug": "demetrius-epic",
+  "newArt": false,
+  "slug": "demetrius-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Director of Siege Works",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-epic-male-pixel.png",
+  "sourceArtSlug": "demetrius-epic-male",
+  "editionLimit": 25,
+  "collectionIndex": 62,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/demetrius.svg",
+    "sha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "The director of siege works commands workshops, materials,",
+    "and crews as parts of one great undertaking. Decisive",
+    "coordination makes formidable machines possible, giving",
+    "Demetrius' ambition a structure strong enough to bear its",
+    "own weight."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-epic-male.svg",
+  "fittedArt": "assets/fitted/demetrius-epic-male.png",
+  "overlaySvg": "source/overlays/demetrius-epic-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "b154f3c2b1719031f2407aad1703d3a7b4e16e77df1cf43e288c274690ef2ee6",
+  "master": "masters/demetrius-epic-male.vectorcraft",
+  "export": "exports/demetrius-epic-male.png",
+  "thumbnail": "assets/demetrius-epic-male-thumb.png",
+  "exportSha256": "64265412cc9c87fb50a12323d89dd8dbbbc4b57858fed3f5767fab91b9e8c5d7",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582585,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

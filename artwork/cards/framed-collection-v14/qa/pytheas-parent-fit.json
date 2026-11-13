@@ -1,0 +1,86 @@
+{
+  "slug": "pytheas-parent",
+  "figureId": "pytheas",
+  "kind": "parent",
+  "gender": "male",
+  "title": "Pytheas of Massalia",
+  "subtitle": "Explorer of the Northern Seas",
+  "rarity": "epic",
+  "gameplayRarity": "epic",
+  "raritySource": "FIGURE_RANK_POLICY.baseRank",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/pytheas-parent-pixel.png",
+  "collectionIndex": 37,
+  "owner": null,
+  "figureName": "Pytheas of Massalia",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "icon": "ship-star",
+  "bodyTitle": "Beyond the Familiar Sea",
+  "bodyText": "An explorer from Massalia, Pytheas described Britain and the distant north in a work now lost. Later writers preserve fragments of his observations, leaving a remarkable voyage whose route remains debated.",
+  "sources": [
+    {
+      "title": "Pytheas — Oxford Dictionary of National Biography",
+      "url": "https://academic.oup.com/oxford-dictionary-of-national-biography/reference/63486/reference-article-abstract/581793426"
+    },
+    {
+      "title": "Pytheas of Massalia — Encyclopedia of Ancient History",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/9781444338386.wbeah21281.pub2"
+    }
+  ],
+  "canonicalTitle": "Pytheas of Massalia",
+  "editionLimit": 25,
+  "iconSource": {
+    "file": "source/icons/pytheas.svg",
+    "sha256": "1b1d60b0ea0be82b54bd88c7fa80eee18c7d08efa74a1861ca65f6b04319f432",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "An explorer from Massalia, Pytheas described Britain and",
+    "the distant north in a work now lost. Later writers",
+    "preserve fragments of his observations, leaving a",
+    "remarkable voyage whose route remains debated."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/pytheas-parent.svg",
+  "fittedArt": "assets/fitted/pytheas-parent.png",
+  "overlaySvg": "source/overlays/pytheas-parent.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "5570661e9944bc601789e9618ffca42cbe52e27f7571899ac00c5cd62c8a134d",
+  "master": "masters/pytheas-parent.vectorcraft",
+  "export": "exports/pytheas-parent.png",
+  "thumbnail": "assets/pytheas-parent-thumb.png",
+  "exportSha256": "3cf83c39f468ff8bc9337d78d0fa57a5c4e334f6301459f60f98c4cc1840198f",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582551,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

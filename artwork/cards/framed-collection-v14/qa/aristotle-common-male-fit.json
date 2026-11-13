@@ -1,0 +1,81 @@
+{
+  "figureId": "aristotle",
+  "figureName": "Aristotle",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Lyceum Attendant",
+  "displayTitle": "Lyceum Attendant",
+  "subtitle": "At the Threshold of Wisdom",
+  "bodyTitle": "A Place for Inquiry",
+  "bodyText": "A Lyceum attendant prepares tablets, gathers scrolls, and makes room for the next discussion. Quiet attention gives the school its daily rhythm, allowing greater questions to begin without needless interruption.",
+  "sourceRoleSlug": "aristotle-common",
+  "newArt": true,
+  "sceneBrief": "A modest Lyceum attendant sets wax tablets and scrolls beside a shaded teaching bench; listening expression, simple tunic.",
+  "slug": "aristotle-common-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Lyceum Attendant",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/aristotle-common-male-pixel.png",
+  "sourceArtSlug": "aristotle-common-male",
+  "editionLimit": null,
+  "collectionIndex": 11,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/aristotle.svg",
+    "sha256": "bbbe367221e46a6d9ad8f1b0c47e8a0db223cd2b9fda67b885e906c6fe72d9c9",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A Lyceum attendant prepares tablets, gathers scrolls, and",
+    "makes room for the next discussion. Quiet attention gives",
+    "the school its daily rhythm, allowing greater questions to",
+    "begin without needless interruption."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/aristotle-common-male.svg",
+  "fittedArt": "assets/fitted/aristotle-common-male.png",
+  "overlaySvg": "source/overlays/aristotle-common-male.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "01e296d07ce64c618f9ca7f0e0f306ee958de34a01dc17d2860c7c32fe6e417d",
+  "master": "masters/aristotle-common-male.vectorcraft",
+  "export": "exports/aristotle-common-male.png",
+  "thumbnail": "assets/aristotle-common-male-thumb.png",
+  "exportSha256": "618ae15cb90464db6f635d950b3845db833ec2fe8b8dea98c72e05eeba0c3d01",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582038,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

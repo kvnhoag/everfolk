@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\alexander-epic-female.png",
+  "sourceSha256": "f045e811d38bcc09dac0857f926e01d073dedad688bf8c34bb415dd069565ded",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\alexander-epic-female-coarse.png",
+  "baseSha256": "3e45d7a12bd4ec28727e43d46aadef899fc3b4d3ec1d5167cc1d5908f2ca31ad",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\alexander-epic-female-coarse.json",
+  "baseQaSha256": "c364ede424a16a174fbc86e68bf9cb31db9d768dfb0d13282b52505c346c374b",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\source\\alexander-epic-female-face.json",
+  "configSha256": "34170b9a3938b345650a05b9eb8553bb350f3ff48ca0b9c593f2fbc7d40b7fa4",
+  "config": {
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "center": [
+          265,
+          188
+        ],
+        "name": "face-eyes",
+        "radius": [
+          100,
+          130
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "detail_pixel_size": 2,
+    "base_pixel_size": 3
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\assets\\alexander-epic-female-pixel.png",
+  "outputSha256": "a4420b06c5a23ce0d5e753dbeff0a83718617989dd6dfc203c2fea1a659a89d0",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "08e18a339f756dedefea3f532179e6bfd23a562a070cfb593be3f6648684a230",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\figure-inner-art-v12\\qa\\alexander-epic-female-face-mask.png",
+  "maskSha256": "82d07f918345dab555bc82ed4075d66106472573508c1f361fbc9654babd6088",
+  "maskPixelSha256": "4f4ccfc217d6c23aaa5fdd3f83294a26a9f4359db1120cdf2adf9e22bb6607cf",
+  "selectedDetailCells": 945,
+  "retainedCoarseCells": 23555,
+  "affectedPixels": 34020,
+  "changedPixels": 33621,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

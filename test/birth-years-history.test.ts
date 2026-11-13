@@ -4,7 +4,7 @@ import { createEngine, yearAtAge } from "../src/index.ts";
 import { validateWorld } from "../src/validate.ts";
 import type { WorldPack } from "../src/types.ts";
 import { BIRTH_YEAR_RANGE, historyBirthWeights, withHistoryBirthYears } from "../src/vocations/birth-years.ts";
-import { LIVES_WORLD_VERSION } from "../src/vocations/ids.ts";
+import { LIVES_BORN_HISTORY_WORLD_VERSION } from "../src/vocations/ids.ts";
 import lives8 from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
 import lives9 from "../worlds/demo/alexandria-lives-9.json" with { type: "json" };
 
@@ -13,7 +13,7 @@ const span = (from: number, to: number) => (to < 0 ? to + 1 : to) - (from < 0 ? 
 const datedHistory = (world: WorldPack) => world.events.filter(event => event.trigger.type === "year" && event.trigger.at !== world.startYear);
 
 test("new births run from 400 to 300 BCE, and the world starts in 400 BCE", () => {
-  assert.equal(current.version, LIVES_WORLD_VERSION);
+  assert.equal(current.version, LIVES_BORN_HISTORY_WORLD_VERSION);
   assert.deepEqual(BIRTH_YEAR_RANGE, { from: -400, to: -300 });
   assert.equal(current.startYear, -400);
   assert.equal(current.birthYears?.from, -400);

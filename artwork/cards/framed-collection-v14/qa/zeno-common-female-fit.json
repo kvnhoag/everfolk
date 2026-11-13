@@ -1,0 +1,81 @@
+{
+  "figureId": "zeno",
+  "figureName": "Zeno of Citium",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Listener at the Stoa",
+  "displayTitle": "Listener at the Stoa",
+  "subtitle": "First Steps Beside Zeno",
+  "bodyTitle": "Attention Before Answer",
+  "bodyText": "A listener beneath the porch gives a difficult argument the attention it deserves. Honest willingness to reconsider an easy answer marks the first small victory of reason over habit.",
+  "sourceRoleSlug": "zeno-common",
+  "newArt": true,
+  "sceneBrief": "A plainly dressed adult listener beside the painted colonnade holds a simple wax tablet, thoughtful attentive gaze; not posed as the school's teacher.",
+  "slug": "zeno-common-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "common",
+  "rarity": "common",
+  "canonicalTitle": "Listener at the Stoa",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v14/assets/zeno-common-female-pixel.png",
+  "sourceArtSlug": "zeno-common-female",
+  "editionLimit": null,
+  "collectionIndex": 75,
+  "gameplayRarity": null,
+  "raritySource": "user-requested-four-tier-collection",
+  "iconSource": {
+    "file": "source/icons/zeno.svg",
+    "sha256": "2ccae9be1d2637a6a603b3dedc84ee85132f1d5b6d6ec3e5840f3e3cd67c5035",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/∞",
+  "rarityCharacteristics": "plain iron, single rule, square corner joints",
+  "bodySize": 24,
+  "bodyLines": [
+    "A listener beneath the porch gives a difficult argument the",
+    "attention it deserves. Honest willingness to reconsider an",
+    "easy answer marks the first small victory of reason over",
+    "habit."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/zeno-common-female.svg",
+  "fittedArt": "assets/fitted/zeno-common-female.png",
+  "overlaySvg": "source/overlays/zeno-common-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "9636a0c1dd265207e24f77e20298939c8bb37bd6aaa42d1c6f1ca5ead27f8cbd",
+  "master": "masters/zeno-common-female.vectorcraft",
+  "export": "exports/zeno-common-female.png",
+  "thumbnail": "assets/zeno-common-female-thumb.png",
+  "exportSha256": "6dd139f7d2961c10248a19dd8cbaa8d99cd3b32af8680188a0f52140e2537612",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582474,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

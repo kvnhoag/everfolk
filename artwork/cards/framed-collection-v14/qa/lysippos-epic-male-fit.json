@@ -1,0 +1,80 @@
+{
+  "figureId": "lysippos",
+  "figureName": "Lysippos",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Master of Lysippan Form",
+  "displayTitle": "Master of Lysippan Form",
+  "subtitle": "Bearer of the Master's Craft",
+  "bodyTitle": "Presence Beyond the Model",
+  "bodyText": "A master sculptor unites proportion, gesture, and command of bronze into a figure that seems alive. Such judgment carries the workshop's tradition forward, making technical mastery serve an unmistakable human presence.",
+  "sourceRoleSlug": "lysippos-epic",
+  "newArt": false,
+  "slug": "lysippos-epic-male",
+  "kind": "contribution",
+  "gender": "male",
+  "tier": "epic",
+  "rarity": "epic",
+  "canonicalTitle": "Master of Lysippan Form",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/lysippos-epic-male-pixel.png",
+  "sourceArtSlug": "lysippos-epic-male",
+  "editionLimit": 25,
+  "collectionIndex": 35,
+  "gameplayRarity": "epic",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/lysippos.svg",
+    "sha256": "dccb7bfb45ee2bdc39ab21f9fb1b206a05545a0acef9ea56284dd12c7eec4d52",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/025",
+  "rarityCharacteristics": "amethyst and gold, interlaced corner knots, gem rails",
+  "bodySize": 24,
+  "bodyLines": [
+    "A master sculptor unites proportion, gesture, and command",
+    "of bronze into a figure that seems alive. Such judgment",
+    "carries the workshop's tradition forward, making technical",
+    "mastery serve an unmistakable human presence."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/lysippos-epic-male.svg",
+  "fittedArt": "assets/fitted/lysippos-epic-male.png",
+  "overlaySvg": "source/overlays/lysippos-epic-male.svg",
+  "titleSize": 62,
+  "sourceArtSha256": "2b95687fd8c0c75f675c7a3079b5b4339c6c11c5eae6f59aeae950362c3378b9",
+  "master": "masters/lysippos-epic-male.vectorcraft",
+  "export": "exports/lysippos-epic-male.png",
+  "thumbnail": "assets/lysippos-epic-male-thumb.png",
+  "exportSha256": "a83eb7828049aaf4db0e609d7898d81b3c822ebf39c2b182534566ecbf6e1e5c",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582649,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}

@@ -21,7 +21,6 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
 } });
 const { default: CharacterPanel } = await import("../client/components/CharacterPanel.tsx");
 const { default: HouseholdSummary } = await import("../client/components/HouseholdSummary.tsx");
-const { default: BirthPortraitPreview } = await import("../client/components/BirthPortraitPreview.tsx");
 hooks.deregister();
 const engine = createEngine(pack);
 
@@ -70,20 +69,6 @@ test("former dated people remain in history without exposing undated acquaintanc
   assert.match(html, /<h4>Kleopatra<\/h4>/);
   assert.match(html, /Former partner/);
   assert.equal((html.match(/character-person-avatar/g) ?? []).length, 1);
-});
-
-test("birth shows the randomly assigned face through all six stages with no portrait controls", () => {
-  for (const sex of ["male", "female"] as const) {
-    const life = structuredClone(engine.start(`avatar-ui-${sex}`));
-    life.character!.sex = sex; life.character!.avatarVariant = 1;
-    const before = structuredClone(life);
-    const html = renderToStaticMarkup(createElement(BirthPortraitPreview, { life, world: engine.world }));
-    assert.doesNotMatch(html, /<button|aria-pressed=|Portrait choices|Choose your portrait/);
-    assert.equal((html.match(/<img\b/g) ?? []).length, 7);
-    for (const stage of ["infant", "child", "youth", "adult", "middle", "elder"]) assert.ok(html.includes(`ef-p-${sex === "female" ? "f" : "m"}02-${stage}-`));
-    assert.match(html, new RegExp(sex === "female" ? "Born a girl" : "Born a boy"));
-    assert.deepEqual(life, before);
-  }
 });
 
 test("an avatar command preserves the unrevealed birth and its exact starting ranges", () => {

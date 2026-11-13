@@ -1,0 +1,60 @@
+{
+  "slug": "demetrius-rare-male",
+  "figureId": "demetrius",
+  "kind": "contribution",
+  "gender": "male",
+  "title": "Siege Engineer",
+  "subtitle": "Demetrius the Besieger",
+  "typeLabel": "PLAYER CONTRIBUTION",
+  "rarity": "rare",
+  "gameplayRarity": "rare",
+  "raritySource": "figure progression tier",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-rare-male-pixel.png",
+  "intendedEditionLimit": 100,
+  "footerLeft": "EVERFOLK",
+  "footerRight": "LIMIT 100",
+  "collectionIndex": 46,
+  "copySerial": null,
+  "owner": null,
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-rare-male.svg",
+  "fittedArt": "assets/fitted/demetrius-rare-male.png",
+  "overlaySvg": "source/overlays/demetrius-rare-male.svg",
+  "titleSize": 72,
+  "sourceArtSha256": "6776d7912d3d58d7c192f65bbc0fe3eece0b1f9d43d8d15d0f1526ea105c0f97",
+  "master": "masters/demetrius-rare-male.vectorcraft",
+  "export": "exports/demetrius-rare-male.png",
+  "thumbnail": "assets/demetrius-rare-male-thumb.png",
+  "exportSha256": "6a59642b84892fb05e594c108b06c241dbe1afe3427d06c8b73b5e82c6cb4553",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 583204,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  },
+  "previewStatus": "ART PREVIEW · MALE CONTRIBUTOR"
+}

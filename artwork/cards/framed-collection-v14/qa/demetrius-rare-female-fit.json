@@ -1,0 +1,80 @@
+{
+  "figureId": "demetrius",
+  "figureName": "Demetrius the Besieger",
+  "exampleCopyNumber": 1,
+  "copySerialIsExample": true,
+  "owner": null,
+  "title": "Siege Engineer",
+  "displayTitle": "Siege Engineer",
+  "subtitle": "Mind of the Siege Train",
+  "bodyTitle": "Force Given Direction",
+  "bodyText": "A siege engineer brings measurement and mechanical judgment to a battlefield problem. By balancing reach, weight, and stability, the engineer turns raw power into a deliberate answer to the enemy's defences.",
+  "sourceRoleSlug": "demetrius-rare",
+  "newArt": false,
+  "slug": "demetrius-rare-female",
+  "kind": "contribution",
+  "gender": "female",
+  "tier": "rare",
+  "rarity": "rare",
+  "canonicalTitle": "Siege Engineer",
+  "frameLayout": "standard",
+  "sourceArt": "artwork/cards/figure-inner-art-v12/assets/demetrius-rare-female-pixel.png",
+  "sourceArtSlug": "demetrius-rare-female",
+  "editionLimit": 100,
+  "collectionIndex": 61,
+  "gameplayRarity": "rare",
+  "raritySource": "existing-figure-progression-tier",
+  "iconSource": {
+    "file": "source/icons/demetrius.svg",
+    "sha256": "4d32ffd7ff753fd02d24995fa75e1263a2b2fb7f10fa495b55c46f273b4b2926",
+    "credits": "source/icon-sources.json"
+  },
+  "editionText": "001/100",
+  "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+  "bodySize": 24,
+  "bodyLines": [
+    "A siege engineer brings measurement and mechanical judgment",
+    "to a battlefield problem. By balancing reach, weight, and",
+    "stability, the engineer turns raw power into a deliberate",
+    "answer to the enemy's defences."
+  ],
+  "fit": {
+    "method": "nearest-neighbour portrait contain with jade inlay",
+    "source": [
+      840,
+      1050
+    ],
+    "rect": [
+      154,
+      190,
+      592,
+      740
+    ],
+    "aperture": [
+      50,
+      190,
+      800,
+      740
+    ],
+    "sourceCropped": false,
+    "kernel": "nearest",
+    "aspectRatioPreserved": true,
+    "note": "Full portrait retained; jade side inlays occupy the wider standard aperture."
+  },
+  "sourceSvg": "source/cards/demetrius-rare-female.svg",
+  "fittedArt": "assets/fitted/demetrius-rare-female.png",
+  "overlaySvg": "source/overlays/demetrius-rare-female.svg",
+  "titleSize": 64,
+  "sourceArtSha256": "6ad875cff013cc058bcfdc9602af927ae1ebdd0ef7ea0c30293fefda0502ca31",
+  "master": "masters/demetrius-rare-female.vectorcraft",
+  "export": "exports/demetrius-rare-female.png",
+  "thumbnail": "assets/demetrius-rare-female-thumb.png",
+  "exportSha256": "f0e85f77a2f73d9afeb63201cb886f327d9a10251a2a1dffc3c8c8c98168e668",
+  "qa": {
+    "nativeReopenIdentical": true,
+    "uncoveredPixelsChecked": 582609,
+    "uncoveredRgbDifferences": 0,
+    "transparentOuterCorners": true,
+    "editableText": true
+  }
+}
