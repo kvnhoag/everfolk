@@ -218,3 +218,13 @@ test("the played character's recorded sex is signed, so the NFT shows that versi
   const unrecorded = await buildEvidence({ life: LIFE, save, state: life, worldFingerprint: life.worldFingerprint });
   assert.equal(Object.hasOwn(unrecorded, "sex"), false, "an unrecorded sex is omitted, never guessed");
 });
+
+test("a figure-path world signs the cards the life earned; an earlier world's evidence keeps its shape", async () => {
+  const { life, save } = finished();
+  const paths = { figurePaths: [] } as unknown as import("../src/types.ts").WorldPack;
+  const weave = { ...paths, figurePaths: (await import("../worlds/demo/alexandria-lives-11.json", { with: { type: "json" } })).default.figurePaths } as unknown as import("../src/types.ts").WorldPack;
+  const signed = await buildEvidence({ life: LIFE, save, state: life, worldFingerprint: life.worldFingerprint, world: weave });
+  assert.deepEqual(signed.earned_cards, [], "a life that followed no figure earns nothing, and says so");
+  const earlier = await buildEvidence({ life: LIFE, save, state: life, worldFingerprint: life.worldFingerprint, world: paths });
+  assert.equal(Object.hasOwn(earlier, "earned_cards"), false);
+});

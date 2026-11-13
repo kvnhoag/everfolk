@@ -155,6 +155,8 @@ impl Contract {
             "Stage evidence is too large"
         );
         let evidence: Evidence = serde_json::from_str(&evidence_json).expect("life evidence json");
+        // Life-stage NFTs are off for figure-path worlds: only earned cards are minted, through the pack.
+        require!(evidence.earned_cards.is_none(), "Life-stage NFTs are turned off; mint an earned card from this life's pack");
         let life = self.lives.get(&life_id.0).expect("Life not found");
         self.assert_evidence(life_id.0, life, &evidence, &npc_action_id);
         let stages: StageEvidence = serde_json::from_str(&evidence_json)
@@ -372,6 +374,7 @@ impl Contract {
                 figure: card.figure_id.clone(),
                 rarity,
                 affection,
+                card: None,
             };
             let id = self.mint_token(
                 &life.account_id,
@@ -394,10 +397,6 @@ impl Contract {
                 "from_age": record.from_age, "to_age": record.to_age, "district": record.district,
                 "field": record.field, "tier": record.tier, "portrait_media": card.portrait_media, "stage_record": record
             }).as_object().unwrap() { extra[name] = value.clone(); }
-            // A stage NFT shows its own portrait, not a collection card; it keeps its serial only.
-            for name in ["card_id", "attributes", "sex"] {
-                extra.as_object_mut().unwrap().remove(name);
-            }
             meta.extra = Some(extra.to_string());
             meta.title = Some(format!("{} · {}", card.character_name, card.title));
             meta.description = Some(format!(

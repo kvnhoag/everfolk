@@ -201,6 +201,21 @@ pub struct Evidence {
     /// The played character's recorded sex ("male" or "female"); picks a profession card's version. Older evidence omits it.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub sex: Option<String>,
+    /// The cards this life earned on historical figure paths (chain/earned-cards.ts). When present, only these can be
+    /// minted, through the pack; an empty list means the life earned none. Evidence from worlds without paths omits it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub earned_cards: Option<Vec<EarnedCard>>,
+}
+
+/// One card a life earned: a figure's own card (`principal`) or the player's contributor card on that figure's path.
+#[near(serializers = [json])]
+#[derive(Clone, Debug, PartialEq)]
+pub struct EarnedCard {
+    pub card_id: String,
+    pub figure_id: String,
+    /// "principal" or "contribution".
+    pub kind: String,
+    pub rarity: u8,
 }
 
 #[near(serializers = [json, borsh])]

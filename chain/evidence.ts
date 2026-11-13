@@ -1,4 +1,5 @@
-import type { LifeState, SaveFile } from "../src/types.ts";
+import type { LifeState, SaveFile, WorldPack } from "../src/types.ts";
+import { earnedCards } from "./earned-cards.ts";
 import { canonicalJson } from "../src/random.ts";
 import { sha256Hex } from "./hash.ts";
 import { computeImpacts } from "./impact.ts";
@@ -6,7 +7,8 @@ import { careerGroupOf, matchFigures, peakJobOf } from "./match.ts";
 import { matchStageFigure, type MatchedStageFigure, type StageCharacterContext } from "./stage-figures.ts";
 import type { Evidence, LifeView } from "./types.ts";
 
-export interface EvidenceInput { life: LifeView; save: SaveFile; state: LifeState; worldFingerprint: string }
+/** `world` is the replayed pack; a world with historical figure paths signs the cards the life earned. */
+export interface EvidenceInput { life: LifeView; save: SaveFile; state: LifeState; worldFingerprint: string; world?: WorldPack }
 
 function assertSameLife({ life, save, state, worldFingerprint }: EvidenceInput): void {
   if (save.seed !== life.seed || state.seed !== life.seed) throw new Error("This save does not match the ranked life's seed.");
@@ -48,6 +50,8 @@ export async function buildEvidence(input: EvidenceInput): Promise<Evidence> {
     sources: computeImpacts(save.commands, state.journal),
     // The recorded sex picks the male or female version of a profession card; it is never guessed.
     ...(state.character?.sex === "male" || state.character?.sex === "female" ? { sex: state.character.sex } : {}),
+    // Only earned cards can be minted (chain/earned-cards.ts); an empty list means this life earned none.
+    ...(input.world?.figurePaths?.length ? { earned_cards: earnedCards(input.world, state) } : {}),
     ...(state.stageRecords && state.stageRecords.length > 0 ? {
       stage_records: state.stageRecords,
       stage_figures: state.stageRecords.map(record => matchStageFigure(record, {

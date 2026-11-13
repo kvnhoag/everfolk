@@ -1,7 +1,7 @@
-//! The v14 collection card each pack card and minted NFT shows. chain/card-art.ts builds the table from the
-//! card manifest; the contract only matches it. Stored as JSON under a raw key, so existing deployments
-//! upgrade without a Borsh change. With no table, or no match, minting keeps its earlier metadata.
-use crate::rarity_caps::{design_key, RARITY_CAPS};
+//! The v14 collection cards an earned NFT can show. scripts/ranked/card-art-table.ts builds the table from the
+//! card manifest (every card a life can earn, chain/earned-cards.ts); the contract only looks cards up by id.
+//! Stored as JSON under a raw key. A card missing from the table is never minted.
+use crate::rarity_caps::RARITY_CAPS;
 use crate::{Contract, ContractExt};
 use near_sdk::{env, near, require, serde_json};
 
@@ -17,11 +17,6 @@ pub struct CardArt {
     /// Absolute https image URL, so wallets and markets can load it.
     pub media: String,
     pub rarity: u8,
-    /// A historical figure's main card; `None` for a profession card.
-    pub figure_id: Option<String>,
-    /// Profession cards match the life's career group and the player's sex.
-    pub career_group: Option<String>,
-    pub sex: Option<String>,
     /// Must equal the contract's cap for `rarity`; `None` is unlimited.
     pub edition_limit: Option<u32>,
 }
@@ -38,7 +33,7 @@ pub struct EditionSupply {
     pub next_edition_number: Option<u32>,
 }
 
-fn is_card_id(id: &str) -> bool {
+pub fn is_card_id(id: &str) -> bool {
     !id.is_empty() && id.len() <= 64 && id.bytes().all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'-')
 }
 
@@ -51,31 +46,16 @@ fn validate(cards: &[CardArt]) {
         require!(card.media.starts_with("https://") && card.media.len() <= 512, "Card images must be absolute https URLs");
         require!((card.rarity as usize) < RARITY_CAPS.len(), "Unknown card rarity");
         require!(card.edition_limit == RARITY_CAPS[card.rarity as usize], "A card's edition limit must equal its rarity cap");
-        match &card.figure_id {
-            Some(figure) => require!(!figure.is_empty() && card.career_group.is_none() && card.sex.is_none(), "A figure card matches figure and rarity only"),
-            None => require!(
-                card.career_group.as_deref().is_some_and(|group| !group.is_empty())
-                    && matches!(card.sex.as_deref(), Some("male") | Some("female")),
-                "A profession card needs a career group and a sex"
-            ),
-        }
     }
 }
 
-/// The card for a figure (by rarity) or a person of the city (by career, rarity and recorded sex).
-pub fn card_for<'a>(cards: &'a [CardArt], figure: Option<&str>, rarity: u8, career: &str, sex: Option<&str>) -> Option<&'a CardArt> {
-    cards.iter().find(|card| {
-        card.rarity == rarity
-            && match figure {
-                Some(id) => card.figure_id.as_deref() == Some(id),
-                None => card.figure_id.is_none() && card.career_group.as_deref() == Some(career) && sex.is_some() && card.sex.as_deref() == sex,
-            }
-    })
+pub fn card_by_id<'a>(cards: &'a [CardArt], card_id: &str) -> Option<&'a CardArt> {
+    cards.iter().find(|card| card.card_id == card_id)
 }
 
-/// The design a copy is counted under: `card:<card_id>`, or the earlier figure/deed key when it has no card.
-pub fn card_design(cards: &[CardArt], figure: Option<&str>, rarity: u8, career: &str, sex: Option<&str>, npc_action_id: &str) -> String {
-    card_for(cards, figure, rarity, career, sex).map(|card| format!("card:{}", card.card_id)).unwrap_or_else(|| design_key(figure, npc_action_id))
+/// The design a card's copies are counted under.
+pub fn card_design(card_id: &str) -> String {
+    format!("card:{card_id}")
 }
 
 /// The edition key the client reads (chain/editions.ts): one design at one rarity, `<design>:rarity:<n>`.
@@ -114,16 +94,5 @@ impl Contract {
 impl Contract {
     pub(crate) fn card_art(&self) -> Vec<CardArt> {
         env::storage_read(KEY).map(|bytes| serde_json::from_slice(&bytes).expect("stored card art")).unwrap_or_default()
-    }
-
-    /// Rarity odds for one roll, each rarity checked against the card design it would produce.
-    pub(crate) fn open_weights_for(&self, cards: &[CardArt], figure: Option<&str>, career: &str, sex: Option<&str>, npc_action_id: &str, weights: [u64; 5]) -> [u64; 5] {
-        let mut open = weights;
-        for (rarity, weight) in open.iter_mut().enumerate() {
-            if !self.rarity_open(&card_design(cards, figure, rarity as u8, career, sex, npc_action_id), rarity as u8) {
-                *weight = 0;
-            }
-        }
-        open
     }
 }

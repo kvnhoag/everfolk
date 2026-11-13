@@ -8,7 +8,8 @@ import { TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO, TESTNET_STAGE_FIGURE_HISTORICAL
 import type { Draw, EditionFields, EditionSupply, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack, StageMintQuote, TokenExtra } from "../../chain/types.ts";
 import { packCardCount } from "../../chain/pack-count.ts";
 import { designKey, openRarityWeights } from "../../chain/rarity-caps.ts";
-import { cardDesign, cardIdFor } from "../../chain/card-art.ts";
+import { getCardArtById } from "../models/card-art.ts";
+import type { EarnedCard } from "../../chain/earned-cards.ts";
 import { editionKey, editionLimit } from "../../chain/editions.ts";
 import { roll, weightedPick } from "./mock-math.ts";
 import { buy, list, payMintFee, setAction, unlist, withdraw } from "./mock-market.ts";
@@ -52,7 +53,7 @@ function previewEdition(state: MockState, input: Parameters<typeof editionKey>[0
 }
 
 function refreshPack(state: MockState, pack: { view: MintPack; evidence: Evidence }): MintPack {
-  return { ...copy(pack.view), cards: pack.view.cards.map(card => ({ ...copy(card), ...previewEdition(state, { ...card, career_group: pack.evidence.career_group, sex: pack.evidence.sex }) })) };
+  return { ...copy(pack.view), cards: pack.view.cards.map(card => ({ ...copy(card), ...previewEdition(state, { ...card, career_group: pack.evidence.career_group }) })) };
 }
 
 function reservedEditions(state: MockState, key: string, excludeLifeId?: string, replacing?: MintCard): number {
@@ -60,7 +61,7 @@ function reservedEditions(state: MockState, key: string, excludeLifeId?: string,
   for (const [lifeId, pack] of state.packs) for (const card of pack.view.cards) {
     if (lifeId === excludeLifeId) continue;
     if (card === replacing) continue;
-    if (editionKey({ ...card, career_group: pack.evidence.career_group, sex: pack.evidence.sex }) === key) reserved++;
+    if (editionKey({ ...card, career_group: pack.evidence.career_group }) === key) reserved++;
   }
   return reserved;
 }
@@ -159,10 +160,10 @@ function rarityTaken(state: MockState, design: string, rarity: number): number {
   return taken;
 }
 
-/** Each rarity is checked against the card design it would produce, as contract/src/card_art.rs `open_weights_for`. */
-function openWeights(state: MockState, figure: string | null, evidence: Evidence, npcActionId: string, weights: readonly bigint[]): bigint[] {
-  const design = (rarity: number) => cardDesign({ figure_id: figure, rarity, career_group: evidence.career_group, sex: evidence.sex }, npcActionId);
-  return openRarityWeights(weights.map(Number), rarity => rarityTaken(state, design(rarity), rarity)).map(BigInt);
+/** Rolled cards (worlds without figure paths) count under their figure or deed, as contract/src/rarity_caps.rs. */
+function openWeights(state: MockState, figure: string | null, _evidence: Evidence, npcActionId: string, weights: readonly bigint[]): bigint[] {
+  const design = designKey(figure, npcActionId);
+  return openRarityWeights(weights.map(Number), rarity => rarityTaken(state, design, rarity)).map(BigInt);
 }
 
 async function rollOutcome(state: MockState, seed: string, evidence: Evidence, npcActionId: string, replacing?: MintCard) {
@@ -177,7 +178,7 @@ async function rollOutcome(state: MockState, seed: string, evidence: Evidence, n
   }
   // The contract's per-design rarity caps (chain/rarity-caps.ts) and the edition serial limits both apply.
   const weights = openWeights(state, figure, evidence, npcActionId, figure ? FIGURE_RARITY_WEIGHTS : NPC_RARITY_WEIGHTS).map((weight, rarity) =>
-    weight > 0n && editionAvailable(state, { figure_id: figure, career_group: evidence.career_group, rarity, sex: evidence.sex }, new Map(), undefined, replacing) ? weight : 0n);
+    weight > 0n && editionAvailable(state, { figure_id: figure, career_group: evidence.career_group, rarity }, new Map(), undefined, replacing) ? weight : 0n);
   const picked = weightedPick(weights, await roll(seed, "rarity"));
   if (picked === null && figure) return rollOutcome(state, seed, { ...evidence, matched_figures: [] }, npcActionId, replacing);
   const rarity = picked ?? 0;
@@ -201,9 +202,9 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
     : state.params.mintFee);
   // Async hashing/rolling may overlap another request; recheck immediately before the synchronous allocation.
   ownedAliveLife(state, account, lifeId);
-  if (!editionAvailable(state, { figure_id: figure, career_group: evidence.career_group, rarity, sex: evidence.sex, stage_id: chosen?.stage_id, stage_record: chosen?.stage_record }, new Map(), chosen ? lifeId : undefined)) throw new Error("This card edition is sold out");
-  // A stage NFT shows its own portrait; every other card shows its v14 collection card, as the contract records it.
-  const cardId = chosen?.stage_id ? null : cardIdFor({ figure_id: figure, rarity, career_group: evidence.career_group, sex: evidence.sex });
+  if (!chosen && evidence.earned_cards) throw new Error("Open this life's pack to mint one of the cards it earned");
+  const cardId = chosen?.card_id ?? null;
+  if (!editionAvailable(state, { figure_id: figure, career_group: evidence.career_group, rarity, card_id: cardId, stage_id: chosen?.stage_id, stage_record: chosen?.stage_record }, new Map(), chosen ? lifeId : undefined)) throw new Error("This card's edition is sold out");
   const tokenId = registerToken(state, {
     owner_id: life.account_id, kind, figure_id: figure, category, rarity, affection, action_id: actionId,
     extra: {
@@ -243,6 +244,22 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
   };
 }
 
+/** One slot per earned card with collection art, in signed order, at most five; rarity comes from the card. */
+async function earnedPackCards(state: MockState, life: LifeView, hash: string, evidence: Evidence, action: string, earned: readonly EarnedCard[]): Promise<MintCard[]> {
+  const seen = new Set<string>(), cards: MintCard[] = [];
+  for (const card of earned) {
+    if (seen.has(card.card_id) || cards.length >= 5) continue;
+    seen.add(card.card_id);
+    const art = getCardArtById(card.card_id);
+    if (!art || ["common", "uncommon", "rare", "epic", "legendary"].indexOf(art.rarity) !== card.rarity) continue;
+    const figure = card.kind === "principal" && (FIGURE_IDS as readonly string[]).includes(card.figure_id) ? card.figure_id as FigureId : null;
+    const bonds = Math.trunc(Math.max(-1e6, Math.min(1e6, evidence.stats.bonds ?? 50)));
+    const affection = Math.max(1, Math.min(100, 1 + Number((await roll(`${life.seed}:pack:${hash}:${cards.length}`, "aff")) % 100n) + Math.trunc((bonds - 50) / 5)));
+    cards.push({ kind: figure ? "figure" : "npc", figure_id: figure, rarity: card.rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action, card_id: card.card_id });
+  }
+  return cards;
+}
+
 async function packCard(state: MockState, life: LifeView, hash: string, slot: number, evidence: Evidence, action: string): Promise<MintCard> {
   const stageFigures = evidence.stage_figures;
   if (stageFigures && stageFigures.length > 0) {
@@ -272,8 +289,7 @@ async function packCard(state: MockState, life: LifeView, hash: string, slot: nu
     };
   }
   const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:pack:${hash}:${slot}`), evidence, action);
-  const cardId = cardIdFor({ figure_id: figure, rarity, career_group: evidence.career_group, sex: evidence.sex });
-  return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action, ...(cardId ? { card_id: cardId } : {}) };
+  return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action };
 }
 
 function bind(state: MockState, account: string): MockLivesContract {
@@ -296,6 +312,7 @@ function bind(state: MockState, account: string): MockLivesContract {
     const life = state.lives.get(lifeId);
     if (!life) throw new Error("Life not found");
     const evidence = parseEvidence(signed); assertEvidence(life, evidence, action, state.params.now());
+    if (evidence.earned_cards) throw new Error("Life-stage NFTs are turned off; mint an earned card from this life's pack");
     if (!evidence.stage_figures?.length) throw new Error("Stage records and signed portraits are required");
     const allocated = new Map<FigureId, number>();
     const allocatedEditions = new Map<string, number>();
@@ -386,9 +403,17 @@ function bind(state: MockState, account: string): MockLivesContract {
       if (state.packs.has(lifeId)) throw new Error("This life already has an open pack; resume it to choose a card");
       const evidence = parseEvidence(signed);
       assertEvidence(life, evidence, action, state.params.now());
+      const evidenceHash = await sha256Hex(signed.evidence_json);
+      if (evidence.earned_cards) {
+        // A figure-path world: exactly the cards this life earned, as contract/src/mint_pack.rs `earned_pack_cards`.
+        const cards = await earnedPackCards(state, life, evidenceHash, evidence, action, evidence.earned_cards);
+        if (!cards.length) throw new Error("This life earned no card to mint");
+        const pack = { view: { life_id: lifeId, evidence_hash: evidenceHash, cards, total_fee: state.params.mintFee.toString(), source_share_bps: state.params.sourceMintShareBps }, evidence, signed, action };
+        state.packs.set(lifeId, pack);
+        return refreshPack(state, pack);
+      }
       const cardCount = packCardCount(evidence);
       if (cardCount === 0) throw new Error("This life ended too early to open a mint pack");
-      const evidenceHash = await sha256Hex(signed.evidence_json);
       const hasStageFigures = Boolean(evidence.stage_figures && evidence.stage_figures.length > 0);
       const initialFee = hasStageFigures ? TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO : state.params.mintFee.toString();
       const view: MintPack = { life_id: lifeId, evidence_hash: evidenceHash, cards: [], total_fee: initialFee, source_share_bps: state.params.sourceMintShareBps };
@@ -405,6 +430,8 @@ function bind(state: MockState, account: string): MockLivesContract {
       ownedAliveLife(state, account, lifeId);
       const pack = state.packs.get(lifeId);
       if (!pack || !Number.isInteger(slot) || slot < 0 || slot >= pack.view.cards.length) throw new Error("Unknown mint slot");
+      const chosen = pack.view.cards[slot];
+      if (chosen.card_id && refreshPack(state, pack).cards[slot].next_edition_number === null) throw new Error("This card's edition is sold out");
       const result = await mintLife(state, account, lifeId, pack.signed, pack.action, pack.view.cards[slot], BigInt(pack.view.total_fee));
       state.packs.delete(lifeId);
       return result;

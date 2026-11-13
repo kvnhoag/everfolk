@@ -70,8 +70,7 @@ impl Contract {
             Some(cap) => read_count(&minted_key(design, rarity)) + read_count(&held_key(design, rarity)) < cap,
         }
     }
-    /// The rarity odds with sold-out tiers removed for one fixed design (crate::card_art checks each rarity's own card).
-    #[cfg(test)]
+    /// The rarity odds with sold-out tiers removed; the remaining tiers keep their relative odds.
     pub(crate) fn open_rarity_weights(&self, design: &str, weights: [u64; 5]) -> [u64; 5] {
         let mut open = weights;
         for (rarity, weight) in open.iter_mut().enumerate() {

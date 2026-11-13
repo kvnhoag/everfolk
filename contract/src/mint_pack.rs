@@ -2,7 +2,8 @@
 //! Raw keys extend existing deployments without changing Contract's Borsh layout.
 use crate::mint::Outcome;
 use crate::random::block_seed;
-use crate::card_art::{card_design, card_for, design_of, edition_key, CardArt};
+use crate::card_art::{card_by_id, card_design, design_of, edition_key};
+use crate::mint::affection_roll;
 use crate::rarity_caps::{design_key, RARITY_CAPS};
 use crate::shares::{bps_of, compute_shares};
 use crate::types::*;
@@ -146,17 +147,17 @@ impl Contract {
         self.assert_signed(&evidence_json, &signature);
         let evidence: Evidence = serde_json::from_str(&evidence_json).expect("life evidence json");
         self.assert_evidence(life_id.0, &life, &evidence, &npc_action_id);
-        let card_count = pack_card_count(&evidence);
-        require!(
-            card_count > 0,
-            "This life ended too early to open a mint pack"
-        );
         let hash = hex::encode(env::sha256_array(evidence_json.as_bytes()));
-        let art = self.card_art();
-        let mut cards = Vec::new();
-        for slot in 0..card_count {
-            cards.push(self.pack_card(life_id.0, &hash, slot, &evidence, &npc_action_id, &art));
-        }
+        let cards = match &evidence.earned_cards {
+            // A figure-path world: exactly the cards this life earned, nothing rolled.
+            Some(earned) => self.earned_pack_cards(life_id.0, &hash, &evidence, &npc_action_id, earned),
+            None => {
+                let card_count = pack_card_count(&evidence);
+                require!(card_count > 0, "This life ended too early to open a mint pack");
+                (0..card_count).map(|slot| self.pack_card(life_id.0, &hash, slot, &evidence, &npc_action_id)).collect()
+            }
+        };
+        require!(!cards.is_empty(), "This life earned no card to mint");
         let pack = StoredPack {
             view: MintPack {
                 life_id,
@@ -185,7 +186,9 @@ impl Contract {
         exact_fee(pack.view.total_fee.0);
         require!((slot as usize) < pack.view.cards.len(), "Unknown mint slot");
         let card = &pack.view.cards[slot as usize];
+        require!(card.card_id.is_none() || card.next_edition_number.is_some(), "This card's edition is sold out");
         let evidence: Evidence = serde_json::from_str(&pack.evidence_json).unwrap();
+        let earned = card.card_id.as_ref().and_then(|id| evidence.earned_cards.as_ref()?.iter().find(|e| &e.card_id == id).cloned());
         let shares = compute_shares(
             &evidence
                 .sources
@@ -201,6 +204,7 @@ impl Contract {
             figure: card.figure_id.clone(),
             rarity: card.rarity,
             affection: card.affection,
+            card: earned,
         };
         let token_id = self.mint_token(
             &life.account_id,
@@ -257,8 +261,12 @@ impl Contract {
     pub(crate) fn release_pack_card(&self, card: &MintCard) {
         let design = card.edition_key.as_deref().and_then(|key| design_of(key, card.rarity)).map(str::to_string)
             .unwrap_or_else(|| design_key(card.figure_id.as_deref(), &card.action_id));
-        self.release_rarity(&design, card.rarity);
-        if let Some(id) = &card.figure_id {
+        // An earned card that was sold out when the pack opened held nothing.
+        if card.card_id.is_none() || card.next_edition_number.is_some() {
+            self.release_rarity(&design, card.rarity);
+        }
+        // Only rolled figure cards reserve figure supply; earned cards are limited by their rarity caps.
+        if let (None, Some(id)) = (&card.card_id, &card.figure_id) {
             let count = self
                 .pack_reserved(id)
                 .checked_sub(1)
@@ -270,6 +278,42 @@ impl Contract {
             }
         }
     }
+    /// One slot per earned card that has art, in the signed order, at most five. A sold-out card is shown with no
+    /// next serial and holds nothing. A figure's own card mints as that figure when the catalog lists it; every other
+    /// card is a person of the city carrying the deed the player chose.
+    fn earned_pack_cards(&self, id: u64, hash: &str, evidence: &Evidence, npc: &str, earned: &[EarnedCard]) -> Vec<MintCard> {
+        let art = self.card_art();
+        let mut seen = std::collections::BTreeSet::new();
+        earned
+            .iter()
+            .filter(|e| seen.insert(e.card_id.clone()))
+            .filter_map(|e| card_by_id(&art, &e.card_id).filter(|card| card.rarity == e.rarity).map(|card| (e, card)))
+            .take(MAX_PACK_CARDS as usize)
+            .enumerate()
+            .map(|(slot, (e, card))| {
+                let seed = block_seed(id, format!("mint-pack:{hash}:{slot}").as_bytes());
+                let design = card_design(&card.card_id);
+                let minted = self.minted_count(&design, card.rarity);
+                let open = self.rarity_open(&design, card.rarity);
+                if open {
+                    self.hold_rarity(&design, card.rarity);
+                }
+                let figure = if e.kind == "principal" { self.catalog.figures.iter().find(|f| f.figure_id == e.figure_id) } else { None };
+                MintCard {
+                    kind: if figure.is_some() { TokenKind::Figure } else { TokenKind::Npc },
+                    figure_id: figure.map(|f| f.figure_id.clone()),
+                    rarity: card.rarity,
+                    affection: affection_roll(&seed, evidence),
+                    action_id: figure.map(|f| f.action_ids[0].clone()).unwrap_or_else(|| npc.to_string()),
+                    card_id: Some(card.card_id.clone()),
+                    edition_key: Some(edition_key(&design, card.rarity)),
+                    edition_limit: Some(card.edition_limit),
+                    minted: Some(minted),
+                    next_edition_number: open.then_some(minted + 1),
+                }
+            })
+            .collect()
+    }
     fn pack_card(
         &self,
         id: u64,
@@ -277,13 +321,10 @@ impl Contract {
         slot: u8,
         evidence: &Evidence,
         npc: &str,
-        art: &[CardArt],
     ) -> MintCard {
         let seed = block_seed(id, format!("mint-pack:{hash}:{slot}").as_bytes());
-        let outcome = self.roll_outcome(&seed, evidence, &self.params, &self.catalog, npc, art);
-        let sex = evidence.sex.as_deref();
-        let card = card_for(art, outcome.figure.as_deref(), outcome.rarity, &evidence.career_group, sex);
-        let design = card_design(art, outcome.figure.as_deref(), outcome.rarity, &evidence.career_group, sex, npc);
+        let outcome = self.roll_outcome(&seed, evidence, &self.params, &self.catalog, npc);
+        let design = design_key(outcome.figure.as_deref(), npc);
         let minted = self.minted_count(&design, outcome.rarity);
         self.hold_rarity(&design, outcome.rarity);
         let action_id = outcome
@@ -313,7 +354,7 @@ impl Contract {
             rarity: outcome.rarity,
             affection: outcome.affection,
             action_id,
-            card_id: card.map(|card| card.card_id.clone()),
+            card_id: None,
             edition_key: Some(edition_key(&design, outcome.rarity)),
             edition_limit: Some(RARITY_CAPS[outcome.rarity as usize]),
             minted: Some(minted),

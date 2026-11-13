@@ -114,11 +114,14 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
     <div className="chain-actions"><button className="chain-primary" type="button" onClick={() => { setStage({ kind: "verifying" }); setAttempt(value => value + 1); }}>Try again<span aria-hidden="true">→</span></button><button className="chain-secondary" type="button" onClick={onClose}>Back to Everfolk</button></div>
   </section>;
   const evidence = stage.signed.evidence;
-  const cardCount = packCardCount(evidence);
+  // Figure-path worlds sign the cards a life earned; only those open (chain/earned-cards.ts).
+  const earned = evidence.earned_cards;
+  const cardCount = earned ? Math.min(new Set(earned.map(card => card.card_id)).size, 5) : packCardCount(evidence);
   if (stage.kind === "declining") return <DeclineChoice cooldownMinutes={COOLDOWN_MINUTES} busy={busy} error={error}
     onKeep={onClose} onClose={() => { void closeLife(); }} onBack={() => { setError(""); setStage({ kind: "report", signed: stage.signed }); }} />;
   if (stage.kind === "pack") return <MintPack walletPath={walletPath} practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;
-  if (evidence.stage_figures?.length) return <StageAlbum signed={stage.signed} contract={contract} practice={practice} walletPath={walletPath}
+  // Life-stage NFTs are off where cards are earned: only earned figure and contributor cards are minted.
+  if (evidence.stage_figures?.length && !earned) return <StageAlbum signed={stage.signed} contract={contract} practice={practice} walletPath={walletPath}
     onMint={(action, fee, quoteHash) => session.mintStages(stage.signed, action, fee, quoteHash)} onClose={onClose}
     onDecline={() => { setError(""); setStage({ kind: "declining", signed: stage.signed }); }} />;
   return <LifeReport
@@ -132,6 +135,7 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
     error={error}
     packMode
     cardCount={cardCount}
+    earnedNone={Boolean(earned) && cardCount === 0}
     sourceSharePercent={(terms?.source_share_bps ?? 5000) / 100}
     onSelectAction={setSelected}
     onMint={() => { void mint(stage.signed); }}

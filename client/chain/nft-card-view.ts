@@ -3,7 +3,6 @@ import type { MintCard, MintResult } from "../../chain/types.ts";
 import { figureMediaPath } from "../../chain/figure-media.ts";
 import { resolvePortraitState } from "../models/portrait-state.ts";
 import { cardEditionText, getCardArtById, getFigureCardArt } from "../models/card-art.ts";
-import { cardIdFor } from "../../chain/card-art.ts";
 import { RARITY_LABELS } from "../../chain/ids.ts";
 import { editionLabel } from "./edition-label.ts";
 import type { BoosterCardView } from "../types/booster.ts";
@@ -28,7 +27,16 @@ export function figureCardArt(figureId: FigureId): string {
   return getFigureCardArt(figureId)?.portraitSrc ?? FIGURE_CARD_ART[figureId] ?? figureMediaPath(figureId);
 }
 
-const roleOf = (figureId: FigureId | null | undefined) => (figureId ? "Historical figure" : "Person of the city");
+const roleOf = (figureId: FigureId | null | undefined, cardId?: string | null) => {
+  const card = getCardArtById(cardId);
+  if (card) return card.kind === "parent" ? "Historical figure" : "Contributor";
+  return figureId ? "Historical figure" : "Person of the city";
+};
+/** An earned card's own face title (e.g. "Proof Checker"); otherwise the figure or person's name. */
+const cardTitle = (cardId: string | null | undefined) => {
+  const card = getCardArtById(cardId);
+  return card ? card.displayTitle || card.title : undefined;
+};
 
 /**
  * The artwork changes the presentation, never the figure, rarity, owner or awarded outcome.
@@ -61,11 +69,11 @@ export function boosterArtwork(figureId: MintCard["figure_id"], rarity: number, 
 /** One opened pack card, as the 3D scene draws it. */
 export function packCardView(card: MintCard, slot: number, evidenceHash: string, group: CareerGroup): BoosterCardView {
   return {
-    name: card.figure_id ? figureTitle(card.figure_id) : card.character_name ?? GROUP_TITLE[group],
+    name: cardTitle(card.card_id) ?? (card.figure_id ? figureTitle(card.figure_id) : card.character_name ?? GROUP_TITLE[group]),
     rarity: card.rarity,
     ...boosterArtwork(card.figure_id, card.rarity, card.portrait_media, `${evidenceHash}:${slot}`, editionLabel({ edition_number: card.next_edition_number ?? undefined, edition_limit: card.edition_limit }), group, card.card_id),
     sub: actionName(card.action_id),
-    role: roleOf(card.figure_id),
+    role: roleOf(card.figure_id, card.card_id),
   };
 }
 
@@ -82,7 +90,7 @@ export function resultCardView(result: MintResult, group?: CareerGroup, actionId
 
 /** An NFT the player owns, from its My lives row. */
 export function keptCardView(row: KeptRow): BoosterCardView {
-  return { name: row.title, rarity: row.rarity, ...boosterArtwork(row.figureId, row.rarity, row.portraitMedia, `token:${row.tokenId}`, row.editionText, row.careerGroup, row.cardId), sub: row.actionName, role: roleOf(row.figureId) };
+  return { name: cardTitle(row.cardId) ?? row.title, rarity: row.rarity, ...boosterArtwork(row.figureId, row.rarity, row.portraitMedia, `token:${row.tokenId}`, row.editionText, row.careerGroup, row.cardId), sub: row.actionName, role: roleOf(row.figureId, row.cardId) };
 }
 
 /** Repaint a known old figure export for viewing without rewriting a saved pack. */
@@ -92,17 +100,13 @@ export function refreshSavedBoosterCard(card: BoosterCardView): BoosterCardView 
   return figureId ? { ...card, ...boosterArtwork(figureId, card.rarity, undefined, `saved:${card.art}`, card.editionText) } : card;
 }
 
-/**
- * A free life's pack card. It never mints, but shows the card a Weave mint would: the career's v14 profession
- * card in the played character's recorded sex, or the life's own portrait when the collection has none yet.
- */
-export function freePlayCardView(card: MintCard, group: CareerGroup, life: { seed: string; character?: { sex?: string } }, ownPortrait: string): BoosterCardView {
-  const cardId = cardIdFor({ figure_id: card.figure_id, rarity: card.rarity, career_group: group, sex: life.character?.sex });
+/** A free life's pack card: the earned v14 card it shows (chain/earned-cards.ts); it never mints. */
+export function freePlayCardView(card: MintCard, group: CareerGroup, life: { seed: string }, ownPortrait: string): BoosterCardView {
   return {
-    name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[group],
+    name: cardTitle(card.card_id) ?? (card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[group]),
     rarity: card.rarity,
-    ...boosterArtwork(card.figure_id, card.rarity, card.figure_id ? undefined : ownPortrait, life.seed, undefined, group, cardId),
+    ...boosterArtwork(card.figure_id, card.rarity, card.figure_id ? undefined : ownPortrait, life.seed, undefined, group, card.card_id),
     sub: actionName(card.action_id),
-    role: roleOf(card.figure_id),
+    role: roleOf(card.figure_id, card.card_id),
   };
 }

@@ -1,17 +1,15 @@
 import { sha256Hex } from "../../chain/hash.ts";
-import { FIGURE_ACTIONS, NPC_ACTIONS, type FigureId } from "../../chain/ids.ts";
+import { FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, type FigureId } from "../../chain/ids.ts";
+import { earnedCards } from "../../chain/earned-cards.ts";
 import { figuresForWorld } from "../../chain/catalog/demo-figures.ts";
 import { careerGroupOf, matchFigures, peakJobOf } from "../../chain/match.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
-import { packCardCount } from "../../chain/pack-count.ts";
 import type { Evidence, MintCard, MintPack, MintResult } from "../../chain/types.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { DEFAULT_MARKET_TERMS } from "../chain/payout-preview.ts";
-import { roll, weightedPick } from "../chain/mock-math.ts";
+import { roll } from "../chain/mock-math.ts";
 import type { LivesContract } from "../chain/types.ts";
 
-const NPC_RARITY_WEIGHTS = [6000n, 2500n, 1000n, 400n, 100n];
-const FIGURE_RARITY_WEIGHTS = [0n, 0n, 7000n, 2500n, 500n];
 
 /** Skill → career group, for free lives that never held a ranked job (for example a household farm). */
 const SKILL_GROUPS: Readonly<Record<string, CareerGroup>> = {
@@ -60,35 +58,31 @@ export async function generateFreePlayEvidence(life: LifeState, world: WorldPack
     career_group: careerGroup,
     matched_figures: matched,
     sources: [],
+    ...(life.character?.sex === "male" || life.character?.sex === "female" ? { sex: life.character.sex } : {}),
+    // Only earned cards open: the same rule as Weave (chain/earned-cards.ts); a life with none gets no pack.
+    earned_cards: earnedCards(world, life),
   };
 }
 
-async function rollCardOutcome(seed: string, evidence: Evidence) {
-  let figure: FigureId | null = null;
-  for (const candidate of evidence.matched_figures) {
-    if ((await roll(seed, `drop:${candidate}`)) % 10_000n < 2500n) {
-      figure = candidate;
-      break;
-    }
+/**
+ * One slot per earned card (chain/earned-cards.ts), at most five, exactly as a Weave pack would hold them.
+ * A figure's own card is that figure when the contract lists it; a contributor is a person of the city
+ * carrying one of the career's deeds.
+ */
+async function earnedPackCards(seed: string, hash: string, evidence: Evidence, groupActions: readonly string[]): Promise<MintCard[]> {
+  const cards: MintCard[] = [];
+  for (const earned of evidence.earned_cards ?? []) {
+    if (cards.length >= 5 || cards.some(card => card.card_id === earned.card_id)) continue;
+    const slot = cards.length;
+    const figure = earned.kind === "principal" && (FIGURE_IDS as readonly string[]).includes(earned.figure_id) ? earned.figure_id as FigureId : null;
+    const bonds = Math.trunc(Math.max(-1e6, Math.min(1e6, evidence.stats.bonds ?? 50)));
+    const affection = Math.max(1, Math.min(100, 1 + Number((await roll(await sha256Hex(`${seed}:pack:${hash}:${slot}`), "aff")) % 100n) + Math.trunc((bonds - 50) / 5)));
+    cards.push({
+      kind: figure ? "figure" : "npc", figure_id: figure, rarity: earned.rarity, affection,
+      action_id: figure ? FIGURE_ACTIONS[figure][0] : groupActions[slot % groupActions.length], card_id: earned.card_id,
+    });
   }
-  const rarity = weightedPick(figure ? FIGURE_RARITY_WEIGHTS : NPC_RARITY_WEIGHTS, await roll(seed, "rarity")) ?? 0;
-  const bonds = Math.trunc(Math.max(-1e6, Math.min(1e6, evidence.stats.bonds ?? 50)));
-  const affection = Math.max(1, Math.min(100, 1 + Number((await roll(seed, "aff")) % 100n) + Math.trunc((bonds - 50) / 5)));
-  return { figure, rarity, affection };
-}
-
-async function generatePackCard(seed: string, hash: string, slot: number, evidence: Evidence, groupActions: readonly string[]): Promise<MintCard> {
-  const cardSeed = await sha256Hex(`${seed}:pack:${hash}:${slot}`);
-  const { figure, rarity, affection } = await rollCardOutcome(cardSeed, evidence);
-  // Neighbouring slots offer the group's different deeds, so a pack does not repeat one card.
-  const actionId = figure ? FIGURE_ACTIONS[figure][0] : groupActions[slot % groupActions.length];
-  return {
-    kind: figure ? "figure" : "npc",
-    figure_id: figure,
-    rarity,
-    affection,
-    action_id: actionId,
-  };
+  return cards;
 }
 
 export interface FreePlayBoosterSession {
@@ -98,7 +92,8 @@ export interface FreePlayBoosterSession {
 }
 
 /**
- * Builds an offline, seeded 1–5 card booster pack preview (0 before age 18) for an ended free-play life.
+ * Builds an offline pack of the cards an ended free-play life earned on historical figure paths (none if it followed
+ * no figure).
  * No network calls, no on-chain actions, no rerolls, fully deterministic from life.seed.
  */
 export async function createFreePlayBooster(life: LifeState, world: WorldPack): Promise<FreePlayBoosterSession> {
@@ -107,12 +102,7 @@ export async function createFreePlayBooster(life: LifeState, world: WorldPack): 
   const groupActions: readonly string[] = NPC_ACTIONS[evidence.career_group]?.actions ?? ["letters.teach"];
   const evidenceHash = await sha256Hex(JSON.stringify(evidence));
   const seed = evidence.seed;
-  const cardCount = packCardCount(evidence);
-
-  const cards: MintCard[] = [];
-  for (let slot = 0; slot < cardCount; slot++) {
-    cards.push(await generatePackCard(seed, evidenceHash, slot, evidence, groupActions));
-  }
+  const cards = await earnedPackCards(seed, evidenceHash, evidence, groupActions);
 
   const packView: MintPack = {
     life_id: evidence.life_id,

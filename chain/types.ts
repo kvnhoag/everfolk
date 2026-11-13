@@ -1,6 +1,7 @@
 import type { CareerGroup, Category, FigureId } from "./ids.ts";
 import type { MatchedStageFigure, StageRecord } from "./stage-figures.ts";
 import type { NpcSessionAttestation } from "./npc-proof.ts";
+import type { EarnedCard } from "./earned-cards.ts";
 
 /** JSON views returned by the Everfolk lives contract. Rust structs serialize to exactly these shapes. */
 export interface FigurePick { figure_id: FigureId; token_id: string; action_id: string; rarity: number }
@@ -30,6 +31,8 @@ export interface Evidence {
   npc_session?: NpcSessionAttestation;
   /** The played character's recorded sex; picks a profession card's version (chain/card-art.ts). Older evidence omits it. */
   sex?: "male" | "female";
+  /** The cards this life earned on historical figure paths (chain/earned-cards.ts); only these can be minted. */
+  earned_cards?: EarnedCard[];
 }
 
 export interface StageMintCard extends EditionPreviewFields {

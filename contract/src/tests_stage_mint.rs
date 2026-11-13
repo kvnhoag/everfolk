@@ -179,7 +179,7 @@ fn reservations_leave_no_room_for_a_racing_legacy_mint() {
     let mut params = c.get_params();
     params.drop_rate_bps = 10_000;
     assert!(c
-        .roll_outcome(&[4; 32], &parsed, &params, &c.get_catalog(), "letters.teach", &[])
+        .roll_outcome(&[4; 32], &parsed, &params, &c.get_catalog(), "letters.teach")
         .figure
         .is_none());
     finish(&mut c, id);
@@ -264,30 +264,3 @@ fn second_payment_and_legacy_mint_are_blocked_after_commit() {
     c.mint_life(U64(id), e.clone(), sign(&e), "letters.teach".into());
 }
 
-#[test]
-fn stage_nfts_show_their_portrait_and_never_claim_a_collection_card() {
-    let (mut c, id, e, _) = ready(61);
-    let mut table = Vec::new();
-    for rarity in 0..4u8 {
-        for sex in ["male", "female"] {
-            let card_id = format!("aristotle-{}-{sex}", ["common", "uncommon", "rare", "epic"][rarity as usize]);
-            table.push(crate::card_art::CardArt {
-                media: format!("https://everfolk.life/assets/cards/collection-v14/{card_id}-footerless.webp"), card_id,
-                title: "Lyceum Attendant".into(), rarity, figure_id: None, career_group: Some("letters".into()),
-                sex: Some(sex.into()), edition_limit: crate::rarity_caps::RARITY_CAPS[rarity as usize],
-            });
-        }
-    }
-    as_account(OWNER);
-    c.set_card_art(table);
-    let mut with_sex: serde_json::Value = serde_json::from_str(&e).unwrap();
-    with_sex["sex"] = "female".into();
-    let e = with_sex.to_string();
-    commit(&mut c, id, &e);
-    for token in finish(&mut c, id).tokens {
-        let meta = c.nft_token(token.result.token_id.clone()).unwrap().metadata.unwrap();
-        let extra: serde_json::Value = serde_json::from_str(meta.extra.as_deref().unwrap()).unwrap();
-        assert_eq!(meta.media.unwrap(), token.portrait_media);
-        assert!(extra.get("card_id").is_none() && extra.get("attributes").is_none(), "{extra}");
-    }
-}
