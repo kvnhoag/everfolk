@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { createFreePlayBooster, type FreePlayBoosterSession } from "../models/freeplay-booster.ts";
-import { portraitSource } from "../models/life-background.ts";
+import { playerPortraitState } from "../models/portrait-state.ts";
 import { legacyLifeKey } from "../storage/legacy-store.ts";
 import { readBoosterCollection, resolveBoosterPack } from "../storage/booster-collection.ts";
 import type { BoosterCollectionPack, BoosterSceneOptions } from "../types/booster.ts";
 import { GROUP_TITLE, figureName, actionName } from "./chain-copy.ts";
-import { figureMediaPath } from "../../chain/figure-media.ts";
+import { figureCardArt } from "./nft-card-view.ts";
 import BoosterOpening from "../components/BoosterOpening.tsx";
 import "./chain.css";
 import "../styles/booster-opening.css";
@@ -42,8 +42,10 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
     const cards = session.pack.cards.map(card => ({
       name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[session.evidence.career_group],
       rarity: card.rarity,
-      art: card.figure_id ? figureMediaPath(card.figure_id) : portraitSource({ age: life.age, seed: life.seed, originId: life.originId, sex: life.character?.sex, avatarVariant: life.character?.avatarVariant }),
+      // People of the city show this life's own v3 portrait; figures show their card painting.
+      art: card.figure_id ? figureCardArt(card.figure_id) : playerPortraitState(world, life).src,
       sub: actionName(card.action_id),
+      role: card.figure_id ? "Historical figure" : "Person of the city",
     }));
     const resolve = (selected: number[]) => {
       const collection = resolveBoosterPack(window.localStorage, {
@@ -53,7 +55,7 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
       return collection.reduce((sum, pack) => sum + pack.selected.length, 0);
     };
     return { cards, legacyCount, reviewIndices: kept?.selected, onSave: resolve, onSkip: () => { resolve([]); onClose(); }, onClose };
-  }, [session, life, legacyCount, kept, onClose]);
+  }, [session, life, world, legacyCount, kept, onClose]);
 
   if (!open) return null;
   return <dialog ref={dialogRef} className="chain-screen freeplay-booster-screen" aria-label="Your life’s booster pack" onCancel={event => { event.preventDefault(); onClose(); }}>

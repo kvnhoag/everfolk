@@ -5,6 +5,8 @@ export interface BoosterCardView {
   rarity: number;
   art: string;
   sub: string;
+  /** The line under the name on the card frame, e.g. "Historical figure". */
+  role?: string;
 }
 
 export interface BoosterCollectionPack {

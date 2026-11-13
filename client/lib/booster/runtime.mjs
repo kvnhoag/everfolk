@@ -22,7 +22,7 @@ export function mountBooster(hostWindow,config){
  const labels=resolveBoosterLabels(config.labels);
  // Weave packs: one card is chosen and minted from inside the scene.
  const mintMode=Boolean(config.mint);let minting=false;
- const A={pack:'/assets/booster/pack-print.png',logo:'/assets/booster/wordmark.png'};
+ const A={pack:'/assets/booster/pack-print.png',logo:'/assets/booster/wordmark.png',standardFrame:'/assets/cards/standard-frame.png',legendaryFrame:'/assets/cards/legendary-frame.png'};
  function toggleCardSelection(selection,index,count){const next=new Set(selection);if(index<0||index>=count)return next;next.has(index)?next.delete(index):next.add(index);return next;}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const mix=(a,b,t)=>a+(b-a)*t;
@@ -54,21 +54,43 @@ function makeCanvas(w,h){const c=document.createElement('canvas');c.width=w;c.he
 function rounded(c,x,y,w,h,r){c.beginPath();c.roundRect(x,y,w,h,r);}
 function tex(canvas,crisp=false){const t=new THREE.CanvasTexture(canvas);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer?Math.min(8,renderer.capabilities.getMaxAnisotropy()):4;t.magFilter=crisp?THREE.NearestFilter:THREE.LinearFilter;textures.add(t);return t;}
 function loadImage(src){return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>reject(Error('An embedded artwork could not be decoded.'));i.src=src;});}
+// Card faces use the selected Everfolk frames (artwork/cards/frame-system-v2-vectorcraft): a 900 × 1260 card,
+// a standard frame with an 800 × 740 art window and ivory text panel, and a full-art frame for Legendary cards.
+const CARD_W=900,CARD_H=1260,ART_WINDOW={x:50,y:190,w:800,h:740};
+function isPixelArt(src){return /\/(portraits|pixel)\//.test(src)||/\.svg$/.test(src);}
+/** Fills the box with the artwork, cropping the sides or bottom so faces stay in view. */
+function coverArt(g,art,x,y,w,h){const scale=Math.max(w/art.width,h/art.height),dw=art.width*scale,dh=art.height*scale;g.drawImage(art,x+(w-dw)/2,y+(h-dh)*.3,dw,dh);}
+function fitText(g,text,size,family,weight,maxWidth){let px=size;do{g.font=`${weight} ${px}px ${family}`;px-=2;}while(px>12&&g.measureText(text).width>maxWidth);}
+function wrapLines(g,text,maxWidth,maxLines){const words=String(text).split(/\s+/),lines=[];let line='';for(const word of words){const next=line?line+' '+word:word;if(line&&g.measureText(next).width>maxWidth){lines.push(line);line=word;if(lines.length===maxLines-1)break;}else line=next;}const used=lines.join(' ').split(/\s+/).filter(Boolean).length;const rest=words.slice(used).join(' ');if(rest)lines.push(rest);return lines.slice(0,maxLines);}
+function cardNumber(person){return String(person.tile+1).padStart(3,'0');}
 function frontCanvas(person,level){
  const key=person.tile+':'+level;if(cardsFront.has(key))return cardsFront.get(key);
- const c=makeCanvas(768,1064),g=c.getContext('2d'),color=tiers[level].color;
- g.fillStyle=level===4?'#c99b47':'#afc4bf';rounded(g,0,0,768,1064,32);g.fill();
- g.fillStyle='#103d3d';rounded(g,7,7,754,1050,27);g.fill();g.save();rounded(g,17,17,734,1030,20);g.clip();
- g.imageSmoothingEnabled=false;g.fillStyle='#e6d4ab';g.fillRect(17,17,734,818);const art=images.cards[person.tile];const scale=Math.min(734/art.width,818/art.height);g.drawImage(art,17+(734-art.width*scale)/2,17+(818-art.height*scale)/2,art.width*scale,art.height*scale);
- g.fillStyle='#103b3d';g.fillRect(17,835,734,212);g.fillStyle=color;g.fillRect(17,835,734,3);
- g.textAlign='center';g.fillStyle='#f3e9ce';g.font=`600 ${person.name.length>13?39:51}px Eczar,Georgia,serif`;g.fillText(person.name,384,910,686);
- g.font='500 21px Arial';g.letterSpacing='7px';g.fillStyle=color;g.fillText(tiers[level].name.toUpperCase(),384,962);g.letterSpacing='1.7px';g.font='12px Arial';g.fillStyle='#adcbc0';g.fillText(person.sub,384,1012,675);g.restore();
- g.strokeStyle=level===4?'#f5d88d':'#d8e4d7';g.lineWidth=2;rounded(g,13,13,742,1038,23);g.stroke();
- if(level===4){
-  // Restrained laurel engraving, exclusive to the historical Legendary frame.
-  g.strokeStyle='#edc76d';g.fillStyle='#edc76d';g.lineWidth=3;
-  for(const sx of [1,-1])for(const sy of [1,-1]){g.save();g.translate(sx===1?34:734,sy===1?35:1029);g.scale(sx,sy);g.beginPath();g.moveTo(0,80);g.quadraticCurveTo(8,18,73,1);g.stroke();for(let i=0;i<6;i++){const x=7+i*10,y=58-i*9;g.save();g.translate(x,y);g.rotate(-.8);g.beginPath();g.ellipse(0,0,5,12,0,0,Math.PI*2);g.fill();g.restore();}g.restore();}
+ const c=makeCanvas(CARD_W,CARD_H),g=c.getContext('2d'),tier=tiers[level],art=images.cards[person.tile],legendary=level===4;
+ const serif='Georgia,"Times New Roman",serif',sans='Arial,Helvetica,sans-serif',role=(person.role||'').toUpperCase();
+ g.save();rounded(g,0,0,CARD_W,CARD_H,42);g.clip();g.imageSmoothingEnabled=!isPixelArt(person.art);
+ if(legendary){g.fillStyle='#1c2621';g.fillRect(0,0,CARD_W,CARD_H);coverArt(g,art,0,0,CARD_W,CARD_H);}
+ else{g.fillStyle='#0b2622';g.fillRect(0,0,CARD_W,CARD_H);g.save();rounded(g,ART_WINDOW.x,ART_WINDOW.y,ART_WINDOW.w,ART_WINDOW.h,22);g.clip();g.fillStyle='#e6d4ab';g.fillRect(ART_WINDOW.x,ART_WINDOW.y,ART_WINDOW.w,ART_WINDOW.h);coverArt(g,art,ART_WINDOW.x,ART_WINDOW.y,ART_WINDOW.w,ART_WINDOW.h);g.restore();}
+ g.imageSmoothingEnabled=true;g.drawImage(legendary?images.frames.legendary:images.frames.standard,0,0,CARD_W,CARD_H);g.restore();
+ g.textBaseline='alphabetic';g.letterSpacing='0px';
+ if(legendary){
+  // Full-art text sits on the painting: a soft shadow keeps it readable over bright skies.
+  g.shadowColor='rgba(8,14,12,.85)';g.shadowBlur=14;g.shadowOffsetY=2;
+  g.textAlign='left';g.fillStyle='#f5ead0';fitText(g,person.name,64,serif,'400',640);g.fillText(person.name,72,130);
+  if(role){g.font=`500 18px ${sans}`;g.letterSpacing='4px';g.fillStyle='#e2bf72';g.fillText(role,74,170);g.letterSpacing='0px';}
+  g.font=`600 18px ${sans}`;g.letterSpacing='5px';g.fillStyle='#e8c879';g.fillText('LEGENDARY',80,1058);g.letterSpacing='0px';
+  g.fillStyle='#f3e9d2';g.font=`400 32px ${serif}`;wrapLines(g,person.sub,740,2).forEach((line,i)=>g.fillText(line,80,1118+i*38));
+  g.fillStyle='#efe2c2';
+ }else{
+  g.textAlign='center';g.fillStyle='#efe3c4';fitText(g,person.name,58,serif,'400',760);g.fillText(person.name,CARD_W/2,124);
+  if(role){g.font=`500 17px ${sans}`;g.letterSpacing='4px';g.fillStyle='#d1b071';g.fillText(role,CARD_W/2,166);g.letterSpacing='0px';}
+  g.textAlign='left';g.fillStyle=tier.color;g.beginPath();g.moveTo(104,982);g.lineTo(113,991);g.lineTo(104,1000);g.lineTo(95,991);g.closePath();g.fill();
+  g.strokeStyle='#2c3a33';g.lineWidth=1.5;g.stroke();
+  g.font=`600 18px ${sans}`;g.letterSpacing='5px';g.fillStyle='#2c3a33';g.fillText(tier.name.toUpperCase(),126,998);g.letterSpacing='0px';
+  g.fillStyle='#1f2b25';g.font=`400 34px ${serif}`;wrapLines(g,person.sub,708,2).forEach((line,i)=>g.fillText(line,96,1076+i*42));
+  g.fillStyle='#e9dcbc';
  }
+ g.textAlign='left';g.font=`400 24px ${serif}`;g.letterSpacing='3px';g.fillText('EVERFOLK',96,1210);
+ g.textAlign='right';g.font=`500 18px ${sans}`;g.letterSpacing='2px';g.fillText(cardNumber(person),806,1209);g.letterSpacing='0px';g.shadowColor='transparent';g.shadowBlur=0;g.shadowOffsetY=0;
  cardsFront.set(key,c);return c;
 }
 function backCanvas(){const c=makeCanvas(768,1064),g=c.getContext('2d');g.fillStyle='#113f40';rounded(g,0,0,768,1064,30);g.fill();g.strokeStyle='#c7d5c4';g.lineWidth=3;rounded(g,14,14,740,1036,20);g.stroke();g.drawImage(images.logo,90,469,588,139);return c;}
@@ -76,7 +98,8 @@ function packPrint(){const c=makeCanvas(1024,1536),g=c.getContext('2d');g.drawIm
 function rearPack(){const c=makeCanvas(1024,1536),g=c.getContext('2d');g.fillStyle='#075052';g.fillRect(0,0,1024,1536);g.imageSmoothingEnabled=false;g.drawImage(packPrint(),0,400,1024,1100,0,180,1024,1356);g.drawImage(images.logo,205,90,614,145);return c;}
 function foilNormal(){const c=makeCanvas(256,384),g=c.getContext('2d'),im=g.createImageData(256,384);for(let y=0;y<384;y++)for(let x=0;x<256;x++){const edge=Math.exp(-Math.min(x,255-x)/25);const n=Math.sin(x*.38+y*.05)*edge*.15+Math.sin(x*.07+y*.09)*.025;const i=(y*256+x)*4;im.data[i]=128+n*100;im.data[i+1]=128+Math.sin(x*.14+y*.1)*edge*8;im.data[i+2]=251;im.data[i+3]=255;}g.putImageData(im,0,0);return c;}
 function roundedShape(w,h,r){const s=new THREE.Shape();s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);return s;}
-function faceGeometry(w,h){const geo=new THREE.ShapeGeometry(roundedShape(w,h,.065),12);const pos=geo.attributes.position,uv=geo.attributes.uv;for(let i=0;i<pos.count;i++)uv.setXY(i,pos.getX(i)/w+.5,pos.getY(i)/h+.5);return geo;}
+// Face corners match the card frame's 42 px radius on a 900 px card.
+function faceGeometry(w,h){const geo=new THREE.ShapeGeometry(roundedShape(w,h,w*42/900),12);const pos=geo.attributes.position,uv=geo.attributes.uv;for(let i=0;i<pos.count;i++)uv.setXY(i,pos.getX(i)/w+.5,pos.getY(i)/h+.5);return geo;}
 function keepMat(m){allMaterials.add(m);return m;}
 function glowTexture(color){const c=makeCanvas(256,256),g=c.getContext('2d');const grad=g.createRadialGradient(128,128,1,128,128,126);grad.addColorStop(0,color+'66');grad.addColorStop(.35,color+'2b');grad.addColorStop(1,color+'00');g.fillStyle=grad;g.fillRect(0,0,256,256);return tex(c);}
 function sheenTexture(level){const c=makeCanvas(512,512),g=c.getContext('2d');const grad=g.createLinearGradient(0,512,512,0);grad.addColorStop(0,'#ffffff00');grad.addColorStop(.35,'#ffffff00');grad.addColorStop(.46,tiers[level].color+'12');grad.addColorStop(.49,'#ffffff8a');grad.addColorStop(.505,'#ffffff10');grad.addColorStop(.55,tiers[level].color+'30');grad.addColorStop(.65,'#ffffff00');grad.addColorStop(1,'#ffffff00');g.fillStyle=grad;g.fillRect(0,0,512,512);return tex(c);}
@@ -442,7 +465,7 @@ function bindUI(){
  window.addEventListener('resize',resize);window.addEventListener('blur',()=>{drag.active=false;held=false;hovered=-1;keyboardTearHeld=false;if(phase==='sealed')gsap.to(foil,{flex:0,duration:.3});});
 }
 async function boot(){const loadingNote=$('loading')?.querySelector('p');if(loadingNote)loadingNote.textContent=labels.loading;try{
- const assets=await Promise.all([loadImage(A.pack),loadImage(A.logo),Promise.all(people.map(person=>loadImage(person.art))),document.fonts.load('600 40px Eczar')]);if(disposed)return;images.pack=assets[0];images.logo=assets[1];images.cards=assets[2];
+ const assets=await Promise.all([loadImage(A.pack),loadImage(A.logo),Promise.all(people.map(person=>loadImage(person.art))),loadImage(A.standardFrame),loadImage(A.legendaryFrame),document.fonts.load('600 40px Eczar')]);if(disposed)return;images.pack=assets[0];images.logo=assets[1];images.cards=assets[2];images.frames={standard:assets[3],legendary:assets[4]};
  try{init3D();}catch(err){renderFailed=true;console.warn('WebGL unavailable; using accessible cards.',err);toast('3D is unavailable in this browser. Showing accessible cards.');}
  bindUI();updateSound();legacyCount=config.legacyCount||0;$('legacy-count').textContent='Legacy · '+legacyCount;ready=true;resetPack(false);$('stage').setAttribute('aria-busy','false');$('loading').style.opacity='0';setTimeout(()=>$('loading').hidden=true,reduced?0:430);requestAnimationFrame(frame);
  if(config.reviewIndices?.length){if(renderFailed){fallbackOpen();}selection=new Set(config.reviewIndices);reviewIndices=[...config.reviewIndices];cardList.forEach(c=>{Object.assign(c.base,cardPositions(c.index),{reveal:1});c.group.visible=true;c.clipPlane.constant=100;});if(pack)pack.visible=false;openSavedReview();}
