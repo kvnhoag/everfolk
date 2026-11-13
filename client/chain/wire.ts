@@ -45,6 +45,12 @@ function parseEditionFields(value: Json, what: string): void {
       || value.rarity === 2 && value.edition_limit === 50)) fail(`${what} edition`);
 }
 
+/** A v14 collection card id, when the contract names one: a lowercase slug (chain/card-art.ts). */
+function parseCardId(value: Json, what: string): void {
+  if (!Object.hasOwn(value, "card_id")) return;
+  if (typeof value.card_id !== "string" || !/^[a-z0-9-]{1,64}$/.test(value.card_id)) fail(`${what} card`);
+}
+
 export function parseEditionSupply(value: unknown): EditionSupply {
   const supply = record(value, "edition supply", { edition_key: "string", rarity: "number", minted: "number", edition_limit: "number|null", next_edition_number: "number|null" });
   if (!(supply.edition_key as string).length || (supply.edition_key as string).length > 1024
@@ -105,6 +111,9 @@ export function parseTokenView(value: unknown): TokenView | null {
   }
   const checkedExtra = record(extra, "token extra", { kind: "string", rarity: "number", affection: "number", action_id: "string", life_id: "string", sources: "array", evidence_hash: "string" });
   parseEditionFields(checkedExtra, "token extra");
+  parseCardId(checkedExtra, "token extra");
+  if (Object.hasOwn(checkedExtra, "attributes") && !(Array.isArray(checkedExtra.attributes)
+    && checkedExtra.attributes.every(item => isRecord(item) && typeof item.trait_type === "string" && typeof item.value === "string"))) fail("token attributes");
   return { owner_id: token.owner_id as string, extra: extra as TokenExtra };
 }
 
@@ -146,6 +155,7 @@ export function parseMintPack(value: unknown): MintPack {
     const card = record(entry, "mint card", { kind: "string", figure_id: "string|null", rarity: "number", affection: "number", action_id: "string" });
     if (!["npc", "figure"].includes(String(card.kind)) || !Number.isInteger(card.rarity) || Number(card.rarity) < 0 || Number(card.rarity) > 4 || !Number.isInteger(card.affection) || Number(card.affection) < 1 || Number(card.affection) > 100) fail("mint card");
     parseEditionPreview(card, Number(card.rarity), "mint card");
+    parseCardId(card, "mint card");
   }
   return pack as unknown as MintPack;
 }

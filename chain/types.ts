@@ -28,6 +28,8 @@ export interface Evidence {
   stage_figures?: MatchedStageFigure[];
   /** Required only for the NPC world; signed with the rest of the finished-life evidence. */
   npc_session?: NpcSessionAttestation;
+  /** The played character's recorded sex; picks a profession card's version (chain/card-art.ts). Older evidence omits it. */
+  sex?: "male" | "female";
 }
 
 export interface StageMintCard extends EditionPreviewFields {
@@ -94,6 +96,8 @@ export interface MintCard extends EditionPreviewFields {
   tier?: string | number;
   portrait_media?: string;
   stage_record?: StageRecord;
+  /** The v14 collection card this slot shows (chain/card-art.ts); absent when the collection has none. */
+  card_id?: string;
 }
 export interface MintPack { life_id: string; evidence_hash: string; cards: MintCard[]; total_fee: string; source_share_bps: number }
 export interface MintTerms { mint_fee: string; source_share_bps: number; pack_version: number }
@@ -111,6 +115,11 @@ export interface TokenExtra extends EditionFields {
   tier?: string | number;
   portrait_media?: string;
   stage_record?: StageRecord;
+  /** The v14 collection card this NFT shows; absent on tokens minted before card art and on stage portraits. */
+  card_id?: string;
+  sex?: "male" | "female";
+  /** Marketplace traits: Card, Rarity, Edition, Career, Born, Died. */
+  attributes?: { trait_type: string; value: string }[];
 }
 /** `earned` is yoctoNEAR as a decimal string. */
 export interface TokenStats { lives_influenced: number; earned: string }

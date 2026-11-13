@@ -46,6 +46,8 @@ export async function buildEvidence(input: EvidenceInput): Promise<Evidence> {
     career_group: careerGroupOf(state),
     matched_figures: matchFigures(state),
     sources: computeImpacts(save.commands, state.journal),
+    // The recorded sex picks the male or female version of a profession card; it is never guessed.
+    ...(state.character?.sex === "male" || state.character?.sex === "female" ? { sex: state.character.sex } : {}),
     ...(state.stageRecords && state.stageRecords.length > 0 ? {
       stage_records: state.stageRecords,
       stage_figures: state.stageRecords.map(record => matchStageFigure(record, {

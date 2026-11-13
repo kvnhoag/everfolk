@@ -26,12 +26,16 @@ The deploy script creates a missing contract account from the testnet faucet and
 | Area | Methods |
 |---|---|
 | Lives | `start_life`, `abandon_life`, `draw_npc`, `checkpoint`, `get_life`, `active_life_of` |
-| Mint | `mint_life` (payable), `retry_mint` (payable), `mint_result`, `set_action`, `figure_supply` |
+| Mint | `mint_life` (payable), `retry_mint` (payable), `mint_result`, `set_action`, `figure_supply`, `open_mint_pack`, `choose_mint_slot` (payable), `rarity_supply`, `edition_supply` |
 | Earnings | `withdraw`, `balance_of`, `sources_of`, `children_of`, `token_stats` |
 | Market | `list`, `unlist`, `buy` (payable, returns seller proceeds), `listing`, `listings` |
 | Pools | `active_pool`, `figure_copies` |
 | Standards | NEP-171 core, NEP-177 metadata, NEP-178 approvals, NEP-181 enumeration, NEP-199 `nft_payout` / `nft_transfer_payout` |
-| Admin (owner) | `set_verifier_keys`, `set_catalog`, `set_params`, `set_world_versions`, getters |
+| Admin (owner) | `set_verifier_keys`, `set_catalog`, `set_card_art`, `set_params`, `set_world_versions`, getters |
+
+## Card art and NFT metadata
+
+`set_card_art` stores the v14 collection card table that `scripts/ranked/card-art-table.ts` builds (chain/card-art.ts): a historical figure matches by figure and rarity; a person of the city matches by career group, rarity and the `sex` recorded in the signed evidence. A minted NFT then carries that card's title, its absolute image as `media`, and in `extra` the `card_id`, the `edition_key` (`card:<card_id>:rarity:<n>`), its `edition_number` and `edition_limit` (null is unlimited), and marketplace `attributes` (Card, Rarity, Edition, Career, Born, Died). Rarity limits are counted per card. With no table, no recorded sex, or no card (a Legendary person of the city has no art yet), the earlier title and media are kept. The table lives under a raw storage key, so an existing deployment can be upgraded in place.
 
 ## Known limits
 

@@ -90,6 +90,12 @@ export function findCardArt(query: CardArtQuery): CardArtwork | undefined {
   return figureId && !query.kind ? getFigureCardArt(figureId) : undefined;
 }
 
+/** A collection card or runtime rarity variant by its id, as the contract records it in `card_id`. */
+export function getCardArtById(id: string | null | undefined): CardArtwork | undefined {
+  if (!id) return undefined;
+  return allCardArt.find(art => art.id === id) ?? parentVariants.find(art => art.id === id);
+}
+
 export function getFigureCardArt(figureId: string, rarity?: number | string): CardArtwork | undefined {
   const base = allCardArt.find(art => art.kind === "parent" && art.figureId === figureId);
   if (rarity === undefined) return base;

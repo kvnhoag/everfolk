@@ -8,6 +8,7 @@ import { TESTNET_STAGE_FIGURE_GENERIC_FEE_YOCTO, TESTNET_STAGE_FIGURE_HISTORICAL
 import type { Draw, EditionFields, EditionSupply, Evidence, FigurePick, LifeView, MintResult, MintCard, MintPack, StageMintQuote, TokenExtra } from "../../chain/types.ts";
 import { packCardCount } from "../../chain/pack-count.ts";
 import { designKey, openRarityWeights } from "../../chain/rarity-caps.ts";
+import { cardDesign, cardIdFor } from "../../chain/card-art.ts";
 import { editionKey, editionLimit } from "../../chain/editions.ts";
 import { roll, weightedPick } from "./mock-math.ts";
 import { buy, list, payMintFee, setAction, unlist, withdraw } from "./mock-market.ts";
@@ -51,7 +52,7 @@ function previewEdition(state: MockState, input: Parameters<typeof editionKey>[0
 }
 
 function refreshPack(state: MockState, pack: { view: MintPack; evidence: Evidence }): MintPack {
-  return { ...copy(pack.view), cards: pack.view.cards.map(card => ({ ...copy(card), ...previewEdition(state, { ...card, career_group: pack.evidence.career_group }) })) };
+  return { ...copy(pack.view), cards: pack.view.cards.map(card => ({ ...copy(card), ...previewEdition(state, { ...card, career_group: pack.evidence.career_group, sex: pack.evidence.sex }) })) };
 }
 
 function reservedEditions(state: MockState, key: string, excludeLifeId?: string, replacing?: MintCard): number {
@@ -59,7 +60,7 @@ function reservedEditions(state: MockState, key: string, excludeLifeId?: string,
   for (const [lifeId, pack] of state.packs) for (const card of pack.view.cards) {
     if (lifeId === excludeLifeId) continue;
     if (card === replacing) continue;
-    if (editionKey({ ...card, career_group: pack.evidence.career_group }) === key) reserved++;
+    if (editionKey({ ...card, career_group: pack.evidence.career_group, sex: pack.evidence.sex }) === key) reserved++;
   }
   return reserved;
 }
@@ -152,28 +153,31 @@ function assertEvidence(life: LifeView, evidence: Evidence, npcActionId: string,
 /** Minted copies plus copies held in opened packs, for one design and rarity (chain/rarity-caps.ts). */
 function rarityTaken(state: MockState, design: string, rarity: number): number {
   let taken = 0;
-  for (const token of state.tokens.values()) if (token.rarity === rarity && designKey(token.figure_id, token.action_id) === design) taken++;
-  for (const pack of state.packs.values()) for (const card of pack.view.cards) if (card.rarity === rarity && designKey(card.figure_id, card.action_id) === design) taken++;
+  const designOf = (item: { figure_id: string | null; action_id: string; card_id?: string }) => item.card_id ? `card:${item.card_id}` : designKey(item.figure_id, item.action_id);
+  for (const token of state.tokens.values()) if (token.rarity === rarity && designOf({ ...token, card_id: token.extra.card_id }) === design) taken++;
+  for (const pack of state.packs.values()) for (const card of pack.view.cards) if (card.rarity === rarity && designOf(card) === design) taken++;
   return taken;
 }
 
-function openWeights(state: MockState, design: string, weights: readonly bigint[]): bigint[] {
-  return openRarityWeights(weights.map(Number), rarity => rarityTaken(state, design, rarity)).map(BigInt);
+/** Each rarity is checked against the card design it would produce, as contract/src/card_art.rs `open_weights_for`. */
+function openWeights(state: MockState, figure: string | null, evidence: Evidence, npcActionId: string, weights: readonly bigint[]): bigint[] {
+  const design = (rarity: number) => cardDesign({ figure_id: figure, rarity, career_group: evidence.career_group, sex: evidence.sex }, npcActionId);
+  return openRarityWeights(weights.map(Number), rarity => rarityTaken(state, design(rarity), rarity)).map(BigInt);
 }
 
 async function rollOutcome(state: MockState, seed: string, evidence: Evidence, npcActionId: string, replacing?: MintCard) {
   let figure: FigureId | null = null;
   for (const candidate of evidence.matched_figures) {
     const minted = (state.figureCopies.get(candidate)?.length ?? 0) + [...state.packs.values()].reduce((n, p) => n + p.view.cards.filter(c => c !== replacing && c.figure_id === candidate).length, 0);
-    const hasRarity = openWeights(state, designKey(candidate, npcActionId), FIGURE_RARITY_WEIGHTS).some(weight => weight > 0n);
+    const hasRarity = openWeights(state, candidate, evidence, npcActionId, FIGURE_RARITY_WEIGHTS).some(weight => weight > 0n);
     if (minted < state.params.figureSupplyCap && hasRarity && (await roll(seed, `drop:${candidate}`)) % 10_000n < BigInt(state.params.dropRateBps)) {
       figure = candidate;
       break;
     }
   }
   // The contract's per-design rarity caps (chain/rarity-caps.ts) and the edition serial limits both apply.
-  const weights = openWeights(state, designKey(figure, npcActionId), figure ? FIGURE_RARITY_WEIGHTS : NPC_RARITY_WEIGHTS).map((weight, rarity) =>
-    weight > 0n && editionAvailable(state, { figure_id: figure, career_group: evidence.career_group, rarity }, new Map(), undefined, replacing) ? weight : 0n);
+  const weights = openWeights(state, figure, evidence, npcActionId, figure ? FIGURE_RARITY_WEIGHTS : NPC_RARITY_WEIGHTS).map((weight, rarity) =>
+    weight > 0n && editionAvailable(state, { figure_id: figure, career_group: evidence.career_group, rarity, sex: evidence.sex }, new Map(), undefined, replacing) ? weight : 0n);
   const picked = weightedPick(weights, await roll(seed, "rarity"));
   if (picked === null && figure) return rollOutcome(state, seed, { ...evidence, matched_figures: [] }, npcActionId, replacing);
   const rarity = picked ?? 0;
@@ -197,7 +201,9 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
     : state.params.mintFee);
   // Async hashing/rolling may overlap another request; recheck immediately before the synchronous allocation.
   ownedAliveLife(state, account, lifeId);
-  if (!editionAvailable(state, { figure_id: figure, career_group: evidence.career_group, rarity, stage_id: chosen?.stage_id, stage_record: chosen?.stage_record }, new Map(), chosen ? lifeId : undefined)) throw new Error("This card edition is sold out");
+  if (!editionAvailable(state, { figure_id: figure, career_group: evidence.career_group, rarity, sex: evidence.sex, stage_id: chosen?.stage_id, stage_record: chosen?.stage_record }, new Map(), chosen ? lifeId : undefined)) throw new Error("This card edition is sold out");
+  // A stage NFT shows its own portrait; every other card shows its v14 collection card, as the contract records it.
+  const cardId = chosen?.stage_id ? null : cardIdFor({ figure_id: figure, rarity, career_group: evidence.career_group, sex: evidence.sex });
   const tokenId = registerToken(state, {
     owner_id: life.account_id, kind, figure_id: figure, category, rarity, affection, action_id: actionId,
     extra: {
@@ -213,6 +219,7 @@ async function mintLife(state: MockState, account: string, lifeId: string, signe
       tier: chosen?.tier,
       portrait_media: chosen?.portrait_media,
       stage_record: chosen?.stage_record,
+      ...(cardId ? { card_id: cardId, sex: evidence.sex } : {}),
     },
   });
   const shares = payMintFee(state, tokenId, evidence.sources, effectiveFee);
@@ -265,7 +272,8 @@ async function packCard(state: MockState, life: LifeView, hash: string, slot: nu
     };
   }
   const { figure, rarity, affection } = await rollOutcome(state, await sha256Hex(`${life.seed}:pack:${hash}:${slot}`), evidence, action);
-  return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action };
+  const cardId = cardIdFor({ figure_id: figure, rarity, career_group: evidence.career_group, sex: evidence.sex });
+  return { kind: figure ? "figure" : "npc", figure_id: figure, rarity, affection, action_id: figure ? FIGURE_ACTIONS[figure][0] : action, ...(cardId ? { card_id: cardId } : {}) };
 }
 
 function bind(state: MockState, account: string): MockLivesContract {

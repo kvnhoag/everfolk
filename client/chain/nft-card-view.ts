@@ -2,11 +2,12 @@ import type { CareerGroup, FigureId } from "../../chain/ids.ts";
 import type { MintCard, MintResult } from "../../chain/types.ts";
 import { figureMediaPath } from "../../chain/figure-media.ts";
 import { resolvePortraitState } from "../models/portrait-state.ts";
-import { cardEditionText, getFigureCardArt } from "../models/card-art.ts";
+import { cardEditionText, getCardArtById, getFigureCardArt } from "../models/card-art.ts";
+import { cardIdFor } from "../../chain/card-art.ts";
 import { RARITY_LABELS } from "../../chain/ids.ts";
 import { editionLabel } from "./edition-label.ts";
 import type { BoosterCardView } from "../types/booster.ts";
-import { actionName, figureTitle, GROUP_TITLE } from "./chain-copy.ts";
+import { actionName, figureName, figureTitle, GROUP_TITLE } from "./chain-copy.ts";
 import type { KeptRow } from "./token-page-model.ts";
 
 /** People of the city are drawn as working adults from the v3 portrait library, seeded so a card always shows the same person. */
@@ -34,7 +35,12 @@ const roleOf = (figureId: FigureId | null | undefined) => (figureId ? "Historica
  * A figure whose approved collection card matches the rarity shows that whole card face (framedArt);
  * people of the city wear their career's clothes from the v3 portrait library.
  */
-export function boosterArtwork(figureId: MintCard["figure_id"], rarity: number, portraitMedia: string | null | undefined, seed: string, recordedEdition?: string | null, group?: CareerGroup): Pick<BoosterCardView, "art" | "framedArt" | "editionText"> {
+export function boosterArtwork(figureId: MintCard["figure_id"], rarity: number, portraitMedia: string | null | undefined, seed: string, recordedEdition?: string | null, group?: CareerGroup, cardId?: string | null): Pick<BoosterCardView, "art" | "framedArt" | "editionText"> {
+  // The card the contract recorded for this slot or token (chain/card-art.ts) is shown exactly.
+  const recorded = getCardArtById(cardId);
+  if (recorded && recorded.rarity === RARITY_LABELS[rarity]?.toLowerCase()) {
+    return { art: recorded.portraitSrc, framedArt: recorded.footerlessSrc, editionText: cardEditionText(recorded, recordedEdition) };
+  }
   const approved = figureId ? getFigureCardArt(figureId, rarity) : undefined;
   let authoredFigureMedia = !portraitMedia;
   if (portraitMedia && figureId && approved) {
@@ -57,7 +63,7 @@ export function packCardView(card: MintCard, slot: number, evidenceHash: string,
   return {
     name: card.figure_id ? figureTitle(card.figure_id) : card.character_name ?? GROUP_TITLE[group],
     rarity: card.rarity,
-    ...boosterArtwork(card.figure_id, card.rarity, card.portrait_media, `${evidenceHash}:${slot}`, editionLabel({ edition_number: card.next_edition_number ?? undefined, edition_limit: card.edition_limit }), group),
+    ...boosterArtwork(card.figure_id, card.rarity, card.portrait_media, `${evidenceHash}:${slot}`, editionLabel({ edition_number: card.next_edition_number ?? undefined, edition_limit: card.edition_limit }), group, card.card_id),
     sub: actionName(card.action_id),
     role: roleOf(card.figure_id),
   };
@@ -76,7 +82,7 @@ export function resultCardView(result: MintResult, group?: CareerGroup, actionId
 
 /** An NFT the player owns, from its My lives row. */
 export function keptCardView(row: KeptRow): BoosterCardView {
-  return { name: row.title, rarity: row.rarity, ...boosterArtwork(row.figureId, row.rarity, row.portraitMedia, `token:${row.tokenId}`, row.editionText, row.careerGroup), sub: row.actionName, role: roleOf(row.figureId) };
+  return { name: row.title, rarity: row.rarity, ...boosterArtwork(row.figureId, row.rarity, row.portraitMedia, `token:${row.tokenId}`, row.editionText, row.careerGroup, row.cardId), sub: row.actionName, role: roleOf(row.figureId) };
 }
 
 /** Repaint a known old figure export for viewing without rewriting a saved pack. */
@@ -84,4 +90,19 @@ export function refreshSavedBoosterCard(card: BoosterCardView): BoosterCardView 
   if (card.framedArt) return card;
   const figureId = (["alexander", "aristotle", "euclid", "cleomenes"] as const).find(id => card.art === figureMediaPath(id) || card.art === FIGURE_CARD_ART[id]);
   return figureId ? { ...card, ...boosterArtwork(figureId, card.rarity, undefined, `saved:${card.art}`, card.editionText) } : card;
+}
+
+/**
+ * A free life's pack card. It never mints, but shows the card a Weave mint would: the career's v14 profession
+ * card in the played character's recorded sex, or the life's own portrait when the collection has none yet.
+ */
+export function freePlayCardView(card: MintCard, group: CareerGroup, life: { seed: string; character?: { sex?: string } }, ownPortrait: string): BoosterCardView {
+  const cardId = cardIdFor({ figure_id: card.figure_id, rarity: card.rarity, career_group: group, sex: life.character?.sex });
+  return {
+    name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[group],
+    rarity: card.rarity,
+    ...boosterArtwork(card.figure_id, card.rarity, card.figure_id ? undefined : ownPortrait, life.seed, undefined, group, cardId),
+    sub: actionName(card.action_id),
+    role: roleOf(card.figure_id),
+  };
 }
