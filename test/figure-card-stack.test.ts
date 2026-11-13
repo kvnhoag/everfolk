@@ -55,7 +55,8 @@ test("contribution stacks keep ascending left and right versions around the actu
   assert.match(html, /data-preview-rank="Uncommon" data-preview-slot="-1"/);
   assert.match(html, /data-preview-rank="Rare" data-preview-slot="0"/);
   assert.match(html, /data-preview-rank="Epic" data-preview-slot="1"/);
-  assert.equal((html.match(/Lyceum Researcher/g) ?? []).length, 2); // title and the static card's accessible name
+  assert.match(html, /aria-label="Lyceum Researcher, Rare contribution card"/);
+  assert.match(html, /data-card-art="aristotle-rare-male"/);
   assert.match(html, /aria-label="Inspect Aristotle: Rare contribution card/);
   assert.doesNotMatch(html, /Legendary/);
 });
