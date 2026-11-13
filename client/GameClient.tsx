@@ -12,6 +12,7 @@ import { useTutorialNavigator } from "./hooks/useTutorial.ts";
 import type { TutorialScreen } from "./models/tutorial-steps.ts";
 import { tutorialStore } from "./state/tutorial-store.ts";
 import type { ChainBackend } from "./chain/chain-backend.ts";
+import { DEFAULT_CHAIN_CONFIG } from "./chain/config.ts";
 import { useChainBackend, loadRankedConfig } from "./chain/chain-backend.ts";
 import { beginRankedSession, type RankedSession } from "./chain/ranked-session.ts";
 import { PRACTICE_CONTRACT_ID, practiceVerifier } from "./chain/practice-verifier.ts";
@@ -43,8 +44,13 @@ export default function GameClient() {
   async function beginRanked(life: LifeView, backend: ChainBackend) {
     const config = backend.mode === "live" ? await loadRankedConfig() : null;
     const world = await loadRankedWorld(life.world_version);
+    const contractId = backend.mode === "preview"
+      ? (backend.contractId ?? PRACTICE_CONTRACT_ID)
+      : (config?.contract_id ?? backend.contractId ?? DEFAULT_CHAIN_CONFIG.contractId);
     const session = await beginRankedSession({
-      contract: backend.contract, contractId: config?.contract_id ?? PRACTICE_CONTRACT_ID,
+      contract: backend.contract, contractId,
+      networkId: backend.networkId ?? DEFAULT_CHAIN_CONFIG.networkId,
+      practice: backend.mode === "preview",
       verifyUrl: "/api/ranked/verify", world,
       ...(backend.mode === "preview" ? { verifyLocally: practiceVerifier(world, backend.contract) } : {}),
     }, life);

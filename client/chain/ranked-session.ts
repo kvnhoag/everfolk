@@ -1,10 +1,12 @@
 import { commandsHash } from "../../chain/hash.ts";
 import { contractWorldVersion } from "../../chain/worlds.ts";
-import { activationCommand, applyCommand } from "../../chain/validate-ranked.ts";
+import { activationCommand, applyCommand, rankedWorldVersion } from "../../chain/validate-ranked.ts";
 import { ObligationTracker, rankedObligations, stepCommand, type Obligation } from "../../chain/ranked-rules.ts";
 import { createEngine } from "../../src/index.ts";
 import { canonicalJson } from "../../src/random.ts";
 import type { Choice, Command, LifeEngine, LifeState, SaveFile, WorldPack } from "../../src/types.ts";
+import { DEFAULT_CHAIN_CONFIG } from "./config.ts";
+import { PRACTICE_CONTRACT_ID } from "./practice-verifier.ts";
 import type { Draw, LifeView, LivesContract, MintResult, StageMintResult, SignedEvidence } from "./types.ts";
 
 
@@ -18,11 +20,21 @@ export interface RankedSessionOptions {
   contract: LivesContract;
   /** Account id of the lives contract; it is the `source.contractId` of every influence. */
   contractId: string;
+  /** NEAR network id (defaults to "testnet"). */
+  networkId?: string;
+  /** True for in-browser practice ledgers so their saves never collide with live contracts. */
+  practice?: boolean;
   verifyUrl: string;
   world: WorldPack;
   storage?: SessionStorage;
   /** Practice ledger only: check and sign the finished life in the browser instead of on the server. */
   verifyLocally?: (life: LifeView, save: SaveFile) => Promise<SignedEvidence>;
+}
+
+export interface RankedSaveScope {
+  networkId?: string;
+  contractId?: string | null;
+  practice?: boolean;
 }
 
 /** A ranked life: every step is saved, key decisions draw on chain, and there is no way to rewind. */
@@ -50,7 +62,95 @@ export interface RankedSession {
   abandon(): Promise<void>;
 }
 
-export const rankedSaveKey = (lifeId: string) => `everfolk.ranked.${lifeId}`;
+export const DEFAULT_RANKED_SAVE_SCOPE: RankedSaveScope = {
+  networkId: DEFAULT_CHAIN_CONFIG.networkId,
+  contractId: DEFAULT_CHAIN_CONFIG.contractId,
+  practice: false,
+};
+
+export const legacyRankedSaveKey = (lifeId: string) => `everfolk.ranked.${lifeId}`;
+
+export function sessionSaveScope(
+  options: Pick<RankedSessionOptions, "networkId" | "contractId" | "practice" | "verifyLocally">,
+): RankedSaveScope {
+  return {
+    networkId: options.networkId ?? DEFAULT_CHAIN_CONFIG.networkId,
+    contractId: options.contractId,
+    practice: options.practice ?? Boolean(options.verifyLocally),
+  };
+}
+
+export function rankedSaveKey(lifeId: string, scope: RankedSaveScope = DEFAULT_RANKED_SAVE_SCOPE): string {
+  const network = encodeURIComponent(scope.networkId?.trim() || DEFAULT_CHAIN_CONFIG.networkId);
+  const practice = Boolean(scope.practice);
+  const contract = encodeURIComponent(
+    scope.contractId?.trim() || (practice ? PRACTICE_CONTRACT_ID : DEFAULT_CHAIN_CONFIG.contractId),
+  );
+  const ledger = practice ? `practice:${contract}` : contract;
+  return `everfolk.ranked.${network}:${ledger}:${encodeURIComponent(lifeId)}`;
+}
+
+export function parseRankedSave(raw: string): SaveFile | null {
+  try {
+    const parsed = JSON.parse(raw) as SaveFile;
+    return parsed && typeof parsed === "object" && typeof parsed.seed === "string" && Array.isArray(parsed.commands)
+      ? parsed
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+export function matchesRankedLife(
+  save: SaveFile,
+  life: Pick<LifeView, "seed" | "world_version" | "figure_picks">,
+  contractId?: string | null,
+): boolean {
+  if (save.seed !== life.seed) return false;
+  if (rankedWorldVersion(save) !== life.world_version) return false;
+  if (contractId) {
+    const resolvedContract = contractId.trim();
+    if (life.figure_picks.some((pick, index) => canonicalJson(save.commands[index]) !== canonicalJson(activationCommand(pick, resolvedContract)))) {
+      return false;
+    }
+    for (const command of save.commands) {
+      if (command && typeof command === "object" && (command as { type?: unknown }).type === "influence") {
+        const sourceContract = (command as { source?: { contractId?: unknown } }).source?.contractId;
+        if (sourceContract !== resolvedContract) return false;
+      }
+    }
+  }
+  return true;
+}
+
+export function readScopedRankedSave(
+  storage: Pick<SessionStorage, "getItem">,
+  life: Pick<LifeView, "life_id" | "seed" | "world_version" | "figure_picks">,
+  scope: RankedSaveScope = DEFAULT_RANKED_SAVE_SCOPE,
+): { raw: string; migratedFromLegacy: boolean } | null {
+  const scoped = storage.getItem(rankedSaveKey(life.life_id, scope));
+  if (scoped !== null) return { raw: scoped, migratedFromLegacy: false };
+  const legacy = storage.getItem(legacyRankedSaveKey(life.life_id));
+  if (legacy === null) return null;
+  const parsed = parseRankedSave(legacy);
+  if (!parsed || !matchesRankedLife(parsed, life, scope.contractId)) return null;
+  return { raw: legacy, migratedFromLegacy: true };
+}
+
+export function removeRankedSave(
+  storage: Pick<SessionStorage, "getItem" | "removeItem">,
+  life: Pick<LifeView, "life_id" | "seed" | "world_version" | "figure_picks">,
+  scope: RankedSaveScope = DEFAULT_RANKED_SAVE_SCOPE,
+): void {
+  storage.removeItem(rankedSaveKey(life.life_id, scope));
+  const legacyKey = legacyRankedSaveKey(life.life_id);
+  const legacyRaw = storage.getItem(legacyKey);
+  if (legacyRaw === null) return;
+  const parsed = parseRankedSave(legacyRaw);
+  if (parsed && matchesRankedLife(parsed, life, scope.contractId)) {
+    storage.removeItem(legacyKey);
+  }
+}
 
 function browserStorage(): SessionStorage {
   if (typeof localStorage === "undefined") throw new Error("Ranked lives need browser storage to keep their progress.");
@@ -78,6 +178,7 @@ class Session implements RankedSession {
   private readonly engine: LifeEngine;
   private readonly options: RankedSessionOptions;
   private readonly storage: SessionStorage;
+  private readonly scope: RankedSaveScope;
   private tracker: ObligationTracker;
   /** Draws and checkpoints owed at the end of the command log, oldest first. */
   private owed: Obligation[] = [];
@@ -85,6 +186,7 @@ class Session implements RankedSession {
   constructor(options: RankedSessionOptions, life: LifeView, state: LifeState, tracker = new ObligationTracker(), owed: Obligation[] = []) {
     this.options = options;
     this.storage = options.storage ?? browserStorage();
+    this.scope = sessionSaveScope(options);
     this.engine = Session.engineFor(options.world);
     this.life = life;
     this.state = state;
@@ -122,7 +224,7 @@ class Session implements RankedSession {
       seed: this.state.seed,
       commands: [...this.state.commands],
     };
-    this.storage.setItem(rankedSaveKey(this.life.life_id), JSON.stringify(saveFile));
+    this.storage.setItem(rankedSaveKey(this.life.life_id, this.scope), JSON.stringify(saveFile));
   }
 
   async applyFigures(): Promise<void> {
@@ -279,7 +381,7 @@ class Session implements RankedSession {
 
   private completeMint(result: MintResult): MintResult {
     this.life = { ...this.life, status: "minted" };
-    this.storage.removeItem(rankedSaveKey(this.life.life_id));
+    removeRankedSave(this.storage, this.life, this.scope);
     return result;
   }
 
@@ -305,15 +407,36 @@ class Session implements RankedSession {
       if (!landed) throw error;
       result = landed;
     }
-    this.storage.removeItem(rankedSaveKey(this.life.life_id));
+    removeRankedSave(this.storage, this.life, this.scope);
     this.life = { ...this.life, status: "minted" };
     return result;
   }
 
   async abandon(): Promise<void> {
     await this.options.contract.abandonLife(this.life.life_id);
-    this.storage.removeItem(rankedSaveKey(this.life.life_id));
+    removeRankedSave(this.storage, this.life, this.scope);
   }
+}
+
+function readOrMigrateRankedSave(
+  storage: SessionStorage,
+  life: LifeView,
+  world: WorldPack,
+  scope: RankedSaveScope,
+): string | null {
+  const found = readScopedRankedSave(storage, life, scope);
+  if (!found) return null;
+  if (found.migratedFromLegacy) {
+    try {
+      const state = Session.engineFor(world).load(found.raw);
+      if (state.seed !== life.seed) return null;
+    } catch {
+      return null;
+    }
+    storage.setItem(rankedSaveKey(life.life_id, scope), found.raw);
+    storage.removeItem(legacyRankedSaveKey(life.life_id));
+  }
+  return found.raw;
 }
 
 /** Starts a ranked life: the contract chooses the seed and the figures that shape this world. */
@@ -326,7 +449,8 @@ export async function startRankedSession(options: RankedSessionOptions): Promise
  * A life with on-chain draws or checkpoints but no local save cannot continue here (it would not match its record).
  */
 export async function beginRankedSession(options: RankedSessionOptions, life: LifeView): Promise<RankedSession> {
-  const saved = (options.storage ?? browserStorage()).getItem(rankedSaveKey(life.life_id));
+  const storage = options.storage ?? browserStorage();
+  const saved = readOrMigrateRankedSave(storage, life, options.world, sessionSaveScope(options));
   if (saved) return resumeRankedSession(options, life.life_id);
   if (life.status !== "alive") throw new Error("This life has a committed mint. Complete it from the ranked entry screen.");
   if (life.draws.length > 0 || life.checkpoints.length > 0) {
@@ -341,7 +465,8 @@ export async function beginRankedSession(options: RankedSessionOptions, life: Li
 export async function resumeRankedSession(options: RankedSessionOptions, lifeId: string): Promise<RankedSession> {
   const life = await options.contract.getLife(lifeId);
   if (!life || life.status === "abandoned") throw new Error("This ranked life is no longer in progress.");
-  const saved = (options.storage ?? browserStorage()).getItem(rankedSaveKey(lifeId));
+  const storage = options.storage ?? browserStorage();
+  const saved = readOrMigrateRankedSave(storage, life, options.world, sessionSaveScope(options));
   if (!saved) throw new Error("This device has no saved progress for this ranked life.");
   const engine = Session.engineFor(options.world);
   const save = JSON.parse(saved) as SaveFile;

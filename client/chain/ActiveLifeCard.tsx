@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { LifeView } from "../../chain/types.ts";
-import { errorText, type ChainBackend } from "./chain-backend.ts";
+import { backendSaveScope, errorText, type ChainBackend } from "./chain-backend.ts";
 import { rankedProgress, type RankedProgress } from "./ranked-progress.ts";
 
 export function useActiveRankedLife(backend: ChainBackend) {
@@ -11,13 +11,14 @@ export function useActiveRankedLife(backend: ChainBackend) {
     let cancelled = false;
     setActive(null); setError(""); setLoading(Boolean(backend.accountId));
     if (!backend.accountId) return;
+    const scope = backendSaveScope(backend);
     void backend.contract.activeLifeOf(backend.accountId).then(async life => {
-      const [progress, pack] = life ? await Promise.all([rankedProgress(life), backend.contract.mintPack(life.life_id).catch(() => null)]) : [null, null];
+      const [progress, pack] = life ? await Promise.all([rankedProgress(life, undefined, undefined, scope), backend.contract.mintPack(life.life_id).catch(() => null)]) : [null, null];
       if (progress && pack) { progress.status = "ended"; progress.pack = true; }
       if (!cancelled) { setActive(life && progress ? { life, progress } : null); setLoading(false); }
     }).catch(cause => { if (!cancelled) { setError(errorText(cause, "Your ranked life could not be loaded. Reload to try again.")); setLoading(false); } });
     return () => { cancelled = true; };
-  }, [backend.accountId, backend.contract, backend.revision]);
+  }, [backend.accountId, backend.contract, backend.revision, backend.mode, backend.contractId, backend.networkId]);
   return { active, loading, error };
 }
 

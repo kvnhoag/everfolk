@@ -5,10 +5,10 @@ import ActiveLifeCard, { useActiveRankedLife } from "./ActiveLifeCard.tsx";
 import { DEFAULT_MINT_FEE_YOCTO, formatNear } from "./near-amount.ts";
 import BornInto from "./BornInto.tsx";
 import { bornIntoLines, type OwnersByToken } from "./born-into-model.ts";
-import { errorText, type ChainBackend } from "./chain-backend.ts";
+import { backendSaveScope, errorText, type ChainBackend } from "./chain-backend.ts";
 import type { LivesContract } from "./types.ts";
 import MintRecovery from "./MintRecovery.tsx";
-import { rankedSaveKey } from "./ranked-session.ts";
+import { removeRankedSave } from "./ranked-session.ts";
 import "./ranked-entry.css";
 import SignInPanel from "./SignInPanel.tsx";
 import { accountLabel } from "./account-bar-model.ts";
@@ -68,6 +68,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   const giveUp = () => run(async () => {
     if (!life) return;
     await contract.abandonLife(life.life_id);
+    try { removeRankedSave(window.localStorage, life, backendSaveScope(backend)); } catch { /* Missing local storage leaves only the closed chain state. */ }
     setLife(null);
     setClosing(false);
     onClosed?.();
@@ -77,7 +78,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   const recover = () => run(async () => {
     if (!life) return;
     const completed = await contract.mintResult(life.life_id) ?? await contract.retryMint(life.life_id);
-    try { window.localStorage.removeItem(rankedSaveKey(life.life_id)); } catch { /* The confirmed mint remains accessible on its token page. */ }
+    try { removeRankedSave(window.localStorage, life, backendSaveScope(backend)); } catch { /* The confirmed mint remains accessible on its token page. */ }
     const album = await contract.stageMintResult(life.life_id).catch(() => null);
     window.location.hash = album ? "#mine" : `token/${completed.token_id}`;
   }, "The mint could not finish. Please try again.");
