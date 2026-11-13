@@ -1,0 +1,127 @@
+{
+  "id": "ptolemy-rare-female",
+  "template": {
+    "id": "ptolemy-rare-female",
+    "figureId": "ptolemy",
+    "figureName": "Ptolemy I Soter",
+    "kind": "contribution",
+    "tier": "rare",
+    "gender": "female",
+    "rarity": "rare",
+    "title": "Ptolemaic Supply Commissioner",
+    "canonicalTitle": "Ptolemaic Supply Commissioner",
+    "displayTitle": "Supply Commissioner",
+    "subtitle": "Keeper of Ptolemy's Lifelines",
+    "bodyTitle": "The Realm Remains Supplied",
+    "bodyText": "A supply commissioner coordinates stores and transport across competing demands. Judgment turns figures on a tablet into provisions where they are needed, giving Ptolemy's government the material strength to maintain its hold on Egypt.",
+    "copy": {
+      "title": "Supply Commissioner",
+      "subtitle": "Keeper of Ptolemy's Lifelines",
+      "bodyTitle": "The Realm Remains Supplied",
+      "bodyText": "A supply commissioner coordinates stores and transport across competing demands. Judgment turns figures on a tablet into provisions where they are needed, giving Ptolemy's government the material strength to maintain its hold on Egypt."
+    },
+    "editionLimit": 100,
+    "exampleEdition": "001/100",
+    "collectionIndex": 88,
+    "frameLayout": "standard",
+    "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+    "frame": "frames/cards/ptolemy-rare-female.png",
+    "footerlessFrame": "frames/cards/ptolemy-rare-female-footerless.png",
+    "overlaySvg": "frames/svg/ptolemy-rare-female.svg",
+    "footerlessOverlaySvg": "frames/svg/ptolemy-rare-female-footerless.svg",
+    "sourcePortrait": "reference/portraits/ptolemy-rare-female.webp",
+    "preview": "reference/cards/ptolemy-rare-female.webp",
+    "fit": "standard",
+    "artRect": {
+      "x": 154,
+      "y": 190,
+      "width": 592,
+      "height": 740
+    },
+    "symbol": "reference/symbols/ptolemy.svg",
+    "historicalSources": [],
+    "sourceArtworkSha256": "be000bc3c79ecae0d2900b8f1deaef40bf2a87a46560c3cd6af8db4c452de9c4",
+    "hashes": {
+      "frame": {
+        "width": 900,
+        "height": 1260,
+        "bytes": 60091,
+        "sha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c",
+        "rgbaSha256": "fcf5dd040a458e5481d6b79f513d68eae100dec796ec2c9fffdc2a172facda11"
+      },
+      "footerlessFrame": {
+        "width": 900,
+        "height": 1260,
+        "bytes": 59458,
+        "sha256": "8dd5252a458eb1d650972b11f465ae1cda557a020cfc9aec896bf127d600de30",
+        "rgbaSha256": "88a6fc7f6f38e64cb5a51d29c924c22aa636d868d912e18865eda0312df95023"
+      },
+      "sourcePortrait": {
+        "width": 840,
+        "height": 1050,
+        "bytes": 229118,
+        "sha256": "52ad378711c434b5c03c0fa426f22a783e6b000aaa7b135aa7242dac4e5eedd3",
+        "rgbaSha256": "490d41a59b142d07f7e4f58f2b9ae3cfc8150b1f5a6da22a9b72986b826692a2"
+      },
+      "preview": {
+        "width": 450,
+        "height": 630,
+        "bytes": 197028,
+        "sha256": "0f682b4ef92dcba6b0a14051ba9e45edb91c6b7d47b6019a6098127c617e4fda",
+        "rgbaSha256": "a7f096a5dc651748d7284693aea1839af2a7e82351bc694376cb2f11a0618122"
+      },
+      "overlaySvg": {
+        "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc"
+      },
+      "footerlessOverlaySvg": {
+        "sha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a"
+      }
+    },
+    "sceneBrief": "A supply commissioner checks a grain consignment and its seal while comparing the shipment with a wooden writing tablet. Keep the chin gently lowered and the gaze directed toward the inspected seal and records, with a relaxed neck aligned naturally above the shoulders. Preserve the hands, tablet, grain sacks, scales and harbour."
+  },
+  "delivery": {
+    "id": "ptolemy-rare-female",
+    "sourcePNG": "exports/ptolemy-rare-female.png",
+    "sourceSha256": "49165b8edaef4f575eaf99ef468d81d4c3be674ff54e312720cd21ee0a01f427",
+    "portraitSourceSha256": "be000bc3c79ecae0d2900b8f1deaef40bf2a87a46560c3cd6af8db4c452de9c4",
+    "symbolSha256": "1f827826ca69f21e4dcddd87db87ecee6c8995be1810dbf61a0e72d5dbd374ea",
+    "editionRemovedPixels": 563,
+    "outsideEditionChangedPixels": 0,
+    "full": {
+      "src": "/assets/cards/collection-v14/ptolemy-rare-female.webp",
+      "width": 900,
+      "height": 1260,
+      "bytes": 254804,
+      "sha256": "3952b1bbca0c8984890e116af3871ac8c9fac23ef6dbfb01e4ff8ef5864684e8",
+      "rgbaSha256": "679c80a2e31fb0c1fe8af16a002614c66a35fdc987893a5786c753acfff110ee"
+    },
+    "thumbnail": {
+      "src": "/assets/cards/collection-v14/ptolemy-rare-female-thumb.webp",
+      "width": 450,
+      "height": 630,
+      "bytes": 197028,
+      "sha256": "0f682b4ef92dcba6b0a14051ba9e45edb91c6b7d47b6019a6098127c617e4fda",
+      "rgbaSha256": "a7f096a5dc651748d7284693aea1839af2a7e82351bc694376cb2f11a0618122"
+    },
+    "footerless": {
+      "src": "/assets/cards/collection-v14/ptolemy-rare-female-footerless.webp",
+      "width": 900,
+      "height": 1260,
+      "bytes": 254176,
+      "sha256": "a7640bb03f2db082e859397774ca8036e7f3cf726fead1496630ddeaa328deee",
+      "rgbaSha256": "5c2929816427169fb06c3efa7a2bbbc383cce9f9fb6e4f8a4c8b9b018b0cd104"
+    },
+    "portrait": {
+      "src": "/assets/cards/collection-v14/ptolemy-rare-female-portrait.webp",
+      "width": 840,
+      "height": 1050,
+      "bytes": 229118,
+      "sha256": "52ad378711c434b5c03c0fa426f22a783e6b000aaa7b135aa7242dac4e5eedd3",
+      "rgbaSha256": "490d41a59b142d07f7e4f58f2b9ae3cfc8150b1f5a6da22a9b72986b826692a2"
+    }
+  },
+  "approvedFrameBytesUnchanged": true,
+  "nativeFrameExact": true,
+  "uncoveredPixelDifferences": 0,
+  "outsideEditionChangedPixels": 0
+}

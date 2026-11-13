@@ -1,0 +1,13 @@
+{
+  "prepared": true,
+  "changedCards": [
+    "ptolemy-common-male",
+    "ptolemy-common-female"
+  ],
+  "retainedWorldsUnchanged": true,
+  "backup": "backup/backup-manifest.json",
+  "newArtwork": [
+    "ptolemy-common-male",
+    "ptolemy-common-female"
+  ]
+}

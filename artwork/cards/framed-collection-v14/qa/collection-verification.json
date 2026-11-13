@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-11-13T18:37:09.958Z",
+  "verifiedAt": "2026-11-13T19:10:00.656Z",
   "libraryId": "everfolk-framed-collection-v14",
   "catalogComplete": true,
   "passed": true,
@@ -535,14 +535,14 @@
         900,
         1260
       ],
-      "sourceArtSha256": "c602290613dea617660aad8a5b3a990dd3b9c054a75e713715c7d277438a52d2",
-      "exportSha256": "9a90d8bf8cd1ff6ed3b80788d541ae5287a924710c6ec454c1af3d1a2865e495",
+      "sourceArtSha256": "b6875e2710905322c22ee40e4c2e6d4ae9745f89742d1873321ca615b50a0553",
+      "exportSha256": "11ce3ba7e4cae2896f68845e06ae7ac69c2729de7e10bc3882a38d32afb3cc70",
       "nativeTextNodes": 7,
       "titleBounds": {
-        "height": 87.744,
+        "height": 87.74400000000001,
         "width": 406.78400000000005,
         "x": 246.608,
-        "y": 54.21600000000001
+        "y": 54.215999999999994
       },
       "nativeReopenPixelDifferences": 0,
       "sourceFitPixelDifferences": 0,
@@ -1349,14 +1349,14 @@
         900,
         1260
       ],
-      "sourceArtSha256": "6ad875cff013cc058bcfdc9602af927ae1ebdd0ef7ea0c30293fefda0502ca31",
-      "exportSha256": "d305b2b166b7a654c36bb6bf05b1eacaf2c88a9054cba5153154ded320848d49",
+      "sourceArtSha256": "645b4fccde2f7b65733f34d5126c1179a1477e0ff8b465dd2901106874078552",
+      "exportSha256": "42faf3ab3fdbcc3e72546e0c8a152e1c7fdefc884a736173d11edf4d195e15c6",
       "nativeTextNodes": 7,
       "titleBounds": {
-        "height": 87.744,
+        "height": 87.74400000000001,
         "width": 425.2800000000001,
         "x": 237.36,
-        "y": 54.21600000000001
+        "y": 54.215999999999994
       },
       "nativeReopenPixelDifferences": 0,
       "sourceFitPixelDifferences": 0,
@@ -1833,14 +1833,14 @@
         900,
         1260
       ],
-      "sourceArtSha256": "fe399787af9ca127d75e11a18affe6d0af34c5fd61295a8186d615a6bd56f3a1",
-      "exportSha256": "b84d9523563ea68bfdb900109675c845e6020d94f3d85a9f8abaeb62bbbe25b6",
+      "sourceArtSha256": "d1fcfd6dc44207357e9bbfc34e7b35048364b0d6199feb016184bf1d2310e5bb",
+      "exportSha256": "b98dc48038fabf801e078c8adde932660d9dd355d300717da835a39ccfe0a108",
       "nativeTextNodes": 7,
       "titleBounds": {
-        "height": 82.25999999999999,
-        "width": 691.3799999999999,
-        "x": 104.31,
-        "y": 56.640000000000015
+        "height": 87.74400000000001,
+        "width": 577.088,
+        "x": 160.91199999999998,
+        "y": 54.215999999999994
       },
       "nativeReopenPixelDifferences": 0,
       "sourceFitPixelDifferences": 0,
@@ -1855,14 +1855,14 @@
         900,
         1260
       ],
-      "sourceArtSha256": "a08ae26a00694926af3f04a754e982db7fdea9b6bc967bfafe5f714acaf1ab66",
-      "exportSha256": "d7b93f9f39194884276367aac72d096424c12635af06eef8cb303af38261302c",
+      "sourceArtSha256": "ec31186cf88b5c80458b475e2e9474d43b8785aefc13cd14eaca9e9be089bb82",
+      "exportSha256": "246e78933849ef2ff3676796bdf7962debb0f6282e5fcb69a38d636bd76dd66f",
       "nativeTextNodes": 7,
       "titleBounds": {
-        "height": 82.25999999999999,
-        "width": 691.3799999999999,
-        "x": 104.31,
-        "y": 56.640000000000015
+        "height": 87.74400000000001,
+        "width": 577.088,
+        "x": 160.91199999999998,
+        "y": 54.215999999999994
       },
       "nativeReopenPixelDifferences": 0,
       "sourceFitPixelDifferences": 0,
@@ -1921,14 +1921,14 @@
         900,
         1260
       ],
-      "sourceArtSha256": "01ff40b31057ccb77ebe85e41faa62dc816fd8235dabe00ecdb5a4172d34f1dd",
-      "exportSha256": "697b914a7cb4f5179318c8e2d40795a58c0d28120c34f80407bdc73e545f082c",
+      "sourceArtSha256": "76bb8cb05410568a68591ecb56c83d215c3bef5aa19dd9ef5e862d0f82a0e65a",
+      "exportSha256": "c36d0b279f7a6621053ff836b66cc24309da5bee1d549337421fcbfb0bf0ec72",
       "nativeTextNodes": 7,
       "titleBounds": {
-        "height": 87.744,
+        "height": 87.74400000000001,
         "width": 626.432,
         "x": 136.784,
-        "y": 54.21600000000001
+        "y": 54.215999999999994
       },
       "nativeReopenPixelDifferences": 0,
       "sourceFitPixelDifferences": 0,
@@ -1943,14 +1943,14 @@
         900,
         1260
       ],
-      "sourceArtSha256": "95690ecdf143d271592028777ffb6a2eeeeb9aad797e2cb0e57fc896e1e148ca",
-      "exportSha256": "8aba0bd79f743897a588fb48808a591b560c1a784c4197772bfcab31fe1b552c",
+      "sourceArtSha256": "be000bc3c79ecae0d2900b8f1deaef40bf2a87a46560c3cd6af8db4c452de9c4",
+      "exportSha256": "49165b8edaef4f575eaf99ef468d81d4c3be674ff54e312720cd21ee0a01f427",
       "nativeTextNodes": 7,
       "titleBounds": {
-        "height": 87.744,
+        "height": 87.74400000000001,
         "width": 626.432,
         "x": 136.784,
-        "y": 54.21600000000001
+        "y": 54.215999999999994
       },
       "nativeReopenPixelDifferences": 0,
       "sourceFitPixelDifferences": 0,
@@ -2515,14 +2515,14 @@
         900,
         1260
       ],
-      "sourceArtSha256": "1962940462c4e362b60e79b8722a1a7522566bd22b41e908383e3d035f95e24b",
-      "exportSha256": "390de73c4b77bb27e0e0958bee61ac1e8f94eda34572ed77b6b21ef8c31e47c2",
+      "sourceArtSha256": "db91466ff4dd95e5eae5ed429c5de74d53e58330661c53a9b0962022ecf19fa5",
+      "exportSha256": "ffa95c173ad25e7b1fc8d920046d3c67661207f9819aad5b60679cbc8279f9e0",
       "nativeTextNodes": 7,
       "titleBounds": {
-        "height": 87.744,
+        "height": 87.74400000000001,
         "width": 733.376,
         "x": 83.31200000000001,
-        "y": 54.21600000000001
+        "y": 54.215999999999994
       },
       "nativeReopenPixelDifferences": 0,
       "sourceFitPixelDifferences": 0,
@@ -2537,14 +2537,14 @@
         900,
         1260
       ],
-      "sourceArtSha256": "3a9fdf305ea39de9e3f927c1017acec69b50641e8276b409b5caf20bfa999c52",
-      "exportSha256": "0aa388ed9aec884ff2bc755c5977f45738d28bbf0cd1533d468f7ec68366893f",
+      "sourceArtSha256": "e24c798ccfb1881a7f6acc1b1f7ef2aa1c1185054ed3ee652b47c3a550267b2e",
+      "exportSha256": "33c3583fc3aebb2902f10c52c5412f47ec736fc967489c3fbe859e5d4669d986",
       "nativeTextNodes": 7,
       "titleBounds": {
-        "height": 87.744,
+        "height": 87.74400000000001,
         "width": 733.376,
         "x": 83.31200000000001,
-        "y": 54.21600000000001
+        "y": 54.215999999999994
       },
       "nativeReopenPixelDifferences": 0,
       "sourceFitPixelDifferences": 0,

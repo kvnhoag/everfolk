@@ -1,0 +1,127 @@
+{
+  "id": "eumenes-rare-female",
+  "template": {
+    "id": "eumenes-rare-female",
+    "figureId": "eumenes",
+    "figureName": "Eumenes of Cardia",
+    "kind": "contribution",
+    "tier": "rare",
+    "gender": "female",
+    "rarity": "rare",
+    "title": "Campaign Correspondent",
+    "canonicalTitle": "Campaign Correspondent",
+    "displayTitle": "Campaign Correspondent",
+    "subtitle": "Voice Across Eumenes' Lines",
+    "bodyTitle": "The Reports Become Clear",
+    "bodyText": "A campaign correspondent compares dispatches with the movement of forces and the needs of command. Clear writing draws scattered events into focus, allowing distant officers to act with a better understanding of one another.",
+    "copy": {
+      "title": "Campaign Correspondent",
+      "subtitle": "Voice Across Eumenes' Lines",
+      "bodyTitle": "The Reports Become Clear",
+      "bodyText": "A campaign correspondent compares dispatches with the movement of forces and the needs of command. Clear writing draws scattered events into focus, allowing distant officers to act with a better understanding of one another."
+    },
+    "editionLimit": 100,
+    "exampleEdition": "001/100",
+    "collectionIndex": 115,
+    "frameLayout": "standard",
+    "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+    "frame": "frames/cards/eumenes-rare-female.png",
+    "footerlessFrame": "frames/cards/eumenes-rare-female-footerless.png",
+    "overlaySvg": "frames/svg/eumenes-rare-female.svg",
+    "footerlessOverlaySvg": "frames/svg/eumenes-rare-female-footerless.svg",
+    "sourcePortrait": "reference/portraits/eumenes-rare-female.webp",
+    "preview": "reference/cards/eumenes-rare-female.webp",
+    "fit": "standard",
+    "artRect": {
+      "x": 154,
+      "y": 190,
+      "width": 592,
+      "height": 740
+    },
+    "symbol": "reference/symbols/eumenes.svg",
+    "historicalSources": [],
+    "sourceArtworkSha256": "e24c798ccfb1881a7f6acc1b1f7ef2aa1c1185054ed3ee652b47c3a550267b2e",
+    "hashes": {
+      "frame": {
+        "width": 900,
+        "height": 1260,
+        "bytes": 60397,
+        "sha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35",
+        "rgbaSha256": "2a913570e33f8ca52f988385a60d07a10bb8f0ce6154e203e83274ef78d529f3"
+      },
+      "footerlessFrame": {
+        "width": 900,
+        "height": 1260,
+        "bytes": 59751,
+        "sha256": "d5241ad272ac48d3d3fb5e7f7d9f8d793fc80664259c470dd50c712238a5b759",
+        "rgbaSha256": "fd442afc3ede82a6527bbbe8ee112c99a51c56942e76cda17170bb0bd55cb48f"
+      },
+      "sourcePortrait": {
+        "width": 840,
+        "height": 1050,
+        "bytes": 224898,
+        "sha256": "264290427be4554892178cbb69149e4350d55442e61e00fd72de9de9ee02fa27",
+        "rgbaSha256": "6472838969da763eee91d4dae7b3815876748ef47bbcf85179f5a8c8f25972c5"
+      },
+      "preview": {
+        "width": 450,
+        "height": 630,
+        "bytes": 193156,
+        "sha256": "73683a5a27d4e250b8635f7ceca1b24e45b865679a3e3f7a5783873e7af3be09",
+        "rgbaSha256": "efa172d8a222f702e755efcc1c740ce48e7e0803947c5106bf6c498b6686c81e"
+      },
+      "overlaySvg": {
+        "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730"
+      },
+      "footerlessOverlaySvg": {
+        "sha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6"
+      }
+    },
+    "sceneBrief": "A campaign correspondent compares a held dispatch with the map and writing surface under her pen. Keep a slight downward three-quarter head and a natural relaxed neck, with the eyes directed toward the dispatch and pen work. Preserve both hands, pen, papers, map, lamp and campaign tent."
+  },
+  "delivery": {
+    "id": "eumenes-rare-female",
+    "sourcePNG": "exports/eumenes-rare-female.png",
+    "sourceSha256": "33c3583fc3aebb2902f10c52c5412f47ec736fc967489c3fbe859e5d4669d986",
+    "portraitSourceSha256": "e24c798ccfb1881a7f6acc1b1f7ef2aa1c1185054ed3ee652b47c3a550267b2e",
+    "symbolSha256": "8dec10d48e8c0012a30d7146b4187e8ed9aa016029de5f87cc254c129dc3c1d6",
+    "editionRemovedPixels": 563,
+    "outsideEditionChangedPixels": 0,
+    "full": {
+      "src": "/assets/cards/collection-v14/eumenes-rare-female.webp",
+      "width": 900,
+      "height": 1260,
+      "bytes": 250402,
+      "sha256": "e0048f599ce564ab939ee5e8c4b542e5c2fa405ea7af8fd94ce806203e53c3c1",
+      "rgbaSha256": "9119bca2c8b6b39629f950013eb8eb8f05f4585ff23b75dbeffb38c87d083818"
+    },
+    "thumbnail": {
+      "src": "/assets/cards/collection-v14/eumenes-rare-female-thumb.webp",
+      "width": 450,
+      "height": 630,
+      "bytes": 193156,
+      "sha256": "73683a5a27d4e250b8635f7ceca1b24e45b865679a3e3f7a5783873e7af3be09",
+      "rgbaSha256": "efa172d8a222f702e755efcc1c740ce48e7e0803947c5106bf6c498b6686c81e"
+    },
+    "footerless": {
+      "src": "/assets/cards/collection-v14/eumenes-rare-female-footerless.webp",
+      "width": 900,
+      "height": 1260,
+      "bytes": 249676,
+      "sha256": "7f9d1b984d2b1c1642fad6dc6008e35b32b8f94f54f19cc6c58e83566fcf099c",
+      "rgbaSha256": "4a186ea7f4613a1cb4efe92615d53d8d5d084f0128c0ff66329df7aa49f272fe"
+    },
+    "portrait": {
+      "src": "/assets/cards/collection-v14/eumenes-rare-female-portrait.webp",
+      "width": 840,
+      "height": 1050,
+      "bytes": 224898,
+      "sha256": "264290427be4554892178cbb69149e4350d55442e61e00fd72de9de9ee02fa27",
+      "rgbaSha256": "6472838969da763eee91d4dae7b3815876748ef47bbcf85179f5a8c8f25972c5"
+    }
+  },
+  "approvedFrameBytesUnchanged": true,
+  "nativeFrameExact": true,
+  "uncoveredPixelDifferences": 0,
+  "outsideEditionChangedPixels": 0
+}

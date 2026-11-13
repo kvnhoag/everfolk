@@ -1,0 +1,53 @@
+{
+  "id": "eumenes-rare-female",
+  "method": "Whole6×6 registered-cell selection between verified new PixelOE head and unchanged prior pixel portrait; no resampling or colour blending",
+  "previousPixel": "artwork/cards/figure-inner-art-v14/assets/eumenes-rare-female-pixel.png",
+  "previousPixelSha256": "3a9fdf305ea39de9e3f927c1017acec69b50641e8276b409b5caf20bfa999c52",
+  "rawPixelCandidate": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-pixel-generated.png",
+  "rawPixelCandidateSha256": "4b540fb0d979c753dcb23f716217df16eba616f13f522edeaa0c7ce30b3af931",
+  "paintingHeadMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-mask.png",
+  "selectionMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-pixel-selection-mask.png",
+  "selectionMaskSha256": "ca797bc0c440c0d22cc9a12318cac6833d74aad4497d9e221c38d5f5c67b8413",
+  "dimensions": [
+    840,
+    1050
+  ],
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "selectedCells": 3490,
+  "expandedMaskPixels": 3981,
+  "excludedProtectedCells": 1,
+  "changedPixels": 124181,
+  "outsideSelectionChangedPixels": 0,
+  "protectedChangedPixels": 0,
+  "selectedCandidateDifferingPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Gold cloak brooch",
+      "box": [
+        524,
+        411,
+        581,
+        472
+      ]
+    },
+    {
+      "name": "Both hands, pen, maps and foreground objects",
+      "box": [
+        0,
+        584,
+        840,
+        1050
+      ]
+    }
+  ],
+  "wholeCommonCellSelection": true,
+  "unselectedPixelsEqualPriorPortrait": true,
+  "selectedPixelsEqualVerifiedPixelOeCandidate": true,
+  "exactPngReadback": true,
+  "output": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-female-pixel.png",
+  "outputSha256": "e24c798ccfb1881a7f6acc1b1f7ef2aa1c1185054ed3ee652b47c3a550267b2e"
+}

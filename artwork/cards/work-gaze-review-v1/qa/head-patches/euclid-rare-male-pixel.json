@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\euclid-rare-male-gaze-fixed.png",
+  "sourceSha256": "7afeb09c18632058679672e6642ef8e326befa50462d7b5665db048731835310",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\assets\\euclid-rare-male-coarse.png",
+  "baseSha256": "d2046b899a31ae8597f557b9cbe21ed47317e85582a58b5fc2fa3ff60b6d3c99",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\euclid-rare-male-coarse.json",
+  "baseQaSha256": "e4874bcd587073705321ba7cb92ca50ac97390af24b0124735527735d42033c7",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\euclid-rare-male-face.json",
+  "configSha256": "2cfabf10d4a14d26dcb7883c303f8e46e4a49352174b965f4c9bab5c0cf26624",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          400,
+          270
+        ],
+        "radius": [
+          120,
+          145
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\euclid-rare-male-pixel-generated.png",
+  "outputSha256": "962cb3fe8a25776e5ba196f244c11780caa6b136d2781867e314d164e347ac4f",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "f6f5a4a4c4b21233661ea90777c6d77853a94ca397d45643ef74c3674a515757",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\euclid-rare-male-face-detail-mask.png",
+  "maskSha256": "15a49da26f2789ac57af97e768ed8e1dc6fada21f704151d5f0081c6bc43def0",
+  "maskPixelSha256": "6f4274088500ddd0ab41030c1fa7509cca339f9930a0a3cd2435ec889bea999f",
+  "selectedDetailCells": 1270,
+  "retainedCoarseCells": 23230,
+  "affectedPixels": 45720,
+  "changedPixels": 45224,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

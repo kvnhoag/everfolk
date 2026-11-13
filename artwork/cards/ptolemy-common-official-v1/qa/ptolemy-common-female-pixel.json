@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\source\\ptolemy-common-female.png",
+  "sourceSha256": "e270208dc3f8f099be1297c238f9257f9068d3fb028c88fac29ad2719b77acaa",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\assets\\ptolemy-common-female-coarse.png",
+  "baseSha256": "42ad99eadc0904b3db22e08b07a4d0b741d14e11deaa15a862cb71ebcbd97644",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\qa\\ptolemy-common-female-coarse.json",
+  "baseQaSha256": "07628e6440313ab84e640d6cc6a5d6a7d37e571a426e9299a133d69744d5fef7",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\source\\ptolemy-common-female-face.json",
+  "configSha256": "c89bbd6998d2f5406d731e99d45112d84a4a00b90dadca3d0f6a324b56e367c6",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          400,
+          286
+        ],
+        "radius": [
+          116,
+          135
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\assets\\ptolemy-common-female-pixel.png",
+  "outputSha256": "ec31186cf88b5c80458b475e2e9474d43b8785aefc13cd14eaca9e9be089bb82",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "d0313d3e6709c8e86cecc33dba0e56a0284cc95c2bc632f4073e6ccfe0e92f0d",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\ptolemy-common-official-v1\\qa\\ptolemy-common-female-detail-mask.png",
+  "maskSha256": "c72aee2f14c252c47052920971432c96f6456f9ef5d96918bb6568a0aa625288",
+  "maskPixelSha256": "271d483efe24f0e9203b13864c1246fe1efc7398b7db09827548baaa1d819e58",
+  "selectedDetailCells": 1148,
+  "retainedCoarseCells": 23352,
+  "affectedPixels": 41328,
+  "changedPixels": 40864,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

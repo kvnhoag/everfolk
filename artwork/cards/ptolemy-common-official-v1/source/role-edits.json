@@ -1,0 +1,13 @@
+{
+  "id": "everfolk-ptolemy-common-official-v1",
+  "scope": "Ptolemy Common profession, depiction and display labels; saved gameplay worlds remain unchanged.",
+  "roles": [
+    {
+      "figureId": "ptolemy", "tier": "common", "newArtwork": true,
+      "title": "Junior Court Official", "displayTitle": "Junior Court Official",
+      "subtitle": "First Duties in Ptolemy's Service", "bodyTitle": "A Place in the Administration",
+      "bodyText": "A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government.",
+      "sceneBrief": "A clearly adult junior official sits at a modest wooden desk in an early Ptolemaic administrative office, checking a short petition against a wax tablet with a stylus. The official's gaze follows the working task, shoulders and hands connect naturally, and the clothing is practical linen with a restrained ochre mantle. Small local duties under supervision; no courier movement, dispatch scroll held against the body, royal regalia, treasury or authority over a large office."
+    }
+  ]
+}

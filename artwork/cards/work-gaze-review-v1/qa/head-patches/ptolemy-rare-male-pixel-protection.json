@@ -1,0 +1,53 @@
+{
+  "id": "ptolemy-rare-male",
+  "method": "Whole6×6 registered-cell selection between verified new PixelOE head and unchanged prior pixel portrait; no resampling or colour blending",
+  "previousPixel": "artwork/cards/figure-inner-art-v12/assets/ptolemy-rare-male-pixel.png",
+  "previousPixelSha256": "01ff40b31057ccb77ebe85e41faa62dc816fd8235dabe00ecdb5a4172d34f1dd",
+  "rawPixelCandidate": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-pixel-generated.png",
+  "rawPixelCandidateSha256": "93e94e366e8e24f013270bbae576c28441fd70488346e8689575f82088e1de38",
+  "paintingHeadMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-mask.png",
+  "selectionMask": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-pixel-selection-mask.png",
+  "selectionMaskSha256": "9108396a93f0951561789037ee4fa7f9da9cf0b9e981b73878c7330c906d8a2e",
+  "dimensions": [
+    840,
+    1050
+  ],
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "selectedCells": 3765,
+  "expandedMaskPixels": 4413,
+  "excludedProtectedCells": 1,
+  "changedPixels": 133275,
+  "outsideSelectionChangedPixels": 0,
+  "protectedChangedPixels": 0,
+  "selectedCandidateDifferingPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Raised tablet and its hand",
+      "box": [
+        598,
+        351,
+        840,
+        712
+      ]
+    },
+    {
+      "name": "Foreground hand, seal, scales and sacks",
+      "box": [
+        0,
+        486,
+        840,
+        1050
+      ]
+    }
+  ],
+  "wholeCommonCellSelection": true,
+  "unselectedPixelsEqualPriorPortrait": true,
+  "selectedPixelsEqualVerifiedPixelOeCandidate": true,
+  "exactPngReadback": true,
+  "output": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-male-pixel.png",
+  "outputSha256": "76bb8cb05410568a68591ecb56c83d215c3bef5aa19dd9ef5e862d0f82a0e65a"
+}

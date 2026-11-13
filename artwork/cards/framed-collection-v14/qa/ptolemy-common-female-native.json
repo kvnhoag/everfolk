@@ -129,8 +129,8 @@
       },
       {
         "bounds": {
-          "height": 110.904,
-          "width": 647.2799999999999,
+          "height": 136.904,
+          "width": 629.6880000000001,
           "x": 96,
           "y": 1015.136
         },
@@ -160,13 +160,13 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "A court records apprentice copies entries, checks names and\nquantities, and helps reconcile the day's administrative\npapers. Precise records are the first practical lesson in\nthe wider duties of supply, revenue, and government.",
+        "text": "A junior court official checks names on petitions, copies\nroutine entries, and prepares papers for review by\nexperienced clerks. Careful work under supervision begins\nthe administrative judgment that later supports accounts,\nsupply, and government.",
         "visible": true
       },
       {
         "bounds": {
           "height": 39.759000000000015,
-          "width": 349.595,
+          "width": 379.66800000000006,
           "x": 96,
           "y": 964.956
         },
@@ -196,14 +196,14 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Order Begins in the Record",
+        "text": "A Place in the Administration",
         "visible": true
       },
       {
         "bounds": {
           "height": 22.9892578125,
-          "width": 393.8447265625,
-          "x": 253.07763671875,
+          "width": 409.22216796875,
+          "x": 245.388916015625,
           "y": 152.59375
         },
         "fill": "#d3d4c7",
@@ -232,15 +232,15 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "LEARNING THE COURT'S ACCOUNTS",
+        "text": "FIRST DUTIES IN PTOLEMY'S SERVICE",
         "visible": true
       },
       {
         "bounds": {
-          "height": 82.25999999999999,
-          "width": 691.3799999999999,
-          "x": 104.31,
-          "y": 56.640000000000015
+          "height": 87.74400000000001,
+          "width": 577.088,
+          "x": 160.91199999999998,
+          "y": 54.215999999999994
         },
         "fill": "#f0e6cf",
         "id": 40,
@@ -268,7 +268,7 @@
           "widthPoints": null
         },
         "strokeWidth": 0,
-        "text": "Court Records Apprentice",
+        "text": "Junior Court Official",
         "visible": true
       }
     ],
@@ -291,7 +291,7 @@
     "title": "ptolemy-common-female.svg",
     "tool": "selection",
     "total": 7,
-    "uid": 17,
+    "uid": 5,
     "units": "Pixels"
   },
   "art": {
@@ -355,7 +355,7 @@
     "title": "ptolemy-common-female.svg",
     "tool": "selection",
     "total": 1,
-    "uid": 17,
+    "uid": 5,
     "units": "Pixels"
   }
 }

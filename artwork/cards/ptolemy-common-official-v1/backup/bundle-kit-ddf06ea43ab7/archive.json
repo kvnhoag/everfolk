@@ -1,0 +1,54 @@
+{
+  "kitManifestSha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+  "activeIds": [
+    "alexander-epic-male",
+    "demetrius-rare-male"
+  ],
+  "files": [
+    {
+      "path": "data/cards.json",
+      "sha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+      "bytes": 479600
+    },
+    {
+      "path": "frames/cards/alexander-epic-male.png",
+      "sha256": "7599d85922123472b092a9fd0e510fa09b6c100bf0c14156c020beb5a33328d5",
+      "bytes": 58696
+    },
+    {
+      "path": "frames/cards/alexander-epic-male-footerless.png",
+      "sha256": "14e44cfc3b4ba5a5e90a4e27b0047f4bf314636f822d979aeea19c13b38d75ce",
+      "bytes": 58072
+    },
+    {
+      "path": "frames/svg/alexander-epic-male.svg",
+      "sha256": "d8008fe571887dafb26ecf30241ee4c95a70486fbd97c33c309256886a67d7c5",
+      "bytes": 11177
+    },
+    {
+      "path": "frames/svg/alexander-epic-male-footerless.svg",
+      "sha256": "9685fab4aa9af51616e503b56cb1146a8103f5f3076cfd4944753e5164d0fb79",
+      "bytes": 10936
+    },
+    {
+      "path": "frames/cards/demetrius-rare-male.png",
+      "sha256": "d53158a055024eae74b6549cff916958bafbd434468c361e0a45fece4c01742e",
+      "bytes": 55787
+    },
+    {
+      "path": "frames/cards/demetrius-rare-male-footerless.png",
+      "sha256": "da6a524f967745318ff23d88d83bb1b081d6b8cb9d4a61842897d6194bb3d6b9",
+      "bytes": 55096
+    },
+    {
+      "path": "frames/svg/demetrius-rare-male.svg",
+      "sha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e",
+      "bytes": 10428
+    },
+    {
+      "path": "frames/svg/demetrius-rare-male-footerless.svg",
+      "sha256": "c85d6726ed7eee854c84d02ab19a8886ac0b2301f5b786c42829b7dc107ff12b",
+      "bytes": 10187
+    }
+  ]
+}

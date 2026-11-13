@@ -187,7 +187,13 @@
           "bodyTitle": "No Step Unexamined",
           "bodyText": "A proof checker questions every inference and tests whether a construction truly follows. This exacting reader guards the chain of reasoning, making an elegant conclusion worthy of the certainty it claims.",
           "sourceRoleSlug": "euclid-rare",
-          "newArt": false
+          "newArt": false,
+          "sourceArtByGender": {
+            "male": "artwork/cards/work-gaze-review-v1/assets/euclid-rare-male-pixel.png"
+          },
+          "sceneBriefByGender": {
+            "male": "A proof checker works with a compass and ruler on a geometrical proof sheet. The head inclines gently forward in a natural three-quarter view and the eyes follow the compass tip on the sheet. Keep the neck relaxed above the shoulders and preserve the drafting hands, compass, ruler and nearby collaborator."
+          }
         },
         "epic": {
           "title": "Geometer of the Teaching Circle",
@@ -431,7 +437,13 @@
           "bodyTitle": "Force Given Direction",
           "bodyText": "A siege engineer brings measurement and mechanical judgment to a battlefield problem. By balancing reach, weight, and stability, the engineer turns raw power into a deliberate answer to the enemy's defences.",
           "sourceRoleSlug": "demetrius-rare",
-          "newArt": false
+          "newArt": false,
+          "sourceArtByGender": {
+            "female": "artwork/cards/work-gaze-review-v1/assets/demetrius-rare-female-pixel.png"
+          },
+          "sceneBriefByGender": {
+            "female": "A siege engineer tests and measures a timber windlass. The head bows gently forward in a natural three-quarter view and the eyes follow the measuring rule and its contact point on the mechanism. Keep the neck relaxed above the shoulders and preserve both hands, rule, rope and timber mechanism."
+          }
         },
         "epic": {
           "title": "Director of Siege Works",
@@ -574,15 +586,16 @@
       },
       "roles": {
         "common": {
-          "title": "Court Records Apprentice",
-          "displayTitle": "Court Records Apprentice",
-          "subtitle": "Learning the Court's Accounts",
-          "bodyTitle": "Order Begins in the Record",
-          "bodyText": "A court records apprentice copies entries, checks names and quantities, and helps reconcile the day's administrative papers. Precise records are the first practical lesson in the wider duties of supply, revenue, and government.",
+          "title": "Junior Court Official",
+          "displayTitle": "Junior Court Official",
+          "subtitle": "First Duties in Ptolemy's Service",
+          "bodyTitle": "A Place in the Administration",
+          "bodyText": "A junior court official checks names on petitions, copies routine entries, and prepares papers for review by experienced clerks. Careful work under supervision begins the administrative judgment that later supports accounts, supply, and government.",
           "sourceRoleSlug": "ptolemy-common",
           "newArt": true,
-          "sceneBrief": "An adult court records apprentice carries and checks administrative papers in an early Ptolemaic office.",
-          "editorialRoleRevision": "role-progression-v1"
+          "sceneBrief": "A clearly adult junior official sits at a modest wooden desk in an early Ptolemaic administrative office, checking a short petition against a wax tablet with a stylus. The official's gaze follows the working task, shoulders and hands connect naturally, and the clothing is practical linen with a restrained ochre mantle. Small local duties under supervision; no courier movement, dispatch scroll held against the body, royal regalia, treasury or authority over a large office.",
+          "editorialRoleRevision": "ptolemy-common-official-v1",
+          "sourceArtRoot": "artwork/cards/ptolemy-common-official-v1/assets"
         },
         "uncommon": {
           "title": "Egyptian Administration Clerk",
@@ -600,7 +613,15 @@
           "bodyTitle": "The Realm Remains Supplied",
           "bodyText": "A supply commissioner coordinates stores and transport across competing demands. Judgment turns figures on a tablet into provisions where they are needed, giving Ptolemy's government the material strength to maintain its hold on Egypt.",
           "sourceRoleSlug": "ptolemy-rare",
-          "newArt": false
+          "newArt": false,
+          "sourceArtByGender": {
+            "male": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-male-pixel.png",
+            "female": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-female-pixel.png"
+          },
+          "sceneBriefByGender": {
+            "male": "A supply commissioner checks a grain consignment and its seal while comparing the shipment with a wooden writing tablet. Keep the chin gently lowered and the gaze directed toward the inspected seal and records, with a relaxed neck aligned naturally above the shoulders. Preserve the hands, tablet, grain sacks, scales and harbour.",
+            "female": "A supply commissioner checks a grain consignment and its seal while comparing the shipment with a wooden writing tablet. Keep the chin gently lowered and the gaze directed toward the inspected seal and records, with a relaxed neck aligned naturally above the shoulders. Preserve the hands, tablet, grain sacks, scales and harbour."
+          }
         },
         "epic": {
           "title": "Steward of Egyptian Government",
@@ -783,7 +804,15 @@
           "bodyText": "A campaign correspondent compares dispatches with the movement of forces and the needs of command. Clear writing draws scattered events into focus, allowing distant officers to act with a better understanding of one another.",
           "sourceRoleSlug": "eumenes-rare",
           "newArt": true,
-          "sceneBrief": "A campaign correspondent compares a simple map and multiple dispatches at a field desk, practical cloak and reed pen, camp visible beyond."
+          "sceneBrief": "A campaign correspondent compares a simple map and multiple dispatches at a field desk, practical cloak and reed pen, camp visible beyond.",
+          "sourceArtByGender": {
+            "male": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-male-pixel.png",
+            "female": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-female-pixel.png"
+          },
+          "sceneBriefByGender": {
+            "male": "A campaign correspondent compares a held dispatch with the map and writing surface under his pen. Keep a slight downward three-quarter head and a natural relaxed neck, with the eyes directed toward the dispatch and pen work. Preserve both hands, pen, papers, map, lamp and campaign tent.",
+            "female": "A campaign correspondent compares a held dispatch with the map and writing surface under her pen. Keep a slight downward three-quarter head and a natural relaxed neck, with the eyes directed toward the dispatch and pen work. Preserve both hands, pen, papers, map, lamp and campaign tent."
+          }
         },
         "epic": {
           "title": "Secretary of Eumenes",

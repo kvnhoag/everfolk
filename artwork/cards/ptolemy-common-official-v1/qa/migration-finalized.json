@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "everfolk-ptolemy-common-official-v1",
+  "completedAt": "2026-11-13T18:44:20.377Z",
+  "changedCards": [
+    "ptolemy-common-male",
+    "ptolemy-common-female"
+  ],
+  "newArtwork": [
+    "ptolemy-common-male",
+    "ptolemy-common-female"
+  ],
+  "oldSourceCatalogSha256": "7fe9c865476590f77ce4eb14395b0347b54572cda9a9cdb412f6a34bee074592",
+  "sourceCatalogSha256": "5327f797588db5fcdc06343e39e7d8ecc4c0cce8a2e2b6de6677c16d57236791",
+  "oldKitManifestSha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+  "kitManifestSha256": "ca985a0eb244f437d0cf1d3177608e10da947c12ae70ccfab36e3559e2fb0d24",
+  "frameGeometryChecks": [
+    {
+      "id": "ptolemy-common-male",
+      "frameGeometryUnchanged": true
+    },
+    {
+      "id": "ptolemy-common-female",
+      "frameGeometryUnchanged": true
+    }
+  ],
+  "unselectedKitRowsUnchanged": 134,
+  "preservedActiveOverrides": [
+    "alexander-epic-male",
+    "demetrius-rare-male"
+  ],
+  "activeEntryRecordsUnchanged": true,
+  "parentVariantsUnchanged": true,
+  "retainedWorldsUnchanged": true,
+  "oldBundleProvenance": "backup/artwork/card-art-handoff-v1/data/cards.json plus archived changed/protected frame assets",
+  "nativeWorkerClosed": true
+}

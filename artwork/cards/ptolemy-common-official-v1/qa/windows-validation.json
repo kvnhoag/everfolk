@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "nativeDocumentsClosed": true,
+  "workersClosed": true,
+  "collectionChecks": 117,
+  "cardAssetTests": 16,
+  "runtimeLabelTests": 21,
+  "bodyless": {
+    "generated": 2,
+    "reused": 134,
+    "outsideBodyChangedPixels": 0
+  },
+  "priorBundleRecomposition": true,
+  "cards": [
+    {
+      "id": "ptolemy-common-male",
+      "title": "Junior Court Official",
+      "subtitle": "FIRST DUTIES IN PTOLEMY'S SERVICE",
+      "titleBounds": {
+        "height": 87.74400000000001,
+        "width": 577.088,
+        "x": 160.91199999999998,
+        "y": 54.215999999999994
+      },
+      "subtitleBounds": {
+        "height": 22.9892578125,
+        "width": 409.22216796875,
+        "x": 245.388916015625,
+        "y": 152.59375
+      },
+      "gap": 10.633749999999992
+    },
+    {
+      "id": "ptolemy-common-female",
+      "title": "Junior Court Official",
+      "subtitle": "FIRST DUTIES IN PTOLEMY'S SERVICE",
+      "titleBounds": {
+        "height": 87.74400000000001,
+        "width": 577.088,
+        "x": 160.91199999999998,
+        "y": 54.215999999999994
+      },
+      "subtitleBounds": {
+        "height": 22.9892578125,
+        "width": 409.22216796875,
+        "x": 245.388916015625,
+        "y": 152.59375
+      },
+      "gap": 10.633749999999992
+    }
+  ]
+}

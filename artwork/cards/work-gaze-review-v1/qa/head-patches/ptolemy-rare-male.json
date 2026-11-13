@@ -1,0 +1,113 @@
+{
+  "id": "ptolemy-rare-male",
+  "original": "artwork/cards/figure-inner-art-v12/source/ptolemy-rare-male.png",
+  "candidate": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-male-head-generated.png",
+  "output": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-male-gaze-fixed.png",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "polygon": [
+    [
+      450,
+      12
+    ],
+    [
+      755,
+      15
+    ],
+    [
+      830,
+      120
+    ],
+    [
+      845,
+      290
+    ],
+    [
+      820,
+      420
+    ],
+    [
+      780,
+      495
+    ],
+    [
+      760,
+      555
+    ],
+    [
+      675,
+      600
+    ],
+    [
+      540,
+      565
+    ],
+    [
+      475,
+      525
+    ],
+    [
+      420,
+      510
+    ],
+    [
+      378,
+      440
+    ],
+    [
+      370,
+      325
+    ],
+    [
+      365,
+      210
+    ],
+    [
+      400,
+      85
+    ]
+  ],
+  "featherInsidePixels": 16,
+  "mask": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-mask.png",
+  "maskSha256": "9ae94cc3b91c8a2a84e78022e4e63740e04ae1ea4be2d6578f8a89315e38ab1b",
+  "maskedPixels": 233724,
+  "changedPixels": 231422,
+  "changedBounds": [
+    366,
+    13,
+    844,
+    599
+  ],
+  "outsideMaskChangedPixels": 0,
+  "protectedMaskPixels": 0,
+  "protectedChangedPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Raised tablet and its hand",
+      "box": [
+        800,
+        470,
+        1122,
+        950
+      ]
+    },
+    {
+      "name": "Foreground hand, seal, scales and sacks",
+      "box": [
+        0,
+        650,
+        1122,
+        1402
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "original": "6b994a7a8d5bf273f095325105f77eae4c8e28978a86c5256ee8e6700222fb66",
+    "candidate": "27911772560171718ce20b795df4ab6fea682e83a1f3f9bf05a35210a01d4e5d"
+  },
+  "outputSha256": "e9ec238df0417e5ad4d2cc7d2b61f25d4ed5da2b58a802467732d16efa743f5b",
+  "sourcesUnchanged": true,
+  "exactPngReadback": true
+}

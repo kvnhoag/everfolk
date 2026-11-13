@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-13T18:10:39.645Z",
+  "reviewedAt": "2026-11-13T19:10:01.292Z",
   "passed": true,
   "copyScope": {
     "parents": 13,
@@ -8,7 +8,7 @@
     "total": 117
   },
   "renderedCardsChecked": 117,
-  "approvedExistingPortraitFitsChecked": 79,
+  "approvedExistingPortraitFitsChecked": 75,
   "visualReview": [
     "euclid-parent",
     "alexander-rare-female",
@@ -179,7 +179,7 @@
       "slug": "euclid-rare-male",
       "editableParagraph": true,
       "editionText": "001/100",
-      "approvedPortraitFitPreserved": true
+      "approvedPortraitFitPreserved": null
     },
     {
       "slug": "euclid-rare-female",
@@ -401,7 +401,7 @@
       "slug": "demetrius-rare-female",
       "editableParagraph": true,
       "editionText": "001/100",
-      "approvedPortraitFitPreserved": true
+      "approvedPortraitFitPreserved": null
     },
     {
       "slug": "demetrius-epic-male",
@@ -557,13 +557,13 @@
       "slug": "ptolemy-rare-male",
       "editableParagraph": true,
       "editionText": "001/100",
-      "approvedPortraitFitPreserved": true
+      "approvedPortraitFitPreserved": null
     },
     {
       "slug": "ptolemy-rare-female",
       "editableParagraph": true,
       "editionText": "001/100",
-      "approvedPortraitFitPreserved": true
+      "approvedPortraitFitPreserved": null
     },
     {
       "slug": "ptolemy-epic-male",

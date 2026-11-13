@@ -167,8 +167,8 @@ test("readable Common titles agree across paths, cards and requirements without 
   }
   for (const path of world.figurePaths!.filter(path => path.baseRank === "Epic")) {
     const common = getFigurePathProgress(world, path, life).stages[0].definition;
-    assert.equal(common.title, path.id === "pytheas" ? "Navigation Assistant" : path.stages[0].title, path.id + " uses the reviewed profession label");
-    assert.equal(common.traditionTitle, path.stages[0].traditionTitle);
+    assert.equal(common.title, path.id === "pytheas" ? "Navigation Assistant" : path.id === "ptolemy" ? "Junior Court Official" : path.stages[0].title, path.id + " uses the reviewed profession label");
+    assert.equal(common.traditionTitle, path.id === "ptolemy" ? "Junior Official in Ptolemaic Administration" : path.stages[0].traditionTitle);
   }
   assert.equal(JSON.stringify(world), beforeWorld);
   assert.equal(JSON.stringify(life), beforeLife);

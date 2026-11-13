@@ -1,0 +1,51 @@
+{
+  "passed": true,
+  "task": "work-gaze-review-v1",
+  "visualReview": {
+    "contributionCards": 104,
+    "male": 52,
+    "female": 52,
+    "parentPortraits": 13,
+    "totalDesigns": 117,
+    "selectedRepairs": [
+      "ptolemy-rare-male",
+      "ptolemy-rare-female",
+      "euclid-rare-male",
+      "demetrius-rare-female",
+      "eumenes-rare-male",
+      "eumenes-rare-female"
+    ]
+  },
+  "wsl": {
+    "sourceCatalogSha256": "77786ac2a4e65cd8e3fd78e32402536c6095a1b153aceba4fa23dae04826be93",
+    "kitManifestSha256": "883806b75b80521d5acea19fd58c896999390cad40aa54fc362048ab5a49c947",
+    "focusedCardTestsPassed": 16,
+    "focusedCardTestsFailed": 0,
+    "sourceChecksPassed": 117,
+    "editorialProblems": 0,
+    "editorialWarnings": 0,
+    "mapRegenerationArtAndCopyPreserved": 117,
+    "servedImageHashesVerified": 12
+  },
+  "browser": {
+    "baseUrl": "http://localhost:5173/cards",
+    "allSixRepairsVisuallyVerified": true,
+    "screenshots": [
+      "artifacts/work-gaze-review-v1/supply-commissioner-live.jpg",
+      "artifacts/work-gaze-review-v1/proof-checker-live.jpg",
+      "artifacts/work-gaze-review-v1/siege-engineer-live.jpg",
+      "artifacts/work-gaze-review-v1/campaign-correspondent-live.jpg"
+    ]
+  },
+  "preservation": {
+    "paintingOutsideHeadMasksChangedPixels": 0,
+    "finalPortraitOutsideRegisteredHeadCellsChangedPixels": 0,
+    "protectedHandsAndToolsChangedPixels": 0,
+    "approvedFramesAndCardCopyUnchanged": true
+  },
+  "cleanup": {
+    "delegatedWorkFinished": true,
+    "nativeDocumentsAndTaskOwnedWorkersClosed": true,
+    "temporaryStagingAndArchivesRemoved": true
+  }
+}

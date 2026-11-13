@@ -1,0 +1,92 @@
+{
+  "passed": true,
+  "baseUrl": "http://localhost:5173",
+  "cards": 6,
+  "servedAssets": 12,
+  "assets": [
+    {
+      "id": "ptolemy-rare-male",
+      "kind": "footerless",
+      "src": "/assets/cards/collection-v14/ptolemy-rare-male-footerless.webp",
+      "sha256": "9da86dead9366278e832c54a467d0f6a647f0c99565d50ac3abe13f4167a70f6",
+      "bytes": 250114
+    },
+    {
+      "id": "ptolemy-rare-male",
+      "kind": "portrait",
+      "src": "/assets/cards/collection-v14/ptolemy-rare-male-portrait.webp",
+      "sha256": "da0e1a20313b7af443bb28f678b0f72e041dd97ef0b625fa0a0afee9ddebf9fd",
+      "bytes": 225476
+    },
+    {
+      "id": "ptolemy-rare-female",
+      "kind": "footerless",
+      "src": "/assets/cards/collection-v14/ptolemy-rare-female-footerless.webp",
+      "sha256": "a7640bb03f2db082e859397774ca8036e7f3cf726fead1496630ddeaa328deee",
+      "bytes": 254176
+    },
+    {
+      "id": "ptolemy-rare-female",
+      "kind": "portrait",
+      "src": "/assets/cards/collection-v14/ptolemy-rare-female-portrait.webp",
+      "sha256": "52ad378711c434b5c03c0fa426f22a783e6b000aaa7b135aa7242dac4e5eedd3",
+      "bytes": 229118
+    },
+    {
+      "id": "euclid-rare-male",
+      "kind": "footerless",
+      "src": "/assets/cards/collection-v14/euclid-rare-male-footerless.webp",
+      "sha256": "db7b99aa5cdc3212b90820f3395a8a6fcc89ddcf19d32d4d04545e1c96d47d4f",
+      "bytes": 232578
+    },
+    {
+      "id": "euclid-rare-male",
+      "kind": "portrait",
+      "src": "/assets/cards/collection-v14/euclid-rare-male-portrait.webp",
+      "sha256": "c4e761a9c3b78d33782282b8d2290886259ae4a0c8de5ca812b344ab40e584be",
+      "bytes": 213012
+    },
+    {
+      "id": "demetrius-rare-female",
+      "kind": "footerless",
+      "src": "/assets/cards/collection-v14/demetrius-rare-female-footerless.webp",
+      "sha256": "e9c6e75c712581384595e4ebd15b92daed73b60e5f36e75b99ab11bb54d76dfc",
+      "bytes": 243900
+    },
+    {
+      "id": "demetrius-rare-female",
+      "kind": "portrait",
+      "src": "/assets/cards/collection-v14/demetrius-rare-female-portrait.webp",
+      "sha256": "620e97fb2c7e1d25d0fc0a3bb8f330a349c98da8a00aa4e42a6bdbbb040163ad",
+      "bytes": 224052
+    },
+    {
+      "id": "eumenes-rare-male",
+      "kind": "footerless",
+      "src": "/assets/cards/collection-v14/eumenes-rare-male-footerless.webp",
+      "sha256": "b5a83e93f60d2ccc6dce5bd489e3cce28178608d7043a82f8b66a450e54b17d2",
+      "bytes": 248770
+    },
+    {
+      "id": "eumenes-rare-male",
+      "kind": "portrait",
+      "src": "/assets/cards/collection-v14/eumenes-rare-male-portrait.webp",
+      "sha256": "4d68200a056f104e099da93f6c5d64ee8d9ccf3e30f0c694220acddc27faa1b3",
+      "bytes": 227642
+    },
+    {
+      "id": "eumenes-rare-female",
+      "kind": "footerless",
+      "src": "/assets/cards/collection-v14/eumenes-rare-female-footerless.webp",
+      "sha256": "7f9d1b984d2b1c1642fad6dc6008e35b32b8f94f54f19cc6c58e83566fcf099c",
+      "bytes": 249676
+    },
+    {
+      "id": "eumenes-rare-female",
+      "kind": "portrait",
+      "src": "/assets/cards/collection-v14/eumenes-rare-female-portrait.webp",
+      "sha256": "264290427be4554892178cbb69149e4350d55442e61e00fd72de9de9ee02fa27",
+      "bytes": 224898
+    }
+  ]
+}

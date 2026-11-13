@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\eumenes-rare-male-gaze-fixed.png",
+  "sourceSha256": "f139acf0685aa20b23f98cda3c033ceeb06e54551305dee8b949bc6792175cc3",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\assets\\eumenes-rare-male-coarse.png",
+  "baseSha256": "33ac39ea1764bbf92ea9611c98081433e00d78f586b610747af39a16bb3f8870",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\eumenes-rare-male-coarse.json",
+  "baseQaSha256": "18c22b3ece62bced1531d3c1730cf691b7a536ea633be4fb98a78b748317a856",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\eumenes-rare-male-face.json",
+  "configSha256": "1b9ae964fceae795e124754bfae477ba34fc2cd73472d9861d6001b4abcf1680",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          445,
+          290
+        ],
+        "radius": [
+          125,
+          145
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\eumenes-rare-male-pixel-generated.png",
+  "outputSha256": "26c5f581228be248ec6b069a114e028c66ef0bb739f09031d76edf01040084bc",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "40f3165549061520608620bc8a11b42dc54e719ad04aef2f1b34181b34b963b1",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\eumenes-rare-male-face-detail-mask.png",
+  "maskSha256": "4d1e0cf4a6cdd97273f136eb30f26f5a36fd091c112b7760a57cc428a8762a8e",
+  "maskPixelSha256": "e01e8d7e6a5b973caaf7fa7700effb7c2415950b355ee68f1999cc37193d467a",
+  "selectedDetailCells": 1313,
+  "retainedCoarseCells": 23187,
+  "affectedPixels": 47268,
+  "changedPixels": 47004,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

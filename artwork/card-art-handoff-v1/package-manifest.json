@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "id": "everfolk-card-art-handoff-v1",
-  "kitManifestSha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a",
+  "kitManifestSha256": "883806b75b80521d5acea19fd58c896999390cad40aa54fc362048ab5a49c947",
   "cards": 117,
   "runtimeVariants": 19,
   "blankFrames": 5,
   "perCardBriefs": 117,
   "userReferenceImages": 3,
-  "totalBytes": 73078332,
+  "totalBytes": 73085513,
   "files": [
     {
       "path": ".gitignore",
@@ -176,8 +176,8 @@
     },
     {
       "path": "briefs/demetrius-rare-female.md",
-      "bytes": 3916,
-      "sha256": "fa3b3370735d93308d67505e1830c141abdb9d3d964ae1d0a461175d997824a5"
+      "bytes": 3981,
+      "sha256": "909d57abed79e05520df533662d735a216a424cfd84cebbc27489d0f30d57f1a"
     },
     {
       "path": "briefs/demetrius-rare-male.md",
@@ -226,8 +226,8 @@
     },
     {
       "path": "briefs/euclid-rare-male.md",
-      "bytes": 3814,
-      "sha256": "e11b38f16dce08ffa39937cd254a03c481540e0a7f1a115d3b0d68eeed88b785"
+      "bytes": 3914,
+      "sha256": "1b14f3c9d2a9cd5d4e2cb3074288776e6448d99849710899fe7ba5e8e85d745c"
     },
     {
       "path": "briefs/euclid-uncommon-female.md",
@@ -266,13 +266,13 @@
     },
     {
       "path": "briefs/eumenes-rare-female.md",
-      "bytes": 3938,
-      "sha256": "05a9e4606a08ea40bc2156b00f043085b102d5c8a2ee864bb7621f7c599aab0c"
+      "bytes": 3996,
+      "sha256": "c297da368ffeb21602672ba325287f4e75d031ca32b0a87f3a2751c19e048534"
     },
     {
       "path": "briefs/eumenes-rare-male.md",
-      "bytes": 3895,
-      "sha256": "26bd8e47ef7abb141e595f94c1dec9043fcec42d7e196dcb99f3ee17b0a1ff30"
+      "bytes": 3976,
+      "sha256": "1d45356b931c98aec5b0ac680450e365de60331f97d2304b2eaeee765bcc678f"
     },
     {
       "path": "briefs/eumenes-uncommon-female.md",
@@ -421,13 +421,13 @@
     },
     {
       "path": "briefs/ptolemy-common-female.md",
-      "bytes": 3947,
-      "sha256": "fc09c2b17af717916dbda86788b52a981c3050f874ec8ecdea6f0ab685f3c56b"
+      "bytes": 4231,
+      "sha256": "d9d92217465cce8018871a32b0a1c77fb2b886e971ad4a38e9105fac25ccd3cb"
     },
     {
       "path": "briefs/ptolemy-common-male.md",
-      "bytes": 3933,
-      "sha256": "0a7fda8a1887c89e29c348ca68aad6ac11586979b9d50935311e5abb8c18e60d"
+      "bytes": 4211,
+      "sha256": "c82cfe7eff81febb2d39618525446b811a27c872f8b7b9344acca1276bb59edf"
     },
     {
       "path": "briefs/ptolemy-epic-female.md",
@@ -446,13 +446,13 @@
     },
     {
       "path": "briefs/ptolemy-rare-female.md",
-      "bytes": 3970,
-      "sha256": "3773d36f248820551e3dcbb331ccebf1ddec32cdcbaaa94e26cbec83affb4d77"
+      "bytes": 4071,
+      "sha256": "249708393fda3a18eb02b7ac88dbeb34e122bd96935c059bd9705e51d78f4b79"
     },
     {
       "path": "briefs/ptolemy-rare-male.md",
-      "bytes": 3927,
-      "sha256": "6eba97cd637ac556c7c68a23afad1f49aa23727c19153bdc21ffd8f4697ea584"
+      "bytes": 4051,
+      "sha256": "2a962b7e023356e121c151449699715a09cdaa11aac460026908090ced82a654"
     },
     {
       "path": "briefs/ptolemy-uncommon-female.md",
@@ -601,13 +601,13 @@
     },
     {
       "path": "data/cards.csv",
-      "bytes": 62471,
-      "sha256": "be610440e1b5cef23fcaa4e316e7dc08611b09720de99d4cd350ade46b4c66d9"
+      "bytes": 62521,
+      "sha256": "7980b59399b7d87c0e7113c0777c35c19a6cef1d2137ba9affd99f98cb228298"
     },
     {
       "path": "data/cards.json",
-      "bytes": 479600,
-      "sha256": "ddf06ea43ab72763198285a5bf51680dc23cbe2f1b626b5ae87e8e2f6d1e218a"
+      "bytes": 483266,
+      "sha256": "883806b75b80521d5acea19fd58c896999390cad40aa54fc362048ab5a49c947"
     },
     {
       "path": "data/geometry.json",
@@ -621,8 +621,8 @@
     },
     {
       "path": "data/verification.json",
-      "bytes": 48209,
-      "sha256": "4a0174434a0114d6911c3171ec7640f6c156de1f438339cc148d6f24bdf0444d"
+      "bytes": 48257,
+      "sha256": "c8a2b6016deb8f7964a63e8786a1096b272d65b7f6a8a01ff570eef30a2e4638"
     },
     {
       "path": "docs/artist-quickstart.md",
@@ -1681,23 +1681,23 @@
     },
     {
       "path": "frames/cards/ptolemy-common-female-footerless.png",
-      "bytes": 57065,
-      "sha256": "d6f7f2328e9fd3f9a94bd84de7a6c494819fe378ce9becaea35692ae64f8db7c"
+      "bytes": 58552,
+      "sha256": "9e09d81b98ac263b89c011d9a88dd5e2a7340c7586a15202c201a6c097e75ebb"
     },
     {
       "path": "frames/cards/ptolemy-common-female.png",
-      "bytes": 57628,
-      "sha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac"
+      "bytes": 59388,
+      "sha256": "51f2f7d4a66aaec44d2880c03730f9a3ec0722cfa9332377c6f7240aa149101a"
     },
     {
       "path": "frames/cards/ptolemy-common-male-footerless.png",
-      "bytes": 57065,
-      "sha256": "d6f7f2328e9fd3f9a94bd84de7a6c494819fe378ce9becaea35692ae64f8db7c"
+      "bytes": 58550,
+      "sha256": "0d702eff051a9618eaff3c2ae23fa2e123b27ed6079b98627e1c911093e4e779"
     },
     {
       "path": "frames/cards/ptolemy-common-male.png",
-      "bytes": 57628,
-      "sha256": "61fda0990d55943fb21826fb69d1e3e64ee54ffea2ae4723f0bcbc44e68f89ac"
+      "bytes": 59386,
+      "sha256": "74426d748b1b05446520bc6fbdf090a1132fa8a4432a2e4a1094ecce105fa44a"
     },
     {
       "path": "frames/cards/ptolemy-epic-female-footerless.png",
@@ -3051,23 +3051,23 @@
     },
     {
       "path": "frames/svg/ptolemy-common-female-footerless.svg",
-      "bytes": 8493,
-      "sha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5"
+      "bytes": 8547,
+      "sha256": "3c451bec899875dd2561cd8e3f6ccb444ee0dd17c5bfd88efd7b9dbc015edfbf"
     },
     {
       "path": "frames/svg/ptolemy-common-female.svg",
-      "bytes": 8734,
-      "sha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819"
+      "bytes": 8788,
+      "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf"
     },
     {
       "path": "frames/svg/ptolemy-common-male-footerless.svg",
-      "bytes": 8493,
-      "sha256": "6db74d078fec9bd67203110ff0db0b47da070592fce05c0a2c3ff1036754f7d5"
+      "bytes": 8547,
+      "sha256": "3c451bec899875dd2561cd8e3f6ccb444ee0dd17c5bfd88efd7b9dbc015edfbf"
     },
     {
       "path": "frames/svg/ptolemy-common-male.svg",
-      "bytes": 8734,
-      "sha256": "65821a576a6615482954bef4e4df8ed97afddbe4bd98b0311bcca4f72405d819"
+      "bytes": 8788,
+      "sha256": "ac14e145010d283798b44fd1db7f4267453fa79bae4595ce370b8cd50f187faf"
     },
     {
       "path": "frames/svg/ptolemy-epic-female-footerless.svg",
@@ -3666,8 +3666,8 @@
     },
     {
       "path": "reference/cards/demetrius-rare-female.webp",
-      "bytes": 191322,
-      "sha256": "1c6e008a996cf92d7955fd38cb1a7aa74fe4705e872c6d958c3f7b013834ad9c"
+      "bytes": 191324,
+      "sha256": "00ddff226876a76d01ff5a8560a646e9be96bad41376b4879ab8df791be77fc7"
     },
     {
       "path": "reference/cards/demetrius-rare-male.webp",
@@ -3716,8 +3716,8 @@
     },
     {
       "path": "reference/cards/euclid-rare-male.webp",
-      "bytes": 180458,
-      "sha256": "d65820927dd80e4551972f96af8be056892757c65213b8ec5b1ed98ed85f4eca"
+      "bytes": 179936,
+      "sha256": "212f415a873b1377a709ca736e8773f1b38c3814210c0c826ffa4da8f2b93d1d"
     },
     {
       "path": "reference/cards/euclid-uncommon-female.webp",
@@ -3756,13 +3756,13 @@
     },
     {
       "path": "reference/cards/eumenes-rare-female.webp",
-      "bytes": 192614,
-      "sha256": "68dd8668497cdc255ff0c351d85e6688e9e95a41e20797c251a3b976c8b9c159"
+      "bytes": 193156,
+      "sha256": "73683a5a27d4e250b8635f7ceca1b24e45b865679a3e3f7a5783873e7af3be09"
     },
     {
       "path": "reference/cards/eumenes-rare-male.webp",
-      "bytes": 194972,
-      "sha256": "74cfda6887268a03ff6c340080759b26a0799a4acf57177693e12e5295a2ab73"
+      "bytes": 195340,
+      "sha256": "4248096f716c5f05e4f66bffe745baf56fd594808047f4d441d82745a7399920"
     },
     {
       "path": "reference/cards/eumenes-uncommon-female.webp",
@@ -3911,13 +3911,13 @@
     },
     {
       "path": "reference/cards/ptolemy-common-female.webp",
-      "bytes": 189370,
-      "sha256": "9192a635b7ec8ec34ce422145c3d0956a43408bbe325e0ecb57fe85dc7a6e404"
+      "bytes": 193086,
+      "sha256": "ddb9a338ea2587f88c45ba9ec7c324e4ba546df8d1e3a0702bb789029b5a8ade"
     },
     {
       "path": "reference/cards/ptolemy-common-male.webp",
-      "bytes": 187598,
-      "sha256": "e626a411e53c11b16ef2e57aa4a32a598671c635b1b68846771df84f3b148c39"
+      "bytes": 182830,
+      "sha256": "78dc3cb202c7e1f719ae7a1c2235c56fe09abc64335e24714c2555bfe3855e5c"
     },
     {
       "path": "reference/cards/ptolemy-epic-female.webp",
@@ -3936,13 +3936,13 @@
     },
     {
       "path": "reference/cards/ptolemy-rare-female.webp",
-      "bytes": 196708,
-      "sha256": "57e890ecc2885d1e52306b06f56003c33fa056defca010b2a051c17b1a889cbd"
+      "bytes": 197028,
+      "sha256": "0f682b4ef92dcba6b0a14051ba9e45edb91c6b7d47b6019a6098127c617e4fda"
     },
     {
       "path": "reference/cards/ptolemy-rare-male.webp",
-      "bytes": 194330,
-      "sha256": "21f3065e161577dceb47a662e297f3dee37c6ee26cadf7f77084f4ec3dd7de88"
+      "bytes": 194142,
+      "sha256": "e6eb120866c479ee7b509175acbe3833e1f0815fb9fbff95061157beb0398314"
     },
     {
       "path": "reference/cards/ptolemy-uncommon-female.webp",
@@ -4091,8 +4091,8 @@
     },
     {
       "path": "reference/index.html",
-      "bytes": 163187,
-      "sha256": "23d5a665e1f28c2988e4dfb70e97035818a18c5d0e2d7c7146aaa6688d2ee1e3"
+      "bytes": 163275,
+      "sha256": "7969c8fb97e5bafb1feecdd549179920db57cd450130eae0181dea7d72911f18"
     },
     {
       "path": "reference/portraits/alexander-common-female.webp",
@@ -4256,8 +4256,8 @@
     },
     {
       "path": "reference/portraits/demetrius-rare-female.webp",
-      "bytes": 226426,
-      "sha256": "4c58be62cf0c018b7c970dcea3d1896d20afa315a8ad5138f0b7bd4871e8e5eb"
+      "bytes": 224052,
+      "sha256": "620e97fb2c7e1d25d0fc0a3bb8f330a349c98da8a00aa4e42a6bdbbb040163ad"
     },
     {
       "path": "reference/portraits/demetrius-rare-male.webp",
@@ -4306,8 +4306,8 @@
     },
     {
       "path": "reference/portraits/euclid-rare-male.webp",
-      "bytes": 215454,
-      "sha256": "107ccf01d954cb841357790fb6267b5d5d42681ffb36b0f272dffddad773d9c3"
+      "bytes": 213012,
+      "sha256": "c4e761a9c3b78d33782282b8d2290886259ae4a0c8de5ca812b344ab40e584be"
     },
     {
       "path": "reference/portraits/euclid-uncommon-female.webp",
@@ -4346,13 +4346,13 @@
     },
     {
       "path": "reference/portraits/eumenes-rare-female.webp",
-      "bytes": 225326,
-      "sha256": "b166ed4845d3b0a84223e19d431f6c1f4eb7ce300d2895513478233739240cf9"
+      "bytes": 224898,
+      "sha256": "264290427be4554892178cbb69149e4350d55442e61e00fd72de9de9ee02fa27"
     },
     {
       "path": "reference/portraits/eumenes-rare-male.webp",
-      "bytes": 229182,
-      "sha256": "e3c759fcfea64faba6d926182b95fca8cde3c20ff0a4cee2318185b260eebc23"
+      "bytes": 227642,
+      "sha256": "4d68200a056f104e099da93f6c5d64ee8d9ccf3e30f0c694220acddc27faa1b3"
     },
     {
       "path": "reference/portraits/eumenes-uncommon-female.webp",
@@ -4501,13 +4501,13 @@
     },
     {
       "path": "reference/portraits/ptolemy-common-female.webp",
-      "bytes": 223462,
-      "sha256": "b2d413010161d0a0a03a23a6cf29ed1393fd15fddf634dc0aeab3800f0981370"
+      "bytes": 231434,
+      "sha256": "9b47882c7466456e7503bcc60ab8fa79ece0fb04104cd54ef94b7b5df79164ca"
     },
     {
       "path": "reference/portraits/ptolemy-common-male.webp",
-      "bytes": 221638,
-      "sha256": "0b93c66dd31ef927c4b193416a735ded1cc505961c4a02e68b21c3039d26107f"
+      "bytes": 220120,
+      "sha256": "5cde9df10dcc6268d550b5ec246901b6828f646d85e9aeed37ca034301c0c68b"
     },
     {
       "path": "reference/portraits/ptolemy-epic-female.webp",
@@ -4526,13 +4526,13 @@
     },
     {
       "path": "reference/portraits/ptolemy-rare-female.webp",
-      "bytes": 229890,
-      "sha256": "7cc20f15f5a7d7fce7ec54a56906a16a1fe96621906c7981bf9979105ccd4b71"
+      "bytes": 229118,
+      "sha256": "52ad378711c434b5c03c0fa426f22a783e6b000aaa7b135aa7242dac4e5eedd3"
     },
     {
       "path": "reference/portraits/ptolemy-rare-male.webp",
-      "bytes": 228312,
-      "sha256": "8b5cd93d8e681a6f8aa7c8fa87457639a95176e32cf91c8ad8e5a242a028d142"
+      "bytes": 225476,
+      "sha256": "da0e1a20313b7af443bb28f678b0f72e041dd97ef0b625fa0a0afee9ddebf9fd"
     },
     {
       "path": "reference/portraits/ptolemy-uncommon-female.webp",

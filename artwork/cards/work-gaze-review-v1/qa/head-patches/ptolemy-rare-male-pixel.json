@@ -1,0 +1,103 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\ptolemy-rare-male-gaze-fixed.png",
+  "sourceSha256": "e9ec238df0417e5ad4d2cc7d2b61f25d4ed5da2b58a802467732d16efa743f5b",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\assets\\ptolemy-rare-male-coarse.png",
+  "baseSha256": "9a1135c632e644bd0ef250c7c1abb2a47bdb86d0bb460530eca08a86a5d9966c",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\ptolemy-rare-male-coarse.json",
+  "baseQaSha256": "67cc7102e1b768e0329e93e3ba19576eb5e0ce8657f5370c609a0f007af9483f",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\source\\ptolemy-rare-male-face.json",
+  "configSha256": "cedb0326526f54c1a3d6b4d705bf01e33c9c558018be85fafa8021112445b62c",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "critical_boxes": [],
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          490,
+          275
+        ],
+        "radius": [
+          120,
+          145
+        ],
+        "inner_scale": 0.82
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\ptolemy-rare-male-pixel-generated.png",
+  "outputSha256": "93e94e366e8e24f013270bbae576c28441fd70488346e8689575f82088e1de38",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "cbd8a46fe00bc363ea0668169134e1c7cefd820d2a9834ea7ebc30e6360a188a",
+  "detailOutputPath": null,
+  "detailOutputSha256": null,
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\work-gaze-review-v1\\qa\\head-patches\\ptolemy-rare-male-face-detail-mask.png",
+  "maskSha256": "4086c76f8ecb496117ca8dd0058f99bd0a7eef11f90c7a1c18b45bdb126e374f",
+  "maskPixelSha256": "e29fd141c0aef097d71fea70741025be437e321adb0987429815146c4843948d",
+  "selectedDetailCells": 1264,
+  "retainedCoarseCells": 23236,
+  "affectedPixels": 45504,
+  "changedPixels": 44912,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

@@ -1,0 +1,113 @@
+{
+  "parentsReviewed": 13,
+  "sharedRarityVariants": 19,
+  "method": "Inspected labelled thirteen-parent contact sheet at224×280 per portrait. No actual suspect requiring enlargement found. Parent portrait, command, teaching, lookout and specimen-examination poses were judged by their depicted action rather than requiring every subject to look down.",
+  "clearHeadNeckDefects": [],
+  "productionEdits": false,
+  "rows": [
+    {
+      "id": "alexander-parent",
+      "title": "Alexander the Great",
+      "portraitSrc": "/assets/cards/collection-v14/alexander-parent-portrait.webp",
+      "portraitSha256": "e8f112221b4f4acf664c9e6f1bc2edbf06417c0cad316d8a640764d1df0c0338",
+      "verdict": "valid",
+      "reason": "Head follows the commanding riding direction; neck joins naturally to the armoured torso."
+    },
+    {
+      "id": "aristotle-parent",
+      "title": "Aristotle",
+      "portraitSrc": "/assets/cards/collection-v14/aristotle-parent-portrait.webp",
+      "portraitSha256": "617bf0e2a6fdbde2044029755af1cce3c3f97db5ccc19d407b5102cd725cc695",
+      "verdict": "valid",
+      "reason": "Frontal teaching gesture addresses the viewer/listeners; no strained head rotation."
+    },
+    {
+      "id": "euclid-parent",
+      "title": "Euclid",
+      "portraitSrc": "/assets/cards/collection-v14/euclid-parent-portrait.webp",
+      "portraitSha256": "14a3201a8f26c20dd938c2aa0c75906bb466e8072ce31e5accc6446c172098ca",
+      "verdict": "valid",
+      "reason": "Slight downward three-quarter head over the geometry table; neck is aligned with shoulders."
+    },
+    {
+      "id": "lysippos-parent",
+      "title": "Lysippos",
+      "portraitSrc": "/assets/cards/collection-v14/lysippos-parent-portrait.webp",
+      "portraitSha256": "26005292cdd608f19d48eed49245fc1a1701bad5ffa052332be003c71799c3e7",
+      "verdict": "valid",
+      "reason": "Raised chin follows the tall sculpture in front/right; looking upward is justified by the subject."
+    },
+    {
+      "id": "pytheas-parent",
+      "title": "Pytheas of Massalia",
+      "portraitSrc": "/assets/cards/collection-v14/pytheas-parent-portrait.webp",
+      "portraitSha256": "2ff1413a27c56df4e98b534eb4762b987621531367c82a25902101101b8d7702",
+      "verdict": "valid",
+      "reason": "Gaze follows the seaward horizon; normal lookout posture."
+    },
+    {
+      "id": "menander-parent",
+      "title": "Menander",
+      "portraitSrc": "/assets/cards/collection-v14/menander-parent-portrait.webp",
+      "portraitSha256": "0bd17544d90b4d46648e410b490d97736a40c6c43cf1424500ca230ba4236a9f",
+      "verdict": "valid",
+      "reason": "Moderate head turn addresses the stage gathering; suitable speaking/storytelling pose."
+    },
+    {
+      "id": "demetrius-parent",
+      "title": "Demetrius the Besieger",
+      "portraitSrc": "/assets/cards/collection-v14/demetrius-parent-portrait.webp",
+      "portraitSha256": "a7e86b47622bfff0d4dbbe72fcfc9df6454cc80b1d4c16ebea639ab4ac35e28b",
+      "verdict": "valid",
+      "reason": "Raised commanding gaze with an indicating arm; head/neck remain plausibly joined to the torso."
+    },
+    {
+      "id": "theophrastus-parent",
+      "title": "Theophrastus",
+      "portraitSrc": "/assets/cards/collection-v14/theophrastus-parent-portrait.webp",
+      "portraitSha256": "aee18756d20d258e5a0a0dfd9e6898768bb58c0ac006fbb2a72076ad6c948bc8",
+      "verdict": "valid",
+      "reason": "Head and eyes examine the raised botanical specimen."
+    },
+    {
+      "id": "zeno-parent",
+      "title": "Zeno of Citium",
+      "portraitSrc": "/assets/cards/collection-v14/zeno-parent-portrait.webp",
+      "portraitSha256": "1d521e19474beef5bce35d0b200132de66fe432edfcff606577084e7b8f7fa25",
+      "verdict": "valid",
+      "reason": "Head addresses the visible student; open-hand teaching gesture supports the gaze."
+    },
+    {
+      "id": "ptolemy-parent",
+      "title": "Ptolemy I Soter",
+      "portraitSrc": "/assets/cards/collection-v14/ptolemy-parent-portrait.webp",
+      "portraitSha256": "457bf4d5f46ea210b2630f3ad343dea59726ab878b2c1d76df0e98b9f31e8fc6",
+      "verdict": "valid",
+      "reason": "Modest outward statesman portrait gaze; hands rest on documents rather than a precision task."
+    },
+    {
+      "id": "cleomenes-parent",
+      "title": "Cleomenes of Naucratis",
+      "portraitSrc": "/assets/cards/collection-v14/cleomenes-parent-portrait.webp",
+      "portraitSha256": "20348913a40dc0304795240d5dad7ef383ff1f6bbf387686a2d327c82cebd8f6",
+      "verdict": "valid",
+      "reason": "Head and eyes inspect the raised grain sample; neck inclination suits the examination."
+    },
+    {
+      "id": "nearchus-parent",
+      "title": "Nearchus",
+      "portraitSrc": "/assets/cards/collection-v14/nearchus-parent-portrait.webp",
+      "portraitSha256": "ae994de48443cb5ec973235ace1df802bf8aca27b0a9b768e8ed6c144a4705b7",
+      "verdict": "valid",
+      "reason": "Outward lookout gaze suits the shipboard navigator role; no neck defect."
+    },
+    {
+      "id": "eumenes-parent",
+      "title": "Eumenes of Cardia",
+      "portraitSrc": "/assets/cards/collection-v14/eumenes-parent-portrait.webp",
+      "portraitSha256": "711e797d585b0e4ab67c6e7d08064039335a9ef09f60e4d0c9d0a73b0addee56",
+      "verdict": "valid",
+      "reason": "Slight outward portrait gaze while holding a scroll; no extreme head/shoulder rotation."
+    }
+  ]
+}

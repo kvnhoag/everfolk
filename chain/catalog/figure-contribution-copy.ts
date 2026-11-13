@@ -16,6 +16,8 @@ const corrections: readonly (readonly [string, string])[] = [
   ["Aide in Lysippan Workshop Practice", "Lysippan Materials Assistant"],
   ["Rehearsal Aide", "Rehearsal Assistant"],
   ["Aide in New Comedy Rehearsal", "New Comedy Rehearsal Assistant"],
+  ["Palace Messenger", "Junior Court Official"],
+  ["Court Records Apprentice", "Junior Court Official"],
 ];
 
 export function figureContributionTitleCopy(text: string): string {
@@ -25,6 +27,9 @@ export function figureContributionTitleCopy(text: string): string {
 }
 
 export function figureContributionStageCopy<T extends { rank: string; title: string; traditionTitle: string }>(stage: T): T {
-  const title = figureContributionTitleCopy(stage.title), traditionTitle = figureContributionTitleCopy(stage.traditionTitle);
+  const commonCourtOfficial = stage.rank === "Common" && stage.title === "Egyptian Administration Clerk";
+  const title = commonCourtOfficial ? "Junior Court Official" : figureContributionTitleCopy(stage.title);
+  const traditionTitle = commonCourtOfficial && stage.traditionTitle === "Reader of Early Ptolemaic Accounts"
+    ? "Junior Official in Ptolemaic Administration" : figureContributionTitleCopy(stage.traditionTitle);
   return title === stage.title && traditionTitle === stage.traditionTitle ? stage : { ...stage, title, traditionTitle };
 }

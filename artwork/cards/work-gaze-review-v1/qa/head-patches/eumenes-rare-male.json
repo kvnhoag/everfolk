@@ -1,0 +1,122 @@
+{
+  "id": "eumenes-rare-male",
+  "original": "artwork/cards/figure-inner-art-v14/source/eumenes-rare-male.png",
+  "candidate": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-male-head-generated.png",
+  "output": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-male-gaze-fixed.png",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "polygon": [
+    [
+      420,
+      35
+    ],
+    [
+      680,
+      35
+    ],
+    [
+      775,
+      115
+    ],
+    [
+      805,
+      285
+    ],
+    [
+      790,
+      400
+    ],
+    [
+      780,
+      505
+    ],
+    [
+      720,
+      595
+    ],
+    [
+      585,
+      620
+    ],
+    [
+      510,
+      600
+    ],
+    [
+      465,
+      550
+    ],
+    [
+      465,
+      480
+    ],
+    [
+      440,
+      440
+    ],
+    [
+      390,
+      370
+    ],
+    [
+      365,
+      270
+    ],
+    [
+      375,
+      140
+    ]
+  ],
+  "featherInsidePixels": 16,
+  "mask": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-mask.png",
+  "maskSha256": "e1f525ac64b68623db0e7ceac5fce7f50ad4c1fe49d1de506d8902268ec8c178",
+  "maskedPixels": 207800,
+  "changedPixels": 205098,
+  "changedBounds": [
+    366,
+    35,
+    804,
+    619
+  ],
+  "outsideMaskChangedPixels": 0,
+  "protectedMaskPixels": 0,
+  "protectedChangedPixels": 0,
+  "protectedRects": [
+    {
+      "name": "Gold cloak brooch",
+      "box": [
+        365,
+        475,
+        455,
+        565
+      ]
+    },
+    {
+      "name": "Raised papyrus and holding hand",
+      "box": [
+        580,
+        630,
+        1050,
+        1010
+      ]
+    },
+    {
+      "name": "Writing hand, map and foreground objects",
+      "box": [
+        0,
+        780,
+        1122,
+        1402
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "original": "f8309aa1fc52a9426eb49b3057f7f76c67f80efe680a6cd48cf133d9582397e0",
+    "candidate": "75914258a1c9e8fc2612d87bf1396ec82d5d265e2a34626ab79b15d2f35ff524"
+  },
+  "outputSha256": "f139acf0685aa20b23f98cda3c033ceeb06e54551305dee8b949bc6792175cc3",
+  "sourcesUnchanged": true,
+  "exactPngReadback": true
+}

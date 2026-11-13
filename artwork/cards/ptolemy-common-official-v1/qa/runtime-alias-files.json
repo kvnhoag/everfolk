@@ -1,0 +1,46 @@
+{
+  "files": [
+    {
+      "file": "chain/catalog/figure-contribution-copy.ts",
+      "beforeSha256": "1ce7d8a4e2bf7ce6199cba6c8e6adcabd8f0ac55613ebe8a9c2eaae8ed5f6da6",
+      "sha256": "19238a3ef6e423965dc5feea92f872307fe064addce7873d3df27ff19ccfc323",
+      "bytes": 2090,
+      "normalizedBeforeSha256": "1ce7d8a4e2bf7ce6199cba6c8e6adcabd8f0ac55613ebe8a9c2eaae8ed5f6da6"
+    },
+    {
+      "file": "test/figure-card-requirements.test.ts",
+      "beforeSha256": "1a05665a520c7725da5dfb5a410aa3c2bf0158ba0f77a4abe84b221868122930",
+      "sha256": "cbef928a2e7ac6c93f1edc1bb5ed9c2a3949b7660c9cdeb7d68e96cf07f2a44d",
+      "bytes": 15200,
+      "normalizedBeforeSha256": "1a05665a520c7725da5dfb5a410aa3c2bf0158ba0f77a4abe84b221868122930"
+    },
+    {
+      "file": "test/figure-contribution-ui.test.ts",
+      "beforeSha256": "cfc3f5528907a46bb9ee1963feb884e7a44406972568a1f182af164dde400919",
+      "sha256": "69105858d960a007250a30057a283bc10b1e18f860d8de6fbfd2b064d869f1fa",
+      "bytes": 13138,
+      "normalizedBeforeSha256": "cfc3f5528907a46bb9ee1963feb884e7a44406972568a1f182af164dde400919"
+    }
+  ],
+  "tests": {
+    "command": "node --test test/figure-card-requirements.test.ts test/figure-contribution-ui.test.ts",
+    "passed": 21,
+    "failed": 0
+  },
+  "behavior": {
+    "genericAliases": [
+      "Palace Messenger",
+      "Court Records Apprentice"
+    ],
+    "title": "Junior Court Official",
+    "contextualCommonOnly": {
+      "before": "Egyptian Administration Clerk",
+      "after": "Junior Court Official",
+      "traditionBefore": "Reader of Early Ptolemaic Accounts",
+      "traditionAfter": "Junior Official in Ptolemaic Administration"
+    },
+    "retainedUncommonUnchanged": true,
+    "savedWorldsAndRecordsUnchanged": true,
+    "freeProseRankLimit": "Egyptian Administration Clerk remains unchanged in TitleCopy-only free prose because rank cannot be inferred safely."
+  }
+}

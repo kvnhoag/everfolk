@@ -1,0 +1,2129 @@
+{
+  "schemaVersion": 1,
+  "id": "everfolk-work-gaze-review-v1",
+  "changedCards": [
+    "ptolemy-rare-male",
+    "ptolemy-rare-female",
+    "euclid-rare-male",
+    "demetrius-rare-female",
+    "eumenes-rare-male",
+    "eumenes-rare-female"
+  ],
+  "newArtwork": [
+    "ptolemy-rare-male",
+    "ptolemy-rare-female",
+    "euclid-rare-male",
+    "demetrius-rare-female",
+    "eumenes-rare-male",
+    "eumenes-rare-female"
+  ],
+  "oldSourceCatalogSha256": "5327f797588db5fcdc06343e39e7d8ecc4c0cce8a2e2b6de6677c16d57236791",
+  "sourceCatalogSha256": "77786ac2a4e65cd8e3fd78e32402536c6095a1b153aceba4fa23dae04826be93",
+  "acceptedOldKitManifestSha256": [
+    "ca985a0eb244f437d0cf1d3177608e10da947c12ae70ccfab36e3559e2fb0d24"
+  ],
+  "windowsKitManifestSha256": "883806b75b80521d5acea19fd58c896999390cad40aa54fc362048ab5a49c947",
+  "targetGeneratedReports": [
+    "artwork/cards/framed-collection-v14/qa/collection-verification.json",
+    "artwork/cards/framed-collection-v14/qa/editorial-review.json"
+  ],
+  "files": [
+    {
+      "file": "artwork/card-art-handoff-v1/briefs/demetrius-rare-female.md",
+      "sha256": "909d57abed79e05520df533662d735a216a424cfd84cebbc27489d0f30d57f1a",
+      "bytes": 3981,
+      "beforeSha256": "fa3b3370735d93308d67505e1830c141abdb9d3d964ae1d0a461175d997824a5",
+      "normalizedBeforeSha256": "fa3b3370735d93308d67505e1830c141abdb9d3d964ae1d0a461175d997824a5",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/briefs/euclid-rare-male.md",
+      "sha256": "1b14f3c9d2a9cd5d4e2cb3074288776e6448d99849710899fe7ba5e8e85d745c",
+      "bytes": 3914,
+      "beforeSha256": "e11b38f16dce08ffa39937cd254a03c481540e0a7f1a115d3b0d68eeed88b785",
+      "normalizedBeforeSha256": "e11b38f16dce08ffa39937cd254a03c481540e0a7f1a115d3b0d68eeed88b785",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/briefs/eumenes-rare-female.md",
+      "sha256": "c297da368ffeb21602672ba325287f4e75d031ca32b0a87f3a2751c19e048534",
+      "bytes": 3996,
+      "beforeSha256": "05a9e4606a08ea40bc2156b00f043085b102d5c8a2ee864bb7621f7c599aab0c",
+      "normalizedBeforeSha256": "05a9e4606a08ea40bc2156b00f043085b102d5c8a2ee864bb7621f7c599aab0c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/briefs/eumenes-rare-male.md",
+      "sha256": "1d45356b931c98aec5b0ac680450e365de60331f97d2304b2eaeee765bcc678f",
+      "bytes": 3976,
+      "beforeSha256": "26bd8e47ef7abb141e595f94c1dec9043fcec42d7e196dcb99f3ee17b0a1ff30",
+      "normalizedBeforeSha256": "26bd8e47ef7abb141e595f94c1dec9043fcec42d7e196dcb99f3ee17b0a1ff30",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/briefs/ptolemy-rare-female.md",
+      "sha256": "249708393fda3a18eb02b7ac88dbeb34e122bd96935c059bd9705e51d78f4b79",
+      "bytes": 4071,
+      "beforeSha256": "3773d36f248820551e3dcbb331ccebf1ddec32cdcbaaa94e26cbec83affb4d77",
+      "normalizedBeforeSha256": "3773d36f248820551e3dcbb331ccebf1ddec32cdcbaaa94e26cbec83affb4d77",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/briefs/ptolemy-rare-male.md",
+      "sha256": "2a962b7e023356e121c151449699715a09cdaa11aac460026908090ced82a654",
+      "bytes": 4051,
+      "beforeSha256": "6eba97cd637ac556c7c68a23afad1f49aa23727c19153bdc21ffd8f4697ea584",
+      "normalizedBeforeSha256": "6eba97cd637ac556c7c68a23afad1f49aa23727c19153bdc21ffd8f4697ea584",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/demetrius-rare-female-footerless.png",
+      "sha256": "da6a524f967745318ff23d88d83bb1b081d6b8cb9d4a61842897d6194bb3d6b9",
+      "bytes": 55096,
+      "beforeSha256": "da6a524f967745318ff23d88d83bb1b081d6b8cb9d4a61842897d6194bb3d6b9",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/demetrius-rare-female.png",
+      "sha256": "d53158a055024eae74b6549cff916958bafbd434468c361e0a45fece4c01742e",
+      "bytes": 55787,
+      "beforeSha256": "d53158a055024eae74b6549cff916958bafbd434468c361e0a45fece4c01742e",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/euclid-rare-male-footerless.png",
+      "sha256": "2ad31986f71e5689a30b014e0a9162fc0a1b99ae55f4f9a7c633214d2a97e34f",
+      "bytes": 54738,
+      "beforeSha256": "2ad31986f71e5689a30b014e0a9162fc0a1b99ae55f4f9a7c633214d2a97e34f",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/euclid-rare-male.png",
+      "sha256": "b23ad812442ad3d848332d183bb0a23856375d38312c39aa11b5657925a4498d",
+      "bytes": 55433,
+      "beforeSha256": "b23ad812442ad3d848332d183bb0a23856375d38312c39aa11b5657925a4498d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/eumenes-rare-female-footerless.png",
+      "sha256": "d5241ad272ac48d3d3fb5e7f7d9f8d793fc80664259c470dd50c712238a5b759",
+      "bytes": 59751,
+      "beforeSha256": "d5241ad272ac48d3d3fb5e7f7d9f8d793fc80664259c470dd50c712238a5b759",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/eumenes-rare-female.png",
+      "sha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35",
+      "bytes": 60397,
+      "beforeSha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/eumenes-rare-male-footerless.png",
+      "sha256": "d5241ad272ac48d3d3fb5e7f7d9f8d793fc80664259c470dd50c712238a5b759",
+      "bytes": 59751,
+      "beforeSha256": "d5241ad272ac48d3d3fb5e7f7d9f8d793fc80664259c470dd50c712238a5b759",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/eumenes-rare-male.png",
+      "sha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35",
+      "bytes": 60397,
+      "beforeSha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/ptolemy-rare-female-footerless.png",
+      "sha256": "8dd5252a458eb1d650972b11f465ae1cda557a020cfc9aec896bf127d600de30",
+      "bytes": 59458,
+      "beforeSha256": "8dd5252a458eb1d650972b11f465ae1cda557a020cfc9aec896bf127d600de30",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/ptolemy-rare-female.png",
+      "sha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c",
+      "bytes": 60091,
+      "beforeSha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/ptolemy-rare-male-footerless.png",
+      "sha256": "8dd5252a458eb1d650972b11f465ae1cda557a020cfc9aec896bf127d600de30",
+      "bytes": 59458,
+      "beforeSha256": "8dd5252a458eb1d650972b11f465ae1cda557a020cfc9aec896bf127d600de30",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/cards/ptolemy-rare-male.png",
+      "sha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c",
+      "bytes": 60091,
+      "beforeSha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/demetrius-rare-female-footerless.svg",
+      "sha256": "c85d6726ed7eee854c84d02ab19a8886ac0b2301f5b786c42829b7dc107ff12b",
+      "bytes": 10187,
+      "beforeSha256": "c85d6726ed7eee854c84d02ab19a8886ac0b2301f5b786c42829b7dc107ff12b",
+      "normalizedBeforeSha256": "c85d6726ed7eee854c84d02ab19a8886ac0b2301f5b786c42829b7dc107ff12b",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/demetrius-rare-female.svg",
+      "sha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e",
+      "bytes": 10428,
+      "beforeSha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e",
+      "normalizedBeforeSha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/euclid-rare-male-footerless.svg",
+      "sha256": "a0e9b487ca03ec36466ee41256b6d3d3fa573a6abde10239f2451a39000eb062",
+      "bytes": 9246,
+      "beforeSha256": "a0e9b487ca03ec36466ee41256b6d3d3fa573a6abde10239f2451a39000eb062",
+      "normalizedBeforeSha256": "a0e9b487ca03ec36466ee41256b6d3d3fa573a6abde10239f2451a39000eb062",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/euclid-rare-male.svg",
+      "sha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7",
+      "bytes": 9487,
+      "beforeSha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7",
+      "normalizedBeforeSha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/eumenes-rare-female-footerless.svg",
+      "sha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6",
+      "bytes": 11375,
+      "beforeSha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6",
+      "normalizedBeforeSha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/eumenes-rare-female.svg",
+      "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "bytes": 11616,
+      "beforeSha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "normalizedBeforeSha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/eumenes-rare-male-footerless.svg",
+      "sha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6",
+      "bytes": 11375,
+      "beforeSha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6",
+      "normalizedBeforeSha256": "1bd283b3883006c8b85d589ad4da8084afbf04528937ab2781ccb1ff8c3f88e6",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/eumenes-rare-male.svg",
+      "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "bytes": 11616,
+      "beforeSha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "normalizedBeforeSha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/ptolemy-rare-female-footerless.svg",
+      "sha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a",
+      "bytes": 10278,
+      "beforeSha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a",
+      "normalizedBeforeSha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/ptolemy-rare-female.svg",
+      "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "bytes": 10519,
+      "beforeSha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "normalizedBeforeSha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/ptolemy-rare-male-footerless.svg",
+      "sha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a",
+      "bytes": 10278,
+      "beforeSha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a",
+      "normalizedBeforeSha256": "1361b0b1c205c1aa6f9c3c4e3c052f64cafed65fc7408fc5249be6ca6dee851a",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/frames/svg/ptolemy-rare-male.svg",
+      "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "bytes": 10519,
+      "beforeSha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "normalizedBeforeSha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/cards/demetrius-rare-female.webp",
+      "sha256": "00ddff226876a76d01ff5a8560a646e9be96bad41376b4879ab8df791be77fc7",
+      "bytes": 191324,
+      "beforeSha256": "1c6e008a996cf92d7955fd38cb1a7aa74fe4705e872c6d958c3f7b013834ad9c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/cards/euclid-rare-male.webp",
+      "sha256": "212f415a873b1377a709ca736e8773f1b38c3814210c0c826ffa4da8f2b93d1d",
+      "bytes": 179936,
+      "beforeSha256": "d65820927dd80e4551972f96af8be056892757c65213b8ec5b1ed98ed85f4eca",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/cards/eumenes-rare-female.webp",
+      "sha256": "73683a5a27d4e250b8635f7ceca1b24e45b865679a3e3f7a5783873e7af3be09",
+      "bytes": 193156,
+      "beforeSha256": "68dd8668497cdc255ff0c351d85e6688e9e95a41e20797c251a3b976c8b9c159",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/cards/eumenes-rare-male.webp",
+      "sha256": "4248096f716c5f05e4f66bffe745baf56fd594808047f4d441d82745a7399920",
+      "bytes": 195340,
+      "beforeSha256": "74cfda6887268a03ff6c340080759b26a0799a4acf57177693e12e5295a2ab73",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/cards/ptolemy-rare-female.webp",
+      "sha256": "0f682b4ef92dcba6b0a14051ba9e45edb91c6b7d47b6019a6098127c617e4fda",
+      "bytes": 197028,
+      "beforeSha256": "57e890ecc2885d1e52306b06f56003c33fa056defca010b2a051c17b1a889cbd",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/cards/ptolemy-rare-male.webp",
+      "sha256": "e6eb120866c479ee7b509175acbe3833e1f0815fb9fbff95061157beb0398314",
+      "bytes": 194142,
+      "beforeSha256": "21f3065e161577dceb47a662e297f3dee37c6ee26cadf7f77084f4ec3dd7de88",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/portraits/demetrius-rare-female.webp",
+      "sha256": "620e97fb2c7e1d25d0fc0a3bb8f330a349c98da8a00aa4e42a6bdbbb040163ad",
+      "bytes": 224052,
+      "beforeSha256": "4c58be62cf0c018b7c970dcea3d1896d20afa315a8ad5138f0b7bd4871e8e5eb",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/portraits/euclid-rare-male.webp",
+      "sha256": "c4e761a9c3b78d33782282b8d2290886259ae4a0c8de5ca812b344ab40e584be",
+      "bytes": 213012,
+      "beforeSha256": "107ccf01d954cb841357790fb6267b5d5d42681ffb36b0f272dffddad773d9c3",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/portraits/eumenes-rare-female.webp",
+      "sha256": "264290427be4554892178cbb69149e4350d55442e61e00fd72de9de9ee02fa27",
+      "bytes": 224898,
+      "beforeSha256": "b166ed4845d3b0a84223e19d431f6c1f4eb7ce300d2895513478233739240cf9",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/portraits/eumenes-rare-male.webp",
+      "sha256": "4d68200a056f104e099da93f6c5d64ee8d9ccf3e30f0c694220acddc27faa1b3",
+      "bytes": 227642,
+      "beforeSha256": "e3c759fcfea64faba6d926182b95fca8cde3c20ff0a4cee2318185b260eebc23",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/portraits/ptolemy-rare-female.webp",
+      "sha256": "52ad378711c434b5c03c0fa426f22a783e6b000aaa7b135aa7242dac4e5eedd3",
+      "bytes": 229118,
+      "beforeSha256": "7cc20f15f5a7d7fce7ec54a56906a16a1fe96621906c7981bf9979105ccd4b71",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/card-art-handoff-v1/reference/portraits/ptolemy-rare-male.webp",
+      "sha256": "da0e1a20313b7af443bb28f678b0f72e041dd97ef0b625fa0a0afee9ddebf9fd",
+      "bytes": 225476,
+      "beforeSha256": "8b5cd93d8e681a6f8aa7c8fa87457639a95176e32cf91c8ad8e5a242a028d142",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/demetrius-rare-female-thumb.png",
+      "sha256": "fc4bea4296652eb1bb921655a4a01e1795df6a074f93651777f836a8afe2d6a5",
+      "bytes": 301201,
+      "beforeSha256": "e7d6749511c5186a1e68f1b05e4f61aa371c40bdc2c6379519cbe5744e813d34",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/euclid-rare-male-thumb.png",
+      "sha256": "4e377469bc4118aff21466698ac0c3b347e4fa710645fa5e83b8b492e5d2c431",
+      "bytes": 285918,
+      "beforeSha256": "5af8e3912b4d92768cfe4263abb0c6b2fdf34b51cd2354eeaaac4cb608a7c56f",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/eumenes-rare-female-thumb.png",
+      "sha256": "0f05a0230f34ef6d969914f150272f9fdc7944b06aa7ee776479fe99db2ac4a1",
+      "bytes": 302848,
+      "beforeSha256": "7da353945ce1e85a2c071d4a4f9d059de8f072f43451d35b7cd0a8ae5935d7ad",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/eumenes-rare-male-thumb.png",
+      "sha256": "bda314e9dd0938d9e106190ff18fb394ee571a2385474d5d4b4f47ef4f6965a9",
+      "bytes": 306768,
+      "beforeSha256": "f9873ec916d1b8c3956401e58ca770d74b136c0a1e21b13339a06c4232dabedf",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/fitted/demetrius-rare-female.png",
+      "sha256": "3744096fc3a2b92e4a1401c5c3e640d1fc13fe9a270ffbeb46bdd25813920bf7",
+      "bytes": 366650,
+      "beforeSha256": "0077f098aec2d27e1fc4ffe7e44edc8815bbadf9e0179dafc3566a1ea989dbf9",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/fitted/euclid-rare-male.png",
+      "sha256": "cf0b88bf86c26030505e17f21b01c46cc1d35a5ab5da8a6125eec5ca6782c45d",
+      "bytes": 355255,
+      "beforeSha256": "c9287476259358ba213a90d36e4e25ae305edf77bb9bb858b14a5b39a230c2f7",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/fitted/eumenes-rare-female.png",
+      "sha256": "3ccf061ac3ef19bb268bdb6eb6a9bc8ef0c4b8b9bc6477585fb55eb55163d34b",
+      "bytes": 370040,
+      "beforeSha256": "e392783dafc571add972a9d1f69e50756c5e436cb6f2c4b4d8669444f5cb23b5",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/fitted/eumenes-rare-male.png",
+      "sha256": "6228c8473f3e301e4fab5049bb2a59855679a32720d25f1910c9d32c94f2ccc6",
+      "bytes": 370107,
+      "beforeSha256": "c8cf22369c99850588c62356b38809348151d25dcc0b8088f36639edf77c5d57",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/fitted/ptolemy-rare-female.png",
+      "sha256": "ec7ad8235d811d09e86e69b222df676204ef42d2a8c5e03e9a69136d84b4aaee",
+      "bytes": 379676,
+      "beforeSha256": "31a196e7ba7ecd49e83b9e808bac7035e51542d3301a2e82104b6f157f7f8175",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/fitted/ptolemy-rare-male.png",
+      "sha256": "3c3e3c3285c1b46b0d21be74a67a73fa58a74b4279f8d1c6964f83818f7d3737",
+      "bytes": 379448,
+      "beforeSha256": "ed7be9ab00d541e92e3a2d10f63ccdbd6feecf784c47b22aefa1bb2d626f980e",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/ptolemy-rare-female-thumb.png",
+      "sha256": "405280c7fea170c2271587768895015b1c5eced93e79ed87a28a457f4543c6e8",
+      "bytes": 314443,
+      "beforeSha256": "cc40b8afaf6a8a72a9ac9d249fcbad8c360ec067a0853c1bd3a7c9858f966a70",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/assets/ptolemy-rare-male-thumb.png",
+      "sha256": "aefb0689901ef50523f00bc309c6e5e615200954994f885b409c1a32be814f64",
+      "bytes": 314849,
+      "beforeSha256": "1ff305e0bcadb16df917947d31f63ef77c7c7254c304f11b5dc470f196c244ab",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/catalog.json",
+      "sha256": "77786ac2a4e65cd8e3fd78e32402536c6095a1b153aceba4fa23dae04826be93",
+      "bytes": 374504,
+      "beforeSha256": "5327f797588db5fcdc06343e39e7d8ecc4c0cce8a2e2b6de6677c16d57236791",
+      "normalizedBeforeSha256": "5327f797588db5fcdc06343e39e7d8ecc4c0cce8a2e2b6de6677c16d57236791",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/exports/demetrius-rare-female.png",
+      "sha256": "42faf3ab3fdbcc3e72546e0c8a152e1c7fdefc884a736173d11edf4d195e15c6",
+      "bytes": 410953,
+      "beforeSha256": "d305b2b166b7a654c36bb6bf05b1eacaf2c88a9054cba5153154ded320848d49",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/exports/euclid-rare-male.png",
+      "sha256": "11ce3ba7e4cae2896f68845e06ae7ac69c2729de7e10bc3882a38d32afb3cc70",
+      "bytes": 396999,
+      "beforeSha256": "9a90d8bf8cd1ff6ed3b80788d541ae5287a924710c6ec454c1af3d1a2865e495",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/exports/eumenes-rare-female.png",
+      "sha256": "33c3583fc3aebb2902f10c52c5412f47ec736fc967489c3fbe859e5d4669d986",
+      "bytes": 416334,
+      "beforeSha256": "0aa388ed9aec884ff2bc755c5977f45738d28bbf0cd1533d468f7ec68366893f",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/exports/eumenes-rare-male.png",
+      "sha256": "ffa95c173ad25e7b1fc8d920046d3c67661207f9819aad5b60679cbc8279f9e0",
+      "bytes": 418224,
+      "beforeSha256": "390de73c4b77bb27e0e0958bee61ac1e8f94eda34572ed77b6b21ef8c31e47c2",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/exports/ptolemy-rare-female.png",
+      "sha256": "49165b8edaef4f575eaf99ef468d81d4c3be674ff54e312720cd21ee0a01f427",
+      "bytes": 427648,
+      "beforeSha256": "8aba0bd79f743897a588fb48808a591b560c1a784c4197772bfcab31fe1b552c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/exports/ptolemy-rare-male.png",
+      "sha256": "c36d0b279f7a6621053ff836b66cc24309da5bee1d549337421fcbfb0bf0ec72",
+      "bytes": 427768,
+      "beforeSha256": "697b914a7cb4f5179318c8e2d40795a58c0d28120c34f80407bdc73e545f082c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/masters/demetrius-rare-female.vectorcraft",
+      "sha256": "caed4e1744d6cfda7f69c49240a01a2415be3e9f8124a1f53a7093626167d5e2",
+      "bytes": 441934,
+      "beforeSha256": "2caf4690d32a2a35ac587309a36b9ad74167521da400d372506907fc6d693d2a",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/masters/euclid-rare-male.vectorcraft",
+      "sha256": "567a6c4a76f75bf88f0e05dbb717801a85857a8e33c21592e24efad66b93fc33",
+      "bytes": 426095,
+      "beforeSha256": "e3093d2689b3930f0796771e8ea32bd8a87e7fc7d98a0e0fc58e80aae23a4aff",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/masters/eumenes-rare-female.vectorcraft",
+      "sha256": "cad9502bb32fa95296f6d1af96fc853ae5d205e733e22f7e25ef60feff6adf6d",
+      "bytes": 450422,
+      "beforeSha256": "2dd9e0b0f66e4880274647ea613263c83476ee1b1b3dfa5ed324811241038d3b",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/masters/eumenes-rare-male.vectorcraft",
+      "sha256": "0ced1eb4b905175dc735cc4fa0e63aaafbdfb6c19bb064ffaee6a4b13caedbca",
+      "bytes": 451152,
+      "beforeSha256": "6ff92feedbfa91483b7c05f56b799ce48997b63a533859e72bc2dd05a5bc7dd2",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/masters/ptolemy-rare-female.vectorcraft",
+      "sha256": "c5ad0eb809a650685f43fc4b95da26428cb79dae4f633ff62fd6218bd02b04e3",
+      "bytes": 460418,
+      "beforeSha256": "5c62f0bd807cb1244589ae36e0c53f0672c48d26f0ea69b69239fc5727dfa024",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/masters/ptolemy-rare-male.vectorcraft",
+      "sha256": "d2def014de7abce99b1c49196b01c21764154cbfb04a04561ccd685c1d0355d7",
+      "bytes": 459687,
+      "beforeSha256": "dd665fd22617f26bfea7d73d8f5bb5bc024e64a8e368de76686e065d0536fb78",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/demetrius-rare-female-fit.json",
+      "sha256": "bbb675f4361dde18e1eb19996eac4ace665eeba7e04dd4aefd42569d38ba2a85",
+      "bytes": 3100,
+      "beforeSha256": "eacd095fea79537894d9c138e2bb6f746399e3ca06687888b1c36dc99faaa57a",
+      "semanticBeforeIgnoredField": "exportSha256",
+      "semanticBeforeSha256": "83309e696dd9df3ae378a788c104c9b6c1aafbca248f8114ee0315c98b8ae7c4",
+      "normalizedBeforeSha256": "eacd095fea79537894d9c138e2bb6f746399e3ca06687888b1c36dc99faaa57a",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/demetrius-rare-female-native.json",
+      "sha256": "4c30bb9fb3e04941f8772d64786aea570534e19ced8e760ed07d879a93cd4bcf",
+      "bytes": 8782,
+      "beforeSha256": "ad3bc5ed639ab5acb76c68f03f97d77fbb95a11584257fd62c7fa62b948db8a2",
+      "normalizedBeforeSha256": "ad3bc5ed639ab5acb76c68f03f97d77fbb95a11584257fd62c7fa62b948db8a2",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/demetrius-rare-female-native.png",
+      "sha256": "fe8813ab4a50b9c16a127a475f15d0678b12c0ea30bd504a2e4fb39599e18ca8",
+      "bytes": 784955,
+      "beforeSha256": "6f5191cb5cb6a61038a0f46c28b7053e5beab38a3fb9427dfc6958c9de5d9921",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/demetrius-rare-female-overlay.png",
+      "sha256": "956a8addcb15e6d2dc5944f2931bfc23ce01ebd200fea9610cd8b344901c2a41",
+      "bytes": 54425,
+      "beforeSha256": "d53158a055024eae74b6549cff916958bafbd434468c361e0a45fece4c01742e",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/demetrius-rare-female-reopened.png",
+      "sha256": "fe8813ab4a50b9c16a127a475f15d0678b12c0ea30bd504a2e4fb39599e18ca8",
+      "bytes": 784955,
+      "beforeSha256": "6f5191cb5cb6a61038a0f46c28b7053e5beab38a3fb9427dfc6958c9de5d9921",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/euclid-rare-male-fit.json",
+      "sha256": "56b3e994ffa7ca69d1ba95bd883ee99ecb327e1a9f65223153f989e0b2bdc333",
+      "bytes": 3035,
+      "beforeSha256": "8b10d427968727fd026279b45e7aea987dfc0fc27ae6cbbb597590affe94dacb",
+      "semanticBeforeIgnoredField": "exportSha256",
+      "semanticBeforeSha256": "0ce5660738362a7353ff7244b4113b2891648b674e804a1e8082797bae76cd78",
+      "normalizedBeforeSha256": "8b10d427968727fd026279b45e7aea987dfc0fc27ae6cbbb597590affe94dacb",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/euclid-rare-male-native.json",
+      "sha256": "fde7b7fd0444dd75bae8dd116d2bade4afee649a653540168720ea7ff24d2981",
+      "bytes": 8739,
+      "beforeSha256": "a3d1151286d2c3e06a07f8ebabed10a07e5f9fa79efba0baf306456b0300bd0a",
+      "normalizedBeforeSha256": "a3d1151286d2c3e06a07f8ebabed10a07e5f9fa79efba0baf306456b0300bd0a",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/euclid-rare-male-native.png",
+      "sha256": "c4d51b868616a854f2cb08b0d1729badc8ab7de74758863c9dc6b05762f98acd",
+      "bytes": 732153,
+      "beforeSha256": "3bdc3a5ae6c18443e1ebfe15e599aaab1a1026a77f871cdbecbf6df2616caca7",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/euclid-rare-male-overlay.png",
+      "sha256": "7bfc78244f87ff451b39c5e6059ca413c5543bdeaac3cc80ede633fe1ad3c5fa",
+      "bytes": 53039,
+      "beforeSha256": "b23ad812442ad3d848332d183bb0a23856375d38312c39aa11b5657925a4498d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/euclid-rare-male-reopened.png",
+      "sha256": "c4d51b868616a854f2cb08b0d1729badc8ab7de74758863c9dc6b05762f98acd",
+      "bytes": 732153,
+      "beforeSha256": "3bdc3a5ae6c18443e1ebfe15e599aaab1a1026a77f871cdbecbf6df2616caca7",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-female-fit.json",
+      "sha256": "5bd1a98dee88e8aeb6a4a95c8bf3ad60c11d713d0931490b7d0504066ea3e737",
+      "bytes": 3131,
+      "beforeSha256": "b00acc94d91e23503b368c3cfc9b28e6c1a9f6dbfa34f2e50ef75a7caf70ce05",
+      "semanticBeforeIgnoredField": "exportSha256",
+      "semanticBeforeSha256": "beffddd4cc76c462bb68540e0657a3f43fda611414fba154056491cb60ae90c5",
+      "normalizedBeforeSha256": "b00acc94d91e23503b368c3cfc9b28e6c1a9f6dbfa34f2e50ef75a7caf70ce05",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-female-native.json",
+      "sha256": "d09c0c7bb3b88f516ed92dd25a4dc7f800058c826a72d7490a7e0d2cab675a3c",
+      "bytes": 8793,
+      "beforeSha256": "3698fb0230fdd0eaa149560d8549d00a05324e4fe4b6b27db58f806abea98545",
+      "normalizedBeforeSha256": "3698fb0230fdd0eaa149560d8549d00a05324e4fe4b6b27db58f806abea98545",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-female-native.png",
+      "sha256": "a8ca5263ce84478e254718e8ea73a3496d4fd5357c8d60bd163b5b8363505ebf",
+      "bytes": 792198,
+      "beforeSha256": "b558c9e01f4a7e575a4454586442a631780c8cbb5a9af591a5daecb8ec8654f0",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-female-overlay.png",
+      "sha256": "9709eb171b9c451028c74c7d37f1fdf85656eae936e50f36a3b2200e43acd9b7",
+      "bytes": 60408,
+      "beforeSha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-female-reopened.png",
+      "sha256": "a8ca5263ce84478e254718e8ea73a3496d4fd5357c8d60bd163b5b8363505ebf",
+      "bytes": 792198,
+      "beforeSha256": "b558c9e01f4a7e575a4454586442a631780c8cbb5a9af591a5daecb8ec8654f0",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-male-fit.json",
+      "sha256": "3a44a4bb9b23c3032d2f14db75b8618d2733167dbe2d2d865b2a0fda563b2ed4",
+      "bytes": 3111,
+      "beforeSha256": "ffbb533cdd613bea0cbdcca1a47f636890641e8b261b38abfaa2e0c7dbf18bb4",
+      "semanticBeforeIgnoredField": "exportSha256",
+      "semanticBeforeSha256": "7c1c5a6e826d6e8c18cbc58a02e0a92535abf1c0f297cce5729d574170f4cc1f",
+      "normalizedBeforeSha256": "ffbb533cdd613bea0cbdcca1a47f636890641e8b261b38abfaa2e0c7dbf18bb4",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-male-native.json",
+      "sha256": "2047ead68eac2bd671770b04590c33285a4c206d2e42240a8b937b6ff625fe7d",
+      "bytes": 8781,
+      "beforeSha256": "3401b00cc27cd47acff7bb792d217ada72ba70db90e65b51e2c02986a654ab1d",
+      "normalizedBeforeSha256": "3401b00cc27cd47acff7bb792d217ada72ba70db90e65b51e2c02986a654ab1d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-male-native.png",
+      "sha256": "f3c334c4ab8c7f9e1b79b8c07d5c1a63d4868c330e537570d0dd5b9ccc01c88e",
+      "bytes": 801560,
+      "beforeSha256": "c4885f000a2a5ba9b605c808f25bb43fe07c3da31939adb209f519e7f7d05dc5",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-male-overlay.png",
+      "sha256": "15e6ae486e780c69de10c49b75ef8934f202bd9235dee25ed27de75043ce62b9",
+      "bytes": 60406,
+      "beforeSha256": "eba857a14e737d1de104d9aeec97399ffc8650cb5fcd7e241dffb7befe136f35",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/eumenes-rare-male-reopened.png",
+      "sha256": "f3c334c4ab8c7f9e1b79b8c07d5c1a63d4868c330e537570d0dd5b9ccc01c88e",
+      "bytes": 801560,
+      "beforeSha256": "c4885f000a2a5ba9b605c808f25bb43fe07c3da31939adb209f519e7f7d05dc5",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-female-fit.json",
+      "sha256": "0603f123ca2a7b7d28c0400c5c5f7aa2085e0190da25da1eb736800c5ebee733",
+      "bytes": 3214,
+      "beforeSha256": "7a6848364ac5e3366b503e7bf11a245440379fea8beff7d15e2633b323dedaa7",
+      "semanticBeforeIgnoredField": "exportSha256",
+      "semanticBeforeSha256": "42d104f38711aba8f1299d3df4564290937859359535578f4838179c4febe3f8",
+      "normalizedBeforeSha256": "7a6848364ac5e3366b503e7bf11a245440379fea8beff7d15e2633b323dedaa7",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-female-native.json",
+      "sha256": "b9d021c753cc63ee2b923ffd64479fe8c52a98ff48b717b50698da81e668f84a",
+      "bytes": 8798,
+      "beforeSha256": "d775e38d6fcdf613de55ef782d941bf5c1ef279f29b93464404b214d2f5c23e6",
+      "normalizedBeforeSha256": "d775e38d6fcdf613de55ef782d941bf5c1ef279f29b93464404b214d2f5c23e6",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-female-native.png",
+      "sha256": "be10b1727794dd9c2f0ced623215befeb0e6140fd3d4bb2b1c07c5f00467dc83",
+      "bytes": 825807,
+      "beforeSha256": "45236dc7ff4969917f9edd2e9103e4ca4195397595baae0fcb7b0142fbdc8069",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-female-overlay.png",
+      "sha256": "c55c0877588b38422b3e9fb639f822521071c8fcf11dd2b55ccddfbd0fdb30a1",
+      "bytes": 61572,
+      "beforeSha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-female-reopened.png",
+      "sha256": "be10b1727794dd9c2f0ced623215befeb0e6140fd3d4bb2b1c07c5f00467dc83",
+      "bytes": 825807,
+      "beforeSha256": "45236dc7ff4969917f9edd2e9103e4ca4195397595baae0fcb7b0142fbdc8069",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-male-fit.json",
+      "sha256": "5613559b83c145f6465366d97c05d719613c28cf857704eab4fabd6d56169fa7",
+      "bytes": 3194,
+      "beforeSha256": "1b95f8cd63631c7301eda876d655054980c28678e26f5bfeb5d848a17aedfd3c",
+      "semanticBeforeIgnoredField": "exportSha256",
+      "semanticBeforeSha256": "3ca682cbf861b148838a78bc38f05d4ed84788afc43a16c092009300059a3949",
+      "normalizedBeforeSha256": "1b95f8cd63631c7301eda876d655054980c28678e26f5bfeb5d848a17aedfd3c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-male-native.json",
+      "sha256": "00de3a40555e513e2570970e8a6e565262772359ff4f9d5040774991dffff3b7",
+      "bytes": 8784,
+      "beforeSha256": "2db8209db03bd08ac5ab76d92613dbf68c4d74d419570b82cfe5de0cade08c3d",
+      "normalizedBeforeSha256": "2db8209db03bd08ac5ab76d92613dbf68c4d74d419570b82cfe5de0cade08c3d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-male-native.png",
+      "sha256": "81047d132c1dbb0cd3c2797da3fffbebda43b454c9da1e4c8d001e92f2e4a5ba",
+      "bytes": 812016,
+      "beforeSha256": "ece66ded476ee90d09f4c031c69ce49d20296f6f8141dcd4e276b55b0111ae2d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-male-overlay.png",
+      "sha256": "3a3cafce595d90e1b9adffb9754c41b90ddc6cee594ac02b345fa2be8b975da8",
+      "bytes": 61570,
+      "beforeSha256": "8d12949441818772e0b6eff6e11e24ed293d352e2c8a59aa6254cc26fb47863c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/qa/ptolemy-rare-male-reopened.png",
+      "sha256": "81047d132c1dbb0cd3c2797da3fffbebda43b454c9da1e4c8d001e92f2e4a5ba",
+      "bytes": 812016,
+      "beforeSha256": "ece66ded476ee90d09f4c031c69ce49d20296f6f8141dcd4e276b55b0111ae2d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/build-map.cjs",
+      "sha256": "b4dc03dc0632cb98dcccec0c43737568ecd59e4486173f0fd432f0079960f72c",
+      "bytes": 3169,
+      "beforeSha256": "4001d710965d51e58c4be15759be7a973c5e3e6b4030136ec40e50a8777a2cfb",
+      "normalizedBeforeSha256": "4001d710965d51e58c4be15759be7a973c5e3e6b4030136ec40e50a8777a2cfb",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/card-copy.json",
+      "sha256": "914ed08d57718163ad3164a72db21739fbfcf8e8b145e5b4d8d3c8cd04e939fe",
+      "bytes": 47367,
+      "beforeSha256": "7ac48c974cdefeea43ece1df65319fe466f0cffb6102a88c70052117b3303d0e",
+      "normalizedBeforeSha256": "7ac48c974cdefeea43ece1df65319fe466f0cffb6102a88c70052117b3303d0e",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/cards/demetrius-rare-female.svg",
+      "sha256": "705cc3b70e27b8fb09e6964e90991d4ebbee27234bcc23fb982b7ff5c6736e5a",
+      "bytes": 499552,
+      "beforeSha256": "aca22034ecb5b7fe7f2862d9697b80881655848e355c67a20e9d3777b1e5824c",
+      "normalizedBeforeSha256": "aca22034ecb5b7fe7f2862d9697b80881655848e355c67a20e9d3777b1e5824c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/cards/euclid-rare-male.svg",
+      "sha256": "c5044d9daf0d52bfa77a8f34387d3fe9842b09fdb160b33ae4a01bd82c7e51d7",
+      "bytes": 483419,
+      "beforeSha256": "30671dada0d7a58cdbca77b80bfcda44034c755883b8c939aaa36820059cf106",
+      "normalizedBeforeSha256": "30671dada0d7a58cdbca77b80bfcda44034c755883b8c939aaa36820059cf106",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/cards/eumenes-rare-female.svg",
+      "sha256": "348fbe406812e9a21da8a87f047b29b94402842b2763be9ae27c05c47ad24ce7",
+      "bytes": 505260,
+      "beforeSha256": "ab05a7bfb7bb3e8fafe3397188441e670c1ee4b0d755538042eb510adf516285",
+      "normalizedBeforeSha256": "ab05a7bfb7bb3e8fafe3397188441e670c1ee4b0d755538042eb510adf516285",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/cards/eumenes-rare-male.svg",
+      "sha256": "457f12cbb05168fcdbd74fd7aee04f4b401b7a1bc55b3dc172e86c9dffa0885a",
+      "bytes": 505348,
+      "beforeSha256": "4079e62d54565aae54f833d3532415ca6e27ce9d9293f2b76f612ceaa964c72d",
+      "normalizedBeforeSha256": "4079e62d54565aae54f833d3532415ca6e27ce9d9293f2b76f612ceaa964c72d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/cards/ptolemy-rare-female.svg",
+      "sha256": "34ee6a21af710d55f016b22f714cc55f9b24c55d8eb78fbe69c26b5ccda233ea",
+      "bytes": 517011,
+      "beforeSha256": "d13fbe4faa198b2a4e6e4e3cf1a107a49be1443bfa5ac10a0dec1a4955e84cb5",
+      "normalizedBeforeSha256": "d13fbe4faa198b2a4e6e4e3cf1a107a49be1443bfa5ac10a0dec1a4955e84cb5",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/cards/ptolemy-rare-male.svg",
+      "sha256": "b0b361db343bfc0982264131cb5aceb5b4422b30342c2496693f430268932b33",
+      "bytes": 516707,
+      "beforeSha256": "2a0b256700b3dd7113947542e18fe5f28effb64203c0c05cfe4c752b6378850e",
+      "normalizedBeforeSha256": "2a0b256700b3dd7113947542e18fe5f28effb64203c0c05cfe4c752b6378850e",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/framing-map.json",
+      "sha256": "a84aeb01ae49a5261136bdad9c22933d3c8530c5a0c5523ce891fa8903128945",
+      "bytes": 148122,
+      "beforeSha256": "ab80fb361221b944805bbc5dd1ed76e45d376ebe106993f6a5b6968a75904185",
+      "normalizedBeforeSha256": "ab80fb361221b944805bbc5dd1ed76e45d376ebe106993f6a5b6968a75904185",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/overlays/demetrius-rare-female.svg",
+      "sha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e",
+      "bytes": 10428,
+      "beforeSha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e",
+      "normalizedBeforeSha256": "8bf84ce058156841c9cbe6f7d1d255e6b1236b17aa9c4f1aa52eca095d5d4a5e",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/overlays/euclid-rare-male.svg",
+      "sha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7",
+      "bytes": 9487,
+      "beforeSha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7",
+      "normalizedBeforeSha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/overlays/eumenes-rare-female.svg",
+      "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "bytes": 11616,
+      "beforeSha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "normalizedBeforeSha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/overlays/eumenes-rare-male.svg",
+      "sha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "bytes": 11616,
+      "beforeSha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "normalizedBeforeSha256": "f44ca10dff8fa69c96b47ada948be46f083499292fecffcdf68a86b491f0c730",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/overlays/ptolemy-rare-female.svg",
+      "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "bytes": 10519,
+      "beforeSha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "normalizedBeforeSha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/framed-collection-v14/source/overlays/ptolemy-rare-male.svg",
+      "sha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "bytes": 10519,
+      "beforeSha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "normalizedBeforeSha256": "28c1efad3d80c8c9ad56f2e6b56e6369d58759ddcf3b18defe9c4d9d21625ecc",
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/README.md",
+      "sha256": "9cd799b2a58bc55c08bceece08bd0418e296ef0c2ecc931e7eb906575d4fc24b",
+      "bytes": 4360,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/demetrius-rare-female-coarse.logical.png",
+      "sha256": "042925f7faa55ed8a268923f00a1f2c5a616614986e0b7fc0c48904c0f9f825e",
+      "bytes": 215727,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/demetrius-rare-female-coarse.png",
+      "sha256": "2a081bd4d9449201d6bae35bffdf95c5f886e3722e6a034110dbd1f2f17f927a",
+      "bytes": 918133,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/demetrius-rare-female-pixel.png",
+      "sha256": "645b4fccde2f7b65733f34d5126c1179a1477e0ff8b465dd2901106874078552",
+      "bytes": 360826,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/euclid-rare-male-coarse.logical.png",
+      "sha256": "94fe0850da15a2cd04dd9cd3a55443385b08a2a4bf913c8ae506b849a63c9f83",
+      "bytes": 204947,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/euclid-rare-male-coarse.png",
+      "sha256": "d2046b899a31ae8597f557b9cbe21ed47317e85582a58b5fc2fa3ff60b6d3c99",
+      "bytes": 878631,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/euclid-rare-male-pixel.png",
+      "sha256": "b6875e2710905322c22ee40e4c2e6d4ae9745f89742d1873321ca615b50a0553",
+      "bytes": 350209,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-female-coarse.logical.png",
+      "sha256": "c494d023e80dc8cc17b8dc98569e5528596658e25ad810a676f410a97fb2b177",
+      "bytes": 214633,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-female-coarse.png",
+      "sha256": "8b6f817fa12ae2cb58a9504728f5acf282a02fc5768d9d558f01d1559348f0ee",
+      "bytes": 915278,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-female-pixel.png",
+      "sha256": "e24c798ccfb1881a7f6acc1b1f7ef2aa1c1185054ed3ee652b47c3a550267b2e",
+      "bytes": 363281,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-male-coarse.logical.png",
+      "sha256": "b668eefb885b2ffba299ee824208c517e662124b37ad4295cae1d28ff7d1cfd0",
+      "bytes": 217085,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-male-coarse.png",
+      "sha256": "33ac39ea1764bbf92ea9611c98081433e00d78f586b610747af39a16bb3f8870",
+      "bytes": 922170,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/eumenes-rare-male-pixel.png",
+      "sha256": "db91466ff4dd95e5eae5ed429c5de74d53e58330661c53a9b0962022ecf19fa5",
+      "bytes": 364560,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-female-coarse.logical.png",
+      "sha256": "56e0b3b8de8390f453db013f6be16c9723987737edc39919201fb1174fc33f57",
+      "bytes": 225039,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-female-coarse.png",
+      "sha256": "7f5d3ce187660ca06510101f5fc54decd58eaa79b1851fde730b43faab91f77f",
+      "bytes": 947760,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-female-pixel.png",
+      "sha256": "be000bc3c79ecae0d2900b8f1deaef40bf2a87a46560c3cd6af8db4c452de9c4",
+      "bytes": 374101,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-male-coarse.logical.png",
+      "sha256": "80ea40b4a829741aff5d7016f63b83e79fac426591c483ff2a76c07eefe201cc",
+      "bytes": 221863,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-male-coarse.png",
+      "sha256": "9a1135c632e644bd0ef250c7c1abb2a47bdb86d0bb460530eca08a86a5d9966c",
+      "bytes": 938019,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/assets/ptolemy-rare-male-pixel.png",
+      "sha256": "76bb8cb05410568a68591ecb56c83d215c3bef5aa19dd9ef5e862d0f82a0e65a",
+      "bytes": 374140,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/backup/artwork/card-art-handoff-v1/data/cards.json",
+      "sha256": "ca985a0eb244f437d0cf1d3177608e10da947c12ae70ccfab36e3559e2fb0d24",
+      "bytes": 480695,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/alexander.png",
+      "sha256": "a4f385696463a8c601295bae30e316c0c649ff008a95793d464c51c466c08c4c",
+      "bytes": 1608172,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/aristotle.png",
+      "sha256": "ff260401dfa982111ce067207eee9f81557392a28039715242ab70a411a91eb5",
+      "bytes": 1606754,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/audit.json",
+      "sha256": "72a0cdfe281c3a0b4353386748f82942fe5293a4a6571514d6f5cc93fb9c2492",
+      "bytes": 32176,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/audit.md",
+      "sha256": "d0c41b15015cf1beb75b5c04095849b0e868f17cb33ff7197b23612a07dad4dc",
+      "bytes": 9999,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/build-sheets.cjs",
+      "sha256": "cad4802a8f9e19a4828b9c41042bd0b611ae77f62cfe4d26f5d2b6a16d0afe1e",
+      "bytes": 1827,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/demetrius.png",
+      "sha256": "8450c9d05270740c77e60c63105e37eeb75766f06f0904ea2c0b9ac31c99b564",
+      "bytes": 1660299,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/euclid.png",
+      "sha256": "a8d2dff96bb56afeb6d2fb554c8c6ef47528284ba171c09acd39a63e49bf2681",
+      "bytes": 1583896,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/lysippos.png",
+      "sha256": "7e2207082ac9189be4c3c9a6e4b146e236d8a6338471f29497380ce0411e8f9e",
+      "bytes": 1500336,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/menander.png",
+      "sha256": "31a06d1f02daffcb64784e52eade3d8947ff050a7740d972d4bce5f594060663",
+      "bytes": 1551928,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/pytheas.png",
+      "sha256": "6c2e8e55f6104d39222839f40c3f6f06a0b8c70aecc312edd2331b9807439e9d",
+      "bytes": 1604394,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-a/write-audit.cjs",
+      "sha256": "17d8115f25190f1e4ff3d90b82d2a8d146c96cdb29ada576141fcb33d508ffc2",
+      "bytes": 8320,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/audit.json",
+      "sha256": "91be0ec20a79073cdcaed31f7db874d45d986c57716d8f8e0807b96ffe99213c",
+      "bytes": 25519,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/audit.md",
+      "sha256": "aa4a1cfb6b34a847868f6a5afe9dd3adb59691d3045603d0f623267ed4a5df2d",
+      "bytes": 7027,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/build-parent-sheet.cjs",
+      "sha256": "3443dae0e41bd45d8b8eea5f94d77282281e6a77d5cf979da025cb3f1333b6a9",
+      "bytes": 1018,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/build-sheets.cjs",
+      "sha256": "959d86defb6bd621882a48ac838bf461ab0aac7d1d24f3bc2e0492af184cae2a",
+      "bytes": 1438,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/cleomenes-sheet.png",
+      "sha256": "bf1584f42f8964d698ddb2348576fc7bc47996b3877972a908cdbdb37df78e55",
+      "bytes": 2129148,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/eumenes-sheet.png",
+      "sha256": "c1313a676f10739c582f9dc583a3f0a6b5506e2de2cdeac1348d2274ff1b3b3f",
+      "bytes": 2214413,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/nearchus-sheet.png",
+      "sha256": "830ac134abf2df892a5445fba195af94734546305e43ccc7f03e8859f8899105",
+      "bytes": 2339610,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/parent-audit.json",
+      "sha256": "6560ce7e6bf39a4c62cd611d6fb709204fd833e70639748828635c5457404bd1",
+      "bytes": 5355,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/parent-audit.md",
+      "sha256": "4d606ffaaed7934897ede001ef0022a39ce425ee0d710b9fb04c9cc5a7494a23",
+      "bytes": 1710,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/parents-sheet.png",
+      "sha256": "815c124e9c4a54603402fd0449859f535eee12b77cb5e8d1e00563bf0bd2c67d",
+      "bytes": 2409577,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/ptolemy-sheet.png",
+      "sha256": "a724fd0c08b2ad80d40504142279b1fcd65060092661684cf74894f3ed9780c9",
+      "bytes": 2327832,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/theophrastus-sheet.png",
+      "sha256": "fafd9dea65b2994f39543ccbe1da5278c17045cc80de316b6d281b1368b32bb9",
+      "bytes": 2331284,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/write-parent-results.cjs",
+      "sha256": "3d23aa298f15b1b1df0a2cbd0f06e788cad34ab86ade46caa4e1b4a6b3ec88fe",
+      "bytes": 2809,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/write-results.cjs",
+      "sha256": "ac445e018227841c4f43af6406d9f04ffb1ccdd58b606d6ace26b9fbf52dccaf",
+      "bytes": 10070,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-b/zeno-sheet.png",
+      "sha256": "81447403c68def7b1d7227bcdb8a82be6284d1358aca0b31859b7159512911e1",
+      "bytes": 2164919,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/audit-summary.json",
+      "sha256": "aff357fdb2a91cb56e9387f538f8f750ef6822049e76bda9c65d2d789348d137",
+      "bytes": 62318,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/derivatives/demetrius-rare-female.json",
+      "sha256": "fc9bc5a0b40d9403a2f87c0182d3bf585f59d5f6229e4346278813d4db50f7bc",
+      "bytes": 5566,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/derivatives/euclid-rare-male.json",
+      "sha256": "54926418469935a54fd6fda85fb18511d18a9cff4368790ad2e6dfbac8fd3089",
+      "bytes": 5480,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/derivatives/eumenes-rare-female.json",
+      "sha256": "bcba7cf0405a9844393036f13007f732708802fdb698a1c1b5dc2325cb6660d3",
+      "bytes": 5603,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/derivatives/eumenes-rare-male.json",
+      "sha256": "58f82d5419041b7e42b55e9e22de0372b9d9e9691bb9fef3d5def219dce71551",
+      "bytes": 5573,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/derivatives/ptolemy-rare-female.json",
+      "sha256": "0ae90730efb09330e1c4cbdb840a27b1a0838d9b1bedf944df279664d5497628",
+      "bytes": 5681,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/derivatives/ptolemy-rare-male.json",
+      "sha256": "e451c1ba99e7386af99e5a17b2f0657a59757f11b1803da1aea343b14d7e2c94",
+      "bytes": 5651,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-coarse.json",
+      "sha256": "5e21e2bfd92f4eb825684ef363d93f630bb7ab39a72679f2b431b015752c63b3",
+      "bytes": 1936,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-face-detail-mask.png",
+      "sha256": "e5be416db8d8881bc7260701d750e1aa913356362a8c95f45ce681cbda80aa95",
+      "bytes": 5261,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-mask.png",
+      "sha256": "781dabf30af8d9555b531269f8d320c7f7e3ae1a764ae24bdd19d71d6658f374",
+      "bytes": 58446,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-pixel-generated.png",
+      "sha256": "099c209f57ecba58cdde1ff274eaf5eb6715cf0f1cb12d389036c45114bd3414",
+      "bytes": 940241,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-pixel-protection.json",
+      "sha256": "b1503ce87cb92f83509cd5598b4cf104874072521931c72f4d1da81dc0ffaf83",
+      "bytes": 1889,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-pixel-selection-mask.png",
+      "sha256": "c27fea8a468f36905410a886cd99b7f5b1ba772548706b143360840a693d26e7",
+      "bytes": 4927,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female-pixel.json",
+      "sha256": "a45516879b83d300ed4a49956330fcf7126109f4d2bfd6679dece41fdd79d125",
+      "bytes": 3611,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/demetrius-rare-female.json",
+      "sha256": "f777f64ca7bc84429fd548ce6b67c4af63d649846ad466c77b121e87d1f21213",
+      "bytes": 1878,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-coarse.json",
+      "sha256": "e4874bcd587073705321ba7cb92ca50ac97390af24b0124735527735d42033c7",
+      "bytes": 1921,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-face-detail-mask.png",
+      "sha256": "15a49da26f2789ac57af97e768ed8e1dc6fada21f704151d5f0081c6bc43def0",
+      "bytes": 5141,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-mask.png",
+      "sha256": "a92438bca9a7aaf1bdce3851f443a3429053503698657e4f9eacf106f6289dec",
+      "bytes": 55361,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-pixel-generated.png",
+      "sha256": "962cb3fe8a25776e5ba196f244c11780caa6b136d2781867e314d164e347ac4f",
+      "bytes": 902908,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-pixel-protection.json",
+      "sha256": "7b90e90cdb28d9fa13a13596ef851376c8551334bc11f60da555cea5f9e0c8dd",
+      "bytes": 1840,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-pixel-selection-mask.png",
+      "sha256": "7ef38dcf8e022f5fdbf3690034eb06b62aa773dbc64ca61b15c4f2e8ff0dc74a",
+      "bytes": 5070,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male-pixel.json",
+      "sha256": "6210d734526101a060fb8bd3778ce5a2b7b716b1cd40a33b8aaf765e9cdbc186",
+      "bytes": 3581,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/euclid-rare-male.json",
+      "sha256": "3e1b75b140ef1f60bf8890c1664758d5b366045736252a87d98bc15cd8a0f1d2",
+      "bytes": 1801,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-coarse.json",
+      "sha256": "17c16f93b2f3f90786200a10a0694eb0fb09a9bb419a41ef429029078e9cf043",
+      "bytes": 1930,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-face-detail-mask.png",
+      "sha256": "f3e4f79e79d99ca6c518a35a09b5e642c8a119736cd310f9b3fffab83cfb2b45",
+      "bytes": 5340,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-mask.png",
+      "sha256": "bd98ab00d2e848a42a409421b66ce94599f8b1bd1300ca7d8f7a0a0427778965",
+      "bytes": 61023,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-pixel-generated.png",
+      "sha256": "4b540fb0d979c753dcb23f716217df16eba616f13f522edeaa0c7ce30b3af931",
+      "bytes": 939696,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-pixel-protection.json",
+      "sha256": "e0ffc057c38647adf9fd81ea83fdd149954b65e48cc31317630e63ddaf3f5576",
+      "bytes": 1858,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-pixel-selection-mask.png",
+      "sha256": "ca797bc0c440c0d22cc9a12318cac6833d74aad4497d9e221c38d5f5c67b8413",
+      "bytes": 5114,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female-pixel.json",
+      "sha256": "a036603365f8ef65223bd862727e6ef074ac7ed4a3e40a371363450cf1e069f2",
+      "bytes": 3599,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-female.json",
+      "sha256": "787611354c94ef00e715831b4f76a12510f6e7686ff1c6a9efcfaefb1e3a8281",
+      "bytes": 1883,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-coarse.json",
+      "sha256": "18c22b3ece62bced1531d3c1730cf691b7a536ea633be4fb98a78b748317a856",
+      "bytes": 1924,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-face-detail-mask.png",
+      "sha256": "4d1e0cf4a6cdd97273f136eb30f26f5a36fd091c112b7760a57cc428a8762a8e",
+      "bytes": 5293,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-mask.png",
+      "sha256": "e1f525ac64b68623db0e7ceac5fce7f50ad4c1fe49d1de506d8902268ec8c178",
+      "bytes": 48194,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-pixel-generated.png",
+      "sha256": "26c5f581228be248ec6b069a114e028c66ef0bb739f09031d76edf01040084bc",
+      "bytes": 947778,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-pixel-protection.json",
+      "sha256": "b658977016560ff1f3ff15e5b657f5df8c74ccf061578d6329badef2d6e73879",
+      "bytes": 1978,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-pixel-selection-mask.png",
+      "sha256": "2064aa0b3c11bcf5f037629455de1e926d037a44cd175ae8ea8f50ec21d7b870",
+      "bytes": 5257,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male-pixel.json",
+      "sha256": "bfb1d2151d3249bdf80c9adfa39fd0a46b277c4736cf9573cf021eca992a62c2",
+      "bytes": 3587,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/eumenes-rare-male.json",
+      "sha256": "c47c078e52f486c9cff92d0e9a634933f552934af7e2c6c9bdd3ade20c20e585",
+      "bytes": 2041,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/manifest.json",
+      "sha256": "f483e537c3f1f272c3ccff068b7893f8fa58033a158328f7751352d30fdc1c9b",
+      "bytes": 7651,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female-coarse.json",
+      "sha256": "7a9c30c19228e74ea992ccb523521bc965a240022d565d4e3f5800175ac46dad",
+      "bytes": 1930,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female-face-detail-mask.png",
+      "sha256": "46dbb9f633c25d16e6c97e7cc90e9703d07bcb63fd9c3bb0eafda3ff5fee3db9",
+      "bytes": 5290,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female-mask.png",
+      "sha256": "5567382fd49abb57726d2eb55294ea6331006c596e500d11a7d4108b817b151d",
+      "bytes": 60634,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female-pixel-generated.png",
+      "sha256": "cd32762c9705117b110b63ecbac0139ec8a68487b20574e342e544acc8daa8bf",
+      "bytes": 973813,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female-pixel-protection.json",
+      "sha256": "531f4cf53336ae9937f643fa90f7f603d2c9aef1286145c817433c351a9240a7",
+      "bytes": 1862,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female-pixel-selection-mask.png",
+      "sha256": "397741655f6f5cad2b4172b76a8fe37c57102844eadf273742c7cc02ab8a88b8",
+      "bytes": 4849,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female-pixel.json",
+      "sha256": "c62a42802dfd4ef9eddc721f24e9f7a8925cbb8d518daae249dc01039df2931b",
+      "bytes": 3599,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-female.json",
+      "sha256": "9034e8772307eccc9e87627e68a3286c17d81efab48f5d48f4aba05ad2acfb19",
+      "bytes": 1921,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-coarse.json",
+      "sha256": "67cc7102e1b768e0329e93e3ba19576eb5e0ce8657f5370c609a0f007af9483f",
+      "bytes": 1924,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-face-detail-mask.png",
+      "sha256": "4086c76f8ecb496117ca8dd0058f99bd0a7eef11f90c7a1c18b45bdb126e374f",
+      "bytes": 5338,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-mask.png",
+      "sha256": "9ae94cc3b91c8a2a84e78022e4e63740e04ae1ea4be2d6578f8a89315e38ab1b",
+      "bytes": 55301,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-pixel-generated.png",
+      "sha256": "93e94e366e8e24f013270bbae576c28441fd70488346e8689575f82088e1de38",
+      "bytes": 961971,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-pixel-protection.json",
+      "sha256": "7f3e448bd96f0766d1737a717a49a785105c793b63f3bb368f740f40cb394e9c",
+      "bytes": 1850,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-pixel-selection-mask.png",
+      "sha256": "9108396a93f0951561789037ee4fa7f9da9cf0b9e981b73878c7330c906d8a2e",
+      "bytes": 4752,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male-pixel.json",
+      "sha256": "c6c0d92c102d20321ad358c52d3ee199c440866db7c9b8934196324494254232",
+      "bytes": 3587,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/head-patches/ptolemy-rare-male.json",
+      "sha256": "b465e3ff9d6a562f2f8b3ce6ae6957495774110dbb84717fdee06cafd0a809aa",
+      "bytes": 1911,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/map-regeneration.json",
+      "sha256": "514dd0707d4a0815f8471725aeba3fdde1b5092adb612555fbc04251872896ea",
+      "bytes": 285,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/migration-finalized.json",
+      "sha256": "d0e2e13350be60bb474df39787b3de26c1087d5efa3f72d4e3157af1ce9aa5b3",
+      "bytes": 1138,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/qa/migration-prepared.json",
+      "sha256": "cf90985a903fd998746ad3e82f4d0ab6f7579c432f2a44d79c37699cf43297f8",
+      "bytes": 260,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/references/credits.json",
+      "sha256": "029d88f7e5aac3a18748245ecd63046fb0d17ab9d2bdd86ef9a614a374d5fe85",
+      "bytes": 619,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/references/fallen-and-felled-furniture-maker.jpg",
+      "sha256": "2fe589fdff1452c292b05ee347991f19c28098d9b086a7d5037ac71b3a6626a1",
+      "bytes": 146373,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/apply-portable-migration.cjs",
+      "sha256": "15fe7dc42d8b91591e85d003129b4c085e1e3895e0f6e8514b2b0f8c05956765",
+      "bytes": 10210,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/art-edits.json",
+      "sha256": "51da3af241b62e0145a8e0cd1034de02990e53bd2667e5c554e26da30bbf93e9",
+      "bytes": 2980,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/build-audit-summary.cjs",
+      "sha256": "b9b658e44eed1e94d31804d8d70f560edaf143ebe19c090ba84a95afd31b6ce7",
+      "bytes": 2305,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/build-head-patches.cjs",
+      "sha256": "ed4feaf686607e690e6657a191b65e0550ee58d04c4ef9de9f48af4d01f7dddb",
+      "bytes": 12099,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/build-portable-release.cjs",
+      "sha256": "1dcd4fe0be8009e12a1d36c82bbd37b479fe28e479da78f4cc51d8a8bb317d2c",
+      "bytes": 3516,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/common.cjs",
+      "sha256": "b3c70f5f982ad01c6c279554a8ef85afdea6007decce7de73c811926a54a32e2",
+      "bytes": 928,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/demetrius-rare-female-face.json",
+      "sha256": "ff59e2bb40244fb743f2d9917b9e3db077eda4434a2dec27cbe5259339068646",
+      "bytes": 299,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/demetrius-rare-female-gaze-fixed.png",
+      "sha256": "27591148a083e5ead9674c264a1c06954eaa201da14615078ee4dc42c7dcbc54",
+      "bytes": 4276593,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/demetrius-rare-female-head-generated.png",
+      "sha256": "ac4f4d7a17e16ec6d89ae17ec9daec533ee563d1d9ee9bb39fd126acc71e7278",
+      "bytes": 2499388,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/euclid-rare-male-face.json",
+      "sha256": "2cfabf10d4a14d26dcb7883c303f8e46e4a49352174b965f4c9bab5c0cf26624",
+      "bytes": 299,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/euclid-rare-male-gaze-fixed.png",
+      "sha256": "7afeb09c18632058679672e6642ef8e326befa50462d7b5665db048731835310",
+      "bytes": 4056773,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/euclid-rare-male-head-generated.png",
+      "sha256": "ada938298b8176a5c1e49785b2c4839ecac411d4cc193f2f34b8fd9479f11a39",
+      "bytes": 2443666,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-female-face.json",
+      "sha256": "cc1d3380e4d749cc77fbc9d1bb50c5f3489d4e05a38f4002a971d7d4edd0dd1a",
+      "bytes": 299,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-female-gaze-fixed.png",
+      "sha256": "8bd6ca0e0d0cf2dc33e6e2f402d88c985d12be2e89ce4ffc1eca4a6ea187fa7f",
+      "bytes": 4333461,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-female-head-generated.png",
+      "sha256": "93967776cdaf909bcc6b5a0573e41e47444be3659ce2b262f90b5368dfbcbd77",
+      "bytes": 2596473,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-male-face.json",
+      "sha256": "1b9ae964fceae795e124754bfae477ba34fc2cd73472d9861d6001b4abcf1680",
+      "bytes": 299,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-male-gaze-fixed.png",
+      "sha256": "f139acf0685aa20b23f98cda3c033ceeb06e54551305dee8b949bc6792175cc3",
+      "bytes": 4329204,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/eumenes-rare-male-head-generated.png",
+      "sha256": "75914258a1c9e8fc2612d87bf1396ec82d5d265e2a34626ab79b15d2f35ff524",
+      "bytes": 2554460,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/finalize-migration.cjs",
+      "sha256": "c408e7495e121a4361b90f9569f69df336b0b5433acf407d5f9b160ef9811292",
+      "bytes": 6132,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/fit-report-baseline.cjs",
+      "sha256": "bf409832e6bc07cbfc6aada402450ef86b41f218320ed117dec125dbdeafa941",
+      "bytes": 1576,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/head-patches.json",
+      "sha256": "e4d9b803e1d3894c3747e86291f0cfe592fb334850be0b8255dd35976fda1b5b",
+      "bytes": 4458,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/prepare-migration.cjs",
+      "sha256": "31a3c16464200d6ac2abf4270f513b00e861a22b95ae5e96136936b1c2ce09df",
+      "bytes": 4713,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/prompts.json",
+      "sha256": "03f6864ddfc8f5f2c7c90a359c847b8d40963e29242a6852eda80104500c945b",
+      "bytes": 10479,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-female-face.json",
+      "sha256": "8329ed03d512f17434aa04e8a2b47e6ad0564d4b0d1312425e7d3f17ff8cc79e",
+      "bytes": 299,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-female-gaze-fixed.png",
+      "sha256": "f4caaacd66dda4f1f45972deafc73bef68a4d1c739f8cb906ea0025bf5bd5e17",
+      "bytes": 4561221,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-female-head-generated.png",
+      "sha256": "094ec1ee6f2f70ac0827a3a8d048e949754efe5c7abf43f7e21be8c698f17094",
+      "bytes": 2704752,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-male-face.json",
+      "sha256": "cedb0326526f54c1a3d6b4d705bf01e33c9c558018be85fafa8021112445b62c",
+      "bytes": 299,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-male-gaze-fixed.png",
+      "sha256": "e9ec238df0417e5ad4d2cc7d2b61f25d4ed5da2b58a802467732d16efa743f5b",
+      "bytes": 4557445,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/ptolemy-rare-male-head-generated.png",
+      "sha256": "27911772560171718ce20b795df4ab6fea682e83a1f3f9bf05a35210a01d4e5d",
+      "bytes": 2651586,
+      "beforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/render-derivatives.cjs",
+      "sha256": "6d851ef68bf56fdcd17dcfc62bb312fb377aeb24737a1b7c602089eb6b6e5f5e",
+      "bytes": 4310,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "artwork/cards/work-gaze-review-v1/source/verify-map-regeneration.cjs",
+      "sha256": "60b19e67752d43d8e69472bebf834caf3cfb4cf181c189cc86bcb8eacefee591",
+      "bytes": 1505,
+      "beforeSha256": null,
+      "normalizedBeforeSha256": null,
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/demetrius-rare-female.webp",
+      "sha256": "7e0476323e1ca07a47254dcf96a5c63238ae3839ec1a5a734e7db0aa4cc6b612",
+      "bytes": 228020,
+      "beforeSha256": "27b671e45f3cada34ff5010e2e54d0ef164e7a50d9543382c4e16e87a58f13a0",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/euclid-rare-male.webp",
+      "sha256": "5e1a8355122459ff3759d6103aeb5707933901879aade15284d8042d996d6a0f",
+      "bytes": 216860,
+      "beforeSha256": "0f050b10caa802e12590abe622596e4fa385a622e2cef6c2f717a3c6526dbff4",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/eumenes-rare-female.webp",
+      "sha256": "c76686c0d5ec9fb6f1f3efa7d4e940d1faf26a98ab335bed6ae4111a411a940e",
+      "bytes": 232386,
+      "beforeSha256": "e6c83bc600ebaa111d9417cc29e207c5055f0525c81babdf95216b8309f9a511",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/eumenes-rare-male.webp",
+      "sha256": "de07a08a2869f79ab246a25e2f34914df3d6822c01670058bd9b44a101f302e9",
+      "bytes": 235510,
+      "beforeSha256": "c4b55287034ee57cbdb261939c2cc17596909d025f9164f937048fc18c0a6828",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/manifest.json",
+      "sha256": "75ff16836297667510856e8a39238697f04c5229554daa8f4efa70dc2070fb2e",
+      "bytes": 104451,
+      "beforeSha256": "dfa43acecc2ff952b16af408987933af4483e54866b86f32a0e7cf0d57827830",
+      "normalizedBeforeSha256": "dfa43acecc2ff952b16af408987933af4483e54866b86f32a0e7cf0d57827830",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/ptolemy-rare-female.webp",
+      "sha256": "bf8a797e7efe0e5e1660fd9f179a537ec565b6bb259bb9f5a19af06fc82248f7",
+      "bytes": 236014,
+      "beforeSha256": "b60b15d7d568efe1c46be871b6c9e723d73f9de8e309f94b0ed2083625216ca2",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/bodyless-v1/ptolemy-rare-male.webp",
+      "sha256": "4599d246ec2c3c8fee2104fd59551569050e6faddb8d695e6afd04b4b13cd07f",
+      "bytes": 231962,
+      "beforeSha256": "65731c9366105432d9f0dbbb6e1724c0c531714d67545cec310f3e614aa585f7",
+      "optionalBodyless": true
+    },
+    {
+      "file": "public/assets/cards/collection-v14/demetrius-rare-female-footerless.webp",
+      "sha256": "e9c6e75c712581384595e4ebd15b92daed73b60e5f36e75b99ab11bb54d76dfc",
+      "bytes": 243900,
+      "beforeSha256": "72d587c41eb1fa80cbe0de7639bb8dac2581d31def1e420db75466be685b33d8",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/demetrius-rare-female-portrait.webp",
+      "sha256": "620e97fb2c7e1d25d0fc0a3bb8f330a349c98da8a00aa4e42a6bdbbb040163ad",
+      "bytes": 224052,
+      "beforeSha256": "4c58be62cf0c018b7c970dcea3d1896d20afa315a8ad5138f0b7bd4871e8e5eb",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/demetrius-rare-female-thumb.webp",
+      "sha256": "00ddff226876a76d01ff5a8560a646e9be96bad41376b4879ab8df791be77fc7",
+      "bytes": 191324,
+      "beforeSha256": "1c6e008a996cf92d7955fd38cb1a7aa74fe4705e872c6d958c3f7b013834ad9c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/demetrius-rare-female.webp",
+      "sha256": "1abb41b2ff2f304f6d370a0528fa4162af3891a31c527a9e311c5c029caa8c2f",
+      "bytes": 244566,
+      "beforeSha256": "d799a95b57b035b42cc0a753b4c33c0d7cf0b95d50656106808405940f33615e",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/euclid-rare-male-footerless.webp",
+      "sha256": "db7b99aa5cdc3212b90820f3395a8a6fcc89ddcf19d32d4d04545e1c96d47d4f",
+      "bytes": 232578,
+      "beforeSha256": "2ef44fd0abd828ed419691504bc76ed8c89bc37a987ab50f2a36d603be0b430d",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/euclid-rare-male-portrait.webp",
+      "sha256": "c4e761a9c3b78d33782282b8d2290886259ae4a0c8de5ca812b344ab40e584be",
+      "bytes": 213012,
+      "beforeSha256": "107ccf01d954cb841357790fb6267b5d5d42681ffb36b0f272dffddad773d9c3",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/euclid-rare-male-thumb.webp",
+      "sha256": "212f415a873b1377a709ca736e8773f1b38c3814210c0c826ffa4da8f2b93d1d",
+      "bytes": 179936,
+      "beforeSha256": "d65820927dd80e4551972f96af8be056892757c65213b8ec5b1ed98ed85f4eca",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/euclid-rare-male.webp",
+      "sha256": "0ac601915b98e9237292781d97ae62190c2ab5d9536f20828ad5db7ee99a58b8",
+      "bytes": 233290,
+      "beforeSha256": "8eb3e872b891c57cb41d3e8c296e00b1ed0366dc2f8ced4911bd3449494c81ab",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/eumenes-rare-female-footerless.webp",
+      "sha256": "7f9d1b984d2b1c1642fad6dc6008e35b32b8f94f54f19cc6c58e83566fcf099c",
+      "bytes": 249676,
+      "beforeSha256": "4fce12598b414112a2d2060e799fa82d9a3257219c3d5498d7f664825535385c",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/eumenes-rare-female-portrait.webp",
+      "sha256": "264290427be4554892178cbb69149e4350d55442e61e00fd72de9de9ee02fa27",
+      "bytes": 224898,
+      "beforeSha256": "b166ed4845d3b0a84223e19d431f6c1f4eb7ce300d2895513478233739240cf9",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/eumenes-rare-female-thumb.webp",
+      "sha256": "73683a5a27d4e250b8635f7ceca1b24e45b865679a3e3f7a5783873e7af3be09",
+      "bytes": 193156,
+      "beforeSha256": "68dd8668497cdc255ff0c351d85e6688e9e95a41e20797c251a3b976c8b9c159",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/eumenes-rare-female.webp",
+      "sha256": "e0048f599ce564ab939ee5e8c4b542e5c2fa405ea7af8fd94ce806203e53c3c1",
+      "bytes": 250402,
+      "beforeSha256": "a05a22d2a0d8348f6b3de7ab4d036d7005cb024d2b5c632f6f371ddddd4af023",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/eumenes-rare-male-footerless.webp",
+      "sha256": "b5a83e93f60d2ccc6dce5bd489e3cce28178608d7043a82f8b66a450e54b17d2",
+      "bytes": 248770,
+      "beforeSha256": "bc09ae55a98e10019055a104f362ceb813c594be1d60ebde6c5c7596b00b006a",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/eumenes-rare-male-portrait.webp",
+      "sha256": "4d68200a056f104e099da93f6c5d64ee8d9ccf3e30f0c694220acddc27faa1b3",
+      "bytes": 227642,
+      "beforeSha256": "e3c759fcfea64faba6d926182b95fca8cde3c20ff0a4cee2318185b260eebc23",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/eumenes-rare-male-thumb.webp",
+      "sha256": "4248096f716c5f05e4f66bffe745baf56fd594808047f4d441d82745a7399920",
+      "bytes": 195340,
+      "beforeSha256": "74cfda6887268a03ff6c340080759b26a0799a4acf57177693e12e5295a2ab73",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/eumenes-rare-male.webp",
+      "sha256": "732d2cd6edba0ba00cc3f6dc99f21a8708cd41e49900f1bb585cf7521f3e30e1",
+      "bytes": 249418,
+      "beforeSha256": "07b278a77db9340b3e9a29b0f2ce9484ed0a26b04135532de6f9ea746ff88437",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-rare-female-footerless.webp",
+      "sha256": "a7640bb03f2db082e859397774ca8036e7f3cf726fead1496630ddeaa328deee",
+      "bytes": 254176,
+      "beforeSha256": "dfa5115d617f26956040206920c1b8e9dc3b9e2a4a5e9d13cd259490417c9c23",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-rare-female-portrait.webp",
+      "sha256": "52ad378711c434b5c03c0fa426f22a783e6b000aaa7b135aa7242dac4e5eedd3",
+      "bytes": 229118,
+      "beforeSha256": "7cc20f15f5a7d7fce7ec54a56906a16a1fe96621906c7981bf9979105ccd4b71",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-rare-female-thumb.webp",
+      "sha256": "0f682b4ef92dcba6b0a14051ba9e45edb91c6b7d47b6019a6098127c617e4fda",
+      "bytes": 197028,
+      "beforeSha256": "57e890ecc2885d1e52306b06f56003c33fa056defca010b2a051c17b1a889cbd",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-rare-female.webp",
+      "sha256": "3952b1bbca0c8984890e116af3871ac8c9fac23ef6dbfb01e4ff8ef5864684e8",
+      "bytes": 254804,
+      "beforeSha256": "0457d86efbae8273e095ff622217e1afed48caeebaedf8a20bd6cc82560ad8b4",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-rare-male-footerless.webp",
+      "sha256": "9da86dead9366278e832c54a467d0f6a647f0c99565d50ac3abe13f4167a70f6",
+      "bytes": 250114,
+      "beforeSha256": "e769922d0c2dc9ab7437ec32707be8fb826ca6ac9837aa38b14146424abce5fc",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-rare-male-portrait.webp",
+      "sha256": "da0e1a20313b7af443bb28f678b0f72e041dd97ef0b625fa0a0afee9ddebf9fd",
+      "bytes": 225476,
+      "beforeSha256": "8b5cd93d8e681a6f8aa7c8fa87457639a95176e32cf91c8ad8e5a242a028d142",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-rare-male-thumb.webp",
+      "sha256": "e6eb120866c479ee7b509175acbe3833e1f0815fb9fbff95061157beb0398314",
+      "bytes": 194142,
+      "beforeSha256": "21f3065e161577dceb47a662e297f3dee37c6ee26cadf7f77084f4ec3dd7de88",
+      "optionalBodyless": false
+    },
+    {
+      "file": "public/assets/cards/collection-v14/ptolemy-rare-male.webp",
+      "sha256": "df0a1cd4a95f530aed1b53625101a58b68b151578135baadec57dfdf69ca8c9e",
+      "bytes": 250786,
+      "beforeSha256": "3bd0d5854cec6234034f2531d383858135bc7f2d9ae71de44ef389a847e0701d",
+      "optionalBodyless": false
+    }
+  ],
+  "metadataPolicy": "Art-only selected records; preserve all card copy, native frame bytes, target unselected/parent rows and active override entries. Global QA reports are regenerated in the target.",
+  "retainedWorldsUnchanged": true
+}

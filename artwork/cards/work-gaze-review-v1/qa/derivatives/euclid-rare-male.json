@@ -1,0 +1,127 @@
+{
+  "id": "euclid-rare-male",
+  "template": {
+    "id": "euclid-rare-male",
+    "figureId": "euclid",
+    "figureName": "Euclid",
+    "kind": "contribution",
+    "tier": "rare",
+    "gender": "male",
+    "rarity": "rare",
+    "title": "Proof Checker",
+    "canonicalTitle": "Proof Checker",
+    "displayTitle": "Proof Checker",
+    "subtitle": "Keeper of Euclid's Reasoning",
+    "bodyTitle": "No Step Unexamined",
+    "bodyText": "A proof checker questions every inference and tests whether a construction truly follows. This exacting reader guards the chain of reasoning, making an elegant conclusion worthy of the certainty it claims.",
+    "copy": {
+      "title": "Proof Checker",
+      "subtitle": "Keeper of Euclid's Reasoning",
+      "bodyTitle": "No Step Unexamined",
+      "bodyText": "A proof checker questions every inference and tests whether a construction truly follows. This exacting reader guards the chain of reasoning, making an elegant conclusion worthy of the certainty it claims."
+    },
+    "editionLimit": 100,
+    "exampleEdition": "001/100",
+    "collectionIndex": 24,
+    "frameLayout": "standard",
+    "rarityCharacteristics": "silver-blue, faceted gems, chamfer brackets",
+    "frame": "frames/cards/euclid-rare-male.png",
+    "footerlessFrame": "frames/cards/euclid-rare-male-footerless.png",
+    "overlaySvg": "frames/svg/euclid-rare-male.svg",
+    "footerlessOverlaySvg": "frames/svg/euclid-rare-male-footerless.svg",
+    "sourcePortrait": "reference/portraits/euclid-rare-male.webp",
+    "preview": "reference/cards/euclid-rare-male.webp",
+    "fit": "standard",
+    "artRect": {
+      "x": 154,
+      "y": 190,
+      "width": 592,
+      "height": 740
+    },
+    "symbol": "reference/symbols/euclid.svg",
+    "historicalSources": [],
+    "sourceArtworkSha256": "b6875e2710905322c22ee40e4c2e6d4ae9745f89742d1873321ca615b50a0553",
+    "hashes": {
+      "frame": {
+        "width": 900,
+        "height": 1260,
+        "bytes": 55433,
+        "sha256": "b23ad812442ad3d848332d183bb0a23856375d38312c39aa11b5657925a4498d",
+        "rgbaSha256": "1844f8618258ac05aefb4ebafec762472786d3e6f10bf5d1a279c2983beb1214"
+      },
+      "footerlessFrame": {
+        "width": 900,
+        "height": 1260,
+        "bytes": 54738,
+        "sha256": "2ad31986f71e5689a30b014e0a9162fc0a1b99ae55f4f9a7c633214d2a97e34f",
+        "rgbaSha256": "63ca1b31c2ab19b3bcf114c344ab0a013c6fd7448849d861feebf342fdad3c57"
+      },
+      "sourcePortrait": {
+        "width": 840,
+        "height": 1050,
+        "bytes": 213012,
+        "sha256": "c4e761a9c3b78d33782282b8d2290886259ae4a0c8de5ca812b344ab40e584be",
+        "rgbaSha256": "83241de4502bac3caefb379d8dc837088435114e70f8a2eb65e7ba66a9995082"
+      },
+      "preview": {
+        "width": 450,
+        "height": 630,
+        "bytes": 179936,
+        "sha256": "212f415a873b1377a709ca736e8773f1b38c3814210c0c826ffa4da8f2b93d1d",
+        "rgbaSha256": "a6db3c2d25d1962beb3cd5a72430beacf1df76acd0061b4ac61eeefa23f7b313"
+      },
+      "overlaySvg": {
+        "sha256": "b4ac12c21b5d2202328050a7837b4fec633de7d0449e41707c559bc2161aaeb7"
+      },
+      "footerlessOverlaySvg": {
+        "sha256": "a0e9b487ca03ec36466ee41256b6d3d3fa573a6abde10239f2451a39000eb062"
+      }
+    },
+    "sceneBrief": "A proof checker works with a compass and ruler on a geometrical proof sheet. The head inclines gently forward in a natural three-quarter view and the eyes follow the compass tip on the sheet. Keep the neck relaxed above the shoulders and preserve the drafting hands, compass, ruler and nearby collaborator."
+  },
+  "delivery": {
+    "id": "euclid-rare-male",
+    "sourcePNG": "exports/euclid-rare-male.png",
+    "sourceSha256": "11ce3ba7e4cae2896f68845e06ae7ac69c2729de7e10bc3882a38d32afb3cc70",
+    "portraitSourceSha256": "b6875e2710905322c22ee40e4c2e6d4ae9745f89742d1873321ca615b50a0553",
+    "symbolSha256": "10e07402dc103860c0a31ee5fb79383f906dcc0d05deb66c4d58a24c98124ea8",
+    "editionRemovedPixels": 563,
+    "outsideEditionChangedPixels": 0,
+    "full": {
+      "src": "/assets/cards/collection-v14/euclid-rare-male.webp",
+      "width": 900,
+      "height": 1260,
+      "bytes": 233290,
+      "sha256": "0ac601915b98e9237292781d97ae62190c2ab5d9536f20828ad5db7ee99a58b8",
+      "rgbaSha256": "3eb1f0cb61691b3c9ea088bb3418bbed5f4e43246cd3f668646b51f6a32d391d"
+    },
+    "thumbnail": {
+      "src": "/assets/cards/collection-v14/euclid-rare-male-thumb.webp",
+      "width": 450,
+      "height": 630,
+      "bytes": 179936,
+      "sha256": "212f415a873b1377a709ca736e8773f1b38c3814210c0c826ffa4da8f2b93d1d",
+      "rgbaSha256": "a6db3c2d25d1962beb3cd5a72430beacf1df76acd0061b4ac61eeefa23f7b313"
+    },
+    "footerless": {
+      "src": "/assets/cards/collection-v14/euclid-rare-male-footerless.webp",
+      "width": 900,
+      "height": 1260,
+      "bytes": 232578,
+      "sha256": "db7b99aa5cdc3212b90820f3395a8a6fcc89ddcf19d32d4d04545e1c96d47d4f",
+      "rgbaSha256": "6762d9d250a5c56d211c80ee38e3784438e782460e84a3528746be180833bc53"
+    },
+    "portrait": {
+      "src": "/assets/cards/collection-v14/euclid-rare-male-portrait.webp",
+      "width": 840,
+      "height": 1050,
+      "bytes": 213012,
+      "sha256": "c4e761a9c3b78d33782282b8d2290886259ae4a0c8de5ca812b344ab40e584be",
+      "rgbaSha256": "83241de4502bac3caefb379d8dc837088435114e70f8a2eb65e7ba66a9995082"
+    }
+  },
+  "approvedFrameBytesUnchanged": true,
+  "nativeFrameExact": true,
+  "uncoveredPixelDifferences": 0,
+  "outsideEditionChangedPixels": 0
+}
