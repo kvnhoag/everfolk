@@ -83,7 +83,7 @@
 .ef-card-back-corners::after { bottom: 2px; right: 2px; }
 
 .ef-card-back-topline {
-  font-family: var(--serif, "Courier New", monospace);
+  font-family: var(--ef-font-display);
   font-size: 10px;
   letter-spacing: 2.5px;
   color: #d6aa52;
@@ -119,11 +119,8 @@
 }
 
 .ef-card-back-brand {
-  font-family: var(--serif, "Courier New", monospace);
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #fff4d1;
+  font-size: 26px;
+  line-height: 1;
   text-shadow: 0 2px 4px #000;
 }
 
@@ -239,7 +236,7 @@
 }
 
 .ef-card-num {
-  font-family: var(--serif, "Courier New", monospace);
+  font-family: var(--ef-font-display);
   font-size: 10px;
   font-weight: 700;
   color: #727562;
@@ -320,12 +317,12 @@
 
 .ef-card-title {
   display: block;
-  font-family: var(--serif, "Courier New", monospace);
-  font-size: 15px;
-  font-weight: 700;
+  font-family: var(--ef-font-display);
+  font-size: 18px;
+  font-weight: 400;
   line-height: 1.25;
   color: #263b43;
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
   margin-bottom: 2px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -408,7 +405,7 @@
 }
 
 .ef-card-price {
-  font-family: var(--serif, "Courier New", monospace);
+  font-family: var(--ef-font-display);
   font-size: 12px;
   font-weight: 700;
   color: #a85e44;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { LifeMomentCard } from "../models/free-life-moments.ts";
+import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
 import "./mint-pack.css";
 import "./life-moments-pack.css";
 
@@ -17,11 +18,11 @@ export default function LifeMomentsPack({ moments, onClose, initiallyOpen = fals
     <h1 id="moments-title" tabIndex={-1}>{opened ? "You could have gotten…" : "The moments of your life"}</h1>
     {moments.length === 0 ? <p>This world does not record life stages, so there are no moments to show. Weave Mode lives keep a portrait of every stage.</p> : <p>{opened ? `${moments.length} moments from this life. In Weave Mode, every stage you live is kept as a portrait NFT on NEAR.` : "Open the pack to see a portrait from every stage you lived."}</p>}
     {moments.length === 0 ? null : !opened ? <button className={`booster-pack${opening ? " is-opening" : ""}`} type="button" disabled={opening} onClick={() => setOpening(true)}>
-      <span className="booster-seal" aria-hidden="true">✦</span><strong>EVERFOLK</strong><span>Moments of a life</span><small>{opening ? "Opening…" : "Open your pack →"}</small>
+      <span className="booster-seal" aria-hidden="true">✦</span><strong className="booster-pack-wordmark"><EverfolkWordmark tone="cream" /></strong><span className="booster-pack-subtitle">Moments of a life</span><small>{opening ? "Opening…" : "Open your pack →"}</small>
     </button> : <div className="life-moments-grid" role="list">{moments.map((moment, index) => <article role="listitem" key={moment.stageId} className={`life-moment-card${moment.historical ? " is-historical" : ""}`} style={{ animationDelay: `${index * 90}ms` }}>
       <span className="life-moment-stage">{moment.stageTitle}<small>{moment.ages}</small></span>
       <img className="life-moment-portrait" src={moment.media} alt="" />
-      <strong>{moment.title}</strong>
+      <strong className="ef-type-display">{moment.title}</strong>
       {moment.historical && <span className="chain-tag is-figure">Historical figure</span>}
     </article>)}</div>}
     <div className="chain-actions"><a className="chain-primary" href="#weave" onClick={onClose}>Play Weave Mode to get real NFTs<span aria-hidden="true">→</span></a><button className="chain-secondary" type="button" onClick={onClose}>Back to your life</button></div>

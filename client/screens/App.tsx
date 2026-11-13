@@ -49,6 +49,7 @@ import { formatWealthStanding, getWealthComparison } from "../models/wealth-comp
 import PixelIcon from "../components/PixelIcon.tsx";
 import PixelPortrait from "../components/PixelPortrait.tsx";
 import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
+import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
 import SiteNav from "../components/SiteNav.tsx";
 import LifeEndingBanner from "../components/LifeEndingBanner.tsx";
@@ -466,7 +467,7 @@ function App({ onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
       <a className="brand" href="#" aria-label="Everfolk main menu" onClick={e => { e.preventDefault(); openMainMenu(); }}>
-        <EverfolkWordmark />
+        <EverfolkBrand />
       </a>
       <SiteNav className="main-nav site-primary-nav" linkClassName="nav-link" onPlay={closeDialog} />
       <div className="header-right-cluster">

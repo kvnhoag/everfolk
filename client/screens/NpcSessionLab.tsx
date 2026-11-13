@@ -4,6 +4,7 @@ import { useNpcSession } from "../hooks/useNpcSession.ts";
 import type { NpcPerson } from "../../src/npc/types.ts";
 import type { NpcSnapshot } from "../types/npc.ts";
 import "../styles/npc-session.css";
+import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
 import { engineForLife } from "../lib/world-session.ts";
 function NpcCard({
@@ -124,7 +125,7 @@ export default function NpcSessionLab() {
   return (
     <main className="npc-lab">
       <nav>
-        <a href="/">← Everfolk</a>
+        <a className="npc-lab-brand" href="/" aria-label="Everfolk home"><EverfolkBrand /></a>
         <span>Online NPC free play</span>
       </nav>
       <header className="npc-intro">

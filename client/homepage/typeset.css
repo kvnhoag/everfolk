@@ -1,29 +1,13 @@
-/* Homepage typography system, measured from the exported Figma frames
-   ("Everfolk wordmark", "Your story", "Main navigation").
-   Two families, five styles:
-     Eczar 600                     -> footer wordmark and saved character name
-     Cormorant Garamond 500         -> "Live another story." (46px) and ornaments
-     Be Vietnam Pro 400             -> intro (18px), dates and notes (12px)
-     Be Vietnam Pro 500             -> menu (14px), emphasis line (18px), age (14px), small labels
-     Be Vietnam Pro 600             -> character name and primary button (18px)
-   The hero uses the outlined Eczar wordmark from the brand kit. */
-@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/be-vietnam-pro-400-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/be-vietnam-pro-400-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/be-vietnam-pro-500-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/be-vietnam-pro-500-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/be-vietnam-pro-600-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Be Vietnam Pro";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/be-vietnam-pro-600-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:600;font-display:swap;src:url("/fonts/cormorant-garamond-600-italic-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:600;font-display:swap;src:url("/fonts/cormorant-garamond-600-italic-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/cormorant-garamond-500-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/cormorant-garamond-500-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Homepage typography, measured from the exported Figma frames
+   ("Everfolk wordmark", "Your story", "Main navigation"), set in the shared tokens:
+     --ef-font-wordmark (Eczar 600)  -> header wordmark; the hero is the outlined brand-kit wordmark
+     --ef-font-display               -> saved character name and ornaments
+     --ef-font-body 400/500/600      -> menu, intro, dates, notes, labels and the primary button */
 
 .ef-home{
   --home-scale:1;
   --home-viewport-width:calc(100vw / var(--home-scale));
   --home-viewport-height:calc(100svh / var(--home-scale));
-  --tx-logo:"Cormorant Garamond",Georgia,serif;
-  --tx-sans:"Be Vietnam Pro","Segoe UI",sans-serif;
   --tx-cream:#fdf3dc;
   --tx-gold:#f1cf88;
   --tx-gold-line:#e3c58b;
@@ -31,10 +15,10 @@
   --tx-panel:#102e37;
   --tx-shadow:0 1px 2px #08161c,0 2px 10px #0a1b22cc;
 }
-/* The global stylesheet forces inherited fonts with !important; the homepage root re-asserts its own system. */
-.ef-home,.ef-home *{font-family:var(--tx-sans)!important;font-synthesis:none}
-.ef-home .ef-home-weave-brand .everfolk-wordmark,.ef-home .ef-home-weave-brand .everfolk-wordmark>span,.ef-home .ef-home-save strong{font-family:var(--font-display)!important;font-style:normal;font-weight:600}
-.ef-home .ef-home-tagline,.ef-home .ef-home-logo-rule i{font-family:var(--tx-logo)!important;font-style:normal;font-weight:500}
+/* The homepage uses the shared tokens from typography.css; the wordmark keeps its own face there. */
+.ef-home,.ef-home *{font-family:var(--ef-font-body)!important;font-synthesis:none}
+.ef-home .ef-home-save strong{font-family:var(--ef-font-display)!important;font-style:normal;font-weight:400}
+.ef-home .ef-home-tagline,.ef-home .ef-home-logo-rule i{font-family:var(--ef-font-display)!important;font-style:normal;font-weight:500}
 
 /* Footer: a compact utility row below the harbor. */
 .ef-home .ef-home-utility-bar{
@@ -161,8 +145,6 @@
 .ef-home .ef-home-weave-bar{min-height:66px;gap:16px;margin-inline:calc((100% - var(--coast-viewport-width, var(--home-viewport-width))) / 2);padding:5px calc(var(--home-viewport-width) * .026);border:0;background:#102e37}
 .ef-home .ef-home-weave-bar-main{gap:12px 0;flex-wrap:nowrap}
 .ef-home .ef-home-weave-brand{gap:6px;padding:4px 40px 4px 0;margin-right:32px;border-right:1px solid #f4d38f33}
-.ef-home .ef-home-weave-brand strong{font-size:32px;line-height:1.02;letter-spacing:-.025em}
-.ef-home .ef-home-weave-brand>span{font-size:10px;font-weight:500;letter-spacing:2.6px;color:var(--tx-gold)}
 .ef-home .ef-home-weave-links{gap:6px 48px;padding-right:0;border-right:0}
 .ef-home .ef-home-weave-links>a,.ef-home .ef-home-weave-links>button{font-size:14px;font-weight:500;letter-spacing:0;color:var(--tx-cream)}
 .ef-home .ef-home-weave-links>a:hover,.ef-home .ef-home-weave-links>button:hover{color:var(--tx-gold);text-shadow:none}

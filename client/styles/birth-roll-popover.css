@@ -3,7 +3,7 @@
 .birth-roll-popover::backdrop{background:#263c36b8;backdrop-filter:blur(3px)}
 .birth-popover-heading{display:flex;justify-content:space-between;gap:22px;padding:25px 28px 18px}
 .birth-popover-eyebrow{font-size:8px;font-weight:600;letter-spacing:1.4px;color:#968063}
-.birth-popover-heading h2{font:400 35px/1.15 var(--serif,Georgia,serif);letter-spacing:-.3px;color:#3d5742;margin:7px 0 8px;outline:none}
+.birth-popover-heading h2{font:400 35px/1.15 var(--ef-font-display);letter-spacing:-.3px;color:#3d5742;margin:7px 0 8px;outline:none}
 .birth-popover-heading p{font-size:12px;line-height:1.7;color:#7a836f;margin:0;max-width:570px}
 .birth-popover-close{display:grid;place-items:center;align-self:flex-start;flex-shrink:0;width:34px;height:34px;border:1px solid #d4dac8;border-radius:50%;background:#eeeee1;color:#74816b;cursor:pointer;font-size:24px;font-weight:300;line-height:1;padding:0}
 .birth-popover-close:hover{background:#e5e9da;color:#3f5b44;border-color:#aebb9e}

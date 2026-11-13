@@ -15,7 +15,7 @@
 }
 
 .mint-pack h1 {
-  font-family: var(--serif, "Courier New", monospace);
+  font-family: var(--ef-font-display);
   font-size: clamp(28px, 5vw, 42px);
   color: #263b43;
   margin: 0 0 10px;
@@ -54,11 +54,16 @@
   box-shadow: 12px 16px 0 rgba(136, 100, 71, 0.4), inset 0 0 25px rgba(214, 170, 82, 0.2);
 }
 
-.booster-pack strong {
-  font: 700 28px/1 var(--serif, "Courier New", monospace);
-  letter-spacing: 2px;
-  color: #fff9e9;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+/* The pack carries the brand lockup: wordmark over a gold tagline. */
+.booster-pack .everfolk-brand { align-items: center; --everfolk-brand-size: 34px; }
+.booster-pack-wordmark { font-size: 34px; line-height: 1.02; }
+.booster-pack-subtitle {
+  margin-top: -10px;
+  color: #f1cf88;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
 }
 
 .booster-seal {
@@ -212,7 +217,7 @@
 }
 
 .pack-receipt strong {
-  font-family: var(--serif, "Courier New", monospace);
+  font-family: var(--ef-font-display);
   font-size: 13px;
   color: #263b43;
 }

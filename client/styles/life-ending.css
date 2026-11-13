@@ -1,7 +1,7 @@
 .life-ending-banner{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0;margin:0 0 18px;border:2px solid #3a2a1d;background:#f8efdc;box-shadow:4px 4px 0 #3a2a1d22}
 .life-ending-record{padding:26px 30px;background:#173b44;color:#f3e6c9}
 .life-ending-eyebrow{margin:0 0 10px;font-size:11px;letter-spacing:2.4px;color:#e2bd73;font-weight:700}
-.life-ending-record h2{margin:0;font-family:var(--serif,"Cormorant Garamond",Georgia,serif);font-size:44px;font-weight:500;line-height:1.05;color:#fff6e4}
+.life-ending-record h2{margin:0;font-family:var(--ef-font-display);font-size:44px;font-weight:500;line-height:1.05;color:#fff6e4}
 .life-ending-dates{margin:8px 0 14px;font-size:14px;color:#d8c8a6}
 .life-ending-cause{display:flex;flex-direction:column;gap:3px;margin:0 0 16px;font-size:16px;color:#fff6e4}
 .life-ending-cause span{font-size:10px;letter-spacing:1.8px;color:#c6b08a}

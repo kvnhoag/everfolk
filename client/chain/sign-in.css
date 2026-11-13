@@ -8,7 +8,7 @@
 .sign-in-step label{font-size:12px;font-weight:700}
 .sign-in-step input{min-height:40px;padding:8px 10px;font:inherit;font-size:14px;color:inherit;background:var(--cr-paper,#fffbed);border:1px solid var(--cr-edge,#b39c68)}
 .sign-in-step input:focus-visible{outline:2px solid #41637b;outline-offset:1px}
-.sign-in-step input[name="code"]{font-family:var(--cr-mono,"Courier New",monospace);letter-spacing:4px;font-size:18px}
+.sign-in-step input[name="code"]{font-family:var(--ef-font-numeric);letter-spacing:4px;font-size:18px}
 .sign-in-step .chain-primary{justify-content:space-between}
 .sign-in-step .account-link{margin:0;align-self:flex-start}
 .sign-in-step .chain-fine{margin:2px 0 0!important}
@@ -21,11 +21,11 @@
 .sign-in-or{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--cr-muted,#6f6550)}
 .account-details{font-size:11px;color:var(--cr-muted,#6f6550)}
 .account-details summary{cursor:pointer;color:#41637b;text-decoration:underline;text-underline-offset:3px}
-.account-details p{margin:6px 0 0;font:11px/1.5 var(--cr-mono,"Courier New",monospace);overflow-wrap:anywhere}
+.account-details p{margin:6px 0 0;font:11px/1.5 var(--ef-font-numeric);overflow-wrap:anywhere}
 dialog.spend-sheet{max-width:min(420px,calc(100vw - 32px));padding:0;border:2px solid #886447;background:#f7ecd4;color:#263b43;box-shadow:4px 4px 0 #88644740}
 dialog.spend-sheet::backdrop{background:rgba(38,59,67,.45)}
 .spend-sheet-body{padding:20px 22px}
 .spend-sheet-body h2{margin:4px 0 8px;font-size:24px;letter-spacing:-.6px}
-.spend-sheet-price{margin:0 0 8px;font:700 20px/1.2 var(--cr-mono,"Courier New",monospace)}
+.spend-sheet-price{margin:0 0 8px;font:700 20px/1.2 var(--ef-font-numeric)}
 .spend-sheet-body .chain-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .spend-sheet-body .chain-actions>button{flex:1 1 140px}
