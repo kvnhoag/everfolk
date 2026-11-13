@@ -10,7 +10,7 @@ import InfluenceMarkerTag from "../components/InfluenceMarkerTag.tsx";
 import { influenceMarker } from "../models/influence-marker.ts";
 import EconomyPanels, { type ComparisonSide, type EconomyTabId } from "../demo/EconomyPanels.tsx";
 import ResourceBar from "../demo/ResourceBar.tsx";
-import type { TradeItem } from "../../src/demo/contracts.ts";
+import type { TradeCommand, TradeItem } from "../../src/demo/contracts.ts";
 import LifeChoiceBoard from "../components/LifeChoiceBoard.tsx";
 import EventNotificationStack from "../components/EventNotificationStack.tsx";
 import GameMusicPlayer from "../components/GameMusicPlayer.tsx";
@@ -20,7 +20,7 @@ import "../styles/creator-tokens.css";
 import "../styles/creator-system.css";
 import "../styles/interface-refinements.css";
 import { storehouseRows } from "../demo/storehouse-model.ts";
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { birthYearOf, lifeStageView, formatYear } from "../../src/index.ts";
 import type { LifeState, JournalEntry, WorldPack } from "../../src/types.ts";
 import type { WorldRoute } from "../../server/content.ts";
@@ -95,9 +95,12 @@ import { howToPlaySteps } from "../models/how-to-play.ts";
 import { lifeRoadmap } from "../models/life-roadmap.ts";
 import { yearChecklist } from "../models/year-checklist.ts";
 import { idleNudge } from "../models/idle-nudge.ts";
+import { plantingCheck } from "../models/planting-check.ts";
+import { tradePreview } from "../models/trade-preview.ts";
 import { tuning } from "../../src/demo/market-rules.ts";
 import { YEARLY_FOCUSES } from "../models/yearly-focus.ts";
 import { tutorialStore } from "../state/tutorial-store.ts";
+import { useTipShown } from "../state/tip-shown.ts";
 import { readHowToPlayAtStart, writeHowToPlayAtStart } from "../storage/how-to-play-storage.ts";
 import { NO_TUTORIAL_CONTEXT, gameTutorialContext } from "../models/tutorial-triggers.ts";
 import { yearlyFocusFirstAge } from "../models/yearly-focus.ts";
@@ -201,18 +204,23 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const [freePlayBoosterOpen, setFreePlayBoosterOpen] = useState(false);
   const offeredBooster = useRef("");
   const loanWarningsSeen = useRef(new Set<string>());
-  // Tutorial hints read the screen and the life; they never pause play or change screens.
+  // Tutorial hints read the screen and the life; they never change screens. The clock waits while a tip is open.
+  const tutorial = useTutorial();
+  const tipShown = useTipShown();
   const [characterTab, setCharacterTab] = useState<string | null>(null);
   const [notificationShown, setNotificationShown] = useState(false);
   // How to Play opens whenever the game screen starts (unless the player switched that off); the clock waits.
   const [howToPlayOpen, setHowToPlayOpen] = useState(false);
   // Read after mount (never during render) and never for preview lives, which must not touch personal storage.
   const [howToPlayAtStart, setHowToPlayAtStart] = useState(true);
-  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || householdWelcomeOpen || howToPlayOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked, online, previewSession });
+  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || householdWelcomeOpen || howToPlayOpen || tipShown || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked, online, previewSession });
   const { life } = game;
   const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
+  // A field plan is tried on a copy of this life, so the planting card shows the game's own answer before the click.
+  const checkPlan = useCallback((flaxPlots: number) => plantingCheck(lifeEngine, life, flaxPlots), [lifeEngine, life]);
+  const previewTrade = useCallback((order: TradeCommand) => tradePreview(lifeEngine, life, order), [lifeEngine, life]);
   const world = lifeEngine.world;
   const management = householdManagement(world, life);
   const demoView = useMemo(() => demoScreen(world, life), [world, life]);
@@ -256,7 +264,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     blockingDialog: restartOpen || worldPickerOpen || householdWelcomeOpen || howToPlayOpen || loanRequest !== null || loanWarningOpen || freePlayBoosterOpen,
     life: {
       age: life.age, ended: life.phase === "ended", decisionPending: life.phase === "choice", learnedSkills: Object.keys(life.capabilities?.learned ?? {}).length + Object.keys(life.deepCapabilities?.learned ?? {}).length,
-      focusShown: life.phase !== "ended" && life.age >= yearlyFocusFirstAge(world), resourcesShown: Boolean(demoView), wealthShown: Boolean(life.economy && wealthComparison),
+      focusShown: life.phase !== "ended" && life.age >= yearlyFocusFirstAge(world, life), resourcesShown: Boolean(demoView), wealthShown: Boolean(life.economy && wealthComparison),
       deckShown: Boolean(demoView) && life.phase !== "ended", notificationShown: notificationShown && Boolean(demoView), tradeAge: world.demo ? world.demo.market.minTradeAge ?? 12 : null,
     },
   }));
@@ -275,7 +283,6 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     setHowToPlayAtStart(atStart);
     if (atStart) setHowToPlayOpen(true);
   }, [onGameScreen, menuOpen, birthPopoverOpen, lifeId]); // eslint-disable-line react-hooks/exhaustive-deps
-  const tutorial = useTutorial();
   const tradeAge = world.demo ? tuning(world.demo.market).minTradeAge : null;
   const focusAge = yearlyFocusFirstAge(world, life);
   const howToPlay = useMemo(() => ({
@@ -290,7 +297,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     tradeAge, marketVisited: Boolean(demoView?.market.visitUsed), recordYears: life.age + 1,
   });
   const nudge = idleNudge({ onGame: dashboardVisible && !readingPause, phase: life.phase, playing: game.isPlaying, decisionOpen, tipOpen: tutorial.open && tutorial.mode === "manual" });
-  const focusShown = life.phase !== "ended" && life.age >= yearlyFocusFirstAge(world);
+  const focusShown = life.phase !== "ended" && life.age >= yearlyFocusFirstAge(world, life);
   const yearReminder = useYearReminder({ age: life.age, phase: life.phase, hasFields: Boolean(demoView), focusShown, actionUsed },
     eventNotificationLifeKey(life), dashboardVisible && game.hasBegun);
   const workStatus: WorkStatus | null = !focusShown && life.age < YEARLY_ACTION_AGE ? null : {
@@ -618,7 +625,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {game.hasBegun && <section className="life-session-bar has-section-help" aria-label="Time controls">
         <div className="life-session-age"><SectionStep step={sectionStep("time")} />Age <strong>{life.age}</strong>{stageTitle && <span className="life-session-stage"> · {stageTitle}</span>}</div><div className="life-session-year">{formatYear(life.year)} · {supportsLocationMap(world) ? <button type="button" className="location-map-open" aria-label={`Open location map: ${place}, Egypt`} onClick={() => setPanel("map")}><Icon name="pin" size={13} />{place}</button> : place}</div>
         <div className="playback-bar life-clock">
-          <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{readingPause ? "Reading pause" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
+          <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{readingPause ? "Reading pause" : life.phase === "ready" && game.isPlaying && !game.isClockRunning && (tipShown || howToPlayOpen) ? "Waiting while you read" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
           <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else { setReadingPause(false); game.continueLife(); } }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
           <button className="text-button turning-point-button" ref={decisionButtonRef} disabled={life.phase !== "ready" && life.phase !== "choice"} onClick={() => { setReadingPause(false); if (life.phase === "choice") { game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); } else game.nextTurningPoint(); }}>{life.phase === "choice" ? "Open decision" : "Next decision"} <Icon name="arrow" size={15} /></button>
           <div className="session-desktop-actions"><button type="button" className={`session-auto${game.autoDecisions ? " is-on" : ""}`} aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => game.setAutoDecisions(value => !value)}>Auto mode</button><button className="session-manage" onClick={() => { setCharacterSection(hasFamilySection ? "children" : "skills"); setPanel("character"); }}>{hasFamilySection ? "Family & life" : "Character & skills"}</button><button className="session-manage" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button></div>
@@ -632,7 +639,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={isRanked} packCards={isRanked || game.isPreview ? 0 : lifePackCardCount(life, world)}
         onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
       {game.hasBegun && <LifeYearRail life={life} />}
-      {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} work={workStatus} onWork={showYearlyWork} />}
+      {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} checkPlan={checkPlan} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} work={workStatus} onWork={showYearlyWork} />}
 
       <div className={`life-layout ${!game.hasBegun ? "life-layout-birth" : demoView ? "life-layout-weave" : "life-layout-classic"} ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">
@@ -698,7 +705,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
               onActivity={requestActivity}
               onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined}
             />
-            {demoView && life.phase !== "ended" && <EconomyPanels screen={demoView} life={life} world={world} activities={activities} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} comparison={demoComparison} externalTradeItem={selectedTradeItem} externalTab={selectedEconomyTab} onAutoPlay={game.setAutoDecisions} onTrade={order => game.runDemo(order)} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
+            {demoView && life.phase !== "ended" && <EconomyPanels screen={demoView} life={life} world={world} activities={activities} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} comparison={demoComparison} externalTradeItem={selectedTradeItem} externalTab={selectedEconomyTab} onAutoPlay={game.setAutoDecisions} onTrade={order => game.runDemo(order)} previewTrade={previewTrade} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
               onActivity={requestActivity} onOpenCharacterSection={sec => { setCharacterSection(sec); setPanel("character"); }} training={activities.filter(item => ["train-farming", "train-craft", "train-warfare", "train-reckoning"].includes(item.id)).map(item => ({ id: item.id, label: item.text, reason: item.available ? null : item.reason ?? "Locked" }))}
               onOccupation={jobId => { const activity = activities.find(item => item.category === "career" && item.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job === jobId))); if (activity) requestActivity(activity.id); }} occupations={(world.character?.jobs ?? []).filter(job => job.id === "farmhand" || job.id === "tenant-farmer" || job.id === "grain-dealer" || job.id === "soldier").map(job => { const badge = occupationBadge(world, job.id, life.character?.jobId === job.id, activities.some(item => item.available && item.outcomes.some(effect => effect.effects.some(e => e.type === "job" && e.job === job.id)))); return { id: job.id, label: job.title, unavailable: badge.label === "Unavailable", reason: badge.detail }; })} />}
             </> : <>

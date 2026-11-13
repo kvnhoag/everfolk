@@ -8,6 +8,7 @@ import { useTutorialSpotlight } from "../hooks/useTutorialSpotlight.ts";
 import { tutorialHint } from "../models/tutorial-hints.ts";
 import { tutorialPosition, type TutorialState } from "../models/tutorial-navigation.ts";
 import { tutorialStore } from "../state/tutorial-store.ts";
+import { tipShownStore } from "../state/tip-shown.ts";
 import { flashSections } from "../lib/section-flash.ts";
 import TutorialCard from "./TutorialCard.tsx";
 
@@ -37,6 +38,9 @@ function ShownTutorial({ state, host, closing, onClosed }: ShownProps) {
     if (card.current?.contains(document.activeElement)) findTutorialButton(card.current, false)?.focus({ preventScroll: true });
     onClosed();
   }, [onClosed]) });
+  // The life clock waits only while the card is really on screen (not while an automatic tip waits for its section).
+  useEffect(() => { tipShownStore.set(!closing && layout.ready); }, [closing, layout.ready]);
+  useEffect(() => () => tipShownStore.set(false), []);
   // A manual popover sits in the top layer without making the page inert, so the game stays playable.
   useEffect(() => { if (card.current) showOnTop(card.current); }, [host]);
   // Only a tutorial the player opened takes focus, once it is visible; automatic tips never pull focus from the game.

@@ -441,3 +441,9 @@
 .aoe-glyph-flax-plots{color:#8fc27f}
 .aoe-cond.is-icon-only{justify-content:center;width:32px;height:30px;padding:0}
 .aoe-cond-flood-normal,.aoe-cond-army-quiet,.aoe-cond-road-safe{border-color:#5d7a58;background:#1d2a1b;color:#b7e0a8}
+
+/* Plan your fields: what this split would do, before Set planting (a refusal locks the button). */
+.aoe-plan-check { display: grid; gap: 4px; margin: 6px 0 2px; padding: 0; list-style: none; }
+.aoe-plan-check li { display: flex; gap: 6px; align-items: flex-start; padding: 4px 8px; border-left: 3px solid #b98a2c; background: #fbefd2; color: #5c4210; font-size: 12px; line-height: 1.35; }
+.aoe-plan-check li.is-blocked { border-left-color: #a3361f; background: #f8e3dc; color: #7a2413; font-weight: 600; }
+.aoe-plan-check svg { flex: none; margin-top: 2px; }

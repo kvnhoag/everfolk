@@ -1039,6 +1039,30 @@
   cursor: not-allowed;
 }
 
+/* The order preview: what changes hands, the price move and the store after, before anything is sold. */
+.demo-trade-preview {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 4px;
+  padding: 10px 12px;
+  border: 1px solid #e2b86b;
+  border-left: 4px solid #e2b86b;
+  background: #fff8e6;
+  color: #2b2418;
+  font-size: 13px;
+}
+.demo-trade-preview ul { display: grid; gap: 3px; margin: 0; padding: 0 0 0 16px; }
+.demo-trade-preview-warnings { list-style: none; padding: 0 !important; }
+.demo-trade-preview-warnings li { display: flex; gap: 6px; align-items: flex-start; padding: 3px 7px; border-left: 3px solid #a3361f; background: #f8e3dc; color: #7a2413; }
+.demo-trade-preview-warnings svg { flex: none; margin-top: 2px; }
+.demo-trade-preview-blocked { margin: 0; color: #7a2413; font-weight: 700; }
+.demo-trade-preview-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.demo-trade-confirm, .demo-trade-cancel { min-height: 34px; padding: 0 14px; border-radius: 2px; font-weight: 700; cursor: pointer; }
+.demo-trade-confirm { border: 1px solid #e2b86b; background: #204843; color: #fff9e8; }
+.demo-trade-confirm:hover:not(:disabled) { background: #2a5e58; }
+.demo-trade-confirm:disabled { opacity: .5; cursor: not-allowed; }
+.demo-trade-cancel { border: 1px solid #6d5a37; background: transparent; color: #3d2f1d; }
+
 .demo-batch-row {
   display: flex;
   align-items: center;

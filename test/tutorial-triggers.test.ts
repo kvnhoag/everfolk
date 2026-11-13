@@ -133,3 +133,8 @@ test("the game's own state maps to the screen the player sees", () => {
   assert.equal(gameTutorialContext({ ...base, hasBegun: false }).view, "elsewhere");
   assert.equal(gameTutorialContext(base).life, life);
 });
+
+test("the yearly-action tip waits while a decision is pending, because its cards are not drawn then", () => {
+  assert.equal(hintAvailable("yearly-action", game({ age: 7 })), true);
+  assert.equal(hintAvailable("yearly-action", game({ age: 7, decisionPending: true })), false);
+});

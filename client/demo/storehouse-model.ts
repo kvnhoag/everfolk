@@ -4,8 +4,10 @@ import { householdView } from "../../src/demo/household.ts";
 import { RESOURCE_IDS, RESOURCES } from "./resources.ts";
 import type { ResourceId } from "./resources.ts";
 import { ledgerFlows, type LedgerFlow } from "./ledger-flows.ts";
+import { grainStoreAlert, spoilageNote, type GrainStoreAlert } from "./grain-store-alert.ts";
+import { tuning } from "../../src/demo/market-rules.ts";
 
-export interface StorehouseFlow { text: string; delta: number; icon: string }
+export interface StorehouseFlow { text: string; delta: number; icon: string; /** Why it happens, for the chip's tooltip. */ hint?: string }
 export interface StorehouseRow {
   id: ResourceId; label: string; icon: string; amount: number;
   capacity: number | null; coming: StorehouseFlow[];
@@ -13,6 +15,8 @@ export interface StorehouseRow {
   lastYear: string[];
   /** The same lines read as signed movements, for icon chips. */
   lastYearFlows: LedgerFlow[];
+  /** Grain only: the store is, or will be by harvest, over its limit. */
+  alert?: GrainStoreAlert | null;
 }
 
 const GRAIN_AND_FLAX: readonly ResourceId[] = ["grain", "flax"];
@@ -76,13 +80,18 @@ export function storehouseRows(world: WorldPack, life: LifeState): StorehouseRow
     ox: household.animals.ox, donkey: household.animals.donkey, silver: goods.silver, gold: goods.gold, silk: goods.silk,
     labour: view.labour, reputation: typed.demo.reputation,
   };
+  const rates = { capacity: view.capacity, spoilageBps: world.demo.household.spoilageBps, overCapacitySpoilageBps: world.demo.household.overCapacitySpoilageBps };
+  const alert = grainStoreAlert({ ...rates, grain: view.grain, expectedHarvest: view.expectedHarvest, expectedRent: view.expectedRent,
+    expectedEating: view.expectedEating, age: life.age, tradeAge: tuning(world.demo.market).minTradeAge });
   const coming: Partial<Record<ResourceId, StorehouseFlow[]>> = {
-    grain: flows([["Harvest", view.expectedHarvest, "res-grain"], ["Rent", -view.expectedRent, "home"], ["Eating", -view.expectedEating, "flow-eat"], ["Spoilage", -view.expectedSpoilage, "flow-spoil"]]),
+    grain: flows([["Harvest", view.expectedHarvest, "res-grain"], ["Rent", -view.expectedRent, "home"], ["Eating", -view.expectedEating, "flow-eat"], ["Spoilage", -view.expectedSpoilage, "flow-spoil"]])
+      .map(flow => flow.text === "Spoilage" ? { ...flow, hint: spoilageNote(rates) } : flow),
     flax: flows([["Harvest", view.expectedFlax, "res-flax"]]),
   };
   const last = lastYearLines(life);
   return RESOURCE_IDS.map(id => ({
     id, label: RESOURCES[id].label, icon: RESOURCES[id].icon, amount: amounts[id],
     capacity: id === "grain" ? view.capacity : null, coming: coming[id] ?? [], lastYear: last[id].lines, lastYearFlows: last[id].flows,
+    ...(id === "grain" ? { alert } : {}),
   }));
 }

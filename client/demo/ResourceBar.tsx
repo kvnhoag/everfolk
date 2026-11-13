@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { PlantingCheck } from "../models/planting-check.ts";
 import type { TradeItem } from "../../src/demo/types.ts";
 import { levelLabel } from "./labels.ts";
 import type { DemoScreen } from "./screen.ts";
@@ -25,6 +26,7 @@ interface ResourceBarProps {
   cashText: string;
   rows?: StorehouseRow[] | null;
   onPlan?(flaxPlots: number): string | null;
+  checkPlan?(flaxPlots: number): PlantingCheck;
   /** Opens the market with this item chosen. */
   onSelectTradeItem?(item: TradeItem): void;
   /** This year's personal action, for the drawer's Work card; null hides the card. */
@@ -98,7 +100,7 @@ function holdingOf(screen: DemoScreen, item: TradeItem): number {
   return 0;
 }
 
-export default function ResourceBar({ rows = null, screen, cashText, onPlan, onSelectTradeItem, work = null, onWork }: ResourceBarProps) {
+export default function ResourceBar({ rows = null, screen, cashText, onPlan, checkPlan, onSelectTradeItem, work = null, onWork }: ResourceBarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TradeItem | null>(null);
 
@@ -119,7 +121,9 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, onS
   const cells: ResourceCell[] = [
     { key: "grain", parts: [{ glyph: "grain", value: String(screen.household.grain), small: `/${screen.household.capacity}` }], selected: open("grain"),
       extraClass: `${overCapacity ? " is-warn" : ""}${hasLegacyGranary ? " is-blessed" : ""}`, onClick: () => openItemInDrawer("grain"),
-      title: `Grain: ${screen.household.grain} of ${screen.household.capacity} the store holds (harvest +${screen.household.expectedHarvest}, spoilage −${screen.household.expectedSpoilage})` },
+      title: overCapacity
+        ? `Grain: ${screen.household.grain}, over the store's limit of ${screen.household.capacity}. The extra spoils fast; open for what to do.`
+        : `Grain: ${screen.household.grain} of ${screen.household.capacity} the store holds (harvest +${screen.household.expectedHarvest}, spoilage −${screen.household.expectedSpoilage})` },
     { key: "cash", parts: [{ glyph: "cash", value: cashText }], onClick: toggle, title: `Cash on hand: ${cashText}` },
     { key: "flax", parts: [{ glyph: "flax", value: String(holdingOf(screen, "flax")) }], selected: open("flax"), onClick: () => openItemInDrawer("flax"), title: `Flax: ${holdingOf(screen, "flax")} bundles` },
     { key: "linen", parts: [{ glyph: "linen", value: String(holdingOf(screen, "linen")) }], selected: open("linen"), onClick: () => openItemInDrawer("linen"), title: `Linen: ${holdingOf(screen, "linen")} bolts` },
@@ -172,7 +176,7 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, onS
       </div>
 
       {drawerOpen && <InventoryDrawer screen={screen} rows={rows} selectedItem={selectedItem} holding={item => holdingOf(screen, item)} work={work}
-        onClose={() => setDrawerOpen(false)} onPlan={onPlan} onWork={onWork}
+        onClose={() => setDrawerOpen(false)} onPlan={onPlan} checkPlan={checkPlan} onWork={onWork}
         onTrade={onSelectTradeItem && (item => { onSelectTradeItem(item); setSelectedItem(item); })} />}
     </section>
   );

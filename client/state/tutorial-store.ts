@@ -9,7 +9,7 @@ export interface TutorialStoreOptions {
 
 /**
  * The tutorial controller: an external store for useSyncExternalStore. Screens report what is on screen;
- * the store opens the hint for each new stage. It never navigates and never pauses the game.
+ * the store opens the hint for each new stage. It never navigates; the game holds its clock while a tip is open.
  */
 export function createTutorialStore({ storage }: TutorialStoreOptions) {
   let state: TutorialState = INITIAL_TUTORIAL;

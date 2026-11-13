@@ -112,3 +112,13 @@ test("the Weave screen does not fight the tutorial for the top layer", () => {
   assert.equal(anotherDialogOpened([{ target: layer }], {}), false);
   assert.equal(anotherDialogOpened([{ target: gameDialog }], {}), true);
 });
+
+test("an open tip holds the life clock, like How to Play, and the time bar says why", () => {
+  const app = readFileSync(new URL("../client/screens/App.tsx", import.meta.url), "utf8");
+  const overlay = app.match(/useGame\(\{ isOverlayOpen: ([^,]+(?:\|\|[^,]+)*),/)?.[1] ?? "";
+  assert.match(overlay, /tipShown/, "a tip on screen is an overlay for the clock");
+  assert.doesNotMatch(overlay, /tutorial\.open/, "an open tip still waiting, unseen, for its section never holds the clock");
+  assert.match(overlay, /howToPlayOpen/);
+  assert.match(app, /"Waiting while you read"/);
+  assert.ok(app.indexOf("const tutorial = useTutorial();") < app.indexOf("const game = useGame("), "the tip state is read before the clock");
+});

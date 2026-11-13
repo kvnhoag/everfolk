@@ -152,12 +152,15 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
           <div className="ef-home-actions">
             {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry checked={weaveEnabled} onChange={setWeaveEnabled} /></div>}
             <div className="ef-home-mode-actions">
-              {openWeave ? <WeaveSignIn backend={chainBackend} notice={notice} /> : <>
-                <button className="ef-home-primary" type="button" onClick={enterFreeLife} aria-describedby={continuing ? saveId : undefined}>
-                  <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>{primaryLabel}</span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
-                </button>
-                <HomeNotice notice={notice} />
+              {openWeave && <>
+                <WeaveSignIn backend={chainBackend} notice={notice} />
+                <div className="ef-home-auth-divider ef-home-guest-divider"><span>or play without an account</span></div>
               </>}
+              {/* Guest play is always on the first screen; Weave Mode only adds the sign-in choices above it. */}
+              <button className={`ef-home-primary${openWeave ? " is-guest" : ""}`} type="button" onClick={enterFreeLife} aria-describedby={continuing ? saveId : undefined}>
+                <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>{primaryLabel}</span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
+              </button>
+              {!openWeave && <HomeNotice notice={notice} />}
             </div>
             {hasBegun && !rankedLife && <button className="ef-home-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "Revisit your last life" : "Begin a different story"}<span aria-hidden="true"> →</span></button>}
           </div>

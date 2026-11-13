@@ -88,3 +88,16 @@ test("automatic hints without a visible section wait in the bottom-right corner 
   assert.equal(placed.top, 900 - 240 - 12);
   assert.equal(placeTutorialCard(null, card, viewports[0]).placement, "center", "centered by default");
 });
+
+test("the card takes the side beside its section that covers the fewest buttons", () => {
+  const viewport = { width: 1200, height: 900 };
+  const card = { width: 300, height: 200 };
+  const target: Rect = { top: 350, left: 450, width: 300, height: 150 };
+  assert.equal(placeTutorialCard(target, card, viewport).placement, "bottom", "below is the usual choice");
+  const sellButton: Rect = { top: 530, left: 500, width: 120, height: 40 };
+  const placed = placeTutorialCard(target, card, viewport, "center", [sellButton]);
+  assert.equal(placed.placement, "top", "a button below moves the card above");
+  const button = (top: number, left: number): Rect => ({ top, left, width: 100, height: 40 });
+  const everywhere: Rect[] = [button(550, 500), button(200, 500), button(400, 800), button(400, 200)];
+  assert.equal(placeTutorialCard(target, card, viewport, "center", everywhere).placement, "bottom", "equal cover keeps the usual order");
+});

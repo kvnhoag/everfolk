@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import type { PlantingCheck } from "../models/planting-check.ts";
 import { TRADE_ITEMS, type TradeItem } from "../../src/demo/types.ts";
 import PixelIcon from "../components/PixelIcon.tsx";
 import SectionHelp from "../components/SectionHelp.tsx";
@@ -23,6 +24,8 @@ export interface InventoryDrawerProps {
   work?: WorkStatus | null;
   onClose(): void;
   onPlan?(flaxPlots: number): string | null;
+  /** What a plan would do, checked before Set planting. */
+  checkPlan?(flaxPlots: number): PlantingCheck;
   onTrade?(item: TradeItem): void;
   onWork?(): void;
 }
@@ -34,13 +37,15 @@ function PlotSquares({ plots, flax }: { plots: number; flax: number }) {
   </span>;
 }
 
-function PlantingTask({ screen, onPlan }: { screen: DemoScreen; onPlan(flaxPlots: number): string | null }) {
+function PlantingTask({ screen, onPlan, checkPlan }: { screen: DemoScreen; onPlan(flaxPlots: number): string | null; checkPlan?(flaxPlots: number): PlantingCheck }) {
   const { plots } = screen.household;
   const [flax, setFlax] = useState(screen.household.flaxPlots);
   const [notice, setNotice] = useState("");
   useEffect(() => { setFlax(screen.household.flaxPlots); }, [screen.household.flaxPlots]);
   const change = (next: number) => { setFlax(Math.max(0, Math.min(plots, next))); setNotice(""); };
   const unchanged = flax === screen.household.flaxPlots;
+  // Checked as the split changes, so a plan the game would refuse never needs a click to find out.
+  const check = useMemo(() => checkPlan?.(flax) ?? { reason: null, warnings: [] }, [checkPlan, flax, screen]);
   return <article className="aoe-task aoe-planting-row has-section-help" aria-labelledby="aoe-task-planting">
     <SectionHelp hint="planting" />
     <h4 id="aoe-task-planting"><PixelIcon name="res-grain" size={14} />Plan your fields</h4>
@@ -54,8 +59,12 @@ function PlantingTask({ screen, onPlan }: { screen: DemoScreen; onPlan(flaxPlots
         <button type="button" aria-label="One more flax plot" disabled={flax >= plots} onClick={() => change(flax + 1)}>+</button>
       </span>
     </div>
+    {(check.reason || check.warnings.length > 0) && <ul className="aoe-plan-check" aria-label="Before you set this plan">
+      {check.reason && <li className="is-blocked"><PixelIcon name="lock" size={12} label="Cannot set" />{check.reason}</li>}
+      {check.warnings.map(line => <li key={line}><PixelIcon name="warn" size={12} label="Warning" />{line}</li>)}
+    </ul>}
     <div className="aoe-task-actions">
-      <button type="button" className="aoe-task-primary" disabled={unchanged} onClick={() => setNotice(onPlan(flax) ?? "Planting set for the next harvest.")}>Set planting</button>
+      <button type="button" className="aoe-task-primary" disabled={unchanged || Boolean(check.reason)} onClick={() => setNotice(onPlan(flax) ?? "Planting set for the next harvest.")}>Set planting</button>
       {notice && <span className="aoe-plan-notice" role="status">{notice}</span>}
       {!notice && unchanged && <span className="aoe-task-hint">Use − and + to change the split.</span>}
     </div>
@@ -111,14 +120,14 @@ function Holdings({ screen, holding, selectedItem, onTrade }: Pick<InventoryDraw
 }
 
 /** Inventory & Granary: this year's tasks first, then the store ledger, then goods with their prices. */
-export default function InventoryDrawer({ screen, rows, selectedItem, holding, work = null, onClose, onPlan, onTrade, onWork }: InventoryDrawerProps) {
+export default function InventoryDrawer({ screen, rows, selectedItem, holding, work = null, onClose, onPlan, checkPlan, onTrade, onWork }: InventoryDrawerProps) {
   return <div className="aoe-inventory-drawer" role="region" aria-label="Inventory and granary details">
     <header className="aoe-drawer-header aoe-drawer-top">
       <div><span className="aoe-drawer-eyebrow">THIS YEAR</span><h3>What you can do</h3></div>
       <button type="button" className="aoe-drawer-close" onClick={onClose}>Close ×</button>
     </header>
     <div className="aoe-year-tasks">
-      {onPlan && <PlantingTask screen={screen} onPlan={onPlan} />}
+      {onPlan && <PlantingTask screen={screen} onPlan={onPlan} checkPlan={checkPlan} />}
       <TradeTask screen={screen} onTrade={onTrade} />
       {work && <WorkTask work={work} onWork={onWork} />}
     </div>

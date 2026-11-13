@@ -32,7 +32,8 @@ function amountText(row: StorehouseRow): string {
 }
 
 function ActiveRow({ row }: { row: StorehouseRow }) {
-  const coming: Chip[] = row.coming.map(flow => ({ key: flow.text, label: flow.text, icon: flow.icon, delta: flow.delta, tone: toneOf(flow.delta), text: `${flow.text}: ${signedAmount(flow.delta)} expected` }));
+  const coming: Chip[] = row.coming.map(flow => ({ key: flow.text, label: flow.text, icon: flow.icon, delta: flow.delta, tone: toneOf(flow.delta),
+    text: `${flow.text}: ${signedAmount(flow.delta)} expected${flow.hint ? `. ${flow.hint}` : ""}` }));
   const last: Chip[] = row.lastYearFlows.map((flow, index) => ({ key: `${index}`, ...flow }));
   const full = row.capacity ? Math.min(100, Math.round(row.amount / row.capacity * 100)) : null;
   return <li className="storehouse-row">
@@ -42,6 +43,9 @@ function ActiveRow({ row }: { row: StorehouseRow }) {
       <span className="storehouse-amount">{amountText(row)}</span>
       {full !== null && <span className={`storehouse-fill${full >= 100 ? " is-full" : ""}`} role="meter" aria-label={`${row.label} store ${full}% full`} aria-valuemin={0} aria-valuemax={100} aria-valuenow={full}><span style={{ width: `${full}%` }} /></span>}
     </div>
+    {row.alert && <p className={`storehouse-alert is-${row.alert.tone}`} role={row.alert.tone === "danger" ? "alert" : "status"}>
+      <PixelIcon name="warn" size={12} label={row.alert.tone === "danger" ? "Over the limit" : "Will overflow"} />{row.alert.text}
+    </p>}
     {coming.length > 0 && <FlowLine caption="Next harvest" chips={coming} total={flowTotal(coming)} />}
     {last.length > 0 && <FlowLine caption="Last year" chips={last} total={flowTotal(last)} />}
   </li>;

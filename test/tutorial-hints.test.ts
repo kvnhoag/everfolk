@@ -48,5 +48,5 @@ test("copy matches the game's labels and never asks the player to spend", () => 
     assert.ok(text.includes(label), `mentions ${label}`);
   }
   assert.match(text, /mints nothing/);
-  assert.match(tutorialHint("time-bar")!.body, /never pause/i, "tips say they do not pause the game");
+  assert.match(tutorialHint("time-bar")!.body, /clock waits while a tip/i, "tips say the clock waits while they are open");
 });

@@ -38,7 +38,7 @@ export const TUTORIAL_HINTS: readonly TutorialHint[] = [
     body: "Every life starts with a roll: your background, name, Health, Knowledge, Total wealth, Bonds and starting resources such as grain. Reborn rolls again, and Begin life starts your story at age 0." },
   { id: "time-bar", targets: [".life-session-bar"], title: "The time bar",
     help: "Pause, change speed, skip to the next decision or turn on Auto mode.",
-    body: "A year passes every few seconds. Pause or Resume, pick a speed from 1× to 16×, skip to the Next decision, or let Auto mode choose for you. Tips never pause the game." },
+    body: "A year passes every few seconds. Pause or Resume, pick a speed from 1× to 16×, skip to the Next decision, or let Auto mode choose for you. The clock waits while a tip like this one is open." },
   { id: "decision", targets: [".life-decision-dialog[open] .decision-dialog-content, .life-decision-dialog[open]", ".turning-point-button"], title: "Turning points",
     body: "Big choices pause the clock until you decide. When one is waiting, Next decision reads Open decision; Auto mode can choose for you." },
   { id: "ending", targets: [".life-ending-banner"], title: "When a life ends",

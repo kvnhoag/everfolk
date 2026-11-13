@@ -25,6 +25,7 @@ import PixelIcon from "../components/PixelIcon.tsx";
 import { SectionStep } from "../components/YearChecklist.tsx";
 import { LockedArea } from "../components/Locked.tsx";
 import { sectionStep } from "../models/section-steps.ts";
+import type { TradePreview } from "../models/trade-preview.ts";
 
 /** A small lock on a tab that has not opened yet, with the age it opens. */
 function TabLock({ age }: { age: number }) {
@@ -54,6 +55,8 @@ interface Props {
   world?: WorldPack;
   activities?: readonly ActivityAvailability[];
   onTrade(order: TradeCommand): string | null;
+  /** What an order would do, tried on a copy of the life; Confirm sends it. */
+  previewTrade?(order: TradeCommand): TradePreview;
   onPlan(flaxPlots: number): string | null;
   onAutoPlay(on: boolean): void;
   onDelegate(agent: string | null): string | null;
@@ -97,6 +100,7 @@ export default function EconomyPanels({
   world,
   activities = [],
   onTrade,
+  previewTrade,
   onPlan,
   onAutoPlay,
   onDelegate,
@@ -128,9 +132,17 @@ export default function EconomyPanels({
       : side === "buy"
         ? (quote?.sell ?? 1)
         : (quote?.buy ?? 1);
-  const orderTotal = quantity * unitPrice;
 
   useEffect(() => { setReserveOverride(false); }, [item, side, counterparty, life?.age]);
+  // The preview always shows the order on screen; any change to it closes the preview.
+  const [preview, setPreview] = useState<TradePreview | null>(null);
+  // Any change to the life (cash spent, a decision, a new year) also closes it, so it never shows stale numbers.
+  useEffect(() => { setPreview(null); }, [item, side, quantity, counterparty, reserveOverride, life, screen.market.visitUsed]);
+  function openPreview() {
+    if (!previewTrade) { setNotice("This life has no market."); return; }
+    setNotice("");
+    setPreview(previewTrade(order));
+  }
 
   useEffect(() => {
     slot.current = false;
@@ -172,9 +184,10 @@ export default function EconomyPanels({
     : undefined;
 
   function confirmTrade() {
-    if (screen.market.visitUsed || pending) return;
+    if (screen.market.visitUsed || pending || !preview?.confirmLabel) return;
     if (!beginOrder(slot)) return;
     const reason = onTrade(order);
+    setPreview(null);
     if (reason) {
       releaseOrder(slot);
       setNotice(reason);
@@ -635,11 +648,25 @@ export default function EconomyPanels({
               type="button"
               className="demo-trade-submit"
               disabled={screen.market.visitUsed || pending || slot.current}
-              onClick={confirmTrade}
+              aria-expanded={preview !== null}
+              onClick={openPreview}
             >
-              Preview and confirm ({orderTotal} dr)
+              Preview order
             </button>
           </div>
+
+          {preview && <div className="demo-trade-preview" role="region" aria-label="Order preview">
+            <strong>{preview.blocked ? "This order cannot go through" : "Check before you confirm"}</strong>
+            {preview.blocked && <p className="demo-trade-preview-blocked">{preview.blocked}</p>}
+            <ul>{preview.lines.map(line => <li key={line}>{line}</li>)}</ul>
+            {preview.warnings.length > 0 && <ul className="demo-trade-preview-warnings">
+              {preview.warnings.map(line => <li key={line}><PixelIcon name="warn" size={12} label="Warning" />{line}</li>)}
+            </ul>}
+            <div className="demo-trade-preview-actions">
+              {preview.confirmLabel && <button type="button" className="demo-trade-confirm" disabled={pending || slot.current} onClick={confirmTrade}>{preview.confirmLabel}</button>}
+              <button type="button" className="demo-trade-cancel" onClick={() => setPreview(null)}>{preview.confirmLabel ? "Change order" : "Close"}</button>
+            </div>
+          </div>}
 
           {world?.capabilities && item === "grain" && side === "sell" && <label className="demo-reserve-override"><input type="checkbox" checked={reserveOverride} onChange={event => setReserveOverride(event.target.checked)} /> Allow this sale to use grain reserved for household food or seed.</label>}
           <div className="demo-batch-row">

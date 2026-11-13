@@ -65,7 +65,8 @@ const RULES: Record<TutorialHintId, HintRule> = {
   "focus": { available: (context, life) => onGame(context, life) && life.focusShown },
   "wealth": { available: (context, life) => onGame(context, life) && life.wealthShown, triggered: fromAge(4) },
   "life-record": { available: onGame, triggered: fromAge(5) },
-  "yearly-action": { available: (context, life) => onGame(context, life) && life.age >= 6 && !life.ended },
+  // The action cards are drawn only when no decision is waiting, so the tip waits for that too.
+  "yearly-action": { available: (context, life) => onGame(context, life) && life.age >= 6 && !life.ended && !life.decisionPending },
   "command-deck": { available: (context, life) => onGame(context, life) && life.deckShown, triggered: fromAge(8) },
   "market": { available: (context, life) => onGame(context, life) && life.deckShown && life.tradeAge !== null && life.age >= life.tradeAge },
   "notifications": { available: onGame, triggered: (_context, life) => life.notificationShown },

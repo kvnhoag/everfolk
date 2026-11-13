@@ -41,6 +41,15 @@ function seeds(life: LifeState, mode = life.capabilities?.farm?.actionAge === li
   const h = life.demo!.household;
   return { grain: Math.max(0, h.plots - h.flaxPlots) * (mode === "dense" ? 20 : GRAIN_SEED_PER_PLOT), flax: h.flaxPlots * FLAX_SEED_PER_PLOT };
 }
+/**
+ * The seed an ordinary sowing of a plan with `flaxPlots` would take, beside what the household holds; null when this
+ * life sows without seed. Pure, for showing a plan's needs before it is set.
+ */
+export function plannedSeed(world: WorldPack, life: LifeState, flaxPlots: number): { grainNeed: number; flaxNeed: number; grainHeld: number; flaxSeedHeld: number } | null {
+  if (!enabled(world, life)) return null;
+  const plots = life.demo!.household.plots, flax = Math.max(0, Math.min(plots, flaxPlots));
+  return { grainNeed: (plots - flax) * GRAIN_SEED_PER_PLOT, flaxNeed: flax * FLAX_SEED_PER_PLOT, grainHeld: life.demo!.household.grain, flaxSeedHeld: material(life, "flax-seed") };
+}
 /** Grain an ordinary sowing of the household's grain plots needs. */
 export function ordinarySeedGrain(life: LifeState): number { return seeds(life, "ordinary").grain; }
 function material(life: LifeState, item: string): number { return life.vocations?.inventory[item] ?? 0; }

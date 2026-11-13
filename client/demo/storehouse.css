@@ -39,3 +39,8 @@
 @media (max-width:600px){
   .storehouse-caption{min-width:0;flex-basis:100%}
 }
+
+/* The store is, or will be, over its limit: say so before the grain is lost, with what to do. */
+.storehouse-alert{display:flex;gap:6px;align-items:flex-start;margin:4px 0 2px;padding:4px 8px;border-left:3px solid #b98a2c;background:#fbefd2;color:#5c4210;font-size:12px;line-height:1.35}
+.storehouse-alert.is-danger{border-left-color:#a3361f;background:#f8e3dc;color:#7a2413}
+.storehouse-alert svg{flex:none;margin-top:2px}

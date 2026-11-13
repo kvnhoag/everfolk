@@ -98,6 +98,30 @@ export function prefersReducedMotion(): boolean {
   return typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+const CONTROLS = "button:not([disabled]), a[href], input:not([type=hidden]), select, textarea, [role=button], [role=switch], [role=tab]";
+/** How often the page's controls are measured again while a card is shown. */
+const CONTROLS_EVERY_MS = 400;
+
+/** The visible controls the card should not cover (not its own), measured at most every few hundred ms. */
+function controlRects(): { read(card: HTMLElement | null, viewport: { width: number; height: number }): Rect[] } {
+  let cached: Rect[] = [];
+  let at = -Infinity;
+  return {
+    read(card, viewport) {
+      const now = performance.now();
+      if (now - at < CONTROLS_EVERY_MS) return cached;
+      at = now;
+      cached = Array.from(document.querySelectorAll(CONTROLS)).flatMap(element => {
+        if (card?.contains(element) || element.closest("[inert], [aria-hidden=true]")) return [];
+        const box = element.getBoundingClientRect();
+        if (box.width <= 0 || box.height <= 0 || box.bottom <= 0 || box.right <= 0 || box.top >= viewport.height || box.left >= viewport.width) return [];
+        return [{ top: box.top, left: box.left, width: box.width, height: box.height }];
+      });
+      return cached;
+    },
+  };
+}
+
 /**
  * Finds the hint's section, scrolls it into view once when the player asked, and keeps the spotlight and card
  * positioned on every frame while the hint is shown, so scrolling, resizing and layout changes are followed.
@@ -112,6 +136,7 @@ export function useTutorialSpotlight(hint: TutorialHint | undefined, hintKey: st
     let everFound = false;
     let frame = 0;
     let previous = INITIAL;
+    const controls = controlRects();
     const tick = () => {
       const found = findTarget(hint.targets);
       target.current = found;
@@ -125,7 +150,7 @@ export function useTutorialSpotlight(hint: TutorialHint | undefined, hintKey: st
       const spotlight = round(spotlightRect(found?.visible ?? null, viewport, PADDING));
       const missing = !found && !searching && hint.targets.length > 0;
       const offscreen = Boolean(found) && !spotlight;
-      const placed = placeTutorialCard(spotlight, size, viewport, (missing || offscreen) && waitForTarget ? "corner" : "center");
+      const placed = placeTutorialCard(spotlight, size, viewport, (missing || offscreen) && waitForTarget ? "corner" : "center", controls.read(card, viewport));
       const next: TutorialLayout = { spotlight, card: { ...placed, top: Math.round(placed.top), left: Math.round(placed.left) }, missing, ready: !searching, offscreen };
       if (!sameLayout(next, previous)) {
         previous = next;
