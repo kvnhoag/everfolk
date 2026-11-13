@@ -15,6 +15,7 @@ export default function CollectionCardArtwork({ art, editionText, className = ""
   const serial = cardEditionText(art, editionText);
   const pointerRef = useLegendaryCardPointer(art.rarity === "legendary", art.slug);
   return <figure ref={pointerRef} className={`collection-card-art ${className}`} data-card-art={art.slug} data-rarity={art.rarity}>
+    {art.rarity === "legendary" && <span className="collection-card-aura" aria-hidden="true" />}
     <img className="collection-card-art-image" src={art.footerlessSrc} width={art.width} height={art.height}
       loading={loading} decoding="async" alt={`${art.displayTitle} — ${art.subtitle}`} />
     {art.rarity === "legendary" && <span className="collection-card-foil" aria-hidden="true" />}

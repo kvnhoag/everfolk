@@ -6,7 +6,11 @@
 /* Physical foil runs continuously; only the gentle tilt follows the pointer. */
 .collection-card-art[data-rarity=legendary]{border-radius:4.667% / 3.333%;transform:perspective(950px) rotateX(0deg) rotateY(0deg);transition:transform .45s ease-out}
 .collection-card-art[data-rarity=legendary][data-pointer-active=true]{transform:perspective(950px) rotateX(var(--foil-rotate-x,0deg)) rotateY(var(--foil-rotate-y,0deg));transition:transform .12s ease-out;will-change:transform}
-/* A fine metallic rim catches the light without an external halo. */
+/* Edge light has no filled surface: a fine champagne core and a short gold falloff.
+   The shadow deliberately opts out of the global interface shadow reset. */
+.collection-card-art[data-rarity=legendary]>.collection-card-aura{position:absolute;inset:.2%;z-index:-1;border-radius:inherit;pointer-events:none;background:transparent;box-shadow:0 0 1px 1px #fff0b899,0 0 6px 1px #e8bd574d,0 0 14px 1px #c8983324 !important;opacity:.8;animation:legendary-edge-light 8s ease-in-out infinite alternate}
+.figure-card-stack-item:not(.is-current) .collection-card-aura,.figure-preview-layer:not(.is-current) .collection-card-aura{opacity:.2;animation:none}
+/* The metallic rim catches a slow moving highlight. */
 .collection-card-art[data-rarity=legendary]:before{content:"";position:absolute;inset:.7%;z-index:2;padding:1.5px;border-radius:4% / 2.9%;pointer-events:none;background:linear-gradient(115deg,#80521c 10%,#b78a37 30%,#fff1bb 44%,#fffbe3 48%,#d8b15a 54%,#8b6124 68%,#e6c57c 90%);background-size:260% 100%;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:.85;animation:legendary-rim-lustre 9s linear infinite}
 /* Keep the nameplate, biography and live serial clear. */
 .collection-card-foil{position:absolute;inset:0;z-index:1;overflow:hidden;border-radius:inherit;pointer-events:none;mix-blend-mode:screen;opacity:.38;mask-image:linear-gradient(180deg,transparent 9%,#000 20%,#000 67%,transparent 78%)}
@@ -20,6 +24,7 @@
 @keyframes legendary-foil-sweep{0%{transform:translateX(-55%);opacity:0}12%{opacity:.85}88%{opacity:.85}100%{transform:translateX(55%);opacity:0}}
 @keyframes legendary-etched-lustre{from{mask-position:100% 0}to{mask-position:0% 0}}
 @keyframes legendary-rim-lustre{from{background-position:100% 0}to{background-position:0% 0}}
+@keyframes legendary-edge-light{from{opacity:.65}to{opacity:.95}}
 @media(hover:none),(pointer:coarse){.collection-card-art[data-rarity=legendary],.collection-card-art[data-rarity=legendary][data-pointer-active=true]{transform:none;transition:none;will-change:auto}}
-@media(prefers-reduced-motion:reduce){.collection-card-art[data-rarity=legendary],.collection-card-art[data-rarity=legendary][data-pointer-active=true]{transform:none;transition:none;will-change:auto}.collection-card-art[data-rarity=legendary]:before,.collection-card-foil:before,.collection-card-foil:after{animation:none}.collection-card-foil{opacity:.15}.collection-card-foil:after{display:none}}
-@media(forced-colors:active){.collection-card-foil,.collection-card-art[data-rarity=legendary]:before,.collection-card-art[data-rarity=legendary]:after{display:none}}
+@media(prefers-reduced-motion:reduce){.collection-card-art[data-rarity=legendary],.collection-card-art[data-rarity=legendary][data-pointer-active=true]{transform:none;transition:none;will-change:auto}.collection-card-art[data-rarity=legendary]>.collection-card-aura,.collection-card-art[data-rarity=legendary]:before,.collection-card-foil:before,.collection-card-foil:after{animation:none}.collection-card-foil{opacity:.15}.collection-card-foil:after{display:none}}
+@media(forced-colors:active){.collection-card-aura,.collection-card-foil,.collection-card-art[data-rarity=legendary]:before,.collection-card-art[data-rarity=legendary]:after{display:none}}
