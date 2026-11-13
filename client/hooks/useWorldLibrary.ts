@@ -52,7 +52,7 @@ export function useWorldLibrary() {
           } catch { /* Keep an existing selection when its save cannot be checked. */ }
           const selection = selectFactoryWorld(world, { hasBegunLife });
           if (selection !== world) { world = selection; restored = false; }
-          if (startupRefreshesToDefault(world.pack, hasBegunLife, LIVES_WORLD_VERSION)) { restored = false; hadSelection = false; }
+          if (startupRefreshesToDefault(world.pack, hasBegunLife, LIVES_WORLD_VERSION, world.id)) { restored = false; hadSelection = false; }
         }
         else if (hasLegacyWorldSave(window.localStorage)) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; restored = false; hadSelection = false; }
@@ -99,6 +99,7 @@ export function useWorldLibrary() {
         } catch (cause) {
           const builtin = getBuiltinWorld();
           if (id === builtin.id) world = builtin;
+          else if (fresh && active?.world.id === id) world = active.world;
           else throw cause;
         }
       }

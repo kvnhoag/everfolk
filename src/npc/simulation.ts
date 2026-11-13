@@ -17,7 +17,8 @@ export function runPlayerCommand(engine:LifeEngine,life:LifeState,command:Player
  switch(command.type){
   case 'advance':return engine.advance(life);
   case 'choose':return engine.choose(life,command.choice);
-  case 'act':return engine.act(life,command.activity);
+  case 'act':return engine.act(life,command.activity,command.calendarDeadline?{calendarDeadline:true}:undefined);
+  case 'assess-jobs':return engine.assess(life,command.nodeId,command.jobIds);
   case 'avatar':return engine.chooseAvatar(life,command.variant);
   case 'market-order':return engine.orderMarket(life,command);
   case 'market-cancel':return engine.cancelMarketOrder(life,command.orderId);

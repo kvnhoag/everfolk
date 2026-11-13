@@ -222,6 +222,8 @@ export function settleFarmCapabilities(world: WorldPack, life: LifeState, comple
     seedReserved: h.grain >= seed.grain && material(life, "flax-seed") >= seed.flax,
     nextRations, nextSeed: seed.grain, debtIncreased: (life.economy?.debt ?? 0) > value(ledger, "debtBefore") };
   data.qualifies = qualifies(world, life, plan.nodeId, data);
+  const count = life.capabilities!.evidence.filter(e => e.nodeId === plan.nodeId && typeof e.data.jobId === "string").length;
+  data.jobId = `${plan.nodeId.toLowerCase()}-${completedAge}-${ledger.year}-${count + 1}`;
   life.capabilities!.evidence.push({ nodeId: plan.nodeId, age: completedAge, year: ledger.year, kind: "farm-settlement", data });
 }
 

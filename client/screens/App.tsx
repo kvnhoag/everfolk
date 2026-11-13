@@ -1,4 +1,5 @@
 import type { RankedPlay } from "../hooks/useGame.ts";
+import type { OnlinePlay } from "../types/online-play.ts";
 import { findLifeEvent } from "../models/life-event-lookup.ts";
 import InfluenceMarkerTag from "../components/InfluenceMarkerTag.tsx";
 import { influenceMarker } from "../models/influence-marker.ts";
@@ -46,6 +47,7 @@ import LoanDeadlineDialog from "../components/LoanDeadlineDialog.tsx";
 import YearlyFocus from "../components/YearlyFocus.tsx";
 import { formatMoney } from "../models/wealth.ts";
 import { formatWealthStanding, getWealthComparison } from "../models/wealth-comparison.ts";
+import { getSocietyWealthBenchmarkInfo } from "../models/society-wealth-data.ts";
 import PixelIcon from "../components/PixelIcon.tsx";
 import PixelPortrait from "../components/PixelPortrait.tsx";
 import EverfolkWordmark from "../components/EverfolkWordmark.tsx";
@@ -158,16 +160,17 @@ function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFir
 export type AppPanel = "world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "wiki" | "map" | null;
 export type CharacterSection = "career" | "wealth" | "children" | "skills" | "relationships";
 
-function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { chainBackend?: import("../chain/chain-backend.ts").ChainBackend | null; onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
+function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, startFresh = false, startFreshFrom, eventVisuals, ranked, online, npcStatusNotice = null, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { chainBackend?: import("../chain/chain-backend.ts").ChainBackend | null; onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; online?: OnlinePlay; npcStatusNotice?: string | null; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
+  const isRanked = Boolean(ranked || online);
   const [panel, setPanel] = useState<AppPanel>(initialPanel);
   const [characterSection, setCharacterSection] = useState<CharacterSection>(initialCharacterSection);
   const [restartOpen, setRestartOpen] = useState(false);
   // A ranked life opens straight into play; free play starts at the main menu.
-  const [menuOpen, setMenuOpen] = useState(!ranked);
+  const [menuOpen, setMenuOpen] = useState(!isRanked);
   const [birthPopoverOpen, setBirthPopoverOpen] = useState(startFresh);
   const [readingPause, setReadingPause] = useState(false);
   const [deferredDecision, setDeferredDecision] = useState<string | null>(() => {
-    const initial = ranked?.initial ?? startFreshFrom;
+    const initial = ranked?.initial ?? online?.initial ?? startFreshFrom;
     return deferInitialDecision && initial?.phase === "choice" ? `${initial.seed}:${initial.age}:${initial.pendingEventId}` : null;
   });
   const [requestedDecision, setRequestedDecision] = useState<string | null>(null);
@@ -179,7 +182,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   // Tutorial hints read the screen and the life; they never pause play or change screens.
   const [characterTab, setCharacterTab] = useState<string | null>(null);
   const [notificationShown, setNotificationShown] = useState(false);
-  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked });
+  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked, online });
   const { life } = game;
   const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const menuLifeRef = useRef<string | null>(null);
@@ -187,7 +190,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const world = lifeEngine.world;
   const demoView = useMemo(() => demoScreen(world, life), [world, life]);
   const intro = freePlayIntro(world);
-  const wealthComparison = useMemo(() => getWealthComparison(world, life), [world, life]);
+  const wealthComparison = useMemo(() => getWealthComparison(world, life), [world, life, game.hasBegun]);
+  const wealthBenchmark = useMemo(() => getSocietyWealthBenchmarkInfo(world), [world, life, game.hasBegun]);
   const place = worldPlace(world, life.year);
   const birthplace = worldPlace(world, birthYearOf(world, life));
   const characterName = life.character?.name ?? "Damon";
@@ -253,6 +257,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const chronicleNameKnown = viewedLife !== null || game.hasRevealedStats;
   const chronicleWorld = engineForLife(chronicleLife).world;
   const chronicleWealthComparison = useMemo(() => chronicleLife === life ? wealthComparison : getWealthComparison(chronicleWorld, chronicleLife), [chronicleLife, life, wealthComparison, chronicleWorld]);
+  const chronicleWealthBenchmark = useMemo(() => chronicleLife === life ? wealthBenchmark : getSocietyWealthBenchmarkInfo(chronicleWorld), [chronicleLife, life, wealthBenchmark, chronicleWorld]);
   const chronicleCause = chronicleWorld.character?.deathCauses.find(item => item.id === chronicleLife.deathCauseId);
   const chronicleEnding = chronicleWorld.endings.find(item => item.id === chronicleLife.endingId);
   const stage = lifeStage(life.age);
@@ -343,8 +348,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     if (!firstVisit) setDeferredDecision(null);
     setRequestedDecision(null);
     // Keep the experience chooser and wallet accessible on arrival. A requested new free life still opens its roll.
-    setBirthPopoverOpen(!ranked && (!firstVisit || startFresh) && !game.hasBegun && life.phase !== "ended");
-    setMenuOpen(!ranked);
+    setBirthPopoverOpen(!isRanked && (!firstVisit || startFresh) && !game.hasBegun && life.phase !== "ended");
+    setMenuOpen(!isRanked);
   }, [life.worldFingerprint, life.seed]);
 
   useEffect(() => {
@@ -429,13 +434,13 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     else game.choose(id);
   }
 
-  function requestActivity(id: string) {
+  function requestActivity(id: string, options?: { calendarDeadline?: boolean }) {
     const activity = activities.find(activity => activity.id === id);
     const gate = activityGate(world, activity, Boolean(activity && activityLoanOffer(world, life, activity)), Boolean(activity && activity.available && isBorrowChoice(activity)));
     if (gate.action === "ignore" || !activity) return;
     if (gate.action === "blocked") { game.setNotice(gate.reason); return; }
     if (gate.action === "loan") setLoanRequest({ kind: activityLoanOffer(world, life, activity) ? "fund-activity" : "activity", id, snapshot: life });
-    else game.act(id);
+    else game.act(id, options);
   }
 
   function confirmLoan() {
@@ -477,7 +482,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       <p>This version could not open it. You can try the game in memory; the original save will stay unchanged until you choose to replace it.</p>
       <div><button type="button" onClick={() => downloadLife(game.unreadableSave!, "everfolk-protected-save.json")}>Download original save</button><button type="button" onClick={game.resetUnreadableSave}>Replace protected save with this life</button></div>
     </aside>}
-    {menuOpen && <MainMenu chainBackend={chainBackend} life={life} rankedLife={Boolean(ranked)} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
+    {menuOpen && <MainMenu chainBackend={chainBackend} life={life} rankedLife={isRanked} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
     <div className="everfolk-game" hidden={menuOpen}>
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
@@ -529,7 +534,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
         <SectionHelp hint="time-bar" />
       </section>}
 
-      {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={Boolean(ranked)} packCards={ranked ? 0 : lifePackCardCount(life, world)}
+      {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={isRanked} packCards={isRanked ? 0 : lifePackCardCount(life, world)}
         onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
       {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && <ResourceBar rows={storehouseRows(world, life)} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
@@ -553,7 +558,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           </div>}
           {!game.hasBegun && <div className="stats" aria-label="Life attributes" aria-busy={!game.hasRevealedStats}>
             {Object.entries(world.stats).map(([id, definition]) => world.economy?.stat === id && life.economy ? <div className={`stat stat-${id} stat-financial`} key={id}>
-              <button className="stat-wealth-open" type="button" disabled={!game.hasRevealedStats} aria-label="Open total wealth and society comparison" title="Total wealth is cash + possessions − debt. Society percentile currently compares your wealth with the game's starting households." onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>
+              <button className="stat-wealth-open" type="button" disabled={!game.hasRevealedStats} aria-label="Open total wealth and society comparison" title={`Total wealth is cash + possessions − debt. Society percentile: ${wealthBenchmark.description}`} onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>
                 <div className="stat-heading"><span><Icon name="coin" size={16} />Total wealth</span><strong>{game.hasRevealedStats && wealthComparison ? formatMoney(wealthComparison.netWorth, world) : "—"}</strong></div>
                 <span className="stat-wealth-percentile"><span>Assets rank among households</span><strong>{game.hasRevealedStats && wealthComparison ? formatWealthStanding(wealthComparison.percentile) : "—"}</strong></span>
                 <span className="stat-wealth-cash"><span>{game.hasRevealedStats ? `Cash ${formatMoney(life.economy.cash, world)}` : "Money not yet revealed"}</span><span aria-hidden="true">Details ↗</span></span>
@@ -564,7 +569,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
             </div>)}
           </div>}
           <button className="secondary-button character-open" disabled={!game.hasRevealedStats} onClick={() => { setCharacterSection("career"); setPanel("character"); }}>Character <Icon name="arrow" size={16} /></button>
-          {!ranked && <button className="text-button another-life" onClick={() => setRestartOpen(true)}><Icon name="restart" size={15} /> Begin another life</button>}
+          {!isRanked && <button className="text-button another-life" onClick={() => setRestartOpen(true)}><Icon name="restart" size={15} /> Begin another life</button>}
         </aside>
         {game.hasBegun && life.phase !== "ended" && <YearlyFocus life={life} world={world} focusId={game.focusId} activities={activities} onChange={game.setFocus} />}
         {game.hasBegun && <LifeOverview life={life} world={world} onOpenWealth={() => { setCharacterSection("wealth"); setPanel("character"); }} />}
@@ -628,6 +633,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           </>}
         </section>
       </div>
+      {npcStatusNotice && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{npcStatusNotice}</span></div>}
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
     {/* Notifications float at the right edge, so they never reorder or push the main section. */}
@@ -654,7 +660,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           <div className="dialog-actions"><button className="secondary-button" onClick={() => downloadLife()}><Icon name="download" size={18} /> Download current life</button><button className="primary-button" onClick={() => { game.setPlaying(false); closeDialog(); if (onNewLife) onNewLife(life); else game.restart(); }}>Begin another life <Icon name="arrow" /></button></div>
         </> : panel === "character" ? <>
           <p className="eyebrow">CHARACTER</p><h2 id="dialog-title">{characterName}</h2>
-          <CharacterPanel key={characterSection} life={life} world={world} onActivity={requestActivity} onMarketOrder={game.orderMarket} onCancelMarketOrder={game.cancelMarketOrder} initialSection={characterSection} onSectionChange={setCharacterTab} />
+          <CharacterPanel key={characterSection} life={life} world={world} onActivity={requestActivity} onAssess={game.assess} onMarketOrder={game.orderMarket} onCancelMarketOrder={game.cancelMarketOrder} initialSection={characterSection} onSectionChange={setCharacterTab} />
         </> : panel === "wiki" ? <>
           <p className="eyebrow">SKILL REFERENCE</p><h2 id="dialog-title">Skill wiki</h2>
           <SkillTree life={life} world={world} activities={activities} onActivity={requestActivity} initialView="wiki" />
@@ -665,7 +671,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           <p className="eyebrow">{chronicleNameKnown ? chronicleName.toLocaleUpperCase() : "CHRONICLE"}</p><h2 id="dialog-title">Life history</h2>
           <p className="dialog-subtitle">{chronicleLife.phase === "ended" ? `${formatYear(birthYearOf(chronicleWorld, chronicleLife))} — ${formatYear(chronicleLife.year)} · ${yearsLived(chronicleLife.age)}` : "Your life record, grouped by year."}</p>
           {chronicleLife.deathCauseContext && <p><strong>{chronicleLife.deathCauseKind === "condition" ? "Health history:" : "What led to it:"}</strong> {displayProse(chronicleLife.deathCauseContext)}</p>}{chronicleCause ? <p><strong>Cause of death: {chronicleCause.title}.</strong> {displayProse(chronicleCause.text)}</p> : chronicleEnding && <p>{displayProse(chronicleEnding.text)}</p>}
-          {chronicleNameKnown && chronicleWealthComparison && chronicleLife.economy && <div className="wealth-summary-line"><p><strong>{chronicleLife.phase === "ended" ? chronicleEnding?.kind === "chapter" ? "Total wealth at record end" : "Total wealth at death" : "Total wealth"}:</strong> {formatMoney(chronicleWealthComparison.netWorth, chronicleWorld)} estimated net worth · {formatMoney(chronicleLife.economy.cash, chronicleWorld)} cash · {formatMoney(chronicleLife.economy.debt, chronicleWorld)} debt.</p><p><strong>Society percentile:</strong> {formatWealthStanding(chronicleWealthComparison.percentile)} · Median household wealth {formatMoney(chronicleWealthComparison.medianWealth, chronicleWorld)}. Game estimate currently using this world’s starting-household benchmark.</p></div>}
+          {chronicleNameKnown && chronicleWealthComparison && chronicleLife.economy && <div className="wealth-summary-line"><p><strong>{chronicleLife.phase === "ended" ? chronicleEnding?.kind === "chapter" ? "Total wealth at record end" : "Total wealth at death" : "Total wealth"}:</strong> {formatMoney(chronicleWealthComparison.netWorth, chronicleWorld)} estimated net worth · {formatMoney(chronicleLife.economy.cash, chronicleWorld)} cash · {formatMoney(chronicleLife.economy.debt, chronicleWorld)} debt.</p><p><strong>Society percentile:</strong> {formatWealthStanding(chronicleWealthComparison.percentile)} · Median {chronicleWealthBenchmark.kind === "recorded-lives" ? "recorded" : "household"} wealth {formatMoney(chronicleWealthComparison.medianWealth, chronicleWorld)}. {chronicleWealthBenchmark.kind === "recorded-lives" ? "Recorded-lives benchmark" : "Game estimate"} · {chronicleWealthBenchmark.description}</p></div>}
           {chronicleNameKnown ? <LifeJournal life={chronicleLife} /> : <p>Your starting stats are still being revealed. Return to your life to finish the reveal.</p>}
           <button className="secondary-button" onClick={() => downloadLife(exportLife(chronicleLife), `everfolk-${chronicleName.toLocaleLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "character"}-life-age-${chronicleLife.age}.json`)}><Icon name="download" size={18} /> Download this life</button>
         </> : panel === "legacy" ? <>

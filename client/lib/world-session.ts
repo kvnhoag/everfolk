@@ -1,4 +1,5 @@
 import { createEngine } from "../../src/index.ts";
+import { buildNpcWorld } from "../../chain/npc-world.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../../src/types.ts";
 import { readEverfolkStorage } from "./brand-storage.ts";
 import sampleWorld from "../../worlds/alexandria-sample.json" with { type: "json" };
@@ -111,6 +112,7 @@ const lives5Engine = createEngine(lives5World as unknown as WorldPack);
 const lives6Engine = createEngine(lives6World as unknown as WorldPack);
 const lives7Engine = createEngine(lives7World as unknown as WorldPack);
 const lives8Engine = createEngine(lives8World as unknown as WorldPack);
+const npcRankedEngine = createEngine(buildNpcWorld(lives8World as unknown as WorldPack));
 const deepEngine = createEngine(deepWorld as unknown as WorldPack);
 const figureEngine = createEngine(figureWorld as unknown as WorldPack);
 export let sampleEngine = builtinEngine;
@@ -156,12 +158,14 @@ engines.set(lives5Engine.fingerprint, lives5Engine);
 engines.set(lives6Engine.fingerprint, lives6Engine);
 engines.set(lives7Engine.fingerprint, lives7Engine);
 engines.set(lives8Engine.fingerprint, lives8Engine);
+engines.set(npcRankedEngine.fingerprint, npcRankedEngine);
 engines.set(deepEngine.fingerprint, deepEngine);
 engines.set(figureEngine.fingerprint, figureEngine);
 const PACK_CACHE_PREFIX = "everfolk:world-pack:";
 // Earlier content revisions remain untouched under their original v1/v2 keys.
 export let SAVE_KEY = saveKeyFor(builtinEngine);
 export const ARCHIVE_KEY = "everfolk:alexandria-lives:v3";
+export const WEALTH_OBSERVATIONS_KEY = "everfolk:wealth-observations:v1";
 export let PRESENTATION_KEY = presentationKeyFor(builtinEngine);
 export const ARCHIVE_LIMIT = 10;
 export function saveKeyFor(engine: LifeEngine): string { return engine.fingerprint === legacyEngine.fingerprint ? "everfolk:alexandria-sample:v3" : `everfolk:active:${engine.world.id}:${engine.fingerprint}`; }

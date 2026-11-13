@@ -56,10 +56,12 @@ function practiceFor(world: WorldPack, node: CapabilityNode, activities: readonl
   }))).slice(0, 3);
 }
 
-export function CapabilityInspector({ node, view, world, life, activities, readOnly, onActivity, onSelect, detailId, presentation }: {
+export function CapabilityInspector({ node, view, world, life, activities, readOnly, onActivity, onAssess, onSelect, detailId, presentation, calendarDeadline = false, onCalendarDeadlineChange, selectedJobIds = [], onToggleJobId }: {
   node: CapabilityNode; view: CapabilityNodeView; world: WorldPack; life: LifeState;
-  activities: readonly ActivityAvailability[]; readOnly: boolean; onActivity(id: string): void;
-  onSelect(id: string): void; detailId: string; presentation?: CapabilityPresentation;
+  activities: readonly ActivityAvailability[]; readOnly: boolean; onActivity(id: string, options?: { calendarDeadline?: boolean }): void;
+  onAssess?(nodeId: string, jobIds: readonly string[]): void; onSelect(id: string): void; detailId: string; presentation?: CapabilityPresentation;
+  calendarDeadline?: boolean; onCalendarDeadlineChange?(checked: boolean): void;
+  selectedJobIds?: readonly string[]; onToggleJobId?(jobId: string): void;
 }) {
   const nodes = (world.capabilities?.version ?? 0) >= 2 ? world.capabilities!.nodes : CAPABILITY_NODES;
   const action = activities.find(activity => activity.id === view.actionId);
@@ -67,6 +69,9 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
   const jobs = relatedJobs(world, node), training = practiceFor(world, node, activities);
   const canWork = Boolean(action?.available) && life.phase === "ready";
   const learned = life.capabilities?.learned[node.id];
+  const activeProject = life.capabilities?.project?.nodeId === node.id ? life.capabilities.project : undefined;
+  const terms = view.terms;
+  const eligibleJobs = view.eligibleJobs ?? [];
   const blocker = !canWork ? action?.reason || view.reasons[0] : undefined;
   const gates = [
     ...Object.entries(node.minimumProficiency).map(([id, target]) => ({ id, label: world.character?.skills[id]?.label ?? id, current: life.character?.skills[id] ?? 0, target })),
@@ -84,8 +89,24 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
       {node.anyProficiency && <p className="capability-alternative">Also one of: {node.anyProficiency.map(group => Object.entries(group).map(([id, value]) => `${world.character?.skills[id]?.label ?? id} ${value}`).join(" + ")).join(" or ")}.</p>}
     </section>
     <section><h5>Demonstrated work</h5><p>{firstSentence(node.proof)}</p><div className="capability-proof-progress"><progress aria-label={`${node.title} demonstrated work`} max={Math.max(1, view.progress.required)} value={Math.min(view.progress.done, Math.max(1, view.progress.required))} /><span>{view.progress.done} / {view.progress.required} work steps</span></div></section>
-    {!readOnly && view.actionId && <div className="capability-work-action"><button className="capability-work-button" type="button" disabled={!canWork || view.state === "unavailable"} onClick={() => { if (canWork && action) onActivity(action.id); }}>{view.actionLabel}<span aria-hidden="true">→</span></button></div>}
+    {terms && <section className="capability-terms"><h5>Commission terms</h5><ul>
+      <li>Materials: {terms.materialsOwner === "employer" ? "Employer-supplied" : terms.materialsOwner === "worker" ? "Worker-provided" : "None required"}</li>
+      <li>Quantity: {terms.quantity} · Minimum quality: Grade {terms.minimumQuality}</li>
+      <li>Total payment: {terms.totalPayment} dr · Payer: {terms.payers ? terms.payers.join(" & ") : terms.payer}</li>
+      <li>Work-year deadline: {terms.workYearDeadline} active work year{terms.workYearDeadline === 1 ? "" : "s"}{terms.completedWorkYears !== undefined ? ` (${terms.completedWorkYears} complete)` : ""}</li>
+      {terms.calendarDeadlineYear !== undefined
+        ? <li>Calendar deadline: year {terms.calendarDeadlineYear} (unpaid future payment forfeits if missed)</li>
+        : terms.calendarDeadlineYears !== undefined && <li>Optional calendar deadline: {terms.calendarDeadlineYears} calendar years from start (unpaid future payment forfeits if missed)</li>}
+      {terms.reservedMissing && Object.keys(terms.reservedMissing).length > 0 && <li>Missing reserved stock: {Object.entries(terms.reservedMissing).map(([item, qty]) => `${qty} ${item}`).join(", ")} (replace before resuming)</li>}
+    </ul></section>}
+    {!readOnly && view.actionId && !activeProject && terms?.calendarDeadlineYears && <label className="capability-deadline-toggle"><input type="checkbox" checked={calendarDeadline} onChange={event => onCalendarDeadlineChange?.(event.target.checked)} /> Commit to {terms.calendarDeadlineYears}-year calendar deadline</label>}
+    {!readOnly && view.actionId && <div className="capability-work-action"><button className="capability-work-button" type="button" disabled={!canWork || view.state === "unavailable"} onClick={() => { if (canWork && action) { if (!activeProject && calendarDeadline) onActivity(action.id, { calendarDeadline: true }); else onActivity(action.id); } }}>{view.actionLabel}<span aria-hidden="true">→</span></button></div>}
     {blocker && <p className="capability-blocker">{blocker}</p>}
+    {!learned && eligibleJobs.length > 0 && <section className="capability-assess-jobs"><h5>Qualify via completed jobs</h5><p>Select 2 distinct completed ordinary jobs from this path for assessment (qualification only; payouts and goods are not repeated).</p><ul>{eligibleJobs.map(job => {
+      const checked = selectedJobIds.includes(job.jobId);
+      const limitReached = !checked && selectedJobIds.length >= 2;
+      return <li key={job.jobId}><label><input type="checkbox" checked={checked} disabled={readOnly || Boolean(life.capabilities?.project) || limitReached} onChange={() => onToggleJobId?.(job.jobId)} /><span>{job.title} ({job.jobId}) · age {job.age} · year {job.year} · {job.payment} dr</span></label></li>;
+    })}</ul>{!readOnly && onAssess && <button type="button" className="capability-assess-button" disabled={life.phase !== "ready" || Boolean(life.capabilities?.project) || selectedJobIds.length !== 2} onClick={() => onAssess(node.id, selectedJobIds)}>Assess 2 selected jobs</button>}</section>}
     {readOnly && <p className="capability-read-only">Preview · take work in a new life.</p>}
     {!readOnly && training.length > 0 && <details className="capability-practice"><summary>Training options</summary>{training.map(activity => <div key={activity.id}><p>{activity.text}</p><button type="button" disabled={!activity.available || life.phase !== "ready"} onClick={() => onActivity(activity.id)}>Practice</button>{activity.reason && <small>{activity.reason}</small>}</div>)}</details>}
     <details className="capability-full-rules"><summary>Full rules &amp; career opportunities</summary><section><h5>Work proof</h5><p>{node.proof}</p><h5>Full reward</h5><p>{node.reward}</p></section>{jobs.map(job => {
@@ -96,8 +117,9 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
 }
 
 /** A fixed, inspectable skill DAG. Views only select and display engine-owned work. */
-export default function CapabilityTree({ world, life, activities, onActivity, readOnly = false }: {
-  world: WorldPack; life: LifeState; activities: readonly ActivityAvailability[]; onActivity(id: string): void; readOnly?: boolean;
+export default function CapabilityTree({ world, life, activities, onActivity, onAssess, readOnly = false }: {
+  world: WorldPack; life: LifeState; activities: readonly ActivityAvailability[];
+  onActivity(id: string, options?: { calendarDeadline?: boolean }): void; onAssess?(nodeId: string, jobIds: readonly string[]): void; readOnly?: boolean;
 }) {
   const nodes = (world.capabilities?.version ?? 0) >= 2 ? world.capabilities!.nodes : CAPABILITY_NODES;
   const layout = useMemo(() => buildCapabilityLayout(nodes), [nodes]);
@@ -106,6 +128,8 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
   const byId = useMemo(() => new Map(view.nodes.map(node => [node.id, node])), [view]);
   const [selectedId, setSelectedId] = useState("F1");
   const [pathSelected, setPathSelected] = useState(false);
+  const [calendarDeadlines, setCalendarDeadlines] = useState<Record<string, boolean>>({});
+  const [selectedJobsByNode, setSelectedJobsByNode] = useState<Record<string, string[]>>({});
   const { viewport, paper, zoom, dragging, focusPoint, pointerHandlers } = useSkillMapNavigation(layout);
   const nodeRefs = useRef(new Map<string, HTMLButtonElement>());
   const instanceId = useId();
@@ -165,7 +189,15 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
           })}
         </div>
       </div></div>
-      <CapabilityInspector key={selected.id} node={selected} presentation={presentations.get(selected.id)} view={selectedView} {...{ world, life, activities, readOnly, onActivity }} onSelect={id => select(id, true)} detailId={`${instanceId}-detail`} />
+      <CapabilityInspector key={selected.id} node={selected} presentation={presentations.get(selected.id)} view={selectedView} {...{ world, life, activities, readOnly, onActivity, onAssess }}
+        calendarDeadline={Boolean(calendarDeadlines[selected.id])}
+        onCalendarDeadlineChange={checked => setCalendarDeadlines(prev => ({ ...prev, [selected.id]: checked }))}
+        selectedJobIds={selectedJobsByNode[selected.id] ?? []}
+        onToggleJobId={jobId => setSelectedJobsByNode(prev => {
+          const current = prev[selected.id] ?? [];
+          return { ...prev, [selected.id]: current.includes(jobId) ? current.filter(id => id !== jobId) : [...current, jobId].slice(0, 2) };
+        })}
+        onSelect={id => select(id, true)} detailId={`${instanceId}-detail`} />
     </div>
     <p className="capability-footnote">One major work action per year. Skills require practice and demonstrated work.</p>
   </section>;

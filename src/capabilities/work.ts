@@ -1,26 +1,176 @@
 import type { LifeState, WorldPack } from "../types.ts";
-import type { CapabilityEvidence } from "./types.ts";
+import type { CapabilityEvidence, CommissionPayer, CommissionTerms } from "./types.ts";
 import { farmSaleReason } from "./farming.ts";
 import { ruleFor, type CapabilityRule } from "./rules.ts";
 import { productionQuote, type ProductionQuote } from "./production.ts";
 import { basketQuote, buyBasket, inventoryOf, putItem, takeItem, type BasketQuote } from "./inventory.ts";
 import { fieldOfNode, needNote, scaledPay } from "../paths/pay.ts";
 
+export type { CommissionTerms };
 export interface WorkQuote {
   inputs: Record<string, number>; basket: BasketQuote; fee: number; pay: number;
-  payer: "merchant" | "workshop" | "school" | "council"; production?: ProductionQuote;
+  payer: CommissionPayer; production?: ProductionQuote;
   output?: string; quantity?: number; quality?: number; reason?: string;
   /** Paths worlds: why the pay differs from the usual (scarce or crowded field). */
   need?: string;
+  terms: CommissionTerms;
 }
 const records = (life: LifeState, id: string) => life.capabilities!.evidence.filter(e => e.nodeId === id && e.data.qualifies === true);
 const held = (life: LifeState, item: string) => inventoryOf(life)[item] ?? 0;
 
+export function nextJobId(life: LifeState, nodeId: string): string {
+  const count = (life.capabilities?.evidence ?? []).filter(e => e.nodeId === nodeId && typeof e.data.jobId === "string").length;
+  return `${nodeId.toLowerCase()}-${life.age}-${life.year}-${count + 1}`;
+}
+
+function materialsOwnershipFor(nodeId: string, inputs: Record<string, number>): "worker" | "employer" | "none" {
+  if (nodeId === "A1") return "employer";
+  if (Object.keys(inputs).length === 0) return "none";
+  return "worker";
+}
+
+function splitProjectInputs(nodeId: string, inputs: Record<string, number>): { consumedInputs: Record<string, number>; reservedStock: Record<string, number> } {
+  if (nodeId === "T10") {
+    const totalGrain = inputs.grain ?? 20;
+    const delivered = Math.min(10, totalGrain);
+    return { consumedInputs: { grain: delivered }, reservedStock: totalGrain > delivered ? { grain: totalGrain - delivered } : {} };
+  }
+  const consumedInputs: Record<string, number> = {};
+  const reservedStock: Record<string, number> = {};
+  for (const [item, qty] of Object.entries(inputs)) {
+    const usedNow = Math.ceil(qty / 2);
+    consumedInputs[item] = usedNow;
+    if (qty > usedNow) reservedStock[item] = qty - usedNow;
+  }
+  return { consumedInputs, reservedStock };
+}
+
+/** Ordinary household spoilage or losses reduce unconsumed reserved stock cleanly until replaced. */
+export function loseReservedStock(life: LifeState, item: string, amount: number): number {
+  const project = life.capabilities?.project;
+  const available = project?.reservedStock?.[item] ?? 0;
+  const lost = Math.min(available, Math.max(0, Math.floor(amount)));
+  if (!project || lost <= 0) return 0;
+  project.reservedStock![item] = available - lost;
+  project.reservedMissing ??= {};
+  project.reservedMissing[item] = (project.reservedMissing[item] ?? 0) + lost;
+  if (project.nodeId === "T10" && item === "grain" && project.data && typeof project.data.undeliveredGrain === "number") {
+    project.data.undeliveredGrain = Math.max(0, project.data.undeliveredGrain - lost);
+  }
+  return lost;
+}
+
+/** Forfeit unpaid future escrow without recreating consumed inputs when an accepted calendar deadline lapses. */
+export function expireMissedCommissions(world: WorldPack, life: LifeState): void {
+  const state = life.capabilities;
+  const project = state?.project;
+  if (!state || !project || project.calendarDeadlineYear === undefined || life.year <= project.calendarDeadlineYear) return;
+  const ledger = life.vocations;
+  const rule = ruleFor(project.nodeId);
+  const openingTotal = (life.economy?.cash ?? 0)
+    + (ledger ? Object.values(ledger.accounts).reduce((a, b) => a + b, 0) : 0)
+    + (state.reservedPayment ?? 0);
+  let forfeitedPayment = 0;
+  if (ledger && project.nodeId === "T10") {
+    const perBuyer = Number(project.data?.perBuyer ?? Math.floor((project.payment ?? 0) / 2));
+    if (project.completedYears === 0) {
+      ledger.accounts.merchant += perBuyer;
+      ledger.accounts.council += perBuyer;
+      forfeitedPayment = perBuyer * 2;
+    } else {
+      ledger.accounts.council += perBuyer;
+      forfeitedPayment = perBuyer;
+    }
+    state.reservedPayment = Math.max(0, (state.reservedPayment ?? 0) - forfeitedPayment);
+  } else if (ledger && (project.payment ?? 0) > 0) {
+    const payer = project.payer ?? rule?.payer ?? "merchant";
+    forfeitedPayment = project.payment!;
+    ledger.accounts[payer] += forfeitedPayment;
+    state.reservedPayment = Math.max(0, (state.reservedPayment ?? 0) - forfeitedPayment);
+  }
+  // Return any unconsumed intact reserved stock without re-creating already consumed materials or fees.
+  for (const [item, qty] of Object.entries(project.reservedStock ?? {})) {
+    if (qty > 0) putItem(life, item, qty);
+  }
+  const closingTotal = (life.economy?.cash ?? 0)
+    + (ledger ? Object.values(ledger.accounts).reduce((a, b) => a + b, 0) : 0)
+    + (state.reservedPayment ?? 0);
+  state.evidence.push({
+    nodeId: project.nodeId,
+    age: life.age,
+    year: life.year,
+    kind: rule?.kind ?? "craft",
+    data: {
+      jobId: project.jobId ?? nextJobId(life, project.nodeId),
+      qualifies: false,
+      reconciled: closingTotal === openingTotal,
+      cashConserved: closingTotal === openingTotal,
+      deadlineMissed: true,
+      calendarDeadlineYear: project.calendarDeadlineYear,
+      expiredYear: life.year,
+      forfeitedPayment,
+      completedWorkYears: project.completedYears,
+    },
+  });
+  delete state.project;
+}
+
 /** Every material/cash obligation appears in this detached quote before accepting the year's work. */
 export function workQuote(world: WorldPack, life: LifeState, nodeId: string): WorkQuote {
   const rule = ruleFor(nodeId)!;
-  if (life.capabilities?.project?.nodeId === nodeId) return { inputs: {}, basket: { missing: {}, cost: 0 }, fee: 0, pay: 0, payer: rule.payer ?? "merchant" };
-  const quote: WorkQuote = { inputs: { ...rule.inputs }, basket: { missing: {}, cost: 0 }, fee: rule.fee ?? 0, pay: rule.pay ?? 0, payer: rule.payer ?? "workshop" };
+  const active = life.capabilities?.project;
+  if (active?.nodeId === nodeId) {
+    const missingEntries = Object.entries(active.reservedMissing ?? {}).filter(([, qty]) => qty > 0);
+    const missingInputs = Object.fromEntries(missingEntries);
+    const basket = missingEntries.length ? basketQuote(world, life, missingInputs) : { missing: {}, cost: 0 };
+    const inventory = inventoryOf(life);
+    const unreplaced = missingEntries.filter(([item, qty]) => (inventory[item] ?? 0) < qty);
+    let reason: string | undefined;
+    if (active.calendarDeadlineYear !== undefined && life.year > active.calendarDeadlineYear) {
+      reason = `This commission's calendar deadline (year ${active.calendarDeadlineYear}) has passed.`;
+    } else if (unreplaced.length > 0) {
+      reason = `Reserved materials were lost (${unreplaced.map(([k, v]) => `${v} ${k}`).join(", ")}). Replace the missing stock before resuming.`;
+    }
+    const payer = active.payer ?? rule.payer ?? "merchant";
+    return {
+      inputs: missingInputs,
+      basket,
+      fee: 0,
+      pay: 0,
+      payer,
+      quantity: active.quantity ?? rule.quantity ?? (nodeId === "T10" ? 20 : 1),
+      quality: active.quality ?? rule.minimumQuality ?? 1,
+      ...(reason ? { reason } : {}),
+      terms: {
+        materialsOwner: materialsOwnershipFor(nodeId, active.inputs ?? rule.inputs ?? {}),
+        quantity: active.quantity ?? rule.quantity ?? (nodeId === "T10" ? 20 : 1),
+        minimumQuality: rule.minimumQuality ?? 1,
+        totalPayment: active.payment ?? 0,
+        payer,
+        ...(nodeId === "T10" ? { payers: ["merchant", "council"] as CommissionPayer[] } : {}),
+        workYearDeadline: active.workYearDeadline ?? rule.years,
+        ...(active.calendarDeadlineYear !== undefined ? { calendarDeadlineYear: active.calendarDeadlineYear } : { calendarDeadlineYears: rule.years * 2 }),
+        completedWorkYears: active.completedYears,
+        ...(missingEntries.length ? { reservedMissing: missingInputs } : {}),
+      },
+    };
+  }
+  const quote: WorkQuote = {
+    inputs: { ...rule.inputs },
+    basket: { missing: {}, cost: 0 },
+    fee: rule.fee ?? 0,
+    pay: rule.pay ?? 0,
+    payer: rule.payer ?? "workshop",
+    terms: {
+      materialsOwner: materialsOwnershipFor(nodeId, rule.inputs ?? {}),
+      quantity: rule.quantity ?? 1,
+      minimumQuality: rule.minimumQuality ?? 1,
+      totalPayment: rule.pay ?? 0,
+      payer: rule.payer ?? "workshop",
+      workYearDeadline: rule.years,
+      ...(rule.project ? { calendarDeadlineYears: rule.years * 2 } : {}),
+    },
+  };
   if (rule.kind === "craft") {
     const secondSculptureExercise = nodeId === "AS5" && records(life, nodeId).length % 2 === 1;
     if (secondSculptureExercise) {
@@ -78,6 +228,16 @@ export function workQuote(world: WorldPack, life: LifeState, nodeId: string): Wo
   const canPayFirst = life.economy!.cash >= expense;
   const payerBalance = life.vocations!.accounts[quote.payer] + (canPayFirst ? quote.payer === "merchant" ? quote.basket.cost : quote.payer === "workshop" ? quote.fee : 0 : 0);
   if (!quote.reason && nodeId !== "T10" && payerBalance < quote.pay) quote.reason = `The ${quote.payer} cannot fund the quoted ${quote.pay} dr payment.`;
+  quote.terms = {
+    materialsOwner: materialsOwnershipFor(nodeId, quote.inputs),
+    quantity: quote.quantity ?? (supplyOrder ? 10 * (nodeId === "T10" ? 2 : 1) : 1),
+    minimumQuality: rule.minimumQuality ?? 1,
+    totalPayment: quote.pay,
+    payer: quote.payer,
+    ...(nodeId === "T10" ? { payers: ["merchant", "council"] as CommissionPayer[] } : {}),
+    workYearDeadline: rule.years,
+    ...(rule.project ? { calendarDeadlineYears: rule.years * 2 } : {}),
+  };
   return quote;
 }
 
@@ -129,26 +289,36 @@ function taskFacts(world: WorldPack, life: LifeState, nodeId: string, quote: Wor
   return data;
 }
 /** Performs actual quoted work and creates one distinct work-year receipt. */
-export function performWork(world: WorldPack, life: LifeState, nodeId: string): CapabilityEvidence {
+export function performWork(world: WorldPack, life: LifeState, nodeId: string, options?: { calendarDeadline?: boolean }): CapabilityEvidence {
   const rule = ruleFor(nodeId)!, state = life.capabilities!, quote = workQuote(world, life, nodeId);
   if (quote.reason) throw new Error(quote.reason);
-  if (nodeId === "T10") return performTradingAssessment(world, life, quote);
+  if (nodeId === "T10") return performTradingAssessment(world, life, quote, options);
   const cashOpening = life.economy!.cash;
   const stockOpening = JSON.stringify(inventoryOf(life));
   const totalOpening = cashOpening + Object.values(life.vocations!.accounts).reduce((a,b)=>a+b,0) + (state.reservedPayment ?? 0);
   const continuing = state.project?.nodeId === nodeId;
   let data: Record<string, string | number | boolean>;
   if (!continuing) {
+    const jobId = nextJobId(life, nodeId);
     const totalBefore = life.economy!.cash + Object.values(life.vocations!.accounts).reduce((a,b) => a+b,0);
     if (rule.project && life.economy!.cash < quote.fee + quote.basket.cost) throw new Error("The assessment reserves inputs up front; earn enough cash before accepting it.");
     const prepaid = payCosts(world, life, quote, Boolean(rule.project));
     if (rule.contract && quote.output) life.vocations!.demand[quote.output] -= quote.quantity!;
     data = taskFacts(world, life, nodeId, quote);
+    data.jobId = jobId;
     if (rule.project) {
+      const { consumedInputs, reservedStock } = splitProjectInputs(nodeId, quote.inputs);
       life.vocations!.accounts[quote.payer] -= quote.pay;
       state.reservedPayment = (state.reservedPayment ?? 0) + quote.pay;
-      state.project = { nodeId, completedYears: 0, startedAge: life.age, inputs: quote.inputs, fee: quote.fee, payment: quote.pay, payer: quote.payer,
-        output: quote.output, quantity: quote.quantity, quality: quote.quality, data };
+      state.project = {
+        nodeId, completedYears: 0, startedAge: life.age, jobId, startedYear: life.year,
+        workYearDeadline: rule.years,
+        ...(options?.calendarDeadline ? { calendarDeadlineYear: life.year + rule.years * 2 } : {}),
+        inputs: quote.inputs, consumedInputs,
+        ...(Object.keys(reservedStock).length ? { reservedStock } : {}),
+        fee: quote.fee, payment: quote.pay, payer: quote.payer,
+        output: quote.output, quantity: quote.quantity, quality: quote.quality, data,
+      };
     } else {
       if (!prepaid) { life.vocations!.accounts[quote.payer] -= quote.pay; life.economy!.cash += quote.pay; }
       if (quote.output && !rule.contract) putItem(life, quote.output, quote.quantity!, quote.quality);
@@ -157,7 +327,24 @@ export function performWork(world: WorldPack, life: LifeState, nodeId: string): 
     if (nodeId === "A3") putItem(life, "prepared-clay", 2);
     const totalAfter = life.economy!.cash + Object.values(life.vocations!.accounts).reduce((a,b) => a+b,0) + (state.reservedPayment ?? 0);
     data.cashConserved = totalBefore + (continuing ? state.reservedPayment ?? 0 : 0) === totalAfter;
-  } else data = { ...state.project!.data!, continued: true, materialsPaid: 0, feePaid: 0, quotedPayment: 0 };
+  } else {
+    const project = state.project!;
+    if (project.calendarDeadlineYear !== undefined && life.year > project.calendarDeadlineYear) {
+      throw new Error(`This commission's calendar deadline (year ${project.calendarDeadlineYear}) has passed.`);
+    }
+    data = { ...project.data!, jobId: project.jobId ?? nextJobId(life, nodeId), continued: true, materialsPaid: 0, feePaid: 0, quotedPayment: 0 };
+    if (project.reservedMissing && Object.keys(project.reservedMissing).length) {
+      const missing = { ...project.reservedMissing };
+      for (const [item, qty] of Object.entries(missing)) {
+        if (qty <= 0) continue;
+        takeItem(life, item, qty);
+        project.reservedStock ??= {};
+        project.reservedStock[item] = (project.reservedStock[item] ?? 0) + qty;
+      }
+      delete project.reservedMissing;
+      data.replacedReservedInputs = JSON.stringify(missing);
+    }
+  }
   if (rule.project) {
     const project = state.project!;
     project.completedYears++;
@@ -191,35 +378,59 @@ export function performWork(world: WorldPack, life: LifeState, nodeId: string): 
 
 
 /** Register both funded orders once, then deliver one reserved lot per active work year. */
-function performTradingAssessment(world: WorldPack, life: LifeState, quote: WorkQuote): CapabilityEvidence {
+function performTradingAssessment(world: WorldPack, life: LifeState, quote: WorkQuote, options?: { calendarDeadline?: boolean }): CapabilityEvidence {
   const state = life.capabilities!, ledger = life.vocations!;
   const total = () => life.economy!.cash + Object.values(ledger.accounts).reduce((a,b)=>a+b,0) + (state.reservedPayment ?? 0);
   const before = total(), openingCash = life.economy!.cash;
   if (!state.project) {
+    const jobId = nextJobId(life, "T10");
     if (life.economy!.cash < quote.fee + quote.basket.cost) throw new Error("The registered plan reserves its inputs and fees up front.");
     payCosts(world, life, quote, true);
     const perBuyer = quote.pay / 2;
     ledger.accounts.merchant -= perBuyer; ledger.accounts.council -= perBuyer;
     state.reservedPayment = (state.reservedPayment ?? 0) + quote.pay;
-    state.project = { nodeId: "T10", completedYears: 0, startedAge: life.age, inputs: { grain: 20 }, fee: quote.fee, payment: quote.pay,
-      data: { perBuyer, quotedFee: quote.fee, undeliveredGrain: 20, grainCost: 20 * life.demo!.town.prices.grain.buy } };
+    state.project = {
+      nodeId: "T10", completedYears: 0, startedAge: life.age, jobId, startedYear: life.year,
+      workYearDeadline: 2,
+      ...(options?.calendarDeadline ? { calendarDeadlineYear: life.year + 4 } : {}),
+      inputs: { grain: 20 }, consumedInputs: { grain: 0 }, reservedStock: { grain: 20 },
+      fee: quote.fee, payment: quote.pay,
+      data: { perBuyer, quotedFee: quote.fee, undeliveredGrain: 20, grainCost: 20 * life.demo!.town.prices.grain.buy },
+    };
   }
   const project = state.project!;
+  if (project.calendarDeadlineYear !== undefined && life.year > project.calendarDeadlineYear) {
+    throw new Error(`This commission's calendar deadline (year ${project.calendarDeadlineYear}) has passed.`);
+  }
+  if (project.reservedMissing?.grain) {
+    const missingGrain = project.reservedMissing.grain;
+    takeItem(life, "grain", missingGrain);
+    project.reservedStock ??= {};
+    project.reservedStock.grain = (project.reservedStock.grain ?? 0) + missingGrain;
+    project.data!.undeliveredGrain = Number(project.data!.undeliveredGrain) + missingGrain;
+    delete project.reservedMissing;
+  }
   const payer = project.completedYears === 0 ? "merchant" : "council";
   const payment = Number(project.data!.perBuyer);
   if (payer === "merchant") life.demo!.town.merchant.grain += 10;
   else state.civicGrain = (state.civicGrain ?? 0) + 10;
+  project.consumedInputs ??= {};
+  project.consumedInputs.grain = (project.consumedInputs.grain ?? 0) + 10;
+  if (project.reservedStock) project.reservedStock.grain = Math.max(0, (project.reservedStock.grain ?? 0) - 10);
   project.data!.undeliveredGrain = Number(project.data!.undeliveredGrain) - 10;
   project.completedYears++;
   state.reservedPayment = (state.reservedPayment ?? 0) - payment;
   life.economy!.cash += payment;
   life.demo!.lastTradeAge = life.age;
   const complete = project.completedYears === 2;
-  const data = { qualifies: total() === before, reconciled: total() === before, cashConserved: total() === before,
+  const data = {
+    jobId: project.jobId ?? nextJobId(life, "T10"),
+    qualifies: total() === before, reconciled: total() === before, cashConserved: total() === before,
     cashOpening: openingCash, cashAtClosing: life.economy!.cash, payer, deliveredGrain: 10,
     reservedGrain: Number(project.data!.undeliveredGrain), paymentReceived: payment, quotedPayment: payment,
     materialsPaid: quote.basket.cost, feePaid: quote.fee,
-    activeWorkYear: project.completedYears, completedAssessment: complete, commitmentStartedAge: project.startedAge };
+    activeWorkYear: project.completedYears, completedAssessment: complete, commitmentStartedAge: project.startedAge,
+  };
   if (complete) delete state.project;
   return { nodeId: "T10", age: life.age, year: life.year, kind: "trade", data };
 }

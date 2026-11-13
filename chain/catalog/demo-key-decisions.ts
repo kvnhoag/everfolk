@@ -1,5 +1,5 @@
 import type { Category } from "../ids.ts";
-import { isDemoVersion } from "../ids.ts";
+import { usesDemoCatalog } from "../ids.ts";
 
 /**
  * Decision event ids for alexandria-demo-1. Workflow 1 should author these ids.
@@ -14,5 +14,5 @@ export const DEMO_KEY_DECISIONS: Readonly<Record<string, Category>> = Object.fre
 });
 
 export function isDemoWorldVersion(worldVersion: string | undefined): boolean {
-  return Boolean(worldVersion && isDemoVersion(worldVersion));
+  return Boolean(worldVersion && usesDemoCatalog(worldVersion));
 }

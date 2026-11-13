@@ -22,3 +22,7 @@ export async function viewCall<T>(rpcUrl: string, contractId: string, method: st
 export function viewLife(rpcUrl: string, contractId: string, lifeId: string, fetcher: typeof fetch = fetch): Promise<LifeView | null> {
   return viewCall<LifeView | null>(rpcUrl, contractId, "get_life", { life_id: lifeId }, fetcher);
 }
+
+export function viewWorldVersions(rpcUrl: string, contractId: string, fetcher: typeof fetch = fetch): Promise<string[]> {
+  return viewCall<string[]>(rpcUrl, contractId, "get_world_versions", {}, fetcher);
+}

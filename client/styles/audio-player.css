@@ -431,10 +431,30 @@
 
 .music-drawer-footer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
   border-top: 1px solid #3a626c;
   padding-top: 8px;
+}
+
+.game-music-player button:focus-visible,
+.game-music-player input:focus-visible,
+.game-music-player a:focus-visible {
+  outline: 2px solid #f0cb82;
+  outline-offset: 2px;
+}
+
+.music-credits-note {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.35;
+  color: #9fb0b7;
+}
+
+.music-credits-note a {
+  color: #e6c173;
+  text-decoration: underline;
 }
 
 .music-sfx-toggle {

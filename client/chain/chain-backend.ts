@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { parseRankedConfig, type RankedConfig } from "./born-into-model.ts";
-import { resolveChainConfig, type ChainConfig } from "./config.ts";
+import { DEFAULT_CHAIN_CONFIG, resolveChainConfig, type ChainConfig } from "./config.ts";
+import { PRACTICE_CONTRACT_ID } from "./practice-verifier.ts";
+import type { RankedSaveScope } from "./ranked-session.ts";
 import { createLivesContract } from "./contract.ts";
 import type { AccountProof, ContractCall, LivesContract, WalletSession } from "./types.ts";
 import { accountBalance } from "./rpc.ts";
@@ -22,6 +24,7 @@ export interface ChainBackend {
   walletId: string | null;
   worldVersion: string;
   contractId: string | null;
+  networkId?: string;
   /** The latest confirmed wallet transaction, for an explorer link. */
   lastTransaction: { hash: string; method: string } | null;
   /** Bumps after every confirmed transaction so balances can be read again. */
@@ -143,7 +146,7 @@ async function createBackend(events: BackendEvents): Promise<BaseBackend | null>
   // A returning player stays signed in: load the remembered wallet in the background, without opening it.
   if (rememberedWallet()) void wallet.restore().then(report, () => { /* stay disconnected; Connect still works */ });
   return {
-    mode: "live", contract: createLivesContract(wallet, cfg), worldVersion: config.world_version, contractId: config.contract_id,
+    mode: "live", contract: createLivesContract(wallet, cfg), worldVersion: config.world_version, contractId: config.contract_id, networkId: cfg.networkId,
     connect: async () => { await wallet.signIn(); report(); },
     // The router drops the session before the wallet answers, so the bar shows signed out even if that fails.
     disconnect: async () => { try { await wallet.signOut(); } finally { report(); } },
@@ -177,6 +180,15 @@ export function useChainBackend(): ChainBackend | null {
     const { state, ...who } = account;
     return { ...rest, ...who, lastTransaction, revision, ...(signin ? { signin: { ...signin, ...state } } : {}) };
   }, [base, account, lastTransaction, revision]);
+}
+
+export function backendSaveScope(backend: Pick<ChainBackend, "mode" | "contractId" | "networkId">): RankedSaveScope {
+  const practice = backend.mode === "preview";
+  return {
+    networkId: backend.networkId ?? DEFAULT_CHAIN_CONFIG.networkId,
+    contractId: backend.contractId ?? PRACTICE_CONTRACT_ID,
+    practice,
+  };
 }
 
 export function errorText(cause: unknown, fallback: string): string {

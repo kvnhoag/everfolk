@@ -15,6 +15,30 @@ export interface CapabilityEvidence {
   kind: string;
   data: Record<string, number | string | boolean>;
 }
+export type CommissionPayer = "merchant" | "workshop" | "school" | "council";
+export interface CommissionTerms {
+  materialsOwner: "worker" | "employer" | "none";
+  quantity: number;
+  minimumQuality: number;
+  totalPayment: number;
+  payer: CommissionPayer;
+  payers?: CommissionPayer[];
+  workYearDeadline: number;
+  calendarDeadlineYears?: number;
+  calendarDeadlineYear?: number;
+  completedWorkYears?: number;
+  reservedMissing?: Record<string, number>;
+}
+export interface EligibleJobRecord {
+  jobId: string;
+  nodeId: string;
+  age: number;
+  year: number;
+  kind: string;
+  title: string;
+  payment: number;
+  quantity: number;
+}
 export interface CapabilityState {
   learned: Record<string, { age: number; year: number }>;
   evidence: CapabilityEvidence[];
@@ -27,8 +51,11 @@ export interface CapabilityState {
   military?: { service: { age: number; role: string; paid: number; wage: number; rations: number; ration: number; purseBefore: number; purseAfter: number; grainBefore: number; grainAfter: number }[] };
   /** An unfinished assessment counts active work years, not elapsed years. */
   project?: { nodeId: string; completedYears: number; startedAge: number;
-    inputs?: Record<string, number>; fee?: number; payment?: number;
-    payer?: "merchant" | "workshop" | "school" | "council";
+    jobId?: string; startedYear?: number; workYearDeadline?: number; calendarDeadlineYear?: number;
+    inputs?: Record<string, number>; consumedInputs?: Record<string, number>;
+    reservedStock?: Record<string, number>; reservedMissing?: Record<string, number>;
+    fee?: number; payment?: number;
+    payer?: CommissionPayer;
     quality?: number; output?: string; quantity?: number;
     data?: Record<string, number | string | boolean>;
   };
@@ -52,5 +79,7 @@ export interface CapabilityNodeView {
   progress: { done: number; required: number };
   actionId: string | null; actionLabel: string;
   requirementText: string[];
+  terms?: CommissionTerms;
+  eligibleJobs?: EligibleJobRecord[];
 }
 export interface CapabilityView { enabled: boolean; nodes: CapabilityNodeView[] }

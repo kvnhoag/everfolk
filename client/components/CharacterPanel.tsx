@@ -134,8 +134,8 @@ function SearchControls({ id, label, placeholder, value, onChange, filter, onFil
 }
 
 /** Personal actions share the simulation's yearly budget and command history. */
-export default function CharacterPanel({ life, world, onActivity, onMarketOrder, onCancelMarketOrder, initialSection = "career", onSectionChange }: {
-  life: LifeState; world: WorldPack; onActivity: (id: string) => void; initialSection?: Section;
+export default function CharacterPanel({ life, world, onActivity, onAssess, onMarketOrder, onCancelMarketOrder, initialSection = "career", onSectionChange }: {
+  life: LifeState; world: WorldPack; onActivity: (id: string, options?: { calendarDeadline?: boolean }) => void; onAssess?: (nodeId: string, jobIds: readonly string[]) => void; initialSection?: Section;
   /** Reports the open tab, so tutorial hints know when the skill tree is on screen. */
   onSectionChange?: (section: Section) => void;
 } & MarketActions) {
@@ -279,7 +279,7 @@ export default function CharacterPanel({ life, world, onActivity, onMarketOrder,
       <div className="character-section has-section-help" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
         <SectionHelp hint="skills" />
         {/* Proficiency and occupation reference lives in the Wiki; the skill tree and figure paths get the space. */}
-        {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} />}
+        {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} onAssess={onAssess} />}
         <FigurePaths activities={activities} {...props} />
       </div>
       {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>

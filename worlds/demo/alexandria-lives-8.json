@@ -90954,7 +90954,8 @@
         "grainAskBps": 7000,
         "grainSpreadBps": 2000,
         "leanYearMeasuresPerStanding": 250,
-        "leanYearStandingCap": 4
+        "leanYearStandingCap": 4,
+        "monotoneOrder": true
       }
     },
     "service": {

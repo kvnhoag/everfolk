@@ -58,3 +58,29 @@ export const npcWorlds = sqliteTable("npc_worlds", {
   id: text("id").primaryKey(),
   worldJson: text("world_json").notNull(),
 });
+
+
+/** Single-use account ownership challenges bound to a ranked NEAR life. */
+export const npcAccountChallenges = sqliteTable("npc_account_challenges", {
+  nonce: text("nonce").primaryKey(),
+  contractId: text("contract_id").notNull(),
+  lifeId: text("life_id").notNull(),
+  accountId: text("account_id").notNull(),
+  expiresAt: integer("expires_at").notNull(),
+  usedAt: integer("used_at"),
+});
+
+/** Authoritative server sessions bound 1:1 to ranked alexandria-npc-1 lives. */
+export const npcRankedSessions = sqliteTable("npc_ranked_sessions", {
+  id: text("id").primaryKey(),
+  lifeKey: text("life_key").notNull().unique(),
+  contractId: text("contract_id").notNull(),
+  lifeId: text("life_id").notNull(),
+  accountId: text("account_id").notNull(),
+  seed: text("seed").notNull(),
+  worldVersion: text("world_version").notNull(),
+  worldFingerprint: text("world_fingerprint").notNull(),
+  revision: integer("revision").notNull(),
+  tokenHash: text("token_hash").notNull(),
+  recordJson: text("record_json").notNull(),
+});

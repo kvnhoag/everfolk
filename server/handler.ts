@@ -14,7 +14,11 @@ import { handleRankedApi, type RankedDependencies, type RankedEnvironment } from
 import { defaultRankedDependencies } from "./ranked/default-verifier.ts";
 import { handleSignInApi, type SignInEnvironment } from "./signin/routes.ts";
 
-export interface ContentEnvironment extends RankedEnvironment, SignInEnvironment, NpcEnvironment { NPC_SESSIONS?: NpcSessionService; DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService; RANKED?: RankedDependencies }
+import { configuredNpcRankedService } from "./npc/composition.ts";
+import { npcRankedRoute } from "./npc/ranked-http.ts";
+import type { NpcRankedService } from "./npc/ranked-service.ts";
+
+export interface ContentEnvironment extends RankedEnvironment, SignInEnvironment, NpcEnvironment { NPC_SESSIONS?: NpcSessionService; NPC_RANKED?: NpcRankedService; DB?: ContentDatabase; ADMIN_EMAIL?: string; ADMIN_EMAILS?: string; SEEDED_PLAY?: SeededPlayService; RANKED?: RankedDependencies }
 
 class HttpError extends Error {
   status: number;
@@ -70,6 +74,9 @@ export async function handleApi(request: Request, env: ContentEnvironment): Prom
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/$/, "");
   try {
+    if (path === "/api/npc/ranked" || path.startsWith("/api/npc/ranked/")) {
+      return npcRankedRoute(request, env.NPC_RANKED ?? configuredNpcRankedService(env));
+    }
     if (path === "/api/npc/mcp" || path.startsWith("/api/npc/sessions")) {
       const service = env.NPC_SESSIONS ?? configuredNpcService(env);
       if (path === "/api/npc/mcp") return npcMcpRoute(request, service);

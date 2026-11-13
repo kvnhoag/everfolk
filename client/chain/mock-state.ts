@@ -1,5 +1,5 @@
 import { categoryOfNpcAction, groupOfNpcAction as catalogGroupOfNpcAction } from "../../chain/catalog/demo-deeds.ts";
-import { DEMO_WORLD_VERSION, FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
+import { DEMO_WORLD_VERSION, FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, NPC_WORLD_VERSION, RANKED_WORLD_VERSION } from "../../chain/ids.ts";
 import type { CareerGroup, Category, FigureId } from "../../chain/ids.ts";
 import type { LifeView, Listing, MintPack, StageMintResult, Evidence, SourceShare, TokenExtra } from "../../chain/types.ts";
 
@@ -94,7 +94,7 @@ export function createState(options: MockOptions): MockState {
       dropRateBps: options.dropRateBps ?? 500,
       nobodyWeightBps: options.nobodyWeightBps ?? 5000,
       figureSupplyCap: options.figureSupplyCap ?? 25,
-      worldVersions: options.worldVersions ?? [RANKED_WORLD_VERSION, DEMO_WORLD_VERSION],
+      worldVersions: options.worldVersions ?? [RANKED_WORLD_VERSION, DEMO_WORLD_VERSION, NPC_WORLD_VERSION],
       treasuryId: options.treasuryId ?? "treasury.testnet",
       sourceMintShareBps: 5000,
       royaltySourcesBps: 500,

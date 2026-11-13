@@ -125,7 +125,13 @@ export function createSeededPlayService(options: {
     const fields = Object.keys(command);
     if (command.type === "advance" && fields.length === 1) return engine.advance(life);
     if (command.type === "choose" && fields.length === 2 && typeof command.choice === "string") return engine.choose(life, command.choice);
-    if (command.type === "act" && fields.length === 2 && typeof command.activity === "string") return engine.act(life, command.activity);
+    if (command.type === "act" && typeof command.activity === "string" && (fields.length === 2 || (fields.length === 3 && command.calendarDeadline === true))) {
+      return engine.act(life, command.activity, command.calendarDeadline ? { calendarDeadline: true } : undefined);
+    }
+    if (command.type === "assess-jobs" && fields.length === 3 && typeof command.nodeId === "string"
+      && Array.isArray(command.jobIds) && command.jobIds.every(id => typeof id === "string")) {
+      return engine.assess(life, command.nodeId, command.jobIds);
+    }
     if (command.type === "market-order" && fields.length === 4 && (command.side === "buy" || command.side === "sell") && typeof command.asset === "string" && typeof command.quantity === "number") {
       return engine.orderMarket(life, { side: command.side, asset: command.asset, quantity: command.quantity });
     }

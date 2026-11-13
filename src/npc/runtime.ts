@@ -396,7 +396,7 @@ function applyDecision(
   if (decision.speech) emit(state, id, decision.speech, "speech");
   syncEconomyStat(world, life);
 }
-export function settlePeople(state: NpcSessionState, previous: LifeState) {
+export function settlePeople(state: NpcSessionState, previous: LifeState, world?: WorldPack) {
   emit(
     state,
     "world",
@@ -421,11 +421,12 @@ export function settlePeople(state: NpcSessionState, previous: LifeState) {
         if (amount < 10) npc.health -= 4;
       } else {
         const shop = state.player.demo!.town.merchant;
-        const cost = 10 * state.player.demo!.town.prices.grain.sell;
+        const cost = grainCost(state, 10, world);
         if (npc.cash >= cost && shop.grain >= 10) {
           npc.cash -= cost;
           shop.cash += cost;
           shop.grain -= 10;
+          if (world) recordGrainPurchase(world, state, 10);
         } else npc.health -= 4;
       }
       npc.health = Math.max(
@@ -635,11 +636,13 @@ export function stepLegacyNpcSimulation(
           "Resolve the NPC turn before advancing the year.",
         );
       state.player = structuredClone(engine.advance(life));
-      settlePeople(state, life);
+      settlePeople(state, life, engine.world);
     } else if (c.type === "choose") {
       state.player = structuredClone(engine.choose(life, c.choice));
     } else if (c.type === "act") {
-      state.player = structuredClone(engine.act(life, c.activity));
+      state.player = structuredClone(engine.act(life, c.activity, c.calendarDeadline ? { calendarDeadline: true } : undefined));
+    } else if (c.type === "assess-jobs") {
+      state.player = structuredClone(engine.assess(life, c.nodeId, c.jobIds));
     } else if (c.type === "avatar") {
       state.player = structuredClone(engine.chooseAvatar(life, c.variant));
     } else if (c.type === "market-order") {

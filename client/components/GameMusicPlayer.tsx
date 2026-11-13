@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useId } from "react";
+import { CLICK_SFX_CREDIT } from "../lib/audio-manager.ts";
 import { useAudioManager } from "../hooks/useAudioManager.ts";
 import "../styles/audio-player.css";
 
@@ -24,17 +25,44 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const wasOpenRef = useRef(false);
+  const restoreFocusOnCloseRef = useRef(false);
   const playlistHeadingId = useId();
 
+  function openDrawer() {
+    restoreFocusOnCloseRef.current = false;
+    setDrawerOpen(true);
+  }
+
+  function closeDrawer(restoreFocus: boolean) {
+    restoreFocusOnCloseRef.current = restoreFocus;
+    setDrawerOpen(false);
+  }
+
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
+    if (drawerOpen && !wasOpenRef.current) {
+      const target = closeButtonRef.current ?? drawerRef.current;
+      target?.focus({ preventScroll: true });
+    } else if (!drawerOpen && wasOpenRef.current && restoreFocusOnCloseRef.current) {
+      restoreFocusOnCloseRef.current = false;
+      triggerRef.current?.focus({ preventScroll: true });
+    }
+    wasOpenRef.current = drawerOpen;
+  }, [drawerOpen]);
+
+  useEffect(() => {
+    function handleClickOutside(e: Event) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setDrawerOpen(false);
+        closeDrawer(false);
       }
     }
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        setDrawerOpen(false);
+        e.preventDefault();
+        closeDrawer(true);
       }
     }
     if (drawerOpen) {
@@ -53,9 +81,10 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
   return (
     <div className={`game-music-player variant-${variant}`} ref={containerRef}>
       <button
+        ref={triggerRef}
         type="button"
         className={`music-square-trigger${isAudible ? " is-playing" : " is-muted"}${drawerOpen ? " is-open" : ""}`}
-        onClick={() => setDrawerOpen(prev => !prev)}
+        onClick={() => (drawerOpen ? closeDrawer(false) : openDrawer())}
         aria-expanded={drawerOpen}
         aria-haspopup="dialog"
         aria-label={`Audio settings (${isAudible ? `Playing: ${currentTrack.title}` : "Muted or paused"})`}
@@ -67,16 +96,24 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
       </button>
 
       {drawerOpen && (
-        <div className="music-drawer" role="dialog" aria-label="Everfolk Audio & Music Settings">
+        <div
+          ref={drawerRef}
+          className="music-drawer"
+          role="dialog"
+          aria-modal="false"
+          tabIndex={-1}
+          aria-label="Everfolk Audio & Music Settings"
+        >
           <div className="music-drawer-header">
             <div>
               <span className="music-drawer-eyebrow">AUDIO &amp; AMBIENCE</span>
               <h4 className="music-drawer-title">Soundscapes of the Nile</h4>
             </div>
             <button
+              ref={closeButtonRef}
               type="button"
               className="music-drawer-close"
-              onClick={() => setDrawerOpen(false)}
+              onClick={() => closeDrawer(true)}
               aria-label="Close audio settings"
             >
               ×
@@ -89,8 +126,8 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
                 {muted ? "MUTED" : isPlaying ? "NOW PLAYING" : "PAUSED"}
               </span>
               <strong className="music-track-title">{currentTrack.title}</strong>
-              <span className="music-track-origin">
-                {currentTrack.origin} · {currentTrack.composer}
+              <span className="music-track-origin" title={currentTrack.attribution}>
+                {currentTrack.origin} · {currentTrack.attribution}
               </span>
             </div>
             <div className="music-transport-row">
@@ -179,11 +216,17 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
                     className={`music-track-item${isActive ? " is-active" : ""}`}
                     aria-pressed={isActive}
                     onClick={() => selectTrack(idx)}
+                    onKeyDown={e => {
+                      if (e.key === " " || e.key === "Spacebar") {
+                        e.preventDefault();
+                        if (!e.repeat) selectTrack(idx);
+                      }
+                    }}
                   >
                     <span className="music-track-badge" aria-hidden="true">{isActive ? "✓" : idx + 1}</span>
                     <span className="music-track-item-info">
                       <strong>{track.title}</strong>
-                      <small>{track.origin} · {track.composer}</small>
+                      <small>{track.origin} · {track.composer} · {track.license}</small>
                       <span className="music-track-item-tag">{track.tag}</span>
                     </span>
                   </button>
@@ -202,6 +245,10 @@ export default function GameMusicPlayer({ variant = "default" }: { variant?: "de
               <span>✦</span>
               <span>UI Click Sound: {sfxEnabled ? "ON" : "OFF"}</span>
             </button>
+            <p className="music-credits-note">
+              Click SFX: {CLICK_SFX_CREDIT.attribution}.{" "}
+              <a href="/assets/audio/ATTRIBUTION.md" target="_blank" rel="noreferrer">Audio notices</a>
+            </p>
           </div>
         </div>
       )}

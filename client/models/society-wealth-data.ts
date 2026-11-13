@@ -4,7 +4,7 @@ import { merchantSaleValue } from "../../src/demo/market-depth.ts";
 import type { DemoState } from "../../src/demo/types.ts";
 import { initialTown } from "../../src/demo/market.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
-import type { Effect, WorldPack } from "../../src/types.ts";
+import type { Effect, LifeState, WorldPack } from "../../src/types.ts";
 
 export interface UniformRoll { first: number; step: number; count: number; /** Optional monotone whole-currency values for a nonlinear market curve. */ valueAt?: (index: number) => number }
 
@@ -24,30 +24,79 @@ export interface SocietyBenchmarkInfo {
   sampleCount: number;
 }
 
-/** In-memory store for recorded player life net worth observations per world and revision. */
-const recordedObservations = new Map<string, number[]>();
+export const MAX_RECORDED_OBSERVATIONS_PER_REVISION = 500;
+const MAX_RECORDED_REVISIONS = 64;
+
+export type WealthObservationsSnapshot = Record<string, Record<string, number>>;
+
+/** In-memory store for recorded player life net worth observations per world and revision, keyed by life identity. */
+const recordedObservations = new Map<string, Map<string, number>>();
+let anonymousObservationSeq = 0;
 
 function observationKey(worldId: string, worldVersion: string): string {
   return `${worldId}::${worldVersion}`;
 }
 
-/** Record a finished life's total assets (cash and holdings, before debt) for a specific world and compatible revision. */
-export function recordWealthObservation(worldId: string, worldVersion: string, netWorth: number): void {
+/** Stable identifier for a single recorded life so progression updates replace rather than duplicate it. */
+export function recordedLifeIdentity(life: Pick<LifeState, "worldFingerprint" | "seed">): string {
+  return `${life.worldFingerprint}:${life.seed}`;
+}
+
+function upsertObservation(key: string, id: string, roundedNetWorth: number): void {
+  const cleanId = id.trim();
+  if (!cleanId) return;
+  let entries = recordedObservations.get(key);
+  if (!entries) {
+    entries = new Map<string, number>();
+    recordedObservations.set(key, entries);
+  }
+  if (!entries.has(cleanId) && entries.size >= MAX_RECORDED_OBSERVATIONS_PER_REVISION) {
+    const oldest = entries.keys().next().value;
+    if (oldest !== undefined) entries.delete(oldest);
+  }
+  entries.set(cleanId, roundedNetWorth);
+}
+
+/** Record a life's total assets (cash and holdings, before debt) for a specific world and compatible revision. */
+export function recordWealthObservation(worldId: string, worldVersion: string, netWorth: number, lifeId?: string): void {
   if (!Number.isFinite(netWorth)) return;
-  const key = observationKey(worldId, worldVersion);
-  const existing = recordedObservations.get(key) ?? [];
-  existing.push(Math.round(netWorth));
-  recordedObservations.set(key, existing);
+  const id = lifeId?.trim() || `anon-${++anonymousObservationSeq}`;
+  upsertObservation(observationKey(worldId, worldVersion), id, Math.round(netWorth));
 }
 
 /** Retrieve all net-worth observations for a specific world revision. */
 export function getRecordedWealthObservations(worldId: string, worldVersion: string): readonly number[] {
-  return recordedObservations.get(observationKey(worldId, worldVersion)) ?? [];
+  const entries = recordedObservations.get(observationKey(worldId, worldVersion));
+  return entries ? Array.from(entries.values()) : [];
+}
+
+/** Export persisted recorded-life wealth observations per world revision. */
+export function exportWealthObservationsSnapshot(): WealthObservationsSnapshot {
+  const snapshot: WealthObservationsSnapshot = {};
+  for (const [revisionKey, entries] of recordedObservations.entries()) {
+    if (entries.size > 0) snapshot[revisionKey] = Object.fromEntries(entries);
+  }
+  return snapshot;
+}
+
+/** Restore recorded-life wealth observations from a validated snapshot. */
+export function hydrateWealthObservations(snapshot: WealthObservationsSnapshot, options?: { merge?: boolean }): void {
+  if (!options?.merge) clearRecordedWealthObservations();
+  for (const [revisionKey, entries] of Object.entries(snapshot).slice(0, MAX_RECORDED_REVISIONS)) {
+    if (!entries || typeof entries !== "object") continue;
+    for (const [lifeId, netWorth] of Object.entries(entries).slice(-MAX_RECORDED_OBSERVATIONS_PER_REVISION)) {
+      if (typeof netWorth !== "number" || !Number.isFinite(netWorth)) continue;
+      upsertObservation(revisionKey, lifeId, Math.round(netWorth));
+      const match = /^anon-(\d+)$/.exec(lifeId);
+      if (match) anonymousObservationSeq = Math.max(anonymousObservationSeq, Number(match[1]));
+    }
+  }
 }
 
 /** Clear all recorded net-worth observations (primarily for test isolation). */
 export function clearRecordedWealthObservations(): void {
   recordedObservations.clear();
+  anonymousObservationSeq = 0;
 }
 
 /** A handful of finished lives is not a society; below this many, the authored households stay the benchmark. */
@@ -62,16 +111,18 @@ function benchmarkObservations(world: WorldPack | undefined, explicitObservation
 /** Retrieve metadata describing whether the society comparison is based on recorded lives or authored fallback. */
 export function getSocietyWealthBenchmarkInfo(world: WorldPack, explicitObservations?: readonly number[]): SocietyBenchmarkInfo {
   const observations = benchmarkObservations(world, explicitObservations);
+  const revisionLabel = world?.version ? `world revision ${world.version}` : "this world revision";
   if (observations.length > 0) {
     return {
       kind: "recorded-lives",
-      description: `Based on ${observations.length} recorded player ${observations.length === 1 ? "life" : "lives"} in this world revision.`,
+      description: `Based on ${observations.length} recorded player ${observations.length === 1 ? "life" : "lives"} in ${revisionLabel}.`,
       sampleCount: observations.length,
     };
   }
+  const recordedCount = explicitObservations ? 0 : (world ? getRecordedWealthObservations(world.id, world.version).length : 0);
   return {
     kind: "authored-households",
-    description: "Based on starting household distributions (game population benchmark).",
+    description: `Based on starting household distributions (${recordedCount} of ${MIN_RECORDED_LIVES} recorded ${recordedCount === 1 ? "life" : "lives"} collected in ${revisionLabel}).`,
     sampleCount: world?.origins?.length ?? 0,
   };
 }

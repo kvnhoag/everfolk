@@ -5,7 +5,17 @@ import { KEY_DECISIONS } from "../chain/catalog/key-decisions.ts";
 import { NPC_ACTIONS } from "../chain/ids.ts";
 import { activationCommand, applyCommand, validateRankedSave } from "../chain/validate-ranked.ts";
 import { createMockContract } from "../client/chain/mock-contract.ts";
-import { beginRankedSession, ChainActionError, startRankedSession, resumeRankedSession, type RankedSession, type SessionStorage } from "../client/chain/ranked-session.ts";
+import {
+  beginRankedSession,
+  ChainActionError,
+  legacyRankedSaveKey,
+  rankedSaveKey,
+  removeRankedSave,
+  resumeRankedSession,
+  startRankedSession,
+  type RankedSession,
+  type SessionStorage,
+} from "../client/chain/ranked-session.ts";
 import type { Command, SaveFile, WorldPack } from "../src/types.ts";
 
 const CONTRACT = "everfolk-lives.testnet";
@@ -84,7 +94,7 @@ test("session save passes validateRankedSave", async () => {
 test("the save is persisted and resumes without rewinding", async () => {
   const { contract, storage, session } = await start();
   await playUntil(session, s => s.state.age >= 6);
-  const key = `everfolk.ranked.${session.life.life_id}`;
+  const key = rankedSaveKey(session.life.life_id, { contractId: CONTRACT });
   assert.equal(storage.getItem(key), session.save());
   const resumed = await resumeRankedSession({ contract, contractId: CONTRACT, verifyUrl: "x", world, storage }, session.life.life_id);
   assert.equal(resumed.save(), session.save());
@@ -375,7 +385,7 @@ test("a mint with a lost response is recovered directly even after its token cha
   const token = await contract.token(result.token_id);
   assert.equal(token?.extra.life_id, session.life.life_id);
   assert.equal(token?.owner_id, "buyer.testnet");
-  assert.equal(storage.getItem(`everfolk.ranked.${session.life.life_id}`), null, "the local save is cleared once minted");
+  assert.equal(storage.getItem(rankedSaveKey(session.life.life_id, { contractId: CONTRACT })), null, "the local save is cleared once minted");
 });
 
 async function finishedSmallLife() {
@@ -414,7 +424,8 @@ test("a committed mint resumes after reload without verification, replay or anot
   (session as unknown as { options: { contract: typeof contract } }).options.contract = wrapped;
   await assert.rejects(session.mint(signed, action), /resolver was interrupted/);
   assert.equal(session.life.status, "minting");
-  const saved = storage.getItem(`everfolk.ranked.${session.life.life_id}`);
+  const saveKey = rankedSaveKey(session.life.life_id, { contractId: CONTRACT });
+  const saved = storage.getItem(saveKey);
   assert.ok(saved, "finished progress stays saved while the mint is pending");
 
   const resumed = await resumeRankedSession({ ...options, contract: wrapped }, session.life.life_id);
@@ -428,18 +439,19 @@ test("a committed mint resumes after reload without verification, replay or anot
   assert.equal(retries, 1);
   assert.equal(resumed.life.status, "minted");
   assert.equal((await contract.mintResult(session.life.life_id))?.token_id, result.token_id);
-  assert.equal(storage.getItem(`everfolk.ranked.${session.life.life_id}`), null);
+  assert.equal(storage.getItem(saveKey), null);
 });
 
 test("a completed mint can be recovered after reload when local save cleanup was interrupted", async () => {
   const { contract, session, storage, options, signed, action } = await finishedSmallLife();
   const saved = session.save();
   const minted = await contract.mintLife(session.life.life_id, signed, action);
-  storage.setItem(`everfolk.ranked.${session.life.life_id}`, saved);
+  const saveKey = rankedSaveKey(session.life.life_id, { contractId: CONTRACT });
+  storage.setItem(saveKey, saved);
   const resumed = await resumeRankedSession(options, session.life.life_id);
   contract.retryMint = async () => { throw new Error("An already complete mint must not send another transaction"); };
   assert.deepEqual(await resumed.recoverMint(), minted);
-  assert.equal(storage.getItem(`everfolk.ranked.${session.life.life_id}`), null);
+  assert.equal(storage.getItem(saveKey), null);
 });
 
 test("a pending mint with no local save is never started again as a new playable life", async () => {
@@ -479,11 +491,107 @@ test("a completed unminted save is recognized as ended when the chain still call
   await playUntil(session, () => false, 20000);
   assert.equal(session.state.phase, "ended");
   assert.equal(session.life.status, "alive");
-  const progress = await rankedProgress(session.life, storage, world);
+  const progress = await rankedProgress(session.life, storage, world, { contractId: CONTRACT });
   assert.equal(progress.status, "ended");
   assert.equal(progress.age, session.state.age);
-  const wrong = await rankedProgress({ ...session.life, seed: "0".repeat(64) }, storage, world);
+  const wrong = await rankedProgress({ ...session.life, seed: "0".repeat(64) }, storage, world, { contractId: CONTRACT });
   assert.equal(wrong.status, "unavailable", "a save from a different deployment cannot masquerade as a finished life");
+});
+
+test("ranked saves stay isolated across contracts, networks and practice mode on matching life ids", async () => {
+  const { rankedProgress } = await import("../client/chain/ranked-progress.ts");
+  const storage = memoryStorage();
+
+  const oldContract = createMockContract({ genesis: true, abandonCooldownMs: 0, accountId: "old-player.testnet" });
+  const newContract = createMockContract({ genesis: true, abandonCooldownMs: 0, accountId: "new-player.testnet" });
+  const mainnetContract = createMockContract({ genesis: true, abandonCooldownMs: 0, accountId: "mainnet-player.near" });
+  const practiceContract = createMockContract({ genesis: true, abandonCooldownMs: 0, accountId: "practice-player.testnet" });
+
+  const oldLife = await oldContract.startLife("alexandria-ranked-1");
+  const newLife = await newContract.startLife("alexandria-ranked-1");
+  const mainnetLife = await mainnetContract.startLife("alexandria-ranked-1");
+  const practiceLife = await practiceContract.startLife("alexandria-ranked-1");
+  assert.equal(oldLife.life_id, newLife.life_id);
+  assert.equal(oldLife.life_id, mainnetLife.life_id);
+  assert.equal(oldLife.life_id, practiceLife.life_id);
+  assert.notEqual(oldLife.seed, newLife.seed);
+
+  const oldOpts = { contract: oldContract, contractId: "old-lives.testnet", verifyUrl: "x", world, storage };
+  const newOpts = { contract: newContract, contractId: "new-lives.testnet", verifyUrl: "x", world, storage };
+  const mainnetOpts = { contract: mainnetContract, contractId: "new-lives.testnet", networkId: "mainnet", verifyUrl: "x", world, storage };
+  const practiceOpts = { contract: practiceContract, contractId: "new-lives.testnet", practice: true, verifyUrl: "x", world, storage };
+
+  const oldSession = await beginRankedSession(oldOpts, oldLife);
+  await playUntil(oldSession, s => s.state.age >= 6);
+
+  assert.equal((await rankedProgress(newLife, storage, world, { contractId: newOpts.contractId })).status, "new");
+  assert.equal((await rankedProgress(practiceLife, storage, world, { contractId: practiceOpts.contractId, practice: true })).status, "new");
+  assert.equal((await rankedProgress(mainnetLife, storage, world, { contractId: mainnetOpts.contractId, networkId: "mainnet" })).status, "new");
+
+  const newSession = await beginRankedSession(newOpts, newLife);
+  await playUntil(newSession, s => s.state.age >= 4);
+  const practiceSession = await beginRankedSession(practiceOpts, practiceLife);
+  await playUntil(practiceSession, s => s.state.age >= 2);
+  const mainnetSession = await beginRankedSession(mainnetOpts, mainnetLife);
+
+  const oldResumed = await resumeRankedSession(oldOpts, oldLife.life_id);
+  const newResumed = await resumeRankedSession(newOpts, newLife.life_id);
+  const practiceResumed = await resumeRankedSession(practiceOpts, practiceLife.life_id);
+  assert.equal(oldResumed.state.seed, oldLife.seed);
+  assert.equal(newResumed.state.seed, newLife.seed);
+  assert.equal(practiceResumed.state.seed, practiceLife.seed);
+  assert.ok(oldResumed.state.age >= 6);
+  assert.ok(newResumed.state.age >= 4);
+  assert.ok(practiceResumed.state.age >= 2);
+
+  await practiceSession.abandon();
+  assert.equal(storage.getItem(rankedSaveKey(practiceLife.life_id, { contractId: practiceOpts.contractId, practice: true })), null);
+  assert.ok(storage.getItem(rankedSaveKey(oldLife.life_id, { contractId: oldOpts.contractId })), "abandoning practice must not clear live save");
+  assert.ok(storage.getItem(rankedSaveKey(newLife.life_id, { contractId: newOpts.contractId })), "abandoning practice must not clear other live contract");
+  assert.ok(storage.getItem(rankedSaveKey(newLife.life_id, { contractId: mainnetOpts.contractId, networkId: "mainnet" })));
+
+  await newSession.abandon();
+  assert.equal(storage.getItem(rankedSaveKey(newLife.life_id, { contractId: newOpts.contractId })), null);
+  assert.ok(storage.getItem(rankedSaveKey(oldLife.life_id, { contractId: oldOpts.contractId })), "abandoning new contract must not clear old contract save");
+  await mainnetSession.abandon();
+});
+
+test("legacy unscoped keys migrate only for their matching life and never collide or get cleared by other ledgers", async () => {
+  const { rankedProgress } = await import("../client/chain/ranked-progress.ts");
+  const storage = memoryStorage();
+
+  const oldContract = createMockContract({ genesis: true, abandonCooldownMs: 0, accountId: "old-player.testnet" });
+  const oldSession = await startRankedSession({ contract: oldContract, contractId: "old-lives.testnet", verifyUrl: "x", world, storage });
+  await playUntil(oldSession, s => s.state.age >= 5);
+  const oldKey = rankedSaveKey(oldSession.life.life_id, { contractId: "old-lives.testnet" });
+  const legacyKey = legacyRankedSaveKey(oldSession.life.life_id);
+  const legacySaved = storage.getItem(oldKey)!;
+  storage.setItem(legacyKey, legacySaved);
+  storage.removeItem(oldKey);
+
+  // An unrelated new contract with the same life_id must ignore and preserve the legacy save.
+  const otherContract = createMockContract({ genesis: true, abandonCooldownMs: 0, accountId: "new-player.testnet" });
+  const otherLife = await otherContract.startLife("alexandria-ranked-1");
+  assert.equal(otherLife.life_id, oldSession.life.life_id);
+  const otherProgress = await rankedProgress(otherLife, storage, world, { contractId: "new-lives.testnet" });
+  assert.equal(otherProgress.status, "new");
+
+  const otherSession = await beginRankedSession({ contract: otherContract, contractId: "new-lives.testnet", verifyUrl: "x", world, storage }, otherLife);
+  assert.equal(storage.getItem(legacyKey), legacySaved, "unrelated legacy key must be untouched");
+  removeRankedSave(storage, otherLife, { contractId: "new-lives.testnet" });
+  await otherSession.abandon();
+  assert.equal(storage.getItem(legacyKey), legacySaved, "cleanup on unrelated ledger must preserve original legacy save");
+
+  // Switching back to the matching ledger validates and migrates the legacy save.
+  const oldProgress = await rankedProgress(oldSession.life, storage, world, { contractId: "old-lives.testnet" });
+  assert.equal(oldProgress.status, "playing");
+  assert.equal(oldProgress.age, oldSession.state.age);
+  assert.equal(storage.getItem(legacyKey), legacySaved, "progress read alone does not mutate storage");
+
+  const migrated = await beginRankedSession({ contract: oldContract, contractId: "old-lives.testnet", verifyUrl: "x", world, storage }, oldSession.life);
+  assert.equal(migrated.state.age, oldSession.state.age);
+  assert.equal(storage.getItem(legacyKey), null, "validated legacy key is retired after migration");
+  assert.equal(storage.getItem(oldKey), legacySaved);
 });
 
 test("verifiable life history checks both evidence and choices before displaying them", async () => {
