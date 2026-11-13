@@ -1,0 +1,56 @@
+EVERFOLK / ALEXANDER / EQUIPMENT REVISION V5
+
+Purpose
+Extend the actual-reference workflow from face/hair to sword, armour and dress.
+Retain the v4 imagined face, readable gaze, mounted gesture and painterly style.
+
+Actual visual references
+1. Greek iron machaira/kopis, 5th-4th century BCE, former Met object 2001.346,
+56.5 cm overall, 0.7 kg. Official public-domain photograph shows two weapons;
+the UPPER weapon guides the new curved blade profile and compact hooked grip.
+https://www.metmuseum.org/art/collection/search/257576
+https://collectionapi.metmuseum.org/api/collection/v1/iiif/257576/1752237/main-image
+Local: references/greek-machaira-met-2001.346.jpg
+The record says the object was restituted in September 2025 and is no longer
+in the Met collection. It is a sword-type reference, not Alexander's weapon.
+
+2. Alexander Mosaic, MANN inv. 10020, House of the Faun, Pompeii.
+Late second century BCE, inspired by a pictorial model.
+https://www.museoarcheologiconapoli.it/mosaici/
+https://www.museoarcheologiconapoli.it/portfolio-item/mosaici/
+Official photo: MANN / Giorgio Albano.
+https://www.museoarcheologiconapoli.it/mann/uploads/2025/07/1-Battaglia-di-Dario-e-Alessandro-inv.-10020.-ALBANO-scaled-1.jpg
+Local: references/mann-alexander-mosaic-10020.jpg
+Detail: references/mann-alexander-armour-detail.png, a faithful ArtCraft view
+crop of the original photograph, not a generated reconstruction. Source JPEG
+remains unchanged. It guides shoulder pieces, edged cuirass, chest device,
+waist ties and closely spaced overlapping skirt strips (pteruges).
+The museum page does not establish the cuirass's material. Surface, material,
+hidden construction and details not legible in the mosaic are reconstructions.
+
+3. Mounted Alexander bronze, MANN inv. 4996, Getty conservation publication.
+First century BCE; potentially a Roman adaptation of a Hellenistic prototype,
+with restorations. The article identifies a silver-inlaid rosette fastening
+the mantle on the rider's RIGHT shoulder. Use its drape and fastening only;
+do not mistake the horse's larger bridle rosettes for the rider's clasp.
+https://www.getty.edu/publications/artistryinbronze/conservation-and-analysis/44-siano/
+https://www.getty.edu/publications/artistryinbronze/assets/img/figures/fig_44.01a_Siano_Melillo.jpg
+Photo: Salvatore Siano, by permission of MANN.
+Local: references/naples-alexander-mounted-cloak.jpg
+The extra oblique front photograph in this folder is supporting context only.
+
+Production
+Built-in image editing uses the v4 artwork as the edit target and the actual
+references above as equipment guides. Exact prompt: source/generation-prompt.txt.
+The generated source is source/alexander-equipment-revised.png. It is not
+an authenticated reconstruction of Alexander's complete personal panoply.
+Sword grip material, clothing colours and hidden construction are artistic
+choices. No new individually authored brush pass is claimed for v5.
+PixelOE 1.0.0 uses a 420 x 525 logical grid enlarged exactly 2x to 840 x 1050.
+ArtCraft keeps frame, text, rarity, emblem and footer independently editable;
+the character illustration itself is flattened. Final pixel PNG is composited
+at 100% under native frame/type to avoid raster interpolation.
+
+Reference photographs stay in the review/source workflow, separate from the
+generated card illustration. Prior v3/v4 variants remain unchanged. Card rarity,
+flavour and numbering are exploratory; no NFT is minted.

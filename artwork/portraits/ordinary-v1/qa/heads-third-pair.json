@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "sourceCount": 11,
+  "assets": [
+    {
+      "id": "ef-h-m01-infant-v1",
+      "path": "source/heads/ef-h-m01-infant-v1.png",
+      "dimensions": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        37,
+        1068,
+        1294
+      ],
+      "edgeAlphaNonzero": 6,
+      "sha256": "6edc43b54004ee4a7fda2dae4910da1f38f22f92817cbf6ef97a6fd1dddb81fa",
+      "alpha128BBox": [
+        156,
+        44,
+        1059,
+        1219
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-m01-child-v1",
+      "path": "source/heads/ef-h-m01-child-v1.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        23,
+        1286,
+        1159
+      ],
+      "edgeAlphaNonzero": 4,
+      "sha256": "f6995fd6133e67dfca191c1ad3af533c931d59cd0e640a6165cbbc8b2ea26d4a",
+      "alpha128BBox": [
+        259,
+        49,
+        1028,
+        1136
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-m01-youth-v1",
+      "path": "source/heads/ef-h-m01-youth-v1.png",
+      "dimensions": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        2,
+        1193,
+        1312
+      ],
+      "edgeAlphaNonzero": 44,
+      "sha256": "f2e581fb3fb8dee0810fbd22692bd1f970c49e277d1641a82a337b6daa292267",
+      "alpha128BBox": [
+        207,
+        15,
+        976,
+        1248
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-m01-middle-v1",
+      "path": "source/heads/ef-h-m01-middle-v1.png",
+      "dimensions": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        10,
+        1180,
+        1298
+      ],
+      "edgeAlphaNonzero": 106,
+      "sha256": "043f2a899e4b439a8b4c0368b5576bbfc1721d698bbf6fe8acc43752a2b4d578",
+      "alpha128BBox": [
+        195,
+        16,
+        973,
+        1272
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-m01-elder-v1",
+      "path": "source/heads/ef-h-m01-elder-v1.png",
+      "dimensions": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        0,
+        1183,
+        1312
+      ],
+      "edgeAlphaNonzero": 310,
+      "sha256": "c08ac00caddcedfee0cff5415f4275e249a3e488e11fb398920afe0378b491ea",
+      "alpha128BBox": [
+        192,
+        9,
+        982,
+        1258
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-f03-infant-v1",
+      "path": "source/heads/ef-h-f03-infant-v1.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        16,
+        1288,
+        1165
+      ],
+      "edgeAlphaNonzero": 2,
+      "sha256": "f87ccedf4212f6af2c97c79b1c40b608d3711fcb2a8aab257727a73737de0ee9",
+      "alpha128BBox": [
+        258,
+        62,
+        1034,
+        1134
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-f03-child-v1",
+      "path": "source/heads/ef-h-f03-child-v1.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        31,
+        1240,
+        1167
+      ],
+      "edgeAlphaNonzero": 6,
+      "sha256": "744f015fb139016f93788d9d02ca85d5478c5bb3008689fa7dde8bf0bf2dfa83",
+      "alpha128BBox": [
+        245,
+        34,
+        1066,
+        1126
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-f03-youth-v1",
+      "path": "source/heads/ef-h-f03-youth-v1.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        11,
+        1298,
+        1169
+      ],
+      "edgeAlphaNonzero": 9,
+      "sha256": "8746622bdaf953dd8937b31d7c02a68938e808d0043f3d22c243bbca959308ae",
+      "alpha128BBox": [
+        263,
+        16,
+        1046,
+        1160
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-f03-adult-v1",
+      "path": "source/heads/ef-h-f03-adult-v1.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        0,
+        1276,
+        1183
+      ],
+      "edgeAlphaNonzero": 43,
+      "sha256": "bf851e2fcb24acfb422ea847d2ec84c919e0c851f76c5628b737e259f300028e",
+      "alpha128BBox": [
+        257,
+        15,
+        1051,
+        1173
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-f03-middle-v1",
+      "path": "source/heads/ef-h-f03-middle-v1.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        0,
+        0,
+        1282,
+        1185
+      ],
+      "edgeAlphaNonzero": 33,
+      "sha256": "1aed61337b3493be67a3a8947a5cf9360bae825b98d5e13924fcc89b78a7b13d",
+      "alpha128BBox": [
+        261,
+        14,
+        1054,
+        1178
+      ],
+      "alpha128EdgeNonzero": 0
+    },
+    {
+      "id": "ef-h-f03-elder-v1",
+      "path": "source/heads/ef-h-f03-elder-v1.png",
+      "dimensions": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        41,
+        0,
+        1224,
+        1199
+      ],
+      "edgeAlphaNonzero": 41,
+      "sha256": "f2c6847540c6654b11a4a505995d2326673f50cf17729c77d71768377e5d6c4d",
+      "alpha128BBox": [
+        252,
+        10,
+        1059,
+        1173
+      ],
+      "alpha128EdgeNonzero": 0
+    }
+  ]
+}

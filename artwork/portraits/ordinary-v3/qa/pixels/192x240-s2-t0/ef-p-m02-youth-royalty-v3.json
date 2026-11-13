@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-m02-youth-royalty-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-m02-youth-royalty-v3.png",
+  "sourceSha256": "946a666e503287349a5e2b638aa957e6d90cdc4d4c71c2e1777576768d5606b9",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      192,
+      240
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    192,
+    240
+  ],
+  "scale": 2,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/192x240-s2-t0/ef-p-m02-youth-royalty-v3.logical.png",
+  "logicalSha256": "74ca6bc893b48602e70203d8ee39dbba1049fbc22fe7dc2a484695fe7a6a7aad",
+  "outputPath": "portraits/192x240-s2-t0/ef-p-m02-youth-royalty-v3.png",
+  "outputSha256": "a0b63b8229a440926ea001825284f4bbc96f697e90d253bc4204a2115b158d45",
+  "logicalPixelSha256": "9b894c802342021237d6a2be45dbdfd760938014dcfbd89567ed09e45cb05589",
+  "uniqueColours": 12341,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

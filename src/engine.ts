@@ -25,6 +25,8 @@ import { randomEventWeights } from "./event-variety.ts";
 import { awardAccomplishment, legacyText } from "./legacy.ts";
 import { encounterPerson, initializeIdentity, personText, visiblePersonChoice } from "./people.ts";
 import { initializeFamily } from "./family.ts";
+import { applyRoyalEffect, initialRoyalty, isRoyalLife, progressRoyalty, royalAudienceAllowed } from "./royalty.ts";
+import { applyAristocratEffect, initialAristocracy, isAristocratLife, isPrivilegedLife, progressAristocracy } from "./aristocracy.ts";
 export { matchesCondition } from "./conditions.ts";
 import type { DemoCommand } from "./demo/types.ts";
 import { demoContext, initialDemo } from "./demo/state.ts";
@@ -99,6 +101,8 @@ function mutableSnapshot(state: LifeState): LifeState {
   return {
     ...state,
     stats: { ...state.stats }, flags: { ...state.flags },
+    ...(state.royalty ? { royalty: { ...state.royalty } } : {}),
+    ...(state.aristocracy ? { aristocracy: { ...state.aristocracy } } : {}),
     eventCounts: { ...state.eventCounts }, lastEventAge: { ...state.lastEventAge },
     journal: [...state.journal], commands: [...state.commands],
     ...(state.accomplishments ? { accomplishments: [...state.accomplishments] } : {}),
@@ -265,6 +269,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
       const reason = characterEffectReason(world, state, effect, true);
       if (reason) throw new Error(`Character effect is unavailable: ${reason}`);
       switch (effect.type) {
+        case "royal": applyRoyalEffect(world, state, effect); break;
+        case "aristocrat": applyAristocratEffect(world, state, effect); break;
         case "accomplishment": {
           if (!provenance) throw new Error("Accomplishments require an accepted decision or activity outcome.");
           if (isUnavailable(world.demo, "accomplishment", effect.achievement)) throw new Error("Character effect is unavailable: Not available in this demo.");
@@ -438,12 +444,18 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
 
   function eligible(event: LifeEvent, state: LifeState): boolean {
     if (influences.inactive(event.id, state)) return false;
+    if (!royalAudienceAllowed(world, state, event.audience)) return false;
     // Medical decisions are interrupts from the health lifecycle, never an
     // unrelated random story or a repeat after care was already chosen.
     if (world.health?.careDecision === event.id) return false;
     if (world.economy?.moneylender && Object.values(world.economy.moneylender.events).includes(event.id)) return false;
     if (event.exclusiveGroup && exclusiveGroups.get(event.exclusiveGroup)!.some(member => (state.eventCounts[member.id] ?? 0) > 0)) return false;
     if ((state.eventCounts[event.id] ?? 0) >= (event.maxOccurrences ?? 1)) return false;
+    // Explicit cooldowns also apply to recurring scheduled invitations. A failed
+    // task cannot offer its next annual review again during the same year.
+    const previousAge = state.lastEventAge[event.id];
+    if (event.trigger.type !== "random" && event.cooldownYears !== undefined && previousAge !== undefined &&
+      state.age - previousAge < event.cooldownYears) return false;
     if (!inTimeFrame(world, event, state.age)) return false;
     // In staged worlds a decision outside the player's scope is resolved by others, or does not happen.
     const byOthers = decidedByOthers(world, event, state.age);
@@ -758,6 +770,8 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (world.economy && !state.economy) throw new Error("State is missing its economy record.");
     if (world.health && !state.health) throw new Error("State is missing its health record.");
     if (world.knowledge && !state.knowledge) throw new Error("State is missing its knowledge record.");
+    if (isRoyalLife(world, state) && !state.royalty) throw new Error("State is missing its royal household record.");
+    if (isAristocratLife(world, state) && !state.aristocracy) throw new Error("State is missing its aristocratic estate record.");
   }
 
   function start(seed: string): LifeState {
@@ -790,6 +804,10 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     if (world.relationships && state.character) state.character.relationships = initialRelationships(world)!;
     const origin = pick(world.origins, candidate => candidate.weight, state);
     state.originId = origin.id;
+    const royalty = initialRoyalty(world, state);
+    if (royalty) state.royalty = royalty;
+    const aristocracy = initialAristocracy(world, state);
+    if (aristocracy) state.aristocracy = aristocracy;
     for (const [id, definition] of Object.entries(world.stats)) {
       const range = origin.statRanges?.[id] ?? definition.initialRange;
       if (range) state.stats[id] = startingStat(range.min, range.max, state);
@@ -850,9 +868,12 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     next.age += 1;
     next.year = yearAtAge(birthYearOf(world, next), next.age);
     journal(next, "year", `age-${next.age}`, `Age ${next.age}`);
-    const marketYear = settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
+    const privileged = isPrivilegedLife(world, next);
+    const marketYear = privileged ? { focused: false, productionBatches: 0 }
+      : settleMarketYear(world, next, completedAge, (id, text) => journal(next, "activity", id, text));
     if (world.economy?.market) syncEconomyStat(world, next);
     const annualIncome = (): void => {
+      if (privileged) return;
       if (next.phase !== "ended" && next.character?.jobId && next.vocations?.workedAge !== next.age - 1) {
         const job = world.character!.jobs.find(candidate => candidate.id === next.character!.jobId)!;
         if (marketYear.focused) journal(next, "activity", "work-set-aside-for-trade", `You set aside your ${job.title.toLowerCase()} work to focus on market trading this year. No job income or production is earned.`);
@@ -897,7 +918,11 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
     apply(next, world.yearlyEffects);
     for (const rule of world.yearlyRules ?? []) {
       if (next.phase === "ended") break;
-      if (matches(rule.when, next)) apply(next, rule.effects);
+      if (royalAudienceAllowed(world, next, rule.audience) && matches(rule.when, next)) apply(next, rule.effects);
+    }
+    if (next.phase !== "ended") {
+      progressRoyalty(world, next);
+      progressAristocracy(world, next);
     }
     if (!world.economy) annualIncome();
     const repaid = repayDebtAutomatically(world, next);
@@ -978,6 +1003,7 @@ export function createEngine(input: unknown, observer?: JournalObserver): LifeEn
   function getActivities(state: LifeState): readonly ActivityAvailability[] {
     assertCompatible(state);
     return freeze((world.character?.activities ?? []).filter(activity => {
+      if (!royalAudienceAllowed(world, state, activity.audience)) return false;
       if (!world.character?.requireIntroductions) return true;
       const known = state.character?.knownPartnerIds ?? [];
       const introduced = new Set(activity.outcomes.flatMap(outcome => outcome.effects.flatMap(effect => effect.type === "introduce" ? [effect.partner] : [])));

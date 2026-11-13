@@ -1,0 +1,38 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-reference-v2\\source\\alexander-card-clean.png",
+  "sourceSha256": "bdc5dc6041ccdd26386a2f300170f6e831595d42f7de5f3f63ec1f520bdb3abc",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "method": "PixelOE 1.0.0 legacy CPU API",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    420,
+    525
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "outputSha256": "fbe4f4fdcd3c398cbf11e27c7915a9dcea4291af3179964647f7d60da6245545",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "sourceUnchanged": true
+}

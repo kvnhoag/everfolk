@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-13",
+  "asset": "Everfolk TCG layout and border, first direction",
+  "tool": "built-in image_gen.imagegen",
+  "mode": "ui-mockup generation using an existing card as style reference",
+  "prompt": "generation-prompt.txt",
+  "reference": "../../alexander-face-detail-v9/review/Alexander-The-Great-card.png",
+  "referenceRole": "Palette, typographic hierarchy and restrained bronze frame; no character art requested",
+  "output": "../review/Everfolk-frame-concept.png",
+  "generatedOriginal": "C:/Users/Legion/.codex/generated_images/01a1d488-0a7b-7d91-9ad5-4379f05d6a0b/exec-c27015c5-cea6-479f-b381-fe9decfd9260.png",
+  "transparentBackground": false,
+  "userConstraint": "Legendary cards use full art",
+  "status": "Initial design direction for review",
+  "notes": [
+    "Generated comparison is flattened and uses artwork placeholders.",
+    "Reusable geometry and live text are authored separately in the SVG templates.",
+    "Standard denotes a layout, not an approved rarity name.",
+    "Combat mechanics, complete rarity tiers and print production specifications are not established by this asset."
+  ]
+}

@@ -28,6 +28,15 @@ test("money uses explicit units, grouping, singular/plural and negative net wort
   assert.equal(formatMoney(-20, world), "-20 dr");
 });
 
+test("wealth amounts round to the nearest whole currency unit", () => {
+  assert.equal(formatMoney(1250.49, world), "1,250 dr");
+  assert.equal(formatMoney(1250.5, world), "1,251 dr");
+  assert.equal(formatMoney(-20.6, world), "-21 dr");
+  assert.equal(formatMoney(0.6, world, true), "1 drachma");
+  assert.equal(formatMoney(1.6, world, true), "2 drachmas");
+  assert.equal(formatMoney(-0.4, world, true), "0 drachmas");
+});
+
 test("wealth separates available cash from assets and debt, not a capped score", () => {
   const life = ready(2000); life.economy!.assets["tool-chest"] = 1; life.economy!.debt = 50;
   const before = structuredClone(life);

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <title>01 Standalone emblem / ink</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Standalone_scarab___ink" data-name="01 Standalone scarab / ink">
+    <g id="_07_Unfolding___standalone_scarab" data-name="07 Unfolding / standalone scarab">
+      <path id="Left_open_shell" data-name="Left open shell" d="M228.571 203.429 C178.286 212.571 141.714 258.286 137.143 310.857 C132.571 368 160 427.429 210.286 457.143 L228.571 416 C194.286 386.286 180.571 354.286 185.143 317.714 C189.714 278.857 210.286 246.857 242.286 221.714 Z" fill="#284744"/>
+      <polygon id="Left_foreleg" data-name="Left foreleg" points="210.286,173.714 164.571,134.857 155.429,77.714 132.571,54.857 116.571,73.143 132.571,96 141.714,150.857 192,198.857" fill="#284744"/>
+      <polygon id="Left_middle_leg" data-name="Left middle leg" points="146.286,253.714 93.714,233.143 48,260.571 59.429,285.714 96,262.857 139.429,283.429" fill="#284744"/>
+      <polygon id="Left_hind_leg" data-name="Left hind leg" points="144,358.857 93.714,386.286 82.286,448 105.143,454.857 116.571,404.571 164.571,384" fill="#284744"/>
+      <path id="Right_open_shell" data-name="Right open shell" d="M283.429 203.429 C333.714 212.571 370.286 258.286 374.857 310.857 C379.429 368 352 427.429 301.714 457.143 L283.429 416 C317.714 386.286 331.429 354.286 326.857 317.714 C322.286 278.857 301.714 246.857 269.714 221.714 Z" fill="#284744"/>
+      <polygon id="Right_foreleg" data-name="Right foreleg" points="301.714,173.714 347.429,134.857 356.571,77.714 379.429,54.857 395.429,73.143 379.429,96 370.286,150.857 320,198.857" fill="#284744"/>
+      <polygon id="Right_middle_leg" data-name="Right middle leg" points="365.714,253.714 418.286,233.143 464,260.571 452.571,285.714 416,262.857 372.571,283.429" fill="#284744"/>
+      <polygon id="Right_hind_leg" data-name="Right hind leg" points="368,358.857 418.286,386.286 429.714,448 406.857,454.857 395.429,404.571 347.429,384" fill="#284744"/>
+      <polygon id="Scalloped_head" data-name="Scalloped head" points="219.429,89.143 228.571,61.714 244.571,68.571 256,54.857 267.429,68.571 283.429,61.714 292.571,89.143 283.429,114.286 228.571,114.286" fill="#284744"/>
+      <path id="Open_shoulder_thorax" data-name="Open shoulder thorax" d="M208 139.429 C240 130.286 272 130.286 304 139.429 L322.286 180.571 C278.095 194.286 233.905 194.286 189.714 180.571 Z" fill="#284744"/>
+      <path id="Seed_abdomen_with_transparent_heart" data-name="Seed abdomen with transparent heart" d="M256 240 C221.714 278.857 210.286 315.429 219.429 354.286 C226.286 390.857 242.286 420.571 256 436.571 C269.714 420.571 285.714 390.857 292.571 354.286 C301.714 315.429 290.286 278.857 256 240 Z M256 299.429 C274.286 326.857 281.143 356.571 256 388.571 C230.857 356.571 237.714 326.857 256 299.429 Z" fill="#284744"/>
+    </g>
+  </g>
+  <g id="_02_Standalone_scarab___cream" data-name="02 Standalone scarab / cream">
+  </g>
+  <g id="_03_Scarab_and_name___cream" data-name="03 Scarab and name / cream">
+  </g>
+  <g id="_04_Scarab_beside_name___ink" data-name="04 Scarab beside name / ink">
+  </g>
+</svg>

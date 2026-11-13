@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-f01-middle-royalty-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-f01-middle-royalty-v3.png",
+  "sourceSha256": "39ebf4622b3de7dd1c214c57f2beba3df949ed377aeea50afd6f7002e697e6cf",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-f01-middle-royalty-v3.logical.png",
+  "logicalSha256": "d3a99384c39fb32887ecbb3c4f83b6cd497f848ff39c0bb73a00c42f066ee53a",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-f01-middle-royalty-v3.png",
+  "outputSha256": "961a6a03659d026ea4fc4147af0ce8478bc68d6a452bd6aa2cb122b747ebac19",
+  "logicalPixelSha256": "988df64fc45c8adf08d0125a4a581a35b66d1d4dd66bed4ee14abceaab78cbe6",
+  "uniqueColours": 7523,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

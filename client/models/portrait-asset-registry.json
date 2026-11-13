@@ -1,0 +1,2344 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v3",
+  "assetVersion": "v3",
+  "sourceManifestSha256": "8f6804ea56edbfae12e5ddea4f6aef7d878f3155d6a465a53565258d39e49e9e",
+  "dimensions": {
+    "width": 384,
+    "height": 480
+  },
+  "identities": [
+    {
+      "id": "m01",
+      "sex": "male",
+      "avatarVariant": 0
+    },
+    {
+      "id": "m02",
+      "sex": "male",
+      "avatarVariant": 1
+    },
+    {
+      "id": "m03",
+      "sex": "male",
+      "avatarVariant": 2
+    },
+    {
+      "id": "f01",
+      "sex": "female",
+      "avatarVariant": 0
+    },
+    {
+      "id": "f02",
+      "sex": "female",
+      "avatarVariant": 1
+    },
+    {
+      "id": "f03",
+      "sex": "female",
+      "avatarVariant": 2
+    }
+  ],
+  "defaultWardrobes": {
+    "infant": "infant",
+    "child": "child",
+    "youth": "youth",
+    "adult": "everyday",
+    "middle": "everyday",
+    "elder": "everyday"
+  },
+  "stageWardrobes": {
+    "infant": [
+      "infant"
+    ],
+    "child": [
+      "child",
+      "work"
+    ],
+    "youth": [
+      "youth",
+      "work",
+      "maritime",
+      "scholarly",
+      "performance",
+      "aristocrat",
+      "royalty"
+    ],
+    "adult": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance",
+      "aristocrat",
+      "royalty"
+    ],
+    "middle": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance",
+      "aristocrat",
+      "royalty"
+    ],
+    "elder": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance",
+      "aristocrat",
+      "royalty"
+    ]
+  },
+  "jobs": [
+    {
+      "id": "apprentice",
+      "title": "Workshop apprentice",
+      "wardrobeId": "work",
+      "minAge": 12
+    },
+    {
+      "id": "porter",
+      "title": "Quay porter",
+      "wardrobeId": "maritime",
+      "minAge": 14
+    },
+    {
+      "id": "potter",
+      "title": "Potter",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "clerk",
+      "title": "Merchant's clerk",
+      "wardrobeId": "scholarly",
+      "minAge": 14
+    },
+    {
+      "id": "copyist",
+      "title": "Workshop copyist",
+      "wardrobeId": "scholarly",
+      "minAge": 14
+    },
+    {
+      "id": "sailor",
+      "title": "Merchant sailor",
+      "wardrobeId": "maritime",
+      "minAge": 16
+    },
+    {
+      "id": "shopkeeper",
+      "title": "Small-shop keeper",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "ceramic-decorator",
+      "title": "Ceramic decorator",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "wood-carver",
+      "title": "Wood carver",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "sculptor",
+      "title": "Sculptor",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "philosophy-tutor",
+      "title": "Philosophy tutor",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "sky-table-calculator",
+      "title": "Sky-table calculator",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "astrologer",
+      "title": "Sky-omen interpreter",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "soldier",
+      "title": "Royal army soldier",
+      "wardrobeId": "military",
+      "minAge": 18
+    },
+    {
+      "id": "officer",
+      "title": "Royal army officer",
+      "wardrobeId": "military",
+      "minAge": 22
+    },
+    {
+      "id": "general",
+      "title": "Royal army general",
+      "wardrobeId": "military",
+      "minAge": 28
+    },
+    {
+      "id": "court-adviser",
+      "title": "Royal court adviser",
+      "wardrobeId": "elite",
+      "minAge": 24
+    },
+    {
+      "id": "patron-supported-reader",
+      "title": "Patron-supported reader",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "pottery-workshop-lead",
+      "title": "Pottery workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "carving-workshop-lead",
+      "title": "Wood-carving workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "sculpture-workshop-lead",
+      "title": "Sculpture workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "performer",
+      "title": "Hired musician",
+      "wardrobeId": "performance",
+      "minAge": 16
+    },
+    {
+      "id": "farmer",
+      "title": "Independent farmer",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "weaver",
+      "title": "Independent weaver",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "writer",
+      "title": "Independent writer",
+      "wardrobeId": "scholarly",
+      "minAge": 16
+    },
+    {
+      "id": "boatbuilder",
+      "title": "Boat-fittings maker",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "trader",
+      "title": "Market trader",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "baker",
+      "title": "Independent baker",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "fisher",
+      "title": "Independent fisher",
+      "wardrobeId": "maritime",
+      "minAge": 14
+    },
+    {
+      "id": "household-worker",
+      "title": "Household worker",
+      "wardrobeId": "everyday",
+      "minAge": 14
+    },
+    {
+      "id": "merchant",
+      "title": "Merchant",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "estate-steward",
+      "title": "Estate steward",
+      "wardrobeId": "elite",
+      "minAge": 18
+    },
+    {
+      "id": "quartermaster",
+      "title": "Quartermaster",
+      "wardrobeId": "military",
+      "minAge": 18
+    }
+  ],
+  "encounters": [
+    {
+      "id": "person-harbor",
+      "title": "Harbor worker",
+      "jobId": "porter",
+      "wardrobeId": "maritime"
+    },
+    {
+      "id": "person-market",
+      "title": "Market seller",
+      "jobId": "trader",
+      "wardrobeId": "commerce"
+    },
+    {
+      "id": "person-workshop",
+      "title": "Workshop worker",
+      "jobId": "apprentice",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-linen",
+      "title": "Linen worker",
+      "jobId": "weaver",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-copies",
+      "title": "Document copyist",
+      "jobId": "copyist",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-bakery",
+      "title": "Bakery worker",
+      "jobId": "baker",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-well",
+      "title": "Household provisioner",
+      "jobId": "household-worker",
+      "wardrobeId": "everyday"
+    },
+    {
+      "id": "person-festival",
+      "title": "Garland maker",
+      "jobId": null,
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-library",
+      "title": "Reader's assistant",
+      "jobId": "patron-supported-reader",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-music",
+      "title": "Musician",
+      "jobId": "performer",
+      "wardrobeId": "performance"
+    },
+    {
+      "id": "person-boat",
+      "title": "Boat worker",
+      "jobId": "boatbuilder",
+      "wardrobeId": "maritime"
+    },
+    {
+      "id": "person-drill",
+      "title": "Equipment keeper",
+      "jobId": "quartermaster",
+      "wardrobeId": "military"
+    },
+    {
+      "id": "person-garden",
+      "title": "Garden attendant",
+      "jobId": "farmer",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-accounts",
+      "title": "Accounts assistant",
+      "jobId": "clerk",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-pottery",
+      "title": "Pottery worker",
+      "jobId": "potter",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-neighbors",
+      "title": "Cloth seller",
+      "jobId": "trader",
+      "wardrobeId": "commerce"
+    }
+  ],
+  "roles": [
+    {
+      "roleAlias": "scholar",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "roleAlias": "warrior",
+      "wardrobeId": "military"
+    },
+    {
+      "roleAlias": "aristocrat",
+      "wardrobeId": "aristocrat",
+      "minAge": 16
+    },
+    {
+      "roleAlias": "royalty",
+      "wardrobeId": "royalty",
+      "minAge": 16
+    }
+  ],
+  "assets": [
+    {
+      "id": "ef-p-f01-adult-aristocrat-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-commerce-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-elite-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-everyday-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-maritime-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-military-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-military-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-performance-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-royalty-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-scholarly-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f01-adult-work-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-adult-work-v3.png"
+    },
+    {
+      "id": "ef-p-f01-child-child-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "child",
+      "wardrobeId": "child",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-child-child-v3.png"
+    },
+    {
+      "id": "ef-p-f01-child-work-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "child",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-child-work-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-aristocrat-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-commerce-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-elite-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-everyday-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-maritime-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-military-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-military-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-performance-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-royalty-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-scholarly-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f01-elder-work-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-elder-work-v3.png"
+    },
+    {
+      "id": "ef-p-f01-infant-infant-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "infant",
+      "wardrobeId": "infant",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-infant-infant-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-aristocrat-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-commerce-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-elite-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-everyday-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-maritime-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-military-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-military-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-performance-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-royalty-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-scholarly-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f01-middle-work-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-middle-work-v3.png"
+    },
+    {
+      "id": "ef-p-f01-youth-aristocrat-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-youth-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f01-youth-maritime-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-youth-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f01-youth-performance-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-youth-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f01-youth-royalty-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-youth-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f01-youth-scholarly-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-youth-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f01-youth-work-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-youth-work-v3.png"
+    },
+    {
+      "id": "ef-p-f01-youth-youth-v3",
+      "identityId": "f01",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "youth",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f01-youth-youth-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-aristocrat-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-commerce-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-elite-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-everyday-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-maritime-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-military-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-military-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-performance-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-royalty-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-scholarly-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f02-adult-work-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-adult-work-v3.png"
+    },
+    {
+      "id": "ef-p-f02-child-child-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "child",
+      "wardrobeId": "child",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-child-child-v3.png"
+    },
+    {
+      "id": "ef-p-f02-child-work-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "child",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-child-work-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-aristocrat-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-commerce-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-elite-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-everyday-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-maritime-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-military-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-military-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-performance-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-royalty-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-scholarly-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f02-elder-work-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-elder-work-v3.png"
+    },
+    {
+      "id": "ef-p-f02-infant-infant-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "infant",
+      "wardrobeId": "infant",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-infant-infant-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-aristocrat-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-commerce-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-elite-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-everyday-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-maritime-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-military-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-military-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-performance-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-royalty-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-scholarly-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f02-middle-work-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-middle-work-v3.png"
+    },
+    {
+      "id": "ef-p-f02-youth-aristocrat-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-youth-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f02-youth-maritime-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-youth-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f02-youth-performance-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-youth-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f02-youth-royalty-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-youth-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f02-youth-scholarly-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-youth-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f02-youth-work-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-youth-work-v3.png"
+    },
+    {
+      "id": "ef-p-f02-youth-youth-v3",
+      "identityId": "f02",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "youth",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f02-youth-youth-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-aristocrat-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-commerce-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-elite-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-everyday-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-maritime-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-military-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-military-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-performance-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-royalty-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-scholarly-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f03-adult-work-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "adult",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-adult-work-v3.png"
+    },
+    {
+      "id": "ef-p-f03-child-child-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "child",
+      "wardrobeId": "child",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-child-child-v3.png"
+    },
+    {
+      "id": "ef-p-f03-child-work-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "child",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-child-work-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-aristocrat-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-commerce-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-elite-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-everyday-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-maritime-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-military-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-military-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-performance-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-royalty-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-scholarly-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f03-elder-work-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "elder",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-elder-work-v3.png"
+    },
+    {
+      "id": "ef-p-f03-infant-infant-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "infant",
+      "wardrobeId": "infant",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-infant-infant-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-aristocrat-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-commerce-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-elite-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-elite-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-everyday-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-maritime-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-military-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-military-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-performance-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-royalty-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-scholarly-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f03-middle-work-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "middle",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-middle-work-v3.png"
+    },
+    {
+      "id": "ef-p-f03-youth-aristocrat-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-youth-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-f03-youth-maritime-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-youth-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-f03-youth-performance-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-youth-performance-v3.png"
+    },
+    {
+      "id": "ef-p-f03-youth-royalty-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-youth-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-f03-youth-scholarly-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-youth-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-f03-youth-work-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-youth-work-v3.png"
+    },
+    {
+      "id": "ef-p-f03-youth-youth-v3",
+      "identityId": "f03",
+      "sex": "female",
+      "stage": "youth",
+      "wardrobeId": "youth",
+      "src": "/assets/portraits/ordinary-v3/ef-p-f03-youth-youth-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-aristocrat-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-commerce-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-elite-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-everyday-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-maritime-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-military-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-military-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-performance-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-royalty-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-scholarly-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m01-adult-work-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-adult-work-v3.png"
+    },
+    {
+      "id": "ef-p-m01-child-child-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "child",
+      "wardrobeId": "child",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-child-child-v3.png"
+    },
+    {
+      "id": "ef-p-m01-child-work-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "child",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-child-work-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-aristocrat-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-commerce-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-elite-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-everyday-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-maritime-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-military-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-military-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-performance-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-royalty-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-scholarly-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m01-elder-work-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-elder-work-v3.png"
+    },
+    {
+      "id": "ef-p-m01-infant-infant-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "infant",
+      "wardrobeId": "infant",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-infant-infant-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-aristocrat-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-commerce-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-elite-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-everyday-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-maritime-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-military-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-military-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-performance-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-royalty-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-scholarly-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m01-middle-work-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-middle-work-v3.png"
+    },
+    {
+      "id": "ef-p-m01-youth-aristocrat-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-youth-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m01-youth-maritime-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-youth-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m01-youth-performance-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-youth-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m01-youth-royalty-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-youth-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m01-youth-scholarly-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-youth-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m01-youth-work-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-youth-work-v3.png"
+    },
+    {
+      "id": "ef-p-m01-youth-youth-v3",
+      "identityId": "m01",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "youth",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m01-youth-youth-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-aristocrat-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-commerce-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-elite-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-everyday-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-maritime-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-military-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-military-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-performance-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-royalty-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-scholarly-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m02-adult-work-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-adult-work-v3.png"
+    },
+    {
+      "id": "ef-p-m02-child-child-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "child",
+      "wardrobeId": "child",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-child-child-v3.png"
+    },
+    {
+      "id": "ef-p-m02-child-work-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "child",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-child-work-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-aristocrat-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-commerce-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-elite-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-everyday-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-maritime-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-military-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-military-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-performance-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-royalty-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-scholarly-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m02-elder-work-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-elder-work-v3.png"
+    },
+    {
+      "id": "ef-p-m02-infant-infant-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "infant",
+      "wardrobeId": "infant",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-infant-infant-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-aristocrat-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-commerce-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-elite-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-everyday-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-maritime-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-military-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-military-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-performance-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-royalty-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-scholarly-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m02-middle-work-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-middle-work-v3.png"
+    },
+    {
+      "id": "ef-p-m02-youth-aristocrat-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-youth-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m02-youth-maritime-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-youth-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m02-youth-performance-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-youth-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m02-youth-royalty-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-youth-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m02-youth-scholarly-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-youth-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m02-youth-work-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-youth-work-v3.png"
+    },
+    {
+      "id": "ef-p-m02-youth-youth-v3",
+      "identityId": "m02",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "youth",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m02-youth-youth-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-aristocrat-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-commerce-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-elite-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-everyday-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-maritime-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-military-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-military-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-performance-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-royalty-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-scholarly-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m03-adult-work-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "adult",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-adult-work-v3.png"
+    },
+    {
+      "id": "ef-p-m03-child-child-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "child",
+      "wardrobeId": "child",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-child-child-v3.png"
+    },
+    {
+      "id": "ef-p-m03-child-work-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "child",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-child-work-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-aristocrat-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-commerce-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-elite-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-everyday-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-maritime-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-military-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-military-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-performance-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-royalty-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-scholarly-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m03-elder-work-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "elder",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-elder-work-v3.png"
+    },
+    {
+      "id": "ef-p-m03-infant-infant-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "infant",
+      "wardrobeId": "infant",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-infant-infant-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-aristocrat-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-commerce-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "commerce",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-commerce-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-elite-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "elite",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-elite-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-everyday-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "everyday",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-everyday-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-maritime-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-military-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "military",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-military-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-performance-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-royalty-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-scholarly-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m03-middle-work-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "middle",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-middle-work-v3.png"
+    },
+    {
+      "id": "ef-p-m03-youth-aristocrat-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "aristocrat",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-youth-aristocrat-v3.png"
+    },
+    {
+      "id": "ef-p-m03-youth-maritime-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "maritime",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-youth-maritime-v3.png"
+    },
+    {
+      "id": "ef-p-m03-youth-performance-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "performance",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-youth-performance-v3.png"
+    },
+    {
+      "id": "ef-p-m03-youth-royalty-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "royalty",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-youth-royalty-v3.png"
+    },
+    {
+      "id": "ef-p-m03-youth-scholarly-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "scholarly",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-youth-scholarly-v3.png"
+    },
+    {
+      "id": "ef-p-m03-youth-work-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "work",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-youth-work-v3.png"
+    },
+    {
+      "id": "ef-p-m03-youth-youth-v3",
+      "identityId": "m03",
+      "sex": "male",
+      "stage": "youth",
+      "wardrobeId": "youth",
+      "src": "/assets/portraits/ordinary-v3/ef-p-m03-youth-youth-v3.png"
+    }
+  ]
+}

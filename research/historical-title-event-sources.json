@@ -1,0 +1,50 @@
+[
+  {
+    "id": "historical-title-nearchus",
+    "title": "Arrian, Indica 24 and 32: Nearchus' coastal expedition",
+    "url": "https://www.livius.org/sources/content/arrian/anabasis/nearchus-voyage-home/",
+    "publisher": "Livius; Arrian translated by E. Iliff Robson",
+    "kind": "primary",
+    "period": "Nearchus' coastal voyage in 325–324 BCE; preceding campaign access is an authored window",
+    "geography": "Indus, coast of Gedrosia, Carmania and the Persian Gulf",
+    "summary": "The transmitted account describes coastal reconnaissance, landfalls, water and supplies, and the responsibility to complete the expedition's stated objective.",
+    "limitations": "Arrian wrote long after the expedition using earlier accounts. The fictional player's eastward journey, tasks and Navigator of Nearchus recognition are invented. No personal visit by Nearchus to the player's Egyptian household is asserted. Chronology cross-checked against Livius' Nearchus biography.",
+    "accessed": "2026-11-13"
+  },
+  {
+    "id": "historical-title-eumenes",
+    "title": "Plutarch, Life of Eumenes: correspondence, service and successor campaigns",
+    "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Eumenes%2A.html",
+    "publisher": "LacusCurtius, University of Chicago; Bernadotte Perrin, Loeb translation (1919)",
+    "kind": "primary",
+    "period": "Eumenes' service under Alexander and successor struggles ending with his execution, conventionally dated 316/315 BCE",
+    "geography": "Macedonian campaigns and successor camps in Asia",
+    "summary": "Describes Eumenes' chief-secretary role, the custody and reconstruction of documents, and the distinction between promised authority and actual possession.",
+    "limitations": "A later literary biography with disputed chronology, not an employment register. The game uses a conservative 322–317 BCE access window, ending before either execution chronology. The player's journey, subordinate secretarial tasks and title are fictional and do not replace Eumenes as chief secretary.",
+    "accessed": "2026-11-13"
+  },
+  {
+    "id": "historical-title-ptolemy",
+    "title": "Egypt in the Ptolemaic Period",
+    "url": "https://www.metmuseum.org/essays/egypt-in-the-ptolemaic-period",
+    "publisher": "Marsha Hill, Metropolitan Museum of Art (2016)",
+    "kind": "scholarship",
+    "period": "Ptolemy I's Egyptian government after 323 BCE and kingship from 305 BCE",
+    "geography": "Egypt and Alexandria",
+    "summary": "Supports the succession-era setting of Ptolemy's Egyptian administration and his later adoption of kingship.",
+    "limitations": "Does not document this player, an appointment or an adviser title. Household petitions, supply reviews and personal recognition are authored fiction. The access window ends in 284 BCE before Ptolemy I's death in 283; pre-305 service must not describe him as already king.",
+    "accessed": "2026-11-13"
+  },
+  {
+    "id": "historical-title-theophrastus",
+    "title": "Theophrastus",
+    "url": "https://plato.stanford.edu/entries/theophrastus/",
+    "publisher": "Katerina Ierodiakonou, Stanford Encyclopedia of Philosophy (2020 revision)",
+    "kind": "scholarship",
+    "period": "Lyceum succession after Aristotle's departure in 323 BCE to about 287 BCE",
+    "geography": "Athens and the Lyceum",
+    "summary": "Describes Theophrastus' leadership, botanical and philosophical inquiry, and departure during the Athenian school restriction of 307 BCE followed by a return after repeal a year later.",
+    "limitations": "The player's independent study, reader reviews and Scholar of Theophrastus distinction are fictional. Current scholarly titles require no journey, personal instruction or appointment at the Lyceum; its historical closure does not block local study. The study start date is an authored approximation. This title grants no headship of the historical Lyceum or family relationship.",
+    "accessed": "2026-11-13"
+  }
+]

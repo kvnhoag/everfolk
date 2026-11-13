@@ -1,0 +1,406 @@
+{
+  "status": "reviewed",
+  "reviewer": "heads_third_pair",
+  "manifestSha256": "f22fa774ebc06d78f83b98ca6aafb8432fd51302ef0500964d977e53d65a3e5f",
+  "reviewedEntries": [
+    {
+      "index": 0,
+      "path": "qa/independent-review-sheets/infant-01.png",
+      "sha256": "7a485f83df5d5eda2e85547758165da812f5b58cef9993f0ed1a840447abf743",
+      "portraitIds": [
+        "ef-p-f01-infant-infant-v3",
+        "ef-p-f02-infant-infant-v3",
+        "ef-p-f03-infant-infant-v3",
+        "ef-p-m01-infant-infant-v3",
+        "ef-p-m02-infant-infant-v3",
+        "ef-p-m03-infant-infant-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material anatomy, palette or pixel-region seam found at the 288x360 contact-card scale."
+    },
+    {
+      "index": 1,
+      "path": "qa/independent-review-sheets/child-01.png",
+      "sha256": "0d17fc3af14eed52b76e569ee3ff4bb71188956651ae2b8599c658e125a67232",
+      "portraitIds": [
+        "ef-p-f01-child-child-v3",
+        "ef-p-f02-child-child-v3",
+        "ef-p-f03-child-child-v3",
+        "ef-p-m01-child-child-v3",
+        "ef-p-m02-child-child-v3",
+        "ef-p-m03-child-child-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material anatomy, palette or pixel-region seam found at the 288x360 contact-card scale."
+    },
+    {
+      "index": 2,
+      "path": "qa/independent-review-sheets/child-02.png",
+      "sha256": "f5da22e892066d3695901d7a622825ae5f6b6543fcaeb2f00f491bcbf199496e",
+      "portraitIds": [
+        "ef-p-f01-child-work-v3",
+        "ef-p-f02-child-work-v3",
+        "ef-p-f03-child-work-v3",
+        "ef-p-m01-child-work-v3",
+        "ef-p-m02-child-work-v3",
+        "ef-p-m03-child-work-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material anatomy, palette or pixel-region seam found at the 288x360 contact-card scale."
+    },
+    {
+      "index": 3,
+      "path": "qa/independent-review-sheets/youth-01.png",
+      "sha256": "7645fe42712777520c6d3645d820a41a097f5611e2b971ed0d7987b36f9d5467",
+      "portraitIds": [
+        "ef-p-f01-youth-maritime-v3",
+        "ef-p-f02-youth-maritime-v3",
+        "ef-p-f03-youth-maritime-v3",
+        "ef-p-m01-youth-maritime-v3",
+        "ef-p-m02-youth-maritime-v3",
+        "ef-p-m03-youth-maritime-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material anatomy, palette or pixel-region seam found at 288x360; garment collars and sleeves follow the preserved whole youth models."
+    },
+    {
+      "index": 4,
+      "path": "qa/independent-review-sheets/youth-02.png",
+      "sha256": "4ca7d496cf474d8932cdc6342cfc13555586a991d3d1667d8204261c9c9b141c",
+      "portraitIds": [
+        "ef-p-f01-youth-performance-v3",
+        "ef-p-f02-youth-performance-v3",
+        "ef-p-f03-youth-performance-v3",
+        "ef-p-m01-youth-performance-v3",
+        "ef-p-m02-youth-performance-v3",
+        "ef-p-m03-youth-performance-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material anatomy, palette or pixel-region seam found at 288x360; garment collars and sleeves follow the preserved whole youth models."
+    },
+    {
+      "index": 5,
+      "path": "qa/independent-review-sheets/youth-03.png",
+      "sha256": "356ee7d78a0e382b3747c455c2c45446a6349c99977b5d2d8b67750204a1c9c6",
+      "portraitIds": [
+        "ef-p-f01-youth-scholarly-v3",
+        "ef-p-f02-youth-scholarly-v3",
+        "ef-p-f03-youth-scholarly-v3",
+        "ef-p-m01-youth-scholarly-v3",
+        "ef-p-m02-youth-scholarly-v3",
+        "ef-p-m03-youth-scholarly-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material anatomy, palette or pixel-region seam found at 288x360; garment collars and sleeves follow the preserved whole youth models."
+    },
+    {
+      "index": 6,
+      "path": "qa/independent-review-sheets/youth-04.png",
+      "sha256": "fd2b0b7b066b9e5d291dcb1d594fb134afc1381785ec55dd3f6ba0476e8975c2",
+      "portraitIds": [
+        "ef-p-f01-youth-work-v3",
+        "ef-p-f02-youth-work-v3",
+        "ef-p-f03-youth-work-v3",
+        "ef-p-m01-youth-work-v3",
+        "ef-p-m02-youth-work-v3",
+        "ef-p-m03-youth-work-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material fit, palette or pixel-region seam at 288x360; native body silhouette remains continuous beneath the clothing."
+    },
+    {
+      "index": 7,
+      "path": "qa/independent-review-sheets/youth-05.png",
+      "sha256": "b4a59a88227cc6731d3aa0f4e616dbee9d39acd97ed78e8b199aa0a613a62cb7",
+      "portraitIds": [
+        "ef-p-f01-youth-youth-v3",
+        "ef-p-f02-youth-youth-v3",
+        "ef-p-f03-youth-youth-v3",
+        "ef-p-m01-youth-youth-v3",
+        "ef-p-m02-youth-youth-v3",
+        "ef-p-m03-youth-youth-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material fit, palette or pixel-region seam at 288x360; native body silhouette remains continuous beneath the clothing."
+    },
+    {
+      "index": 8,
+      "path": "qa/independent-review-sheets/adult-01.png",
+      "sha256": "440c1ca3530a3ae9efa8acdf77b652c7c4b8d90d5a0d0e869481d08c6dfb2772",
+      "portraitIds": [
+        "ef-p-f01-adult-aristocrat-v3",
+        "ef-p-f02-adult-aristocrat-v3",
+        "ef-p-f03-adult-aristocrat-v3",
+        "ef-p-m01-adult-aristocrat-v3",
+        "ef-p-m02-adult-aristocrat-v3",
+        "ef-p-m03-adult-aristocrat-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material fit, palette or pixel-region seam at 288x360; native body silhouette remains continuous beneath the clothing."
+    },
+    {
+      "index": 9,
+      "path": "qa/independent-review-sheets/adult-02.png",
+      "sha256": "a8155adc22d8aa932c0c36597ff47aefe905cc93233026f6079013278a9600e5",
+      "portraitIds": [
+        "ef-p-f01-adult-commerce-v3",
+        "ef-p-f02-adult-commerce-v3",
+        "ef-p-f03-adult-commerce-v3",
+        "ef-p-m01-adult-commerce-v3",
+        "ef-p-m02-adult-commerce-v3",
+        "ef-p-m03-adult-commerce-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; identities and body proportions remain stable across wardrobe changes."
+    },
+    {
+      "index": 10,
+      "path": "qa/independent-review-sheets/adult-03.png",
+      "sha256": "80f81ee69ac5c9cdc8d1506284524f8ef14fc7d4baa96f147fc549cc74a623a0",
+      "portraitIds": [
+        "ef-p-f01-adult-elite-v3",
+        "ef-p-f02-adult-elite-v3",
+        "ef-p-f03-adult-elite-v3",
+        "ef-p-m01-adult-elite-v3",
+        "ef-p-m02-adult-elite-v3",
+        "ef-p-m03-adult-elite-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; identities and body proportions remain stable across wardrobe changes."
+    },
+    {
+      "index": 11,
+      "path": "qa/independent-review-sheets/adult-04.png",
+      "sha256": "6581f606d215450016daa530eca42b94aa4d4abf5d7c05fdbb693b5b208f3dde",
+      "portraitIds": [
+        "ef-p-f01-adult-everyday-v3",
+        "ef-p-f02-adult-everyday-v3",
+        "ef-p-f03-adult-everyday-v3",
+        "ef-p-m01-adult-everyday-v3",
+        "ef-p-m02-adult-everyday-v3",
+        "ef-p-m03-adult-everyday-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; identities and body proportions remain stable across wardrobe changes."
+    },
+    {
+      "index": 12,
+      "path": "qa/independent-review-sheets/adult-05.png",
+      "sha256": "20b6505f0293077918a4c0c5d61402fc83049792b343cc6b7b6ca3dd44bfc4d0",
+      "portraitIds": [
+        "ef-p-f01-adult-maritime-v3",
+        "ef-p-f02-adult-maritime-v3",
+        "ef-p-f03-adult-maritime-v3",
+        "ef-p-m01-adult-maritime-v3",
+        "ef-p-m02-adult-maritime-v3",
+        "ef-p-m03-adult-maritime-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; maritime, military and performance clothing remain visually distinct."
+    },
+    {
+      "index": 13,
+      "path": "qa/independent-review-sheets/adult-06.png",
+      "sha256": "6d7a7959db74d119260ad717692e6c4f01f23d4c4bc00e030591a59db4185776",
+      "portraitIds": [
+        "ef-p-f01-adult-military-v3",
+        "ef-p-f02-adult-military-v3",
+        "ef-p-f03-adult-military-v3",
+        "ef-p-m01-adult-military-v3",
+        "ef-p-m02-adult-military-v3",
+        "ef-p-m03-adult-military-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; maritime, military and performance clothing remain visually distinct."
+    },
+    {
+      "index": 14,
+      "path": "qa/independent-review-sheets/adult-07.png",
+      "sha256": "01b811d129767344bb980247fa8c5e3573d100268d2a71786880e85cddf3ae7a",
+      "portraitIds": [
+        "ef-p-f01-adult-performance-v3",
+        "ef-p-f02-adult-performance-v3",
+        "ef-p-f03-adult-performance-v3",
+        "ef-p-m01-adult-performance-v3",
+        "ef-p-m02-adult-performance-v3",
+        "ef-p-m03-adult-performance-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; maritime, military and performance clothing remain visually distinct."
+    },
+    {
+      "index": 15,
+      "path": "qa/independent-review-sheets/adult-08.png",
+      "sha256": "293f43292abd834d19a1a2e4917f79ab583701143477adc418f8aaa0cfab1a28",
+      "portraitIds": [
+        "ef-p-f01-adult-royalty-v3",
+        "ef-p-f02-adult-royalty-v3",
+        "ef-p-f03-adult-royalty-v3",
+        "ef-p-m01-adult-royalty-v3",
+        "ef-p-m02-adult-royalty-v3",
+        "ef-p-m03-adult-royalty-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; new royalty and aristocrat clothes remain fitted to original anatomy."
+    },
+    {
+      "index": 16,
+      "path": "qa/independent-review-sheets/adult-09.png",
+      "sha256": "9aa16f251bda2560bc0edb1630775cb13625f3b943f869c2185b9ddb185c1f48",
+      "portraitIds": [
+        "ef-p-f01-adult-scholarly-v3",
+        "ef-p-f02-adult-scholarly-v3",
+        "ef-p-f03-adult-scholarly-v3",
+        "ef-p-m01-adult-scholarly-v3",
+        "ef-p-m02-adult-scholarly-v3",
+        "ef-p-m03-adult-scholarly-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; new royalty and aristocrat clothes remain fitted to original anatomy."
+    },
+    {
+      "index": 17,
+      "path": "qa/independent-review-sheets/adult-10.png",
+      "sha256": "bd7c8982f4ecc035003aa6f8611efa906965f6809dcbe3749fda01ffb2b648d9",
+      "portraitIds": [
+        "ef-p-f01-adult-work-v3",
+        "ef-p-f02-adult-work-v3",
+        "ef-p-f03-adult-work-v3",
+        "ef-p-m01-adult-work-v3",
+        "ef-p-m02-adult-work-v3",
+        "ef-p-m03-adult-work-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; new royalty and aristocrat clothes remain fitted to original anatomy."
+    },
+    {
+      "index": 18,
+      "path": "qa/independent-review-sheets/middle-01.png",
+      "sha256": "7fdc8ba96b7214a1b61bdbf7ccf9e4779bd0de898dbbe4a17b10b4f40cd20e11",
+      "portraitIds": [
+        "ef-p-f01-middle-aristocrat-v3",
+        "ef-p-f02-middle-aristocrat-v3",
+        "ef-p-f03-middle-aristocrat-v3",
+        "ef-p-m01-middle-aristocrat-v3",
+        "ef-p-m02-middle-aristocrat-v3",
+        "ef-p-m03-middle-aristocrat-v3"
+      ],
+      "portraitDisplayPixels": [
+        288,
+        360
+      ],
+      "reviewed": true,
+      "finding": "No material neck/collar, arm palette or pixel-region seam at 288x360; new royalty and aristocrat clothes remain fitted to original anatomy."
+    }
+  ],
+  "reviewedAtUtc": "2026-11-13T03:42:54.336117+00:00",
+  "contactCardCount": 114,
+  "allAssignedSheetsReviewed": true,
+  "nativePixelSpotChecks": [
+    {
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-m03-child-work-v3.png",
+      "sha256": "e68480cbb1515625a02c9958c02e93476190f666b1e50c8835bfe7808c50d8ad",
+      "displayPixels": [
+        384,
+        480
+      ],
+      "finding": "Original neck/collar remains continuous; dark pupils and eye structure retained within fine face band; no regional patch edge found."
+    },
+    {
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f03-youth-maritime-v3.png",
+      "sha256": "805b39f8945f44d4fec5a74da77dcd1cfd7ebc044bc381f87de8c2729d887c04",
+      "displayPixels": [
+        384,
+        480
+      ],
+      "finding": "Original neck/collar remains continuous; dark pupils and eye structure retained within fine face band; no regional patch edge found."
+    },
+    {
+      "path": "portraits/mixed-3px-body-2px-face/ef-p-f02-adult-royalty-v3.png",
+      "sha256": "6f81d2f58c764b3bac9cb7c1aa7a545501d68a38d2e30029deadd336588d7b47",
+      "displayPixels": [
+        384,
+        480
+      ],
+      "finding": "Original neck/collar remains continuous; dark pupils and eye structure retained within fine face band; no regional patch edge found."
+    }
+  ],
+  "materialBlockingIssues": [],
+  "limitations": [
+    "114 outputs reviewed on labelled contact sheets at 288x360 each, not all at native resolution.",
+    "Three final outputs viewed at native384x480 as explicitly listed.",
+    "Source preservation and this visual review do not establish user acceptance."
+  ]
+}

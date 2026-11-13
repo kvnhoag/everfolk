@@ -1,0 +1,44 @@
+EVERFOLK / TWENTY LOGO OPTIONS / REVISION 3
+11 November 2026
+
+START HERE
+review/Everfolk-20-reference-led-logos.png
+The sheet organises twenty options into five lettering directions and
+names the game references behind each family. The corresponding native
+.vectorcraft review board remains editable.
+REFERENCE-STUDY.txt records official sources and the design lessons.
+
+CONTENTS
+masters/ : 20 individual VectorCraft masters.
+Each master contains three artboards, each 1000 x 600:
+  1. Transparent primary logo.
+  2. Colour presentation proof.
+  3. Transparent one-colour logo.
+
+svg/ : 40 SVG files, primary and one-colour for each option.
+png/ : 20 transparent PNGs at 2000 x 1200 and 20 presentation proofs
+       at 1500 x 900.
+
+EDITABILITY
+Every title letter is drawn as editable vector paths, with named letter
+groups. The title does not require an installed display font. The motto
+remains live supporting text in native masters and is outlined in SVGs.
+Proof backgrounds sit on their own layer.
+
+FAMILIES
+01-04 Inscription / Civilization VII and Anno 1800 references.
+05-08 Calligraphy / Crusader Kings III reference.
+09-12 Geometry / Manor Lords reference.
+13-16 Living letters / Old World reference.
+17-20 Display title / Age of Empires IV reference.
+
+VALIDATION
+All twenty masters were saved, closed and reopened in VectorCraft.
+Each retained three artboards. The comparison and representative full-size
+proofs were visually checked for title readability and transparent counters.
+Primary and monochrome SVGs contain vector geometry without raster images.
+No export warnings or supporting-font substitutions were reported.
+
+source/ stores the custom glyph sets, composition data and native MCP
+build script. manifest.json maps each option to its files and reference
+family. qa/ contains the native inspections and validation record.

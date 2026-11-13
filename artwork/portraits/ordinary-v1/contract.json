@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-ordinary-portraits-v1",
+  "scope": "Player, ordinary NPC and relation portraits only. No historical figure or TCG artwork.",
+  "canvas": [800, 1000],
+  "identityIds": ["m01", "m02", "m03", "f01", "f02", "f03"],
+  "stages": ["infant", "child", "youth", "adult", "middle", "elder"],
+  "ageExamples": {"infant": 1, "child": 8, "youth": 16, "adult": 28, "middle": 49, "elder": 72},
+  "sourceHeadNaming": "source/heads/ef-h-{identityId}-{stage}-v1.png",
+  "sourceGarmentNaming": "source/wardrobe/ef-w-{wardrobeId}-v1.png",
+  "promptNaming": "source/prompts/{assetId}-prompt.txt",
+  "sourceHeadContract": "One alpha-isolated frontal head including hair, ears and long neck; no shoulder/body/clothes/background. Whole head contained. Same upper-left warm keylight, cool jade/umber shadows, readable eyes. Age changes preserve individual face identity.",
+  "composition": {"headTargetBox": [170, 85, 630, 735], "neckAnchor": [400, 700], "garmentTargetBox": [35, 625, 765, 1000], "layerOrder": ["background", "garment", "head-and-neck"]},
+  "style": "Mature anime anatomical character design, painterly chiaroscuro, warm upper-left light/cool jade umber shadows, restrained earth colours. Generate smooth components first; PixelOE finish after composition. No glossy actor likeness or uniform heroic scowl.",
+  "runtimeIntegration": "Asset authoring library; explicit runtime binding is documented separately and existing game assets are retained."
+}

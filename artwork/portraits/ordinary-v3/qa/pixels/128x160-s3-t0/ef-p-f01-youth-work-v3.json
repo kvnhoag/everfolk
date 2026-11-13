@@ -1,0 +1,51 @@
+{
+  "id": "ef-p-f01-youth-work-v3",
+  "method": "PixelOE legacy outline prepass + upstream contrast_based_downscale",
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu",
+    "pixeloe": "1.0.0"
+  },
+  "source": "portraits/assembled/ef-p-f01-youth-work-v3.png",
+  "sourceSha256": "feb92f9ee1b874d63ecaca709d5ac33a486eb7b60ef70fa291b4c21123100d80",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      128,
+      160
+    ],
+    "patch_size": 4,
+    "pixel_size": 3,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "logical": [
+    128,
+    160
+  ],
+  "scale": 3,
+  "output": [
+    384,
+    480
+  ],
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logicalPath": "portraits/128x160-s3-t0/ef-p-f01-youth-work-v3.logical.png",
+  "logicalSha256": "074efde08417c6e0da7bb6bdf6d81603c76281567232bd7cf19468bc4e070f50",
+  "outputPath": "portraits/128x160-s3-t0/ef-p-f01-youth-work-v3.png",
+  "outputSha256": "396772c31652f42dc89ea6cc733ea7acea518be014d1810f1f5ad1814db1a6d7",
+  "logicalPixelSha256": "06a6175670989c6d5830d03869f295bbd278f4169c9692f736eb4659f48b1243",
+  "uniqueColours": 6973,
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "pngReadbackExact": true,
+  "opaqueSource": true,
+  "sourceUnchanged": true,
+  "interpolatingUpscale": false
+}

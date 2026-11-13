@@ -55,8 +55,8 @@ export function initializeFamily(world: WorldPack, state: LifeState): void {
     if (!names.length) throw new Error("No unused family identity remains in the name pool.");
     const name = names[integer(0, names.length - 1)];
     used.add(name);
-    // One grandparent can provide the care described by the birth stories.
-    // Terminal ages are authored fiction and do not change the player's risks.
+    // Retained family releases keep their original lifespans. Newer worlds
+    // apply the household survival roll after every identity has been recorded.
     const minimumDeathAge = relative.relation === "mother" || relative.relation === "father" || relative.relation === "maternal-grandmother"
       ? Math.max(42, relative.ageOffset + 1) : 42;
     return {
@@ -66,6 +66,20 @@ export function initializeFamily(world: WorldPack, state: LifeState): void {
       deathAge: integer(minimumDeathAge, 85),
     };
   });
+  const livingChance = world.character.familyLivingGrandparentChance;
+  if (livingChance === undefined) return;
+  const grandparents = state.character.family.filter(member => member.relation.includes("grand"));
+  const survival = nextRandom(randomState);
+  randomState = survival.state;
+  const survivor = survival.value < livingChance ? integer(0, grandparents.length - 1) : -1;
+  for (const [index, member] of grandparents.entries()) {
+    const parentAge = member.relation.startsWith("maternal-") ? motherAge : fatherAge;
+    const ageWhenParentBorn = member.ageOffset - parentAge;
+    // Authored rarity: most births have no living grandparent. Remembered
+    // relatives still survived long enough to have their recorded child.
+    member.deathAge = index === survivor ? integer(member.ageOffset + 1, 85)
+      : integer(ageWhenParentBorn + 1, member.ageOffset);
+  }
 }
 
 /** Once deceased, a relative's displayed age stops at their terminal age. */

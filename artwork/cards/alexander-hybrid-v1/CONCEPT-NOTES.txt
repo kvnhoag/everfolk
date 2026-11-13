@@ -1,0 +1,80 @@
+EVERFOLK — ALEXANDER THE GREAT CARD / CONCEPT 01
+12 November 2026
+
+PURPOSE
+First collectible/TCG card concept in the working hybrid anime–Chiaroscuro
+pixel illustration direction. This explores the frame and information layout;
+it does not establish gameplay statistics, final rarity rules or mint metadata.
+
+ART
+A new vertical clean portrait preserves the identity, cream tunic, red mantle
+and focused presence from the accepted-direction scene. Its dramatic light and
+sculptural shadow structure come from the Chiaroscuro direction; deliberately
+drawn adult features and hair retain the anime/cartoon influence.
+Built-in image generation produced source/alexander-card-clean.png.
+source/generation-prompt.txt records the exact prompt and reference role.
+
+Published PixelOE1.0.0 provides contrast-aware outline expansion, original
+colour matching and downsampling. The illustration's logical canvas is140×175,
+enlarged by exact6× to840×1050. No colour quantization or new palette imposed.
+The floating-point area/size truncation in the upstream legacy downsampler
+is guarded by a small positive rounding epsilon to obtain the exact grid.
+source/pixelate-card.py rebuilds it; qa/portrait-pixel.json records checks.
+The clean source is unchanged and repeat processing produces identical pixels.
+
+CARD LAYOUT
+900×1260 front, rounded dark jade body, restrained double bronze border.
+Large embedded portrait at100% pixels. Independently editable frame, title,
+rarity/type treatment, flavour line, brand, dates and catalogue identifier.
+Source Serif4 Regular and Inter are used for the prototype because the native
+ArtCraft font engine does not have Eczar or DM Sans installed. The approved
+Eczar Everfolk wordmark and crowned scarab are reused as separate brand assets.
+The new title font is a card experiment, not a change to the game identity.
+
+TEXT
+Alexander / THE GREAT
+LEGENDARY / MACEDONIAN KING
+A legacy beyond the horizon.
+356–323 BCE
+ALEXANDRIA / 001
+
+Legendary and catalogue001 are proposed visual labels for this concept.
+The flavour line is original art-direction copy, not a historical quotation.
+Alexander's portrait and harbour interior are imagined illustrations.
+His life dates and title are checked against primary institutional references:
+https://www.ucl.ac.uk/museums-static/digitalegypt/chronology/alexandergreat.html
+https://www.darwinproject.ac.uk/view/nameregs/nameregs_71
+
+LAYER SCOPE
+The portrait itself is a flattened illustration. Frame, labels, type and brand
+are independent components; separate body/face/clothing assets are future work.
+The concept exports artwork only and performs no token minting or publication.
+
+DELIVERY AND REVIEW
+masters/Alexander-The-Great.vectorcraft — native editable card master.
+review/Alexander-The-Great-card.png — full900×1260 transparent-corner export.
+review/Alexander-The-Great-card-450.png —450×630 display-size review.
+Root inspected both full and reduced card images. The title, rarity/type bar,
+flavour, dates and brand remain legible with no clipping or crowding.
+Native ArtCraft text and frame components remain independent of the embedded
+pixel portrait. Font matching and native reopen/export checks passed.
+
+CRISP DELIVERY EXPORT
+VectorCraft's native PNG renderer slightly interpolates embedded pixel-art
+block edges, even at100% placement. The final delivery PNG therefore combines
+the ArtCraft base and transparent frame/text overlay with the original pixel
+portrait at(30,30), with no resizing. The portrait window's10px corner clipping
+is applied without sampling its interior. This keeps frame/type antialiasing
+while preserving every unobscured portrait pixel exactly.
+765234 visible portrait pixels were checked: zero RGB differences. Transparent
+outer corner alpha is0 at all four corners. qa/final-crisp-export.json records
+the delivery hashes; qa/VectorCraft-native-export.png retains the intermediate
+renderer output referred to by the original native-build QA record.
+
+REBUILD ORDER
+1. Run source/pixelate-card.py with the existing isolated PixelOE Python runtime.
+2. Run node source/build-card.cjs for the native ArtCraft master and raw preview.
+3. Run node source/export-composite-layers.cjs for base/overlay PNGs; it restores
+   full native layer visibility after export.
+4. Run node source/export-crisp-card.cjs for the final sharp delivery PNG and
+   nearest-neighbour450×630 thumbnail.

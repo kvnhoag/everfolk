@@ -1,0 +1,59 @@
+EVERFOLK / ALEXANDER / PORTRAIT REVISION V4
+
+Requested change
+Make the face belong more convincingly to the painting and reduce the modern
+cinematic hairstyle; include an actual historical portrait reference.
+
+Primary visual reference actually supplied to generation
+Portrait en hermes d'Alexandre, dit Alexandre Azara, Louvre Ma 436.
+https://collections.louvre.fr/en/ark:/53355/cl010277962
+Official machine-readable object record is retained in:
+references/louvre-object-record.json
+Official photo used: references/louvre-alexander-azara-full.jpg
+Source URL:
+https://collections.louvre.fr/media/cache/large/0000000021/0000277962/0001132522_OG.JPG
+Photo credit: Copyright GrandPalaisRmn (musee du Louvre) / Herve Lewandowski.
+The original photographic reference is retained unmodified. The comparison
+board presents it within a head-focused native clipping frame for review.
+It is distinct from the generated game illustration.
+
+Evidence and uncertainty
+The Louvre dates this Roman work to 1-50 CE and relates it to a late-fourth-
+century BCE Lysippos original. Its inscription identifies Alexander, son of
+Philip, Macedonian. The nose was reconstructed; chips on brows/lips were
+completed; the surface is worn. These features limit a literal reconstruction.
+This is an ancient portrait reference, not a verified photograph-like likeness.
+
+Hair context also checked against museum descriptions
+https://www.theacropolismuseum.gr/en/head-statue-alexander-great
+https://art.thewalters.org/object/23.121/
+Both describe the forehead-lifted anastole; Acropolis also describes deep-set
+eyes, an upward gaze and half-open lips. The Acropolis dating is disputed.
+Neither a sculpture's current colour nor traces of its paint establish his
+natural hair colour. Muted brown/chestnut in this card is an artistic choice.
+Acropolis and Walters image downloads were unavailable during this run; those
+photos were not supplied to generation. The actual visual reference was Louvre.
+
+Art direction
+Reduced hair volume and flying locks, waves closer to the skull and ears,
+modest central forehead lift. Less squared lower face and exaggerated scowl,
+softer cheek/jaw transitions, deep-set eyes with visible pupils and parted lips.
+Retain the prior painterly chiaroscuro, mounted action and card composition.
+
+Production provenance
+Built-in image generation/editing revised the v3 illustration using the real
+Louvre photograph. Exact prompt: source/generation-prompt.txt.
+Output: source/alexander-portrait-revised.png (1122 x 1402).
+This edit is generated; no new individually authored brush pass was applied in
+v4. The v3 actual-brush source remains available separately in its own folder.
+PixelOE 1.0.0 finishing uses logical 420 x 525, exact nearest-neighbour 2x to
+840 x 1050; no palette reduction. See source/pixelate-card.py and qa/portrait-pixel.json.
+
+Native ArtCraft card
+masters/Alexander-The-Great.vectorcraft retains independent frame, live type,
+rarity, emblem and footer; the character illustration remains flattened.
+Final review PNG uses the exact pixel image under ArtCraft's frame/type overlay
+to avoid native raster interpolation. Fonts resolved exactly; native reopening
+reproduced the card render. The final export checks 765,234 unobscured portrait
+pixels with no differing RGB channels. See qa/final-crisp-export.json.
+Rarity, flavour and card numbering are exploratory. No NFT was minted.

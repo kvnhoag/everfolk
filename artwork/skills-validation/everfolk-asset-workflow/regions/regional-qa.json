@@ -1,0 +1,147 @@
+{
+  "method": "Regional PixelOE: whole common-cell Bayer selection, no colour/alpha blend",
+  "gridType": "mixed-grid; no single logical grid",
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\source\\alexander-blade-only.png",
+  "sourceSha256": "bdcc4654a4253aabccb656231cd85fbcb0ab66c08c6eb1cf8bb52bf791feb55f",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "base": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\assets\\alexander-card-pixel.png",
+  "baseSha256": "7ebbb312e9ecd7d7c05874764eae5165f2b988f7da3eccdfe7f83a0a47e5dd2e",
+  "baseQa": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-fixed-pose-v8\\qa\\portrait-pixel.json",
+  "baseQaSha256": "d13763481db7bedb8f0ceebd14aebbcc3bbaac14f13e8f6a04ff3fd8d3a63808",
+  "configPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\regions\\profile.json",
+  "configSha256": "aeb17576b37c4e541db2b058282d81f155909de6799d44af4bfaf92c22f036d4",
+  "config": {
+    "base_pixel_size": 3,
+    "detail_pixel_size": 2,
+    "detail_outline_thickness": 0,
+    "regions": [
+      {
+        "name": "face-eyes",
+        "center": [
+          360,
+          302
+        ],
+        "radius": [
+          87,
+          96
+        ],
+        "inner_scale": 0.82
+      }
+    ],
+    "critical_boxes": [
+      {
+        "name": "near-eye",
+        "box": [
+          341,
+          263,
+          375,
+          285
+        ]
+      },
+      {
+        "name": "far-eye",
+        "box": [
+          394,
+          267,
+          421,
+          288
+        ]
+      }
+    ]
+  },
+  "runtime": "D:\\Hustle\\Games\\Historical Lives\\artifacts\\pixeloe-runtime\\site-packages",
+  "versions": {
+    "pixeloe": "1.0.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "torch": "2.7.1+cpu"
+  },
+  "output": [
+    840,
+    1050
+  ],
+  "outputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\regions\\regional-pixel.png",
+  "outputSha256": "89fe6da957a7cd8c5612a27056b6e195a9f9d5bc8f3a2b6443c148699057025c",
+  "basePixelSize": 3,
+  "detailPixelSize": 2,
+  "commonCellSize": 6,
+  "gridOrigin": [
+    0,
+    0
+  ],
+  "detailLogical": [
+    420,
+    525
+  ],
+  "detailOptions": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 0,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "detailPixelSha256": "73ccf157666a6feaa57dbb4caaaf717011f6426e31651693e7db04cd8e2038cb",
+  "detailOutputPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\regions\\detail-pass.png",
+  "detailOutputSha256": "d97a238b183cc860106f6d08b10ca2e457e1ee4d3088031137047e7139c895a7",
+  "maskPath": "D:\\Hustle\\Games\\Historical Lives\\artwork\\skills-validation\\everfolk-asset-workflow\\regions\\selection-mask.png",
+  "maskSha256": "35d8a560ad74e4d5661fdc4b3f9d99c2bf43d7036490080a256c908990e5505d",
+  "maskPixelSha256": "0043ee86f114a4a0d0acb3958bf0d3acbaa7e1e2389bd3c7cf5c5db96d7ed122",
+  "selectedDetailCells": 603,
+  "retainedCoarseCells": 23897,
+  "affectedPixels": 21708,
+  "changedPixels": 21485,
+  "outsideMaskChangedPixels": 0,
+  "selectedDetailDifferingPixels": 0,
+  "criticalCoverage": [
+    {
+      "name": "near-eye",
+      "box": [
+        341,
+        263,
+        375,
+        285
+      ],
+      "selectedPixels": 748,
+      "totalPixels": 748,
+      "detailCoverage": 1.0
+    },
+    {
+      "name": "far-eye",
+      "box": [
+        394,
+        267,
+        421,
+        288
+      ],
+      "selectedPixels": 567,
+      "totalPixels": 567,
+      "detailCoverage": 1.0
+    }
+  ],
+  "innerRegionFullDetail": true,
+  "cellCenterEllipseSampling": true,
+  "transition": "4x4 Bayer threshold (entry + 0.5) / 16, global cell origin",
+  "explicitGridRoundingEpsilon": 1e-06,
+  "registeredExactIntegerBlocks": true,
+  "wholeCommonCells": true,
+  "deterministic": true,
+  "pngReadbackExact": true,
+  "sourceUnchanged": true,
+  "baseUnchanged": true,
+  "metadataUnchanged": true,
+  "interpolatingUpscale": false,
+  "colourBlend": false,
+  "alphaBlend": false
+}

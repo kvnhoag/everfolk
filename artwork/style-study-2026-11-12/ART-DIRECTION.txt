@@ -1,0 +1,196 @@
+EVERFOLK — ASSET STYLE STUDY
+12 November 2026
+
+DECISION
+Latest request: hybrid anime + Chiaroscuro aura. HYBRID-V5.txt records the
+new source redesign and coarser pixel passes. It is a candidate for review,
+not an automatically approved final production style.
+
+Latest steering: the user supplied references/user-anime-pixel-style.png and
+requested clean anime/cartoon generation first, followed by pixelation. This
+supersedes the oil-painted source treatment and the authored 24-colour filter
+as the current target. Chiaroscuro can remain a lighting principle.
+The earlier experiments below are retained for comparison and provenance.
+
+The user selected direction 3, Chiaroscuro, from the five-portrait comparison.
+Chosen base language: expressive painted faces, deep jade/umber shadows,
+warm directional light, restrained colour and readable silhouettes.
+The original Mosaic-only test was rejected as too blurred by the user.
+The second iteration develops a custom palette/cluster/grid filter; see FILTER.txt.
+The Chiaroscuro base style remains selected. Filter strength is still reviewable.
+The TCG card's components, layout, rarity names and mint behaviour remain open.
+
+FIRST STUDY: LEFT TO RIGHT
+1. Painted Chronicle — opaque tempera shapes; warm, human, storybook presence.
+2. Graphic Woodcut — carved contours and flat colour; forceful graphic identity.
+3. Chiaroscuro — sculptural light and deep shadow; psychological presence. SELECTED.
+4. Etched Archive — cross-hatched line and hand tint; intimate historical record.
+5. Tesserae Legend — directional stone marks; monumental, ceremonial presence.
+
+The comparison is one generated raster sheet, not five production characters.
+Faces, cloth, hair and backgrounds in this source are flattened. Named layers
+in a composition do not make those painted elements independently replaceable.
+Production must generate or construct actual separate assets.
+
+WHAT CHIAROSCURO MEANS FOR EVERFOLK
+Lighting carries attention: eyes first, expression second, hands or signature
+object third. Preserve facial asymmetry and distinctive proportions.
+Use large, deliberate shadow shapes and quiet backgrounds. Avoid glossy skin,
+uniform beauty, decorative noise and the same heroic expression on everyone.
+Deep shadows should retain readable skin and fabric information across skin
+tones and at the displayed size. Dramatic lighting can also support warmth,
+curiosity, fatigue, humour or unease; every person need not look grim.
+Keep the approved Printed Folktale interface, Eczar lettering and jade/cream/
+clay brand relationship as the surrounding context for this exploration.
+
+REFERENCE → AURA → STYLE → LAYERS → PIXEL FINISH → SIZE CHECK
+1. Establish who, when and where. Gather primary object/portrait references,
+   costume and material evidence, and setting references separately. Record
+   source links and which choices are supported, inferred or invented.
+2. Write an aura brief: three emotional traits, one tension, posture, gaze,
+   silhouette, light, palette and one meaningful object. Aura is an art
+   direction interpretation, not a claim to know a person's psychology.
+3. Translate that brief into the shared chiaroscuro language. Preserve the
+   person's distinctive face and bearing; avoid dressing one generic face
+   in a succession of costumes.
+4. Approve an identity master and pose. Construct transparent components
+   around that fixed identity with shared dimensions, anchors and lighting.
+5. Composite in ArtCraft, then apply a reproducible pixel finish. Simplify
+   colour and edge noise deliberately. Fix weak anatomy and expressions
+   before pixelation; the filter cannot repair those defects.
+6. Review at actual portrait, event and card display sizes, plus a reduced
+   thumbnail. Clean facial pixel clusters and silhouette edges after review.
+
+PROPOSED AURA PILOT CAST — ART DIRECTION INTERPRETATIONS
+Alexander: contained authority, urgency, outward ambition; resolve versus
+fatigue. Lifted gaze, off-centre hair silhouette, controlled turn of the neck.
+Aristotle: observation, intellectual weight, measured scepticism; certainty
+versus curiosity. Attentive eyes and a grounded conversational gesture.
+Euclid: precision, patience, clarity; rigor versus discovery. Quiet alignment
+and a constructive gesture. His face must be an explicitly imagined design.
+Fictional female artisan: capability, warmth, lived experience; pride versus
+exhaustion. Economical gestures, practical clothing and a distinctive face.
+Fictional navigator: endurance, judgement, alertness; confidence versus risk.
+Weathered features, a stable silhouette and a gaze attentive to distance.
+These are proposed future tests, not additional assets created in this study.
+
+ONE LANGUAGE, THREE ASSET FAMILIES
+Portrait: largest attention budget on eyes, brows, mouth, face proportions
+and hair silhouette. Clothing changes must preserve the approved identity.
+Event scene: communicate the action and emotional relationship first. Use
+light, spacing and foreground overlap to guide the eye. Maintain the same
+face and costume system, with reusable settings and props where practical.
+TCG/NFT artwork: give the figure a strong iconic composition using the same
+identity and rendering language. Keep frame, text, badges and rarity finish
+outside the artwork's pixel filter and independently editable. Layout and
+components will be decided separately. Nothing is minted by this study.
+
+PROPOSED MODULAR ASSET CONTRACT — NOT IMPLEMENTED HERE
+Background / atmosphere
+Rear props / architectural elements
+Body / skin base
+Base garments
+Mantle, armour or outer clothing
+Face and ears — identity locked
+Hair, facial hair and age details
+Hands and held objects
+Foreground occluders / contact shadows
+Shared artwork colour and pixel finish
+Independent card frame / rarity / lettering, when specified
+
+This order is a starting point: individual poses may require front/back
+garment splits or hands on both sides of an object. A single universal layer
+order is insufficient for every costume and pose.
+Every replaceable part needs common canvas size, registration anchors,
+occlusion masks and a lighting contract. Generate neutral continuous body
+coverage beneath garments rather than relying on holes hidden by one outfit.
+Identity stays fixed when clothing or rarity changes. Rarity changes should
+not silently regenerate the face or change the emotional character.
+Keep figure-local modelling and shadows with the relevant components; apply
+the shared finish after assembly so parts share a pixel grid and colour grade.
+Backgrounds should not be baked into transparent character masters. Preserve
+edge alpha without a dark fringe. Keep source components before finishing.
+
+PIXEL FINISH AND ARTCRAFT — ORIGINAL CAPABILITY STUDY
+Use EffectCraft Mosaic with sharpColors to compare controlled block scales.
+Posterize changes channel levels; it is not a fixed-size colour palette.
+No dedicated palette quantization/dither or nearest-neighbour layer sampler
+was found in the inspected EffectCraft catalog. Do not describe Mosaic as
+hand-authored pixel art or assume registry support guarantees a good render.
+Use a consistent pixel density within each asset family, with grid counts
+derived from the dimensions; do not copy identical block counts to a small
+portrait and a wide event scene. Judge eyes and expression before approving.
+Existing 32×40 portraits and 240×112 banners remain runtime constraints for
+direct replacements. Larger card art requires its own export contract.
+Higher-detail artwork does not automatically remain legible at 32×40.
+
+HISTORICAL BOUNDARIES
+The game starts near Rhakotis in 350 BCE, with Alexandria developing after
+331 BCE. Do not insert completed later landmarks into early dated events.
+Ancient portraits are representations, often idealised and sometimes later
+copies. Do not present the generated Alexander face as an exact likeness.
+Fayum portraits, early modern paintings/prints and later Roman mosaics are
+medium/composition references only; their costumes are not automatically
+evidence for fourth-century BCE Alexandria.
+
+REFERENCE LOG — ACCESSED 12 NOVEMBER 2026
+Alexander identity conventions: Acropolis Museum, Head of a statue of
+Alexander the Great.
+https://www.theacropolismuseum.gr/en/head-statue-alexander-great
+Use: portrait tradition and head/hair structure; not photographic likeness.
+
+Alexander identity conventions: Cleveland Museum of Art, Head of Alexander
+the Great, 1927.209, c. 300–200 BCE.
+https://www.clevelandart.org/art/1927.209
+Use: swept-back anastole hair, head tilt and upward gaze. Later representation.
+
+Selected lighting reference: National Gallery of Art, Rembrandt, Self-Portrait,
+1659.
+https://www.nga.gov/artworks/79-self-portrait
+Use: directional light, dark ground and human dignity; not costume or face.
+
+Painted portrait reference: National Archaeological Museum, Fayum portraits.
+https://www.namuseum.gr/en/collection/fayum-portraits/
+Use: gaze and painted presence; Roman-period reference, much later than start.
+
+Woodblock reference: Tokyo National Museum, Toshusai Sharaku, The Actor Otani
+Oniji III as Edobei, A10569.471.
+https://www.tnm.jp/modules/r_collection/index.php?colid=A10569.471&controller=dtl&lang=en
+Use: carved line, flat separations and expressive contour, not cultural dress.
+Search record retrieved; direct page returned an error on this run.
+
+Etching reference: Metropolitan Museum of Art, Jacques Callot, The Beggar
+Sitting and Eating, ca. 1623, 57.650.307(23).
+https://www.metmuseum.org/art/collection/search/421765
+Use: economical line, cloth and bodily attitude; not an ancient costume model.
+
+Mosaic reference: MANN, Restauro del mosaico di Alessandro e Dario.
+https://www.museoarcheologiconapoli.it/restauro-del-mosaico-di-alessandro-e-dario/
+Use: tesserae as directional marks. Later Roman work, not a contemporary image.
+
+These were researched as visual conventions and text descriptions; museum
+image files were not supplied to the generator. The exact source prompt is
+saved in source/generation-prompt.txt. Built-in image generation was used for
+the comparison sheet; ArtCraft is used for the finishing experiment.
+DELIVERED FINISH EXPERIMENT
+review/chiaroscuro-source.png — selected centre portrait, cropped in ArtCraft.
+review/chiaroscuro-pixel-fine.png — 132×264 Mosaic grid, approximately 3px blocks.
+review/chiaroscuro-pixel-medium.png — 66×132 grid, approximately 6px blocks.
+review/chiaroscuro-pixel-coarse.png — 40×79 grid, approximately 10px blocks.
+All four are 397×793 pixels; non-integer grid division slightly varies block
+width. This is a Mosaic experiment, not yet a final integer-grid export spec.
+masters/chiaroscuro-pixel-finish.ecproj — source crop and editable adjustment.
+review/chiaroscuro-finish-comparison.png — 1728×900 side-by-side review board.
+masters/chiaroscuro-finish-comparison.ecproj — editable image/label composition.
+source/build-pixel-study.cjs — reproducible ArtCraft generation of the tests.
+qa/chiaroscuro-pixel-study.json — parameters, hashes and native reopen checks.
+qa/chiaroscuro-pixel-nonblank.json — PNG pixel-content checks.
+Native reopen reproduced the medium export exactly. Source remained unchanged.
+No gameplay, runtime asset replacements, card layout or minting was implemented.
+SECOND ITERATION
+The user's instruction was to develop a pixel-art filter, rather than blur.
+FILTER.txt documents the reusable deterministic filter, shared authored palette,
+new outputs and external finishing workflow for ArtCraft. The original Mosaic
+exports above are comparison baselines, not the recommended current finish.
+Status: style 3 selected; custom pixel-art filter delivered for visual review;
+production component library and TCG layout remain future tasks.

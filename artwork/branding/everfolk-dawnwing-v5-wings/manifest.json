@@ -1,0 +1,38 @@
+{
+  "name": "Dawnwing / lifted wings",
+  "parent": "../everfolk-dawnwing-v4-scarab",
+  "changes": [
+    "The central body is a substantial oval with two convex wing cases and a clear centre seam.",
+    "A distinct broad thorax separates the head from the abdomen.",
+    "The three-point crown is integrated into a rounded beetle head.",
+    "Three pairs of legs are visible: raised forelegs, outward middle legs and descending hindlegs.",
+    "The wings emerge from short roots behind the thorax and upper shell, spreading outward and upward.",
+    "Each wing forms one continuous fan with two curved internal feather divisions and a pointed outer tip.",
+    "The lower wings no longer wrap around the abdomen; the shell and all three leg pairs are exposed."
+  ],
+  "master": "masters/Everfolk-Dawnwing-Lifted-Wings.vectorcraft",
+  "artboards": 8,
+  "exports": [
+    "emblem-ink",
+    "emblem-cream",
+    "stacked-ink",
+    "stacked-cream",
+    "horizontal-ink",
+    "horizontal-cream",
+    "wordmark-ink",
+    "wordmark-cream"
+  ],
+  "palette": {
+    "olive": "#292c25",
+    "card": "#33372e",
+    "cream": "#e7e0c9",
+    "ink": "#284744",
+    "clay": "#db9c78",
+    "clayInk": "#9b553e",
+    "paper": "#f1ead8",
+    "muted": "#b4b59e",
+    "darkMuted": "#6b7566",
+    "light": "#e8e2d2"
+  },
+  "warnings": []
+}

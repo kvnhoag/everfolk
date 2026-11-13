@@ -4,7 +4,7 @@ import type { SetStateAction } from "react";
 import type { LifeState } from "../../src/types.ts";
 import type { OnlinePlay } from "../types/online-play.ts";
 import { archiveLife, createDifferentSampleLife, createSampleLife, persistBirthPresentation, persistBirthStatsReveal, newLifeSeed, persistLife } from "../mutations/lives.ts";
-import { engineForLife, loadAnyLife } from "../lib/world-session.ts";
+import { engineForLife, loadAnyLife, registerLifeEngine } from "../lib/world-session.ts";
 import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readRawSavedLife, readSavedLife } from "../queries/lives.ts";
 import type { ArchivedLife } from "../types/session.ts";
 import { advanceToDecisionWithFocus, advanceYearWithFocus, focusActivity, normalizeYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "../models/yearly-focus.ts";
@@ -19,6 +19,7 @@ import type { DemoCommand } from "../../src/demo/types.ts";
 import "../demo/start.ts";
 import { releaseOrder, sendDemoCommand } from "../demo/screen.ts";
 import { isUnavailable } from "../../src/demo/availability.ts";
+import type { GamePreviewSession } from "../types/game-preview.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
 export type PlaybackSpeed = 1 | 2 | 4 | 8 | 12 | 16;
@@ -42,7 +43,11 @@ interface SessionState {
   unreadableSave?: string | null;
 }
 
-function initialSession(startFresh = false, startFreshFrom?: LifeState): SessionState {
+function initialSession(startFresh = false, startFreshFrom?: LifeState, previewSession?: GamePreviewSession): SessionState {
+  if (previewSession) {
+    registerLifeEngine(previewSession.engine);
+    return { life: previewSession.life, notice: "", hasBegun: !previewSession.atBirth, hasRevealedStats: !previewSession.atBirth, unreadableSave: null };
+  }
   try {
     if (!startFresh && typeof window !== "undefined") {
       const restored = readSavedLife(window.localStorage);
@@ -102,7 +107,7 @@ export function runOnlineAction(
 export async function advanceOnlineYearWithFocus(online: OnlinePlay, life: LifeState, focusId: YearlyFocusId): Promise<LifeState> {
   if (life.phase !== "ready") return life;
   const engine = engineForLife(life);
-  const activity = focusActivity(engine.world, normalizeYearlyFocus(focusId, engine.world));
+  const activity = focusActivity(engine.world, normalizeYearlyFocus(focusId, engine.world, life));
   let next = life;
   if (activity && !isUnavailable(engine.world.demo, "activity", activity.id) && life.character?.lastActivityAge !== life.age &&
     engine.getActivities(life).some(candidate => candidate.id === activity.id && candidate.available)) {
@@ -113,7 +118,8 @@ export async function advanceOnlineYearWithFocus(online: OnlinePlay, life: LifeS
   return next.phase === "ready" ? online.dispatch({ type: "advance" }) : next;
 }
 
-export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = false, startFreshFrom, ranked, online }: { isOverlayOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; ranked?: RankedPlay; online?: OnlinePlay } = {}) {
+export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = false, startFreshFrom, ranked, online, previewSession }: { isOverlayOpen?: boolean; startFresh?: boolean; startFreshFrom?: LifeState; ranked?: RankedPlay; online?: OnlinePlay; previewSession?: GamePreviewSession } = {}) {
+  const isPreview = Boolean(previewSession);
   const [syncing, setSyncing] = useState(false);
   const pendingRef = useRef(false);
   const isOverlayOpen = overlayFromApp || syncing;
@@ -124,14 +130,14 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const externalOnlineLifeRef = useRef(online?.initial);
   const [initial] = useState(() => online || ranked
     ? { life: (online ?? ranked)!.initial, notice: "", hasBegun: true, hasRevealedStats: true, unreadableSave: null }
-    : initialSession(startFresh, startFreshFrom));
+    : initialSession(startFresh, startFreshFrom, previewSession));
   const [unreadableSave, setUnreadableSave] = useState<string | null>(() => initial.unreadableSave ?? null);
   const unreadableSaveRef = useRef(unreadableSave);
   unreadableSaveRef.current = unreadableSave;
   const [life, setLife] = useState(initial.life);
   const lifeRef = useRef(life);
-  const [focusSelection, setFocusSelection] = useState(() => ({ key: yearlyFocusStorageKey(initial.life), id: startFresh || online ? "everyday" as YearlyFocusId : savedFocus(initial.life) }));
-  const focusId = focusSelection.key === yearlyFocusStorageKey(life) ? focusSelection.id : "everyday";
+  const [focusSelection, setFocusSelection] = useState(() => ({ key: yearlyFocusStorageKey(initial.life), id: startFresh || online || isPreview ? "everyday" as YearlyFocusId : savedFocus(initial.life) }));
+  const focusId = normalizeYearlyFocus(focusSelection.key === yearlyFocusStorageKey(life) ? focusSelection.id : "everyday", engineForLife(life).world, life);
   const focusIdRef = useRef(focusId);
   focusIdRef.current = focusId;
   const [hasBegun, setHasBegun] = useState(initial.hasBegun);
@@ -151,7 +157,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const [speed, setSpeed] = useState<PlaybackSpeed>(1);
   const [yearClock] = useState(() => createPlaybackClock(playbackYearKey(initial.life), YEAR_DURATION_MS));
   const [clockProgress, setClockProgress] = useState(0);
-  const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked || online ? "saved" : "saving");
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>(ranked || online || isPreview ? "saved" : "saving");
   const [isVisible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [archivedLives, setArchivedLives] = useState<ArchivedLife[]>([]);
   const yearDurationMs = YEAR_DURATION_MS / speed;
@@ -214,7 +220,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const setFocus = useCallback((id: YearlyFocusId) => {
     if (lifeRef.current !== life || life.phase === "ended") return;
     const world = engineForLife(life).world;
-    const next = normalizeYearlyFocus(id, world);
+    const next = normalizeYearlyFocus(id, world, life);
     const activity = focusActivity(world, next);
     if (activity && life.age < (activity.minAge ?? 0)) return;
     focusIdRef.current = next;
@@ -273,15 +279,15 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       return;
     }
     if (fresh || next.worldFingerprint !== lifeRef.current.worldFingerprint || next.seed !== lifeRef.current.seed) {
-      setFocusSelection({ key: yearlyFocusStorageKey(next), id: fresh ? "everyday" : savedFocus(next) });
+      setFocusSelection({ key: yearlyFocusStorageKey(next), id: fresh || isPreview ? "everyday" : savedFocus(next) });
     }
     if (fresh) yearClock.reset(playbackYearKey(next)); else yearClock.setYear(playbackYearKey(next));
     setClockProgress(yearClock.read().progress);
     lifeRef.current = next;
     setLife(next);
-    setSaveStatus("saving");
+    setSaveStatus(isPreview ? "saved" : "saving");
     if (next.phase === "ended" || fresh) commitPauseState(updatePauseState(pauseStateRef.current, { type: next.phase === "ended" ? "ended" : "fresh" }, { hasBegun: hasBegunRef.current, phase: next.phase }));
-  }, [commitPauseState, yearClock]);
+  }, [commitPauseState, yearClock, isPreview]);
 
   const choose = useCallback((choiceId: string) => {
     // Ignore an old rendered button after its snapshot has already been replaced.
@@ -409,14 +415,26 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     setUnreadableSave(null);
     setPlaying(false);
     setAutoDecisions(false);
+    if (previewSession) {
+      hasBegunRef.current = !previewSession.atBirth;
+      setHasBegun(!previewSession.atBirth);
+      setHasRevealedStats(!previewSession.atBirth);
+      commit(previewSession.life, true);
+      setNotice("");
+      return;
+    }
     hasBegunRef.current = false;
     setHasBegun(false);
     setHasRevealedStats(false);
     commit(createSampleLife(newLifeSeed()), true);
     setNotice("");
-  }, [commit, setPlaying, setAutoDecisions]);
+  }, [commit, setPlaying, setAutoDecisions, previewSession]);
 
   const importLife = useCallback((json: string) => {
+    if (isPreview) {
+      setNotice("Choose a test situation to start another preview life.");
+      return false;
+    }
     if (onlineRef.current) {
       setNotice("Saved lives cannot be imported into an active online life.");
       return false;
@@ -449,22 +467,22 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       setNotice("The imported life is ready.");
       return restored;
     } catch (error) { setNotice(message(error)); return false; }
-  }, [commit, commitPauseState, setAutoDecisions, yearClock]);
+  }, [commit, commitPauseState, setAutoDecisions, yearClock, isPreview]);
 
   useEffect(() => {
-    if (onlineRef.current) return;
+    if (isPreview || onlineRef.current) return;
     try { persistYearlyFocus(window.localStorage, life, focusId); }
     catch { /* A blocked preference store does not prevent playing this life. */ }
-  }, [focusId, life.worldFingerprint, life.seed]);
+  }, [focusId, life.worldFingerprint, life.seed, isPreview]);
 
   useEffect(() => {
-    if (onlineRef.current) return;
+    if (isPreview || onlineRef.current) return;
     try { setArchivedLives(readArchivedLives(window.localStorage)); }
     catch (error) { setNotice(message(error)); }
-  }, []);
+  }, [isPreview]);
 
   useEffect(() => {
-    if (onlineRef.current || rankedRef.current) return; // Authoritative sessions keep their own saves.
+    if (isPreview || onlineRef.current || rankedRef.current) return; // Authoritative sessions and previews keep their own saves.
     if (unreadableSaveRef.current !== null) return; // Includes malformed empty records.
     try {
       persistLife(window.localStorage, life);
@@ -474,24 +492,24 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       setSaveStatus("unavailable");
       setNotice(message(error));
     }
-  }, [hasBegun, life, unreadableSave]);
+  }, [hasBegun, life, unreadableSave, isPreview]);
 
   useEffect(() => {
-    if (onlineRef.current) return;
+    if (isPreview || onlineRef.current) return;
     if (unreadableSaveRef.current !== null) return;
     try { persistBirthStatsReveal(window.localStorage, life, hasRevealedStats); }
     catch (error) {
       setSaveStatus("unavailable");
       setNotice(message(error));
     }
-  }, [hasRevealedStats, life, unreadableSave]);
+  }, [hasRevealedStats, life, unreadableSave, isPreview]);
 
   useEffect(() => {
     // Ranked lives are kept on chain and by their session; the past-lives shelf is for free play.
-    if (life.phase !== "ended" || onlineRef.current || rankedRef.current) return;
+    if (isPreview || life.phase !== "ended" || onlineRef.current || rankedRef.current) return;
     try { setArchivedLives(archiveLife(window.localStorage, life)); }
     catch (error) { setNotice(message(error)); }
-  }, [life]);
+  }, [life, isPreview]);
 
   useEffect(() => {
     const updateVisibility = () => {
@@ -569,6 +587,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, []);
 
   return {
+    isPreview,
     life,
     choose,
     act,

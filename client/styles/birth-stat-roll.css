@@ -54,3 +54,4 @@
 @media(max-width:900px){.birth-roll-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.birth-roll-card{padding:13px 14px 10px}.birth-roll-number{font-size:39px}.birth-roll-stat-name{font-size:10px}.birth-roll-range{font-size:10px}}
 @media(max-width:480px){.birth-stat-roll{padding:17px;margin:20px 0}.birth-roll-heading h3{font-size:26px}.birth-roll-heading{gap:10px}.birth-roll-origin{padding:11px}.birth-roll-origin>strong{font-size:11px}.birth-roll-card{padding:12px}.birth-roll-footer{align-items:flex-start}.birth-roll-button{width:100%}}
 @media(prefers-reduced-motion:reduce){.birth-stat-roll *,.birth-stat-roll *::before{animation:none!important;transition:none!important}}
+.birth-royal-note{margin:14px 0 0;padding:12px 14px;border:1px solid #d7cbab;border-radius:6px;background:#f4efdf;font-size:12px;line-height:1.65;color:#75674b}

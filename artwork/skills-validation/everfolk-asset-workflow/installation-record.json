@@ -1,0 +1,35 @@
+{
+  "installedPath": "C:/Users/Legion/.codex/skills/everfolk-asset-workflow",
+  "count": 7,
+  "identical": true,
+  "files": [
+    {
+      "file": "SKILL.md",
+      "sha256": "25DBE65BAB3655D6E4413C1502E4EE504D8DD225E1937BA08D6E90C9AE9CF80C"
+    },
+    {
+      "file": "agents\\openai.yaml",
+      "sha256": "9F6EDB08050859E3BCD307232AE1640068BCF5BF2D4AE2727B0E287628129A34"
+    },
+    {
+      "file": "references\\artcraft-and-editability.md",
+      "sha256": "A1E322208C56FD7C237DEE8006F92719AD4873F0DA584B02A6EC0F0C498E073D"
+    },
+    {
+      "file": "references\\direction-and-references.md",
+      "sha256": "43DC492B410BC14AFCE299721E2DE6BA62439B092959B4D78E0BF185F37C1D94"
+    },
+    {
+      "file": "references\\pixel-workflow.md",
+      "sha256": "C95C9403BB0C9FC399D787A5FA39B84A95478DB3EC3EF34E43D8233853DD59D0"
+    },
+    {
+      "file": "scripts\\pixelate_regions.py",
+      "sha256": "4676283868954E64E423815A67C5CA920FEC0D8643CF10457D8DA62C2975F500"
+    },
+    {
+      "file": "scripts\\pixelate.py",
+      "sha256": "05C2A02099B9FE9F2393C68634C356ECC6AE89CEB5C8B0F453560C191BEAE011"
+    }
+  ]
+}

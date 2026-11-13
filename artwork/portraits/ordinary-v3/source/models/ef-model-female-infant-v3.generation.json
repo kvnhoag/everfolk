@@ -1,0 +1,15 @@
+{
+  "id": "ef-model-female-infant-v3",
+  "role": "continuous-whole-person-age-model",
+  "sex": "female",
+  "stage": "infant",
+  "originalGeneratedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-2c3be01c-7111-4172-a16e-07c210b025e8.png",
+  "promptPath": "source/prompts/ef-model-female-infant-v3-prompt.txt",
+  "referencePaths": [
+    "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v2/source/body-references/ef-r-female-waist-v2.png"
+  ],
+  "tool": "built-in image_gen",
+  "transparentRequested": true,
+  "destinationPath": "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v3/source/models/ef-model-female-infant-v3.png",
+  "anatomyPolicy": "Generated head, neck, shoulders, torso and arms continuously as one age-appropriate person. No manual head/neck cuts."
+}

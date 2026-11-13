@@ -1,0 +1,6 @@
+interface:
+  display_name: "Everfolk Asset Workflow"
+  short_description: "Historical game art, modular assets, and pixel finish"
+  default_prompt: "Use $everfolk-asset-workflow to create or revise reference-led historical game art."
+policy:
+  allow_implicit_invocation: true

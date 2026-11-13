@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 1,
+  "coordinateSpace": "Native original generated source PNG pixels, origin upper-left.",
+  "method": "Shoulders chosen at the observed outer garment outline 55px above the center-front neckline, with direct alpha contour measurements. Collar front is first opaque fabric at canvas center. Waist centers are visually measured at belt midpoint; infant waist is corresponding torso height, since wrap has no belt. These are registration guides, not claims of exact anatomical equivalence.",
+  "expectedPrecisionPixels": {
+    "shoulders": 8,
+    "collar": 3,
+    "waist": 15
+  },
+  "canonicalFemaleTarget": {
+    "sourceDimensions": [
+      1122,
+      1402
+    ],
+    "leftShoulder": [
+      190,
+      680
+    ],
+    "rightShoulder": [
+      920,
+      680
+    ],
+    "collarFrontCenter": [
+      560,
+      730
+    ],
+    "waistCenter": [
+      560,
+      1270
+    ]
+  },
+  "garments": [
+    {
+      "sex": "female",
+      "wardrobeId": "everyday",
+      "source": "source/wardrobe/ef-w-female-everyday-v2.png",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "leftShoulder": [
+        185,
+        683
+      ],
+      "rightShoulder": [
+        925,
+        683
+      ],
+      "collarFrontCenter": [
+        561,
+        738
+      ],
+      "waistCenter": [
+        560,
+        1260
+      ],
+      "registrationRequired": true,
+      "note": "Canonical crop retained; identity registration is also available."
+    },
+    {
+      "sex": "female",
+      "wardrobeId": "work",
+      "source": "source/wardrobe/ef-w-female-work-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "leftShoulder": [
+        157,
+        700
+      ],
+      "rightShoulder": [
+        907,
+        700
+      ],
+      "collarFrontCenter": [
+        536,
+        755
+      ],
+      "waistCenter": [
+        525,
+        1290
+      ],
+      "registrationRequired": true,
+      "note": "Generated silhouette/frame has small changes; verify neck hole, sleeve/arm intersections and belt after affine fit."
+    },
+    {
+      "sex": "female",
+      "wardrobeId": "maritime",
+      "source": "source/wardrobe/ef-w-female-maritime-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "leftShoulder": [
+        152,
+        713
+      ],
+      "rightShoulder": [
+        885,
+        713
+      ],
+      "collarFrontCenter": [
+        536,
+        768
+      ],
+      "waistCenter": [
+        515,
+        1295
+      ],
+      "registrationRequired": true,
+      "note": "Generated silhouette/frame has small changes; verify neck hole, sleeve/arm intersections and belt after affine fit."
+    },
+    {
+      "sex": "female",
+      "wardrobeId": "commerce",
+      "source": "source/wardrobe/ef-w-female-commerce-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "leftShoulder": [
+        135,
+        715
+      ],
+      "rightShoulder": [
+        916,
+        715
+      ],
+      "collarFrontCenter": [
+        536,
+        770
+      ],
+      "waistCenter": [
+        520,
+        1310
+      ],
+      "registrationRequired": true,
+      "note": "Generated silhouette/frame has small changes; verify neck hole, sleeve/arm intersections and belt after affine fit."
+    },
+    {
+      "sex": "female",
+      "wardrobeId": "scholarly",
+      "source": "source/wardrobe/ef-w-female-scholarly-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "leftShoulder": [
+        154,
+        716
+      ],
+      "rightShoulder": [
+        929,
+        716
+      ],
+      "collarFrontCenter": [
+        536,
+        771
+      ],
+      "waistCenter": [
+        520,
+        1300
+      ],
+      "registrationRequired": true,
+      "note": "Generated silhouette/frame has small changes; verify neck hole, sleeve/arm intersections and belt after affine fit."
+    },
+    {
+      "sex": "female",
+      "wardrobeId": "military",
+      "source": "source/wardrobe/ef-w-female-military-v2.png",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "leftShoulder": [
+        196,
+        681
+      ],
+      "rightShoulder": [
+        920,
+        681
+      ],
+      "collarFrontCenter": [
+        561,
+        736
+      ],
+      "waistCenter": [
+        555,
+        1255
+      ],
+      "registrationRequired": true,
+      "note": "Generated silhouette/frame has small changes; verify neck hole, sleeve/arm intersections and belt after affine fit."
+    },
+    {
+      "sex": "female",
+      "wardrobeId": "elite",
+      "source": "source/wardrobe/ef-w-female-elite-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "leftShoulder": [
+        149,
+        708
+      ],
+      "rightShoulder": [
+        894,
+        708
+      ],
+      "collarFrontCenter": [
+        536,
+        763
+      ],
+      "waistCenter": [
+        515,
+        1300
+      ],
+      "registrationRequired": true,
+      "note": "Generated silhouette/frame has small changes; verify neck hole, sleeve/arm intersections and belt after affine fit."
+    },
+    {
+      "sex": "female",
+      "wardrobeId": "performance",
+      "source": "source/wardrobe/ef-w-female-performance-v2.png",
+      "sourceDimensions": [
+        1072,
+        1467
+      ],
+      "leftShoulder": [
+        148,
+        721
+      ],
+      "rightShoulder": [
+        911,
+        721
+      ],
+      "collarFrontCenter": [
+        536,
+        776
+      ],
+      "waistCenter": [
+        520,
+        1306
+      ],
+      "registrationRequired": true,
+      "note": "Generated silhouette/frame has small changes; verify neck hole, sleeve/arm intersections and belt after affine fit."
+    },
+    {
+      "sex": "female",
+      "wardrobeId": "infant",
+      "source": "source/wardrobe/ef-w-female-infant-v2.png",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "leftShoulder": [
+        204,
+        681
+      ],
+      "rightShoulder": [
+        896,
+        681
+      ],
+      "collarFrontCenter": [
+        561,
+        736
+      ],
+      "waistCenter": [
+        550,
+        1270
+      ],
+      "registrationRequired": true,
+      "note": "Opaque arm-covering wrap; waist guide is torso height, no belt. Preserve cover over both arms when scaling."
+    }
+  ]
+}

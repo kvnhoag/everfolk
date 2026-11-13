@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>09 One-colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+    <g id="_09_Sprouting_Story___mono_device" data-name="09 Sprouting Story / mono device">
+      <path id="Sprouting_Story___element_1" data-name="Sprouting Story / element 1" d="M32.64 95.36 C49.707 89.387 65.493 91.52 80 101.76 C94.507 91.52 110.293 89.387 127.36 95.36 L127.36 122.24 C110.293 117.12 94.507 119.68 80 129.92 C65.493 119.68 49.707 117.12 32.64 122.24 Z" fill="none" stroke="#24464b" stroke-width="5.76" stroke-linecap="round" stroke-linejoin="round"/>
+      <line id="Sprouting_Story___element_2" data-name="Sprouting Story / element 2" x1="80" y1="60.8" x2="80" y2="128.64" fill="none" stroke="#24464b" stroke-width="5.76" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Sprouting_Story___element_3" data-name="Sprouting Story / element 3" d="M77.44 72.32 C51.84 76.16 39.04 59.52 42.88 40.32 C67.2 39.04 78.72 51.84 77.44 72.32 Z" fill="#24464b"/>
+      <path id="Sprouting_Story___element_4" data-name="Sprouting Story / element 4" d="M83.84 58.24 C81.28 33.92 97.92 23.68 117.12 28.8 C118.4 50.56 101.76 62.08 83.84 58.24 Z" fill="#24464b"/>
+    </g>
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

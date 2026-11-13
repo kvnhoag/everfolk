@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "onlyWingGeometryChanged": true,
+  "svgExports": 8,
+  "svgPathsOnly": true,
+  "transparentPngs": true,
+  "nativeArtboards": 8,
+  "rasterImages": 0,
+  "exportWarnings": []
+}

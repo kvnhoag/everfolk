@@ -1,0 +1,99 @@
+{
+  "artboards": [
+    {
+      "height": 300,
+      "name": "01 Independent name / ink",
+      "width": 1200,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 300,
+      "name": "02 Independent name / cream",
+      "width": 1200,
+      "x": 0,
+      "y": 420
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 1,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / independent wordmark",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 627.5271533215458,
+        "width": 1011.1038140944681,
+        "x": 94.44809295276585,
+        "y": 46.44809295276585
+      },
+      "children": [
+        {
+          "bounds": {
+            "height": 207.52715332154577,
+            "width": 1011.1038140944681,
+            "x": 94.44809295276585,
+            "y": 466.4480929527659
+          },
+          "childCount": 9,
+          "id": 21,
+          "kind": "Group",
+          "locked": false,
+          "name": "Everfolk. / independent approved Eczar wordmark",
+          "visible": true
+        },
+        {
+          "bounds": {
+            "height": 207.52715332154582,
+            "width": 1011.1038140944681,
+            "x": 94.44809295276585,
+            "y": 46.44809295276585
+          },
+          "childCount": 9,
+          "id": 11,
+          "kind": "Group",
+          "locked": false,
+          "name": "Everfolk. / independent approved Eczar wordmark",
+          "visible": true
+        }
+      ],
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 21,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "#db9c78",
+    "fillActive": false,
+    "stroke": "None",
+    "strokeWidth": 1
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-scarabs-v1\\masters\\everfolk-independent-wordmark.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "everfolk-independent-wordmark.vectorcraft",
+  "tool": "selection",
+  "uid": 34,
+  "units": "Pixels",
+  "rasterImages": 0
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>10 One-colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+    <g id="_10_Returning_Dawn___mono_device" data-name="10 Returning Dawn / mono device">
+      <path id="Returning_Dawn___element_1" data-name="Returning Dawn / element 1" d="M53.12 77.44 C53.12 41.6 106.88 41.6 106.88 77.44" fill="none" stroke="#24464b" stroke-width="7.68" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Returning_Dawn___element_2" data-name="Returning Dawn / element 2" d="M80 31.36 L80 24.96 M42.88 48 L37.76 42.88 M117.12 48 L122.24 42.88" fill="none" stroke="#24464b" stroke-width="5.12" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Returning_Dawn___element_3" data-name="Returning Dawn / element 3" d="M30.08 81.28 C47.147 74.453 63.787 76.587 80 87.68 C96.213 76.587 112.853 74.453 129.92 81.28" fill="none" stroke="#24464b" stroke-width="7.68" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="Returning_Dawn___element_4" data-name="Returning Dawn / element 4" d="M35.2 99.2 C50.56 93.227 65.493 95.36 80 105.6 C94.507 95.36 109.44 93.227 124.8 99.2 M42.88 117.12 C55.68 112.853 68.053 114.987 80 123.52 C91.947 114.987 104.32 112.853 117.12 117.12" fill="none" stroke="#24464b" stroke-width="6.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

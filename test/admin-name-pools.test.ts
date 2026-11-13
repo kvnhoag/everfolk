@@ -47,6 +47,9 @@ test("the guided editor rejects case-insensitive duplicates, cross-pool overlap 
 
 function encounterFixture(pack: WorldPack): WorldPack {
   const copy = structuredClone(pack), keep = new Set([copy.health!.careDecision, ...Object.values(copy.economy!.moneylender!.events), "meet-person-harbor"]);
+  // Name acceptance is independent of the sampled household's management route.
+  if (copy.royalty) copy.royalty.originId = "fixture-unselected-royal-origin";
+  if (copy.aristocracy) copy.aristocracy.originId = "fixture-unselected-estate-origin";
   withoutMarketSignals(copy);
   copy.events = copy.events.filter(event => keep.has(event.id));
   const meet = copy.events.find(event => event.id === "meet-person-harbor")!;

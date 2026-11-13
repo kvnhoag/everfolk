@@ -3,6 +3,7 @@ import type { RelationshipRow } from "../models/relationship-table.ts";
 import { relationshipBond } from "../models/relationship-table.ts";
 import { displayProse } from "../models/display-prose.ts";
 import "../styles/relationship-table.css";
+import PixelPortrait from "./PixelPortrait.tsx";
 
 export default function RelationshipTable({ rows, world, caption, emptyText }: {
   rows: readonly RelationshipRow[]; world: WorldPack; caption: string; emptyText: string;
@@ -15,7 +16,7 @@ export default function RelationshipTable({ rows, world, caption, emptyText }: {
         <caption>{caption}</caption>
         <thead><tr><th scope="col">Person</th><th scope="col">Relationship</th><th scope="col">Background</th><th scope="col">Occupation</th><th scope="col">Bond</th></tr></thead>
         <tbody>{rows.map(row => <tr key={row.id} className={row.deceased ? "is-deceased" : undefined}>
-          <th scope="row"><strong>{row.name}</strong><span>{row.age}</span></th>
+          <th scope="row"><div className="relationship-person"><PixelPortrait portrait={row.portrait} name={row.name} className="relationship-person-portrait" /><div><strong>{row.name}</strong><span>{row.age}</span></div></div></th>
           <td><ul className="relationship-table-roles">{row.roles.length ? row.roles.map(role => <li key={role}>{role}</li>) : <li>Acquaintance</li>}</ul></td>
           <td>{row.backgroundDetail ? <details className="relationship-table-background"><summary>{row.background}</summary><p>{displayProse(row.backgroundDetail)}</p></details> : row.background}</td>
           <td>{row.occupation}</td>

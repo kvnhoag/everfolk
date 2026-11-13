@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>04 One-colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+    <g id="_04_Chronicle_Ribbon___mono_device" data-name="04 Chronicle Ribbon / mono device">
+      <path id="Chronicle_Ribbon___element_1" data-name="Chronicle Ribbon / element 1" d="M31.36 46.72 C45.867 43.307 59.52 45.867 72.32 54.4 L72.32 120.96 C59.52 112.427 45.867 109.867 31.36 113.28 Z" fill="#24464b"/>
+      <path id="Chronicle_Ribbon___element_2" data-name="Chronicle Ribbon / element 2" d="M128.64 46.72 C114.133 43.307 100.48 45.867 87.68 54.4 L87.68 120.96 C100.48 112.427 114.133 109.867 128.64 113.28 Z" fill="#24464b"/>
+      <polygon id="Chronicle_Ribbon___element_3" data-name="Chronicle Ribbon / element 3" points="73.6,41.6 86.4,41.6 86.4,129.92 80,123.52 73.6,129.92" fill="#24464b"/>
+      <path id="Chronicle_Ribbon___element_4" data-name="Chronicle Ribbon / element 4" d="M80 22.4 C80.768 25.899 82.901 28.032 86.4 28.8 C82.901 29.568 80.768 31.701 80 35.2 C79.232 31.701 77.099 29.568 73.6 28.8 C77.099 28.032 79.232 25.899 80 22.4 Z" fill="#24464b"/>
+    </g>
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

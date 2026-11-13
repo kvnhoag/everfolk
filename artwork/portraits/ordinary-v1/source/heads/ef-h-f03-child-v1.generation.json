@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "ef-h-f03-child-v1",
+  "identityId": "f03",
+  "stage": "child",
+  "ageExample": 8,
+  "tool": "built-in image_gen",
+  "originalGeneratedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d25c-329f-7391-8456-bfd70bdc869e\\exec-d55077d7-b6ee-4472-87f1-c12fd610ab64.png",
+  "reference": "D:\\Hustle\\Games\\Historical Lives\\artwork\\portraits\\ordinary-v1\\source\\heads\\ef-h-f03-adult-v1.png",
+  "prompt": "source/prompts/ef-h-f03-child-v1-prompt.txt",
+  "alphaRequested": true
+}

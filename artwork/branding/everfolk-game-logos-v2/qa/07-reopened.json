@@ -1,0 +1,104 @@
+{
+  "artboards": [
+    {
+      "height": 560,
+      "name": "07 Transparent logo",
+      "width": 1000,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 560,
+      "name": "07 Dark proof",
+      "width": 1000,
+      "x": 1100,
+      "y": 0
+    }
+  ],
+  "colorMode": "Rgb",
+  "currentLayer": 4,
+  "dirty": false,
+  "fileInfoTitle": "Everfolk / game title 07 Roots of Legacy",
+  "history": [],
+  "isolation": null,
+  "key": null,
+  "keyGuide": null,
+  "layerRows": [],
+  "layers": [
+    {
+      "bounds": {
+        "height": 428.89601643197614,
+        "width": 1910.8589511041569,
+        "x": 96.20749602793154,
+        "y": 56.83103434927389
+      },
+      "childCount": 2,
+      "clip": false,
+      "color": "#4fff4f",
+      "dimImages": null,
+      "id": 4,
+      "kind": "Layer",
+      "locked": false,
+      "name": "02 Game title / editable vector lettering and emblem",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": {
+        "height": 560,
+        "width": 1000,
+        "x": 1100,
+        "y": 0
+      },
+      "childCount": 1,
+      "clip": false,
+      "color": "#ff4f4f",
+      "dimImages": null,
+      "id": 2,
+      "kind": "Layer",
+      "locked": false,
+      "name": "01 Dark proof ground",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    },
+    {
+      "bounds": null,
+      "childCount": 0,
+      "clip": false,
+      "color": "#4f80ff",
+      "dimImages": null,
+      "id": 1,
+      "kind": "Layer",
+      "locked": false,
+      "name": "Layer 1",
+      "preview": true,
+      "printable": true,
+      "template": false,
+      "visible": true
+    }
+  ],
+  "objects": 92,
+  "paint": {
+    "appearanceItem": null,
+    "fill": "Linear gradient",
+    "fillActive": false,
+    "stroke": "#122a2e",
+    "strokeWidth": 2
+  },
+  "pasteRemembersLayers": false,
+  "path": "D:\\Hustle\\Games\\Historical Lives\\artwork\\branding\\everfolk-game-logos-v2\\masters\\07-roots-of-legacy.vectorcraft",
+  "redo": [],
+  "revision": 1,
+  "selection": [],
+  "selectionBounds": null,
+  "selectionRotation": 0,
+  "target": null,
+  "title": "07-roots-of-legacy.vectorcraft",
+  "tool": "selection",
+  "uid": 5,
+  "units": "Pixels"
+}

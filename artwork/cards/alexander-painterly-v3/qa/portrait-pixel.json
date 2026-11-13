@@ -1,0 +1,38 @@
+{
+  "source": "D:\\Hustle\\Games\\Historical Lives\\artwork\\cards\\alexander-painterly-v3\\source\\alexander-painterly-brushed.png",
+  "sourceSha256": "236acfbcb5bb832313cc71920ede16f2e8e0daaca8372328ea2c18080a108d08",
+  "sourceSize": [
+    1122,
+    1402
+  ],
+  "method": "PixelOE 1.0.0 legacy CPU API",
+  "options": {
+    "mode": "contrast",
+    "target_size": [
+      420,
+      525
+    ],
+    "patch_size": 4,
+    "pixel_size": 2,
+    "thickness": 1,
+    "color_matching": true,
+    "contrast": 1.0,
+    "saturation": 1.0,
+    "colors": null,
+    "no_upscale": true,
+    "no_downscale": true
+  },
+  "explicitGridRoundingEpsilon": 1e-06,
+  "logical": [
+    420,
+    525
+  ],
+  "output": [
+    840,
+    1050
+  ],
+  "outputSha256": "c0b007dddaa36a3b46b6ab369d05eaee463b63c6dfc56c9cbba02b8b65c05d93",
+  "deterministic": true,
+  "exactIntegerBlocks": true,
+  "sourceUnchanged": true
+}

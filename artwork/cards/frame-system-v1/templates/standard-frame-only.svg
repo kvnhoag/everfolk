@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1260" viewBox="0 0 900 1260" role="img" aria-labelledby="title desc">
+  <title id="title">Everfolk standard transparent card frame</title>
+  <desc id="desc">A deep jade and bronze frame with a transparent 800 by 740 artwork window and a separate ivory information panel. No artwork is embedded.</desc>
+  <defs>
+    <clipPath id="card-clip"><rect width="900" height="1260" rx="34"/></clipPath>
+    <mask id="art-knockout"><rect width="900" height="1260" fill="white"/><path d="M74 190H826L850 214V906L826 930H74L50 906V214Z" fill="black"/></mask>
+    <linearGradient id="jade-finish" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#0c2421"/><stop offset=".5" stop-color="#091b19"/><stop offset="1" stop-color="#0c2421"/></linearGradient>
+    
+  </defs>
+  <g clip-path="url(#card-clip)">
+    <g id="frame" data-name="Frame / jade body, bronze rules and corner ornament">
+      <rect width="900" height="1260" fill="url(#jade-finish)" mask="url(#art-knockout)"/>
+      <rect x="18" y="18" width="864" height="1224" rx="24" fill="none" stroke="#a9844f" stroke-width="3"/>
+      <rect x="28" y="28" width="844" height="1204" rx="17" fill="none" stroke="#d8b67d" stroke-width="1.2"/>
+      <path id="art-window-outline" d="M74 190H826L850 214V906L826 930H74L50 906V214Z" fill="none" stroke="#d8b67d" stroke-width="2"/>
+      <g id="top-left-laurel" transform="translate(43 47) rotate(0) scale(0.8)" fill="#d8b67d">
+    <path d="M0 44 C0 26 9 10 30 0" fill="none" stroke="#d8b67d" stroke-width="1.7"/>
+    <path d="M2 35 C-6 31 -5 23 -3 19 C3 23 5 29 2 35Z M5 25 C-1 18 1 11 5 8 C10 14 10 20 5 25Z M12 15 C10 6 14 1 19 0 C21 7 18 12 12 15Z M21 6 C23 -1 28 -3 33 -2 C31 3 27 6 21 6Z M1 40 C8 39 14 34 15 29 C7 29 2 32 1 40Z M6 29 C14 28 19 24 21 19 C13 18 8 22 6 29Z M13 18 C21 17 26 13 28 8 C21 8 16 11 13 18Z"/>
+  </g>
+      <g id="top-right-laurel" transform="translate(857 47) rotate(90) scale(0.8)" fill="#d8b67d">
+    <path d="M0 44 C0 26 9 10 30 0" fill="none" stroke="#d8b67d" stroke-width="1.7"/>
+    <path d="M2 35 C-6 31 -5 23 -3 19 C3 23 5 29 2 35Z M5 25 C-1 18 1 11 5 8 C10 14 10 20 5 25Z M12 15 C10 6 14 1 19 0 C21 7 18 12 12 15Z M21 6 C23 -1 28 -3 33 -2 C31 3 27 6 21 6Z M1 40 C8 39 14 34 15 29 C7 29 2 32 1 40Z M6 29 C14 28 19 24 21 19 C13 18 8 22 6 29Z M13 18 C21 17 26 13 28 8 C21 8 16 11 13 18Z"/>
+  </g>
+      <g id="bottom-right-laurel" transform="translate(857 1213) rotate(180) scale(0.8)" fill="#d8b67d">
+    <path d="M0 44 C0 26 9 10 30 0" fill="none" stroke="#d8b67d" stroke-width="1.7"/>
+    <path d="M2 35 C-6 31 -5 23 -3 19 C3 23 5 29 2 35Z M5 25 C-1 18 1 11 5 8 C10 14 10 20 5 25Z M12 15 C10 6 14 1 19 0 C21 7 18 12 12 15Z M21 6 C23 -1 28 -3 33 -2 C31 3 27 6 21 6Z M1 40 C8 39 14 34 15 29 C7 29 2 32 1 40Z M6 29 C14 28 19 24 21 19 C13 18 8 22 6 29Z M13 18 C21 17 26 13 28 8 C21 8 16 11 13 18Z"/>
+  </g>
+      <g id="bottom-left-laurel" transform="translate(43 1213) rotate(270) scale(0.8)" fill="#d8b67d">
+    <path d="M0 44 C0 26 9 10 30 0" fill="none" stroke="#d8b67d" stroke-width="1.7"/>
+    <path d="M2 35 C-6 31 -5 23 -3 19 C3 23 5 29 2 35Z M5 25 C-1 18 1 11 5 8 C10 14 10 20 5 25Z M12 15 C10 6 14 1 19 0 C21 7 18 12 12 15Z M21 6 C23 -1 28 -3 33 -2 C31 3 27 6 21 6Z M1 40 C8 39 14 34 15 29 C7 29 2 32 1 40Z M6 29 C14 28 19 24 21 19 C13 18 8 22 6 29Z M13 18 C21 17 26 13 28 8 C21 8 16 11 13 18Z"/>
+  </g>
+    </g>
+    <g id="readability" data-name="Readability / independent ivory information panel">
+      <path d="M64 952H836L850 966V1146L836 1160H64L50 1146V966Z" fill="#eee4cb"/>
+      <path d="M88 1015H812" fill="none" stroke="#a9844f" stroke-width="1"/>
+    </g>
+    <g id="emblem" data-name="Emblem / approved crowned scarab vector geometry">
+      <svg x="775" y="103" width="53" height="53" viewBox="0 0 512 512" aria-label="Approved Everfolk crowned scarab">
+  
+  <g id="standard-scarab-Layer_1" data-name="Layer 1">
+    <g id="standard-scarab-Everfolk___crowned_scarab_at_rest" data-name="Everfolk / crowned scarab at rest">
+      <path id="standard-scarab-Left_compact_forward_digging_leg___root_y118" data-name="Left compact forward digging leg / root y118" d="M195.443 203.342 C174.38 198.076 155.949 179.646 142.785 158.582 L124.354 116.456 C120.844 107.679 121.722 98.903 126.987 90.127 L142.785 71.696 C148.051 64.675 154.194 63.797 161.215 69.063 C168.236 76.084 169.114 82.228 163.848 87.494 L150.684 103.291 C147.173 108.557 147.173 114.7 150.684 121.722 L166.481 148.051 C173.502 158.582 188.422 169.114 211.241 179.646 C220.017 184.911 221.772 191.055 216.506 198.076 C212.996 205.097 205.975 206.852 195.443 203.342 Z" fill="#d8bc7b" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Right_compact_forward_digging_leg___root_y118" data-name="Right compact forward digging leg / root y118" d="M316.557 203.342 C337.62 198.076 356.051 179.646 369.215 158.582 L387.646 116.456 C391.156 107.679 390.278 98.903 385.013 90.127 L369.215 71.696 C363.949 64.675 357.806 63.797 350.785 69.063 C343.764 76.084 342.886 82.228 348.152 87.494 L361.316 103.291 C364.827 108.557 364.827 114.7 361.316 121.722 L345.519 148.051 C338.498 158.582 323.578 169.114 300.759 179.646 C291.983 184.911 290.228 191.055 295.494 198.076 C299.004 205.097 306.025 206.852 316.557 203.342 Z" fill="#d8bc7b" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Left_outward_jointed_middle_leg___root_y146" data-name="Left outward jointed middle leg / root y146" d="M177.013 248.101 C190.177 253.367 192.81 266.532 182.278 277.063 L137.519 308.658 C130.498 313.924 122.599 314.802 113.823 311.291 L71.696 295.494 C61.165 291.983 57.654 285.84 61.165 277.063 C64.675 268.287 70.819 265.654 79.595 269.165 L116.456 282.329 C119.966 284.084 123.477 283.207 126.987 279.696 L155.949 253.367 C162.97 248.101 169.992 246.346 177.013 248.101 Z" fill="#d8bc7b" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Right_outward_jointed_middle_leg___root_y146" data-name="Right outward jointed middle leg / root y146" d="M334.987 248.101 C321.823 253.367 319.19 266.532 329.722 277.063 L374.481 308.658 C381.502 313.924 389.401 314.802 398.177 311.291 L440.304 295.494 C450.835 291.983 454.346 285.84 450.835 277.063 C447.325 268.287 441.181 265.654 432.405 269.165 L395.544 282.329 C392.034 284.084 388.523 283.207 385.013 279.696 L356.051 253.367 C349.03 248.101 342.008 246.346 334.987 248.101 Z" fill="#d8bc7b" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Left_backward_jointed_hind_leg___root_y170" data-name="Left backward jointed hind leg / root y170" d="M187.544 311.291 C198.076 316.557 200.709 327.089 190.177 337.62 L153.316 369.215 C148.051 372.726 144.54 377.992 142.785 385.013 L126.987 424.506 C123.477 433.283 118.211 435.038 111.19 429.772 C102.414 426.262 99.781 420.118 103.291 411.342 L121.722 361.316 C125.232 354.295 130.498 348.152 137.519 342.886 L169.114 316.557 C176.135 311.291 182.278 309.536 187.544 311.291 Z" fill="#d8bc7b" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Right_backward_jointed_hind_leg___root_y170" data-name="Right backward jointed hind leg / root y170" d="M324.456 311.291 C313.924 316.557 311.291 327.089 321.823 337.62 L358.684 369.215 C363.949 372.726 367.46 377.992 369.215 385.013 L385.013 424.506 C388.523 433.283 393.789 435.038 400.81 429.772 C409.586 426.262 412.219 420.118 408.709 411.342 L390.278 361.316 C386.768 354.295 381.502 348.152 374.481 342.886 L342.886 316.557 C335.865 311.291 329.722 309.536 324.456 311.291 Z" fill="#d8bc7b" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Continuous_head_thorax_and_oval_underbody" data-name="Continuous head thorax and oval underbody" d="M211.241 111.19 C241.08 102.414 270.92 102.414 300.759 111.19 C308.658 129.62 303.392 142.785 319.19 153.316 C345.519 174.38 350.785 200.709 342.886 229.671 C369.215 258.633 379.747 298.127 374.481 342.886 C369.215 403.443 319.19 453.468 266.532 461.367 C259.511 464.878 252.489 464.878 245.468 461.367 C192.81 453.468 142.785 403.443 137.519 342.886 C132.253 298.127 142.785 258.633 169.114 229.671 C161.215 200.709 166.481 174.38 192.81 153.316 C208.608 142.785 203.342 129.62 211.241 111.19 Z" fill="#214942" stroke="#203f3b" stroke-width="4.739" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Three-point_crown_integrated_into_broad_beetle_head" data-name="Three-point crown integrated into broad beetle head" d="M198.076 76.962 L227.038 95.392 L256 48 L284.962 95.392 L313.924 76.962 L306.025 132.253 C295.494 148.051 279.696 153.316 256 153.316 C232.304 153.316 216.506 148.051 205.975 132.253 Z" fill="#dfad79" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-miterlimit="10"/>
+      <path id="standard-scarab-Broad_rounded_pronotum___overlaps_continuous_core" data-name="Broad rounded pronotum / overlaps continuous core" d="M200.709 158.582 C237.57 146.295 274.43 146.295 311.291 158.582 C327.089 171.747 334.987 190.177 334.987 208.608 C282.329 229.671 229.671 229.671 177.013 208.608 C177.013 190.177 184.911 171.747 200.709 158.582 Z" fill="#4e7c67" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Left_full_convex_elytron___central_dark_seam" data-name="Left full convex elytron / central dark seam" d="M242.835 234.937 C211.241 221.772 184.911 237.57 169.114 269.165 C150.684 303.392 148.051 337.62 155.949 369.215 C166.481 406.076 200.709 437.671 234.937 450.835 C241.958 454.346 245.468 451.713 245.468 442.937 L245.468 253.367 C245.468 244.591 244.591 238.447 242.835 234.937 Z" fill="#ddc383" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+      <path id="standard-scarab-Right_full_convex_elytron___central_dark_seam" data-name="Right full convex elytron / central dark seam" d="M269.165 234.937 C300.759 221.772 327.089 237.57 342.886 269.165 C361.316 303.392 363.949 337.62 356.051 369.215 C345.519 406.076 311.291 437.671 277.063 450.835 C270.042 454.346 266.532 451.713 266.532 442.937 L266.532 253.367 C266.532 244.591 267.409 238.447 269.165 234.937 Z" fill="#b89c64" stroke="#203f3b" stroke-width="3.423" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+</svg>
+    </g>
+    <g id="type" data-name="Type / editable card name, role and information">
+      
+    </g>
+    <g id="footer" data-name="Footer / independent Everfolk vector wordmark and number">
+      <path d="M300 1198H720" fill="none" stroke="#a9844f" stroke-width="1.2"/>
+      
+      
+    </g>
+  </g>
+</svg>

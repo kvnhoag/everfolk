@@ -1,0 +1,17 @@
+{
+  "id": "ef-face-f02-infant-v3",
+  "role": "internal-face-feature-edit-on-continuous-age-model",
+  "identityId": "f02",
+  "sex": "female",
+  "stage": "infant",
+  "originalGeneratedPath": "C:\\Users\\Legion\\.codex\\generated_images\\01a1d1f3-5493-7e50-be6f-d9e7135643dd\\exec-70aa8fdf-cecf-44a0-b0b3-a1ea52c7e37c.png",
+  "promptPath": "source/prompts/ef-face-f02-infant-v3-prompt.txt",
+  "referencePaths": [
+    "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v3/source/models/ef-model-female-infant-v3.png",
+    "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v1/source/heads/ef-h-f02-infant-v1.png"
+  ],
+  "tool": "built-in image_gen",
+  "transparentRequested": true,
+  "destinationPath": "D:/Hustle/Games/Historical Lives/artwork/portraits/ordinary-v3/source/faces/ef-face-f02-infant-v3.png",
+  "editPolicy": "Complete canonical age model preserved; only internal facial features requested to change. Original model skin/hair/body/neck/clothes remain authoritative; no manual head or neck cut."
+}

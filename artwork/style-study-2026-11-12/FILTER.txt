@@ -1,0 +1,79 @@
+EVERFOLK PIXEL-ART FILTER — SECOND ITERATION
+12 November 2026
+
+This replaces the Mosaic-only treatment as the recommended finishing approach.
+It processes the existing illustration deterministically; no new generated
+portrait is used. The source artwork and earlier studies remain unchanged.
+
+RUN FROM THE PROJECT ROOT
+node scripts/pixel-art-filter.mjs input.png output.png --preset chiaroscuro
+
+Default Chiaroscuro preset: logical width 128, height derived from source aspect,
+3× integer enlargement, authored 24-colour palette, three cluster-cleanup passes,
+restrained local contrast, dithering off, binary alpha for crisp cutout edges.
+For this portrait the logical dimensions are 128×256 and the export is 384×768.
+The portrait uses 19 of the 24 available palette colours.
+
+For a bolder grid:
+node scripts/pixel-art-filter.mjs input.png output.png --preset chiaroscuro --width 100 --height 200 --scale 4
+
+For an adaptive palette instead of the authored palette:
+node scripts/pixel-art-filter.mjs input.png output.png --width 100 --colors 24 --scale 4
+
+Existing outputs are refused unless --overwrite is explicitly supplied.
+The source image and input palette can never also be output destinations.
+PNG output is lossless. Each run also saves a logical-size PNG, palette JSON,
+and metadata with parameters, source/output hashes and processing statistics.
+
+HOW IT CREATES THE PIXEL TREATMENT
+1. Divide the input into a deliberately chosen logical grid.
+2. Select an actual source colour near each cell's weighted perceptual median.
+   No box averaging or bilinear sampling creates muddy colours at boundaries.
+3. Map into an authored shared palette, or deterministically fit a palette
+   in OKLab with luminance balancing. The dark backdrop must not take all
+   the palette space needed by the face and highlights.
+4. Apply restrained luminance edge emphasis before quantization.
+5. Clean small low-contrast index clusters with a majority rule. Protect
+   high-contrast highlights and creases from this cleanup.
+6. Optionally apply sparse ordered dither only in quiet transitions. Off in
+   the recommended preset to avoid reintroducing the painting's grain.
+7. Enlarge by literal integer pixel replication. There is no blur stage and
+   no interpolating resize. Every enlarged block is one exact palette colour.
+
+TRANSPARENT, INTERCHANGEABLE COMPONENTS
+Use the same full canvas, logical width/height and top-left registration for
+all parts. Do not independently crop head, clothing and props before filtering.
+Use --preset chiaroscuro or the same --palette file for every component.
+Transparent source RGB is excluded from colour sampling and palette fitting.
+Alpha coverage measures every source pixel, including thin opaque details.
+The binary alpha mode intentionally hardens silhouettes at 50% coverage;
+--alpha-mode coverage retains average cell opacity for translucent materials.
+Neither mode introduces a matte/background colour into transparent edges.
+
+ARTCRAFT WORKFLOW
+Keep unfiltered, editable character components as the ArtCraft source master.
+Assemble clothing/props in ArtCraft; export the artwork on the common canvas;
+run this custom filter on that export; reimport the finished PNG above the
+retained source layers. Re-run it after an outfit or artwork change.
+This is an external reusable filter, not a built-in EffectCraft custom effect.
+The native comparison master retains separate named source/result image layers.
+Card lettering, frames and rarity details stay outside the artwork filter.
+Keep outputs at integer display scales; browsers need image-rendering:pixelated.
+Resizing a finished PNG with a smooth sampler will undo the crisp presentation.
+
+DELIVERY
+scripts/lib/pixel-art-filter.mjs — pure colour/grid/alpha/cluster processing.
+scripts/pixel-art-filter.mjs — reusable PNG CLI and metadata/export protection.
+scripts/pixel-art-presets/chiaroscuro.json — shared authored palette and settings.
+test/pixel-art-filter.test.ts — automated correctness and regression checks.
+review/filter-v2/chiaroscuro-pixel-authored-detail.png — recommended 128×256 grid.
+review/filter-v2/chiaroscuro-pixel-authored.png — bolder 100×200 grid.
+review/filter-v2/chiaroscuro-filter-v2-comparison.png — ArtCraft comparison board.
+masters/chiaroscuro-filter-v2-comparison.ecproj — editable comparison composition.
+
+LIMITS
+This creates an automated pixel-art treatment with controlled colours and
+pixel clusters. Character-specific eye, mouth and silhouette decisions can
+still benefit from a final manual pixel pass. It does not reconstruct hidden
+clothing/body layers from a flattened painting. Existing 32×40 runtime portraits
+need their own small-size review; these larger studies are not replacements.

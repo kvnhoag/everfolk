@@ -126,14 +126,14 @@ export function getWealthComparison(world: WorldPack, life: LifeState, explicitO
 }
 
 export function formatWealthPercentile(percentile: number): string {
-  if (percentile > 0 && percentile < 0.1) return "<0.1%";
-  if (percentile > 99.9 && percentile < 100) return ">99.9%";
-  return `${new Intl.NumberFormat("en-GB", { maximumFractionDigits: 1 }).format(percentile)}%`;
+  if (percentile > 0 && percentile < 1) return "<1%";
+  if (percentile > 99 && percentile < 100) return ">99%";
+  return `${Math.round(percentile)}%`;
 }
 
 /** Describe the nearest end of society's wealth ranking. */
 export function formatWealthStanding(percentile: number): string {
   if (percentile === 50) return "At the median";
   const share = percentile < 50 ? percentile : 100 - percentile;
-  return `${percentile < 50 ? "Bottom" : "Top"} ${share === 0 ? "<0.1%" : formatWealthPercentile(share)}`;
+  return `${percentile < 50 ? "Bottom" : "Top"} ${share === 0 ? "<1%" : formatWealthPercentile(share)}`;
 }

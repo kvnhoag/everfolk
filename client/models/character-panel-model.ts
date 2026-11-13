@@ -1,4 +1,6 @@
 import type { ActivityAvailability, Condition, LifeState, WorldPack } from "../../src/types.ts";
+import { isRoyalLife } from "../../src/royalty.ts";
+import { isAristocratLife, isPrivilegedLife } from "../../src/aristocracy.ts";
 
 export type CharacterSection = "career" | "skills" | "path" | "wealth" | "relationships" | "children";
 
@@ -13,15 +15,18 @@ export const CHARACTER_SECTIONS: { id: CharacterSection; label: string }[] = [
 
 /** Show life management when it becomes part of the character's life. */
 export function visibleCharacterSections(life: LifeState, world: WorldPack, hasRelationships: boolean): typeof CHARACTER_SECTIONS {
+  const royal = isRoyalLife(world, life);
+  const aristocrat = isAristocratLife(world, life);
+  const privileged = isPrivilegedLife(world, life);
   const firstJobAge = Math.min(...(world.character?.jobs.map(job => job.minAge) ?? []));
   return CHARACTER_SECTIONS.filter(section => {
-    if (section.id === "career") return Boolean(life.character?.jobId) || life.age >= firstJobAge;
+    if (section.id === "career") return !privileged && (Boolean(life.character?.jobId) || life.age >= firstJobAge);
     if (section.id === "path") return Boolean(world.paths && life.paths);
-    if (section.id === "wealth") return Boolean(world.economy && life.economy);
+    if (section.id === "wealth") return privileged || Boolean(world.economy && life.economy);
     if (section.id === "relationships") return world.character?.extendedSocialRoles === true || life.age >= 18 && hasRelationships;
     if (section.id === "children") return Boolean(world.demo || life.character?.family?.length) || life.age >= 12 || Boolean(life.character?.children.length);
     return true;
-  });
+  }).map(section => section.id === "wealth" && (royal || aristocrat) ? { ...section, label: royal ? "Royal council" : "Estate council" } : section);
 }
 
 function needsChildren(condition?: Condition): boolean {

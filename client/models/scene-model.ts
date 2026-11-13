@@ -168,6 +168,13 @@ Object.assign(ALL_ALEXANDRIA_EVENT_VISUALS, Object.fromEntries([
   ...["market-trader-opening", "market-poor-harvest", "market-abundant-harvest", "market-delayed-ships", "market-workshop-orders"].map(id => [id, visual("history-city", "gather")]),
   ["farmer-checks-seed", visual("work")],
   ["household-royal-patronage-changes", visual("history-city", "reflect")],
+  ["royal-first-audience", visual("childhood", "gather")],
+  ["aristocrat-family-visitors", visual("childhood", "gather")],
+  ...["aristocrat-first-tutor", "aristocrat-listen-stewards", "aristocrat-inheritance-dispute", "aristocrat-thin-reserves"].map(id => [id, visual("learning", "write")]),
+  ...["aristocrat-first-responsibility", "aristocrat-water-agreement", "aristocrat-tenant-petition", "aristocrat-patron-request", "aristocrat-meet-person-accounts", "aristocrat-meet-person-garden", "aristocrat-meet-person-music"].map(id => [id, visual("history-city", "gather")]),
+  ["aristocrat-storage-damage", visual("work", "reflect")],
+  ...["royal-first-tutor", "royal-council-observer", "royal-thin-reserves", "royal-continuity-question"].map(id => [id, visual("learning", "write")]),
+  ...["royal-household-responsibility", "royal-rival-house", "royal-guard-dispute", "royal-estate-petition", "royal-family-precedence", "royal-meet-person-accounts", "royal-meet-person-library", "royal-meet-person-music"].map(id => [id, visual("history-city", "gather")]),
   ...["classical-persian-reconquest", "classical-alexander-accession", "classical-alexander-crossing", "classical-alexander-egypt", "classical-alexandria-founded", "classical-alexander-death", "classical-aristotle-death", "classical-ptolemy-kingship", "classical-pharos-completed"].map(id => [id, visual("history-city")]),
   ...["classical-euclid-teaching", "classical-scholarly-households", "classical-euclid-demonstration"].map(id => [id, visual("learning")]),
   ["classical-aristotle-journey", visual("sea")],
@@ -176,7 +183,12 @@ Object.assign(ALL_ALEXANDRIA_EVENT_VISUALS, Object.fromEntries([
   ["classical-garrison-account", visual("history-city", "work")],
 ]));
 export const ALEXANDRIA_EVENT_VISUALS: EventVisuals = Object.fromEntries(currentWorld.events.map(event => {
-  const assignment = ALL_ALEXANDRIA_EVENT_VISUALS[event.id];
+  const achievement = /^(?:(?:royal|aristocrat)-)?historical-/.test(event.id) ? currentWorld.legacy?.achievements.find(item =>
+    event.choices.some(choice => choice.outcomes.some(outcome => outcome.effects.some(effect =>
+      effect.type === "accomplishment" && "achievement" in effect && effect.achievement === item.id)))) : undefined;
+  const historicalScene = achievement ? visual(achievement.routeId === "philosophy" || achievement.routeId === "astronomy-calendar" ? "learning" :
+    achievement.routeId === "seafaring" ? "sea" : achievement.routeId === "military" ? "history-war" : "history-city", "gather") : undefined;
+  const assignment = ALL_ALEXANDRIA_EVENT_VISUALS[event.id] ?? historicalScene;
   if (!assignment) throw new Error(`Missing authored visual for ${event.id}`);
   return [event.id, assignment];
 }));

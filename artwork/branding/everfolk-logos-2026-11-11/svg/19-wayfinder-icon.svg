@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160" viewBox="0 0 160 160">
+  <title>19 Colour device</title>
+  <g id="Layer_1" data-name="Layer 1">
+  </g>
+  <g id="_01_Primary_lockup___live_type" data-name="01 Primary lockup / live type">
+  </g>
+  <g id="_02_Colour_device" data-name="02 Colour device">
+    <g id="_19_Wayfinder___color_device" data-name="19 Wayfinder / color device">
+      <path id="Left_page_bracket" data-name="Left page bracket" d="M56.96 36.48 C39.04 50.56 31.36 69.76 35.2 91.52 C37.76 109.44 49.28 122.24 64.64 128.64" fill="none" stroke="#24464b" stroke-width="7.04" stroke-linecap="round" stroke-miterlimit="10"/>
+      <path id="Right_page_bracket" data-name="Right page bracket" d="M103.04 36.48 C120.96 50.56 128.64 69.76 124.8 91.52 C122.24 109.44 110.72 122.24 95.36 128.64" fill="none" stroke="#24464b" stroke-width="7.04" stroke-linecap="round" stroke-miterlimit="10"/>
+      <polygon id="Four-way_guiding_light" data-name="Four-way guiding light" points="80,44.16 88.96,71.04 115.84,80 88.96,88.96 80,115.84 71.04,88.96 44.16,80 71.04,71.04" fill="#b58a49"/>
+    </g>
+  </g>
+  <g id="_03_One-colour_device" data-name="03 One-colour device">
+  </g>
+  <g id="_04_Reverse_lockup___live_type" data-name="04 Reverse lockup / live type">
+  </g>
+</svg>

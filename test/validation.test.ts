@@ -105,7 +105,7 @@ rejects("rejects scheduled years before birth", pack => {
   pack.events[0].trigger = { type: "year", at: pack.startYear - 1 };
 }, /world\.events\[0\]\.trigger\.at: scheduled year is outside/);
 
-rejects("rejects repeated scheduled events", pack => { pack.events[0].maxOccurrences = 2; }, /world\.events\[0\]\.maxOccurrences: scheduled events/);
+rejects("requires an explicit annual cooldown for repeated scheduled events", pack => { pack.events[0].maxOccurrences = 2; }, /world\.events\[0\]\.maxOccurrences: repeating scheduled events require an explicit annual cooldownYears/);
 rejects("rejects negative cooldowns", pack => { pack.events[0].cooldownYears = -1; }, /world\.events\[0\]\.cooldownYears/);
 rejects("rejects unknown condition operators", pack => { pack.events[0].when = { type: "age", op: "execute", value: 1 }; }, /world\.events\[0\]\.when\.op/);
 rejects("rejects empty compound conditions", pack => { pack.events[0].when = { type: "all", conditions: [] }; }, /world\.events\[0\]\.when\.conditions: expected 1/);

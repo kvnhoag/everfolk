@@ -2,6 +2,7 @@ import { displayProse } from "../models/display-prose.ts";
 import { useId, useMemo, useState } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import { buildLateSkillRoutes } from "../models/late-skill-routes.ts";
+import { isHouseholdTitleRoute } from "../models/household-title-paths.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
 import figures from "../../research/late-route-figures.json" with { type: "json" };
 import "../styles/late-skill-routes.css";
@@ -12,7 +13,7 @@ export default function LateSkillRoutes({ world, life, activities, onActivity, r
 }) {
   const [routeId, setRouteId] = useState("");
   const id = useId();
-  const all = useMemo(() => buildLateSkillRoutes(world, life, activities), [world, life, activities]);
+  const all = useMemo(() => buildLateSkillRoutes(world, life, activities).filter(route => !isHouseholdTitleRoute(route)), [world, life, activities]);
   const routes = readOnly ? all : all.filter(route => route.discovered);
   if (!all.length) return null;
   if (!routes.length) return <section className="late-routes"><h4>Advanced routes &amp; titles</h4><p>Develop a skill to 20 or complete your first work to discover a career path. The skill wiki shows every later route.</p></section>;

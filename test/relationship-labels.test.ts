@@ -147,6 +147,14 @@ test("the actual relationship panel reveals a friend or business partner without
   }
 });
 
+function householdField(html: string, label: string): string {
+  const marker = `<span class="household-field-label">${label}</span>`;
+  assert.ok(html.includes(marker), `The household must show ${label}.`);
+  // Portraits may sit between the label and name; keep the assertion scoped
+  // to this field so a matching name elsewhere cannot satisfy it.
+  return html.split(marker)[1]!.split('<span class="household-field-label">')[0]!;
+}
+
 test("the actual relationship and household panels show wife or husband alongside independent social tags", () => {
   for (const [index, label, name] of [[0, "Wife", "Kleopatra"], [1, "Husband", "Petosiris"]] as const) {
     const { world, life, ids } = socialFixture(), id = ids[index];
@@ -158,7 +166,7 @@ test("the actual relationship and household panels show wife or husband alongsid
     for (const tag of [label, "Friend", "Business partner"]) assert.ok(html.includes(`<span class="character-status-tag">${tag}</span>`));
     assert.doesNotMatch(html, /Former partner/);
     const household = renderToStaticMarkup(createElement(HouseholdSummary, { world, life, onOpenCharacter() {} }));
-    assert.ok(household.includes(`<span class="household-field-label">${label}</span><strong>${name}</strong>`));
+    assert.ok(householdField(household, label).includes(`<strong>${name}</strong>`));
     assert.doesNotMatch(household, /Courting|Spouse/);
   }
 });
@@ -178,5 +186,5 @@ test("the actual panel keeps a plain acquaintance hidden and uses love interest 
   assert.match(dating, /Love interest: Kleopatra/);
   assert.match(dating, /<span class="character-status-tag">Love interest<\/span>/);
   const household = renderToStaticMarkup(createElement(HouseholdSummary, { world, life, onOpenCharacter() {} }));
-  assert.match(household, /<span class="household-field-label">Love interest<\/span><strong>Kleopatra<\/strong>/);
+  assert.match(householdField(household, "Love interest"), /<strong>Kleopatra<\/strong>/);
 });

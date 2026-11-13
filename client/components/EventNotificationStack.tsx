@@ -17,8 +17,7 @@ interface NotificationItem {
   title: string;
   body: string;
   kind: "decision" | "offer" | "legacy" | "event";
-  actionLabel: string;
-  onAction(): void;
+  action?: { label: string; onClick(): void };
   onDismiss?: () => void;
 }
 
@@ -28,7 +27,7 @@ function truncateText(text: string, maxLen = 96): string {
 }
 
 export default function EventNotificationStack({ life, world, decisionEvent, demoView, decisionButtonRef,
-  onOpenDecision, onOpenChronicle, onOpenPeopleTab, visible = true,
+  onOpenDecision, onOpenPeopleTab, visible = true,
 }: {
   life: LifeState;
   world: WorldPack;
@@ -36,7 +35,6 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
   demoView?: DemoScreen | null;
   decisionButtonRef?: RefObject<HTMLButtonElement | null>;
   onOpenDecision(): void;
-  onOpenChronicle(): void;
   onOpenPeopleTab?(): void;
   visible?: boolean;
 }) {
@@ -52,7 +50,7 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
       key: `decision:${life.seed}:${life.age}:${decisionEvent.id}`,
       badge: decisionEvent.rarity === "rare" ? "Rare Encounter" : demoView?.activeOffer ? "Town Offer" : "Turning Point",
       age: life.age, year: life.year, title: displayProse(decisionEvent.title),
-      body: truncateText(decisionEvent.text, 105), kind: "decision", actionLabel: "Open decision →", onAction: onOpenDecision,
+      body: truncateText(decisionEvent.text, 105), kind: "decision", action: { label: "Open decision →", onClick: onOpenDecision },
     });
   }
 
@@ -63,7 +61,7 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
       key, badge: "Contract Offer", age: life.age, year: life.year,
       title: `${offer.role.charAt(0).toUpperCase() + offer.role.slice(1)} offers ${offer.kind.replace("-", " ")}`,
       body: `${offer.quantity} ${offer.item} at ${offer.price} dr each (${offer.total} dr total).`,
-      kind: "offer", actionLabel: "View counterparty →", onAction: () => onOpenPeopleTab?.(),
+      kind: "offer", action: { label: "View counterparty →", onClick: () => onOpenPeopleTab?.() },
       onDismiss: () => {
         rememberSeenEventNotifications(lifeKey, [key]);
         setDismissedOffers(previous => new Set(previous).add(key));
@@ -76,8 +74,8 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
     items.push({
       key: event.key, badge: granary ? "Past-Life Granary" : "Life Event", age: event.age, year: event.year,
       title: granary ? `Granary opened · Life NFT #${event.marker!.tokenId}` : displayProse(event.title ?? event.marker?.actionLabel ?? "Life event"),
-      body: truncateText(event.text, 105), kind: granary ? "legacy" : "event", actionLabel: "Life record ↗",
-      onAction: onOpenChronicle, onDismiss: () => completed.dismiss(event.key),
+      body: truncateText(event.text, 105), kind: granary ? "legacy" : "event",
+      onDismiss: () => completed.dismiss(event.key),
     });
   }
   const notifications = items.slice(0, 3);
@@ -91,7 +89,7 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
       </div>
       <strong className="event-toast-title">{item.title}</strong>
       <p className="event-toast-body">{item.body}</p>
-      <div className="event-toast-footer"><button ref={item.kind === "decision" ? decisionButtonRef : undefined} type="button" className="event-toast-action" onClick={item.onAction}>{item.actionLabel}</button></div>
+      {item.action && <div className="event-toast-footer"><button ref={item.kind === "decision" ? decisionButtonRef : undefined} type="button" className="event-toast-action" onClick={item.action.onClick}>{item.action.label}</button></div>}
     </article>)}
   </aside>;
 }

@@ -27,6 +27,8 @@ export function matchesCondition(condition: Condition | undefined, state: LifeSt
     case "introduced": return state.paths?.introductions.includes(condition.field) === true;
     case "material": return compare(state.vocations?.inventory[condition.item] ?? 0, condition.op, condition.value);
     case "account": return compareAccount(state, condition.account, condition.op, condition.value);
+    case "aristocrat": return state.aristocracy !== undefined && compare(state.aristocracy[condition.metric], condition.op, condition.value);
+    case "royal": return state.royalty !== undefined && compare(state.royalty[condition.metric], condition.op, condition.value);
     case "accomplishment": return state.accomplishments?.some(record => record.achievementId === condition.achievement &&
       state.age - record.age >= (condition.minYears ?? 0)) === true;
     case "cash": return state.economy !== undefined && compare(state.economy.cash, condition.op, condition.value);

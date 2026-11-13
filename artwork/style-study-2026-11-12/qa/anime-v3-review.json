@@ -1,0 +1,231 @@
+{
+  "master": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\masters\\anime-pixel-v3-review.ecproj",
+  "inputs": [
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\source\\alexander-anime-before-v3.png",
+      "name": "BEFORE — clean anime / native 1672×941, centred at 100%",
+      "key": "before",
+      "x": 124,
+      "y": 70,
+      "cropX": 600,
+      "cropY": 0,
+      "label": "BEFORE / native pixels",
+      "sha256": "5c7a9cdadeeb736ff579461c776c590921261631052ea714da3d54e1dd8d567a",
+      "width": 1672,
+      "height": 941,
+      "item": 2,
+      "stageLayer": 3,
+      "cropComp": 74
+    },
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-fine.png",
+      "name": "AFTER — fine PixelOE / 640×360 grid, exact 3×",
+      "key": "fine",
+      "x": 0,
+      "y": 0,
+      "cropX": 700,
+      "cropY": 0,
+      "label": "AFTER / fine 3×",
+      "sha256": "a4a673d5cf504727864cfb313008cabd74b5efa7b75c789a1e9b26415733ffd9",
+      "width": 1920,
+      "height": 1080,
+      "item": 26,
+      "stageLayer": 27,
+      "cropComp": 98
+    },
+    {
+      "file": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-strong.png",
+      "name": "AFTER — strong PixelOE / 480×270 grid, exact 4×",
+      "key": "strong",
+      "x": 0,
+      "y": 0,
+      "cropX": 700,
+      "cropY": 0,
+      "label": "AFTER / strong 4×",
+      "sha256": "bbde61c87f73ecb1ff582e1416d43caf8650d5805c1f569d3bfd90b51d0f38ae",
+      "width": 1920,
+      "height": 1080,
+      "item": 50,
+      "stageLayer": 51,
+      "cropComp": 122
+    }
+  ],
+  "checks": [
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\source\\alexander-anime-before-v3.png",
+      "outputFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\anime-before-stage.png",
+      "destinationX": 124,
+      "destinationY": 70,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-fine.png",
+      "outputFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\anime-fine-stage.png",
+      "destinationX": 0,
+      "destinationY": 0,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-strong.png",
+      "outputFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\anime-strong-stage.png",
+      "destinationX": 0,
+      "destinationY": 0,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\source\\alexander-anime-before-v3.png",
+      "outputFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\anime-face-comparison.png",
+      "sourceX": 600,
+      "sourceY": 0,
+      "destinationX": 20,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-fine.png",
+      "outputFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\anime-face-comparison.png",
+      "sourceX": 700,
+      "sourceY": 0,
+      "destinationX": 540,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    },
+    {
+      "sourceFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\alexander-anime-pixel-strong.png",
+      "outputFile": "D:\\Hustle\\Games\\Historical Lives\\artwork\\style-study-2026-11-12\\review\\anime-v3\\anime-face-comparison.png",
+      "sourceX": 700,
+      "sourceY": 0,
+      "destinationX": 1060,
+      "destinationY": 70,
+      "width": 500,
+      "height": 600,
+      "differingPixels": 0,
+      "maximumChannelDifference": 0
+    }
+  ],
+  "stageComp": {
+    "background": [
+      0.06666667014360428,
+      0.09019608050584793,
+      0.0784313753247261
+    ],
+    "duration": 1,
+    "frameRate": 1,
+    "height": 1080,
+    "id": 1,
+    "layers": [
+      {
+        "blendMode": "Normal",
+        "id": 51,
+        "in": 0,
+        "index": 1,
+        "label": "Lavender",
+        "name": "AFTER — strong PixelOE / 480×270 grid, exact 4×",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": false
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      },
+      {
+        "blendMode": "Normal",
+        "id": 27,
+        "in": 0,
+        "index": 2,
+        "label": "Lavender",
+        "name": "AFTER — fine PixelOE / 640×360 grid, exact 3×",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": true
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      },
+      {
+        "blendMode": "Normal",
+        "id": 3,
+        "in": 0,
+        "index": 3,
+        "label": "Lavender",
+        "name": "BEFORE — clean anime / native 1672×941, centred at 100%",
+        "out": 1,
+        "parent": null,
+        "start": 0,
+        "stretch": 100,
+        "switches": {
+          "adjustment": false,
+          "audio": true,
+          "collapse": false,
+          "effects": true,
+          "frame_blend": "Off",
+          "guide": false,
+          "locked": false,
+          "motion_blur": false,
+          "quality": "Best",
+          "sampling": "Bilinear",
+          "shy": false,
+          "solo": false,
+          "three_d": false,
+          "video": false
+        },
+        "trackMatte": null,
+        "type": "Footage"
+      }
+    ],
+    "name": "01 — ANIME REVIEW STAGE / 1920×1080 / toggle named image layers",
+    "preserveFrameRate": false,
+    "preserveResolution": false,
+    "resolution": "Auto",
+    "resolutionFactor": null,
+    "width": 1920,
+    "workArea": [
+      0,
+      1
+    ]
+  },
+  "faceComp": 146,
+  "nativeReopenMatches": true,
+  "inputsUnchanged": true
+}
