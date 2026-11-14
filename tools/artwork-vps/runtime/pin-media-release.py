@@ -38,7 +38,7 @@ def media_block(release, origin='everfolk-art-origin-1:8080', app='everfolk:8787
         require(re.fullmatch(r'[A-Za-z0-9_.-]+:[0-9]{1,5}', upstream), 'Invalid upstream')
     return f"""	{BEGIN}
 	@everfolk_legacy_media {{
-		path /assets/* /fonts/*
+		path /assets/* /fonts/* /favicon.svg
 		method GET HEAD
 	}}
 	handle @everfolk_legacy_media {{
@@ -85,7 +85,7 @@ def media_block(release, origin='everfolk-art-origin-1:8080', app='everfolk:8787
 	}}
 	handle_errors 502 503 504 {{
 		@everfolk_media_transport {{
-			path /assets/* /fonts/*
+			path /assets/* /fonts/* /favicon.svg
 			method GET HEAD
 		}}
 		handle @everfolk_media_transport {{
@@ -181,7 +181,7 @@ def main():
     require(hashlib.sha256(manifest_bytes).hexdigest() == args.manifest_sha256, 'Published manifest does not match the trusted authoring receipt')
     manifest = json.loads(manifest_bytes)
     require(manifest.get('kind') == 'public' and manifest.get('releaseId') == args.release_id, 'Expected immutable public release')
-    files = [entry for entry in manifest['files'] if entry['path'].startswith(('assets/', 'fonts/'))]
+    files = [entry for entry in manifest['files'] if entry['path'].startswith(('assets/', 'fonts/')) or entry['path'] == 'favicon.svg']
     require(files and all('..' not in Path(entry['path']).parts and not Path(entry['path']).is_absolute() for entry in files), 'Expected public media paths')
     labels = json.loads(run(['docker', 'inspect', '--format', '{{json .Config.Labels}}', args.caddy_container]).stdout)
     require(labels.get('com.docker.compose.service') == 'caddy' and labels.get('com.docker.compose.project') == 'app', 'Unexpected Caddy container')
@@ -221,7 +221,12 @@ def main():
         status, _, body = curl(args.hostname, '/releases/' + args.release_id + '/manifest.json')
         require(status == 200 and hashlib.sha256(body).hexdigest() == args.manifest_sha256, 'Versioned release manifest check failed')
         chosen = {}
+        favicon = next((entry for entry in files if entry['path'] == 'favicon.svg'), None)
+        if favicon:
+            chosen['favicon'] = favicon  # Always verify the exact root-level media route.
         for entry in files:
+            if entry['path'] == 'favicon.svg':
+                continue
             extension = Path(entry['path']).suffix.lower()
             group = 'font' if entry['path'].startswith('fonts/') else 'audio' if '/audio/' in entry['path'] else extension
             if group not in chosen:

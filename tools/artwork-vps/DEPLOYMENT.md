@@ -40,13 +40,13 @@ The runtime is `/opt/everfolk-art`; `everfolk-art-origin-1` serves the public tr
 Caddy serves these paths:
 
 - `/releases/*` goes to the static origin. Immutable successful releases use `public, max-age=31536000, immutable, no-transform` and anonymous CORS.
-- GET/HEAD `/assets/*` and `/fonts/*` resolve against the pinned full public release. Mutable aliases use `public, max-age=300, s-maxage=3600, no-transform`.
+- GET/HEAD `/assets/*`, `/fonts/*` and exact `/favicon.svg` resolve against the pinned full public release. Mutable aliases use `public, max-age=300, s-maxage=3600, no-transform`.
 - Missing files, upstream errors and bounded timeouts fall back anonymously to the existing application, preserving the original URI/query. Fallback/error responses use `no-store`.
 - Other application routes retain their previous behavior.
 
 Cloudflare Free uses Full (strict) TLS. Both apex A and www CNAME records are proxied. Porkbun delegates to `nelci.ns.cloudflare.com` and `yoxall.ns.cloudflare.com`.
 
-Two active Cloudflare rules respect origin edge/browser TTLs: `Everfolk immutable artwork` covers apex `/releases/` with no query; `Everfolk runtime media` covers apex GET/HEAD `/assets/` and `/fonts/`. The latter prevents the zone's default four-hour browser TTL from overriding the shorter alias policy. No paid cache add-on or Tunnel is enabled.
+Two active Cloudflare rules respect origin edge/browser TTLs: `Everfolk immutable artwork` covers apex `/releases/` with no query; `Everfolk runtime media` covers apex GET/HEAD `/assets/`, `/fonts/` and exact `/favicon.svg`. The latter prevents the zone's default four-hour browser TTL from overriding the shorter alias policy. No paid cache add-on or Tunnel is enabled.
 
 TTF/OTF MIME mappings are explicit. After correction, only the two affected versioned TTF URLs were purged; both returned correct font/ttf bytes and MISS then HIT. Canonical missing/query/POST/hidden-path tests remain uncached. A HIT at one checked edge is not a guarantee of global or permanent retention.
 

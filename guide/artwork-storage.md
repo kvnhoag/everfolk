@@ -16,6 +16,7 @@ The root account has these directory links:
     manifest.json
     payload/assets/          # Runtime images, audio, CSS and media metadata
     payload/fonts/           # Runtime fonts and licenses
+    payload/favicon.svg      # Site favicon
   incoming/                  # Unpublished uploads
 ```
 
@@ -62,6 +63,6 @@ Keep the downloaded release as an immutable reference. For editing, copy the nec
 
 ## Public delivery and updates
 
-React images can use the pinned `VITE_EVERFOLK_ASSET_BASE_URL` and retry their original local file on failure. The production media adapter maps existing `/assets/` and `/fonts/` paths to the pinned public release, covering CSS backgrounds, audio and fonts as well. See [Artwork Delivery](artwork-delivery.md) for cache policy, deployment validation and rollback.
+React images can use the pinned `VITE_EVERFOLK_ASSET_BASE_URL` and retry their original local file on failure. The production media adapter maps existing `/assets/` and `/fonts/` paths and exact `/favicon.svg` to the pinned public release, covering CSS backgrounds, audio, fonts and the site favicon as well. See [Artwork Delivery](artwork-delivery.md) for cache policy, deployment validation and rollback.
 
 To change media, generate the reviewed delivery files, build a new immutable public release using the packaging tools, upload and verify it against its trusted manifest, then change the selected release. A new release ID changes the versioned URLs. Private source files stay outside the public export inventory. Retained local delivery files provide a transition fallback; deleting those fallback exports is a separate verified step.

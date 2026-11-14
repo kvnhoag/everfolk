@@ -28,6 +28,11 @@ def main():
             received.append({'path': self.path, 'cookie': self.headers.get('cookie'), 'authorization': self.headers.get('authorization')})
             if '?' in self.path:
                 status, body = 400, b'QUERY MUST BE STRIPPED'
+            elif self.path.endswith('/favicon.svg'):
+                status, body = 200, b'<svg xmlns="http://www.w3.org/2000/svg"/>'
+            elif self.path.endswith('/assets/timeout.webp'):
+                time.sleep(4)  # Exceeds the adapter's real three-second header timeout.
+                status, body = 200, b'LATE-MEDIA'
             elif self.path.endswith('/assets/good.webp') or self.path.endswith('/fonts/good.woff2'):
                 status, body = 200, b'PUBLIC-MEDIA'
             elif self.path.endswith('/assets/upstream-error.webp'):
@@ -39,16 +44,17 @@ def main():
             if self.headers.get('range') == 'bytes=0-2' and status == 200:
                 status, body = 206, body[:3]
             self.send_response(status)
-            self.send_header('Content-Type', 'image/webp')
+            self.send_header('Content-Type', 'image/svg+xml' if self.path.endswith('/favicon.svg') else 'image/webp')
             self.send_header('Cache-Control', 'public, max-age=31536000, immutable' if status in (200, 206) else 'no-store')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.send_header('Content-Security-Policy', "default-src 'none'")
             self.send_header('ETag', '"source-etag"')
             if status == 206: self.send_header('Content-Range', 'bytes 0-2/12')
             self.send_header('Content-Length', str(len(body)))
-            self.end_headers()
-            try: self.wfile.write(body)
-            except BrokenPipeError: pass
+            try:
+                self.end_headers()
+                self.wfile.write(body)
+            except (BrokenPipeError, ConnectionResetError): pass
     class App(http.server.BaseHTTPRequestHandler):
         def log_message(self, *_): pass
         def do_GET(self):
@@ -109,6 +115,12 @@ def main():
             status, headers, body = fetch('/fonts/good.woff2')
             assert status == 200 and body == b'PUBLIC-MEDIA' and headers.get('cache-control') == pin.CACHE
             results.append('fonts use the same external storage adapter')
+            status, headers, body = fetch('/favicon.svg?v=icon', {'Cookie':'private=secret', 'Authorization':'Bearer private'})
+            assert status == 200 and body == b'<svg xmlns="http://www.w3.org/2000/svg"/>', (status, headers, body)
+            assert headers.get('content-type') == 'image/svg+xml' and headers.get('cache-control') == pin.CACHE and headers.get('x-everfolk-media-release') == 'test-v1', headers
+            assert received[-1] == {'path':'/releases/test-v1/payload/favicon.svg','cookie':None,'authorization':None}, received[-1]
+            assert fetch('/favicon.svg/secret')[2] == b'UNTOUCHED'
+            results.append('exact root favicon uses verified external SVG bytes, MIME, release and TTL without matching child paths')
             status, headers, body = fetch('/assets/good.webp', {'Range':'bytes=0-2'})
             assert status == 206 and body == b'PUB' and headers.get('content-range') == 'bytes 0-2/12' and headers.get('cache-control') == pin.CACHE, (status, headers, body)
             results.append('range206 response and byte range survive proxying')
@@ -126,12 +138,16 @@ def main():
             before = time.monotonic()
             status, headers, body = fetch('/assets/timeout.webp?original=timed-out')
             assert status == 200 and json.loads(body)['path'] == '/assets/timeout.webp?original=timed-out' and headers.get('cache-control') == 'no-store'
-            assert time.monotonic()-before < 5
+            assert 2.5 <= time.monotonic()-before < 5
             results.append('origin header timeout falls back within the image retry budget')
             source.shutdown(); source.server_close()
             status, headers, body = fetch('/assets/good.webp?transport=down')
             assert status == 200 and json.loads(body)['path'] == '/assets/good.webp?transport=down' and headers.get('cache-control') == 'no-store'
             results.append('origin connection failure falls back anonymously with exact URI and no-store')
+            status, headers, body = fetch('/favicon.svg?transport=down', {'Cookie':'private=secret', 'Authorization':'Bearer private'})
+            assert status == 200 and json.loads(body) == {'path':'/favicon.svg?transport=down','cookie':None,'authorization':None}, (status, headers, body)
+            assert headers.get('cache-control') == 'no-store' and headers.get('x-everfolk-media-fallback') == 'app', headers
+            results.append('favicon origin connection failure preserves exact URI and anonymous no-store fallback')
             print(json.dumps({'passed':True,'checks':results}, indent=2), flush=True)
     finally:
         found = subprocess.run(['docker', 'inspect', '--format', '{{index .Config.Labels "everfolk.test.owner"}}', container], capture_output=True, text=True)
