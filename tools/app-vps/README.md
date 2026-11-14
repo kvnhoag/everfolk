@@ -37,7 +37,7 @@ The timer checks both branches every two minutes after the preceding run finishe
 
 ## What a deployment does
 
-The runner shallow-fetches each branch through credential-free public HTTPS into a bare partial repository. It enumerates and bulk-fetches only allowed application blobs, then exports an immutable commit context. Source `artwork/`, local staging, dependencies, generated builds and private env files never enter that context. Selected tar members are validated against traversal, links and special files before extraction.
+The runner shallow-fetches each branch through credential-free public HTTPS into a bare partial repository. It enumerates and bulk-fetches only allowed application blobs, then exports an immutable commit context. Source `artwork/`, local staging, dependencies, generated builds and private env files never enter that context. Selected Git paths and modes are validated against traversal, links and special files before exact object streaming. Git archive is deliberately avoided: in a partial clone it can prefetch excluded source blobs before applying its path filters. The bulk prefetch retains `blob:none` and passes only explicit blob object IDs; the exporter streams only those cached objects through `git cat-file --batch` with lazy fetch disabled.
 
 Current `main` predates the new Docker build arguments. For that branch, the generated build context receives only a deployment Dockerfile overlay for the public CDN argument, plus `public/build-info.json`; the Git branch and application source remain unchanged. Newer dev Dockerfiles already accept the public arguments and generate the same metadata themselves. Dependencies remain pinned by `pnpm-lock.yaml`.
 
@@ -66,4 +66,4 @@ To keep production frozen while beta is being tested, leave `main` unchanged. Me
 python3 -m unittest discover -s tools/app-vps -p 'test_deploy.py' -v
 ```
 
-The isolated unit tests cover export exclusions, safe extraction, old-main build overlay, exact branch mappings, distinct data/ports, private env boundaries and rejected credentials in public build URLs. They do not replace the real server build, Caddy validation or HTTPS checks.
+The isolated unit tests cover export exclusions, safe export paths, old-main build overlay, exact branch mappings, distinct data/ports, private env boundaries and rejected credentials in public build URLs. A real local `file://` upload-pack fixture tests multiple prefetch batches against a packed repository containing a private 1 MiB master, a related public binary preview and a private env file. The cached blob inventory must exactly match the permitted application files; it must contain neither private blob. This test failed under the former Git archive exporter and passes with exact object streaming. These tests do not replace the real server build, Caddy validation or HTTPS checks.

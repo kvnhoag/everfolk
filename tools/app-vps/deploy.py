@@ -128,6 +128,59 @@ def overlay_dockerfile(source):
     return source.replace(anchor, anchor + overlay)
 
 
+def export_blobs(repo, records, destination):
+    """Write only explicitly selected regular Git blobs, without archive prefetch."""
+    destination = destination.resolve()
+    parsed = []
+    seen = set()
+    for record in records:
+        if not record:
+            continue
+        metadata, name = record.split("\t", 1)
+        mode, kind, oid = metadata.split()
+        path = PurePosixPath(name)
+        if (path.is_absolute() or not path.parts or ".." in path.parts
+                or path.parts[0] in EXCLUDED_TOP_LEVEL
+                or path.parts[0].startswith(".env") and path.parts[0] != ".env.production.example"):
+            raise ValueError(f"unsafe Git export path: {name}")
+        if mode not in {"100644", "100755"} or kind != "blob" or not SHA.fullmatch(oid):
+            raise ValueError(f"unsupported Git export entry: {name}")
+        target = destination.joinpath(*path.parts)
+        if name in seen or not target.resolve().is_relative_to(destination):
+            raise ValueError("duplicate or escaping Git export path")
+        seen.add(name)
+        parsed.append((oid, target, mode))
+    environment = os.environ.copy()
+    environment.update(GIT_TERMINAL_PROMPT="0", GIT_NO_LAZY_FETCH="1", GIT_LFS_SKIP_SMUDGE="1")
+    # git archive prefetches every missing blob before applying pathspecs in a
+    # partial clone. cat-file reads only these already-fetched object IDs.
+    with subprocess.Popen(["git", "--git-dir", str(repo), "cat-file", "--batch"],
+                          stdin=subprocess.PIPE, stdout=subprocess.PIPE, env=environment) as process:
+        for oid, target, mode in parsed:
+            process.stdin.write((oid + "\n").encode("ascii"))
+            process.stdin.flush()
+            header = process.stdout.readline().decode("ascii").strip().split()
+            if len(header) != 3 or header[0] != oid or header[1] != "blob" or not header[2].isdigit():
+                raise RuntimeError(f"required application blob is unavailable: {oid}")
+            remaining = int(header[2])
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with target.open("wb") as output:
+                while remaining:
+                    chunk = process.stdout.read(min(remaining, 1024 * 1024))
+                    if not chunk:
+                        raise RuntimeError("truncated Git blob export")
+                    output.write(chunk)
+                    remaining -= len(chunk)
+            if process.stdout.read(1) != b"\n":
+                raise RuntimeError("invalid Git batch framing")
+            target.chmod(0o755 if mode == "100755" else 0o644)
+        process.stdin.close()
+        process.stdin = None
+        process.wait()
+        if process.returncode:
+            raise RuntimeError("Git batch export failed")
+
+
 def prepare_context(config, repo, branch, commit):
     root = Path(config["root"])
     release = root / "releases" / branch / commit
@@ -151,13 +204,13 @@ def prepare_context(config, repo, branch, commit):
         print(f"{branch}: fetching {len(missing)} application blobs; artwork excluded", flush=True)
         env = os.environ.copy()
         env.update(GIT_TERMINAL_PROMPT="0", GIT_LFS_SKIP_SMUDGE="1")
-        subprocess.run(["git", "--git-dir", str(repo), "-c", "fetch.negotiationAlgorithm=noop", "fetch", "--no-tags", "--no-write-fetch-head", "--recurse-submodules=no", "--no-filter", "origin", "--stdin"], input="\n".join(missing) + "\n", text=True, env=env, check=True)
-    archive = release / "context.tar"
-    with archive.open("wb") as output:
-        subprocess.run(["git", "--git-dir", str(repo), "archive", "--format=tar", commit, "--", *paths], stdout=output, check=True)
+        # Explicit refspec arguments suppress remote wildcard defaults. Keep the
+        # blob:none filter: explicit wants are included, unrelated source blobs are not.
+        for offset in range(0, len(missing), 256):
+            batch = missing[offset:offset + 256]
+            subprocess.run(["git", "--git-dir", str(repo), "-c", "fetch.negotiationAlgorithm=noop", "fetch", "--no-tags", "--no-write-fetch-head", "--recurse-submodules=no", "--filter=blob:none", "origin", *batch], env=env, check=True)
     context.mkdir()
-    safe_extract(archive, context)
-    archive.unlink()
+    export_blobs(repo, records, context)
     dockerfile = context / "Dockerfile"
     dockerfile.write_text(overlay_dockerfile(dockerfile.read_text()))
     ignore = context / ".dockerignore"

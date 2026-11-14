@@ -3,7 +3,10 @@ import copy
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
+import shutil
+import subprocess
 import tarfile
 import tempfile
 import unittest
@@ -156,6 +159,83 @@ class DeploymentPreparationTests(unittest.TestCase):
             mutation(config)
             with self.subTest(config=config), self.assertRaises(ValueError):
                 deploy.validate_config(config)
+
+    @unittest.skipUnless(shutil.which("git"), "Git is required for the filtered export integration")
+    def test_real_filtered_git_export_fetches_only_permitted_blobs(self):
+        # Exercise the actual upload-pack protocol, including more than one
+        # prefetch batch; source artwork is a distinct, incompressible 1 MiB blob.
+        with tempfile.TemporaryDirectory(prefix="everfolk-export-test-") as temporary:
+            directory = Path(temporary)
+            source, remote, cache = [directory / name for name in ["source", "remote.git", "cache.git"]]
+            source.mkdir()
+            environment = os.environ.copy()
+            environment.update(GIT_TERMINAL_PROMPT="0", GIT_NO_LAZY_FETCH="1")
+
+            def git(*arguments, cwd=None):
+                return subprocess.run(["git", *map(str, arguments)], cwd=cwd, env=environment,
+                    check=True, text=True, capture_output=True).stdout
+
+            git("init", "--initial-branch=main", source)
+            git("config", "user.name", "Everfolk test fixture", cwd=source)
+            git("config", "user.email", "fixture@example.invalid", cwd=source)
+            (source / "package.json").write_text('{"name":"fixture","version":"0.1.0"}\n')
+            (source / "Dockerfile").write_text("FROM node:24 AS build\nCOPY . .\nRUN pnpm build\n")
+            (source / "public").mkdir()
+            for number in range(270):
+                (source / "public" / f"asset-{number:03d}.txt").write_text(f"public fixture {number}\n")
+            (source / "artwork").mkdir()
+            private_master = os.urandom(1024 * 1024)
+            (source / "artwork" / "private-master.bin").write_bytes(private_master)
+            # Repacking can delta this permitted preview against the private master.
+            # The server must still return only the explicitly requested blobs.
+            (source / "public" / "preview.bin").write_bytes(private_master[:65536])
+            (source / "entrypoint.sh").write_text("#!/bin/sh\necho ready\n")
+            (source / "entrypoint.sh").chmod(0o755)
+            (source / ".env.production").write_text("FIXTURE_ONLY=excluded-value\n")
+            git("add", ".", cwd=source)
+            git("commit", "-m", "Create bounded export fixture", cwd=source)
+            commit = git("rev-parse", "HEAD", cwd=source).strip()
+            git("clone", "--bare", source, remote)
+            git("--git-dir", remote, "config", "uploadpack.allowFilter", "true")
+            git("--git-dir", remote, "config", "uploadpack.allowAnySHA1InWant", "true")
+            git("--git-dir", remote, "repack", "-adf", "--write-bitmap-index")
+            git("init", "--bare", cache)
+            git("--git-dir", cache, "remote", "add", "origin", remote.as_uri())
+            git("--git-dir", cache, "config", "remote.origin.promisor", "true")
+            git("--git-dir", cache, "config", "remote.origin.partialclonefilter", "blob:none")
+            git("--git-dir", cache, "fetch", "--no-tags", "--depth=1", "--filter=blob:none", "origin", "main")
+
+            def cached_blobs():
+                output = git("--git-dir", cache, "cat-file", "--batch-all-objects",
+                             "--batch-check=%(objecttype) %(objectsize) %(objectname)")
+                return {fields[2]: int(fields[1]) for line in output.splitlines()
+                        if (fields := line.split())[0] == "blob"}
+
+            self.assertEqual(cached_blobs(), {}, "initial partial fetch must contain no blobs")
+            expected = {}
+            excluded = set()
+            for record in git("ls-tree", "-rlz", "HEAD", cwd=source).split("\0"):
+                if not record:
+                    continue
+                metadata, path = record.split("\t", 1)
+                _, kind, oid, size = metadata.split()
+                if path.startswith("artwork/") or path == ".env.production":
+                    excluded.add(oid)
+                elif kind == "blob":
+                    expected[oid] = int(size)
+            config = self.config()
+            config["root"] = str(directory / "deployment")
+            context = deploy.prepare_context(config, cache, "main", commit)
+            received = cached_blobs()
+            self.assertEqual(received, expected, "every received blob must belong to the allowed application export")
+            self.assertTrue(excluded.isdisjoint(received), "private artwork/env blobs must not reach the deployment cache")
+            self.assertLess(sum(received.values()), 100_000)
+            self.assertEqual((context / "public/preview.bin").read_bytes(), private_master[:65536])
+            self.assertEqual((context / "entrypoint.sh").stat().st_mode & 0o777, 0o755)
+            self.assertFalse((context / "artwork").exists())
+            self.assertFalse((context / ".env.production").exists())
+            self.assertEqual((context / "public/asset-269.txt").read_text(), "public fixture 269\n")
+            self.assertEqual(json.loads((context / "public/build-info.json").read_text())["commit"], commit)
 
     def test_compose_has_separate_external_data_and_loopback_only_port(self):
         config = self.config()
