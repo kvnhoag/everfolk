@@ -6,8 +6,8 @@ const smooth=(a,b,v)=>{v=clamp((v-a)/(b-a),0,1);return v*v*(3-2*v);};
 // Shared by the printed shell, pale laminate and detached seal. Untorn foil
 // remains at its original height; the cut has a shallow bow and small fibres.
 export function tearProfile(u){return -.080-.025*Math.sin(u*Math.PI)+.013*Math.sin(u*171)+.007*Math.sin(u*63+1.3);}
-export function sampleTearLine(u,tear){
- const opened=tear>=1?1:(1-smooth(tear-.018,tear+.018,u))*smooth(.005,.035,tear);
+export function sampleTearLine(u,tear,direction=1){
+ const at=direction<0?1-u:u,opened=tear>=1?1:(1-smooth(tear-.018,tear+.018,at))*smooth(.005,.035,tear);
  return 1.91+opened*tearProfile(u);
 }
 
@@ -17,11 +17,11 @@ export function createInnerLip(surface){
  for(let i=0;i<nx;i++)for(let row=0;row<2;row++){const a=i*3+row,b=a+3;idx.push(a,b,b+1,a,b+1,a+1);}
  g.setIndex(idx);g.userData={nx};return g;
 }
-export function updateInnerLip(lip,surface,tear){
+export function updateInnerLip(lip,surface,tear,direction=1,face=1){
  const {nx,ny}=surface.userData,p=lip.attributes.position,q=surface.attributes.position;
  for(let i=0;i<=nx;i++){
-  const at=ny*(nx+1)+i,u=i/nx,open=tear>=1?1:(1-smooth(tear-.025,tear+.015,u))*smooth(.015,.12,tear);
-  for(let row=0;row<3;row++)p.setXYZ(i*3+row,q.getX(at),q.getY(at)+[-.019,.017,.033][row]*open,q.getZ(at)+[.004,.005,-.043][row]*open);
+  const at=ny*(nx+1)+i,u=direction<0?1-i/nx:i/nx,open=tear>=1?1:(1-smooth(tear-.025,tear+.015,u))*smooth(.015,.12,tear);
+  for(let row=0;row<3;row++)p.setXYZ(i*3+row,q.getX(at),q.getY(at)+[-.019,.017,.033][row]*open,q.getZ(at)+face*[.004,.005,-.043][row]*open);
  }
  p.needsUpdate=true;lip.computeVertexNormals();
 }
@@ -42,7 +42,7 @@ export function createPouchBridges(surface){
  });
 }
 
-export function updatePouchGeometry(front,back,bridges,{tear=0,flex=0,time=0,reduced=false}={}){
+export function updatePouchGeometry(front,back,bridges,{tear=0,flex=0,time=0,reduced=false,direction=1}={}){
  for(const geometry of [front,back]){
   const {nx,ny,side}=geometry.userData,p=geometry.attributes.position;
   for(let j=0;j<=ny;j++)for(let i=0;i<=nx;i++){
@@ -54,8 +54,8 @@ export function updatePouchGeometry(front,back,bridges,{tear=0,flex=0,time=0,red
    let thickness=Math.max(.016,.024+inflate*.16+crease+breathe);
    const topCollar=smooth(.91,1,v),bottomCollar=1-smooth(0,.08,v),collar=Math.max(topCollar,bottomCollar);
    thickness=thickness*(1-collar)+(.026*topCollar+.018*bottomCollar);
-   const topMask=smooth(.74,1,v),peeled=1-smooth(tear-.06,tear+.1,u);
-   const y=-2.04+v*3.95+topMask*(sampleTearLine(u,tear)-1.91);
+   const topMask=smooth(.74,1,v),peeled=1-smooth(tear-.06,tear+.1,direction<0?1-u:u);
+   const y=-2.04+v*3.95+topMask*(sampleTearLine(u,tear,direction)-1.91);
    const z=side*(thickness+topMask*peeled*smooth(0,.035,tear)*.055)+Math.sin(v*15+u*5+time*3)*flex*.018*(1-collar);
    p.setXYZ(j*(nx+1)+i,x*(1+edge*Math.sin(v*10)*.005*(1-collar)),y,z);
   }
@@ -66,7 +66,7 @@ export function updatePouchGeometry(front,back,bridges,{tear=0,flex=0,time=0,red
  for(const bridge of bridges){const p=bridge.attributes.position;bridge.userData.boundary.forEach((source,i)=>{for(const [n,face] of [[0,front],[1,back]]){const q=face.attributes.position;p.setXYZ(i*2+n,q.getX(source),q.getY(source),q.getZ(source));}});
   if(bridge.userData.edge==='top'){
    const count=bridge.userData.boundary.length-1,indices=[];
-   for(let i=0;i<count;i++)if((i+.5)/count>=tear){const a=i*2;indices.push(a,a+1,a+3,a,a+3,a+2);}
+   for(let i=0;i<count;i++)if((direction<0?1-(i+.5)/count:(i+.5)/count)>=tear){const a=i*2;indices.push(a,a+1,a+3,a,a+3,a+2);}
    bridge.setIndex(indices);
   }
   p.needsUpdate=true;bridge.computeVertexNormals();}
@@ -86,16 +86,16 @@ export function createCrimpedSeal(w=2.77,h=.28,nx=192,ny=10,{torn=false}={}){
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setIndex(idx);const faceCount=nx*ny*6;g.addGroup(0,faceCount,0);g.addGroup(faceCount,faceCount,1);g.addGroup(bottomStart,bottomCount,torn?3:2);g.addGroup(bottomStart+bottomCount,idx.length-bottomStart-bottomCount,2);g.computeVertexNormals();g.userData={rest:Float32Array.from(p),w,h,nx,ny,torn};return g;
 }
 
-export function updateSealPeel(geometry,tear,time=0,curl=0){
+export function updateSealPeel(geometry,tear,time=0,curl=0,direction=1,face=1){
  const {rest,w}=geometry.userData,p=geometry.attributes.position;
  for(let k=0;k<p.count;k++){
-  const x=rest[k*3],u=x/w+.5,s=Math.max(0,tear-u)*w,y=rest[k*3+1],z=rest[k*3+2];
+  const x=direction*rest[k*3],u=x/w+.5,s=Math.max(0,tear-u)*w,y=rest[k*3+1],z=face*rest[k*3+2];
   // Arc length is the material coordinate s. Bending rotates each cross-section
   // rigidly; neither the printed strip nor its immutable torn edge is stretched.
   const curvature=.20*(1-.25*curl),angle=s*curvature,cs=Math.cos(angle),sn=Math.sin(angle),dy=.22,dz=Math.sqrt(1-dy*dy);
   const bow=(1-cs)/curvature,tip=(tear-.5)*w,dot=dz*y-dy*z;
-  p.setXYZ(k,(s>0?tip-Math.sin(angle)/curvature:x)+(dz*z+dy*y)*sn,
-   dy*bow+y*cs+dz*dot*(1-cs),dz*bow+z*cs-dy*dot*(1-cs));
+  p.setXYZ(k,direction*((s>0?tip-Math.sin(angle)/curvature:x)+(dz*z+dy*y)*sn),
+   dy*bow+y*cs+dz*dot*(1-cs),face*(dz*bow+z*cs-dy*dot*(1-cs)));
  }
  p.needsUpdate=true;geometry.computeVertexNormals();
 }

@@ -84,3 +84,32 @@ test('the bottom factory seam remains in front of the pinched pouch collar',()=>
  const {nx}=front.userData,p=front.attributes.position;
  for(let row=0;row<=1;row++)for(let i=0;i<=nx;i++)assert.ok(p.getZ(row*(nx+1)+i)<.034,'the pouch must not cover the lower crimped seam');
 });
+
+test('either end of the seal peels towards its visible face without stretching or moving the attached end',()=>{
+ const seal=createCrimpedSeal(2.72,.28,96,10,{torn:true}),{nx,ny,rest}=seal.userData;
+ for(const direction of [-1,1])for(const face of [-1,1])for(const tear of [.2,.6,.85]){
+  updateSealPeel(seal,tear,0,.5,direction,face);
+  const p=seal.attributes.position,row=Math.floor(ny/2)*(nx+1),opened=row+(direction>0?0:nx),attached=row+(direction>0?nx:0);
+  assert.ok(face*(p.getZ(opened)-rest[opened*3+2])>.005,'the peeled end bows towards the visible face');
+  for(let axis=0;axis<3;axis++)assert.ok(Math.abs(p.array[attached*3+axis]-rest[attached*3+axis])<1e-6,'the unpeeled end stays attached');
+  for(let i=0;i<=nx;i+=3){
+   const a=i,b=ny*(nx+1)+i;
+   const before=Math.hypot(rest[a*3]-rest[b*3],rest[a*3+1]-rest[b*3+1],rest[a*3+2]-rest[b*3+2]);
+   assert.ok(Math.abs(Math.hypot(p.getX(a)-p.getX(b),p.getY(a)-p.getY(b),p.getZ(a)-p.getZ(b))-before)<1e-6);
+  }
+ }
+});
+
+test('a reverse tear opens the correct mouth edge and puts the laminate on the viewed face',()=>{
+ const front=createPouchSurface(1),back=createPouchSurface(-1),walls=createPouchBridges(front),lip=createInnerLip(front);
+ for(const direction of [-1,1])for(const face of [-1,1]){
+  const tear=.4;updatePouchGeometry(front,back,walls,{tear,direction});
+  const surface=face<0?back:front,{nx,ny}=surface.userData,p=surface.attributes.position,start=direction>0?0:nx,end=direction>0?nx:0;
+  assert.ok(p.getY(ny*(nx+1)+start)<1.87);
+  assert.ok(Math.abs(p.getY(ny*(nx+1)+end)-1.91)<1e-6);
+  updateInnerLip(lip,surface,tear,direction,face);
+  assert.ok(face*(lip.attributes.position.getZ(start*3+1)-p.getZ(ny*(nx+1)+start))>0);
+  const bridge=walls.find(wall=>wall.userData.edge==='top');
+  for(const index of bridge.index.array){const u=Math.floor(index/2)/nx;assert.ok(direction>0?u>=tear-1/nx:u<=1-tear+1/nx);}
+ }
+});

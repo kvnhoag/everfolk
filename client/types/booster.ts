@@ -25,6 +25,8 @@ export interface BoosterSceneOptions {
   cards: BoosterCardView[];
   /** Words the scene shows; defaults to the free Legacy collection. Weave NFTs pass NFT_LABELS. */
   labels?: Partial<BoosterLabels>;
+  /** Standalone showcases use the revealed pack's action instead of a separate close button. */
+  hideClose?: boolean;
   legacyCount?: number;
   reviewIndices?: number[];
   onSave(indices: number[]): number;

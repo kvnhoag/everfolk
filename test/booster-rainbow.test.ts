@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {RAINBOW,sampleRainbowState,rainbowPoint} from '../client/lib/booster/rainbow.mjs';
+import {sampleTearLine} from '../client/lib/booster/pack-geometry.mjs';
 
 test('the tear reveals only the reached stripes and unexposed rays remain collapsed and transparent',()=>{
  assert.equal(sampleRainbowState(0,-1).visible,false);
@@ -35,6 +36,23 @@ test('the ribbon field has no crossed stripes, unbounded points or gaps during p
     const p=rainbowPoint(column/(RAINBOW.bands*2),row/RAINBOW.rows,state,time);
     assert.ok(p.x>=last);last=p.x;assert.ok(Object.values(p).every(Number.isFinite));
    }
+  }
+ }
+});
+
+test('reverse and back-face ribbons follow the opened edge without crossed stripes or exposing unopened rays',()=>{
+ for(const direction of [-1,1])for(const face of [-1,1])for(const progress of [.2,.7,1]){
+  const state=sampleRainbowState(progress,-1,7.6,direction,face);
+  for(const u of [0,progress/2,progress]){
+   const point=rainbowPoint(u,0,state,0),physical=direction<0?1-u:u;
+   assert.ok(Math.abs(point.y-sampleTearLine(physical,progress,direction))<1e-10);
+   assert.ok(face*point.z<0,'the field originates behind the viewed face');
+  }
+  let last=-Infinity;
+  for(let column=0;column<=RAINBOW.bands*2;column++){
+   const point=rainbowPoint(column/(RAINBOW.bands*2),.6,state,0);
+   assert.ok(Object.values(point).every(Number.isFinite));assert.ok(direction*point.x>=last);last=direction*point.x;
+   if(column/(RAINBOW.bands*2)>progress)assert.equal(point.alpha,0);
   }
  }
 });
