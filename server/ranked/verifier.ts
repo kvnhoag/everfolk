@@ -43,7 +43,7 @@ export interface NpcRewardVerification {
   attestation: NpcSessionAttestation;
 }
 
-export type BuildEvidence = (input: { life: LifeView; save: SaveFile; state: LifeState; worldFingerprint: string }) => Promise<Evidence>;
+export type BuildEvidence = (input: { life: LifeView; save: SaveFile; state: LifeState; worldFingerprint: string; world: WorldPack }) => Promise<Evidence>;
 
 export async function createServerSignerVerifier(options: {
   secretHex: string;
@@ -80,7 +80,7 @@ export async function createServerSignerVerifier(options: {
       if (!replay.ok) throw new VerificationError(replay.reason);
       const state: LifeState = replay.state;
       if (state.phase !== "ended") throw new VerificationError("This life has not ended yet.");
-      const baseEvidence = await options.buildEvidence({ life, save, state, worldFingerprint: engine.fingerprint });
+      const baseEvidence = await options.buildEvidence({ life, save, state, worldFingerprint: engine.fingerprint, world });
       const evidence: Evidence = npcSession ? { ...baseEvidence, npc_session: npcSession } : baseEvidence;
       const evidenceJson = canonicalJson(evidence);
       return {

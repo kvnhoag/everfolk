@@ -9,7 +9,7 @@ export interface TutorialStoreOptions {
 
 /**
  * The tutorial controller: an external store for useSyncExternalStore. Screens report what is on screen;
- * the store opens the hint for each new stage. It never navigates and never pauses the game.
+ * the store opens the hint for each new stage. It never navigates; the game holds its clock while a tip is open.
  */
 export function createTutorialStore({ storage }: TutorialStoreOptions) {
   let state: TutorialState = INITIAL_TUTORIAL;
@@ -31,16 +31,16 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     const saved = readTutorialProgress(storage());
     const seen = saved.seen.filter(isTutorialHintId);
     const hintId = isTutorialHintId(saved.current) ? saved.current : null;
-    if (seen.length || hintId) state = { ...state, seen, hintId };
+    if (seen.length || hintId || saved.tipsOff) state = { ...state, seen, hintId, tipsOn: !saved.tipsOff };
   }
 
   function dispatch(action: TutorialAction): void {
     load();
     const next = tutorialReducer(state, action, context);
     if (next === state) return;
-    const persist = next.seen !== state.seen || next.hintId !== state.hintId;
+    const persist = next.seen !== state.seen || next.hintId !== state.hintId || next.tipsOn !== state.tipsOn;
     state = next;
-    if (persist) writeTutorialProgress(storage(), { seen: state.seen, current: state.hintId });
+    if (persist) writeTutorialProgress(storage(), { seen: state.seen, current: state.hintId, tipsOff: !state.tipsOn });
     emit();
   }
 
@@ -54,7 +54,8 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
   }
 
   return {
-    getSnapshot: (): TutorialState => state,
+    /** Reads saved progress on first use, so the switch shows the remembered On/Off before any screen reports in. */
+    getSnapshot: (): TutorialState => { load(); return state; },
     getServerSnapshot: (): TutorialState => INITIAL_TUTORIAL,
     getContext: (): TutorialContext => context,
     subscribe(listener: () => void): () => void {
@@ -78,6 +79,8 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     next: () => dispatch({ type: "next" }),
     back: () => dispatch({ type: "back" }),
     close: () => dispatch({ type: "close" }),
+    /** Turns automatic tip cards on or off. Off: new sections glow instead. The Tutorial and "?" buttons always open cards. */
+    setTipsOn: (on: boolean) => dispatch({ type: "tips", on }),
   };
 }
 

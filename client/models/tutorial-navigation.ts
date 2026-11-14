@@ -11,8 +11,19 @@ export interface TutorialQuiet {
   age: number | null;
 }
 
+/** Sections to light up instead of opening a card, when the player has turned tips off. */
+export interface TutorialFlash {
+  ids: readonly TutorialHintId[];
+  /** Changes on every flash, so the same section can light up again. */
+  run: number;
+}
+
 export interface TutorialState {
   open: boolean;
+  /** Tips open as cards when a new section appears. Off: the section's border glows for a few seconds instead. */
+  tipsOn: boolean;
+  /** The latest sections lit up while tips are off. */
+  flash: TutorialFlash | null;
   mode: TutorialMode;
   /** The current step. Kept after closing so the tutorial reopens where it was. */
   hintId: TutorialHintId | null;
@@ -29,9 +40,10 @@ export type TutorialAction =
   | { type: "open"; hintId?: TutorialHintId }
   | { type: "next" }
   | { type: "back" }
-  | { type: "close" };
+  | { type: "close" }
+  | { type: "tips"; on: boolean };
 
-export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, mode: "auto", hintId: null, queue: [], seen: [], quiet: null, run: 0 });
+export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], quiet: null, run: 0 });
 
 /** Shown when the player asks for help on a screen that has no tips of its own. */
 const FALLBACK_HINT: TutorialHintId = "about";
@@ -64,6 +76,8 @@ function autoOpen(state: TutorialState, context: TutorialContext): TutorialState
   if (quietHere(state.quiet, context)) return state;
   const queue = triggeredHints(context, state.seen);
   if (queue.length === 0) return state;
+  // Tips off: each new section only glows once. It counts as seen, so it does not glow again.
+  if (!state.tipsOn) return { ...state, seen: queue.reduce(markSeen, state.seen), flash: { ids: queue, run: (state.flash?.run ?? 0) + 1 } };
   return { ...state, open: true, mode: "auto", hintId: queue[0], queue, run: state.run + 1 };
 }
 
@@ -98,16 +112,20 @@ export function tutorialReducer(state: TutorialState, action: TutorialAction, co
       return { ...state, open: true, mode: "manual", hintId, queue: manualQueue(context, hintId), run: state.run + 1 };
     }
     case "close": return close(state, context);
+    // Paging is the player asking for the next tip, so it shows like a tip they opened: it never waits invisibly
+    // for a section that is not drawn right now (a faded notice, a board hidden during a decision).
     case "next": {
       if (!state.open) return state;
       const index = state.hintId ? state.queue.indexOf(state.hintId) : -1;
       if (index < 0 || index >= state.queue.length - 1) return close(state, context);
-      return { ...state, hintId: state.queue[index + 1], seen: markSeen(state.seen, state.hintId) };
+      return { ...state, mode: "manual", hintId: state.queue[index + 1], seen: markSeen(state.seen, state.hintId) };
     }
     case "back": {
       const index = state.hintId ? state.queue.indexOf(state.hintId) : -1;
-      return state.open && index > 0 ? { ...state, hintId: state.queue[index - 1] } : state;
+      return state.open && index > 0 ? { ...state, mode: "manual", hintId: state.queue[index - 1] } : state;
     }
+    // The open card stays open; only the next new section changes how it is shown.
+    case "tips": return state.tipsOn === action.on ? state : { ...state, tipsOn: action.on };
   }
 }
 
@@ -119,7 +137,7 @@ export function tutorialPosition(state: TutorialState): { index: number; total: 
 
 export type TutorialKeyAction = "next" | "back" | "close";
 
-/** Keyboard for the card. Arrows page only through queued tips; Enter on a focused button activates that button. */
+/** Keyboard for the card. Arrows page only through queued tips; Enter on a focused control activates that control. */
 export function tutorialKeyAction(key: string, focusOnButton: boolean, paged: boolean): TutorialKeyAction | null {
   if (key === "Escape") return "close";
   if (!paged) return null;

@@ -19,6 +19,17 @@ export const NFT_LABELS = Object.freeze({
   reviewLabel: "Your NFT in 3D",
 });
 
+/** A verified Weave pack being opened: one card will be minted from it. */
+export const WEAVE_PACK_LABELS = Object.freeze({
+  tag: "WEAVE MODE PACK",
+  footer: "WEAVE MODE · VERIFIED PACK",
+  loading: "Preparing your pack",
+  back: "Back to Weave Mode",
+  close: "Save the pack and leave",
+  showCount: false,
+  reviewLabel: "Your pack",
+});
+
 export function resolveBoosterLabels(labels) {
   return { ...LEGACY_LABELS, ...(labels ?? {}) };
 }

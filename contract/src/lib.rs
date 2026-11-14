@@ -1,5 +1,6 @@
 //! Everfolk ranked lives: seeded births, live influence draws, verified mints and source royalties.
 mod admin;
+mod card_art;
 mod earnings;
 mod lives;
 mod market;
@@ -8,6 +9,7 @@ mod mint_pack;
 mod stage_mint;
 mod nft;
 mod random;
+mod rarity_caps;
 mod shares;
 mod tokens;
 mod types;
@@ -132,3 +134,7 @@ mod tests_market;
 mod tests_demo_catalog;
 #[cfg(test)]
 mod tests_npc_session;
+#[cfg(test)]
+mod tests_rarity_caps;
+#[cfg(test)]
+mod tests_card_art;

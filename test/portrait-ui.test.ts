@@ -58,14 +58,36 @@ function householdFixture(): LifeState {
 test("the actual image component uses an explicit complete descriptor over loose scalar props", () => {
   const portrait = resolvePortraitState({ age: 16, sex: "female", avatarVariant: 1, role: "royalty", personKey: "recorded-subject" });
   const html = renderToStaticMarkup(createElement(PixelPortrait, { portrait, age: 70, sex: "male", avatarVariant: 0, name: "Chosen portrait" }));
-  assert.match(html, /src="\/assets\/portraits\/ordinary-v3\/ef-p-f02-youth-royalty-v3.png"/);
+  assert.match(html, /src="\/assets\/portraits\/concept1-v4\/youth-girl-f02\.png"/);
+  assert.match(html, /data-portrait-set="concept1"/);
   assert.match(html, /width="384" height="480"/);
   assert.match(html, /data-portrait-key="f02:youth:royalty"/);
   assert.match(html, /data-portrait-identity="f02"/);
   assert.match(html, /Pixel portrait of Chosen portrait, a young person/);
+  const v3Html = renderToStaticMarkup(createElement(PixelPortrait, { age: 16, sex: "female", avatarVariant: 1, role: "royalty", personKey: "recorded-subject", portraitSet: "ordinary-v3", name: "Chosen v3 portrait" }));
+  assert.match(v3Html, /src="\/assets\/portraits\/ordinary-v3\/ef-p-f02-youth-royalty-v3\.png"/);
+  assert.match(v3Html, /data-portrait-set="ordinary-v3"/);
 });
 
 test("assigned portraits keep their face through all six ages with role clothing from youth", () => {
+  const expectedFiles = {
+    male: {
+      infant: "infant-c1.png",
+      child: "child-boy-m01.png",
+      youth: "elite-citizen-m02.png",
+      adult: "elite-citizen-m02.png",
+      middle: "elite-citizen-m02.png",
+      elder: "elite-citizen-m02.png",
+    },
+    female: {
+      infant: "infant-c1.png",
+      child: "child-girl-f01.png",
+      youth: "youth-girl-f02.png",
+      adult: "merchant-woman-f03.png",
+      middle: "merchant-woman-f03.png",
+      elder: "elder-woman-f01.png",
+    },
+  } as const;
   for (const sex of ["male", "female"] as const) {
     const life = structuredClone(engine.start(`portrait-ui-role-picker-${sex}`));
     life.originId = pack.royalty.originId;
@@ -76,8 +98,9 @@ test("assigned portraits keep their face through all six ages with role clothing
     assert.doesNotMatch(html, /<button|aria-pressed=|Portrait choices|Choose your portrait/);
     assert.equal((html.match(/<img\b/g) ?? []).length, 6);
     assert.ok((html.match(/<img\b[^>]*>/g) ?? []).every(tag => attribute(tag, "data-portrait-identity") === identity));
-    for (const [stage, wardrobe] of [["infant", "infant"], ["child", "child"], ["youth", "royalty"], ["adult", "royalty"], ["middle", "royalty"], ["elder", "royalty"]]) {
-      assert.ok(html.includes(`ef-p-${identity}-${stage}-${wardrobe}-v3.png`), `${sex} ${stage}`);
+    for (const [stage, wardrobe] of [["infant", "infant"], ["child", "child"], ["youth", "royalty"], ["adult", "royalty"], ["middle", "royalty"], ["elder", "royalty"]] as const) {
+      assert.ok(html.includes(`data-portrait-key="${identity}:${stage}:${wardrobe}"`), `${sex} ${stage} key`);
+      assert.ok(html.includes(`/assets/portraits/concept1-v4/${expectedFiles[sex][stage]}`), `${sex} ${stage} concept1 file`);
     }
     assert.match(html, /an infant in a swaddle/);
     assert.deepEqual(life, before);
@@ -120,7 +143,8 @@ test("spouse, friend and activity card portraits share the recorded NPC face and
   for (const html of [table, panel, household]) {
     const portraits = images(html, "Recorded spouse");
     assert.ok(portraits.length > 0);
-    assert.ok(portraits.every(tag => attribute(tag, "src") === "/assets/portraits/ordinary-v3/ef-p-f03-adult-maritime-v3.png"));
+    assert.ok(portraits.every(tag => attribute(tag, "src") === "/assets/portraits/concept1-v4/citizen-mother-f01.png"));
+    assert.ok(portraits.every(tag => attribute(tag, "data-portrait-key") === "f03:adult:maritime"));
     assert.ok(portraits.every(tag => attribute(tag, "data-portrait-identity") === "f03"));
   }
   life.character!.relationships!.partners[pack.character.partners[0].id].roles = ["enemy"];
@@ -182,8 +206,12 @@ test("retained saves render new body portraits without acquiring a newer world's
   const portrait = playerPortraitState(oldEngine.world, life, { age: 28 });
   assert.equal(portrait.wardrobeId, "everyday");
   const html = renderToStaticMarkup(createElement(PixelPortrait, { portrait, name: "Retained character" }));
-  assert.match(html, /\/assets\/portraits\/ordinary-v3\//);
-  assert.doesNotMatch(html, /-royalty-v3.png/);
+  assert.match(html, /\/assets\/portraits\/concept1-v4\/citizen-(mother-f01|adult-m02)\.png/);
+  assert.doesNotMatch(html, /elite-citizen-m02\.png|-royalty-v3\.png/);
+  const legacyV3 = playerPortraitState(oldEngine.world, life, { age: 28, portraitSet: "ordinary-v3" });
+  const legacyHtml = renderToStaticMarkup(createElement(PixelPortrait, { portrait: legacyV3, name: "Retained character" }));
+  assert.match(legacyHtml, /\/assets\/portraits\/ordinary-v3\//);
+  assert.doesNotMatch(legacyHtml, /-royalty-v3\.png/);
   assert.deepEqual(life, before);
   assert.deepEqual(oldEngine.load(oldEngine.save(life)), life);
 });

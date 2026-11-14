@@ -9,7 +9,13 @@ import { visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { getLoanSummary } from "../models/loan-summary.ts";
 import PixelPortrait from "../components/PixelPortrait.tsx";
-import { childPortraitState, personPortraitState, resolvePortraitState } from "../models/portrait-state.ts";
+import {
+  childPortraitState,
+  moneylenderPortraitState,
+  personPortraitState,
+  resolvePortraitState,
+  townFigurePortraitState,
+} from "../models/portrait-state.ts";
 import { relationshipLabels, visibleRelationshipPeople } from "../models/relationship-labels.ts";
 import { beginOrder, releaseOrder } from "./screen.ts";
 import type { DemoScreen, TownFigureView } from "./screen.ts";
@@ -18,6 +24,21 @@ import PriceChart, { AssetSparkline } from "./PriceChart.tsx";
 import { ResourceGlyph } from "./ResourceBar.tsx";
 import "./economy-panels.css";
 import SectionHelp from "../components/SectionHelp.tsx";
+import { focusSection } from "../lib/section-flash.ts";
+import WorksPanel from "./WorksPanel.tsx";
+import { tuning } from "../../src/demo/market-rules.ts";
+import PixelIcon from "../components/PixelIcon.tsx";
+import { SectionStep } from "../components/YearChecklist.tsx";
+import { LockedArea } from "../components/Locked.tsx";
+import { sectionStep } from "../models/section-steps.ts";
+import type { TradePreview } from "../models/trade-preview.ts";
+import type { PlantingCheck } from "../models/planting-check.ts";
+import FarmGranary from "./FarmGranary.tsx";
+
+/** A small lock on a tab that has not opened yet, with the age it opens. */
+function TabLock({ age }: { age: number }) {
+  return <span className="tab-lock" title={`Opens at age ${age}`}><PixelIcon name="lock" size={11} />Age {age}</span>;
+}
 
 export interface ComparisonSide {
   label: string;
@@ -42,6 +63,12 @@ interface Props {
   world?: WorldPack;
   activities?: readonly ActivityAvailability[];
   onTrade(order: TradeCommand): string | null;
+  /** What an order would do, tried on a copy of the life; Confirm sends it. */
+  previewTrade?(order: TradeCommand): TradePreview;
+  /** What a field plan would do, checked before Set planting. */
+  checkPlan?(flaxPlots: number): PlantingCheck;
+  /** The age planting opens for the player; null once open. */
+  plantingLockedUntil?: number | null;
   onPlan(flaxPlots: number): string | null;
   onAutoPlay(on: boolean): void;
   onDelegate(agent: string | null): string | null;
@@ -67,9 +94,7 @@ function heldQuantity(screen: DemoScreen, item: TradeItem): number {
 }
 
 function townFigurePortrait(figure: TownFigureView) {
-  const jobId = { merchant: "merchant", grower: "farmer", army: "quartermaster" }[figure.role];
-  return resolvePortraitState({ personKey: `town:${figure.role}`, age: figure.age, sex: figure.sex,
-    avatarVariant: figure.avatarVariant, jobId });
+  return townFigurePortraitState(figure);
 }
 
 export default function EconomyPanels({
@@ -85,6 +110,9 @@ export default function EconomyPanels({
   world,
   activities = [],
   onTrade,
+  previewTrade,
+  checkPlan,
+  plantingLockedUntil = null,
   onPlan,
   onAutoPlay,
   onDelegate,
@@ -96,15 +124,14 @@ export default function EconomyPanels({
 }: Props) {
   const titleId = useId();
   const slot = useRef(false);
-  const [activeTab, setActiveTab] = useState<EconomyTabId>("market");
+  // Opens on a tab the player can use: Farm & Granary while the market is still closed to them.
+  const [activeTab, setActiveTab] = useState<EconomyTabId>(() => life && world?.demo && life.age < tuning(world.demo.market).minTradeAge ? "farm" : "market");
   const [item, setItem] = useState<TradeItem>("grain");
   const [side, setSide] = useState<"buy" | "sell">("sell");
   const [quantity, setQuantity] = useState(1);
   const [reserveOverride, setReserveOverride] = useState(false);
   const [counterparty, setCounterparty] = useState<"merchant" | "army">("merchant");
   const [notice, setNotice] = useState("");
-  const [flaxPlots, setFlaxPlots] = useState(screen.household.flaxPlots);
-  const [agentName, setAgentName] = useState("");
   const [peopleFilter, setPeopleFilter] = useState<"all" | "friends" | "business" | "romance" | "family">("all");
   const [openDropdown, setOpenDropdown] = useState<"good" | "side" | "with" | null>(null);
 
@@ -117,19 +144,39 @@ export default function EconomyPanels({
       : side === "buy"
         ? (quote?.sell ?? 1)
         : (quote?.buy ?? 1);
-  const orderTotal = quantity * unitPrice;
 
   useEffect(() => { setReserveOverride(false); }, [item, side, counterparty, life?.age]);
+  // The preview always shows the order on screen; any change to it closes the preview.
+  const [preview, setPreview] = useState<TradePreview | null>(null);
+  // Any change to the life (cash spent, a decision, a new year) also closes it, so it never shows stale numbers.
+  useEffect(() => { setPreview(null); }, [item, side, quantity, counterparty, reserveOverride, life, screen.market.visitUsed]);
+  function openPreview() {
+    if (!previewTrade) { setNotice("This life has no market."); return; }
+    setNotice("");
+    setPreview(previewTrade(order));
+  }
 
   useEffect(() => {
     slot.current = false;
   }, [screen.market.visitUsed, pending]);
 
+  // A Trade button elsewhere (Inventory & Granary) opens the market here with that good chosen, scrolls the
+  // order ticket into view and lights it up, so the click visibly lands somewhere.
+  const marketRef = useRef<HTMLElement>(null);
+  const [tradeJump, setTradeJump] = useState(0);
   useEffect(() => {
     if (!externalTradeItem) return;
     setItem(externalTradeItem.item);
+    setSide(heldQuantity(screen, externalTradeItem.item) > 0 ? "sell" : "buy");
+    setCounterparty("merchant");
     setActiveTab("market");
+    setTradeJump(externalTradeItem.seq);
   }, [externalTradeItem?.seq]);
+  useEffect(() => {
+    if (!tradeJump) return;
+    const frame = requestAnimationFrame(() => focusSection({ selectors: [".demo-economy .demo-trade-ticket"], label: "Your order: set the quantity, then Preview order" }));
+    return () => cancelAnimationFrame(frame);
+  }, [tradeJump]);
 
   useEffect(() => {
     if (!externalTab) return;
@@ -145,9 +192,10 @@ export default function EconomyPanels({
     : undefined;
 
   function confirmTrade() {
-    if (screen.market.visitUsed || pending) return;
+    if (screen.market.visitUsed || pending || !preview?.confirmLabel) return;
     if (!beginOrder(slot)) return;
     const reason = onTrade(order);
+    setPreview(null);
     if (reason) {
       releaseOrder(slot);
       setNotice(reason);
@@ -166,6 +214,13 @@ export default function EconomyPanels({
     }
   }
 
+  // Tabs that open later carry their opening age, so nothing looks broken before it is meant to work.
+  const age = life?.age ?? 0;
+  const tradeAge = world?.demo ? tuning(world.demo.market).minTradeAge : undefined;
+  const tradeLockedUntil = tradeAge !== undefined && age < tradeAge ? tradeAge : null;
+  const firstJobAge = Math.min(...(world?.character?.jobs ?? []).map(job => job.minAge ?? 0));
+  const careerLockedUntil = Number.isFinite(firstJobAge) && age < firstJobAge ? firstJobAge : null;
+
   const history = screen.priceHistory ?? [];
   const basePrices = screen.basePrices;
 
@@ -174,7 +229,7 @@ export default function EconomyPanels({
       <header className="demo-deck-header has-section-help">
         <SectionHelp hint="command-deck" />
         <div>
-          <span className="demo-deck-eyebrow">HOUSEHOLD &amp; TOWN COMMAND DECK</span>
+          <span className="demo-deck-eyebrow"><SectionStep step={sectionStep("town")} />HOUSEHOLD &amp; TOWN COMMAND DECK</span>
           <h2 id={titleId} className="demo-economy-title">This year in the fields</h2>
         </div>
         <div className="demo-deck-tabs" role="tablist" aria-label="Economy command deck">
@@ -185,7 +240,7 @@ export default function EconomyPanels({
             className={`demo-deck-tab${activeTab === "market" ? " is-active" : ""}`}
             onClick={() => setActiveTab("market")}
           >
-            Market &amp; Trade
+            Market &amp; Trade{tradeLockedUntil !== null && <TabLock age={tradeLockedUntil} />}
           </button>
           <button
             type="button"
@@ -203,7 +258,7 @@ export default function EconomyPanels({
             className={`demo-deck-tab${activeTab === "service" ? " is-active" : ""}`}
             onClick={() => setActiveTab("service")}
           >
-            Career &amp; Army
+            Career &amp; Army{careerLockedUntil !== null && <TabLock age={careerLockedUntil} />}
           </button>
           <button
             type="button"
@@ -326,8 +381,9 @@ export default function EconomyPanels({
       )}
 
       {/* TAB 1: MARKET & TRADE + ASSET PRICE GRAPHS */}
-      <section className="has-section-help" aria-label="Grain market" hidden={activeTab !== "market"}>
+      <section ref={marketRef} className="has-section-help" aria-label="Grain market" hidden={activeTab !== "market"}>
         <SectionHelp hint="market" />
+        <LockedArea locked={tradeLockedUntil !== null} title="Market & Trade" unlock={`Unlocks at age ${tradeLockedUntil ?? 0}`} note="Then buy and sell grain and goods once a year.">
         <div className="demo-market-top">
           <div>
             <h3>Grain market</h3>
@@ -382,13 +438,17 @@ export default function EconomyPanels({
                     </td>
                     <td>
                       <div className="demo-row-btns">
+                        {/* A row's Sell or Buy fills the order below and takes the player there, labelled. */}
                         <button
                           type="button"
+                          disabled={heldQuantity(screen, entry.item) <= 0}
+                          title={heldQuantity(screen, entry.item) <= 0 ? `You hold no ${itemLabel(entry.item).toLowerCase()} to sell` : undefined}
                           onClick={e => {
                             e.stopPropagation();
                             setItem(entry.item);
                             setSide("sell");
                             setCounterparty("merchant");
+                            setTradeJump(seq => seq + 1);
                           }}
                         >
                           Sell
@@ -400,6 +460,7 @@ export default function EconomyPanels({
                             setItem(entry.item);
                             setSide("buy");
                             setCounterparty("merchant");
+                            setTradeJump(seq => seq + 1);
                           }}
                         >
                           Buy
@@ -600,11 +661,25 @@ export default function EconomyPanels({
               type="button"
               className="demo-trade-submit"
               disabled={screen.market.visitUsed || pending || slot.current}
-              onClick={confirmTrade}
+              aria-expanded={preview !== null}
+              onClick={openPreview}
             >
-              Preview and confirm ({orderTotal} dr)
+              Preview order
             </button>
           </div>
+
+          {preview && <div className="demo-trade-preview" role="region" aria-label="Order preview">
+            <strong>{preview.blocked ? "This order cannot go through" : "Check before you confirm"}</strong>
+            {preview.blocked && <p className="demo-trade-preview-blocked">{preview.blocked}</p>}
+            <ul>{preview.lines.map(line => <li key={line}>{line}</li>)}</ul>
+            {preview.warnings.length > 0 && <ul className="demo-trade-preview-warnings">
+              {preview.warnings.map(line => <li key={line}><PixelIcon name="warn" size={12} label="Warning" />{line}</li>)}
+            </ul>}
+            <div className="demo-trade-preview-actions">
+              {preview.confirmLabel && <button type="button" className="demo-trade-confirm" disabled={pending || slot.current} onClick={confirmTrade}>{preview.confirmLabel}</button>}
+              <button type="button" className="demo-trade-cancel" onClick={() => setPreview(null)}>{preview.confirmLabel ? "Change order" : "Close"}</button>
+            </div>
+          </div>}
 
           {world?.capabilities && item === "grain" && side === "sell" && <label className="demo-reserve-override"><input type="checkbox" checked={reserveOverride} onChange={event => setReserveOverride(event.target.checked)} /> Allow this sale to use grain reserved for household food or seed.</label>}
           <div className="demo-batch-row">
@@ -623,82 +698,19 @@ export default function EconomyPanels({
 
         {notice && <p className="demo-trade-notice" role="status">{notice}</p>}
 
+        </LockedArea>
       </section>
 
       {/* TAB 2: FARM & GRANARY */}
-      <section aria-label="This year" hidden={activeTab !== "farm"}>
-        <h3>This year</h3>
-        <dl className="demo-facts">
-          <Field label="Flood" value={levelLabel(screen.year.flood)} />
-          <Field label="Army" value={levelLabel(screen.year.army)} />
-          <Field label="Road" value={levelLabel(screen.year.road)} />
-        </dl>
-        {screen.year.lines.length > 0 ? (
-          <ul>
-            {screen.year.lines.map(line => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>The year has not added a further effect.</p>
-        )}
-      </section>
-
-      <section aria-label="Household grain" hidden={activeTab !== "farm"}>
-        <h3>Household grain</h3>
-        <dl className="demo-facts">
-          <Field label="Store" value={String(screen.household.grain)} />
-          <Field label="Capacity" value={String(screen.household.capacity)} />
-          <Field label="Mouths" value={String(screen.household.mouths)} />
-          <Field label="Expected harvest" value={String(screen.household.expectedHarvest)} />
-          <Field label="Expected spoilage" value={String(screen.household.expectedSpoilage)} />
-          <Field label="Rent" value={String(screen.household.expectedRent)} />
-          <Field label="Cash" value={cashText} />
-        </dl>
-        {screen.household.grain === 0 && <p>The store is empty.</p>}
-        {screen.household.shortfallBps > 0 && <p>The household was short last year.</p>}
-      </section>
-
-      <section aria-label="Wider life" hidden={activeTab !== "farm"}>
-        <h3>Fields, animals and stores</h3>
-        <dl className="demo-facts">
-          <Field label="Grain plots" value={String(screen.household.plots - screen.household.flaxPlots)} />
-          <Field label="Flax plots" value={String(screen.household.flaxPlots)} />
-          <Field label="Flax stored" value={String(screen.household.flax)} />
-          <Field label="Linen" value={String(screen.household.linen)} />
-          <Field label="Oxen" value={String(screen.household.animals.ox)} />
-          <Field label="Donkeys" value={String(screen.household.animals.donkey)} />
-        </dl>
-        <div className="demo-actions">
-          <label>
-            Flax plots next year
-            <input
-              inputMode="numeric"
-              min={0}
-              max={screen.household.plots}
-              type="number"
-              value={flaxPlots}
-              onChange={event => setFlaxPlots(Math.max(0, Number(event.target.value) || 0))}
-            />
-          </label>
-          <button type="button" onClick={() => setNotice(onPlan(flaxPlots) ?? "Planting plan sent.")}>
-            Set planting
-          </button>
-        </div>
-        <h3>Holdings</h3>
-        <ul>
-          {screen.market.quotes
-            .filter(entry => entry.item !== "grain" && entry.item !== "flax")
-            .map(entry => (
-              <li key={entry.item}>
-                {itemLabel(entry.item)}: held {heldQuantity(screen, entry.item)} · buy {entry.buy}, sell {entry.sell}.
-              </li>
-            ))}
-        </ul>
+      <section aria-label="Farm and granary" hidden={activeTab !== "farm"}>
+        <FarmGranary screen={screen} world={world} age={life?.age ?? 0} cashText={cashText} cash={life?.economy?.cash ?? 0} holding={entry => heldQuantity(screen, entry)}
+          onPlan={onPlan} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil}
+          onTrade={tradeItem => { setItem(tradeItem); setSide(heldQuantity(screen, tradeItem) > 0 ? "sell" : "buy"); setCounterparty("merchant"); setActiveTab("market"); setTradeJump(seq => seq + 1); }} />
       </section>
 
       {/* TAB 3: CAREER & ARMY */}
       <section aria-label="Service" hidden={activeTab !== "service"}>
+        <LockedArea locked={careerLockedUntil !== null} title="Career & Army" unlock={`Unlocks at age ${careerLockedUntil ?? 0}`} note="Then take your first work, train for a career or serve in the army.">
         <h3>Farm or serve</h3>
         <p>
           {screen.service.serving
@@ -768,6 +780,7 @@ export default function EconomyPanels({
               ))}
           </div>
         )}
+        </LockedArea>
       </section>
 
       {/* TAB 4: PEOPLE & TOWN FIGURES */}
@@ -883,8 +896,7 @@ export default function EconomyPanels({
                 <article className={`demo-town-figure-card${loanSummary?.dueSoon || loanSummary?.due ? " has-offer" : ""}`}>
                   <div className="demo-town-figure-top">
                     <PixelPortrait
-                      portrait={resolvePortraitState({ age: 52, sex: "male", avatarVariant: 2,
-                        personKey: "town:moneylender", occupation: world.economy.moneylender.title })}
+                      portrait={moneylenderPortraitState(world)}
                       name="Syros the Banker"
                       className="demo-town-figure-avatar"
                     />
@@ -1075,72 +1087,7 @@ export default function EconomyPanels({
       </section>
 
       {/* TAB 5: WORKS & STEWARDS */}
-      <section aria-label="Community works" hidden={activeTab !== "works"}>
-        <h3>Community works</h3>
-        <ul>
-          {screen.works.works.map(work => (
-            <li key={work.id}>
-              <strong>{work.title}</strong> · {work.built ? "Finished" : work.progress + " of " + work.needed} · costs{" "}
-              {work.cash} drachmas and {work.grain} grain{work.built ? " · effect is in place" : ""}
-            </li>
-          ))}
-        </ul>
-        <p>Reputation {screen.works.reputation}. Changes are listed in the life record when they happen.</p>
-      </section>
-
-      <section aria-label="Townspeople" hidden={activeTab !== "works"}>
-        <h3>Who decided</h3>
-        <ul>
-          {screen.agents.map(agent => (
-            <li key={agent.role}>{agent.text}</li>
-          ))}
-        </ul>
-        {screen.offerText && <p>{screen.offerText} It is shown here until it arrives as a decision.</p>}
-        <div className="demo-actions">
-          <button type="button" aria-pressed={autoPlay} onClick={() => onAutoPlay(!autoPlay)}>
-            {autoPlay ? "Auto-play is on" : "Auto-play is off"}
-          </button>
-          {autoPlay && (
-            <button type="button" onClick={() => onAutoPlay(false)}>
-              Take back
-            </button>
-          )}
-          <label>
-            Agent account
-            <input value={agentName} onChange={event => setAgentName(event.target.value)} placeholder="account.testnet" />
-          </label>
-          <button type="button" onClick={() => setNotice(onDelegate(agentName.trim() || null) ?? "Delegation sent.")}>
-            Hand decisions over
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setAgentName("");
-              setNotice(onDelegate(null) ?? "You took the decisions back.");
-            }}
-          >
-            Take the decisions back
-          </button>
-        </div>
-      </section>
-
-      <section aria-label="Future paths" hidden={activeTab !== "works"}>
-        <h3>Future paths</h3>
-        {screen.futurePaths.length === 0 ? (
-          <p>No future paths are listed for this world.</p>
-        ) : (
-          <ul>
-            {screen.futurePaths.map(path => (
-              <li key={path.id}>
-                <strong>{path.title}</strong> <span className="demo-badge">Unavailable</span>
-                <p>{path.description}</p>
-                {path.prerequisites && <p>{path.prerequisites}</p>}
-                <p>Not available in this demo.</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <WorksPanel screen={screen} hidden={activeTab !== "works"} autoPlay={autoPlay} onAutoPlay={onAutoPlay} onDelegate={onDelegate} onNotice={setNotice} />
     </div>
   );
 }

@@ -5,6 +5,11 @@ import { isUnavailable } from "../../src/demo/availability.ts";
 import { choiceIsUnavailable } from "../demo/screen.ts";
 import { isRoyalLife, royalAudienceAllowed } from "../../src/royalty.ts";
 import { isAristocratLife } from "../../src/aristocracy.ts";
+import { cashCost } from "./cash-note.ts";
+import { formatMoney } from "./wealth.ts";
+
+/** Below this many years of cash left, the focus says how long the purse lasts. */
+const PURSE_WARNING_YEARS = 3;
 
 export const YEARLY_FOCUSES = [
   { id: "everyday", label: "Everyday life", activityId: null },
@@ -99,14 +104,32 @@ export function yearlyDeclineNotes(life: LifeState, world: WorldPack): string[] 
 export function focusStatus(life: LifeState, world: WorldPack, focusId: YearlyFocusId, activities: readonly ActivityAvailability[]): string {
   if (life.phase === "ended") return "This life has ended.";
   if (life.phase === "choice") return "Choose an option to continue.";
-  if (focusId === "everyday") return "No activity will be chosen for you.";
+  if (focusId === "everyday") return "No action is recommended; at year end you pick freely.";
   const activity = focusActivity(world, focusId);
   if (!activity) return "This focus is unavailable in this world.";
-  if (life.character?.lastActivityAge === life.age) return "You already chose an activity this year. Focus resumes next year.";
+  if (life.character?.lastActivityAge === life.age) return "You already chose an action this year. Your focus is recommended again next year.";
   const available = activities.find(candidate => candidate.id === activity.id);
-  if (!available?.available) return `Skipped this year: ${available?.reason ?? "This activity is unavailable."}`;
-  return focusId === "trade" ? "Uses this year's activity and puts paid work aside. Place your own market orders; complete sales to build a trader's livelihood."
-    : "Repeats before the next year, when available. Uses your yearly activity.";
+  if (!available?.available) {
+    const reason = available?.reason ?? "This activity is unavailable.";
+    return `Can't do this year: ${reason}${/cash/i.test(reason) ? ` ${earningHint(activities)}` : ""} Pick another focus, or choose any other action this year.`;
+  }
+  const base = focusId === "trade" ? "Uses this year's activity and puts paid work aside. Place your own market orders; complete sales to build a trader's livelihood."
+    : "Recommended at year end if your action is still unused. You choose; nothing is spent for you.";
+  return [base, purseNote(life, world, available, activities)].filter(Boolean).join(" ");
+}
+
+/** How long the cash lasts if the focus costs money every year; nothing when it lasts long enough not to matter. */
+function purseNote(life: LifeState, world: WorldPack, activity: ActivityAvailability, activities: readonly ActivityAvailability[]): string {
+  const cost = cashCost(activity, world), cash = life.economy?.cash ?? 0;
+  if (cost <= 0 || !world.economy) return "";
+  const years = Math.floor(cash / cost);
+  if (years >= PURSE_WARNING_YEARS) return "";
+  return `It costs ${formatMoney(cost, world)} a year; your ${formatMoney(cash, world)} covers ${years} more ${years === 1 ? "year" : "years"}. ${earningHint(activities)}`.trim();
+}
+
+/** Where money comes from at this age, so a cash warning never stops at the bad news. */
+function earningHint(activities: readonly ActivityAvailability[]): string {
+  return activities.some(activity => activity.available && activity.category === "career") ? "Paid work (a Work action) brings cash in." : "";
 }
 
 /** Both timed years and fast-forward accept the same normal engine commands. */

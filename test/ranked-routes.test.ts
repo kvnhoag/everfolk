@@ -39,14 +39,14 @@ const verifyBody = JSON.stringify({ life_id: "5", save: JSON.stringify(SAVE) });
 test("config exposes contract, rpc, world version and verifier key", async () => {
   const response = await handleRankedApi(new Request(`${ORIGIN}/api/ranked/config`), env(), { verifier: async () => fakeVerifier(signed) });
   assert.equal(response.status, 200);
-  assert.deepEqual(await response.json(), { contract_id: "lives.testnet", rpc_url: "https://rpc.test", world_version: "alexandria-demo-2", verifier_public_key: "ed25519:Fake" });
+  assert.deepEqual(await response.json(), { contract_id: "lives.testnet", rpc_url: "https://rpc.test", world_version: "alexandria-weave-1", verifier_public_key: "ed25519:Fake" });
 });
 
 test("sign-in can discover the contract without a signing secret, but verification stays unavailable", async () => {
   const unsigned = env({ RANKED_VERIFIER_SECRET: undefined });
   const response = await handleRankedApi(new Request(`${ORIGIN}/api/ranked/config`), unsigned);
   assert.equal(response.status, 200);
-  assert.deepEqual(await response.json(), { contract_id: "lives.testnet", rpc_url: "https://rpc.test", world_version: "alexandria-demo-2", verifier_public_key: null });
+  assert.deepEqual(await response.json(), { contract_id: "lives.testnet", rpc_url: "https://rpc.test", world_version: "alexandria-weave-1", verifier_public_key: null });
   assert.equal((await handleRankedApi(post(verifyBody), unsigned)).status, 503);
 });
 

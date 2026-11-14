@@ -1,0 +1,15 @@
+/* Locked parts of the screen: greyed out and crossed through, with the condition that opens them in large type. */
+.locked-area{position:relative;min-height:150px;max-height:300px;overflow:hidden;border:2px dashed #9c8f78;background:#e6e0d4}
+.locked-area-content{filter:grayscale(1);opacity:.22;pointer-events:none;user-select:none}
+.locked-cover{position:absolute;inset:0;display:grid;place-items:center;padding:16px;text-align:center}
+.locked-cross{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.locked-cross line{stroke:#7a2413;stroke-width:1.4;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.55;stroke-width:6px}
+.locked-cover-copy{position:relative;display:grid;justify-items:center;gap:4px;max-width:420px;padding:12px 18px;border:2px solid #4b4335;background:#f3eee4ee;box-shadow:4px 4px 0 #4b433540}
+.locked-cover-title{display:inline-flex;align-items:center;gap:6px;font:700 12px/1.2 var(--ef-font-body);letter-spacing:.08em;text-transform:uppercase;color:#4b4335}
+.locked-cover-unlock{font:700 26px/1.15 var(--ef-font-body);color:#2c2216}
+.locked-cover-copy p{margin:0;font-size:13px;line-height:1.4;color:#4b4335}
+/* A numbered section that has not opened yet: same cover on its own grey box. */
+.section-locked{position:relative;display:block;min-height:170px;margin:0 0 14px;border:2px dashed #9c8f78;background:repeating-linear-gradient(135deg,#e6e0d4 0 12px,#ded7c9 12px 24px)}
+.section-locked-step{position:absolute;top:10px;left:10px;z-index:1}
+.section-locked-step .section-step{background:#8f877a;color:#ece5d6}
+@media(max-width:600px){.locked-cover-unlock{font-size:21px}.locked-area{max-height:240px}}

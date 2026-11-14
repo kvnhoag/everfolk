@@ -1,5 +1,7 @@
 import { buildEvidence } from "../../chain/evidence.ts";
 import { buildNpcWorld } from "../../chain/npc-world.ts";
+import { buildWeaveWorld } from "../../chain/weave-world.ts";
+import { lives11World } from "../../worlds/demo/wsl-world-packs.mjs";
 import { worldForVersion } from "../../chain/worlds.ts";
 import type { WorldPack } from "../../src/types.ts";
 import rankedWorld from "../../worlds/ranked/alexandria-ranked-1.json" with { type: "json" };
@@ -12,6 +14,11 @@ import { createEvidenceSigner, type EvidenceSigner } from "./signer.ts";
 import { createServerSignerVerifier, VerificationUnavailableError } from "./verifier.ts";
 
 const signerCache = new Map<string, Promise<EvidenceSigner>>();
+let weave: WorldPack | undefined;
+/** Built once per server instance: the Weave world is the current free-play pack plus the on-chain deeds. */
+function weaveWorld(): WorldPack {
+  return weave ??= buildWeaveWorld(lives11World as unknown as WorldPack);
+}
 
 function cachedSigner(secretHex: string): Promise<EvidenceSigner> {
   let signer = signerCache.get(secretHex);
@@ -38,6 +45,7 @@ export function defaultRankedDependencies(): RankedDependencies {
           demoWorld as unknown as WorldPack,
           legacyDemoWorld as unknown as WorldPack,
           buildNpcWorld(lives8World as unknown as WorldPack),
+          weaveWorld(),
         ),
         verifyNpcSession: (life, save) => {
           const service = env.NPC_RANKED ?? configuredNpcRankedService(env, {

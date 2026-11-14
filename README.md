@@ -13,7 +13,7 @@
   <a href="https://everfolk.life/test/weave/granary"><img src="https://img.shields.io/badge/WEAVE_MODE-TRY_DEMO-9b553e?style=for-the-badge" alt="Try Weave Mode Demo"></a>
   <a href="https://everfolk.life/#market"><img src="https://img.shields.io/badge/NFT_MARKET-RHAKOTIS_BAZAAR-263b43?style=for-the-badge" alt="Rhakotis Bazaar NFT Market"></a>
   <a href="https://everfolk.life/skills"><img src="https://img.shields.io/badge/SKILL_ATLAS-74_NODES-3a6b65?style=for-the-badge" alt="74-Node Skill Atlas"></a>
-  <a href="https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet"><img src="https://img.shields.io/badge/NEAR_TESTNET-EXPLORER-1d3534?style=for-the-badge&logo=near&logoColor=e7e0c9" alt="NEAR Testnet Explorer"></a>
+  <a href="https://testnet.nearblocks.io/address/everfolk-cards-11140224.testnet"><img src="https://img.shields.io/badge/NEAR_TESTNET-EXPLORER-1d3534?style=for-the-badge&logo=near&logoColor=e7e0c9" alt="NEAR Testnet Explorer"></a>
 </p>
 
 <p>
@@ -126,38 +126,38 @@ In **Free Play**, every life runs locally from a seed and command log with zero 
 
 ## NFTs & Historical Collectibles
 
-### Historical Figures (`5` Copies per Figure &middot; `5%` Qualified Drop Rate)
+### Historical Figures (Earned on Their Paths &middot; Legendary 10 / Epic 25 Copies)
 
-Qualifying for a historical figure requires sustained, multi-decade specialization calibrated across seeded simulations (~20–30% pass rate on deliberate runs; ~0% on unfocused runs). Meeting the criteria grants eligibility — final mint drops use a **5% (`500 bps`)** on-chain roll on the main contract until the `5`-copy supply cap is filled.
+A figure's card is never dropped by chance. The life must meet the figure within its historical window, climb the contribution ladder, and complete the figure's separately assessed capstone (`design/figure-paths.md`). Each card design is limited on chain: Legendary 10 copies, Epic 25.
 
 <table>
   <tr>
     <td width="25%" align="center" valign="top">
-      <img src="public/assets/figures/alexander.png" alt="Alexander the Great NFT Card" width="180"><br>
+      <img src="public/assets/cards/collection-v14/alexander-parent-thumb.webp" alt="Alexander the Great NFT Card" width="180"><br>
       <b>Alexander the Great</b><br>
-      <sub><code>alexander</code> &middot; Supply Cap <b>5</b></sub><br><br>
-      <sub><b>Path (Ranked):</b> <code>royal-household</code> origin (1/100), <code>general</code> by age 32, <code>warfare &ge; 70</code>, <code>oratory &ge; 50</code>, military prestige.</sub><br>
+      <sub><code>alexander</code> &middot; Legendary &middot; 10 copies</sub><br><br>
+      <sub><b>Path:</b> Meet him in Egypt 332–331 BCE, contribute to campaign logistics, then win the one-shot decisive campaign before 323 BCE; a lost campaign earns no figure card.</sub><br>
       <sub><b>Deeds:</b> <code>alexander.levy</code> &middot; <code>alexander.found</code></sub>
     </td>
     <td width="25%" align="center" valign="top">
-      <img src="public/assets/figures/aristotle.png" alt="Aristotle NFT Card" width="180"><br>
+      <img src="public/assets/cards/collection-v14/aristotle-parent-thumb.webp" alt="Aristotle NFT Card" width="180"><br>
       <b>Aristotle</b><br>
-      <sub><code>aristotle</code> &middot; Supply Cap <b>5</b></sub><br><br>
-      <sub><b>Path:</b> Age 30+, <code>philosophy-tutor</code> or <code>court-adviser</code>, <code>literacy &ge; 76</code>, <code>philosophy &ge; 76</code>, <code>oratory &ge; 50</code>, <code>knowledge &ge; 60</code>.</sub><br>
+      <sub><code>aristotle</code> &middot; Legendary &middot; 10 copies</sub><br><br>
+      <sub><b>Path:</b> Join the Lyceum (335–323 BCE), contribute independent research, then complete an independently checked body of inquiry and teaching.</sub><br>
       <sub><b>Deeds:</b> <code>aristotle.lyceum</code> &middot; <code>aristotle.tutor-court</code></sub>
     </td>
     <td width="25%" align="center" valign="top">
-      <img src="public/assets/figures/euclid.png" alt="Euclid the Geometer NFT Card" width="180"><br>
+      <img src="public/assets/cards/collection-v14/euclid-parent-thumb.webp" alt="Euclid the Geometer NFT Card" width="180"><br>
       <b>Euclid</b><br>
-      <sub><code>euclid</code> &middot; Supply Cap <b>5</b> (<b>3/5 Live</b>)</sub><br><br>
-      <sub><b>Path:</b> Age 25+, <code>sky-table-calculator</code> / <code>patron-supported-reader</code> / <code>philosophy-tutor</code>, <code>reckoning &ge; 80</code>, <code>literacy &ge; 70</code>.</sub><br>
+      <sub><code>euclid</code> &middot; Legendary &middot; 10 copies</sub><br><br>
+      <sub><b>Path:</b> Join the geometrical teaching circle in Alexandria (from about 300 BCE), check and organise proofs, then complete a reviewed deductive collection.</sub><br>
       <sub><b>Deeds:</b> <code>euclid.school</code> &middot; <code>euclid.museum</code></sub>
     </td>
     <td width="25%" align="center" valign="top">
-      <img src="public/assets/figures/cleomenes.png" alt="Cleomenes of Naucratis NFT Card" width="180"><br>
+      <img src="public/assets/cards/collection-v14/cleomenes-parent-thumb.webp" alt="Cleomenes of Naucratis NFT Card" width="180"><br>
       <b>Cleomenes</b><br>
-      <sub><code>cleomenes</code> &middot; Supply Cap <b>5</b></sub><br><br>
-      <sub><b>Path:</b> Age 30+, <code>court-adviser</code> or <code>shopkeeper</code>, <code>reckoning &ge; 80</code>, <code>literacy &ge; 50</code>, <code>wealth &ge; 90</code>, commerce prestige.</sub><br>
+      <sub><code>cleomenes</code> &middot; Epic &middot; 25 copies</sub><br><br>
+      <sub><b>Path:</b> Work in revenue administration (332–323 BCE): accounts, grain delivery and oversight, then an audited grain and revenue programme.</sub><br>
       <sub><b>Deeds:</b> <code>cleomenes.corner-grain</code> &middot; <code>cleomenes.granaries</code></sub>
     </td>
   </tr>
@@ -167,9 +167,15 @@ Qualifying for a historical figure requires sustained, multi-decade specializati
   <img src="assets/readme/historical-figures.png" alt="Live NEAR Testnet Historical Figures Registry showing Euclid 3/5 Minted" width="92%">
 </p>
 
-### Citizen NFTs, Career Groups & Stage Albums
+### Earned Cards, Career Groups & Deeds
 
-Beyond the 4 legendary figures, every ranked life mints into a **Citizen NFT** across **7 career groups** and **8 on-chain draw categories**, plus milestone **Stage Albums** captured at youth, adulthood, and later life:
+NFTs are **earned, never rolled** (`chain/earned-cards.ts`, `design/figure-paths.md`). A Weave life mints only the v14 cards it earned on a historical figure's path:
+
+- **Figure card:** the figure's own card, for completing its contribution ladder and the separately assessed capstone. Alexander, Aristotle, Euclid, Lysippos and Menander are Legendary. Demetrius, Ptolemy and Zeno reach Legendary only through a one-shot promotion (Rhodes captured in alternate history, the dynasty founded, an independent Stoa). The rest stay Epic.
+- **Contributor card:** the player's own rank on that path (e.g. *Campaign Soldier* → *Trusted Commander*), in the played character's recorded sex. It is Epic at most, and Rare at most below an Epic figure.
+- **No figure, no card:** a person of the city who followed no figure earns no NFT. Life-stage NFTs are off.
+
+Every minted NFT names its card on chain (`card_id`, title, absolute image, serial such as `003/025`, attributes). Its **deed** is chosen by career group and drives the on-chain draw categories:
 
 | Career Group | Draw Category | Selectable On-Chain Deeds (`chain/catalog/contract-catalog.json`) |
 |---|---|---|
@@ -191,7 +197,8 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
 
 | Deployment | Account ID | Explorer | Purpose &amp; Live Rules |
 |---|---|---|---|
-| **Primary Live Contract** | `everfolk-albums-11121956.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet) | Active production testnet contract supporting **Booster Packs**, **Stage Albums**, `5%` figure drop, and full source royalty graph (`alexandria-ranked-1`, `alexandria-demo-2`). |
+| **Primary Live Contract** | `everfolk-cards-11140224.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-cards-11140224.testnet) | Active testnet contract: **earned cards only**. Weave mode plays `alexandria-weave-1` (the free-play figure-path world); the verifier signs the v14 cards a life earned on a historical figure's path, and the pack holds exactly those. Free pack opening, pay at mint (`mint_terms.pack_version` 2); each NFT carries its card's title, image, serial (`edition_supply`) and attributes; per-card limits Legendary 10, Epic 25, Rare 100. Worlds: `alexandria-weave-1`, `alexandria-npc-1`. |
+| **Previous Contract** | `everfolk-albums-11121956.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet) | Pay-at-opening packs without rarity caps. Existing tokens remain readable on-chain. |
 | **Legacy v1 Contract** | `everfolk-lives-11101338.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-lives-11101338.testnet) | Initial v1 deployment (`1 NEAR` mint fee, `alexandria-ranked-1`, pre-stage-albums). Existing tokens remain readable on-chain. |
 | **Rehearsal / Demo Contract** | `demo.genesis-1794297139-6.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/demo.genesis-1794297139-6.testnet) | Isolated demonstration deployment (`100%` qualified figure drop, `0` nobody draw weight, `0` abandon cooldown) used for walkthrough recording. |
 
@@ -205,16 +212,15 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
   <tr>
     <td width="50%" valign="top">
 
-**Fee &amp; Royalty Schedule (`everfolk-albums-11121956.testnet`)**
+**Fee &amp; Royalty Schedule (`everfolk-cards-11140224.testnet`)**
 
 | Parameter | Value | Description |
 |---|---|---|
-| `mint_fee` | `0.001 NEAR` | Minting &amp; booster pack settlement (`10^21` yoctoNEAR) |
-| Stage Album Fee | `0.002 / 0.01 NEAR` | Generic stage record vs. historical figure stage stamp |
+| `mint_fee` | `0.001 NEAR` | Paid when the chosen pack card is minted; opening a pack is free (`10^21` yoctoNEAR) |
+| Card limits | `10 / 25 / 100` | Legendary / Epic / Rare copies per card design; Common and Uncommon unlimited; an earned card whose design is sold out cannot be minted |
 | `source_mint_share_bps` | `5000` (`50%`) | Mint fee share distributed by impact to upstream sources |
 | `royalty_sources_bps` | `500` (`5%`) | Secondary sale royalty paid proportionally to sources |
 | `royalty_treasury_bps` | `500` (`5%`) | Secondary sale royalty routed to protocol treasury (`10%` total) |
-| `drop_rate_bps` | `500` (`5%`) | Figure drop chance on eligible lives (cap `5` per figure) |
 | `nobody_weight_bps` | `5000` (`50%`) | Baseline draw weight allocated to uninfluenced turns |
 | `abandon_cooldown_ms` | `600000` (`10 min`) | Cooldown after abandoning an active life |
 
@@ -225,13 +231,11 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
 
 | Constraint | Value | Notes |
 |---|---|---|
-| `mint_life` / `retry_mint` Gas | `200 Tgas` | Includes dedicated `150 Tgas` private resolver receipt |
-| `open_mint_pack` Gas | `150 Tgas` | Commits verified pack outcomes before reveal choice |
+| `open_mint_pack` Gas | `150 Tgas` | Holds the earned cards before the reveal choice |
 | `draw_npc` Gas | `100 Tgas` | Samples Affection-weighted token from category pool |
 | Per-Life Draw / Checkpoint Cap | `128` / `128` | Max recorded NPC draws and 5-year checkpoints |
 | Pool / Source Cap | `1000` / `64` | Max pooled NPCs per category; max upstream sources per NFT |
 | Rarity Impact Multiplier | `1.0x` – `3.0x` | Common `10000`, Uncommon `12500`, Rare `15000`, Epic `20000`, Legendary `30000` bps |
-| Figure Supply Cap | `5` per figure | Checked atomically inside resolver to prevent races |
 
   </td>
   </tr>
@@ -245,11 +249,10 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
 | Area | Methods |
 |---|---|
 | **Lives** | `start_life`, `abandon_life`, `draw_npc`, `checkpoint`, `get_life`, `active_life_of` |
-| **Packs &amp; Mint** | `open_mint_pack` (payable), `choose_mint_slot`, `mint_life` (payable), `retry_mint` (payable), `mint_result`, `set_action`, `figure_supply` |
-| **Stage Albums** | `mint_stage_record` (payable), `stage_mint_quote` |
+| **Packs &amp; Mint** | `open_mint_pack` (earned cards only), `choose_mint_slot` (payable), `mint_result`, `set_action`, `edition_supply`, `rarity_supply`, `figure_supply` |
 | **Earnings &amp; Graph** | `withdraw`, `balance_of`, `sources_of`, `children_of`, `token_stats` |
 | **Market (`NEP-199`)** | `list`, `unlist`, `buy` (payable), `listing`, `listings`, `nft_payout`, `nft_transfer_payout` |
-| **Pools &amp; Admin** | `active_pool`, `figure_copies`, `set_verifier_keys`, `set_catalog`, `set_params`, `set_world_versions` |
+| **Pools &amp; Admin** | `active_pool`, `figure_copies`, `set_verifier_keys`, `set_catalog`, `set_card_art`, `set_params`, `set_world_versions` |
 
 #### Dual Authentication (`Weave Mode`)
 

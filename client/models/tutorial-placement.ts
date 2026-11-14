@@ -69,17 +69,29 @@ function candidates(target: Rect, card: Size, viewport: Size): CardPosition[] {
 }
 
 /**
- * Places the card beside the target without covering it when there is room (below, above, right, left),
- * otherwise in the bottom-right corner. Without a target it goes to `fallback`. The card always stays fully on screen.
+ * Places the card beside the target without covering it when there is room (below, above, right, left, preferring the
+ * side that covers the fewest of the page's controls in `avoid`), otherwise in the bottom-right corner. Without a target it goes to `fallback`. The card always stays fully on screen.
  */
-export function placeTutorialCard(target: Rect | null, card: Size, viewport: Size, fallback: "center" | "corner" = "center"): CardPosition {
+/** How much of the page's controls a card at `position` would cover. */
+function coveredArea(position: CardPosition, card: Size, avoid: readonly Rect[]): number {
+  const box = { top: position.top, left: position.left, width: card.width, height: card.height };
+  return avoid.reduce((sum, rect) => {
+    const overlap = intersectRect(box, rect);
+    return sum + (overlap ? overlap.width * overlap.height : 0);
+  }, 0);
+}
+
+export function placeTutorialCard(target: Rect | null, card: Size, viewport: Size, fallback: "center" | "corner" = "center", avoid: readonly Rect[] = []): CardPosition {
   const maxLeft = Math.max(0, viewport.width - card.width);
   const maxTop = Math.max(0, viewport.height - card.height);
   const corner: CardPosition = { top: clamp(viewport.height - card.height - EDGE, 0, maxTop), left: clamp(viewport.width - card.width - EDGE, 0, maxLeft), placement: "corner" };
   if (!target && fallback === "corner") return corner;
   if (!target) return { top: clamp((viewport.height - card.height) / 2, 0, maxTop), left: clamp((viewport.width - card.width) / 2, 0, maxLeft), placement: "center" };
-  const [best] = candidates(target, card, viewport);
-  return best ? { ...best, top: clamp(best.top, 0, maxTop), left: clamp(best.left, 0, maxLeft) } : corner;
+  const fitting = candidates(target, card, viewport).map(best => ({ ...best, top: clamp(best.top, 0, maxTop), left: clamp(best.left, 0, maxLeft) }));
+  if (fitting.length === 0) return corner;
+  if (avoid.length === 0) return fitting[0];
+  // Of the places beside the target, the one covering the fewest buttons wins; ties keep the usual order.
+  return fitting.reduce((best, next) => coveredArea(next, card, avoid) < coveredArea(best, card, avoid) ? next : best);
 }
 
 export interface ScrollPlan { block: "center" | "start"; marginTop: number }

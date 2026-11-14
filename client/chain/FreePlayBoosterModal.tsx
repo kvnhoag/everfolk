@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { createFreePlayBooster, type FreePlayBoosterSession } from "../models/freeplay-booster.ts";
-import { portraitSource } from "../models/life-background.ts";
+import { playerPortraitState } from "../models/portrait-state.ts";
 import { legacyLifeKey } from "../storage/legacy-store.ts";
 import { readBoosterCollection, resolveBoosterPack } from "../storage/booster-collection.ts";
 import type { BoosterCollectionPack, BoosterSceneOptions } from "../types/booster.ts";
-import { GROUP_TITLE, figureName, actionName } from "./chain-copy.ts";
-import { boosterArtwork } from "./nft-card-view.ts";
+import { freePlayCardView } from "./nft-card-view.ts";
 import BoosterOpening from "../components/BoosterOpening.tsx";
 import "./chain.css";
 import "../styles/booster-opening.css";
@@ -39,12 +38,10 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
 
   const options = useMemo<BoosterSceneOptions | null>(() => {
     if (!session) return null;
-    const cards = session.pack.cards.map(card => ({
-      name: card.figure_id ? figureName(card.figure_id) : GROUP_TITLE[session.evidence.career_group],
-      rarity: card.rarity,
-      ...boosterArtwork(card.figure_id, card.rarity, card.figure_id ? undefined : portraitSource({ age: life.age, seed: life.seed, originId: life.originId, sex: life.character?.sex, avatarVariant: life.character?.avatarVariant }), life.seed),
-      sub: actionName(card.action_id),
-    }));
+    // Each card shows the v14 card a Weave mint would record, in this life's own sex (client/chain/nft-card-view.ts).
+    // People of the city keep their ordinary-v3 NFT portrait, not the in-game Hi-Bit one.
+    const ownPortrait = playerPortraitState(world, life, { portraitSet: "ordinary-v3" }).src;
+    const cards = session.pack.cards.map(card => freePlayCardView(card, session.evidence.career_group, life, ownPortrait));
     const resolve = (selected: number[]) => {
       const collection = resolveBoosterPack(window.localStorage, {
         id: session.pack.evidence_hash, lifeKey: legacyLifeKey(life), characterName: life.character?.name ?? "A life in Alexandria", cards, selected,
@@ -53,12 +50,12 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
       return collection.reduce((sum, pack) => sum + pack.selected.length, 0);
     };
     return { cards, legacyCount, reviewIndices: kept?.selected, onSave: resolve, onSkip: () => { resolve([]); onClose(); }, onClose };
-  }, [session, life, legacyCount, kept, onClose]);
+  }, [session, life, world, legacyCount, kept, onClose]);
 
   if (!open) return null;
   return <dialog ref={dialogRef} className="chain-screen freeplay-booster-screen" aria-label="Your life’s booster pack" onCancel={event => { event.preventDefault(); onClose(); }}>
     {error ? <section className="freeplay-booster-message"><p role="alert">{error}</p><button onClick={onClose}>Back to memorial</button></section>
-      : session && !session.pack.cards.length ? <section className="freeplay-booster-message"><h1>No pack this time</h1><p>This life ended at age {session.evidence.death_age}, before adulthood. Lives that reach age 18 open 1 to 5 cards, and titles add more.</p><a href="#weave" onClick={onClose}>Play Weave Mode to get real NFTs →</a><button onClick={onClose}>Back to memorial</button></section>
+      : session && !session.pack.cards.length ? <section className="freeplay-booster-message"><h1>No pack this time</h1><p>Cards are earned, not drawn. This life did not contribute on a historical figure’s path. Earn a contributor title with a figure, or complete their defining work, to open a pack of those cards.</p><a href="#weave" onClick={onClose}>Play Weave Mode to get real NFTs →</a><button onClick={onClose}>Back to memorial</button></section>
       : kept && !kept.selected.length ? <section className="freeplay-booster-message"><h1>This pack was skipped</h1><p>No cards were added to your Legacy. Complete another life to discover a new pack.</p><button onClick={onClose}>Back to memorial</button></section>
       : options ? <BoosterOpening key={session!.pack.evidence_hash} options={options} />
       : <section className="freeplay-booster-message" role="status">Preparing your life’s legacy pack…<br /><button onClick={onClose}>Back to memorial</button></section>}

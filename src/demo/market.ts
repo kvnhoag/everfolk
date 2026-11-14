@@ -359,6 +359,56 @@ export function buyForHousehold(ctx: DemoContext, quantity: number): number {
   return bought;
 }
 
+/** What a household with no money for food sells, in order: cloth and fibre first, then valuables, animals last. */
+const FOOD_SALE_ORDER: readonly TradeItem[] = ["linen", "flax", "silk", "silver", "gold", "donkey", "ox"];
+
+/** Drachmas the merchant pays for `quantity` of `item` now. */
+function saleValue(def: DemoDefinition, demo: DemoState, item: TradeItem, quantity: number): number {
+  return def.market.depth ? orderValue(def, demo, item, "sell", quantity).total : quantity * demo.town.prices[item].buy;
+}
+
+/** The smallest quantity (at most `held`) whose sale raises `needed`, cut to what the merchant can pay. */
+function quantityToRaise(def: DemoDefinition, demo: DemoState, item: TradeItem, held: number, needed: number): number {
+  let low = 1, high = held;
+  while (low < high) {
+    const middle = Math.floor((low + high) / 2);
+    if (saleValue(def, demo, item, middle) >= needed) high = middle; else low = middle + 1;
+  }
+  let quantity = low;
+  while (quantity > 0 && saleValue(def, demo, item, quantity) > demo.town.merchant.cash) quantity -= 1;
+  return quantity;
+}
+
+/**
+ * When the purse cannot pay for the grain the household lacks, it sells what it owns to the merchant: only enough to
+ * pay for that grain, never more than the merchant can pay. Returns the drachmas raised. Not the yearly visit.
+ */
+export function sellForFood(ctx: DemoContext, grainShort: number): number {
+  const def = ctx.def, demo = ctx.demo, life = ctx.life as LifeStateWithDemo;
+  const units = Math.min(grainShort, demo.town.merchant.grain);
+  if (units <= 0) return 0;
+  const cost = def.market.depth ? orderValue(def, demo, "grain", "buy", units).total : units * demo.town.prices.grain.sell;
+  let needed = cost - playerCash(life), raised = 0;
+  const sold: string[] = [];
+  for (const item of FOOD_SALE_ORDER) {
+    if (needed <= 0) break;
+    const held = householdHolding(demo, item);
+    if (held <= 0) continue;
+    const quantity = quantityToRaise(def, demo, item, held, needed);
+    if (quantity <= 0) continue;
+    const value = saleValue(def, demo, item, quantity);
+    if (value <= 0) continue;
+    moveItem(demo, item, -quantity);
+    demo.town.merchant.cash -= value;
+    ctx.apply([{ type: "cash", delta: value }]);
+    if (def.market.depth) addPressure(demo, item, "sell", quantity);
+    sold.push(`${quantity} ${label(item, quantity)}`);
+    needed -= value; raised += value;
+  }
+  if (raised > 0) ctx.journal("household-sold-for-food", `With no money left for food, the household sells ${sold.join(", ")} to the merchant for ${raised} ${CURRENCY} to buy grain.`);
+  return raised;
+}
+
 /** Depth worlds: the most the household can afford of `quantity` as the price rises, bought in one order. */
 function buyForHouseholdAtDepth(ctx: DemoContext, quantity: number): number {
   const demo = ctx.demo, cash = playerCash(ctx.life as LifeStateWithDemo);

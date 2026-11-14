@@ -56,7 +56,8 @@ test("dating reveals the generated person with a matching portrait and household
   const html = renderToStaticMarkup(createElement(CharacterPanel, { life, world: engine.world, initialSection: "relationships", onActivity() {} }));
   assert.match(html, />Relationships<\/button>/);
   assert.match(html, /Love interest: Kleopatra/);
-  assert.match(html, /portraits\/ordinary-v3\/ef-p-f03-adult-maritime-v3.png/);
+  assert.match(html, /portraits\/concept1-v4\/citizen-mother-f01\.png/);
+  assert.match(html, /data-portrait-key="f03:adult:maritime"/);
   assert.doesNotMatch(html, /\{person:|<h4>A harbor acquaintance<\/h4>/);
   const household = renderToStaticMarkup(createElement(HouseholdSummary, { life, world: engine.world, onOpenCharacter() {} }));
   assert.match(household, /Kleopatra/);

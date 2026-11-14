@@ -63,7 +63,7 @@ export function buildCapabilityLayout(nodes: readonly CapabilityNode[] = CAPABIL
 }
 
 /** Arrow keys follow real dependencies before using a nearby lane. */
-export function nextCapabilityNode(layout: CapabilityLayout, currentId: string, key: string): string | null {
+export function nextCapabilityNode(layout: { nodes: readonly PositionedCapability[] }, currentId: string, key: string): string | null {
   const current = layout.nodes.find(item => item.node.id === currentId);
   if (!current) return layout.nodes[0]?.node.id ?? null;
   if (key === "Home") return layout.nodes.find(item => item.node.branch === current.node.branch)?.node.id ?? null;

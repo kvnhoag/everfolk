@@ -83,3 +83,58 @@ span.section-help.is-edge{top:-10px;right:10px}
 /* The tooltip is a top-layer popover, placed by script so it stays on screen and is never clipped. */
 .section-help-tip{position:fixed;inset:auto;top:0;left:0;z-index:30;box-sizing:border-box;width:max-content;max-width:min(260px,calc(100vw - 16px));margin:0;padding:8px 10px;overflow:visible;border:1px solid #b39c68;border-top:3px solid var(--tour-teal);border-radius:3px;background:var(--tour-papyrus-light);color:var(--tour-ink);font:500 12px/1.45 var(--ef-font-body);letter-spacing:normal;text-align:left;text-transform:none;white-space:normal;pointer-events:none;visibility:hidden;opacity:0;transition:opacity .12s}
 .section-help-tip[data-open]{visibility:visible;opacity:1}
+
+/* The tips switch at the foot of every card: off, new sections glow instead of opening a card. */
+.everfolk-tutorial-layer .tutorial-card-toggle{display:flex;align-items:flex-start;gap:9px;margin:14px 0 0;padding:10px 0 0;border-top:1px dashed #c8b07c;font:500 12.5px/1.35 var(--ef-font-body);color:var(--tour-ink);cursor:pointer}
+.everfolk-tutorial-layer .tutorial-card-toggle input{appearance:none;flex:none;position:relative;width:30px;height:17px;margin:1px 0 0;border:1px solid var(--tour-teal);border-radius:9px;background:#e7d8b4;cursor:pointer;transition:background-color .15s}
+.everfolk-tutorial-layer .tutorial-card-toggle input::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:var(--tour-teal);transition:transform .15s}
+.everfolk-tutorial-layer .tutorial-card-toggle input:checked{background:var(--tour-teal)}
+.everfolk-tutorial-layer .tutorial-card-toggle input:checked::after{background:var(--tour-gold);transform:translateX(13px)}
+.everfolk-tutorial-layer .tutorial-card-toggle input:focus-visible{outline:2px solid var(--tour-teal);outline-offset:2px}
+.everfolk-tutorial-layer .tutorial-card-toggle-copy{display:grid;gap:2px}
+.everfolk-tutorial-layer .tutorial-card-toggle-copy small{font-size:11px;color:#6d5a37}
+
+/* A section that just opened (tips off) or needs this year's attention: its border lights up, then fades over
+   about ten seconds. The outline sits just outside the box, so it never covers the section's own text. */
+.section-flash{animation:section-flash var(--section-flash-ms,10s) ease-out both}
+@keyframes section-flash{
+  0%{outline:3px solid #e2a93b;outline-offset:2px;box-shadow:0 0 0 2px #e2a93b66,0 0 22px 4px #e2a93b88}
+  8%{outline:3px solid #f0c060;outline-offset:2px;box-shadow:0 0 0 4px #e2a93b55,0 0 30px 8px #e2a93b77}
+  20%{outline:3px solid #e2a93b;outline-offset:2px;box-shadow:0 0 0 2px #e2a93b55,0 0 20px 4px #e2a93b66}
+  100%{outline:3px solid #e2a93b00;outline-offset:2px;box-shadow:0 0 0 0 #e2a93b00,0 0 0 0 #e2a93b00}
+}
+@media(prefers-reduced-motion:reduce){.section-flash{animation-timing-function:steps(4,end)}}
+
+/* Every "?" sits just inside its section's top-right corner, so a panel that clips its edges never hides it,
+   and its tooltip opens from a badge that is always on screen. Content that reaches that corner leaves room. */
+span.section-help,span.section-help.is-edge,span.section-help.is-inset{top:7px;right:7px;bottom:auto;left:auto}
+.life-year-rail.has-section-help>.life-year-rail-heading{padding-right:34px}
+.life-record-panel.has-section-help>summary{padding-right:40px}
+.aoe-resource-hud.has-section-help>.aoe-resource-bar{padding-right:38px}
+.has-section-help>.demo-market-top{padding-right:32px}
+.yearly-focus.has-section-help>h2{padding-right:32px}
+.life-session-bar.has-section-help{padding-right:40px}
+.life-yearly-action-deck.has-section-help>.life-action-deck-header{padding-right:32px}
+.character-tabs.has-section-help{padding-right:34px}
+.demo-deck-header.has-section-help{padding-right:40px}
+.life-overview.has-section-help>:first-child{padding-right:30px}
+.life-ending-banner.has-section-help{padding-right:40px}
+
+/* While a section is highlighted the rest of the page dims (section-spotlight.ts). Clicks pass through. */
+.section-spotlight{position:fixed;inset:0;z-index:40;width:100vw;height:100vh;pointer-events:none;opacity:0;transition:opacity .25s ease-out}
+@media(prefers-reduced-motion:reduce){.section-spotlight{transition:none}}
+
+/* The header switch shows the tutorial's state at a glance. */
+.tutorial-button-state{display:grid;place-items:center;min-width:34px;height:20px;padding:0 6px;border-radius:10px;font:700 10.5px/1 var(--ef-font-body);letter-spacing:.06em;text-transform:uppercase}
+.tutorial-button.is-on .tutorial-button-state{background:#3f6b4a;color:#f6efd9}
+.tutorial-button.is-off .tutorial-button-state{background:#c9bfae;color:#4b4335}
+.tutorial-button.is-off{opacity:.92}
+
+/* "Look here": the words and arrow that sit on a section whenever the game moves the player's view to it. */
+.focus-callout{position:fixed;z-index:42;max-width:min(360px,calc(100vw - 24px));padding:7px 12px;border:2px solid #f0c24e;border-radius:3px;background:#173b44;color:#fff8e6;
+  font:700 14px/1.3 var(--ef-font-body);box-shadow:0 6px 18px #0008;transform:translate(0,-100%);pointer-events:none;animation:focus-callout-in .25s ease-out}
+.focus-callout::after{content:"";position:absolute;left:18px;top:100%;border:9px solid transparent;border-top-color:#f0c24e}
+.focus-callout.is-below{transform:none}
+.focus-callout.is-below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#f0c24e}
+@keyframes focus-callout-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.focus-callout{animation:none}}

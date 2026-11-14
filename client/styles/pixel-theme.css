@@ -5,7 +5,7 @@ button,input,select,textarea{border-radius:0}
 button{transition:background-color .12s,border-color .12s,color .12s;box-shadow:none}
 button:focus-visible,a:focus-visible{outline:2px solid #41637b;outline-offset:3px}
 .pixel-icon{display:inline-block;flex-shrink:0;vertical-align:middle;overflow:visible}
-.pixel-portrait{display:block;image-rendering:pixelated;image-rendering:crisp-edges;object-fit:contain;filter:none}
+.pixel-portrait{display:block;image-rendering:crisp-edges;image-rendering:pixelated;object-fit:contain;filter:none}
 .site-header{border-bottom:2px solid #cdbb95}
 .brand{font-weight:700;letter-spacing:-.8px}
 .brand-mark{border:2px solid #886447;border-radius:0;background:#edcf91;box-shadow:3px 3px 0 #d6b778}
@@ -38,7 +38,7 @@ button:focus-visible,a:focus-visible{outline:2px solid #41637b;outline-offset:3p
 .pause-content h1,.pause-brand{font-weight:700}
 .pause-continue{background:#41637b;color:#fff2d1}
 .pause-continue:hover{background:#293c58}
-.pause-art img{image-rendering:pixelated;image-rendering:crisp-edges}
+.pause-art img{image-rendering:crisp-edges;image-rendering:pixelated}
 .event-card h3,.year-event h3,.year-review h2{font-family:var(--ef-font-display);font-weight:700}
 /* Match the actual modal classes so their older paper-theme rules cannot win. */
 dialog.detail-dialog,dialog.life-decision-dialog,dialog.birth-roll-popover{border-radius:0;border:2px solid #886447;background:#f7ecd4;color:var(--ink);box-shadow:6px 6px 0 #263b4366;scrollbar-color:#886447 #edcf91;scrollbar-width:thin}
@@ -93,6 +93,6 @@ dialog.detail-dialog :is(input,select,textarea){border-radius:0;border-color:#ba
 .choice-locked,.activity-locked{border-style:dashed}
 .site-footer{border-color:#cdbb95}
 .memorial-scene>img,.life-has-ended .portrait{filter:saturate(.65)}
-img[src^="/assets/pixel/"]{image-rendering:pixelated;image-rendering:crisp-edges}
+img[src^="/assets/pixel/"]{image-rendering:crisp-edges;image-rendering:pixelated}
 @media(max-width:760px){.main-menu h1{font-size:clamp(55px,13.4vw,80px);letter-spacing:-3px}.main-menu-world{font-size:21px}.character-panel h2{font-size:25px}.scene-image.paper-scene .paper-scene-copy h2{font-size:25px}.portrait-frame{height:103px;width:80px}.portrait{width:80px;height:100px}.chapter-heading h1{font-size:35px}}
 @media(prefers-reduced-motion:reduce){button{transition:none}.pixel-scene [data-loop]{animation:none!important}}

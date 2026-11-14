@@ -7,6 +7,7 @@ import { formatNear } from "./near-amount.ts";
 import MintReveal from "./MintReveal.tsx";
 import BoosterOpening from "../components/BoosterOpening.tsx";
 import { packCardView } from "./nft-card-view.ts";
+import { WEAVE_PACK_LABELS } from "../lib/booster/labels.mjs";
 import { mintRevealView } from "./life-report-model.ts";
 import { nextEditionLabel } from "./edition-label.ts";
 import type { LivesContract } from "./types.ts";
@@ -79,12 +80,12 @@ export default function MintPack({
     }
   }
 
-  async function choose() {
-    if (freePlay || selected === null || pack.cards[selected]?.next_edition_number === null) return;
-    setBusy("mint");
-    setError("");
+  /** Mints one card. A lost wallet response is recovered from the chain; any other failure is thrown with a readable message. */
+  async function mintSlot(slot: number): Promise<void> {
+    setSelected(slot);
+    if (pack.cards[slot]?.next_edition_number === null) throw new Error("This card's edition is sold out. Choose another card.");
     try {
-      setResult(await (onChoose ? onChoose(selected) : contract.chooseMintSlot(pack.life_id, selected)));
+      setResult(await (onChoose ? onChoose(slot) : contract.chooseMintSlot(pack.life_id, slot)));
     } catch (cause) {
       const landed = await contract.mintResult(pack.life_id).catch(() => null);
       if (landed) {
@@ -108,11 +109,18 @@ export default function MintPack({
           edition_limit: token.extra.edition_limit,
         });
       } else {
-        setError(errorText(cause, "The mint was not confirmed. Your pack is saved on NEAR; try again."));
+        throw new Error(errorText(cause, "The mint was not confirmed. Your pack is saved on NEAR; try again."));
       }
-    } finally {
-      setBusy(null);
     }
+  }
+
+  async function choose() {
+    if (freePlay || selected === null || pack.cards[selected]?.next_edition_number === null) return;
+    setBusy("mint");
+    setError("");
+    try { await mintSlot(selected); }
+    catch (cause) { setError(cause instanceof Error ? cause.message : "The mint was not confirmed. Your pack is saved on NEAR; try again."); }
+    finally { setBusy(null); }
   }
 
   if (result) {
@@ -142,18 +150,24 @@ export default function MintPack({
             onSave: () => 0,
             onSkip: onClose,
             onClose,
-            onRevealed: () => {
-              setFlippedCards(Object.fromEntries((pack?.cards ?? []).map((_, slot) => [slot, true])));
-              if (!freePlay && (pack?.cards?.length ?? 0) === 1 && pack.cards[0]?.next_edition_number !== null) setSelected(0);
-              setOpened(true);
+            labels: freePlay ? undefined : WEAVE_PACK_LABELS,
+            // Weave packs mint from the scene: click a card, then "Mint with … NEAR" under it.
+            mint: freePlay ? undefined : {
+              label: `Mint with ${formatNear(pack.total_fee)} NEAR`,
+              busyLabel: walletPath ? "Confirm in your wallet…" : "Confirming…",
+              onMint: mintSlot,
             },
+            onRevealed: freePlay ? () => {
+              setFlippedCards(Object.fromEntries((pack?.cards ?? []).map((_, slot) => [slot, true])));
+              setOpened(true);
+            } : undefined,
           }}
         />
         <p className="verified-booster-disclosure">
           {freePlay
             ? "Free Play never mints on NEAR. Play Weave Mode to get real NFTs."
             : walletPath
-              ? "No transaction happens during the reveal. Continue to choose your life NFT."
+              ? "Opening is free. Your wallet asks only when you mint the card you chose."
               : "You’ll confirm your choice first."}
         </p>
       </div>
@@ -309,11 +323,11 @@ export default function MintPack({
 
       {!freePlay && (
         <div className="pack-receipt">
-          <strong>Total paid: {formatNear(pack.total_fee)} NEAR</strong>
+          <strong>Mint fee: {formatNear(pack.total_fee)} NEAR</strong>
           <span>
             {pack.source_share_bps / 100}% to source lives by impact; remainder to the protocol treasury. If no
-            sources shaped this life, the treasury receives the fee. Fees are split when you mint or close this
-            life. {walletPath && "Network gas is separate."}
+            sources shaped this life, the treasury receives the fee. You pay it only when you mint; opening and
+            closing the pack are free. {walletPath && "Network gas is separate."}
           </span>
         </div>
       )}
@@ -373,7 +387,7 @@ export default function MintPack({
           ? "Free Play never mints on NEAR. Start a ranked life in Weave Mode to collect and trade real NFTs."
           : practice
             ? "This practice pack lasts while this page stays open. No NEAR is spent."
-            : `Your pack is saved on NEAR. Return from My lives at any time. ${walletPath ? "Final selection asks for wallet approval with 1 yoctoNEAR, plus network gas." : "You’ll confirm your choice first."}`}
+            : `Your pack is saved on NEAR. Return from My lives at any time. ${walletPath ? `Minting your chosen card pays ${formatNear(pack.total_fee)} NEAR in your wallet, plus network gas.` : "You’ll confirm your choice first."}`}
       </p>
 
       {!practice && !freePlay && (

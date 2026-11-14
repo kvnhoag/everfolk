@@ -5,6 +5,8 @@ export interface BoosterCardView {
   rarity: number;
   art: string;
   sub: string;
+  /** The line under the name on the card frame, e.g. "Historical figure". */
+  role?: string;
   /** Complete approved card face, without a baked example edition number. */
   framedArt?: string;
   /** A recorded serial or an unassigned placeholder; never inferred from a token id. */
@@ -31,4 +33,6 @@ export interface BoosterSceneOptions {
   onReady?(): void;
   /** Verified packs continue to the contract's existing single-card decision UI. */
   onRevealed?(): void;
+  /** Weave packs: clicking a card shows `label` under it; pressing it mints that card. A rejection keeps the pack open. */
+  mint?: { label: string; busyLabel?: string; onMint(index: number): Promise<void> };
 }

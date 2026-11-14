@@ -272,7 +272,7 @@ test("ranked NPC config advertises alexandria-npc-1 availability without breakin
   const rankedCfgRes = await h.rpcFetch("https://everfolk.test/api/ranked/config");
   assert.equal(rankedCfgRes.status, 200);
   const rankedCfg = (await rankedCfgRes.json()) as Record<string, unknown>;
-  assert.equal(rankedCfg.world_version, "alexandria-demo-2");
+  assert.equal(rankedCfg.world_version, "alexandria-weave-1", "Weave mode plays the figure-path world");
 });
 
 test("end-to-end live AI life verifies replay, checks provider right before verify, mints NFT pack & credits sources", async () => {
@@ -329,20 +329,22 @@ test("end-to-end live AI life verifies replay, checks provider right before veri
   assert.equal(attestation.expires_at, h.clockMs + 120_000);
 
   const actionId = NPC_ACTIONS[signed.evidence.career_group].actions[0];
-  // Use MintPack (1-5 cards) or mintLife depending on age at death, testing authoritative NEAR issuance.
-  if (endState.age >= 18) {
-    const pack = await h.contract.openMintPack(life.life_id, signed, actionId);
-    assert.ok(pack.cards.length >= 1 && pack.cards.length <= 5);
-    const mintResult = await rankedSession.chooseMint(0);
-    assert.ok(mintResult.token_id);
-    const mintedToken = await h.contract.token(mintResult.token_id);
-    assert.equal(mintedToken?.owner_id, "player.testnet");
-    assert.equal(h.db && saveStorage.getItem(rankedSaveKey(life.life_id, scope)), null, "Committed mint cleans local save");
-  } else {
-    const mintResult = await rankedSession.mint(signed, actionId);
-    assert.ok(mintResult.token_id);
+  // The live NPC world has historical figure paths, so its evidence signs the cards the life earned (chain/earned-cards.ts).
+  const earned = signed.evidence.earned_cards;
+  assert.ok(Array.isArray(earned), "a figure-path world signs the earned cards, even when there are none");
+  if (!earned.length) {
+    // A person of the city who followed no figure earns no NFT: no pack, and no rolled direct mint.
+    await assert.rejects(h.contract.openMintPack(life.life_id, signed, actionId), /earned no card/);
+    await assert.rejects(rankedSession.mint(signed, actionId), /pack/);
+    return;
   }
-
+  const pack = await h.contract.openMintPack(life.life_id, signed, actionId);
+  assert.deepEqual(pack.cards.map(card => card.card_id), earned.slice(0, 5).map(card => card.card_id));
+  const mintResult = await rankedSession.chooseMint(0);
+  assert.ok(mintResult.token_id);
+  const mintedToken = await h.contract.token(mintResult.token_id);
+  assert.equal(mintedToken?.owner_id, "player.testnet");
+  assert.equal(h.db && saveStorage.getItem(rankedSaveKey(life.life_id, scope)), null, "Committed mint cleans local save");
   const genesisBalanceAfter = BigInt(await h.contract.balanceOf("genesis.testnet"));
   const treasuryBalanceAfter = BigInt(await h.contract.balanceOf("treasury.testnet"));
   assert.ok(treasuryBalanceAfter > treasuryBalanceBefore, "Protocol treasury received reward share");
@@ -446,18 +448,11 @@ test("provider outage at verify returns 503 without tainting, recovers on retry,
   const refreshedSigned = await rankedSession.finish(h.rpcFetch);
   assert.notEqual(refreshedSigned.evidence_hash, firstSigned.evidence_hash);
 
-  // Commit mint once, then verify duplicate mint/pack attempts fail safely.
+  // Earned evidence never mints by a rolled direct mint; a life that earned no card cannot open a pack either.
   const actionId = NPC_ACTIONS[refreshedSigned.evidence.career_group].actions[0];
-  const mintResult = await h.contract.mintLife(life.life_id, refreshedSigned, actionId);
-  assert.ok(mintResult.token_id);
-  await assert.rejects(
-    h.contract.mintLife(life.life_id, refreshedSigned, actionId),
-    /already|minted|no longer in progress/i,
-  );
-  await assert.rejects(
-    h.contract.openMintPack(life.life_id, refreshedSigned, actionId),
-    /already|minted|no longer in progress/i,
-  );
+  assert.deepEqual(refreshedSigned.evidence.earned_cards, [], "this town life followed no historical figure");
+  await assert.rejects(h.contract.mintLife(life.life_id, refreshedSigned, actionId), /pack/);
+  await assert.rejects(h.contract.openMintPack(life.life_id, refreshedSigned, actionId), /earned no card/);
 });
 
 test("mid-life provider failure lets play finish via rule fallback while permanently disqualifying NFT rewards", async () => {

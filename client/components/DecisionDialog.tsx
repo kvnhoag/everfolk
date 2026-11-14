@@ -7,7 +7,12 @@ import ChoiceImpact from "./ChoiceImpact.tsx";
 import { ChoicePreview } from "./CompactSkillPanel.tsx";
 import type { DemoScreen, TownFigureView } from "../demo/screen.ts";
 import PixelPortrait from "./PixelPortrait.tsx";
-import { playerPortraitState, personPortraitState } from "../models/portrait-state.ts";
+import {
+  moneylenderPortraitState,
+  personPortraitState,
+  playerPortraitState,
+  townFigurePortraitState,
+} from "../models/portrait-state.ts";
 import { relationshipLabels } from "../models/relationship-labels.ts";
 import "../styles/decision-dialog.css";
 import "../styles/decision-storybook.css";
@@ -146,12 +151,8 @@ function OpenDecisionDialog({
       ) : involvedTownFigure ? (
         <div className="life-encounter-side is-counterpart">
           <PixelPortrait
-            age={involvedTownFigure.age}
+            portrait={townFigurePortraitState(involvedTownFigure)}
             name={involvedTownFigure.name}
-            sex={involvedTownFigure.sex}
-            originId={involvedTownFigure.originId}
-            avatarVariant={involvedTownFigure.avatarVariant}
-            seed={`town:${involvedTownFigure.role}`}
             className="life-encounter-avatar"
           />
           <div>
@@ -163,12 +164,8 @@ function OpenDecisionDialog({
       ) : isLoanDecision || isLoanOffer ? (
         <div className="life-encounter-side is-counterpart">
           <PixelPortrait
-            age={52}
+            portrait={moneylenderPortraitState(world)}
             name="Syros the Banker"
-            sex="male"
-            originId="merchant-household"
-            avatarVariant={2}
-            seed="town:moneylender"
             className="life-encounter-avatar"
           />
           <div>
@@ -196,7 +193,7 @@ function OpenDecisionDialog({
             event.preventDefault();
             previewStack.current?.querySelector<HTMLElement>(".is-active .compact-skills")?.focus();
           }
-        }} onClick={() => onChoose(choice.id)}><span className="life-option-number" aria-hidden="true">{index + 1}</span><span><strong>{displayProse(choice.text)}</strong><ChoiceImpact choice={choice} life={life} world={world} /></span></button>)}</div>
+        }} onClick={() => onChoose(choice.id)}><span className="life-option-number" aria-hidden="true">{index + 1}</span><span><strong>{displayProse(choice.text)}</strong><ChoiceImpact choice={choice} life={life} world={world} showSkillChanges /></span></button>)}</div>
         {choices.length > 0 && <div ref={previewStack} id={`${id}-choice-preview`} className="life-choice-preview-stack" onKeyDown={event => {
           if (event.key === "ArrowLeft") {
             event.preventDefault();

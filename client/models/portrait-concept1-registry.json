@@ -1,0 +1,1241 @@
+{
+  "schemaVersion": 1,
+  "libraryId": "everfolk-concept1-portraits-v4",
+  "assetVersion": "c1-v4",
+  "publicPrefix": "/assets/portraits/concept1-v4/",
+  "dimensions": {
+    "width": 384,
+    "height": 480
+  },
+  "nativeGrid": {
+    "width": 64,
+    "height": 80,
+    "scale": 6
+  },
+  "identities": [
+    {
+      "id": "m01",
+      "sex": "male",
+      "avatarVariant": 0
+    },
+    {
+      "id": "m02",
+      "sex": "male",
+      "avatarVariant": 1
+    },
+    {
+      "id": "m03",
+      "sex": "male",
+      "avatarVariant": 2
+    },
+    {
+      "id": "f01",
+      "sex": "female",
+      "avatarVariant": 0
+    },
+    {
+      "id": "f02",
+      "sex": "female",
+      "avatarVariant": 1
+    },
+    {
+      "id": "f03",
+      "sex": "female",
+      "avatarVariant": 2
+    }
+  ],
+  "defaultWardrobes": {
+    "infant": "infant",
+    "child": "child",
+    "youth": "youth",
+    "adult": "everyday",
+    "middle": "everyday",
+    "elder": "everyday"
+  },
+  "stageWardrobes": {
+    "infant": [
+      "infant"
+    ],
+    "child": [
+      "child",
+      "work"
+    ],
+    "youth": [
+      "youth",
+      "work",
+      "maritime",
+      "scholarly",
+      "performance",
+      "aristocrat",
+      "royalty"
+    ],
+    "adult": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance",
+      "aristocrat",
+      "royalty",
+      "banker"
+    ],
+    "middle": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance",
+      "aristocrat",
+      "royalty",
+      "banker"
+    ],
+    "elder": [
+      "everyday",
+      "work",
+      "maritime",
+      "commerce",
+      "scholarly",
+      "military",
+      "elite",
+      "performance",
+      "aristocrat",
+      "royalty",
+      "banker"
+    ]
+  },
+  "jobs": [
+    {
+      "id": "apprentice",
+      "title": "Workshop apprentice",
+      "wardrobeId": "work",
+      "minAge": 12
+    },
+    {
+      "id": "porter",
+      "title": "Quay porter",
+      "wardrobeId": "maritime",
+      "minAge": 14
+    },
+    {
+      "id": "potter",
+      "title": "Potter",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "clerk",
+      "title": "Merchant's clerk",
+      "wardrobeId": "scholarly",
+      "minAge": 14
+    },
+    {
+      "id": "copyist",
+      "title": "Workshop copyist",
+      "wardrobeId": "scholarly",
+      "minAge": 14
+    },
+    {
+      "id": "sailor",
+      "title": "Merchant sailor",
+      "wardrobeId": "maritime",
+      "minAge": 16
+    },
+    {
+      "id": "shopkeeper",
+      "title": "Small-shop keeper",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "ceramic-decorator",
+      "title": "Ceramic decorator",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "wood-carver",
+      "title": "Wood carver",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "sculptor",
+      "title": "Sculptor",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "philosophy-tutor",
+      "title": "Philosophy tutor",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "sky-table-calculator",
+      "title": "Sky-table calculator",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "astrologer",
+      "title": "Sky-omen interpreter",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "soldier",
+      "title": "Royal army soldier",
+      "wardrobeId": "military",
+      "minAge": 18
+    },
+    {
+      "id": "officer",
+      "title": "Royal army officer",
+      "wardrobeId": "military",
+      "minAge": 22
+    },
+    {
+      "id": "general",
+      "title": "Royal army general",
+      "wardrobeId": "military",
+      "minAge": 28
+    },
+    {
+      "id": "court-adviser",
+      "title": "Royal court adviser",
+      "wardrobeId": "elite",
+      "minAge": 24
+    },
+    {
+      "id": "patron-supported-reader",
+      "title": "Patron-supported reader",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "pottery-workshop-lead",
+      "title": "Pottery workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "carving-workshop-lead",
+      "title": "Wood-carving workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "sculpture-workshop-lead",
+      "title": "Sculpture workshop lead",
+      "wardrobeId": "work",
+      "minAge": 20
+    },
+    {
+      "id": "performer",
+      "title": "Hired musician",
+      "wardrobeId": "performance",
+      "minAge": 16
+    },
+    {
+      "id": "farmer",
+      "title": "Independent farmer",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "weaver",
+      "title": "Independent weaver",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "writer",
+      "title": "Independent writer",
+      "wardrobeId": "scholarly",
+      "minAge": 16
+    },
+    {
+      "id": "boatbuilder",
+      "title": "Boat-fittings maker",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "trader",
+      "title": "Market trader",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "baker",
+      "title": "Independent baker",
+      "wardrobeId": "work",
+      "minAge": 14
+    },
+    {
+      "id": "fisher",
+      "title": "Independent fisher",
+      "wardrobeId": "maritime",
+      "minAge": 14
+    },
+    {
+      "id": "household-worker",
+      "title": "Household worker",
+      "wardrobeId": "everyday",
+      "minAge": 14
+    },
+    {
+      "id": "merchant",
+      "title": "Merchant",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "estate-steward",
+      "title": "Estate steward",
+      "wardrobeId": "elite",
+      "minAge": 18
+    },
+    {
+      "id": "quartermaster",
+      "title": "Quartermaster",
+      "wardrobeId": "military",
+      "minAge": 18
+    },
+    {
+      "id": "farmhand",
+      "title": "Farmhand",
+      "wardrobeId": "work",
+      "minAge": 12
+    },
+    {
+      "id": "tenant-farmer",
+      "title": "Tenant farmer",
+      "wardrobeId": "work",
+      "minAge": 16
+    },
+    {
+      "id": "master-cultivator",
+      "title": "Master cultivator",
+      "wardrobeId": "work",
+      "minAge": 18
+    },
+    {
+      "id": "master-household-farmer",
+      "title": "Master household farmer",
+      "wardrobeId": "work",
+      "minAge": 18
+    },
+    {
+      "id": "tailor",
+      "title": "Tailor",
+      "wardrobeId": "work",
+      "minAge": 18
+    },
+    {
+      "id": "master-tailor",
+      "title": "Master tailor",
+      "wardrobeId": "work",
+      "minAge": 18
+    },
+    {
+      "id": "master-potter",
+      "title": "Master potter",
+      "wardrobeId": "work",
+      "minAge": 18
+    },
+    {
+      "id": "master-sculptor",
+      "title": "Master sculptor",
+      "wardrobeId": "work",
+      "minAge": 18
+    },
+    {
+      "id": "grain-dealer",
+      "title": "Grain dealer",
+      "wardrobeId": "commerce",
+      "minAge": 20
+    },
+    {
+      "id": "trading-house-manager",
+      "title": "Trading-house manager",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "id": "scientist",
+      "title": "Scientist",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "id": "politician",
+      "title": "Politician",
+      "wardrobeId": "elite",
+      "minAge": 18
+    },
+    {
+      "id": "banker",
+      "title": "Harbor moneylender",
+      "wardrobeId": "banker",
+      "minAge": 18
+    },
+    {
+      "id": "moneylender",
+      "title": "Moneylender",
+      "wardrobeId": "banker",
+      "minAge": 18
+    }
+  ],
+  "occupationAliases": [
+    {
+      "title": "Artisan apprentice",
+      "wardrobeId": "work",
+      "minAge": 12
+    },
+    {
+      "title": "Philosopher and tutor",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "title": "Astrologer",
+      "wardrobeId": "scholarly",
+      "minAge": 18
+    },
+    {
+      "title": "Trading house manager",
+      "wardrobeId": "commerce",
+      "minAge": 18
+    },
+    {
+      "title": "Banker",
+      "wardrobeId": "banker",
+      "minAge": 18
+    },
+    {
+      "title": "Syros the Banker",
+      "wardrobeId": "banker",
+      "minAge": 18
+    }
+  ],
+  "encounters": [
+    {
+      "id": "person-harbor",
+      "title": "Harbor worker",
+      "jobId": "porter",
+      "wardrobeId": "maritime"
+    },
+    {
+      "id": "person-market",
+      "title": "Market seller",
+      "jobId": "trader",
+      "wardrobeId": "commerce"
+    },
+    {
+      "id": "person-workshop",
+      "title": "Workshop worker",
+      "jobId": "apprentice",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-linen",
+      "title": "Linen worker",
+      "jobId": "weaver",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-copies",
+      "title": "Document copyist",
+      "jobId": "copyist",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-bakery",
+      "title": "Bakery worker",
+      "jobId": "baker",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-well",
+      "title": "Household provisioner",
+      "jobId": "household-worker",
+      "wardrobeId": "everyday"
+    },
+    {
+      "id": "person-festival",
+      "title": "Garland maker",
+      "jobId": null,
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-library",
+      "title": "Reader's assistant",
+      "jobId": "patron-supported-reader",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-music",
+      "title": "Musician",
+      "jobId": "performer",
+      "wardrobeId": "performance"
+    },
+    {
+      "id": "person-boat",
+      "title": "Boat worker",
+      "jobId": "boatbuilder",
+      "wardrobeId": "maritime"
+    },
+    {
+      "id": "person-drill",
+      "title": "Equipment keeper",
+      "jobId": "quartermaster",
+      "wardrobeId": "military"
+    },
+    {
+      "id": "person-garden",
+      "title": "Garden attendant",
+      "jobId": "farmer",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-accounts",
+      "title": "Accounts assistant",
+      "jobId": "clerk",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "id": "person-pottery",
+      "title": "Pottery worker",
+      "jobId": "potter",
+      "wardrobeId": "work"
+    },
+    {
+      "id": "person-neighbors",
+      "title": "Cloth seller",
+      "jobId": "trader",
+      "wardrobeId": "commerce"
+    }
+  ],
+  "roles": [
+    {
+      "roleAlias": "scholar",
+      "wardrobeId": "scholarly"
+    },
+    {
+      "roleAlias": "warrior",
+      "wardrobeId": "military"
+    },
+    {
+      "roleAlias": "banker",
+      "wardrobeId": "banker",
+      "minAge": 18
+    },
+    {
+      "roleAlias": "aristocrat",
+      "wardrobeId": "aristocrat",
+      "minAge": 16
+    },
+    {
+      "roleAlias": "royalty",
+      "wardrobeId": "royalty",
+      "minAge": 16
+    }
+  ],
+  "personOverrides": {
+    "town:moneylender": {
+      "file": "banker-syros.png",
+      "wardrobeId": "banker"
+    },
+    "town:merchant": {
+      "file": "merchant-heron.png",
+      "wardrobeId": "commerce"
+    },
+    "town:grower": {
+      "file": "pakhom-grower.png",
+      "wardrobeId": "work"
+    },
+    "town:army": {
+      "file": "ptolemaios-military.png",
+      "wardrobeId": "military"
+    }
+  },
+  "portraits": {
+    "merchant-heron.png": {
+      "id": "merchant-heron",
+      "file": "merchant-heron.png",
+      "src": "/assets/portraits/concept1-v4/merchant-heron.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Harbor merchant Heron / male adult commerce",
+      "sha256": "b30608858e941a3f65c8f1a2a5313ab33c87a64b364afe8bfaaa1f0fb57bcb15"
+    },
+    "banker-syros.png": {
+      "id": "banker-syros",
+      "file": "banker-syros.png",
+      "src": "/assets/portraits/concept1-v4/banker-syros.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Harbor banker Syros / moneylender / elder male commerce",
+      "sha256": "3f9ba14c42b0a04c44775d220892f59a16d324d340c287e0a041cf7b5f4caccb"
+    },
+    "pakhom-grower.png": {
+      "id": "pakhom-grower",
+      "file": "pakhom-grower.png",
+      "src": "/assets/portraits/concept1-v4/pakhom-grower.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Nile grower Pakhom / male farm and craft work",
+      "sha256": "032f84065fd75931bf86a4966d5681fd601c7b057e2c2ccb9dd79ee91be5a158"
+    },
+    "ptolemaios-military.png": {
+      "id": "ptolemaios-military",
+      "file": "ptolemaios-military.png",
+      "src": "/assets/portraits/concept1-v4/ptolemaios-military.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Army quartermaster Ptolemaios / military",
+      "sha256": "382890d7cf70721c080edaabb903e0f8a00f232fa2bcfb8b64d059a05c67adc5"
+    },
+    "teacher-scholar.png": {
+      "id": "teacher-scholar",
+      "file": "teacher-scholar.png",
+      "src": "/assets/portraits/concept1-v4/teacher-scholar.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Female philosophy teacher / scholarly / mentor NPC",
+      "sha256": "02e1a80b23ebeb383a6e2440a3d7144468a9dcb67347bb88d48febc672e6bdc8"
+    },
+    "scholar-clerk-m01.png": {
+      "id": "scholar-clerk-m01",
+      "file": "scholar-clerk-m01.png",
+      "src": "/assets/portraits/concept1-v4/scholar-clerk-m01.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Male scholar and clerk / scientist / scholarly",
+      "sha256": "7f20e67f76454ced1343dc3c81af3c82540bf9cb04af83d2014d8d8819b6a130"
+    },
+    "citizen-mother-f01.png": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Adult female citizen and mother / caregiver-a",
+      "sha256": "31c24e2521490170d713b6ad49cdc77aa87e2549a4df5cc9bbc1c92e4ab9cac1"
+    },
+    "citizen-adult-m02.png": {
+      "id": "citizen-adult-m02",
+      "file": "citizen-adult-m02.png",
+      "src": "/assets/portraits/concept1-v4/citizen-adult-m02.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Adult male citizen / caregiver-b / peer",
+      "sha256": "caadbf276660b0e1655ed4568e5008dff721c91e595f77083fbcd728905435d3"
+    },
+    "merchant-woman-f03.png": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Adult female merchant / commerce",
+      "sha256": "7470c95c6a577074e20608e4686864e5aedf8a02dbfc576cdbb84d5f44d4e4bc"
+    },
+    "elite-citizen-m02.png": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Noble citizen / politician / aristocrat / royalty / elite",
+      "sha256": "35a3e6ef7563f3fcc9aca408e6154c0841526ed9ec04b78b53e6709faa236d2e"
+    },
+    "youth-student.png": {
+      "id": "youth-student",
+      "file": "youth-student.png",
+      "src": "/assets/portraits/concept1-v4/youth-student.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Male youth student",
+      "sha256": "c2d464911893e34c63bb002e76914907362f79b82486df4c6af1c66ce814acac"
+    },
+    "youth-girl-f02.png": {
+      "id": "youth-girl-f02",
+      "file": "youth-girl-f02.png",
+      "src": "/assets/portraits/concept1-v4/youth-girl-f02.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Female youth",
+      "sha256": "71335bad1b3d72b84c261b1f11c71f8d435e6cfc5478d6e833caa952828fe38d"
+    },
+    "child-boy-m01.png": {
+      "id": "child-boy-m01",
+      "file": "child-boy-m01.png",
+      "src": "/assets/portraits/concept1-v4/child-boy-m01.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Male child",
+      "sha256": "9761998192e5ec9c942d0a843847b878294542f1ea8d7c47f0f4bd9952b4d0ed"
+    },
+    "child-girl-f01.png": {
+      "id": "child-girl-f01",
+      "file": "child-girl-f01.png",
+      "src": "/assets/portraits/concept1-v4/child-girl-f01.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Female child",
+      "sha256": "7a1aae0fec81ece562e7fbe2c89e4fc7cff2b0e58596973a308625638ad7f6f8"
+    },
+    "infant-c1.png": {
+      "id": "infant-c1",
+      "file": "infant-c1.png",
+      "src": "/assets/portraits/concept1-v4/infant-c1.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Infant",
+      "sha256": "5386e7266dd3787a9e596bd957a8f7b6f0b3ec7f7ff8faa43dd830483d551882"
+    },
+    "elder-woman-f01.png": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Elder woman",
+      "sha256": "c36be21ddf05e12071d649edf56fbec543f935ac317c55bd6497a9ac46f1be7e"
+    },
+    "elder-man-m01.png": {
+      "id": "elder-man-m01",
+      "file": "elder-man-m01.png",
+      "src": "/assets/portraits/concept1-v4/elder-man-m01.png",
+      "width": 384,
+      "height": 480,
+      "nativeGrid": {
+        "width": 64,
+        "height": 80,
+        "scale": 6
+      },
+      "role": "Elder man",
+      "sha256": "608e6d0cb4ced0bc1a594c8676433f8a7a1fa1754c4b08337bab6f512fa555f2"
+    }
+  },
+  "combinationRoutes": {
+    "male:infant:infant": {
+      "id": "infant-c1",
+      "file": "infant-c1.png",
+      "src": "/assets/portraits/concept1-v4/infant-c1.png"
+    },
+    "male:child:child": {
+      "id": "child-boy-m01",
+      "file": "child-boy-m01.png",
+      "src": "/assets/portraits/concept1-v4/child-boy-m01.png"
+    },
+    "male:child:work": {
+      "id": "child-boy-m01",
+      "file": "child-boy-m01.png",
+      "src": "/assets/portraits/concept1-v4/child-boy-m01.png"
+    },
+    "male:youth:youth": {
+      "id": "youth-student",
+      "file": "youth-student.png",
+      "src": "/assets/portraits/concept1-v4/youth-student.png"
+    },
+    "male:youth:work": {
+      "id": "youth-student",
+      "file": "youth-student.png",
+      "src": "/assets/portraits/concept1-v4/youth-student.png"
+    },
+    "male:youth:maritime": {
+      "id": "youth-student",
+      "file": "youth-student.png",
+      "src": "/assets/portraits/concept1-v4/youth-student.png"
+    },
+    "male:youth:scholarly": {
+      "id": "youth-student",
+      "file": "youth-student.png",
+      "src": "/assets/portraits/concept1-v4/youth-student.png"
+    },
+    "male:youth:performance": {
+      "id": "youth-student",
+      "file": "youth-student.png",
+      "src": "/assets/portraits/concept1-v4/youth-student.png"
+    },
+    "male:youth:aristocrat": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:youth:royalty": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:adult:everyday": {
+      "id": "citizen-adult-m02",
+      "file": "citizen-adult-m02.png",
+      "src": "/assets/portraits/concept1-v4/citizen-adult-m02.png"
+    },
+    "male:adult:work": {
+      "id": "pakhom-grower",
+      "file": "pakhom-grower.png",
+      "src": "/assets/portraits/concept1-v4/pakhom-grower.png"
+    },
+    "male:adult:maritime": {
+      "id": "pakhom-grower",
+      "file": "pakhom-grower.png",
+      "src": "/assets/portraits/concept1-v4/pakhom-grower.png"
+    },
+    "male:adult:commerce": {
+      "id": "merchant-heron",
+      "file": "merchant-heron.png",
+      "src": "/assets/portraits/concept1-v4/merchant-heron.png"
+    },
+    "male:adult:scholarly": {
+      "id": "scholar-clerk-m01",
+      "file": "scholar-clerk-m01.png",
+      "src": "/assets/portraits/concept1-v4/scholar-clerk-m01.png"
+    },
+    "male:adult:military": {
+      "id": "ptolemaios-military",
+      "file": "ptolemaios-military.png",
+      "src": "/assets/portraits/concept1-v4/ptolemaios-military.png"
+    },
+    "male:adult:elite": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:adult:performance": {
+      "id": "citizen-adult-m02",
+      "file": "citizen-adult-m02.png",
+      "src": "/assets/portraits/concept1-v4/citizen-adult-m02.png"
+    },
+    "male:adult:aristocrat": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:adult:royalty": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:adult:banker": {
+      "id": "banker-syros",
+      "file": "banker-syros.png",
+      "src": "/assets/portraits/concept1-v4/banker-syros.png"
+    },
+    "male:middle:everyday": {
+      "id": "citizen-adult-m02",
+      "file": "citizen-adult-m02.png",
+      "src": "/assets/portraits/concept1-v4/citizen-adult-m02.png"
+    },
+    "male:middle:work": {
+      "id": "pakhom-grower",
+      "file": "pakhom-grower.png",
+      "src": "/assets/portraits/concept1-v4/pakhom-grower.png"
+    },
+    "male:middle:maritime": {
+      "id": "pakhom-grower",
+      "file": "pakhom-grower.png",
+      "src": "/assets/portraits/concept1-v4/pakhom-grower.png"
+    },
+    "male:middle:commerce": {
+      "id": "merchant-heron",
+      "file": "merchant-heron.png",
+      "src": "/assets/portraits/concept1-v4/merchant-heron.png"
+    },
+    "male:middle:scholarly": {
+      "id": "scholar-clerk-m01",
+      "file": "scholar-clerk-m01.png",
+      "src": "/assets/portraits/concept1-v4/scholar-clerk-m01.png"
+    },
+    "male:middle:military": {
+      "id": "ptolemaios-military",
+      "file": "ptolemaios-military.png",
+      "src": "/assets/portraits/concept1-v4/ptolemaios-military.png"
+    },
+    "male:middle:elite": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:middle:performance": {
+      "id": "citizen-adult-m02",
+      "file": "citizen-adult-m02.png",
+      "src": "/assets/portraits/concept1-v4/citizen-adult-m02.png"
+    },
+    "male:middle:aristocrat": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:middle:royalty": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:middle:banker": {
+      "id": "banker-syros",
+      "file": "banker-syros.png",
+      "src": "/assets/portraits/concept1-v4/banker-syros.png"
+    },
+    "male:elder:everyday": {
+      "id": "elder-man-m01",
+      "file": "elder-man-m01.png",
+      "src": "/assets/portraits/concept1-v4/elder-man-m01.png"
+    },
+    "male:elder:work": {
+      "id": "elder-man-m01",
+      "file": "elder-man-m01.png",
+      "src": "/assets/portraits/concept1-v4/elder-man-m01.png"
+    },
+    "male:elder:maritime": {
+      "id": "elder-man-m01",
+      "file": "elder-man-m01.png",
+      "src": "/assets/portraits/concept1-v4/elder-man-m01.png"
+    },
+    "male:elder:commerce": {
+      "id": "banker-syros",
+      "file": "banker-syros.png",
+      "src": "/assets/portraits/concept1-v4/banker-syros.png"
+    },
+    "male:elder:scholarly": {
+      "id": "scholar-clerk-m01",
+      "file": "scholar-clerk-m01.png",
+      "src": "/assets/portraits/concept1-v4/scholar-clerk-m01.png"
+    },
+    "male:elder:military": {
+      "id": "ptolemaios-military",
+      "file": "ptolemaios-military.png",
+      "src": "/assets/portraits/concept1-v4/ptolemaios-military.png"
+    },
+    "male:elder:elite": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:elder:performance": {
+      "id": "elder-man-m01",
+      "file": "elder-man-m01.png",
+      "src": "/assets/portraits/concept1-v4/elder-man-m01.png"
+    },
+    "male:elder:aristocrat": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:elder:royalty": {
+      "id": "elite-citizen-m02",
+      "file": "elite-citizen-m02.png",
+      "src": "/assets/portraits/concept1-v4/elite-citizen-m02.png"
+    },
+    "male:elder:banker": {
+      "id": "banker-syros",
+      "file": "banker-syros.png",
+      "src": "/assets/portraits/concept1-v4/banker-syros.png"
+    },
+    "female:infant:infant": {
+      "id": "infant-c1",
+      "file": "infant-c1.png",
+      "src": "/assets/portraits/concept1-v4/infant-c1.png"
+    },
+    "female:child:child": {
+      "id": "child-girl-f01",
+      "file": "child-girl-f01.png",
+      "src": "/assets/portraits/concept1-v4/child-girl-f01.png"
+    },
+    "female:child:work": {
+      "id": "child-girl-f01",
+      "file": "child-girl-f01.png",
+      "src": "/assets/portraits/concept1-v4/child-girl-f01.png"
+    },
+    "female:youth:youth": {
+      "id": "youth-girl-f02",
+      "file": "youth-girl-f02.png",
+      "src": "/assets/portraits/concept1-v4/youth-girl-f02.png"
+    },
+    "female:youth:work": {
+      "id": "youth-girl-f02",
+      "file": "youth-girl-f02.png",
+      "src": "/assets/portraits/concept1-v4/youth-girl-f02.png"
+    },
+    "female:youth:maritime": {
+      "id": "youth-girl-f02",
+      "file": "youth-girl-f02.png",
+      "src": "/assets/portraits/concept1-v4/youth-girl-f02.png"
+    },
+    "female:youth:scholarly": {
+      "id": "youth-girl-f02",
+      "file": "youth-girl-f02.png",
+      "src": "/assets/portraits/concept1-v4/youth-girl-f02.png"
+    },
+    "female:youth:performance": {
+      "id": "youth-girl-f02",
+      "file": "youth-girl-f02.png",
+      "src": "/assets/portraits/concept1-v4/youth-girl-f02.png"
+    },
+    "female:youth:aristocrat": {
+      "id": "youth-girl-f02",
+      "file": "youth-girl-f02.png",
+      "src": "/assets/portraits/concept1-v4/youth-girl-f02.png"
+    },
+    "female:youth:royalty": {
+      "id": "youth-girl-f02",
+      "file": "youth-girl-f02.png",
+      "src": "/assets/portraits/concept1-v4/youth-girl-f02.png"
+    },
+    "female:adult:everyday": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png"
+    },
+    "female:adult:work": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png"
+    },
+    "female:adult:maritime": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png"
+    },
+    "female:adult:commerce": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:adult:scholarly": {
+      "id": "teacher-scholar",
+      "file": "teacher-scholar.png",
+      "src": "/assets/portraits/concept1-v4/teacher-scholar.png"
+    },
+    "female:adult:military": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png"
+    },
+    "female:adult:elite": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:adult:performance": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:adult:aristocrat": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:adult:royalty": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:adult:banker": {
+      "id": "banker-syros",
+      "file": "banker-syros.png",
+      "src": "/assets/portraits/concept1-v4/banker-syros.png"
+    },
+    "female:middle:everyday": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png"
+    },
+    "female:middle:work": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png"
+    },
+    "female:middle:maritime": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png"
+    },
+    "female:middle:commerce": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:middle:scholarly": {
+      "id": "teacher-scholar",
+      "file": "teacher-scholar.png",
+      "src": "/assets/portraits/concept1-v4/teacher-scholar.png"
+    },
+    "female:middle:military": {
+      "id": "citizen-mother-f01",
+      "file": "citizen-mother-f01.png",
+      "src": "/assets/portraits/concept1-v4/citizen-mother-f01.png"
+    },
+    "female:middle:elite": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:middle:performance": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:middle:aristocrat": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:middle:royalty": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:middle:banker": {
+      "id": "banker-syros",
+      "file": "banker-syros.png",
+      "src": "/assets/portraits/concept1-v4/banker-syros.png"
+    },
+    "female:elder:everyday": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png"
+    },
+    "female:elder:work": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png"
+    },
+    "female:elder:maritime": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png"
+    },
+    "female:elder:commerce": {
+      "id": "merchant-woman-f03",
+      "file": "merchant-woman-f03.png",
+      "src": "/assets/portraits/concept1-v4/merchant-woman-f03.png"
+    },
+    "female:elder:scholarly": {
+      "id": "teacher-scholar",
+      "file": "teacher-scholar.png",
+      "src": "/assets/portraits/concept1-v4/teacher-scholar.png"
+    },
+    "female:elder:military": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png"
+    },
+    "female:elder:elite": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png"
+    },
+    "female:elder:performance": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png"
+    },
+    "female:elder:aristocrat": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png"
+    },
+    "female:elder:royalty": {
+      "id": "elder-woman-f01",
+      "file": "elder-woman-f01.png",
+      "src": "/assets/portraits/concept1-v4/elder-woman-f01.png"
+    },
+    "female:elder:banker": {
+      "id": "banker-syros",
+      "file": "banker-syros.png",
+      "src": "/assets/portraits/concept1-v4/banker-syros.png"
+    }
+  }
+}

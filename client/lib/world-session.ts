@@ -1,4 +1,4 @@
-import { wslLives7World, wslLives8World, wslLives9World, lives10World, figure2World, figure3World } from "../../worlds/demo/wsl-world-packs.mjs";
+import { wslLives7World, wslLives8World, wslLives9World, lives10World, lives11World, figure2World, figure3World } from "../../worlds/demo/wsl-world-packs.mjs";
 import { createEngine } from "../../src/index.ts";
 import { buildNpcWorld } from "../../chain/npc-world.ts";
 import type { LifeEngine, LifeState, WorldPack } from "../../src/types.ts";
@@ -120,6 +120,7 @@ const lives5Engine = createEngine(lives5World as unknown as WorldPack);
 const lives8Engine = createEngine(lives8World as unknown as WorldPack);
 const lives9Engine = createEngine(lives9World as unknown as WorldPack);
 const lives10Engine = createEngine(lives10World as unknown as WorldPack);
+const lives11Engine = createEngine(lives11World as unknown as WorldPack);
 // Local published revisions retain their fingerprints alongside the upstream archives.
 const wslLives7Engine = createEngine(wslLives7World as unknown as WorldPack);
 const wslLives8Engine = createEngine(wslLives8World as unknown as WorldPack);
@@ -181,6 +182,7 @@ engines.set(lives6Engine.fingerprint, lives6Engine);
 engines.set(lives8Engine.fingerprint, lives8Engine);
 engines.set(lives9Engine.fingerprint, lives9Engine);
 engines.set(lives10Engine.fingerprint, lives10Engine);
+engines.set(lives11Engine.fingerprint, lives11Engine);
 engines.set(wslLives7Engine.fingerprint, wslLives7Engine);
 engines.set(wslLives8Engine.fingerprint, wslLives8Engine);
 engines.set(wslLives9Engine.fingerprint, wslLives9Engine);

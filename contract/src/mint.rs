@@ -1,3 +1,6 @@
+use crate::card_art::{card_by_id, card_design, edition_key, CardArt};
+use crate::rarity_caps::design_key;
+use crate::rarity_caps::RARITY_CAPS;
 use crate::random::{block_seed, roll, weighted_pick};
 use crate::shares::compute_shares;
 use crate::types::*;
@@ -91,6 +94,12 @@ pub(crate) struct Outcome {
     pub(crate) figure: Option<String>,
     pub(crate) rarity: u8,
     pub(crate) affection: u8,
+    /// The earned v14 card this mint shows (crate::card_art); `None` for evidence from worlds without figure paths.
+    pub(crate) card: Option<EarnedCard>,
+}
+
+pub(crate) fn affection_roll(seed: &[u8; 32], evidence: &Evidence) -> u8 {
+    affection(seed, evidence)
 }
 
 #[near]
@@ -107,6 +116,7 @@ impl Contract {
         self.assert_signed(&evidence_json, &signature);
         let evidence: Evidence =
             serde_json::from_str(&evidence_json).unwrap_or_else(|_| env::panic_str("The life evidence is not in the expected format"));
+        require!(evidence.earned_cards.is_none(), "Open this life's pack to mint one of the cards it earned");
         let mut life = self.owned_alive_life(life_id.0);
         self.assert_evidence(life_id.0, &life, &evidence, &npc_action_id);
 
@@ -187,7 +197,7 @@ impl Contract {
         require!(life.status == LifeStatus::Minting, "This life is not awaiting its mint");
         let evidence: Evidence = serde_json::from_str(&request.evidence_json).expect("validated evidence");
         self.flush_mint_storage();
-        let outcome = self.roll_outcome(&request.seed, &evidence, &request.params, &request.catalog);
+        let outcome = self.roll_outcome(&request.seed, &evidence, &request.params, &request.catalog, &request.npc_action_id);
         let shares = compute_shares(&evidence.sources.iter().map(|s| (s.token_id.clone(), s.impact)).collect::<Vec<_>>());
         let evidence_hash = env::sha256_array(request.evidence_json.as_bytes());
         let token_id = self.mint_token(&life.account_id, life_id.0, &evidence, &outcome, &request.npc_action_id, &shares, &evidence_hash, &request.params, &request.catalog);
@@ -263,19 +273,24 @@ impl Contract {
         );
     }
 
-    pub(crate) fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence, params: &Params, catalog: &CatalogConfig) -> Outcome {
+    /// Rolls a card for evidence from a world without figure paths. Sold-out rarities of its design
+    /// (crate::rarity_caps) are skipped; the others keep their relative odds. Earned evidence never rolls.
+    pub(crate) fn roll_outcome(&self, seed: &[u8; 32], evidence: &Evidence, params: &Params, catalog: &CatalogConfig, npc_action_id: &str) -> Outcome {
         let figure = evidence
             .matched_figures
             .iter()
             .find(|figure| {
                 let minted = self.figure_copies.get(*figure).map(|copies| copies.len() as u32).unwrap_or(0);
                 let cap = catalog.figures.iter().find(|item| &item.figure_id == *figure).map(|item| item.supply_cap).unwrap_or(0);
-                minted + self.pack_reserved(figure) < cap && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < params.drop_rate_bps as u64
+                let design = design_key(Some(figure.as_str()), npc_action_id);
+                let has_rarity = self.open_rarity_weights(&design, FIGURE_RARITY_WEIGHTS).iter().any(|w| *w > 0);
+                minted + self.pack_reserved(figure) < cap && has_rarity && roll(seed, format!("drop:{figure}").as_bytes()) % (MAX_BPS as u64) < params.drop_rate_bps as u64
             })
             .cloned();
-        let weights = if figure.is_some() { FIGURE_RARITY_WEIGHTS } else { NPC_RARITY_WEIGHTS };
+        let base = if figure.is_some() { FIGURE_RARITY_WEIGHTS } else { NPC_RARITY_WEIGHTS };
+        let weights = self.open_rarity_weights(&design_key(figure.as_deref(), npc_action_id), base);
         let rarity = weighted_pick(&weights, roll(seed, b"rarity")).expect("rarity weights") as u8;
-        Outcome { figure, rarity, affection: affection(seed, evidence) }
+        Outcome { figure, rarity, affection: affection(seed, evidence), card: None }
     }
 
     fn record_kind(&self, outcome: &Outcome) -> TokenKind {
@@ -303,6 +318,10 @@ impl Contract {
         let action_id = figure.as_ref().map(|f| f.action_ids[0].clone()).unwrap_or_else(|| npc_action_id.to_string());
         let category = catalog.npc_actions.iter().find(|a| a.action_id == npc_action_id).map(|a| a.category.clone());
         let kind = self.record_kind(outcome);
+        let earned = outcome.card.as_ref();
+        let card = earned.and_then(|earned| card_by_id(&self.card_art(), &earned.card_id).cloned());
+        let design = card.as_ref().map(|card| card_design(&card.card_id)).unwrap_or_else(|| design_key(outcome.figure.as_deref(), npc_action_id));
+        let serial = self.count_minted_rarity(&design, outcome.rarity);
         let record = TokenRecord {
             kind,
             figure_id: outcome.figure.clone(),
@@ -312,6 +331,12 @@ impl Contract {
             action_id: action_id.clone(),
         };
         let hash_hex = hex::encode(evidence_hash);
+        let edition = TokenEdition { edition_key: edition_key(&design, outcome.rarity), edition_number: serial, edition_limit: RARITY_CAPS[outcome.rarity as usize] };
+        let lived = format!("An Everfolk life lived to age {} ({} BCE – {} BCE).", evidence.death_age, -evidence.birth_year, -evidence.death_year);
+        let attributes = match (&card, earned) {
+            (Some(card), Some(earned)) => card_attributes(card, earned, &edition, evidence),
+            _ => Vec::new(),
+        };
         let extra = TokenExtra {
             kind,
             figure_id: outcome.figure.clone(),
@@ -324,12 +349,28 @@ impl Contract {
             career_group: evidence.career_group.clone(),
             sources: shares.to_vec(),
             evidence_hash: hash_hex.clone(),
+            card_id: card.as_ref().map(|card| card.card_id.clone()),
+            sex: card.as_ref().and(evidence.sex.clone()),
+            attributes,
+            edition: Some(edition.clone()),
         };
         let base_url = &params.evidence_base_url;
+        let (title, media, description) = match &card {
+            Some(card) => (
+                card.title.clone(),
+                Some(card.media.clone()),
+                format!("{} · {} · {}. {lived}", card.title, RARITY_NAMES[outcome.rarity as usize], edition_text(&edition)),
+            ),
+            None => (
+                figure.as_ref().map(|f| f.title.clone()).unwrap_or_else(|| format!("A life of Alexandria #{life_id}")),
+                figure.as_ref().map(|f| f.media.clone()).filter(|m| !m.is_empty()),
+                lived,
+            ),
+        };
         let metadata = TokenMetadata {
-            title: Some(figure.as_ref().map(|f| f.title.clone()).unwrap_or_else(|| format!("A life of Alexandria #{life_id}"))),
-            description: Some(format!("An Everfolk life lived to age {} ({} BCE – {} BCE).", evidence.death_age, -evidence.birth_year, -evidence.death_year)),
-            media: figure.as_ref().map(|f| f.media.clone()).filter(|m| !m.is_empty()),
+            title: Some(title),
+            description: Some(description),
+            media,
             issued_at: Some(env::block_timestamp_ms().to_string()),
             extra: Some(serde_json::to_string(&extra).expect("extra json")),
             reference: (!base_url.is_empty()).then(|| format!("{base_url}{hash_hex}")),
@@ -349,4 +390,50 @@ impl Contract {
             .unwrap_or_else(|| env::panic_str("Unknown figure"));
         (self.figure_copies.get(figure_id).map(|c| c.len() as u32).unwrap_or(0), cap)
     }
+}
+
+pub(crate) const RARITY_NAMES: [&str; 5] = ["Common", "Uncommon", "Rare", "Epic", "Legendary"];
+
+/// "007/025", or "007/∞" for an unlimited rarity, as the card footer prints it.
+fn edition_text(edition: &TokenEdition) -> String {
+    match edition.edition_limit {
+        Some(limit) => format!("{:03}/{:03}", edition.edition_number, limit),
+        None => format!("{:03}/∞", edition.edition_number),
+    }
+}
+
+fn year_text(year: i32) -> String {
+    if year < 0 { format!("{} BCE", -year) } else { format!("{year} CE") }
+}
+
+/// The roster name of a figure-path figure, for the Figure trait.
+fn figure_name(id: &str) -> String {
+    match id {
+        "alexander" => "Alexander the Great", "aristotle" => "Aristotle", "euclid" => "Euclid", "lysippos" => "Lysippos",
+        "pytheas" => "Pytheas of Massalia", "menander" => "Menander", "demetrius" => "Demetrius the Besieger",
+        "theophrastus" => "Theophrastus", "zeno" => "Zeno of Citium", "ptolemy" => "Ptolemy I Soter",
+        "cleomenes" => "Cleomenes of Naucratis", "nearchus" => "Nearchus", "eumenes" => "Eumenes of Cardia",
+        other => return title_case(other),
+    }
+    .into()
+}
+
+fn title_case(word: &str) -> String {
+    let mut chars = word.chars();
+    chars.next().map(|first| first.to_uppercase().chain(chars).collect()).unwrap_or_default()
+}
+
+/// Marketplace traits for an earned card NFT.
+fn card_attributes(card: &CardArt, earned: &EarnedCard, edition: &TokenEdition, evidence: &Evidence) -> Vec<TokenAttribute> {
+    let pair = |trait_type: &str, value: String| TokenAttribute { trait_type: trait_type.into(), value };
+    vec![
+        pair("Card", card.title.clone()),
+        pair("Rarity", RARITY_NAMES[card.rarity as usize].into()),
+        pair("Edition", edition_text(edition)),
+        pair("Figure", figure_name(&earned.figure_id)),
+        pair("Role", if earned.kind == "principal" { "Historical figure".into() } else { "Contributor".into() }),
+        pair("Career", title_case(&evidence.career_group)),
+        pair("Born", year_text(evidence.birth_year)),
+        pair("Died", year_text(evidence.death_year)),
+    ]
 }

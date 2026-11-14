@@ -8,6 +8,7 @@ import { engineForLife, loadAnyLife, registerLifeEngine } from "../lib/world-ses
 import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readRawSavedLife, readSavedLife } from "../queries/lives.ts";
 import type { ArchivedLife } from "../types/session.ts";
 import { advanceToDecisionWithFocus, advanceYearWithFocus, focusActivity, normalizeYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "../models/yearly-focus.ts";
+import { yearEndChoiceNeeded, yearEndKeyOf } from "../models/year-end-choice.ts";
 import { persistYearlyFocus } from "../mutations/yearly-focus.ts";
 import { readYearlyFocus } from "../queries/yearly-focus.ts";
 import type { YearlyFocusId } from "../models/yearly-focus.ts";
@@ -128,7 +129,9 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   const isPreview = Boolean(previewSession);
   const [syncing, setSyncing] = useState(false);
   const pendingRef = useRef(false);
-  const isOverlayOpen = overlayFromApp || syncing;
+  // A year whose action is still unspent waits for the player at its end (see yearEndKey below).
+  const [yearEndKey, setYearEndKey] = useState<string | null>(null);
+  const isOverlayOpen = overlayFromApp || syncing || yearEndKey !== null;
   const rankedRef = useRef(ranked);
   rankedRef.current = ranked;
   const onlineRef = useRef(online);
@@ -302,9 +305,11 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     if (next.phase === "ended" || fresh) commitPauseState(updatePauseState(pauseStateRef.current, { type: next.phase === "ended" ? "ended" : "fresh" }, { hasBegun: hasBegunRef.current, phase: next.phase }));
   }, [commitPauseState, yearClock, isPreview]);
 
-  const choose = useCallback((choiceId: string) => {
+  const choose = useCallback((choiceId: string, options?: { automatic?: boolean }) => {
     // Ignore an old rendered button after its snapshot has already been replaced.
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
+    // After the player answers a turning point the clock stays paused until they press Resume (Auto mode carries on).
+    if (!options?.automatic && !autoIntentRef.current) pauseLife();
     if (submitOnline(play => play.dispatch({ type: "choose", choice: choiceId }))) return;
     try {
       const current = life;
@@ -314,7 +319,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     } catch (error) {
       setNotice(message(error));
     }
-  }, [commit, hasBegun, life, submitOnline]);
+  }, [commit, hasBegun, life, submitOnline, pauseLife]);
 
   const act = useCallback((activityId: string, options?: { calendarDeadline?: boolean }) => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
@@ -381,11 +386,25 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     } catch (error) { setNotice(message(error)); }
   }, [commit, life, submitOnline]);
 
+  const letGoRef = useRef<string | null>(null);
+  /** The player chose to let this year's action go: the year ends without it. */
+  const letYearEndGo = useCallback(() => {
+    letGoRef.current = yearEndKeyOf(lifeRef.current);
+    setYearEndKey(null);
+  }, []);
+  /** The player spent the action (or the life moved on): the year carries on. */
+  const closeYearEnd = useCallback(() => setYearEndKey(null), []);
+  useEffect(() => {
+    if (yearEndKey !== null && (yearEndKey !== yearEndKeyOf(life) || life.phase !== "ready" || life.character?.lastActivityAge === life.age)) setYearEndKey(null);
+  }, [life, yearEndKey]);
+
   const advance = useCallback(() => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
-    if (submitOnline(play => advanceOnlineYearWithFocus(play, life, focusIdRef.current))) return;
+    // The player let this year's action go: the focus does not act for them.
+    const focus = letGoRef.current === yearEndKeyOf(life) ? "everyday" : focusIdRef.current;
+    if (submitOnline(play => advanceOnlineYearWithFocus(play, life, focus))) return;
     try {
-      commit(advanceYearWithFocus(engineForLife(life), life, focusIdRef.current));
+      commit(advanceYearWithFocus(engineForLife(life), life, focus));
       setNotice("");
     } catch (error) {
       setNotice(message(error));
@@ -570,6 +589,11 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
         timer = window.setTimeout(finishYear, Math.max(1, Math.ceil(remainingMs)));
         return;
       }
+      // An unspent yearly action is never decided for the player: the year waits for their choice (unless Auto mode is on).
+      if (!isPreview && !autoIntentRef.current && letGoRef.current !== yearEndKeyOf(life) && yearEndChoiceNeeded(engineForLife(life), life)) {
+        setYearEndKey(yearEndKeyOf(life));
+        return;
+      }
       if (yearClock.takeDue(token, now)) {
         setClockProgress(1);
         advance();
@@ -588,7 +612,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     const choice = selectAutomaticChoice(engineForLife(life).getChoices(life), engineForLife(life).world, life);
     if (!choice) return;
     const timer = window.setTimeout(() => {
-      if (!document.hidden && autoAllowedRef.current && autoIntentRef.current && playbackIntentRef.current && lifeRef.current === life && lifeRef.current.phase === "choice") choose(choice.id);
+      if (!document.hidden && autoAllowedRef.current && autoIntentRef.current && playbackIntentRef.current && lifeRef.current === life && lifeRef.current.phase === "choice") choose(choice.id, { automatic: true });
     }, 700);
     return () => window.clearTimeout(timer);
   }, [autoDecisions, hasBegun, pauseState, isVisible, isOverlayOpen, life, choose]);
@@ -633,6 +657,10 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     nextTurningPoint,
     focusId,
     setFocus,
+    /** The year has ended with its action unspent and waits for the player's choice. */
+    yearEndPending: yearEndKey !== null && yearEndKey === yearEndKeyOf(life) && life.phase === "ready" && life.character?.lastActivityAge !== life.age,
+    letYearEndGo,
+    closeYearEnd,
     autoDecisions,
     setAutoDecisions,
     importLife,

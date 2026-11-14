@@ -13,6 +13,21 @@ const artifacts = resolve(repo, "artifacts");
 const rgba = async (input: Buffer) => sharp(input).ensureAlpha().raw().toBuffer();
 const load = (file: string) => JSON.parse(readFileSync(file, "utf8"));
 
+/**
+ * Composited cards are compared with the committed production files. libvips rounds alpha blending by at most
+ * one level differently across CPU architectures, so a channel may differ by 1; anything larger is a real change.
+ * Compared by hand: assert.deepEqual's diff of two 4.5 MB buffers takes minutes and times the test out.
+ */
+function assertSamePixels(actual: Buffer, expected: Buffer, label: string) {
+  assert.equal(actual.length, expected.length, `${label}: dimensions differ`);
+  let worst = 0, changed = 0;
+  for (let i = 0; i < actual.length; i++) {
+    const delta = Math.abs(actual[i] - expected[i]);
+    if (delta) { changed++; if (delta > worst) worst = delta; }
+  }
+  assert.ok(worst <= 1, `${label}: ${changed} channel values differ, by up to ${worst}`);
+}
+
 function workspace() {
   mkdirSync(artifacts, { recursive: true });
   return mkdtempSync(resolve(artifacts, "card-kit-test-"));
@@ -52,7 +67,7 @@ test("portable fitting reproduces approved parents, contributors and all three L
       const current = production.find((card: { id: string }) => card.id === row.id);
       const pairs = row.variantOf ? [["footerless", "footerlessSrc"]] : [["full", "src"], ["footerless", "footerlessSrc"], ["thumbnail", "thumbnailSrc"], ["portrait", "portraitSrc"]];
       for (const [file, field] of pairs) {
-        assert.deepEqual(await rgba(readFileSync(resolve(out, row.files[file].path))), await rgba(readFileSync(resolve(repo, "public" + current[field]))), `${row.id}/${file}`);
+        assertSamePixels(await rgba(readFileSync(resolve(out, row.files[file].path))), await rgba(readFileSync(resolve(repo, "public" + current[field]))), `${row.id}/${file}`);
       }
     }
     assert.equal((await checkBundle({ bundle: out })).framePixelsVerified, true);

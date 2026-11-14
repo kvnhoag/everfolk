@@ -5,9 +5,11 @@ import type { NpcPerson } from "../../src/npc/types.ts";
 import type { NpcSnapshot } from "../types/npc.ts";
 import "../styles/npc-session.css";
 import EverfolkBrand from "../components/EverfolkBrand.tsx";
+import PixelPortrait from "../components/PixelPortrait.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
 import { engineForLife } from "../lib/world-session.ts";
 import { lifePackCardCount } from "../../chain/pack-count.ts";
+import { npcPortraitState } from "../models/portrait-state.ts";
 function NpcCard({
   npc,
   session,
@@ -36,20 +38,25 @@ function NpcCard({
           account: "Shop",
         }
       : { cash: npc.cash, grain: npc.grain, account: "Personal" };
+  const portrait = npcPortraitState(engineForLife(session.life).world, session.life, npc);
+  const avatarName = npc.introduced ? npc.name : npc.role.replaceAll("-", " ");
   return (
     <article className="npc-person">
-      <header>
-        <p>
-          {npc.role.replaceAll("-", " ")} · {session.life.year - npc.born} years
-        </p>
-        <h2>{npc.introduced ? npc.name : "Not met yet"}</h2>
-        <small>
-          {npc.introduced
-            ? external
-              ? "External controller"
-              : "Server controller"
-            : "Will enter your life as you grow"}
-        </small>
+      <header className="npc-person-head">
+        <PixelPortrait portrait={portrait} name={avatarName} className="npc-person-avatar" />
+        <div>
+          <p>
+            {npc.role.replaceAll("-", " ")} · {session.life.year - npc.born} years
+          </p>
+          <h2>{npc.introduced ? npc.name : "Not met yet"}</h2>
+          <small>
+            {npc.introduced
+              ? external
+                ? "External controller"
+                : "Server controller"
+              : "Will enter your life as you grow"}
+          </small>
+        </div>
       </header>
       <p>{npc.goal}</p>
       <dl>

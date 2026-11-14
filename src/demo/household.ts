@@ -4,9 +4,9 @@ import type { WorldPack } from "../types.ts";
 import type { DemoContext, DemoDefinition, HouseholdConfig, HouseholdState, LifeStateWithDemo, PlanCommand } from "./contracts.ts";
 import type { LifeState } from "../types.ts";
 import { FARMING_JOBS, FARMING_SKILL, LIVESTOCK } from "./types.ts";
-import { buyForHousehold } from "./market.ts";
+import { buyForHousehold, sellForFood } from "./market.ts";
 import { spoilageCutBps } from "./works.ts";
-import { beginFarmHarvest, farmCapacityBonus, farmSpoilageCut, farmYieldPlan, ordinarySeedGrain, recordFarmFlow } from "../capabilities/farming.ts";
+import { beginFarmHarvest, farmCapacityBonus, farmSpoilageCut, farmYieldPlan, ordinarySeedGrain, recordFarmFlow, sowableFlaxPlots } from "../capabilities/farming.ts";
 import { loseReservedStock } from "../capabilities/work.ts";
 import { hasServiceRole } from "./service-role.ts";
 
@@ -137,9 +137,64 @@ function expectedYield(def: DemoDefinition, life: LifeStateWithDemo, age: number
 const harvested = new WeakMap<object, number>();
 const harvestedFlax = new WeakMap<object, number>();
 
-/** Grain and flax harvest from plots × labour × flood × skill × ox. */
+function plotCount(count: number): string {
+  return `${count} ${count === 1 ? "plot" : "plots"}`;
+}
+
+/**
+ * Seed grain a household with fields and hands to work them, but too little seed in store, borrows from the royal
+ * granary for the settlement at `age`; repaid from that harvest, as Ptolemaic cultivators did. Pure.
+ */
+function seedLoan(def: DemoDefinition, life: LifeStateWithDemo, world: WorldPack | undefined, age: number): number {
+  if (!world?.capabilities || !life.capabilities || life.demo.household.plots <= 0) return 0;
+  if (life.capabilities.farm?.actionAge === age - 1 || labourAt(def, life, age, age - 1) <= 0) return 0;
+  return Math.max(0, ordinarySeedGrain(life, def) - life.demo.household.grain);
+}
+
+/**
+ * The life as it will be sown at the settlement at `age`: flax plots without flax seed grow grain, and missing seed
+ * grain is borrowed. Pure; the plan itself is not changed.
+ */
+function asSown(def: DemoDefinition, life: LifeStateWithDemo, world: WorldPack | undefined, age: number): LifeStateWithDemo {
+  const h = life.demo.household, flaxPlots = sowableFlaxPlots(world, life, age - 1);
+  const replanned = flaxPlots === h.flaxPlots ? life : { ...life, demo: { ...life.demo, household: { ...h, flaxPlots } } };
+  const loan = seedLoan(def, replanned, world, age);
+  return loan === 0 ? replanned : { ...replanned, demo: { ...replanned.demo, household: { ...replanned.demo.household, grain: replanned.demo.household.grain + loan } } };
+}
+
+/** Grain and flax harvest from plots × labour × flood × skill × ox. Flax plots without seed are sown with grain. */
 export function harvest(ctx: DemoContext): void {
   if (ctx.world.deepCapabilities) return deepHousehold.harvest(ctx);
+  const household = ctx.demo.household, planned = household.flaxPlots;
+  const sown = sowableFlaxPlots(ctx.world, ctx.life, ctx.life.age - 1);
+  if (sown < planned) {
+    household.flaxPlots = sown;
+    ctx.journal("household-flax-to-grain", sown === 0
+      ? `There was no flax seed for the ${plotCount(planned)} planned for flax, so the household sowed them with grain rather than leave them empty.`
+      : `There was flax seed for only ${plotCount(sown)} of the ${plotCount(planned)} planned for flax, so the household sowed grain on the other ${plotCount(planned - sown)}.`);
+  }
+  try {
+    const loan = seedLoan(ctx.def, ctx.life as LifeStateWithDemo, ctx.world, ctx.life.age);
+    if (loan > 0) {
+      household.grain += loan;
+      ctx.journal("household-seed-loan", `The store had too little seed, so the household borrows ${loan} measures of seed grain from the royal granary, to be repaid from the harvest.`);
+    }
+    sowAndReap(ctx);
+    if (loan > 0) repaySeedLoan(ctx, loan);
+  } finally { household.flaxPlots = planned; }
+}
+
+/** The seed loan goes back to the royal granary with the harvest; what a failed harvest cannot repay is let go. */
+function repaySeedLoan(ctx: DemoContext, loan: number): void {
+  const household = ctx.demo.household, repaid = Math.min(loan, household.grain);
+  household.grain -= repaid;
+  recordFarmFlow(ctx.life, "rent", repaid);
+  ctx.journal("household-seed-loan-repaid", repaid === loan
+    ? `The household repays the ${loan} measures of seed grain to the royal granary.`
+    : `The harvest repays only ${repaid} of the ${loan} measures of seed grain; the royal granary lets the rest go.`);
+}
+
+function sowAndReap(ctx: DemoContext): void {
   const household = ctx.demo.household;
   const grainBeforeSeed = household.grain, flaxSeedBefore = ctx.life.vocations?.inventory["flax-seed"] ?? 0;
   beginFarmHarvest(ctx.world, ctx.life, ctx.life.age - 1);
@@ -231,7 +286,9 @@ export function feedHousehold(ctx: DemoContext): void {
   const missing = need + animalNeed - household.grain;
   if (missing > 0) {
     const cash = life.economy?.cash ?? 0;
-    const bought = cash > 0 ? whole(buyForHousehold(ctx, missing)) : 0;
+    let bought = cash > 0 ? whole(buyForHousehold(ctx, missing)) : 0;
+    // An empty purse is no reason to starve while the household still owns things: it sells them for food first.
+    if (bought < missing && sellForFood(ctx, missing - bought) > 0) bought += whole(buyForHousehold(ctx, missing - bought));
     if (bought > 0) recordFarmFlow(ctx.life, "boughtFood", bought);
     if (bought > 0) ctx.journal("household-bought-grain", `The store ran short, so the household bought ${bought} measures of grain from the merchant.`);
   }
@@ -383,7 +440,7 @@ export interface HouseholdView {
 export function householdView(def: DemoDefinition, life: LifeStateWithDemo, world?: WorldPack): HouseholdView {
   if (life.deepCapabilities) return deepHousehold.householdView(def, life, world);
   const h = life.demo.household, age = life.age + 1;
-  const crop = expectedYield(def, life, age);
+  const crop = expectedYield(def, asSown(def, life, world, age), age);
   const expectedRent = rentOn(def, crop.grain);
   const expectedEating = peopleRation(def, life, age) + animalRation(def, h);
   const afterEating = Math.max(0, h.grain + crop.grain - expectedRent - expectedEating);

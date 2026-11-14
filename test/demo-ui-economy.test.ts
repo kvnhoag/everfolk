@@ -213,8 +213,10 @@ test("the inventory details coexist with the command deck without duplicating it
   const bar = renderToStaticMarkup(createElement(ResourceBar, { screen, rows: storehouse, cashText: "12 drachmas" }));
   assert.doesNotMatch(html, /aria-label="Storehouse"|storehouse-row/);
   assert.match(bar, /Inventory &amp; Granary/);
-  assert.equal((details.match(/class="storehouse-row"/g) ?? []).length, storehouse.length);
-  assert.match(details, /Coming year/);
+  const moving = storehouse.filter(row => row.coming.length > 0 || row.lastYearFlows.length > 0);
+  assert.equal((details.match(/class="storehouse-row"/g) ?? []).length, moving.length);
+  assert.match(details, /Next harvest/);
+  assert.match(details, /No change last year/, "resources that did not move sit together as grey tiles");
   for (const label of ["Market &amp; Trade", "Farm &amp; Granary", "Career &amp; Army", "People &amp; Town", "Works &amp; Stewards"]) {
     assert.ok(html.includes(label), label);
   }

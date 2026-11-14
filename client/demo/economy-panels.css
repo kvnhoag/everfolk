@@ -1039,6 +1039,30 @@
   cursor: not-allowed;
 }
 
+/* The order preview: what changes hands, the price move and the store after, before anything is sold. */
+.demo-trade-preview {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 4px;
+  padding: 10px 12px;
+  border: 1px solid #e2b86b;
+  border-left: 4px solid #e2b86b;
+  background: #fff8e6;
+  color: #2b2418;
+  font-size: 13px;
+}
+.demo-trade-preview ul { display: grid; gap: 3px; margin: 0; padding: 0 0 0 16px; }
+.demo-trade-preview-warnings { list-style: none; padding: 0 !important; }
+.demo-trade-preview-warnings li { display: flex; gap: 6px; align-items: flex-start; padding: 3px 7px; border-left: 3px solid #a3361f; background: #f8e3dc; color: #7a2413; }
+.demo-trade-preview-warnings svg { flex: none; margin-top: 2px; }
+.demo-trade-preview-blocked { margin: 0; color: #7a2413; font-weight: 700; }
+.demo-trade-preview-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+.demo-trade-confirm, .demo-trade-cancel { min-height: 34px; padding: 0 14px; border-radius: 2px; font-weight: 700; cursor: pointer; }
+.demo-trade-confirm { border: 1px solid #e2b86b; background: #204843; color: #fff9e8; }
+.demo-trade-confirm:hover:not(:disabled) { background: #2a5e58; }
+.demo-trade-confirm:disabled { opacity: .5; cursor: not-allowed; }
+.demo-trade-cancel { border: 1px solid #6d5a37; background: transparent; color: #3d2f1d; }
+
 .demo-batch-row {
   display: flex;
   align-items: center;
@@ -1101,3 +1125,35 @@
     width: 100%;
   }
 }
+
+/* Works & Stewards: compact blocks; works as progress bars with cost chips, locked paths as requirement chips. */
+.works-panel{display:grid;gap:12px;min-width:0}
+.works-panel[hidden]{display:none}
+.demo-economy .works-block{padding:12px 14px}
+.works-block-head,.works-stewards>summary{display:flex;align-items:baseline;justify-content:space-between;gap:6px 12px;flex-wrap:wrap;margin-bottom:8px}
+.demo-economy .works-block-head h3,.demo-economy .works-stewards h3{margin:0;font-size:17px}
+.works-note{font-size:11px;color:#6e5f49}
+.works-rep{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#3a2c1a}
+.demo-economy .works-list,.demo-economy .future-path-grid,.demo-economy .req-chips,.demo-economy .works-agents{list-style:none;margin:0;padding:0}
+.works-list{display:grid;gap:6px}
+.demo-economy .works-list li{display:grid;grid-template-columns:minmax(120px,1.2fr) minmax(70px,1fr) auto auto;align-items:center;gap:6px 10px;padding:5px 0;border-bottom:1px dashed #d8c9aa;line-height:1.3}
+.works-title{font-size:13px;font-weight:600;color:#2c2216}
+.works-progress{height:7px;border:1px solid #9c8459;border-radius:3px;background:#efe5cf;overflow:hidden}
+.works-progress>span{display:block;height:100%;background:#a98636}
+.works-list li.is-built .works-progress>span{background:#3f6b4a}
+.works-state{font-size:11.5px;font-variant-numeric:tabular-nums;color:#5b4c38}
+.works-list li.is-built .works-state{color:#2f6b3c;font-weight:700}
+.works-costs{display:inline-flex;gap:4px;flex-wrap:wrap}
+.req-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 7px 2px 5px;border:1px solid #c9b791;border-radius:3px;background:#f1e8d3;color:#3d2f1d;font-size:11px;line-height:1.35;white-space:nowrap}
+.future-path-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.demo-economy .future-path-grid>li{display:grid;gap:6px;align-content:start;padding:8px 10px;border:1px dashed #b7a27a;border-radius:3px;background:#f3ecdb;line-height:1.3}
+.future-path-grid strong{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#4b3d29}
+.future-path-grid strong svg{color:#8c3322}
+.req-chips{display:flex;flex-wrap:wrap;gap:4px}
+.works-stewards>summary{cursor:pointer;list-style:none;margin-bottom:0}
+.works-stewards>summary::-webkit-details-marker{display:none}
+.works-stewards>summary h3::after{content:" ▾";font-size:12px;color:#7c6b53}
+.works-stewards[open]>summary{margin-bottom:8px}
+.works-agents{display:grid;gap:3px;margin-bottom:8px;font-size:12px}
+@media (max-width:640px){.demo-economy .works-list li{grid-template-columns:1fr auto}.works-costs{grid-column:1/-1}}
+.demo-economy details.works-stewards{border:2px solid #5a4228;border-radius:2px;background:#f8f2e2;box-shadow:inset 0 1px 0 #fffdf8}

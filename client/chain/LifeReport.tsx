@@ -20,10 +20,12 @@ export interface LifeReportProps {
   onMint(): void;
   onDecline(): void;
   onCloseTooEarly?(): void;
+  /** Set when the life's world signs earned cards (chain/earned-cards.ts) and this life earned none. */
+  earnedNone?: boolean;
 }
 
 /** "Who shaped your life", then "Mint this life?" with the fee and the action picker. */
-export default function LifeReport({ report, walletPath = true, packMode = false, cardCount, sourceSharePercent = 50, spanLine, feeText, menu, selectedAction, busy = false, error, onSelectAction, onMint, onDecline, onCloseTooEarly }: LifeReportProps) {
+export default function LifeReport({ report, walletPath = true, packMode = false, cardCount, sourceSharePercent = 50, spanLine, feeText, menu, selectedAction, busy = false, error, onSelectAction, onMint, onDecline, onCloseTooEarly, earnedNone = false }: LifeReportProps) {
   const headingId = useId();
   const mintId = useId();
   const shaped = report.rows.length > 0;
@@ -54,10 +56,12 @@ export default function LifeReport({ report, walletPath = true, packMode = false
       {report.unassignedPercent && <p className="chain-fine">Many small influences: {report.unassignedPercent} goes to the city.</p>}
     </section>
     <section className="chain-card life-report-mint" aria-labelledby={mintId}>
-      <h2 id={mintId}>{tooEarly ? "No fate pack for this life" : "Mint this life?"}</h2>
+      <h2 id={mintId}>{tooEarly ? (earnedNone ? "No card earned in this life" : "No fate pack for this life") : "Mint this life?"}</h2>
       {tooEarly ? (
         <>
-          <p>This life ended before adulthood (age 18), so no booster cards (0 cards) are unlocked for minting.</p>
+          <p>{earnedNone
+            ? "Cards are earned, not drawn. This life did not contribute on a historical figure's path, so there is no card to mint. Join a figure's path and earn a contributor title, or complete the figure's defining work, to open a pack."
+            : "This life ended before adulthood (age 18), so no booster cards (0 cards) are unlocked for minting."}</p>
           {error && <p className="chain-error" role="alert">{error}</p>}
           <div className="chain-actions">
             <button className="chain-primary" type="button" disabled={busy} onClick={onCloseTooEarly ?? onDecline}>{busy ? "Closing…" : "Close this life"}<span aria-hidden="true">→</span></button>
@@ -65,8 +69,8 @@ export default function LifeReport({ report, walletPath = true, packMode = false
         </>
       ) : (
         <>
-          <p>{packMode ? packSummary : "Keep this life"} for {feeText} NEAR. {shaped ? `${sourceSharePercent}% goes to the source lives above, by their share. The rest goes to the protocol treasury.` : "No one shaped it, so the fee goes to the protocol treasury."}</p>
-          {packMode && <p>{revealSummary}, then choose one card from the opened pack to mint as your permanent Life NFT. Outcomes are final once opened. {walletPath ? "Your wallet confirms every payment. Network gas is separate." : "You’ll confirm the price first."}</p>}
+          <p>{packMode ? `${packSummary} for free, then mint one card for ${feeText} NEAR.` : `Keep this life for ${feeText} NEAR.`} {shaped ? `${sourceSharePercent}% goes to the source lives above, by their share. The rest goes to the protocol treasury.` : "No one shaped it, so the fee goes to the protocol treasury."}</p>
+          {packMode && <p>{revealSummary}, then click the card you want and mint it as your permanent Life NFT. Outcomes are final once opened. {walletPath ? "Your wallet confirms the payment. Network gas is separate." : "You’ll confirm the price first."}</p>}
           <fieldset className="life-report-actions" disabled={busy}>
             <legend>What will you do for the lives that meet you?</legend>
             {menu.map(option => <label key={option.id} className={option.id === selectedAction ? "is-selected" : ""}>
@@ -77,7 +81,7 @@ export default function LifeReport({ report, walletPath = true, packMode = false
           </fieldset>
           {error && <p className="chain-error" role="alert">{error}</p>}
           <div className="chain-actions">
-            <button className="chain-primary" type="button" disabled={busy || !selectedAction} onClick={onMint}>{busy ? (walletPath ? "Confirm in wallet…" : "Confirming…") : packMode ? `Open pack · ${feeText} NEAR` : `Mint for ${feeText} NEAR`}<span aria-hidden="true">→</span></button>
+            <button className="chain-primary" type="button" disabled={busy || !selectedAction} onClick={onMint}>{busy ? (walletPath ? "Confirm in wallet…" : "Confirming…") : packMode ? "Open pack · free" : `Mint for ${feeText} NEAR`}<span aria-hidden="true">→</span></button>
             <button className="chain-secondary" type="button" disabled={busy} onClick={onDecline}>Not this time</button>
           </div>
         </>

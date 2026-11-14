@@ -96,6 +96,21 @@
   background: #f9f5e9;
   min-width: 0;
 }
+.npc-person-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.npc-person-avatar {
+  width: 56px;
+  height: 70px;
+  flex-shrink: 0;
+  border: 1px solid #b2a98b;
+  background: #f2ead3;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  object-fit: cover;
+}
 .npc-person header p,
 .npc-person small {
   font-size: 10px;

@@ -18,3 +18,15 @@
 .capability-tree .capability-node.tier-unavailable.is-off-path{opacity:.3}
 .capability-tree .capability-legend .is-unavailable{opacity:.55}
 .character-management.is-skills>.life-health-panel,.character-management.is-skills>.character-background,.character-management.is-skills>.character-activity-status,.character-management.is-skills>.character-recent-outcome{display:none}
+
+/* The Skill tree tab takes nearly the whole screen and opens on the whole tree. On wide screens the selected
+   skill's details sit beside the map, so the map keeps its full height. */
+.detail-dialog.character-dialog:has(.character-management.is-skills){width:min(1800px,calc(100vw - 24px));max-width:1800px;max-height:calc(100dvh - 24px)}
+.detail-dialog.character-dialog:has(.character-management.is-skills) .dialog-content{padding:28px 24px 24px}
+.capability-tree .capability-viewport.is-fitted{cursor:default}
+@media(min-width:1180px){
+  .character-management.is-skills .capability-tree .capability-workspace{grid-template-columns:minmax(0,1fr) minmax(300px,360px);align-items:start}
+  .character-management.is-skills .capability-tree .capability-viewport{height:clamp(480px,calc(100dvh - 410px),1200px)}
+  .character-management.is-skills .capability-tree .capability-inspector{grid-template-columns:minmax(0,1fr);max-height:clamp(480px,calc(100dvh - 410px),1200px);overflow:auto}
+}
+.character-section.has-section-help .capability-heading,.character-section.has-section-help .deep-capability-heading{padding-right:34px}

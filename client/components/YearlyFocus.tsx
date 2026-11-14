@@ -7,6 +7,10 @@ import { trainingSkillChanges } from "../models/skill-tree.ts";
 import { focusActivity, focusStatus, yearlyDeclineNotes, availableYearlyFocuses } from "../models/yearly-focus.ts";
 import { yearlyFocusFirstAge } from "../models/yearly-focus.ts";
 import SectionHelp from "./SectionHelp.tsx";
+import PixelIcon from "./PixelIcon.tsx";
+import { SectionStep } from "./YearChecklist.tsx";
+import { LockedSection } from "./Locked.tsx";
+import { sectionStep } from "../models/section-steps.ts";
 import type { YearlyFocusId } from "../models/yearly-focus.ts";
 import "../styles/yearly-focus.css";
 
@@ -16,18 +20,21 @@ export default function YearlyFocus({ life, world, focusId, activities: provided
   const id = useId();
   const activities = useMemo(() => providedActivities ?? engineForLife(life).getActivities(life), [providedActivities, life]);
   const focuses = availableYearlyFocuses(world, life);
-  if (life.age < yearlyFocusFirstAge(world, life) || life.phase === "ended") return null;
+  const firstAge = yearlyFocusFirstAge(world, life);
+  if (life.phase === "ended" || !Number.isFinite(firstAge)) return null;
+  if (life.age < firstAge) return <LockedSection step={sectionStep("focus")} id="focus" title="This year’s focus" unlock={`Unlocks at age ${firstAge}`}
+    note={`Then pick what you practise each year: ${focuses.filter(focus => focus.activityId).slice(0, 3).map(focus => focus.label).join(", ")} and more.`} />;
   const selected = activities.find(activity => activity.id === focusActivity(world, focusId)?.id);
   const skillChanges = selected ? trainingSkillChanges(selected, world, life) : [];
   return <section className="yearly-focus has-section-help" aria-labelledby={`${id}-title`}>
-    <h2 id={`${id}-title`}>This year’s focus <small>Change anytime</small></h2>
+    <h2 id={`${id}-title`}><span className="yearly-focus-title"><SectionStep step={sectionStep("focus")} />This year’s focus</span> <small>Change anytime</small></h2>
     <div className="yearly-focus-options" role="group" aria-label="Yearly focus">{focuses.map(focus => {
       const activity = focusActivity(world, focus.id);
       if (focus.activityId && !activity) return null;
       const ageLocked = Boolean(activity && life.age < (activity.minAge ?? 0));
       return <button key={focus.id} type="button" aria-pressed={focusId === focus.id} disabled={ageLocked}
         title={ageLocked ? `Available from age ${activity!.minAge}.` : undefined} onClick={() => onChange(focus.id)}>
-        {focus.label}{ageLocked && <span>Age {activity!.minAge}+</span>}
+        {focus.label}{ageLocked && <span><PixelIcon name="lock" size={9} /> Age {activity!.minAge}</span>}
       </button>;
     })}</div>
     {selected && <div className="yearly-focus-impact">
