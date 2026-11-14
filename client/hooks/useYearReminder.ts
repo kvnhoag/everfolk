@@ -1,34 +1,45 @@
 import { useEffect, useRef, useState } from "react";
 import type { YearReminder } from "../components/EventNotificationStack.tsx";
 import { flashSections } from "../lib/section-flash.ts";
-import { YEAR_TASK_TARGETS, yearReminderKey, yearReminderText, yearTaskLabel, yearTasks, type YearTaskFacts } from "../models/year-reminder.ts";
+import { stillOngoing, yearGuideFacts, type GuideInput } from "../models/year-guide.ts";
+import { YEAR_TASK_TARGETS, yearReminderKey, yearReminderLine, yearTask, type YearTask } from "../models/year-reminder.ts";
+import { guidePointers } from "../state/guide-pointers.ts";
+
+export interface YearReminderOptions {
+  /** The life and what it shows; `pointed` and `ongoing` are filled in here. */
+  guide: Omit<GuideInput, "pointed" | "ongoing">;
+  lifeKey: string;
+  /** The game screen is in view with nothing over it. */
+  enabled: boolean;
+  /** Remember pointed steps in this browser (not for preview lives). */
+  persistent: boolean;
+}
 
 /**
- * Once a year, when the year is running, returns a short notice naming what the player can still do (fields, focus,
- * yearly action) and lights up only the first of them, so one thing is in focus at a time. Each year is announced
- * once per life on this page.
+ * Once a year, when the year runs, names the one new thing the player can do (the next step not tried yet, or a
+ * problem a click fixes) and lights up exactly that section with the same words. A step is pointed at once per life
+ * and a problem once while it lasts, so nothing is named year after year.
  */
-export function useYearReminder(facts: YearTaskFacts, lifeKey: string, enabled: boolean): YearReminder | null {
+export function useYearReminder({ guide, lifeKey, enabled, persistent }: YearReminderOptions): YearReminder | null {
   const [reminder, setReminder] = useState<YearReminder | null>(null);
   const announced = useRef(new Set<string>());
-  const tasks = yearTasks(facts);
-  const key = yearReminderKey(lifeKey, facts.age);
-  const ready = enabled && tasks.length > 0;
+  // Problems already named; a solved one drops out, so it may be named again if it comes back.
+  const ongoing = useRef<readonly YearTask[]>([]);
+  ongoing.current = stillOngoing(ongoing.current, { overfull: guide.overfull ?? false, planProblem: guide.planProblem ?? false });
+  const pick = yearTask(yearGuideFacts({ ...guide, pointed: guidePointers.read(lifeKey, persistent), ongoing: ongoing.current }));
+  const key = yearReminderKey(lifeKey, guide.life.age);
+  const ready = enabled && pick !== null;
 
   useEffect(() => {
-    if (!ready || announced.current.has(key)) return;
+    if (!ready || !pick || announced.current.has(key)) return;
     announced.current.add(key);
-    setReminder({ key, title: "Plan this year", body: yearReminderText(tasks) });
-    return undefined;
+    if (pick.reason === "learn") guidePointers.add(lifeKey, pick.task, persistent);
+    else ongoing.current = [...ongoing.current, pick.task];
+    const line = yearReminderLine(pick);
+    setReminder({ key, title: "Plan this year", body: line.body });
+    // The glow is not cancelled when the year moves on, so it always fades by itself.
+    flashSections([{ selectors: YEAR_TASK_TARGETS[pick.task], label: line.label }]);
   }, [ready, key]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // The glow follows the notice; it is not cancelled when the year moves on, so it always fades by itself.
-  const flashed = useRef("");
-  useEffect(() => {
-    if (!reminder || flashed.current === reminder.key) return;
-    flashed.current = reminder.key;
-    if (tasks[0]) flashSections([{ selectors: YEAR_TASK_TARGETS[tasks[0]], label: `This year: ${yearTaskLabel(tasks[0])}` }]);
-  }, [reminder?.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return reminder && reminder.key.startsWith(`year-reminder:${lifeKey}:`) ? reminder : null;
 }

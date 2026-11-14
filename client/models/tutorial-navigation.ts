@@ -1,15 +1,8 @@
 import type { TutorialHintId } from "./tutorial-hints.ts";
-import { availableHints, hintAvailable, triggeredHints, type TutorialContext, type TutorialView } from "./tutorial-triggers.ts";
+import { availableHints, hintAvailable, triggeredHints, type TutorialContext } from "./tutorial-triggers.ts";
 
 /** "auto": the game opened a hint at its stage. "manual": the player opened the tutorial (button or "?"). */
 export type TutorialMode = "auto" | "manual";
-
-/** Where the last card closed; automatic hints wait until the player reaches a new screen, popup tab or year. */
-export interface TutorialQuiet {
-  view: TutorialView;
-  section: string | null;
-  age: number | null;
-}
 
 /** Sections to light up instead of opening a card, when the player has turned tips off. */
 export interface TutorialFlash {
@@ -27,10 +20,9 @@ export interface TutorialState {
   mode: TutorialMode;
   /** The current step. Kept after closing so the tutorial reopens where it was. */
   hintId: TutorialHintId | null;
-  /** The hints the open card can page through with Back and Next tip. */
+  /** The hints the open card can page through with Back and Next tip; an automatic tip stands alone. */
   queue: readonly TutorialHintId[];
   seen: readonly TutorialHintId[];
-  quiet: TutorialQuiet | null;
   /** Changes on every opening, so the card animates and takes focus again. */
   run: number;
 }
@@ -41,9 +33,13 @@ export type TutorialAction =
   | { type: "next" }
   | { type: "back" }
   | { type: "close" }
+  /** The player used these sections: their tips are learned, and an automatic tip on one of them closes. */
+  | { type: "used"; hintIds: readonly TutorialHintId[] }
+  /** A life was entered mid-way (a loaded save): tips whose stage already passed count as seen. */
+  | { type: "enter"; passed: readonly TutorialHintId[] }
   | { type: "tips"; on: boolean };
 
-export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], quiet: null, run: 0 });
+export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], run: 0 });
 
 /** Shown when the player asks for help on a screen that has no tips of its own. */
 const FALLBACK_HINT: TutorialHintId = "about";
@@ -54,10 +50,6 @@ function markSeen(seen: readonly TutorialHintId[], id: TutorialHintId | null): r
 
 function sameList(a: readonly string[], b: readonly string[]): boolean {
   return a.length === b.length && a.every((item, index) => item === b[index]);
-}
-
-function quietHere(quiet: TutorialQuiet | null, context: TutorialContext): boolean {
-  return quiet !== null && quiet.view === context.view && quiet.section === context.characterSection && quiet.age === (context.life?.age ?? null);
 }
 
 /** The hint the Tutorial button opens: the current step while it is on screen, else this screen's most relevant one. */
@@ -72,13 +64,16 @@ function manualQueue(context: TutorialContext, hintId: TutorialHintId): Tutorial
   return available.includes(hintId) ? available : [hintId, ...available];
 }
 
+/**
+ * Opens the next unseen tip that has reached its stage. One tip at a time: the others wait their turn and open, in
+ * teaching order, as soon as this one is closed or its section used.
+ */
 function autoOpen(state: TutorialState, context: TutorialContext): TutorialState {
-  if (quietHere(state.quiet, context)) return state;
-  const queue = triggeredHints(context, state.seen);
-  if (queue.length === 0) return state;
+  const due = triggeredHints(context, state.seen);
+  if (due.length === 0) return state;
   // Tips off: each new section only glows once. It counts as seen, so it does not glow again.
-  if (!state.tipsOn) return { ...state, seen: queue.reduce(markSeen, state.seen), flash: { ids: queue, run: (state.flash?.run ?? 0) + 1 } };
-  return { ...state, open: true, mode: "auto", hintId: queue[0], queue, run: state.run + 1 };
+  if (!state.tipsOn) return { ...state, seen: due.reduce(markSeen, state.seen), flash: { ids: due, run: (state.flash?.run ?? 0) + 1 } };
+  return { ...state, open: true, mode: "auto", hintId: due[0], queue: [due[0]], run: state.run + 1 };
 }
 
 /** The screen or the life changed: keep, follow, or quietly drop the open card, then let a new stage's hint open. */
@@ -98,9 +93,25 @@ function sync(state: TutorialState, context: TutorialContext): TutorialState {
   return autoOpen({ ...state, open: false }, context);
 }
 
+/** Closing marks the tip seen; the next waiting tip, if any, takes its place. */
 function close(state: TutorialState, context: TutorialContext): TutorialState {
   if (!state.open) return state;
-  return { ...state, open: false, seen: markSeen(state.seen, state.hintId), quiet: { view: context.view, section: context.characterSection, age: context.life?.age ?? null } };
+  return autoOpen({ ...state, open: false, seen: markSeen(state.seen, state.hintId) }, context);
+}
+
+function used(state: TutorialState, context: TutorialContext, hintIds: readonly TutorialHintId[]): TutorialState {
+  const fresh = hintIds.filter(id => !state.seen.includes(id));
+  const closes = state.open && state.mode === "auto" && state.hintId !== null && hintIds.includes(state.hintId);
+  if (closes) return close({ ...state, seen: fresh.reduce(markSeen, state.seen) }, context);
+  return fresh.length ? { ...state, seen: fresh.reduce(markSeen, state.seen) } : state;
+}
+
+function enter(state: TutorialState, context: TutorialContext, passed: readonly TutorialHintId[]): TutorialState {
+  const fresh = passed.filter(id => !state.seen.includes(id));
+  if (fresh.length === 0) return state;
+  const seen = fresh.reduce(markSeen, state.seen);
+  const stale = state.open && state.mode === "auto" && state.hintId !== null && fresh.includes(state.hintId);
+  return stale ? autoOpen({ ...state, seen, open: false }, context) : { ...state, seen };
 }
 
 /** Pure tutorial transitions. Returns the same object when nothing changes, so subscribers stay quiet. */
@@ -112,6 +123,8 @@ export function tutorialReducer(state: TutorialState, action: TutorialAction, co
       return { ...state, open: true, mode: "manual", hintId, queue: manualQueue(context, hintId), run: state.run + 1 };
     }
     case "close": return close(state, context);
+    case "used": return used(state, context, action.hintIds);
+    case "enter": return enter(state, context, action.passed);
     // Paging is the player asking for the next tip, so it shows like a tip they opened: it never waits invisibly
     // for a section that is not drawn right now (a faded notice, a board hidden during a decision).
     case "next": {

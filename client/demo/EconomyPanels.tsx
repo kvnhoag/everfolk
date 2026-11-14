@@ -49,6 +49,7 @@ export interface ComparisonSide {
 }
 
 export type EconomyTabId = "market" | "farm" | "service" | "people" | "works";
+const ALL_TABS: readonly EconomyTabId[] = ["market", "farm", "service", "people", "works"];
 
 interface Props {
   screen: DemoScreen;
@@ -69,6 +70,8 @@ interface Props {
   checkPlan?(flaxPlots: number): PlantingCheck;
   /** The age planting opens for the player; null once open. */
   plantingLockedUntil?: number | null;
+  /** The tabs open to the player at this age, in order; tabs that open later are not drawn. Defaults to all. */
+  tabs?: readonly EconomyTabId[];
   onPlan(flaxPlots: number): string | null;
   onAutoPlay(on: boolean): void;
   onDelegate(agent: string | null): string | null;
@@ -113,6 +116,7 @@ export default function EconomyPanels({
   previewTrade,
   checkPlan,
   plantingLockedUntil = null,
+  tabs = ALL_TABS,
   onPlan,
   onAutoPlay,
   onDelegate,
@@ -125,7 +129,9 @@ export default function EconomyPanels({
   const titleId = useId();
   const slot = useRef(false);
   // Opens on a tab the player can use: Farm & Granary while the market is still closed to them.
-  const [activeTab, setActiveTab] = useState<EconomyTabId>(() => life && world?.demo && life.age < tuning(world.demo.market).minTradeAge ? "farm" : "market");
+  const [chosenTab, setActiveTab] = useState<EconomyTabId>(() => life && world?.demo && life.age < tuning(world.demo.market).minTradeAge ? "farm" : "market");
+  // A tab that has not opened yet is never shown: the deck falls back to its first open tab.
+  const activeTab: EconomyTabId = tabs.includes(chosenTab) ? chosenTab : tabs[0] ?? chosenTab;
   const [item, setItem] = useState<TradeItem>("grain");
   const [side, setSide] = useState<"buy" | "sell">("sell");
   const [quantity, setQuantity] = useState(1);
@@ -233,51 +239,56 @@ export default function EconomyPanels({
           <h2 id={titleId} className="demo-economy-title">This year in the fields</h2>
         </div>
         <div className="demo-deck-tabs" role="tablist" aria-label="Economy command deck">
-          <button
+          {tabs.includes("market") && <button
             type="button"
             role="tab"
+            data-tab="market"
             aria-selected={activeTab === "market"}
             className={`demo-deck-tab${activeTab === "market" ? " is-active" : ""}`}
             onClick={() => setActiveTab("market")}
           >
             Market &amp; Trade{tradeLockedUntil !== null && <TabLock age={tradeLockedUntil} />}
-          </button>
-          <button
+          </button>}
+          {tabs.includes("farm") && <button
             type="button"
             role="tab"
+            data-tab="farm"
             aria-selected={activeTab === "farm"}
             className={`demo-deck-tab${activeTab === "farm" ? " is-active" : ""}`}
             onClick={() => setActiveTab("farm")}
           >
             Farm &amp; Granary
-          </button>
-          <button
+          </button>}
+          {tabs.includes("service") && <button
             type="button"
             role="tab"
+            data-tab="service"
             aria-selected={activeTab === "service"}
             className={`demo-deck-tab${activeTab === "service" ? " is-active" : ""}`}
             onClick={() => setActiveTab("service")}
           >
             Career &amp; Army{careerLockedUntil !== null && <TabLock age={careerLockedUntil} />}
-          </button>
-          <button
+          </button>}
+          {tabs.includes("people") && <button
             type="button"
             role="tab"
+            data-tab="people"
             aria-selected={activeTab === "people"}
             className={`demo-deck-tab${activeTab === "people" ? " is-active" : ""}`}
             onClick={() => setActiveTab("people")}
           >
             People &amp; Town
-          </button>
-          <button
+          </button>}
+          {tabs.includes("works") && <button
             type="button"
             role="tab"
+            data-tab="works"
             aria-selected={activeTab === "works"}
             className={`demo-deck-tab${activeTab === "works" ? " is-active" : ""}`}
             onClick={() => setActiveTab("works")}
           >
             Works &amp; Stewards
-          </button>
+          </button>}
         </div>
       </header>
 

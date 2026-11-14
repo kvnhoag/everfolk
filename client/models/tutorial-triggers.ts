@@ -1,3 +1,4 @@
+import type { GameSection } from "./onboarding-sections.ts";
 import { TUTORIAL_HINT_IDS, type TutorialHintId } from "./tutorial-hints.ts";
 
 /**
@@ -10,19 +11,18 @@ export type TutorialView = "home" | "new-life" | "game" | "decision" | "characte
 
 /** What the current life shows; read from the game's own state. */
 export interface TutorialLifeFacts {
+  /** Which life this is; a new key is a life entered (born, continued or loaded). */
+  lifeKey: string;
   age: number;
   ended: boolean;
   decisionPending: boolean;
   learnedSkills: number;
-  focusShown: boolean;
-  resourcesShown: boolean;
-  wealthShown: boolean;
-  /** The Household & Town command deck is on screen. */
-  deckShown: boolean;
+  /** The life screen's sections drawn at this age (see onboarding-sections). */
+  sections: readonly GameSection[];
   /** At least one notification is on screen. */
   notificationShown: boolean;
-  /** The age the world's grain market opens, or null when the world has no market. */
-  tradeAge: number | null;
+  /** Tips whose stage passed before this year; seen at once when a life is entered mid-way (a loaded save). */
+  passed: readonly TutorialHintId[];
 }
 
 export interface TutorialContext {
@@ -45,6 +45,10 @@ const onGame = (context: TutorialContext, life: TutorialLifeFacts | null): life 
 const fromAge = (age: number): HintRule["triggered"] => (_context, life) => life.age >= age;
 const view = (name: TutorialView): HintRule => ({ available: context => context.view === name });
 const never = () => false;
+/** On the game screen while the section is drawn. */
+const shows = (section: GameSection): HintRule["available"] => (context, life) => onGame(context, life) && life.sections.includes(section);
+/** Help only: the section's "?" opens it, but it never opens by itself (another tip already introduces it). */
+const helpOnly = (rule: HintRule): HintRule => ({ ...rule, triggered: never });
 
 /** The age the "Plan your fields" tip opens; the yearly reminder to plan starts the same year. */
 /** The household's decisions, fields included, become the player's at 16 (adulthood in the world's decision stages). */
@@ -59,23 +63,24 @@ const RULES: Record<TutorialHintId, HintRule> = {
   "time-bar": { available: onGame },
   "decision": { available: (context, life) => context.view === "decision" || onGame(context, life), triggered: (_context, life) => life.decisionPending },
   "ending": { available: (context, life) => onGame(context, life) && life.ended },
-  "rail": { available: onGame, triggered: fromAge(2) },
-  "resources": { available: (context, life) => onGame(context, life) && life.resourcesShown, triggered: fromAge(3) },
-  "planting": { available: (context, life) => onGame(context, life) && life.resourcesShown && !life.ended, triggered: fromAge(PLANTING_HINT_AGE) },
+  "rail": helpOnly({ available: onGame }),
+  "resources": { available: shows("resources") },
+  "planting": { available: (context, life) => shows("planting")(context, life) && !life!.ended },
   "scene": { available: onGame, triggered: fromAge(1) },
-  "focus": { available: (context, life) => onGame(context, life) && life.focusShown },
-  "wealth": { available: (context, life) => onGame(context, life) && life.wealthShown, triggered: fromAge(4) },
-  "life-record": { available: onGame, triggered: fromAge(5) },
+  "focus": { available: (context, life) => shows("focus")(context, life) && !life!.ended },
+  "wealth": { available: shows("wealth") },
+  "life-record": helpOnly({ available: onGame }),
   // The action cards are drawn only when no decision is waiting, so the tip waits for that too.
-  "yearly-action": { available: (context, life) => onGame(context, life) && life.age >= 6 && !life.ended && !life.decisionPending },
-  "command-deck": { available: (context, life) => onGame(context, life) && life.deckShown, triggered: fromAge(8) },
-  "market": { available: (context, life) => onGame(context, life) && life.deckShown && life.tradeAge !== null && life.age >= life.tradeAge },
+  "yearly-action": { available: (context, life) => shows("yearly-action")(context, life) && !life!.ended && !life!.decisionPending },
+  // The market tip introduces the deck; the deck's own tip stays behind its "?".
+  "command-deck": helpOnly({ available: (context, life) => shows("command-deck")(context, life) && !life!.ended }),
+  "market": { available: (context, life) => shows("deck-market")(context, life) && !life!.ended },
   "notifications": { available: onGame, triggered: (_context, life) => life.notificationShown },
   "skills": {
-    available: (context, life) => context.view === "character" || onGame(context, life) && life.learnedSkills > 0,
+    available: (context, life) => context.view === "character" || shows("skill-tree")(context, life),
     triggered: (context, life) => context.view === "character" ? context.characterSection === "skills" : life.learnedSkills > 0,
   },
-  "character": view("character"),
+  "character": { available: (context, life) => context.view === "character" || shows("character")(context, life) },
   "weave": view("weave"),
   "nft-market": view("nft-market"),
   "figures": view("figures"),
@@ -83,11 +88,14 @@ const RULES: Record<TutorialHintId, HintRule> = {
   "about": { available: never },
 };
 
-/** Which hint opens first when several fire at once: first-visit screens, then events, then the layout. */
+/**
+ * Which hint opens first when several fire at once: first-visit screens, then events, then the life's sections in the
+ * order the early years teach them.
+ */
 const AUTO_ORDER: readonly TutorialHintId[] = [
-  "welcome", "roll", "weave", "nft-market", "figures", "mine", "character", "skills",
-  "time-bar", "decision", "ending", "notifications", "market", "yearly-action", "focus",
-  "scene", "rail", "resources", "planting", "wealth", "life-record", "command-deck",
+  "welcome", "roll", "weave", "nft-market", "figures", "mine",
+  "time-bar", "decision", "ending", "scene", "notifications",
+  "focus", "yearly-action", "wealth", "resources", "market", "character", "skills", "planting",
 ];
 
 export function hintAvailable(id: TutorialHintId, context: TutorialContext): boolean {

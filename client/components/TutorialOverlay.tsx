@@ -10,6 +10,10 @@ import { tutorialPosition, type TutorialState } from "../models/tutorial-navigat
 import { tutorialStore } from "../state/tutorial-store.ts";
 import { tipShownStore } from "../state/tip-shown.ts";
 import { flashSections } from "../lib/section-flash.ts";
+import { usedSectionTips } from "../lib/section-use.ts";
+import { blockedByTipLock } from "../lib/tip-lock.ts";
+import { guidedStepLocked } from "../models/guided-step.ts";
+import { useTipShield } from "../hooks/useTipShield.ts";
 import TutorialCard from "./TutorialCard.tsx";
 
 function showOnTop(card: HTMLDivElement): void {
@@ -46,10 +50,13 @@ function ShownTutorial({ state, host, closing, onClosed }: ShownProps) {
   useEffect(() => { if (card.current) showOnTop(card.current); }, [host]);
   // Only a tutorial the player opened takes focus, once it is visible; automatic tips never pull focus from the game.
   useEffect(() => { if (manual && !closing && layout.ready) card.current?.focus({ preventScroll: true }); }, [hintKey, layout.ready]); // eslint-disable-line react-hooks/exhaustive-deps
+  // A guided step on the page locks everything but its section and the tip; the veil shows that and says why.
+  const locked = guidedStepLocked({ tipsOn: state.tipsOn, tipShown: layout.ready && !closing, mode: state.mode, hosted: host !== null });
+  const shield = useTipShield(locked, hint.targets, card.current, layout.spotlight);
   const { index, total } = tutorialPosition(state);
   return <TutorialCard cardRef={card} panelRef={panel} hint={hint} index={index} total={total} mode={state.mode} missing={layout.missing}
     ready={layout.ready} settled={settled} closing={closing} offscreen={layout.offscreen} position={layout.card} spotlight={layout.spotlight}
-    tipsOn={state.tipsOn} onTipsChange={tutorialStore.setTipsOn}
+    tipsOn={state.tipsOn} onTipsChange={tutorialStore.setTipsOn} shield={shield}
     onBack={tutorialStore.back} onNext={tutorialStore.next} onClose={tutorialStore.close} onReveal={layout.reveal} />;
 }
 
@@ -63,6 +70,16 @@ export default function TutorialOverlay() {
   const host = useTutorialHost();
   const [settledRun, setSettledRun] = useState(0);
   const onClosed = useCallback(() => setSettledRun(state.run), [state.run]);
+  // During a guided step, clicks outside its section are stopped. Otherwise, using a section once teaches it: its tip
+  // closes if open and is never shown later.
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      if (blockedByTipLock(event.target)) { event.preventDefault(); event.stopImmediatePropagation(); return; }
+      tutorialStore.used(usedSectionTips(event.target));
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, []);
   // Tips off: a new section's border glows and fades instead of opening a card.
   const flashRun = state.flash?.run ?? 0;
   useEffect(() => {
