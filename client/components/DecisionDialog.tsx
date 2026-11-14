@@ -7,7 +7,9 @@ import ChoiceImpact from "./ChoiceImpact.tsx";
 import { useGameModal } from "../hooks/useGameModal.ts";
 import { ChoicePreview } from "./CompactSkillPanel.tsx";
 import type { DemoScreen, TownFigureView } from "../demo/screen.ts";
+import PixelIcon from "./PixelIcon.tsx";
 import PixelPortrait from "./PixelPortrait.tsx";
+import { hasReturningIllness } from "../models/health-risk.ts";
 import {
   moneylenderPortraitState,
   personPortraitState,
@@ -187,6 +189,7 @@ function OpenDecisionDialog({
     <div className="life-decision-content">
       <h2 ref={heading} tabIndex={-1} id={`${id}-title`}>{displayProse(event.title)}</h2>
       <p id={`${id}-body`}>{displayProse(event.text)}</p>
+      {Boolean(world.health && event.id === world.health.careDecision && hasReturningIllness(life)) && <p className="life-decision-danger" role="status"><PixelIcon name="warn" size={14} />Your illness is getting worse.</p>}
       <div className="life-decision-board-grid">
         <div className="life-decision-options" aria-label="Options">{choices.map((choice, index) => <button className={`life-choice-commit${preview?.id === choice.id ? " is-previewed" : ""}`} key={choice.id} type="button" aria-controls={`${id}-choice-preview`} aria-keyshortcuts="ArrowRight" onPointerEnter={event => { if (event.pointerType !== "touch") setPreviewId(choice.id); }} onFocus={() => setPreviewId(choice.id)} onKeyDown={event => {
           if (event.key === "ArrowRight") {
