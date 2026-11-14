@@ -31,19 +31,24 @@ function context(change: Partial<SceneContext> = {}): SceneContext {
 
 test("resolved events select their authored backdrop without changing the actor situation", () => {
   for (const [eventId, scene, file] of [
-    ["child-route-care-floating-reed", "childhood", "reed-washing-court"],
-    ["child-route-learning-shadow-marks", "learning", "shadow-mark-terrace"],
-    ["child-route-training-vessel-packing", "work", "pottery-packing-room"],
+    ["child-route-care-floating-reed", "childhood", "bg_reed_basin_480x224"],
+    ["child-route-learning-shadow-marks", "learning", "bg_shadow_terrace_480x224"],
+    ["child-route-training-vessel-packing", "work", "bg_vessel_packing_480x224"],
   ] as const) {
     assert.ok(world.events.some(event => event.id === eventId), eventId);
     const life = lifeAt(10);
     const accepted = resolveLifeBanner(life, world, context({ kind: "outcome", eventId, scene }));
     const generic = resolveLifeBanner(life, world, context({ kind: "outcome", scene }));
-    assert.equal(accepted.assetSrc, `/assets/pixel/banners/events/${file}.svg`);
+    assert.equal(accepted.assetSrc, `/assets/pixel/banners-concept1/${file}.png`);
+    assert.equal(accepted.bannerStyle, "concept1-plate");
+    assert.equal(accepted.assetWidth, 480);
+    assert.equal(accepted.assetHeight, 224);
+    assert.equal(accepted.actorVisible, true);
     assert.equal(accepted.situation, generic.situation);
     assert.equal(accepted.actorPose, generic.actorPose);
     const pending = resolveLifeBanner(life, world, context({ kind: "pending", eventId, scene }));
     assert.doesNotMatch(pending.assetSrc, /\/events\//);
+    assert.notEqual(pending.assetSrc, accepted.assetSrc);
     const overridden = resolveLifeBanner(life, world, context({ kind: "outcome", eventId, scene }), {
       eventVisuals: { [eventId]: { scene: "family", motion: "gather" } },
     });
@@ -126,6 +131,10 @@ test("pending offers never depict an accepted voyage, partner, child or business
   assert.equal(resolveLifeBanner(life, world, dating).situation, "civic");
   const proposal = context({ kind: "outcome", eventId: "business-proposal-person-harbor", scene: "history-city", motion: "work" });
   assert.equal(resolveLifeBanner(life, world, proposal).situation, "civic");
+  const declinedLoan = context({ kind: "outcome", eventId: "lender-offer", scene: "history-city", motion: "work" });
+  assert.equal(resolveLifeBanner(life, world, declinedLoan).situation, "civic");
+  const extendedDebtor = { ...life, economy: { ...life.economy!, loan: { balance: 120, borrowedAge: life.age - 1, dueAge: life.age + 4, extensions: 0 } } };
+  assert.equal(resolveLifeBanner(extendedDebtor, world, declinedLoan).situation, "debt");
   const family = context({ kind: "event", eventId: "a-new-generation", scene: "family", motion: "gather" });
   assert.equal(resolveLifeBanner(life, world, family).situation, "home");
   life.character!.relationships!.partners["person-harbor"] = { closeness: 40, lastContactAge: 24, roles: ["friend", "business-partner"] };
@@ -166,16 +175,53 @@ test("all banner IDs have a stable asset path and reading the banner leaves life
   assert.deepEqual(Object.keys(BANNER_SITUATIONS).sort(), [...BANNER_SITUATION_IDS].sort());
   const life = lifeAt(42), before = structuredClone(life), pack = structuredClone(world);
   const banner = resolveLifeBanner(life, world, context());
-  assert.equal(banner.assetSrc, `/assets/pixel/banners/${banner.situation}.svg`);
+  assert.equal(banner.assetSrc, "/assets/pixel/banners-concept1/bg_alexandria_street_480x224.png");
+  assert.equal(banner.fallbackAssetSrc, `/assets/pixel/banners/${banner.situation}.svg`);
+  assert.equal(banner.assetWidth, 480);
+  assert.equal(banner.assetHeight, 224);
+  const workshopLife = lifeAt(24);
+  workshopLife.character!.jobId = "potter";
+  const workshopBanner = resolveLifeBanner(workshopLife, world);
+  assert.equal(workshopBanner.assetSrc, "/assets/pixel/banners-concept1/bg_pottery_kiln_480x224.png");
+  assert.equal(workshopBanner.assetWidth, 480);
+  assert.equal(workshopBanner.assetHeight, 224);
   assert.ok(banner.caption.length > 0); assert.match(banner.alt, /middle years/);
   assert.deepEqual(life, before); assert.deepEqual(world, pack);
 });
 
-test("a child with an established apprenticeship keeps the childhood phase and the actual work setting", () => {
-  const life = lifeAt(12);
+test("Concept 1 backdrops match indoor care, home interior, street, and civilian vs soldier unrest", () => {
+  const infant = lifeAt(0);
+  assert.equal(resolveLifeBanner(infant, world, context()).assetSrc, "/assets/pixel/banners-concept1/bg_home_interior_480x224.png");
+  const newbornBirth = resolveLifeBanner(lifeAt(20), world, context(), { birthReveal: true });
+  assert.equal(newbornBirth.assetSrc, "/assets/pixel/banners-concept1/bg_home_interior_480x224.png");
+
+  const sickFarmer = lifeAt(30);
+  sickFarmer.character!.jobId = "tenant-farmer";
+  sickFarmer.health = { conditions: [{ id: world.health!.conditions[0].id, acquiredYear: sickFarmer.year }] };
+  assert.equal(resolveLifeBanner(sickFarmer, world).assetSrc, "/assets/pixel/banners-concept1/bg_rest_chamber_480x224.png");
+
+  const parent = lifeAt(28);
+  parent.flags.parent = true;
+  assert.equal(
+    resolveLifeBanner(parent, world, context({ id: "activity-28-7-care-for-children", key: "care-for-children", kind: "outcome", scene: "learning", motion: "write" })).assetSrc,
+    "/assets/pixel/banners-concept1/bg_home_interior_480x224.png",
+  );
+  const debtor = lifeAt(28);
+  debtor.economy!.loan = { balance: 40, borrowedAge: 26, dueAge: 28, extensions: 0 };
+  assert.equal(resolveLifeBanner(debtor, world).assetSrc, "/assets/pixel/banners-concept1/bg_home_interior_480x224.png");
+
+  const warContext = context({ kind: "history", eventId: "caesar-in-alexandria", scene: "history-war", motion: "unrest" });
+  assert.equal(resolveLifeBanner(lifeAt(24), world, warContext).assetSrc, "/assets/pixel/banners-concept1/bg_city_unrest_480x224.png");
+  const soldier = lifeAt(24);
+  soldier.character!.jobId = "soldier";
+  assert.equal(resolveLifeBanner(soldier, world, warContext).assetSrc, "/assets/pixel/banners-concept1/bg_military_garrison_480x224.png");
+});
+
+test("a young apprentice shows the youth stage that begins at 13 and the actual work setting", () => {
+  const life = lifeAt(13);
   life.character!.jobId = "apprentice";
   const banner = resolveLifeBanner(life, world, context());
-  assert.equal(banner.title, "Childhood");
-  assert.equal(banner.stage, "child");
+  assert.equal(banner.title, "Youth");
+  assert.equal(banner.stage, "youth");
   assert.equal(banner.situation, "workshop");
 });

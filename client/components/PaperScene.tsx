@@ -1,12 +1,14 @@
+import ArtworkImage from "./ArtworkImage.tsx";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { engineForLife } from "../lib/world-session.ts";
 import { resolveLifeScenes, sceneContextLabel } from "../models/scene-model.ts";
 import type { EventVisuals, MotionId } from "../models/scene-model.ts";
 import { resolveLifeBanner } from "../models/banner-state.ts";
-import { bannerActorSource } from "../models/banner-actor.ts";
+import { bannerActorFallbackSource, bannerActorSource } from "../models/banner-actor.ts";
 import { formatYear } from "../../src/calendar.ts";
 import { readEverfolkStorage } from "../lib/brand-storage.ts";
+import { sceneArtworkBaseUrl } from "../lib/scene-artwork.ts";
 import "../styles/paper-motion.css";
 import "../styles/life-banner.css";
 
@@ -45,6 +47,8 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
   const [reducedMotion, setReducedMotion] = useState(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [visible, setVisible] = useState(() => typeof document === "undefined" || !document.hidden);
   const [inView, setInView] = useState(true);
+  const [failedBannerSrc, setFailedBannerSrc] = useState<string | null>(null);
+  const [failedActorSrc, setFailedActorSrc] = useState<string | null>(null);
   const figure = useRef<HTMLElement>(null);
 
   useEffect(() => { setSelectedKey(primaryKey); }, [primaryKey]);
@@ -61,7 +65,17 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
 
   if (!scene) return null;
   const banner = resolveLifeBanner(life, world, scene, { eventVisuals, birthReveal });
-  const actorSrc = bannerActorSource(life, banner);
+  const cdnBaseUrl = sceneArtworkBaseUrl();
+  const bannerFellBack = failedBannerSrc === banner.assetSrc && banner.assetSrc !== banner.fallbackAssetSrc;
+  const activeAssetSrc = bannerFellBack ? banner.fallbackAssetSrc : banner.assetSrc;
+  const rawActorSrc = bannerActorSource(life, banner);
+  const fallbackActorSrc = bannerActorFallbackSource(life, banner);
+  const actorFellBack = bannerFellBack || (rawActorSrc !== undefined && failedActorSrc === rawActorSrc && rawActorSrc !== fallbackActorSrc);
+  const actorSrc = actorFellBack ? fallbackActorSrc : rawActorSrc;
+  const activeWidth = bannerFellBack ? 240 : banner.assetWidth;
+  const activeHeight = bannerFellBack ? 112 : banner.assetHeight;
+  const actorWidth = actorFellBack ? 240 : banner.assetWidth;
+  const actorHeight = actorFellBack ? 112 : banner.assetHeight;
   const running = motionEnabled && !reducedMotion && !paused && visible && inView && banner.motion !== "still";
   const motionState = reducedMotion ? "reduced" : !motionEnabled ? "off" : banner.motion === "still" ? "still" : paused ? "paused" : !visible || !inView ? "resting" : "running";
   const toggleMotion = () => {
@@ -70,12 +84,16 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
     if (persistentPreferences) try { window.localStorage.setItem(MOTION_KEY, next ? "on" : "off"); } catch { /* The control still works for this visit. */ }
   };
 
-  return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene life-banner ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-situation={banner.situation} data-life-stage={banner.stage} data-motion={banner.motion} data-motion-state={motionState}>
+  return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene life-banner ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-situation={banner.situation} data-life-stage={banner.stage} data-banner-style={banner.bannerStyle} data-motion={banner.motion} data-motion-state={motionState}>
     <div className="paper-scene-copy" hidden={dashboard}><span className="paper-scene-kicker">Age {life.age} · {formatYear(life.year)}</span><h2>{banner.title}</h2><strong className="life-banner-situation">{banner.situationLabel}</strong><p className="paper-event-caption">{banner.caption}</p></div>
     <div className={`paper-illustration-wrap life-banner-art motion-${banner.motion}`} key={`${banner.assetSrc}-${banner.stage}-${banner.actorPose}`} role="img" aria-label={banner.alt}>
-      <img className="life-banner-background" src={banner.assetSrc} alt="" width={240} height={112} fetchPriority="high" />
+      <ArtworkImage className="life-banner-background" src={activeAssetSrc} cdnBaseUrl={cdnBaseUrl} alt="" width={activeWidth} height={activeHeight} fetchPriority="high" onError={() => { if (banner.assetSrc !== banner.fallbackAssetSrc) setFailedBannerSrc(banner.assetSrc); }} />
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} />
-      {actorSrc && <div className={`paper-character-layer life-banner-actor pose-${banner.actorPose}`}><img src={actorSrc} alt="" width={240} height={112} /></div>}
+      {actorSrc && (
+        <div className={`paper-character-layer life-banner-actor pose-${banner.actorPose}`}>
+          <ArtworkImage src={actorSrc} cdnBaseUrl={cdnBaseUrl} alt="" width={actorWidth} height={actorHeight} onError={() => { if (rawActorSrc && rawActorSrc !== fallbackActorSrc) setFailedActorSrc(rawActorSrc); }} />
+        </div>
+      )}
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} front />
     </div>
     <div className="paper-scene-bottom">

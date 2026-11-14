@@ -9,9 +9,10 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine, yearAtAge } from "../../src/index.ts";
 import { BANNER_SITUATION_IDS, resolveLifeBanner } from "../../client/models/banner-state.ts";
-import { bannerActorSource } from "../../client/models/banner-actor.ts";
+import { bannerActorFallbackSource, bannerActorSource } from "../../client/models/banner-actor.ts";
 import pack from "../../worlds/alexandria-sample.json" with { type: "json" };
 import manifest from "../../public/assets/pixel/banners/manifest.json" with { type: "json" };
+import concept1Manifest from "../../public/assets/pixel/banners-concept1/manifest.json" with { type: "json" };
 
 const hooks = registerHooks({ load(url, context, next) {
   if (url.endsWith(".css")) return { format: "module", shortCircuit: true, source: "export {};" };
@@ -53,13 +54,15 @@ function lifeAt(age: number) {
 }
 
 test("all six real life stages and selected identities resolve to shipped actor poses", () => {
-  const actorAssets = new Set(manifest.actors.map(actor => actor.asset));
+  const actorAssets = new Set(concept1Manifest.actors.map(actor => actor.asset));
+  const fallbackAssets = new Set(manifest.actors.map(actor => actor.asset));
   for (const age of [0, 3, 13, 18, 40, 60]) for (const sex of ["female", "male"] as const) for (let variant = 0; variant < 3; variant++) {
     const life = lifeAt(age); life.character!.sex = sex; life.character!.avatarVariant = variant;
     const banner = resolveLifeBanner(life, pack);
     for (const pose of age < 3 ? ["cradle"] as const : ["standing", "seated", "reclined"] as const) {
       const src = bannerActorSource(life, { ...banner, actorPose: pose })!;
       assert.ok(actorAssets.has(src), `Missing ${age}/${sex}/${variant}/${pose}: ${src}`);
+      assert.ok(fallbackAssets.has(bannerActorFallbackSource(life, { ...banner, actorPose: pose })!));
     }
   }
 });
@@ -71,7 +74,7 @@ test("the dashboard banner shows the phase and current description, with separat
   assert.match(html, /<h2>Youth<\/h2>/);
   assert.match(html, /life-banner-situation/);
   assert.match(html, /paper-event-caption/);
-  assert.ok(html.includes(`banners/actors/${life.originId}/female/youth-2-seated.svg`));
+  assert.ok(html.includes(`banners-concept1/actors/${life.originId}/female/youth-2-seated.png`));
   assert.doesNotMatch(html, /\/assets\/pixel\/scenes\//);
   assert.deepEqual(life, before);
 });
@@ -81,11 +84,22 @@ test("illness uses a reclining character while death removes the actor and stops
   life.health!.conditions = [{ id: "pneumonia", sinceAge: 60, severity: "mild" } as typeof life.health.conditions[number]];
   const illness = renderToStaticMarkup(createElement(PaperScene, { life, world: pack, compact: true, dashboard: true }));
   assert.match(illness, /data-situation="illness"/);
-  assert.ok(illness.includes(`banners/actors/${life.originId}/female/elder-2-reclined.svg`));
+  assert.ok(illness.includes(`banners-concept1/actors/${life.originId}/female/elder-2-reclined.png`));
   life.phase = "ended"; life.endingId = pack.endings.find(ending => ending.kind === "death")!.id;
   const ended = renderToStaticMarkup(createElement(PaperScene, { life, world: pack, compact: true, dashboard: true }));
   assert.match(ended, /data-situation="memorial"/);
   assert.match(ended, /data-motion="still"/);
   assert.match(ended, /<h2>Life ended<\/h2>/);
-  assert.doesNotMatch(ended, /banners\/actors\//);
+  assert.doesNotMatch(ended, /banners(?:-concept1)?\/actors\//);
+});
+
+test("all high-bit scene and actor PNGs match their published hashes and dimensions", () => {
+  for (const record of [...concept1Manifest.scenes.map(scene => ({ path: scene.src, sha256: scene.sha256, colorType: 2 })),
+    ...concept1Manifest.actors.map(actor => ({ path: actor.asset, sha256: actor.sha256, colorType: 6 }))]) {
+    const bytes = readFileSync(new URL(`../../public${record.path}`, import.meta.url));
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), record.sha256, record.path);
+    assert.equal(bytes.readUInt32BE(16), 480, record.path);
+    assert.equal(bytes.readUInt32BE(20), 224, record.path);
+    assert.equal(bytes[25], record.colorType, record.path);
+  }
 });
