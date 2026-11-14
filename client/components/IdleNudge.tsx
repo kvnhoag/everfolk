@@ -3,45 +3,41 @@ import { createPortal } from "react-dom";
 import { useIdle } from "../hooks/useIdle.ts";
 import { useTutorialHost } from "../hooks/useTutorialHost.ts";
 import { firstMatching } from "../lib/section-flash.ts";
-import { IDLE_NUDGE_MS, type IdleNudge as Nudge } from "../models/idle-nudge.ts";
+import { IDLE_NUDGE_MS, placeIdleBubble, type IdleNudge as Nudge, type ScreenBox } from "../models/idle-nudge.ts";
 import { tutorialStore } from "../state/tutorial-store.ts";
 import PixelIcon from "./PixelIcon.tsx";
 import "../styles/onboarding.css";
 
-interface Box { top: number; left: number; width: number; height: number }
+interface TargetGeometry { target: ScreenBox; dialog: ScreenBox | null }
 
-const GAP = 10;
-const BUBBLE = { width: 280, height: 110 };
+const DEFAULT_BUBBLE = { width: 280, height: 110 };
 
-function bubbleSpot(box: Box): { top: number; left: number } {
-  const viewport = { width: document.documentElement.clientWidth || window.innerWidth, height: document.documentElement.clientHeight || window.innerHeight };
-  const below = box.top + box.height + GAP;
-  const top = below + BUBBLE.height <= viewport.height ? below : Math.max(8, box.top - GAP - BUBBLE.height);
-  const left = Math.max(8, Math.min(box.left, viewport.width - BUBBLE.width - 8));
-  return { top, left };
+function roundRect(rect: DOMRect | undefined | null): ScreenBox | null {
+  return rect ? { top: Math.round(rect.top), left: Math.round(rect.left), width: Math.round(rect.width), height: Math.round(rect.height) } : null;
 }
 
-/** Follows the target every frame while shown, so scrolling and layout changes keep the ring on the button. */
-function useTargetBox(target: readonly string[] | null): Box | null {
-  const [box, setBox] = useState<Box | null>(null);
+/** Follows the target and any enclosing popup every frame while shown, keeping the ring and hint clear. */
+function useTargetGeometry(target: readonly string[] | null): TargetGeometry | null {
+  const [geometry, setGeometry] = useState<TargetGeometry | null>(null);
   useLayoutEffect(() => {
-    if (!target) { setBox(null); return; }
+    if (!target) { setGeometry(null); return; }
     let frame = 0;
     let last = "";
     const tick = () => {
       // Never on top of a tip card that is actually showing; a tip still waiting for its section does not count.
       const tipShown = document.querySelector(".everfolk-tutorial-layer.is-ready:not(.is-closing)") !== null;
       const element = tipShown ? undefined : firstMatching(target)[0];
-      const rect = element?.getBoundingClientRect();
-      const next = rect ? { top: Math.round(rect.top), left: Math.round(rect.left), width: Math.round(rect.width), height: Math.round(rect.height) } : null;
+      const box = roundRect(element?.getBoundingClientRect());
+      const dialog = box ? roundRect(element?.closest("dialog[open]")?.getBoundingClientRect()) : null;
+      const next = box ? { target: box, dialog } : null;
       const key = JSON.stringify(next);
-      if (key !== last) { last = key; setBox(next); }
+      if (key !== last) { last = key; setGeometry(next); }
       frame = window.requestAnimationFrame(tick);
     };
     tick();
     return () => window.cancelAnimationFrame(frame);
   }, [target?.join("|")]); // eslint-disable-line react-hooks/exhaustive-deps
-  return box;
+  return geometry;
 }
 
 /**
@@ -51,19 +47,34 @@ function useTargetBox(target: readonly string[] | null): Box | null {
 export default function IdleNudge({ nudge }: { nudge: Nudge | null }) {
   const idle = useIdle(IDLE_NUDGE_MS, nudge !== null, nudge?.key ?? "");
   const shown = idle ? nudge : null;
-  const box = useTargetBox(shown?.target ?? null);
+  const geometry = useTargetGeometry(shown?.target ?? null);
   const host = useTutorialHost();
   const layer = useRef<HTMLDivElement>(null);
+  const bubbleRef = useRef<HTMLDivElement>(null);
+  const [bubbleSize, setBubbleSize] = useState(DEFAULT_BUBBLE);
   useLayoutEffect(() => {
     const element = layer.current;
     if (!element || typeof element.showPopover !== "function") return;
     try { if (!element.matches(":popover-open")) element.showPopover(); } catch { /* Shown in place without the top layer. */ }
-  }, [shown?.key, box !== null, host]);
-  if (!shown || !box || typeof document === "undefined") return null;
-  const spot = bubbleSpot(box);
+  }, [shown?.key, geometry !== null, host]);
+  useLayoutEffect(() => {
+    const bubble = bubbleRef.current;
+    if (!shown || !geometry || !bubble) return;
+    const rect = bubble.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return;
+    const next = { width: Math.ceil(rect.width), height: Math.ceil(rect.height) };
+    setBubbleSize(prev => (prev.width === next.width && prev.height === next.height ? prev : next));
+  }, [shown?.key, geometry !== null]);
+  if (!shown || !geometry || typeof document === "undefined") return null;
+  const { target: box, dialog } = geometry;
+  const viewport = {
+    width: document.documentElement.clientWidth || window.innerWidth,
+    height: document.documentElement.clientHeight || window.innerHeight,
+  };
+  const spot = placeIdleBubble(box, viewport, bubbleSize, dialog);
   return createPortal(<div ref={layer} className="idle-nudge" popover="manual" role="status" aria-live="polite">
     <span className="idle-nudge-ring" aria-hidden="true" style={{ top: box.top - 5, left: box.left - 5, width: box.width + 10, height: box.height + 10 }} />
-    <div className="idle-nudge-bubble" style={spot}>
+    <div ref={bubbleRef} className="idle-nudge-bubble" style={spot}>
       <strong><span className="idle-nudge-hand" aria-hidden="true"><PixelIcon name="arrow" size={13} /></span>{shown.title}</strong>
       {shown.text}
       <div><button type="button" data-idle-ignore="" onClick={() => tutorialStore.openHint(shown.hint)}>What is this?</button></div>

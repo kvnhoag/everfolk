@@ -42,3 +42,44 @@ export function idleNudge(facts: IdleFacts): IdleNudge | null {
     title: "Press Resume", text: "The game is paused. Resume to let the next year of your life begin." };
   return null;
 }
+
+export interface ScreenBox { top: number; left: number; width: number; height: number }
+
+const NUDGE_GAP = 10;
+const NUDGE_MARGIN = 8;
+
+/**
+ * Places the idle hint bubble near its target while keeping an enclosing popup's options and bottom edge clear.
+ */
+export function placeIdleBubble(
+  target: ScreenBox,
+  viewport: { width: number; height: number },
+  bubble: { width: number; height: number } = { width: 280, height: 110 },
+  dialog?: ScreenBox | null,
+): { top: number; left: number } {
+  const clampLeft = (left: number) => Math.max(NUDGE_MARGIN, Math.min(left, viewport.width - bubble.width - NUDGE_MARGIN));
+  const clampTop = (top: number) => Math.max(NUDGE_MARGIN, Math.min(top, viewport.height - bubble.height - NUDGE_MARGIN));
+  const belowTarget = target.top + target.height + NUDGE_GAP;
+  const aboveTarget = target.top - NUDGE_GAP - bubble.height;
+
+  if (!dialog) {
+    const top = belowTarget + bubble.height <= viewport.height - NUDGE_MARGIN ? belowTarget : Math.max(NUDGE_MARGIN, aboveTarget);
+    return { top, left: clampLeft(target.left) };
+  }
+
+  // Keep the bubble completely outside the popup whenever the viewport leaves room around any side.
+  const leftOfDialog = dialog.left - NUDGE_GAP - bubble.width;
+  if (leftOfDialog >= NUDGE_MARGIN) return { top: clampTop(target.top), left: leftOfDialog };
+  const rightOfDialog = dialog.left + dialog.width + NUDGE_GAP;
+  if (rightOfDialog + bubble.width <= viewport.width - NUDGE_MARGIN) return { top: clampTop(target.top), left: rightOfDialog };
+  const belowDialog = dialog.top + dialog.height + NUDGE_GAP;
+  if (belowDialog + bubble.height <= viewport.height - NUDGE_MARGIN) return { top: belowDialog, left: clampLeft(target.left) };
+  const aboveDialog = dialog.top - NUDGE_GAP - bubble.height;
+  if (aboveDialog >= NUDGE_MARGIN) return { top: aboveDialog, left: clampLeft(target.left) };
+
+  // When a dialog fills the viewport (e.g. mobile screens), stay above the options or clear of the bottom edge.
+  if (aboveTarget >= NUDGE_MARGIN) return { top: aboveTarget, left: clampLeft(target.left) };
+  const dialogBottomSafe = Math.min(viewport.height - NUDGE_MARGIN, dialog.top + dialog.height - NUDGE_GAP);
+  if (belowTarget + bubble.height <= dialogBottomSafe) return { top: belowTarget, left: clampLeft(target.left) };
+  return { top: NUDGE_MARGIN, left: clampLeft(target.left) };
+}
