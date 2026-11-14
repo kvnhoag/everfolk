@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createCoastalScene } from './coastal-scene.ts';
+import { DAWN_SUN } from './dawn-water.ts';
 
 const MOTION_KEY = 'everfolk:homepage-motion:v1';
 export function useCoastMotion() {
@@ -28,11 +29,18 @@ export default function LivingCoast({ running, active }: { running: boolean; act
     const canvas = element.current;
     const home = canvas?.closest<HTMLElement>('.ef-home');
     if (!canvas || !home) return;
+    const header = home.querySelector<HTMLElement>('.ef-home-weave-bar');
     const syncSize = () => {
       const viewportWidth = canvas.clientWidth;
       const sceneWidth = Math.max(viewportWidth, canvas.clientHeight * canvas.width / canvas.height);
+      const sceneHeight = sceneWidth * canvas.height / canvas.width;
+      // Vertical object-position is centered at every breakpoint; keep water-line Y in .ef-home CSS pixels.
+      const waterTop = (canvas.clientHeight - sceneHeight) / 2 + sceneHeight * (DAWN_SUN.horizon / canvas.height);
+      const headerHeight = header ? header.offsetTop + header.offsetHeight : 0;
       home.style.setProperty('--coast-rendered-width', `${sceneWidth}px`);
       home.style.setProperty('--coast-viewport-width', `${viewportWidth}px`);
+      home.style.setProperty('--coast-water-top', `${waterTop}px`);
+      home.style.setProperty('--home-header-height', `${headerHeight}px`);
     };
     // Measure in the next frame so CSS updates cannot feed back into the observer's current delivery.
     let resizeFrame = 0;
@@ -41,12 +49,15 @@ export default function LivingCoast({ running, active }: { running: boolean; act
       resizeFrame = requestAnimationFrame(syncSize);
     });
     observer.observe(canvas);
+    if (header) observer.observe(header);
     syncSize();
     return () => {
       observer.disconnect();
       cancelAnimationFrame(resizeFrame);
       home.style.removeProperty('--coast-rendered-width');
       home.style.removeProperty('--coast-viewport-width');
+      home.style.removeProperty('--coast-water-top');
+      home.style.removeProperty('--home-header-height');
     };
   }, []);
   useEffect(() => {
