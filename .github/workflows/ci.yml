@@ -32,7 +32,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          sparse-checkout: scripts
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /scripts/ci-changes.mjs
       - name: Detect changed inputs
         id: paths
         run: node scripts/ci-changes.mjs
@@ -53,6 +55,10 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/artwork/
 
       - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -97,7 +103,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          sparse-checkout: contract
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /contract/
 
       - name: Cache Rust dependencies and build output
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -127,6 +135,23 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/artwork/*
+            /artwork/card-art-handoff-v1/
+            /artwork/life-banners/
+            /artwork/cards/
+            !/artwork/cards/*
+            /artwork/cards/framed-collection-v14/
+            !/artwork/cards/framed-collection-v14/*
+            /artwork/cards/framed-collection-v14/catalog.json
+            /artwork/cards/replacements/
+            /artwork/portraits/
+            !/artwork/portraits/*
+            /artwork/portraits/ordinary-v3/
+            !/artwork/portraits/ordinary-v3/*
+            /artwork/portraits/ordinary-v3/manifest.json
       - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -154,6 +179,10 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/artwork/
       - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
