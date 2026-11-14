@@ -2,8 +2,14 @@ name: CI
 
 on:
   push:
+    branches: [main, dev]
   pull_request:
   workflow_dispatch:
+    inputs:
+      audits:
+        description: Run exhaustive balance and historical-content audits
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -13,10 +19,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    name: Select necessary checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      app: ${{ steps.paths.outputs.app }}
+      contract: ${{ steps.paths.outputs.contract }}
+      art: ${{ steps.paths.outputs.art }}
+    steps:
+      - name: Check out CI scripts
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: scripts
+      - name: Detect changed inputs
+        id: paths
+        run: node scripts/ci-changes.mjs
+
   verify:
     name: Check, test and build
+    needs: changes
+    if: needs.changes.outputs.app == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 15
     env:
       CI: "true"
       CLOUDFLARE_CF_FETCH_ENABLED: "false"
@@ -42,41 +68,105 @@ jobs:
           cache: true
           cache_dependency_path: pnpm-lock.yaml
 
-      - name: Verify toolchain
-        run: |
-          node --input-type=module -e 'import { readFileSync } from "node:fs"; const pkg = JSON.parse(readFileSync("package.json", "utf8")); if (Number(process.versions.node.split(".")[0]) < 24 || pkg.packageManager !== "pnpm@11.25.0") throw new Error("Expected Node.js 24+ and pnpm@11.25.0.");'
-          test "$(pnpm --version)" = "11.25.0"
-
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Check types
+      - name: Check types and source boundaries
         run: pnpm check
 
       - name: Run regression suite
         run: pnpm test
 
       - name: Build application
-        run: pnpm build
+        run: pnpm build:app
 
       - name: Check generated source stays reproducible
         run: git diff --exit-code
 
   contract:
     name: Test the NEAR contract
+    needs: changes
+    if: needs.changes.outputs.contract == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: contract
     steps:
-      - name: Check out source
+      - name: Check out contract
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          sparse-checkout: contract
+
+      - name: Cache Rust dependencies and build output
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            contract/target
+          key: ${{ runner.os }}-rust-${{ hashFiles('contract/Cargo.lock', 'contract/rust-toolchain.toml') }}-${{ hashFiles('contract/src/**') }}
+          restore-keys: |
+            ${{ runner.os }}-rust-${{ hashFiles('contract/Cargo.lock', 'contract/rust-toolchain.toml') }}-
 
       - name: Install the pinned Rust toolchain
         run: rustup show active-toolchain || rustup toolchain install
 
       - name: Run contract unit tests
         run: cargo test --locked --lib
+
+  art:
+    name: Check art pipeline
+    needs: changes
+    if: needs.changes.outputs.art == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source and art inputs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - name: Set up pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          version: 11.25.0
+          run_install: false
+          cache: true
+          cache_dependency_path: pnpm-lock.yaml
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run art pipeline tests
+        run: pnpm test:art
+
+  audits:
+    name: Exhaustive balance and content audits
+    if: github.event_name == 'workflow_dispatch' && inputs.audits
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out source and audit inputs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - name: Set up pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+        with:
+          version: 11.25.0
+          run_install: false
+          cache: true
+          cache_dependency_path: pnpm-lock.yaml
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run exhaustive audits
+        run: pnpm test:audit

@@ -18,8 +18,8 @@ interface SymbolSource {
   viewBox: number[];
   originalPreserved: boolean;
 }
-const credits = JSON.parse(readFileSync(new URL("../public/assets/cards/collection-v14/icon-credits.json", import.meta.url), "utf8"));
-const registry = JSON.parse(readFileSync(new URL("../client/models/card-art-registry.json", import.meta.url), "utf8"));
+const credits = JSON.parse(readFileSync(new URL("../../public/assets/cards/collection-v14/icon-credits.json", import.meta.url), "utf8"));
+const registry = JSON.parse(readFileSync(new URL("../../client/models/card-art-registry.json", import.meta.url), "utf8"));
 const icons = credits.icons as SymbolSource[];
 const sha = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
 
@@ -48,7 +48,7 @@ test("all thirteen figure symbols have professional immutable sources and author
 test("published original SVGs retain their downloaded hashes and contain no active content", () => {
   for (const icon of icons) {
     assert.equal(icon.publicPath, `/assets/cards/collection-v14/symbols/${icon.figureId}.svg`);
-    const bytes = readFileSync(new URL("../public" + icon.publicPath, import.meta.url));
+    const bytes = readFileSync(new URL("../../public" + icon.publicPath, import.meta.url));
     assert.equal(sha(bytes), icon.sha256, icon.figureId);
     const svg = bytes.toString("utf8");
     assert.match(svg, /<svg\b/);
@@ -60,7 +60,7 @@ test("published original SVGs retain their downloaded hashes and contain no acti
 });
 
 test("the human credits page exposes every symbol's creator, original source and licence", () => {
-  const html = readFileSync(new URL("../public/assets/cards/collection-v14/icon-credits.html", import.meta.url), "utf8");
+  const html = readFileSync(new URL("../../public/assets/cards/collection-v14/icon-credits.html", import.meta.url), "utf8");
   assert.match(html, /Card symbols &amp; credits/);
   assert.equal((html.match(/<article>/g) ?? []).length, 13);
   for (const icon of icons) {
@@ -69,6 +69,6 @@ test("the human credits page exposes every symbol's creator, original source and
     assert.ok(html.includes(`href="${icon.pageUrl}"`));
     assert.ok(html.includes(`href="${icon.licenseUrl}"`));
   }
-  assert.ok(readFileSync(new URL("../public/assets/cards/collection-v14/symbols/CC-BY-3.0.txt", import.meta.url), "utf8").includes("Lorc"));
-  assert.ok(readFileSync(new URL("../public/assets/cards/collection-v14/symbols/Apache-2.0.txt", import.meta.url), "utf8").includes("Apache License"));
+  assert.ok(readFileSync(new URL("../../public/assets/cards/collection-v14/symbols/CC-BY-3.0.txt", import.meta.url), "utf8").includes("Lorc"));
+  assert.ok(readFileSync(new URL("../../public/assets/cards/collection-v14/symbols/Apache-2.0.txt", import.meta.url), "utf8").includes("Apache License"));
 });

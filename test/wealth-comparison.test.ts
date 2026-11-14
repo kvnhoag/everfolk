@@ -82,7 +82,13 @@ test("the rank compares total household assets; debt shows in net worth but does
   assert.equal(indebted.netWorth, -10, "Net worth still subtracts debt.");
   assert.equal(indebted.totalAssets, 20);
   assert.equal(indebted.percentile, base.percentile, "Households are ranked by what they hold, as the reference households are.");
-  life.economy!.cash = 0; life.economy!.debt = 10;
+  life.economy!.cash = 50;
+  assert.equal(getWealthComparison(world, life)!.percentile, 75);
+  assert.equal(getWealthComparison(world, life)!.netWorth, 20);
+  life.economy!.cash = 20; life.economy!.assets.tools = 1;
+  assert.equal(getWealthComparison(world, life)!.percentile, 75);
+  assert.equal(getWealthComparison(world, life)!.totalAssets, 50);
+  life.economy!.cash = 0; life.economy!.assets.tools = 0; life.economy!.debt = 10;
   assert.deepEqual(getWealthComparison(world, life), { netWorth: -10, totalAssets: 0, percentile: 0, medianWealth: 10 });
   life.economy!.cash = 2000; life.economy!.debt = 0;
   assert.equal(getWealthComparison(world, life)!.netWorth, 2000);
@@ -171,6 +177,7 @@ test("comparison preserves the world, state and RNG and leaves legacy scores alo
 test("wealth percentile text rounds to whole percentages and preserves tails", () => {
   assert.equal(formatWealthPercentile(0), "0%");
   assert.equal(formatWealthPercentile(0.001), "<1%");
+  assert.equal(formatWealthPercentile(0.1), "<1%");
   assert.equal(formatWealthPercentile(0.9), "<1%");
   assert.equal(formatWealthPercentile(1), "1%");
   assert.equal(formatWealthPercentile(75.49), "75%");
