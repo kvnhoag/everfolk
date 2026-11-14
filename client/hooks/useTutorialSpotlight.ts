@@ -112,8 +112,14 @@ const CONTROLS = "button:not([disabled]), a[href], input:not([type=hidden]), sel
 /** How often the page's controls are measured again while a card is shown. */
 const CONTROLS_EVERY_MS = 400;
 
-/** The visible controls the card should not cover (not its own), measured at most every few hundred ms. */
-function controlRects(): { read(card: HTMLElement | null, viewport: { width: number; height: number }): Rect[] } {
+/** Controls a tip card must never cover while another place is free: the time bar, Resume, Begin life, decisions. */
+const PROTECTED = [
+  ".life-session-bar", ".session-play", ".birth-popover-continue", ".ef-home-primary", ".turning-point-button",
+  ".life-decision-dialog[open] button", ".life-decision-dialog[open] [role=button]",
+].join(", ");
+
+/** The visible `selector` matches the card should not cover (not its own), measured at most every few hundred ms. */
+function controlRects(selector: string = CONTROLS): { read(card: HTMLElement | null, viewport: { width: number; height: number }): Rect[] } {
   let cached: Rect[] = [];
   let at = -Infinity;
   return {
@@ -121,7 +127,7 @@ function controlRects(): { read(card: HTMLElement | null, viewport: { width: num
       const now = performance.now();
       if (now - at < CONTROLS_EVERY_MS) return cached;
       at = now;
-      cached = Array.from(document.querySelectorAll(CONTROLS)).flatMap(element => {
+      cached = Array.from(document.querySelectorAll(selector)).flatMap(element => {
         if (card?.contains(element) || element.closest("[inert], [aria-hidden=true]")) return [];
         const box = element.getBoundingClientRect();
         if (box.width <= 0 || box.height <= 0 || box.bottom <= 0 || box.right <= 0 || box.top >= viewport.height || box.left >= viewport.width) return [];
@@ -152,6 +158,7 @@ export function useTutorialSpotlight(hint: TutorialHint | undefined, hintKey: st
     let stillFrames = 0;
     let lastSpot = "";
     const controls = controlRects();
+    const guarded = controlRects(PROTECTED);
     const tick = () => {
       const found = findTarget(hint.targets);
       target.current = found;
@@ -170,7 +177,7 @@ export function useTutorialSpotlight(hint: TutorialHint | undefined, hintKey: st
       lastSpot = spotKey;
       if (pinned && (pinned.width !== viewport.width || pinned.height !== viewport.height)) pinned = null;
       const placed = pinned ? pinnedCardPosition(pinned.card, size, viewport)
-        : placeTutorialCard(spotlight, size, viewport, (missing || offscreen) && waitForTarget ? "corner" : "center", controls.read(card, viewport));
+        : placeTutorialCard(spotlight, size, viewport, (missing || offscreen) && waitForTarget ? "corner" : "center", controls.read(card, viewport), guarded.read(card, viewport));
       const position = { ...placed, top: Math.round(placed.top), left: Math.round(placed.left) };
       if (!pinned && !searching && card && card.offsetWidth > 0 && stillFrames >= CARD_SETTLE_FRAMES) pinned = { card: position, ...viewport };
       const next: TutorialLayout = { spotlight, card: position, missing, ready: !searching, offscreen };

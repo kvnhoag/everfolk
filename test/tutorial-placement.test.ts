@@ -111,3 +111,33 @@ test("a pinned card keeps its place and is only pulled back inside a smaller vie
   assert.equal(targetOnScreen({ top: 100, left: 0, width: 10, height: 10 }, 900, 120), false);
   assert.equal(targetOnScreen({ top: 130, left: 0, width: 10, height: 10 }, 900, 120), true);
 });
+
+test("the card never covers the time bar, Resume, Begin life or decision buttons when another place is free", () => {
+  const viewport = { width: 1200, height: 900 };
+  const size = { width: 300, height: 200 };
+  const timeBar: Rect = { top: 0, left: 0, width: 1200, height: 150 };
+  const tall: Rect = { top: 320, left: 450, width: 300, height: 400 };
+  assert.equal(placeTutorialCard(tall, size, viewport).placement, "top", "above is the usual choice here");
+  const dodged = placeTutorialCard(tall, size, viewport, "center", [], [timeBar]);
+  assert.equal(dodged.placement, "right", "above would cover the time bar, so the card goes beside");
+  assert.ok(!overlaps({ ...dodged, ...size }, timeBar) && !overlaps({ ...dodged, ...size }, tall));
+  // A Resume button under the middle of the target: the card lines up with an edge instead.
+  const target: Rect = { top: 200, left: 300, width: 600, height: 100 };
+  const resume: Rect = { top: 330, left: 520, width: 60, height: 36 };
+  const beside = placeTutorialCard(target, size, viewport, "center", [], [resume]);
+  assert.equal(beside.placement, "bottom");
+  assert.ok(!overlaps({ ...beside, ...size }, resume));
+  // A centered card without a target moves to a corner rather than cover Begin life.
+  const beginLife: Rect = { top: 420, left: 520, width: 160, height: 44 };
+  const waiting = placeTutorialCard(null, size, viewport, "center", [], [beginLife]);
+  assert.equal(waiting.placement, "corner");
+  assert.ok(!overlaps({ ...waiting, ...size }, beginLife));
+});
+
+test("with no free place the card covers as little of the protected controls as it can, and stays on screen", () => {
+  const viewport = { width: 400, height: 500 };
+  const size = { width: 376, height: 300 };
+  const placed = placeTutorialCard({ top: 0, left: 0, width: 400, height: 500 }, size, viewport, "center", [], [{ top: 0, left: 0, width: 400, height: 60 }]);
+  assert.ok(inside(placed, size, viewport));
+  assert.equal(placed.top, 500 - 300 - 12, "the bottom corner leaves the top bar uncovered");
+});
