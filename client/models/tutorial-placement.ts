@@ -103,9 +103,31 @@ const VISIBLE_TOP_SHARE = 0.6;
 /** Room kept above a tall target so sticky headers do not cover it. */
 const TOP_ROOM_SHARE = 0.22;
 
-/** How to bring a step's target into view: centered when it fits, top first when it is tall. Null: stay. */
-export function tutorialScrollPlan(target: Rect, viewportHeight: number): ScrollPlan | null {
+/** The target is fully on screen, below anything pinned to the top (`topInset`, the time bar). */
+export function targetOnScreen(target: Rect, viewportHeight: number, topInset = 0): boolean {
+  return target.top >= topInset && target.top + target.height <= viewportHeight;
+}
+
+/**
+ * How to bring a step's target into view: centered when it fits, top first when it is tall. Null: stay, which is
+ * always the answer for a target already on screen, so a tip never moves the page the player is looking at.
+ */
+export function tutorialScrollPlan(target: Rect, viewportHeight: number, topInset = 0): ScrollPlan | null {
+  if (targetOnScreen(target, viewportHeight, topInset)) return null;
   if (target.height <= viewportHeight * TALL_SHARE) return { block: "center", marginTop: 0 };
   if (target.top >= 0 && target.top <= viewportHeight * VISIBLE_TOP_SHARE) return null;
   return { block: "start", marginTop: Math.round(viewportHeight * TOP_ROOM_SHARE) };
+}
+
+/** Frames the target must stay still (after any opening scroll) before the card is pinned where it is. */
+export const CARD_SETTLE_FRAMES = 8;
+
+/**
+ * The card's place while it shows: placed beside its target until the target has stood still for a few frames, then
+ * pinned, so scrolling the page never moves the card. A pinned card is only re-clamped to stay fully on screen.
+ */
+export function pinnedCardPosition(pinned: CardPosition, card: Size, viewport: Size): CardPosition {
+  const top = clamp(pinned.top, 0, Math.max(0, viewport.height - card.height));
+  const left = clamp(pinned.left, 0, Math.max(0, viewport.width - card.width));
+  return top === pinned.top && left === pinned.left ? pinned : { ...pinned, top, left };
 }

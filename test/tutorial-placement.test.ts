@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { intersectRect, placeTutorialCard, spotlightRect, tutorialScrollPlan, unionRect, type Rect } from "../client/models/tutorial-placement.ts";
+import { intersectRect, pinnedCardPosition, placeTutorialCard, spotlightRect, targetOnScreen, tutorialScrollPlan, unionRect, type Rect } from "../client/models/tutorial-placement.ts";
 
 const card = { width: 360, height: 240 };
 const viewports = [{ width: 1440, height: 900 }, { width: 1280, height: 800 }, { width: 390, height: 844 }];
@@ -70,7 +70,9 @@ test("several matches are highlighted together", () => {
 
 test("a target is scrolled to the middle, and a tall one only far enough to show its top", () => {
   assert.deepEqual(tutorialScrollPlan({ top: 1400, left: 0, width: 300, height: 80 }, 900), { block: "center", marginTop: 0 });
-  assert.equal(tutorialScrollPlan({ top: 300, left: 0, width: 300, height: 80 }, 900)?.block, "center", "even a visible target is centered");
+  assert.equal(tutorialScrollPlan({ top: 300, left: 0, width: 300, height: 80 }, 900), null, "a visible target never moves the page");
+  assert.equal(tutorialScrollPlan({ top: 20, left: 0, width: 300, height: 80 }, 900, 60)?.block, "center", "a target under the pinned time bar is brought down");
+  assert.equal(tutorialScrollPlan({ top: 860, left: 0, width: 300, height: 80 }, 900)?.block, "center", "a target cut by the bottom edge is brought up");
   assert.equal(tutorialScrollPlan({ top: 260, left: 0, width: 900, height: 2000 }, 900), null, "a tall target whose top is in view stays put");
   assert.deepEqual(tutorialScrollPlan({ top: 1500, left: 0, width: 900, height: 2000 }, 900), { block: "start", marginTop: 198 }, "its top lands below sticky headers");
   assert.deepEqual(tutorialScrollPlan({ top: -900, left: 0, width: 900, height: 2000 }, 900), { block: "start", marginTop: 198 });
@@ -100,4 +102,12 @@ test("the card takes the side beside its section that covers the fewest buttons"
   const button = (top: number, left: number): Rect => ({ top, left, width: 100, height: 40 });
   const everywhere: Rect[] = [button(550, 500), button(200, 500), button(400, 800), button(400, 200)];
   assert.equal(placeTutorialCard(target, card, viewport, "center", everywhere).placement, "bottom", "equal cover keeps the usual order");
+});
+
+test("a pinned card keeps its place and is only pulled back inside a smaller viewport", () => {
+  const pinned = { top: 500, left: 900, placement: "bottom" as const };
+  assert.equal(pinnedCardPosition(pinned, card, { width: 1440, height: 900 }), pinned);
+  assert.deepEqual(pinnedCardPosition(pinned, card, { width: 1000, height: 600 }), { top: 360, left: 640, placement: "bottom" });
+  assert.equal(targetOnScreen({ top: 100, left: 0, width: 10, height: 10 }, 900, 120), false);
+  assert.equal(targetOnScreen({ top: 130, left: 0, width: 10, height: 10 }, 900, 120), true);
 });

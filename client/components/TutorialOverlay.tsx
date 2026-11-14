@@ -37,7 +37,7 @@ function ShownTutorial({ state, host, closing, onClosed }: ShownProps) {
   const hint = tutorialHint(state.hintId) ?? tutorialHint("about")!;
   const hintKey = `${state.run}:${hint.id}`;
   const manual = state.mode === "manual";
-  // Every tip brings its section into view, so the one thing in focus is always on screen.
+  // A tip whose section is off screen scrolls to it once as it opens; a section already in view never moves the page.
   const layout = useTutorialSpotlight(hint, hintKey, card, { waitForTarget: !manual, scroll: true });
   const settled = useTutorialFlight({ panel, ready: layout.ready, closing, run: state.run, onClosed: useCallback(() => {
     // Focus follows the card back to the Tutorial button, so keyboard players do not lose their place.
