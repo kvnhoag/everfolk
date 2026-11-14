@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 import { createEngine } from "../src/index.ts";
+import { advanceToDecisionWithFocus, focusActivity } from "../client/models/yearly-focus.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import { focusLabel, yearEndChoiceNeeded, yearEndKeyOf, yearEndOptions } from "../client/models/year-end-choice.ts";
 
@@ -73,4 +74,41 @@ test("free actions (ending a friendship, resting while ill) are never offered as
   const life = liveTo("year-end-free", 9);
   const onlyFree = { ...engine, getActivities: () => [free] };
   assert.equal(yearEndChoiceNeeded(onlyFree, life), false, "a year with only free actions left does not wait");
+});
+
+
+test("manual fast-forward waits before spending a funded focus action", () => {
+  const life = liveTo("year-end-fast-forward-funded", 9);
+  const activity = focusActivity(world, "study")!;
+  assert.ok(engine.getActivities(life).some(item => item.id === activity.id && item.available), "the focus is affordable");
+  const saved = engine.save(life);
+  const next = advanceToDecisionWithFocus(engine, life, "study", state => yearEndChoiceNeeded(engine, state));
+  assert.strictEqual(next, life, "manual play waits at this age");
+  assert.equal(engine.save(next), saved, "no money, work or replay commands change without a choice");
+});
+
+test("fast-forward after an explicit action cannot spend the following year's action", () => {
+  const life = liveTo("year-end-fast-forward-spent", 9);
+  const action = yearEndOptions(world, engine.getActivities(life), "study")[0];
+  const spent = engine.act(life, action.id);
+  const next = advanceToDecisionWithFocus(engine, spent, "study", state => yearEndChoiceNeeded(engine, state));
+  assert.ok(next.age > spent.age || next.phase !== "ready");
+  if (next.phase === "ready") assert.ok(yearEndChoiceNeeded(engine, next));
+  const commands = (state: LifeState) => JSON.parse(engine.save(state)).commands.filter((command: { type: string }) => command.type === "act").length;
+  assert.equal(commands(next), commands(spent), "only the player's chosen action is spent");
+});
+
+test("fast-forward from birth stops at an ordinary decision or an unspent yearly action", () => {
+  let life = engine.start("year-end-fast-forward-birth");
+  for (let step = 0; step < 100; step++) {
+    const next = advanceToDecisionWithFocus(engine, life, "study", state => yearEndChoiceNeeded(engine, state));
+    if (next.phase === "ready") {
+      assert.ok(yearEndChoiceNeeded(engine, next));
+      assert.equal(next.age, 6, "the first unused yearly action is not skipped");
+      return;
+    }
+    assert.notEqual(next.phase, "ended", "this regression seed survives childhood");
+    life = engine.choose(next, engine.getChoices(next)[0].id);
+  }
+  assert.fail("fast-forward did not reach the yearly action boundary");
 });

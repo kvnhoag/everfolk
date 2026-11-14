@@ -7,6 +7,9 @@ export default defineConfig(async () => {
   configureToolEnvironment(process.cwd());
   const { cloudflare } = await import("@cloudflare/vite-plugin");
   return {
+    // Keep large retained world packs as JSON.parse payloads in the dev worker.
+    // Named object exports make its module runner retain huge JavaScript ASTs.
+    json: { namedExports: false, stringify: true },
     environments: {
       client: {
         build: {
