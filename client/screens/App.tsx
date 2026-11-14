@@ -314,6 +314,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       learnedSkills: lifeSections.facts.learnedSkills, sections: [...lifeSections.sections], notificationShown: notificationShown && Boolean(demoView), passed: lifeSections.passed,
     },
   }));
+  // Auto mode never waits for a tip: the one on screen closes as seen and new ones are marked seen as they come.
+  useEffect(() => { tutorialStore.setAutoPlay(game.autoDecisions && !game.isPreview); }, [game.autoDecisions, game.isPreview]);
   // Once a year: the fields, the focus and the yearly action glow, with a short notice naming them.
   const actionUsed = life.character?.lastActivityAge === life.age;
   // Once per entry into a life: from the main menu, after a new birth, or straight into a ranked life. Closing

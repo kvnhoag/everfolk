@@ -27,6 +27,8 @@ export interface TutorialState {
   run: number;
   /** The in-game year (life and age) of the last automatic tip: at most one opens per year, the rest wait. */
   tipYear: string | null;
+  /** Auto mode plays the life by itself: tips that come due are marked seen instead of stopping it. */
+  autoPlay: boolean;
 }
 
 export type TutorialAction =
@@ -39,9 +41,11 @@ export type TutorialAction =
   | { type: "used"; hintIds: readonly TutorialHintId[] }
   /** A life was entered mid-way (a loaded save): tips whose stage already passed count as seen. */
   | { type: "enter"; passed: readonly TutorialHintId[] }
-  | { type: "tips"; on: boolean };
+  | { type: "tips"; on: boolean }
+  /** Auto mode turned on or off. On: the tip on screen closes (seen) and no automatic tip opens in the game. */
+  | { type: "auto-play"; on: boolean };
 
-export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], run: 0, tipYear: null });
+export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], run: 0, tipYear: null, autoPlay: false });
 
 /** Shown when the player asks for help on a screen that has no tips of its own. */
 const FALLBACK_HINT: TutorialHintId = "about";
@@ -75,6 +79,8 @@ function autoOpen(state: TutorialState, context: TutorialContext): TutorialState
   if (due.length === 0) return state;
   // Tips off: each new section only glows once. It counts as seen, so it does not glow again.
   if (!state.tipsOn) return { ...state, seen: due.reduce(markSeen, state.seen), flash: { ids: due, run: (state.flash?.run ?? 0) + 1 } };
+  // Auto mode never waits for a tip: the tips due in the life it plays count as seen and nothing stops the clock.
+  if (state.autoPlay && tutorialYearKey(context) !== null) return { ...state, seen: due.reduce(markSeen, state.seen) };
   const next = due.find(id => yearAllowsTip(id, context, state.tipYear));
   if (!next) return state;
   return { ...state, open: true, mode: "auto", hintId: next, queue: [next], run: state.run + 1, tipYear: tutorialYearKey(context) ?? state.tipYear };
@@ -110,6 +116,14 @@ function used(state: TutorialState, context: TutorialContext, hintIds: readonly 
   return fresh.length ? { ...state, seen: fresh.reduce(markSeen, state.seen) } : state;
 }
 
+/** Auto mode on: the automatic tip on screen closes as seen (its veil lifts) and others are marked seen as they come. */
+function autoPlay(state: TutorialState, context: TutorialContext, on: boolean): TutorialState {
+  if (state.autoPlay === on) return state;
+  if (!on) return { ...state, autoPlay: false };
+  const shown = state.open && state.mode === "auto";
+  return autoOpen({ ...state, autoPlay: true, open: shown ? false : state.open, seen: shown ? markSeen(state.seen, state.hintId) : state.seen }, context);
+}
+
 function enter(state: TutorialState, context: TutorialContext, passed: readonly TutorialHintId[]): TutorialState {
   const fresh = passed.filter(id => !state.seen.includes(id));
   if (fresh.length === 0) return state;
@@ -143,6 +157,7 @@ export function tutorialReducer(state: TutorialState, action: TutorialAction, co
     }
     // The open card stays open; only the next new section changes how it is shown.
     case "tips": return state.tipsOn === action.on ? state : { ...state, tipsOn: action.on };
+    case "auto-play": return autoPlay(state, context, action.on);
   }
 }
 
