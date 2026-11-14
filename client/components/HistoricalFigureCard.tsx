@@ -1,3 +1,4 @@
+import ArtworkImage from "./ArtworkImage.tsx";
 import type { FigureCardRank, FigureRosterEntry } from "../../chain/catalog/figure-roster.ts";
 import { figureCardRanks } from "../models/figure-contribution-ranks.ts";
 import { findCardArt, cardArtRank, type CardArtGender } from "../models/card-art.ts";
@@ -46,7 +47,7 @@ export default function HistoricalFigureCard({ figure, rank: requested, mode = "
     <span className="figure-tcg-title">{cardTitle}</span>
     <span className="figure-tcg-art">
       <svg className="figure-tcg-architecture" viewBox="0 0 240 260" aria-hidden="true"><path d="M22 240V55h196v185M15 55l105-38 105 38M36 230V76m168 154V76M36 94h168M36 214h168M15 240h210" fill="none" /></svg>
-      <img src={figure.art.src} width={192} height={288} loading="lazy" decoding="async" alt={figure.art.placeholder ? `${figure.name} placeholder portrait` : `${figure.name} portrait artwork`} />
+      <ArtworkImage src={figure.art.src} width={192} height={288} loading="lazy" decoding="async" alt={figure.art.placeholder ? `${figure.name} placeholder portrait` : `${figure.name} portrait artwork`} />
       {figure.art.placeholder && <span className="figure-tcg-placeholder">Placeholder art</span>}
       <span className="figure-tcg-art-rule" aria-hidden="true" />
     </span>

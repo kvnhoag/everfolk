@@ -1,3 +1,4 @@
+import ArtworkImage from "./ArtworkImage.tsx";
 import { useState } from "react";
 import { resolvePortraitState } from "../models/portrait-state.ts";
 import type { PortraitSet, PortraitSpecialRole, PortraitState } from "../models/portrait-state.ts";
@@ -44,7 +45,7 @@ export default function PixelPortrait({
   const { stage } = state;
   const activeSrc = failedSrc === state.src && state.fallbackSrc ? state.fallbackSrc : state.src;
   return (
-    <img
+    <ArtworkImage
       className={`pixel-portrait ${className}`}
       src={activeSrc}
       width={state.width}

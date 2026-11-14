@@ -5,7 +5,7 @@ import test from 'node:test';
 import ts from 'typescript';
 
 // Tiny self-contained DOM implementation sufficient to mount React 19 createRoot
-// and verify real focus, Escape, Close button, Space keydown preventDefault, and outside-click behavior.
+// and verify accessible inline music controls, focus, state updates, and preserved click effects.
 class FakeNode extends EventTarget {
   nodeType: number;
   ownerDocument: FakeDocument;
@@ -113,7 +113,10 @@ class FakeElement extends FakeNode {
   get id() { return this.attributes.get('id') ?? ''; }
   set id(v: string) { this.attributes.set('id', v); }
 
-  setAttribute(name: string, value: string) { this.attributes.set(name, String(value)); }
+  setAttribute(name: string, value: string) {
+    this.attributes.set(name, String(value));
+    if (name === 'type') this.type = String(value);
+  }
   getAttribute(name: string) { return this.attributes.get(name) ?? null; }
   removeAttribute(name: string) { this.attributes.delete(name); }
   hasAttribute(name: string) { return this.attributes.has(name); }
@@ -188,6 +191,7 @@ class FakeDocument extends FakeNode {
   body: FakeElement;
   activeElement: FakeElement | null = null;
   defaultView: unknown = null;
+  oninput = null;
 
   constructor() {
     super(9, null as unknown as FakeDocument);
@@ -205,10 +209,6 @@ class FakeDocument extends FakeNode {
   createComment(text: string) { return new FakeComment(text, this); }
 }
 
-function keyEvent(type: string, key: string, repeat = false): Event {
-  return Object.assign(new Event(type, { bubbles: true, cancelable: true }), { key, repeat });
-}
-
 class MockAudio extends EventTarget {
   src = '';
   loop = false;
@@ -220,7 +220,7 @@ class MockAudio extends EventTarget {
   pause() { this.dispatchEvent(new Event('pause')); }
 }
 
-test('audio settings drawer moves focus in, prevents Space scroll, allows nonmodal outside click, and restores focus on Escape and Close', async () => {
+test('inline music controls expose one native volume slider and mute while preserving focus and click effects', async () => {
   const originals = [
     'window', 'document', 'Node', 'Element', 'HTMLElement', 'HTMLIFrameElement', 'Audio', 'IS_REACT_ACT_ENVIRONMENT',
   ].map(k => [k, Object.getOwnPropertyDescriptor(globalThis, k)] as const);
@@ -267,79 +267,56 @@ test('audio settings drawer moves focus in, prevents Space scroll, allows nonmod
     const { act, createElement } = await import('react');
     const { createRoot } = await import('react-dom/client');
     const { default: GameMusicPlayer } = await import('../client/components/GameMusicPlayer.tsx');
-    const { audioManager, PLAYLIST } = await import('../client/lib/audio-manager.ts');
+    const { audioManager } = await import('../client/lib/audio-manager.ts');
 
-    const outsideButton = new FakeElement('button', doc);
-    doc.body.appendChild(outsideButton);
     const mount = new FakeElement('div', doc);
     doc.body.appendChild(mount);
     const root = createRoot(mount as unknown as Element);
+    await act(async () => { root.render(createElement(GameMusicPlayer)); });
 
-    await act(async () => {
-      root.render(createElement(GameMusicPlayer));
-    });
+    const controls = mount.querySelector('[aria-label="Music controls"]');
+    assert.ok(controls);
+    assert.equal(controls.getAttribute('role'), 'group');
+    assert.equal(mount.querySelectorAll('.music-square-trigger').length, 0, 'no popover trigger');
+    assert.equal(mount.querySelectorAll('.music-drawer').length, 0, 'no settings drawer');
+    assert.equal(mount.querySelectorAll('.music-track-item').length, 0, 'the old six-track selector is removed');
+    assert.equal(mount.querySelectorAll('.music-playlist-section').length, 0);
+    assert.equal(mount.querySelectorAll('.music-stepper-btns').length, 0, 'no previous/next controls');
+    assert.equal(mount.querySelectorAll('.music-sfx-toggle').length, 0, 'click effects do not need a visible toggle');
+    assert.equal(mount.querySelectorAll('iframe').length, 0, 'no visible YouTube player');
+    assert.equal(mount.querySelectorAll('audio, video').length, 0, 'background playback is owned outside the UI');
+    assert.equal(controls.querySelectorAll('button').length, 1, 'mute is the only button');
 
-    const trigger = mount.querySelector('.music-square-trigger');
-    assert.ok(trigger);
-    assert.equal(trigger.getAttribute('aria-expanded'), 'false');
+    const sliders = controls.querySelectorAll('input[type="range"]');
+    assert.equal(sliders.length, 1, 'one native keyboard-accessible volume slider');
+    const slider = sliders[0];
+    assert.equal(slider.getAttribute('aria-label'), 'Music volume');
+    assert.equal(slider.getAttribute('min'), '0');
+    assert.equal(slider.getAttribute('max'), '100');
+    slider.focus();
+    assert.equal(doc.activeElement, slider);
 
-    // Open with trigger -> focus moves into the opened settings panel.
-    trigger.focus();
-    await act(async () => {
-      trigger.dispatchEvent(new Event('click', { bubbles: true }));
-    });
-    const drawer = mount.querySelector('.music-drawer');
-    const closeBtn = mount.querySelector('.music-drawer-close');
-    assert.ok(drawer);
-    assert.ok(closeBtn);
-    assert.equal(drawer.getAttribute('aria-modal'), 'false');
-    assert.equal(doc.activeElement === closeBtn, true, 'focus moves into opened drawer without trapping keyboard navigation');
+    const mute = controls.querySelector('button[aria-label="Mute music"]');
+    assert.ok(mute);
+    assert.equal(mute.getAttribute('aria-pressed'), 'false');
+    const sfxBeforeMute = audioManager.getState().sfxEnabled;
+    mute.focus();
+    await act(async () => { mute.dispatchEvent(new Event('click', { bubbles: true })); });
+    const unmute = controls.querySelector('button[aria-label="Unmute music"]');
+    assert.ok(unmute);
+    assert.equal(unmute, mute, 'toggle keeps the same keyboard focus target');
+    assert.equal(doc.activeElement, mute);
+    assert.equal(unmute.getAttribute('aria-pressed'), 'true');
+    assert.equal(audioManager.getState().muted, true);
+    assert.equal(audioManager.getState().sfxEnabled, sfxBeforeMute, 'muting music preserves sound effects');
 
-    // Selecting a playlist option with Space calls preventDefault (no page scroll) and selects track.
-    const tracks = mount.querySelectorAll('.music-track-item');
-    assert.equal(tracks.length, PLAYLIST.length);
-    tracks[2].focus();
-    const spaceKeydown = keyEvent('keydown', ' ');
-    await act(async () => {
-      tracks[2].dispatchEvent(spaceKeydown);
-    });
-    assert.equal(spaceKeydown.defaultPrevented, true, 'Space keydown prevents default scroll');
-    assert.equal(audioManager.getState().currentTrack.id, PLAYLIST[2].id);
-    assert.equal(tracks[2].getAttribute('aria-pressed'), 'true');
-
-    // Pressing Escape closes drawer and restores focus to trigger.
-    const escapeKeydown = keyEvent('keydown', 'Escape');
-    await act(async () => {
-      doc.dispatchEvent(escapeKeydown);
-    });
-    assert.equal(escapeKeydown.defaultPrevented, true);
-    assert.equal(mount.querySelector('.music-drawer') === null, true, 'Escape closes drawer');
-    assert.equal(doc.activeElement === trigger, true, 'Escape restores focus to trigger');
-
-    // Reopen and close via Close button -> restores focus to trigger.
-    await act(async () => {
-      trigger.dispatchEvent(new Event('click', { bubbles: true }));
-    });
-    const closeBtn2 = mount.querySelector('.music-drawer-close');
-    assert.ok(closeBtn2);
-    assert.equal(doc.activeElement === closeBtn2, true, 'Reopening moves focus into drawer');
-    await act(async () => {
-      closeBtn2.dispatchEvent(new Event('click', { bubbles: true }));
-    });
-    assert.equal(mount.querySelector('.music-drawer') === null, true, 'Close button closes drawer');
-    assert.equal(doc.activeElement === trigger, true, 'Close button restores focus to trigger');
-
-    // Nonmodal outside click closes the drawer without hijacking focus away from outside control.
-    await act(async () => {
-      trigger.dispatchEvent(new Event('click', { bubbles: true }));
-    });
-    assert.ok(mount.querySelector('.music-drawer'));
-    outsideButton.focus();
-    await act(async () => {
-      outsideButton.dispatchEvent(new Event('pointerdown', { bubbles: true }));
-    });
-    assert.equal(mount.querySelector('.music-drawer') === null, true, 'outside click closes nonmodal drawer');
-    assert.equal(doc.activeElement === outsideButton, true, 'nonmodal outside click leaves focus on outside target');
+    slider.value = '25';
+    await act(async () => { slider.dispatchEvent(new Event('input', { bubbles: true })); });
+    assert.equal(audioManager.getState().volume, 0.25, 'the slider updates music volume');
+    assert.equal(audioManager.getState().muted, true, 'changing volume preserves mute');
+    await act(async () => { unmute.dispatchEvent(new Event('click', { bubbles: true })); });
+    assert.equal(audioManager.getState().muted, false);
+    assert.equal(audioManager.getState().sfxEnabled, sfxBeforeMute);
 
     await act(async () => { root.unmount(); });
     await new Promise(resolve => setTimeout(resolve, 20));

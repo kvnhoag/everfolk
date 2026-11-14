@@ -1,3 +1,4 @@
+import ArtworkImage from "./ArtworkImage.tsx";
 import { useEffect, useRef, useState } from "react";
 import { readBoosterCollection } from "../storage/booster-collection.ts";
 import type { BoosterCollectionPack } from "../types/booster.ts";
@@ -29,7 +30,7 @@ export default function BoosterCollection() {
     <p>Your Free to Play collection is saved on this device. Select a life to rotate and review its cards.</p>
     {error && <p role="status">{error}</p>}
     <div className="booster-collection-packs">{kept.map(pack => <button key={pack.id} onClick={() => setReview(pack)}>
-      <img src={pack.cards[pack.selected[0]].framedArt ?? pack.cards[pack.selected[0]].art} alt="" />
+      <ArtworkImage src={pack.cards[pack.selected[0]].framedArt ?? pack.cards[pack.selected[0]].art} alt="" />
       <span>{pack.characterName}<small>{pack.selected.length} {pack.selected.length === 1 ? "card" : "cards"} · Review collection →</small></span>
     </button>)}</div>
     {review && <dialog ref={dialog} className="booster-review-dialog" aria-label="Review saved Legacy cards" onCancel={event => { event.preventDefault(); setReview(null); }}>

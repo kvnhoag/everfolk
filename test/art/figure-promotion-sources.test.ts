@@ -10,7 +10,7 @@ const promotedIds = ["demetrius", "ptolemy", "zeno"] as const;
 const figure = (id: string) => { const entry = figureRosterEntry(id); assert.ok(entry, id); return entry; };
 
 test("promotion copy does not overwrite the reviewed Epic card copy or historical research", () => {
-  const reviewed = JSON.parse(readFileSync(new URL("../../artwork/cards/framed-collection-v14/catalog.json", import.meta.url), "utf8"));
+  const reviewed = JSON.parse(readFileSync(new URL("../../assets/source/cards/framed-collection-v14/catalog.json", import.meta.url), "utf8"));
   for (const id of promotedIds) {
     const epic = getFigureCardArt(id, "Epic");
     const baseline = reviewed.assets.find((card: { figureId: string; kind: string }) => card.figureId === id && card.kind === "parent");
@@ -24,8 +24,8 @@ test("promotion copy does not overwrite the reviewed Epic card copy or historica
 });
 
 test("portable Legendary templates render the promotion biography in both SVG overlays", () => {
-  const root = new URL("../../artwork/card-art-handoff-v1/", import.meta.url);
-  const kit = JSON.parse(readFileSync(new URL("data/cards.json", root), "utf8"));
+  const root = new URL("../fixtures/card-art-kit/", import.meta.url);
+  const kit = JSON.parse(readFileSync(new URL("../../assets/source/cards/handoff-v1/cards.json", import.meta.url), "utf8"));
   const normalize = (value: string) => value.replace(/\s+/g, " ").trim();
   const entities: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" };
   const decode = (value: string) => value.replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos);/gi, (_, entity: string) =>

@@ -13,7 +13,8 @@ export function jobsForPaths(paths) {
     if (path.startsWith(".github/") || path === "scripts/ci-changes.mjs") return allJobs();
     if (path.startsWith("contract/")) { jobs.contract = true; continue; }
     if (path.startsWith("test/audits/")) continue;
-    if (path.startsWith("test/art/") || path.startsWith("tools/character-creator/") || path.startsWith("artwork/")) {
+    if (path.startsWith("test/art/") || path === "test/fixtures/card-art-kit.mjs" ||
+        path.startsWith("test/fixtures/card-art-kit/") || path.startsWith("tools/character-creator/") || path.startsWith("artwork/")) {
       jobs.art = true;
       continue;
     }

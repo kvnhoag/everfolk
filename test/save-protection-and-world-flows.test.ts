@@ -447,7 +447,7 @@ test("Issue #14: Custom household worlds stay selected across fresh-life restart
 
   try {
     renderHook();
-    await new Promise((r) => setTimeout(r, 10));
+    for (let attempt = 0; !hookResult.active && attempt < 100; attempt++) await new Promise((r) => setTimeout(r, 10));
     assert.equal(hookResult.active?.world.id, "custom-household", "Unbegun pending birth reload must keep custom household world");
     assert.equal(hookResult.active?.world.pack.version, "1");
 

@@ -31,6 +31,7 @@ export const CLICK_SFX_CREDIT: AudioSfxCredit = {
   sourceUrl: "https://opengameart.org/content/menu-selection-click",
 };
 
+// Retained only for bundled asset provenance; music uses the YouTube player.
 export const PLAYLIST: readonly MusicTrack[] = [
   {
     id: "egyptian-meditation",
@@ -106,131 +107,83 @@ export const PLAYLIST: readonly MusicTrack[] = [
   },
 ] as const;
 
+export const BACKGROUND_MUSIC = {
+  id: "ancient-macedonian-music",
+  title: "Relaxing Ancient Macedonian Music & Garden Ambience",
+  composer: "Atmospherious",
+  src: "/assets/audio/ancient-macedonian-music.mp3",
+  sourceUrl: "https://www.youtube.com/watch?v=5ZMLYtJ0KMU",
+} as const;
+
 export interface AudioState {
-  currentTrackIndex: number;
-  currentTrack: MusicTrack;
-  isPlaying: boolean;
-  volume: number;
   muted: boolean;
+  volume: number;
   sfxEnabled: boolean;
 }
 
-const STORAGE_KEY_TRACK = "everfolk:audio:track-id";
-const STORAGE_KEY_VOLUME = "everfolk:audio:volume";
-const STORAGE_KEY_MUTED = "everfolk:audio:muted";
+const STORAGE_KEY_VOLUME = "everfolk:music:volume";
+const STORAGE_KEY_MUTED = "everfolk:music:muted";
+const STORAGE_KEY_SFX_VOLUME = "everfolk:audio:volume";
 const STORAGE_KEY_SFX = "everfolk:audio:sfx";
-
-const CLICK_SFX_SRC = CLICK_SFX_CREDIT.src;
-const DEFAULT_VOLUME = 0.60;
 
 export class AudioManager {
   private bgmAudio: HTMLAudioElement | null = null;
+  private musicStarted = false;
+  private musicStarting = false;
+  private unlockInstalled = false;
+  private sfxVolume = 0.6;
   private sfxAudioPool: HTMLAudioElement[] = [];
   private sfxPoolIndex = 0;
   private sfxAssetUnavailable = false;
-  private failedTrackIds = new Set<string>();
-  private wantsPlayback = false;
   private audioCtx: AudioContext | null = null;
   private listeners = new Set<() => void>();
   private globalClickInstalled = false;
-  private userUnlockInstalled = false;
   private lastClickTime = 0;
-
-  private state: AudioState = {
-    currentTrackIndex: 0,
-    currentTrack: PLAYLIST[0],
-    isPlaying: false,
-    volume: DEFAULT_VOLUME,
-    muted: false,
-    sfxEnabled: true,
-  };
+  private state: AudioState = { volume: 0.6, muted: false, sfxEnabled: true };
 
   constructor() {
-    this.restoreSettings();
-  }
-
-  private restoreSettings() {
     if (typeof window === "undefined") return;
     try {
-      const savedTrackId = window.localStorage.getItem(STORAGE_KEY_TRACK);
-      if (savedTrackId) {
-        const found = PLAYLIST.findIndex(t => t.id === savedTrackId);
-        if (found !== -1) {
-          this.state.currentTrackIndex = found;
-          this.state.currentTrack = PLAYLIST[found];
-        }
-      }
-      const savedVol = window.localStorage.getItem(STORAGE_KEY_VOLUME);
-      if (savedVol !== null) {
-        const parsed = parseFloat(savedVol);
-        if (!isNaN(parsed) && parsed >= 0 && parsed <= 1) {
-          this.state.volume = parsed;
-        }
-      }
-      const savedMuted = window.localStorage.getItem(STORAGE_KEY_MUTED);
-      if (savedMuted === "1") {
-        this.state.muted = true;
-      }
-      const savedSfx = window.localStorage.getItem(STORAGE_KEY_SFX);
-      if (savedSfx === "0") {
-        this.state.sfxEnabled = false;
-      }
+      const savedVolume = window.localStorage.getItem(STORAGE_KEY_VOLUME);
+      const volume = savedVolume === null ? NaN : Number(savedVolume);
+      if (Number.isFinite(volume) && volume >= 0 && volume <= 1) this.state.volume = volume;
+      this.state.muted = window.localStorage.getItem(STORAGE_KEY_MUTED) === "1";
+      const savedSfxVolume = window.localStorage.getItem(STORAGE_KEY_SFX_VOLUME);
+      const sfxVolume = savedSfxVolume === null ? NaN : Number(savedSfxVolume);
+      if (Number.isFinite(sfxVolume) && sfxVolume >= 0 && sfxVolume <= 1) this.sfxVolume = sfxVolume;
+      this.state.sfxEnabled = window.localStorage.getItem(STORAGE_KEY_SFX) !== "0";
     } catch {
-      // Ignore storage errors
+      // Storage may be unavailable in private browsing.
     }
   }
 
   private persistSettings() {
     if (typeof window === "undefined") return;
     try {
-      window.localStorage.setItem(STORAGE_KEY_TRACK, this.state.currentTrack.id);
-      window.localStorage.setItem(STORAGE_KEY_VOLUME, this.state.volume.toString());
+      window.localStorage.setItem(STORAGE_KEY_VOLUME, String(this.state.volume));
       window.localStorage.setItem(STORAGE_KEY_MUTED, this.state.muted ? "1" : "0");
       window.localStorage.setItem(STORAGE_KEY_SFX, this.state.sfxEnabled ? "1" : "0");
     } catch {
-      // Ignore storage errors
+      // Sound settings still work when storage is unavailable.
     }
   }
 
   public init() {
     if (typeof window === "undefined") return;
     if (!this.bgmAudio) {
-      this.bgmAudio = new Audio();
+      this.bgmAudio = new Audio(BACKGROUND_MUSIC.src);
       this.bgmAudio.loop = true;
-      this.bgmAudio.preload = "auto";
-      this.bgmAudio.src = this.state.currentTrack.src;
+      this.bgmAudio.preload = "metadata";
       this.bgmAudio.volume = this.state.volume;
       this.bgmAudio.muted = this.state.muted;
-
-      this.bgmAudio.addEventListener("play", () => {
-        if (!this.state.isPlaying) {
-          this.state = { ...this.state, isPlaying: true };
-          this.notify();
-        }
-      });
-      this.bgmAudio.addEventListener("pause", () => {
-        if (this.state.isPlaying) {
-          this.state = { ...this.state, isPlaying: false };
-          this.notify();
-        }
-      });
-      this.bgmAudio.addEventListener("ended", () => {
-        this.nextTrack();
-      });
-      this.bgmAudio.addEventListener("error", () => {
-        this.handleBgmFailure();
-      });
     }
-
     if (this.sfxAudioPool.length === 0 && !this.sfxAssetUnavailable) {
       try {
         for (let i = 0; i < 4; i++) {
-          const sfx = new Audio(CLICK_SFX_SRC);
+          const sfx = new Audio(CLICK_SFX_CREDIT.src);
           sfx.preload = "auto";
-          sfx.volume = Math.min(1, this.state.volume * 0.9);
-          sfx.addEventListener("error", () => {
-            this.sfxAssetUnavailable = true;
-          });
+          sfx.volume = this.sfxVolume * 0.85;
+          sfx.addEventListener("error", () => { this.sfxAssetUnavailable = true; });
           this.sfxAudioPool.push(sfx);
         }
       } catch {
@@ -238,115 +191,92 @@ export class AudioManager {
         this.sfxAudioPool = [];
       }
     }
-
     this.installGlobalClickListener();
-    this.installUserUnlockListener();
+    if (!this.unlockInstalled && !this.musicStarted) {
+      this.unlockInstalled = true;
+      window.addEventListener("pointerdown", this.startBackgroundMusic, { passive: true });
+      window.addEventListener("keydown", this.startBackgroundMusic, { passive: true });
+    }
   }
 
-  private installUserUnlockListener() {
-    if (typeof window === "undefined" || this.userUnlockInstalled) return;
-    this.userUnlockInstalled = true;
-    const unlock = () => {
-      // Only the first gesture unlocks autoplay; later interactions must respect Pause.
-      window.removeEventListener("pointerdown", unlock);
-      window.removeEventListener("keydown", unlock);
-      if (!this.state.muted && !this.state.isPlaying && this.bgmAudio) {
-        this.play();
-      }
-      if (!this.audioCtx) {
-        try {
-          const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-          if (AudioContextClass) {
-            this.audioCtx = new AudioContextClass();
-          }
-        } catch {
-          // Ignore
-        }
-      } else if (this.audioCtx.state === "suspended") {
-        void this.audioCtx.resume();
-      }
-    };
+  private startBackgroundMusic = () => {
+    if (!this.bgmAudio || this.musicStarted || this.musicStarting) return;
+    this.musicStarting = true;
+    try {
+      const result = this.bgmAudio.play();
+      void Promise.resolve(result).then(() => {
+        this.musicStarted = true;
+        window.removeEventListener("pointerdown", this.startBackgroundMusic);
+        window.removeEventListener("keydown", this.startBackgroundMusic);
+        this.unlockInstalled = false;
+      }).catch(() => {
+        // Browser autoplay restrictions can require another user gesture.
+      }).finally(() => { this.musicStarting = false; });
+    } catch {
+      this.musicStarting = false;
+    }
+  };
 
-    window.addEventListener("pointerdown", unlock, { passive: true, once: false });
-    window.addEventListener("keydown", unlock, { passive: true, once: false });
-  }
 
   public installGlobalClickListener() {
-    if (typeof window === "undefined" || this.globalClickInstalled) return;
+    if (typeof document === "undefined" || this.globalClickInstalled) return;
     this.globalClickInstalled = true;
-
-    document.addEventListener("click", (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-      const clickable = target.closest("button, [role='button'], summary, a, input[type='button'], input[type='submit']");
-      if (clickable) {
+    document.addEventListener("click", (event: MouseEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest("button, [role='button'], summary, a, input[type='button'], input[type='submit']")) {
         this.playClickSound();
       }
     }, { capture: true, passive: true });
   }
 
   public playClickSound() {
-    if (typeof window === "undefined" || !this.state.sfxEnabled) return;
+    if (typeof window === "undefined" || !this.state.sfxEnabled || this.sfxVolume === 0) return;
     const now = Date.now();
-    if (now - this.lastClickTime < 25) return; // Debounce rapid multi-events
+    if (now - this.lastClickTime < 25) return;
     this.lastClickTime = now;
 
-    // Use bundled click asset when available, falling back cleanly to synthesized click audio.
     if (!this.sfxAssetUnavailable && this.sfxAudioPool.length > 0) {
       const sfx = this.sfxAudioPool[this.sfxPoolIndex];
       this.sfxPoolIndex = (this.sfxPoolIndex + 1) % this.sfxAudioPool.length;
-      if (sfx) {
-        try {
-          sfx.volume = Math.min(1, Math.max(0.1, this.state.volume * 0.85));
-          sfx.currentTime = 0;
-          const result = sfx.play();
-          if (result && typeof result.catch === "function") {
-            void result.catch(() => {
-              this.synthesizeClickFallback();
-            });
-          }
-          return;
-        } catch {
-          this.sfxAssetUnavailable = true;
-        }
+      try {
+        sfx.volume = this.sfxVolume * 0.85;
+        sfx.currentTime = 0;
+        void sfx.play()?.catch(() => this.synthesizeClickFallback());
+        return;
+      } catch {
+        this.sfxAssetUnavailable = true;
       }
     }
-
     this.synthesizeClickFallback();
   }
 
   private synthesizeClickFallback() {
+    if (!this.state.sfxEnabled || this.sfxVolume === 0) return;
     try {
       if (!this.audioCtx) {
-        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        const AudioContextClass = window.AudioContext
+          || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
         if (AudioContextClass) this.audioCtx = new AudioContextClass();
       }
       if (!this.audioCtx) return;
       if (this.audioCtx.state === "suspended") void this.audioCtx.resume();
-
       const osc = this.audioCtx.createOscillator();
       const gain = this.audioCtx.createGain();
-
       osc.type = "sine";
       osc.frequency.setValueAtTime(800, this.audioCtx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(120, this.audioCtx.currentTime + 0.04);
-
-      gain.gain.setValueAtTime(this.state.volume * 0.25, this.audioCtx.currentTime);
+      gain.gain.setValueAtTime(this.sfxVolume * 0.25, this.audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + 0.04);
-
       osc.connect(gain);
       gain.connect(this.audioCtx.destination);
-
       osc.start();
       osc.stop(this.audioCtx.currentTime + 0.04);
     } catch {
-      // Audio fallback failed silently
+      // A missing audio device must not interrupt the game.
     }
   }
 
-  public getState(): AudioState {
-    return this.state;
-  }
+  public getState(): AudioState { return this.state; }
 
   public subscribe(listener: () => void): () => void {
     this.listeners.add(listener);
@@ -354,192 +284,27 @@ export class AudioManager {
   }
 
   private notify() {
-    for (const listener of this.listeners) {
-      try {
-        listener();
-      } catch {
-        // Ignore listener error
-      }
-    }
+    for (const listener of this.listeners) listener();
   }
 
-  private handleBgmFailure() {
-    const failedTrack = this.state.currentTrack;
-    this.failedTrackIds.add(failedTrack.id);
-    const shouldTryFallback = (this.wantsPlayback || this.state.isPlaying) && !this.state.muted;
-    const nextPlayable = PLAYLIST.findIndex(track => !this.failedTrackIds.has(track.id));
-
-    if (shouldTryFallback && nextPlayable !== -1 && nextPlayable !== this.state.currentTrackIndex) {
-      this.selectTrack(nextPlayable);
-      return;
-    }
-
-    this.wantsPlayback = false;
-    if (this.state.isPlaying) {
-      this.state = { ...this.state, isPlaying: false };
-      this.notify();
-    }
-  }
-
-  public play() {
-    this.init();
-    if (!this.bgmAudio) return;
-    this.wantsPlayback = true;
-    this.bgmAudio.muted = false;
-    this.bgmAudio.volume = this.state.volume;
-    try {
-      const playResult = this.bgmAudio.play();
-      if (playResult && typeof playResult.then === "function") {
-        void playResult.then(() => {
-          this.failedTrackIds.delete(this.state.currentTrack.id);
-          this.state = { ...this.state, isPlaying: true, muted: false };
-          this.persistSettings();
-          this.notify();
-        }).catch(() => {
-          this.wantsPlayback = false;
-          this.state = { ...this.state, isPlaying: false };
-          this.notify();
-        });
-      }
-    } catch {
-      this.wantsPlayback = false;
-      this.state = { ...this.state, isPlaying: false };
-      this.notify();
-    }
-  }
-
-  public pause() {
-    this.wantsPlayback = false;
-    if (this.bgmAudio) {
-      this.bgmAudio.pause();
-    }
-    this.state = { ...this.state, isPlaying: false };
+  public setVolume(volume: number) {
+    if (!Number.isFinite(volume)) return;
+    this.state = { ...this.state, volume: Math.max(0, Math.min(1, volume)) };
+    if (this.bgmAudio) this.bgmAudio.volume = this.state.volume;
+    this.persistSettings();
     this.notify();
-  }
-
-  public togglePlay() {
-    if (this.state.isPlaying) {
-      this.pause();
-    } else {
-      this.play();
-    }
   }
 
   public toggleMute() {
-    this.init();
-    const nextMuted = !this.state.muted;
-    this.wantsPlayback = !nextMuted;
-    if (this.bgmAudio) {
-      this.bgmAudio.muted = nextMuted;
-      if (nextMuted) {
-        this.bgmAudio.pause();
-      } else {
-        this.bgmAudio.volume = this.state.volume;
-        try {
-          const playResult = this.bgmAudio.play();
-          if (playResult && typeof playResult.catch === "function") {
-            void playResult.catch(() => {
-              this.wantsPlayback = false;
-              this.state = { ...this.state, isPlaying: false };
-              this.notify();
-            });
-          }
-        } catch {
-          this.wantsPlayback = false;
-        }
-      }
-    }
-    this.state = {
-      ...this.state,
-      muted: nextMuted,
-      isPlaying: !nextMuted,
-    };
+    this.state = { ...this.state, muted: !this.state.muted };
+    if (this.bgmAudio) this.bgmAudio.muted = this.state.muted;
+    if (!this.state.muted) this.startBackgroundMusic();
     this.persistSettings();
     this.notify();
   }
 
-  public setVolume(vol: number) {
-    this.init();
-    const clamped = Math.max(0, Math.min(1, vol));
-    if (this.bgmAudio) {
-      this.bgmAudio.volume = clamped;
-      if (clamped > 0 && this.state.muted) {
-        this.bgmAudio.muted = false;
-      }
-    }
-    this.state = {
-      ...this.state,
-      volume: clamped,
-      muted: clamped === 0,
-    };
-    this.persistSettings();
-    this.notify();
-  }
-
-  public increaseVolume(step = 0.1) {
-    this.setVolume(this.state.volume + step);
-  }
-
-  public decreaseVolume(step = 0.1) {
-    this.setVolume(this.state.volume - step);
-  }
-
-  public selectTrack(indexOrId: number | string) {
-    this.init();
-    let index: number;
-    if (typeof indexOrId === "number") {
-      index = (indexOrId + PLAYLIST.length) % PLAYLIST.length;
-    } else {
-      index = PLAYLIST.findIndex(t => t.id === indexOrId);
-      if (index === -1) index = 0;
-    }
-
-    const nextTrack = PLAYLIST[index];
-    const wasPlaying = this.state.isPlaying || this.wantsPlayback;
-
-    this.state = {
-      ...this.state,
-      currentTrackIndex: index,
-      currentTrack: nextTrack,
-    };
-    this.persistSettings();
-
-    if (this.bgmAudio) {
-      this.bgmAudio.src = nextTrack.src;
-      this.bgmAudio.currentTime = 0;
-      if (wasPlaying && !this.state.muted) {
-        try {
-          const playResult = this.bgmAudio.play();
-          if (playResult && typeof playResult.then === "function") {
-            void playResult.then(() => {
-              this.failedTrackIds.delete(nextTrack.id);
-              if (!this.state.isPlaying) {
-                this.state = { ...this.state, isPlaying: true };
-                this.notify();
-              }
-            }).catch(() => {
-              this.wantsPlayback = false;
-              this.state = { ...this.state, isPlaying: false };
-              this.notify();
-            });
-          }
-        } catch {
-          this.wantsPlayback = false;
-          this.state = { ...this.state, isPlaying: false };
-        }
-      }
-    }
-
-    this.notify();
-  }
-
-  public nextTrack() {
-    this.selectTrack(this.state.currentTrackIndex + 1);
-  }
-
-  public prevTrack() {
-    this.selectTrack(this.state.currentTrackIndex - 1);
-  }
+  public increaseVolume(step = 0.1) { this.setVolume(this.state.volume + step); }
+  public decreaseVolume(step = 0.1) { this.setVolume(this.state.volume - step); }
 
   public toggleSfx() {
     this.state = { ...this.state, sfxEnabled: !this.state.sfxEnabled };

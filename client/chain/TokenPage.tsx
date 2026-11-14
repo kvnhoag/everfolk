@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import LifeChoices from "./LifeChoices.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import { useEffect, useId, useState, type ReactNode } from "react";
@@ -85,7 +86,7 @@ export function TokenPageBody({ tokenId, view, practice = false, busy = false, e
       {view.figureId && (!view.portraitMedia || /\/assets\/figures\/[^/]+\.png(?:[?#].*)?$/.test(view.portraitMedia))
         ? <FigureArtwork figureId={view.figureId} rarity={view.rarityLabel} editionText={view.editionText} fullCard />
         : view.portraitMedia
-        ? <div className="figure-artwork is-stage"><img src={view.portraitMedia} alt={view.title} className="stage-token-portrait" /></div>
+        ? <div className="figure-artwork is-stage"><ArtworkImage src={view.portraitMedia} alt={view.title} className="stage-token-portrait" /></div>
         : <FigureArtwork figureId={view.figureId} rarity={view.rarityLabel} editionText={view.editionText} fullCard />}
       <div className="token-tags"><span className={`chain-tag${view.isFigure ? " is-figure" : ""}`}>{view.rarityLabel}</span>{view.editionText && <span className="chain-tag">Edition {view.editionText}</span>}<span className="chain-tag">{view.lifeLine}</span></div>
       {view.stageInfo && <div className="token-tags stage-tags">

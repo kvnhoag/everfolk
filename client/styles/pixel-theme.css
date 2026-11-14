@@ -93,6 +93,6 @@ dialog.detail-dialog :is(input,select,textarea){border-radius:0;border-color:#ba
 .choice-locked,.activity-locked{border-style:dashed}
 .site-footer{border-color:#cdbb95}
 .memorial-scene>img,.life-has-ended .portrait{filter:saturate(.65)}
-img[src^="/assets/pixel/"]{image-rendering:crisp-edges;image-rendering:pixelated}
+img[src^="/assets/pixel/"],img[data-artwork-path^="/assets/pixel/"]{image-rendering:crisp-edges;image-rendering:pixelated}
 @media(max-width:760px){.main-menu h1{font-size:clamp(55px,13.4vw,80px);letter-spacing:-3px}.main-menu-world{font-size:21px}.character-panel h2{font-size:25px}.scene-image.paper-scene .paper-scene-copy h2{font-size:25px}.portrait-frame{height:103px;width:80px}.portrait{width:80px;height:100px}.chapter-heading h1{font-size:35px}}
 @media(prefers-reduced-motion:reduce){button{transition:none}.pixel-scene [data-loop]{animation:none!important}}

@@ -22,6 +22,13 @@ test("art tooling and delivered assets retain their own audits", () => {
   for (const path of ["scripts/lib/card-art-replacements.mjs", "client/models/avatar-appearance.ts", "client/models/banner-state.ts", "assets/source/frame.svg", "chain/catalog/figures.ts", "chain/ids.ts"]) assert.equal(jobsForPaths([path]).art, true, path);
 });
 
+test("retained card fixtures run the art suite without unrelated application or contract work", () => {
+  for (const path of ["test/fixtures/card-art-kit.mjs", "test/fixtures/card-art-kit/frames/approved.png", "test/fixtures/card-art-kit/frames/nested/frame.svg", "test/fixtures/card-art-kit/LICENSE.txt"]) {
+    assert.deepEqual(jobsForPaths([path]), { app: false, contract: false, art: true }, path);
+  }
+  assert.deepEqual(jobsForPaths(["test/fixtures/another-kit/input.json"]), { app: true, contract: false, art: false });
+});
+
 test("workflow changes run every job and combined changes retain both application and contract tests", () => {
   assert.deepEqual(jobsForPaths([".github/workflows/ci.yml"]), { app: true, contract: true, art: true });
   assert.deepEqual(jobsForPaths(["src/engine.ts", "contract/src/lib.rs"]), { app: true, contract: true, art: false });

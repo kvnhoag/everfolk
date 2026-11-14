@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import { type ReactNode } from "react";
 import { RARITY_LABELS, type FigureId } from "../../chain/ids.ts";
 import { getFigureCardArt } from "../models/card-art.ts";
@@ -136,7 +137,7 @@ export default function EverfolkCard({
 
           <div className="ef-card-portrait-wrap">
             {portraitMedia ? (
-              <img className="stage-card-portrait" src={portraitMedia} alt={title} />
+              <ArtworkImage className="stage-card-portrait" src={portraitMedia} alt={title} />
             ) : figureId ? (
               <FigureArtwork figureId={figureId} />
             ) : (

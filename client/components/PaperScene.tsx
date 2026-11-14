@@ -1,3 +1,4 @@
+import ArtworkImage from "./ArtworkImage.tsx";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { engineForLife } from "../lib/world-session.ts";
@@ -75,9 +76,9 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
   return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene life-banner ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-situation={banner.situation} data-life-stage={banner.stage} data-banner-style={banner.bannerStyle} data-motion={banner.motion} data-motion-state={motionState}>
     <div className="paper-scene-copy" hidden={dashboard}><span className="paper-scene-kicker">Age {life.age} · {formatYear(life.year)}</span><h2>{banner.title}</h2><strong className="life-banner-situation">{banner.situationLabel}</strong><p className="paper-event-caption">{banner.caption}</p></div>
     <div className={`paper-illustration-wrap life-banner-art motion-${banner.motion}`} key={`${banner.assetSrc}-${banner.stage}-${banner.actorPose}`} role="img" aria-label={banner.alt}>
-      <img className="life-banner-background" src={activeAssetSrc} alt="" width={banner.assetWidth} height={banner.assetHeight} fetchPriority="high" onError={() => { if (banner.assetSrc !== banner.fallbackAssetSrc) setFailedBannerSrc(banner.assetSrc); }} />
+      <ArtworkImage className="life-banner-background" src={activeAssetSrc} alt="" width={banner.assetWidth} height={banner.assetHeight} fetchPriority="high" onError={() => { if (banner.assetSrc !== banner.fallbackAssetSrc) setFailedBannerSrc(banner.assetSrc); }} />
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} />
-      {actorSrc && <div className={`paper-character-layer life-banner-actor pose-${banner.actorPose}`}><img src={actorSrc} alt="" width={240} height={112} /></div>}
+      {actorSrc && <div className={`paper-character-layer life-banner-actor pose-${banner.actorPose}`}><ArtworkImage src={actorSrc} alt="" width={240} height={112} /></div>}
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} front />
     </div>
     <div className="paper-scene-bottom">

@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import { useEffect, useId, useState } from "react";
 import type { LifeView } from "../../chain/types.ts";
 import ActiveLifeCard, { useActiveRankedLife } from "./ActiveLifeCard.tsx";
@@ -286,7 +287,7 @@ export default function MyLives({ backend, onOpen }: { backend: ChainBackend; on
               <div className="ledger-value">
                 <span className="market-thumb">
                   {row.portraitMedia ? (
-                    <img src={row.portraitMedia} alt={row.title} className="stage-market-portrait" />
+                    <ArtworkImage src={row.portraitMedia} alt={row.title} className="stage-market-portrait" />
                   ) : row.figureId ? (
                     <FigureArtwork figureId={row.figureId} />
                   ) : (

@@ -137,27 +137,14 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: ${{ fromJSON(needs.changes.outputs.timeout_minutes) }}
     steps:
-      - name: Check out source and art inputs
+      - name: Check out source, retained metadata and art fixtures
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /*
-            !/artwork/*
-            /artwork/card-art-handoff-v1/
-            /artwork/life-banners/
-            /artwork/cards/
-            !/artwork/cards/*
-            /artwork/cards/framed-collection-v14/
-            !/artwork/cards/framed-collection-v14/*
-            /artwork/cards/framed-collection-v14/catalog.json
-            /artwork/cards/replacements/
-            /artwork/portraits/
-            !/artwork/portraits/*
-            /artwork/portraits/ordinary-v3/
-            !/artwork/portraits/ordinary-v3/*
-            /artwork/portraits/ordinary-v3/manifest.json
+            !/artwork/
       - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:

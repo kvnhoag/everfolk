@@ -8,3 +8,7 @@ dist
 contract/target
 **/.venv
 *.log
+
+# Source artwork and local release staging live outside application images.
+artwork
+artifacts

@@ -1,3 +1,4 @@
+import ArtworkImage from "./ArtworkImage.tsx";
 import { displayProse } from "../models/display-prose.ts";
 import { useId, useMemo, useState } from "react";
 import type { AccomplishmentRecord, LifeState, WorldPack } from "../../src/types.ts";
@@ -32,7 +33,7 @@ function CollectionCard({ entry, subcard = false, world, life, onInspect }: {
       <CollectionCardArtwork art={art} />
     </a> : figureCard ? <div style={{ display: "flex", justifyContent: "center", padding: "18px 12px 0" }}>
       <FigureCardStack recorded gender={entry.characterSex} artSeed={entry.seed} figure={figureCard.figure} rank={figureCard.rank} title={figureCard.mode === "contribution" ? figureCard.title : figureCard.figure.name} mode={figureCard.mode} contributionRanks={figureCard.contributionRanks} compact onInspect={() => onInspect({ ...figureCard, gender: entry.characterSex })} />
-    </div> : <div className="legacy-card-art" aria-hidden="true"><img src={`/assets/pixel/routes/${record.routeId.startsWith("figure-") ? "philosophy" : record.routeId}.svg`} width={64} height={64} alt="" /><span>{subcard ? "◆" : distinction(record.kind) ? "✦" : "◆"}</span></div>}
+    </div> : <div className="legacy-card-art" aria-hidden="true"><ArtworkImage src={`/assets/pixel/routes/${record.routeId.startsWith("figure-") ? "philosophy" : record.routeId}.svg`} width={64} height={64} alt="" /><span>{subcard ? "◆" : distinction(record.kind) ? "✦" : "◆"}</span></div>}
     <div className="legacy-card-copy"><p className="legacy-card-path">{entry.routeTitle ?? record.routeId.replace(/-/g, " ")}{cardLabel(record) && <span className="legacy-prestige">{cardLabel(record)}</span>}</p><Heading>{displayProse(record.name)}</Heading><strong className="legacy-card-achievement">{displayProse(record.title)}</strong><p>{displayProse(record.description)}</p><div className="legacy-card-person"><strong>{entry.characterName}</strong><span>Age {record.age} · {formatYear(record.year)}</span></div>{record.people.length > 0 && <p className="legacy-card-people">Remembered with {record.people.join(", ")}</p>}<small className="legacy-card-world">{entry.worldTitle}</small>
       {figureCard && <button type="button" className="text-button" onClick={() => onInspect({ ...figureCard, gender: entry.characterSex })}>Inspect earned card</button>}
     </div>

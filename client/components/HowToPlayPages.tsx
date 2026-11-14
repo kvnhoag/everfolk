@@ -1,3 +1,4 @@
+import ArtworkImage from "./ArtworkImage.tsx";
 import { BAR_LEGEND, HOW_TO_WIN, YEAR_SCRIPT, type PlayStep, type Shot } from "../models/how-to-play.ts";
 import type { RoadmapStage } from "../models/life-roadmap.ts";
 import { stageAges } from "../models/life-roadmap.ts";
@@ -13,7 +14,7 @@ import PixelPortrait from "./PixelPortrait.tsx";
 
 function Screenshot({ shot }: { shot: Shot }) {
   // Captured at twice the size, shown at half: sharp on any screen and never wider than it was on screen.
-  return <img className="htp-shot" src={shot.src} width={shot.width / 2} height={shot.height / 2} alt={shot.alt} loading="lazy" decoding="async" draggable={false} />;
+  return <ArtworkImage className="htp-shot" src={shot.src} width={shot.width / 2} height={shot.height / 2} alt={shot.alt} loading="lazy" decoding="async" draggable={false} />;
 }
 
 function StepCard({ step }: { step: PlayStep }) {

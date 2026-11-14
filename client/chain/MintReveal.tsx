@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import { useId, useState } from "react";
 import PixelIcon from "../components/PixelIcon.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
@@ -31,7 +32,7 @@ export default function MintReveal({ view, affection, card, practice = false, on
       {view.figureId && (!view.portraitMedia || /\/assets\/figures\/[^/]+\.png(?:[?#].*)?$/.test(view.portraitMedia))
         ? <FigureArtwork figureId={view.figureId} rarity={card?.rarity ?? view.rarityLabel} editionText={view.rows.find(row => row.label === "Edition")?.value} fullCard />
         : view.portraitMedia
-        ? <div className="mint-reveal-portrait"><img src={view.portraitMedia} alt={view.title} className="stage-reveal-portrait" /></div>
+        ? <div className="mint-reveal-portrait"><ArtworkImage src={view.portraitMedia} alt={view.title} className="stage-reveal-portrait" /></div>
         : view.figureId
         ? <FigureArtwork figureId={view.figureId} rarity={card?.rarity ?? view.rarityLabel} editionText={view.rows.find(row => row.label === "Edition")?.value} fullCard />
         : <div className="ledger-emblem" aria-hidden="true"><PixelIcon name={view.emblem ?? "sun"} size={64} /><span>{view.kindLabel}</span></div>}

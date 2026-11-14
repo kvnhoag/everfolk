@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test from 'node:test';
 import { mergeActiveCardArtReplacements, stageCardArtImport, validateCardArtBundle } from '../../scripts/lib/card-art-replacements.mjs';
-import { fitArtwork } from '../../artwork/card-art-handoff-v1/tools/card-art.mjs';
+import { fitArtwork } from '../../scripts/lib/card-art-kit.mjs';
 
 const require = createRequire(import.meta.url);
 const sharp = createRequire(require.resolve('next/package.json'))('sharp');
@@ -75,7 +75,7 @@ test('artist bundles stage without switching live registry, then apply all paren
   assert.equal(staged.installed, false);
   assert.equal(staged.cards.length, 2);
   assert.deepEqual(readFileSync(resolve(repo, 'client/models/card-art-registry.json')), before);
-  assert.equal(existsSync(resolve(repo, 'artwork/cards/replacements/active.json')), false);
+  assert.equal(existsSync(resolve(repo, 'assets/source/cards/replacements/active.json')), false);
   const installed = await stageCardArtImport({ repo, bundle, version: 'pixel-v1', apply: true });
   assert.equal(installed.installed, true);
   const current = load(resolve(repo, 'client/models/card-art-registry.json'));

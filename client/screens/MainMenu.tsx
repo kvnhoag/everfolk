@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import { useEffect, useId, useRef, useState } from "react";
 import { formatYear } from "../../src/calendar.ts";
 import type { LifeState } from "../../src/types.ts";
@@ -145,7 +146,7 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
           {rankedLife && <p className="ef-home-eyebrow">WEAVE MODE · NEAR TESTNET</p>}
           <h1 id={headingId} ref={heading} aria-label="Everfolk" tabIndex={-1}>
             <span className="ef-title-wrap">
-              <img className="ef-home-wordmark" src="/assets/branding/everfolk-wordmark-cream.svg" alt="" width={1280} height={291} />
+              <ArtworkImage className="ef-home-wordmark" src="/assets/branding/everfolk-wordmark-cream.svg" alt="" width={1280} height={291} />
               {[0, 1, 2].map(i => <i key={i} className="ef-title-glint" aria-hidden="true" />)}
             </span>
           </h1>

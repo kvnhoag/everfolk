@@ -33,6 +33,7 @@ interface VariantDelivery { id: string; variantOf: string; rarity: string; symbo
 const registry = JSON.parse(readFileSync(new URL("../../client/models/card-art-registry.json", import.meta.url), "utf8"));
 const manifest = JSON.parse(readFileSync(new URL("../../public/assets/cards/collection-v14/manifest.json", import.meta.url), "utf8"));
 const symbolCredits = JSON.parse(readFileSync(new URL("../../public/assets/cards/collection-v14/icon-credits.json", import.meta.url), "utf8"));
+const reviewedCatalogBytes = readFileSync(new URL("../../assets/source/cards/framed-collection-v14/catalog.json", import.meta.url));
 // The reviewed v14 source library remains testable after a versioned pixel-art
 // import changes the app's active artwork URLs.
 const assets = manifest.assets as CardArt[];
@@ -57,7 +58,7 @@ test("active artwork preserves every reviewed card identity, biography, rank and
   const expected = mergeActiveCardArtReplacements({ repo, registry: { ...registry, assets, parentVariants: variants } });
   assert.deepEqual(registry.assets, expected.assets);
   assert.deepEqual(registry.parentVariants, expected.parentVariants);
-  const activePath = new URL("../../artwork/cards/replacements/active.json", import.meta.url);
+  const activePath = new URL("../../assets/source/cards/replacements/active.json", import.meta.url);
   if (existsSync(activePath)) {
     const active = JSON.parse(readFileSync(activePath, "utf8"));
     assert.equal(registry.artReplacements.count, active.entries.length);
@@ -114,6 +115,7 @@ test("all 487 production images have intact hashes, lossless encoding and approv
   assert.equal(deliveries.length, 117);
   assert.equal(variantDeliveries.length, 19);
   assert.equal(manifest.sourceCatalogSha256, registry.sourceCatalogSha256);
+  assert.equal(sha(reviewedCatalogBytes), registry.sourceCatalogSha256, "Retained reviewed source metadata must match the delivered collection fingerprint");
   assert.equal(manifest.losslessRGBAReadbackVerified, true);
   const files = deliveries.flatMap(asset => [asset.full, asset.thumbnail, asset.footerless, asset.portrait]).concat(variantDeliveries.map(variant => variant.footerless));
   assert.equal(files.length, 487);

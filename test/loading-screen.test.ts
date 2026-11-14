@@ -24,11 +24,13 @@ test("loading shows a visible percentage and an accessible determinate bar along
   assert.match(html, /aria-valuetext="65% — Loading world…"/);
   assert.match(html, /aria-busy="true"/);
   assert.match(html, /class="loading-soldier"/);
+  assert.match(html, /<span role="status">Loading\.\.\.<\/span>/);
+  assert.doesNotMatch(html, /Loading game|Loading progress|<div role="status"/);
   assert.doesNotMatch(html, /loading-preview-enter/);
 });
 
 test("the server-rendered opening frame and restoring phase have progress before hydration", () => {
-  for (const [props, percent] of [[{}, 5], [{ phase: "restoring" as const }, 20]] as const) {
+  for (const [props, percent] of [[{}, 5], [{ phase: "restoring" as const }, 85]] as const) {
     const html = renderToStaticMarkup(createElement(LoadingScreen, props));
     assert.match(html, new RegExp(`<progress[^>]*value="${percent}"`));
     assert.ok(html.includes(`${percent}%`));
