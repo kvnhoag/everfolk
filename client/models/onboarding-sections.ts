@@ -103,6 +103,32 @@ export function visibleSections(facts: SectionFacts, ages: SectionAges): Readonl
   return new Set(GAME_SECTIONS.filter(id => sectionOpen(id, facts, ages)));
 }
 
+export interface DashboardColumnOptions {
+  begun: boolean;
+  demo: boolean;
+  ended: boolean;
+  ready: boolean;
+  hasTitlePaths: boolean;
+  hasProgressFeedback: boolean;
+}
+
+export interface DashboardColumnLayout {
+  /** Place wealth overview and life records in `.story-column` until `command-deck` opens, preventing an empty or sparse column at early ages. */
+  moveSupportToStory: boolean;
+  /** False when `.story-column` has nothing visible, so the visual column takes the full width. */
+  showStoryColumn: boolean;
+}
+
+/** Resolves whether `.story-column` renders and which early-childhood panels balance it before the command deck opens. */
+export function dashboardColumns(sections: ReadonlySet<GameSection>, options: DashboardColumnOptions): DashboardColumnLayout {
+  if (!options.begun || !options.demo) return { moveSupportToStory: false, showStoryColumn: true };
+  const hasYearlyAction = options.ready && sections.has("yearly-action");
+  const hasCommandDeck = !options.ended && sections.has("command-deck");
+  const moveSupportToStory = !options.ended && !hasCommandDeck && (hasYearlyAction || sections.has("wealth"));
+  const showStoryColumn = options.ended || options.hasTitlePaths || options.hasProgressFeedback || hasYearlyAction || hasCommandDeck || moveSupportToStory;
+  return { moveSupportToStory, showStoryColumn };
+}
+
 /** A tip that introduces a section the first time it appears; `covers` lists every section it explains. */
 export interface SectionTip {
   hint: TutorialHintId;

@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import type { LifeState, WorldPack } from "../src/types.ts";
 import { createEngine } from "../src/index.ts";
 import {
-  GAME_SECTIONS, SECTION_TIPS, newGuidedStep, sectionAges, sectionFacts, sectionOpenAge, tipsPassedOnEntry, visibleSections,
+  GAME_SECTIONS, SECTION_TIPS, dashboardColumns, newGuidedStep, sectionAges, sectionFacts, sectionOpenAge, tipsPassedOnEntry, visibleSections,
   type SectionAges, type SectionFacts,
 } from "../client/models/onboarding-sections.ts";
 import { advanceToDecisionWithFocus } from "../client/models/yearly-focus.ts";
@@ -103,4 +103,36 @@ test("with tips on, Next decision stops at the year a section opens; with tips o
   assert.ok(guided.phase === "choice" || guided.age === 6, "either a decision came first or it stopped where focus opens");
   const free = advanceToDecisionWithFocus(engine, start, "everyday");
   assert.ok(free.phase !== "ready", "without a stop it runs to the next decision");
+});
+
+test("dashboardColumns collapses empty right columns in early childhood and balances age 6 before command-deck opens", () => {
+  const layoutAt = (age: number, over: Partial<Parameters<typeof dashboardColumns>[1]> = {}) =>
+    dashboardColumns(visibleSections(facts({ age }), AGES), {
+      begun: true, demo: true, ended: false, ready: true, hasTitlePaths: false, hasProgressFeedback: false, ...over,
+    });
+
+  for (const age of [0, 3]) {
+    assert.deepEqual(layoutAt(age), { moveSupportToStory: false, showStoryColumn: false }, `age ${age} ready collapses empty column`);
+    assert.deepEqual(layoutAt(age, { ready: false }), { moveSupportToStory: false, showStoryColumn: false }, `age ${age} choice collapses empty column`);
+  }
+  assert.deepEqual(layoutAt(3, { hasTitlePaths: true }), { moveSupportToStory: false, showStoryColumn: true }, "title paths keep right column shown");
+  assert.deepEqual(layoutAt(3, { hasProgressFeedback: true }), { moveSupportToStory: false, showStoryColumn: true }, "progress feedback keeps right column shown");
+
+  assert.deepEqual(layoutAt(6), { moveSupportToStory: true, showStoryColumn: true }, "age 6 balances wealth and life record into story column");
+  assert.deepEqual(layoutAt(6, { ready: false }), { moveSupportToStory: true, showStoryColumn: true }, "age 6 choice still keeps support panels balancing story column");
+
+  for (const age of [12, 16]) {
+    assert.deepEqual(layoutAt(age), { moveSupportToStory: false, showStoryColumn: true }, `age ${age} fills story column with command deck`);
+    assert.deepEqual(layoutAt(age, { ready: false }), { moveSupportToStory: false, showStoryColumn: true }, `age ${age} choice keeps command deck in story column`);
+  }
+
+  for (const age of [0, 3, 6, 12, 16]) {
+    assert.deepEqual(layoutAt(age, { ended: true }), { moveSupportToStory: false, showStoryColumn: true }, `age ${age} ending keeps story column`);
+  }
+  assert.deepEqual(layoutAt(0, { begun: false }), { moveSupportToStory: false, showStoryColumn: true });
+  assert.deepEqual(layoutAt(0, { demo: false }), { moveSupportToStory: false, showStoryColumn: true });
+
+  const themeCss = readFileSync(new URL("../client/styles/storybook-theme.css", import.meta.url), "utf8");
+  assert.match(themeCss, /\.life-layout\.life-layout-single[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+  assert.match(themeCss, /:not\(:has\(\.story-column\s*>\s*\*\)\)/);
 });

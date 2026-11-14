@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import {
-  newGuidedStep, sectionAges, sectionFacts, tipsPassedOnEntry, visibleSections,
-  type GameSection, type SectionAges, type SectionFacts,
+  dashboardColumns, newGuidedStep, sectionAges, sectionFacts, tipsPassedOnEntry, visibleSections,
+  type DashboardColumnLayout, type DashboardColumnOptions, type GameSection, type SectionAges, type SectionFacts,
 } from "../models/onboarding-sections.ts";
 import type { TutorialHintId } from "../models/tutorial-hints.ts";
 import { guidePointerDue } from "../models/year-guide.ts";
@@ -15,6 +15,8 @@ export interface LifeSections {
   sections: ReadonlySet<GameSection>;
   /** The section is drawn at this age. */
   shows(id: GameSection): boolean;
+  /** Column placement and visibility for the dashboard's current life stage. */
+  columns(options: DashboardColumnOptions): DashboardColumnLayout;
   /** Tips whose stage passed before this year (for a save entered mid-life). */
   passed: TutorialHintId[];
 }
@@ -26,7 +28,12 @@ export function useLifeSections(world: WorldPack, life: LifeState): LifeSections
   const factsKey = JSON.stringify(now);
   return useMemo(() => {
     const sections = visibleSections(now, ages);
-    return { ages, facts: now, sections, shows: (id: GameSection) => sections.has(id), passed: tipsPassedOnEntry(now, ages) };
+    return {
+      ages, facts: now, sections,
+      shows: (id: GameSection) => sections.has(id),
+      columns: (options: DashboardColumnOptions) => dashboardColumns(sections, options),
+      passed: tipsPassedOnEntry(now, ages),
+    };
   }, [factsKey, ages]); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
