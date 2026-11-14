@@ -7,6 +7,7 @@ import { readBoosterCollection, resolveBoosterPack } from "../storage/booster-co
 import type { BoosterCollectionPack, BoosterSceneOptions } from "../types/booster.ts";
 import { freePlayCardView } from "./nft-card-view.ts";
 import BoosterOpening from "../components/BoosterOpening.tsx";
+import { useGameModal } from "../hooks/useGameModal.ts";
 import "./chain.css";
 import "../styles/booster-opening.css";
 
@@ -21,9 +22,9 @@ export default function FreePlayBoosterModal({ open, life, world, onClose }: Fre
   const [kept, setKept] = useState<BoosterCollectionPack | undefined>();
   const [legacyCount, setLegacyCount] = useState(0);
   const [error, setError] = useState("");
+  useGameModal(dialogRef, open);
   useEffect(() => {
     if (!open) return;
-    dialogRef.current?.showModal();
     let cancelled = false;
     setSession(null); setError(""); setKept(undefined);
     void createFreePlayBooster(life, world).then(result => {

@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useGameModal } from "../hooks/useGameModal.ts";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import type { YearEndOption } from "../models/year-end-choice.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
@@ -20,12 +21,7 @@ export default function YearEndDialog({ age, options, activities, life, world, f
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const first = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    const element = dialog.current;
-    if (element && !element.open) element.showModal();
-    first.current?.focus();
-    return () => { if (element?.open) element.close(); };
-  }, []);
+  useGameModal(dialog, true, () => { first.current?.focus(); });
   return <dialog ref={dialog} className="year-end-dialog" aria-labelledby="year-end-title" data-tutorial="hide" onCancel={event => event.preventDefault()}>
     <p className="year-end-eyebrow"><PixelIcon name="hourglass" size={14} />Age {age} is ending</p>
     <h2 id="year-end-title">Choose this year's action</h2>

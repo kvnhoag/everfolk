@@ -9,7 +9,7 @@ import type { WorldPack } from "../src/types.ts";
 import { lifeRoadmap, stageAges, worldUnlocks } from "../client/models/life-roadmap.ts";
 import { avatarStage } from "../client/models/life-background.ts";
 import { nextTodo, yearChecklist, type YearFacts } from "../client/models/year-checklist.ts";
-import { idleNudge, IDLE_NUDGE_MS, type IdleFacts } from "../client/models/idle-nudge.ts";
+import { idleNudge, IDLE_NUDGE_MS, placeIdleBubble, type IdleFacts } from "../client/models/idle-nudge.ts";
 import { BAR_LEGEND, HOW_TO_WIN, howToPlayFacts, howToPlaySteps, YEAR_RHYTHM, YEAR_SCRIPT } from "../client/models/how-to-play.ts";
 import { createEngine } from "../src/index.ts";
 import { SECTION_STEPS, sectionStep } from "../client/models/section-steps.ts";
@@ -67,25 +67,26 @@ test("unlock ages come from the world: focus, jobs, trading, courtship, family a
 const facts = (over: Partial<YearFacts> = {}): YearFacts => ({ age: 9, phase: "ready", playing: true, focusLabel: "Study", focusAge: 6, actionAge: 6, actionUsed: false,
   hasFields: true, fieldsAge: 4, grainPlots: 2, flaxPlots: 0, tradeAge: 10, marketVisited: false, recordYears: 10, ...over });
 
-test("This year lists the sections in screen order with what each needs now", () => {
+test("This year lists the open sections in screen order with what each needs now", () => {
   const items = yearChecklist(facts());
-  assert.deepEqual(items.map(entry => entry.step), [1, 2, 3, 4, 5, 6]);
-  assert.deepEqual(items.map(entry => entry.state), ["done", "done", "todo", "info", "locked", "info"]);
-  assert.equal(items.find(entry => entry.id === "town")!.status, "Trade at age 10");
+  assert.deepEqual(items.map(entry => entry.step), [1, 2, 3, 4, 6], "the market line waits for trading at 10");
+  assert.deepEqual(items.map(entry => entry.state), ["done", "done", "todo", "info", "info"]);
+  assert.equal(items.find(entry => entry.id === "town"), undefined);
   assert.equal(nextTodo(items)?.id, "action");
   assert.equal(yearChecklist(facts({ playing: false }))[0].status, "Paused: press Resume");
   assert.equal(yearChecklist(facts({ phase: "choice" }))[0].status, "Open the decision");
-  assert.equal(yearChecklist(facts({ age: 3, focusAge: 6 }))[1].status, "Opens at age 6");
+  assert.deepEqual(yearChecklist(facts({ age: 3, focusAge: 6, fieldsAge: 16 })).map(entry => entry.id), ["time", "record"], "nothing unopened is listed");
   assert.equal(yearChecklist(facts({ focusLabel: null }))[1].state, "todo");
   assert.equal(yearChecklist(facts({ age: 12, marketVisited: true })).find(entry => entry.id === "town")!.state, "done");
   assert.deepEqual(yearChecklist(facts({ hasFields: false })).map(entry => entry.id), ["time", "focus", "action", "record"]);
+  assert.ok(yearChecklist(facts({ age: 40 })).every(entry => (entry.state as string) !== "locked"), "never a lock");
 });
 
-test("the checklist renders numbered buttons; locked lines say when they open", () => {
+test("the checklist renders numbered buttons, and an unopened section has no line", () => {
   const html = renderToStaticMarkup(createElement(YearChecklist, { items: yearChecklist(facts({ age: 3, focusAge: 6 })) }));
   assert.match(html, /aria-label="This year, in order"/);
-  assert.match(html, /aria-label="2\. Focus: Opens at age 6"/);
-  assert.match(html, /class="year-check is-locked"/);
+  assert.doesNotMatch(html, /Focus/);
+  assert.doesNotMatch(html, /is-locked/);
   const locked = renderToStaticMarkup(createElement(LockedSection, { step: 3, id: "action", title: "Your yearly action", unlock: "Unlocks at age 6", note: "One action a year." }));
   assert.match(locked, /data-step="action"/);
   assert.match(locked, /class="locked-cross"/, "a locked section is crossed out");
@@ -101,7 +102,7 @@ test("a locked area greys out and disables its content under a cross and the unl
   assert.match(shut, /class="locked-cross"/);
 });
 
-const idle = (over: Partial<IdleFacts> = {}): IdleFacts => ({ onGame: true, phase: "ready", playing: false, decisionOpen: false, tipOpen: false, ...over });
+const idle = (over: Partial<IdleFacts> = {}): IdleFacts => ({ onGame: true, phase: "ready", playing: false, decisionOpen: false, tipOpen: false, timeStarted: false, ...over });
 
 test("the idle hint points at what the game is waiting for, and never while it runs or over a tip", () => {
   assert.equal(IDLE_NUDGE_MS, 5000);
@@ -113,6 +114,8 @@ test("the idle hint points at what the game is waiting for, and never while it r
   assert.equal(idleNudge(idle({ tipOpen: true })), null, "never stacked on a tip");
   assert.equal(idleNudge(idle({ phase: "ended" })), null);
   assert.equal(idleNudge(idle({ onGame: false })), null);
+  assert.equal(idleNudge(idle({ timeStarted: true })), null, "once time has moved, a paused game is the player's choice: no Resume nag");
+  assert.equal(idleNudge(idle({ timeStarted: true, phase: "choice" }))?.key, "open-decision", "a waiting decision is still pointed at");
 });
 
 test("How to Play steps use the same numbers as the screen and state when each opens", () => {
@@ -233,4 +236,33 @@ test("Farm & Granary shows every number as an icon tile and locks planting until
   }
   assert.match(html, /Unlocks at age 4/);
   assert.doesNotMatch(html, />Set planting</, "no planting button before it opens");
+});
+
+test("placeIdleBubble keeps turning-point hints clear of the options and popup bottom edge", () => {
+  const bubble = { width: 280, height: 107 };
+  const overlaps = (a: { top: number; left: number; width: number; height: number }, b: { top: number; left: number; width: number; height: number }) =>
+    a.left < b.left + b.width && a.left + a.width > b.left && a.top < b.top + b.height && a.top + a.height > b.top;
+
+  // Desktop 1440x900: placed beside the dialog outside the options and bottom edge.
+  const desktopDialog = { top: 132, left: 410, width: 620, height: 636 };
+  const desktopOptions = { top: 442, left: 434, width: 321, height: 227 };
+  const desktopSpot = placeIdleBubble(desktopOptions, { width: 1440, height: 900 }, bubble, desktopDialog);
+  const desktopRect = { ...desktopSpot, ...bubble };
+  assert.equal(overlaps(desktopRect, desktopDialog), false);
+  assert.equal(overlaps(desktopRect, desktopOptions), false);
+
+  // Medium desktop where side gutters are narrow but bottom has room: sits below the popup bottom edge.
+  const midDialog = { top: 60, left: 100, width: 620, height: 400 };
+  const midOptions = { top: 240, left: 120, width: 320, height: 180 };
+  const midSpot = placeIdleBubble(midOptions, { width: 820, height: 700 }, bubble, midDialog);
+  assert.ok(midSpot.top >= midDialog.top + midDialog.height);
+
+  // Mobile 390x844 full-height popup: placed above the options and well clear of the popup bottom edge.
+  const mobileDialog = { top: 19, left: 19, width: 352, height: 806 };
+  const mobileOptions = { top: 441, left: 35, width: 320, height: 217 };
+  const mobileSpot = placeIdleBubble(mobileOptions, { width: 390, height: 844 }, bubble, mobileDialog);
+  const mobileRect = { ...mobileSpot, ...bubble };
+  assert.equal(overlaps(mobileRect, mobileOptions), false);
+  assert.ok(mobileRect.top + mobileRect.height <= mobileOptions.top);
+  assert.ok(mobileRect.top + mobileRect.height < mobileDialog.top + mobileDialog.height - 50);
 });

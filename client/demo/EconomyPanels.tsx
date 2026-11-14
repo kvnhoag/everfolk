@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from "react";
 import { activityPartnerIds } from "../../src/character.ts";
 import type { TradeCommand, TradeItem } from "../../src/demo/types.ts";
 import { TRADE_ITEMS } from "../../src/demo/types.ts";
@@ -31,7 +31,9 @@ import PixelIcon from "../components/PixelIcon.tsx";
 import { SectionStep } from "../components/YearChecklist.tsx";
 import { LockedArea } from "../components/Locked.tsx";
 import { sectionStep } from "../models/section-steps.ts";
-import type { TradePreview } from "../models/trade-preview.ts";
+import { confirmStage, type TradePreview } from "../models/trade-preview.ts";
+import { grainSalePlan, leavesGrain, maxSaleQuantity, planFromFacts, startingQuantity } from "../models/grain-sale-plan.ts";
+import { cleanQuantityText, quantityOf, tradeLimit } from "../models/trade-quantity.ts";
 import type { PlantingCheck } from "../models/planting-check.ts";
 import FarmGranary from "./FarmGranary.tsx";
 
@@ -49,6 +51,7 @@ export interface ComparisonSide {
 }
 
 export type EconomyTabId = "market" | "farm" | "service" | "people" | "works";
+const ALL_TABS: readonly EconomyTabId[] = ["market", "farm", "service", "people", "works"];
 
 interface Props {
   screen: DemoScreen;
@@ -69,6 +72,8 @@ interface Props {
   checkPlan?(flaxPlots: number): PlantingCheck;
   /** The age planting opens for the player; null once open. */
   plantingLockedUntil?: number | null;
+  /** The tabs open to the player at this age, in order; tabs that open later are not drawn. Defaults to all. */
+  tabs?: readonly EconomyTabId[];
   onPlan(flaxPlots: number): string | null;
   onAutoPlay(on: boolean): void;
   onDelegate(agent: string | null): string | null;
@@ -113,6 +118,7 @@ export default function EconomyPanels({
   previewTrade,
   checkPlan,
   plantingLockedUntil = null,
+  tabs = ALL_TABS,
   onPlan,
   onAutoPlay,
   onDelegate,
@@ -125,10 +131,14 @@ export default function EconomyPanels({
   const titleId = useId();
   const slot = useRef(false);
   // Opens on a tab the player can use: Farm & Granary while the market is still closed to them.
-  const [activeTab, setActiveTab] = useState<EconomyTabId>(() => life && world?.demo && life.age < tuning(world.demo.market).minTradeAge ? "farm" : "market");
+  const [chosenTab, setActiveTab] = useState<EconomyTabId>(() => life && world?.demo && life.age < tuning(world.demo.market).minTradeAge ? "farm" : "market");
+  // A tab that has not opened yet is never shown: the deck falls back to its first open tab.
+  const activeTab: EconomyTabId = tabs.includes(chosenTab) ? chosenTab : tabs[0] ?? chosenTab;
   const [item, setItem] = useState<TradeItem>("grain");
   const [side, setSide] = useState<"buy" | "sell">("sell");
-  const [quantity, setQuantity] = useState(1);
+  // The quantity box is text so it can be empty while typing; the number is read from it.
+  const [quantityText, setQuantityText] = useState("1");
+  const quantity = quantityOf(quantityText);
   const [reserveOverride, setReserveOverride] = useState(false);
   const [counterparty, setCounterparty] = useState<"merchant" | "army">("merchant");
   const [notice, setNotice] = useState("");
@@ -136,8 +146,21 @@ export default function EconomyPanels({
   const [openDropdown, setOpenDropdown] = useState<"good" | "side" | "with" | null>(null);
 
   const quote = screen.market.quotes.find(entry => entry.item === item);
-  const order: TradeCommand = { type: "trade", item, side, quantity, counterparty, ...(reserveOverride ? { reserveOverride: true } : {}) };
   const held = heldQuantity(screen, item);
+  const limit = tradeLimit({ side, counterparty, held, merchantCanBuy: quote?.merchantCanBuy, merchantStock: quote?.merchantStock, maxOrder: world?.demo?.market.maxOrderQuantity });
+  // What a grain sale may take without selling the household's food: the store above next year's eating plus seed.
+  const grainPlan = useMemo(
+    () => life && world ? grainSalePlan(world, life) : planFromFacts(screen.household.grain, screen.household.expectedEating, 0),
+    [life, world, screen.household.grain, screen.household.expectedEating],
+  );
+  const grainSale = item === "grain" && side === "sell";
+  const spareGrain = grainSale && grainPlan ? grainPlan.surplus : null;
+  const maxQuantity = maxSaleQuantity({ item, side, limit, plan: grainPlan });
+  // Selling past the surplus needs a second confirmation; the order then carries the explicit reserve override.
+  const pastSurplus = grainSale && grainPlan ? leavesGrain(grainPlan, quantity) !== null : false;
+  const order: TradeCommand = { type: "trade", item, side, quantity, counterparty, ...(reserveOverride || pastSurplus ? { reserveOverride: true } : {}) };
+  // Every way of setting the quantity goes through the same clean-up: digits only, never above what is available.
+  const setQuantity = (value: number | string) => setQuantityText(cleanQuantityText(String(value), limit));
   const unitPrice =
     counterparty === "army" && item === "grain"
       ? screen.market.armyGrainPrice
@@ -146,13 +169,21 @@ export default function EconomyPanels({
         : (quote?.buy ?? 1);
 
   useEffect(() => { setReserveOverride(false); }, [item, side, counterparty, life?.age]);
+  // A new good, side or counterparty starts from the default (the spare grain for a grain sale, else one); a shrinking
+  // limit (a sale, a new year) trims what was typed.
+  useEffect(() => { setQuantity(startingQuantity({ item, side, limit, plan: grainPlan })); }, [item, side, counterparty, life?.age, grainPlan?.surplus]);
+  useEffect(() => { setQuantityText(text => cleanQuantityText(text, limit)); }, [limit]);
   // The preview always shows the order on screen; any change to it closes the preview.
   const [preview, setPreview] = useState<TradePreview | null>(null);
+  // Set once the player has answered the second question on a sale that leaves too little grain.
+  const [reserveAsked, setReserveAsked] = useState(false);
   // Any change to the life (cash spent, a decision, a new year) also closes it, so it never shows stale numbers.
-  useEffect(() => { setPreview(null); }, [item, side, quantity, counterparty, reserveOverride, life, screen.market.visitUsed]);
+  useEffect(() => { setPreview(null); setReserveAsked(false); }, [item, side, quantity, counterparty, reserveOverride, life, screen.market.visitUsed]);
   function openPreview() {
     if (!previewTrade) { setNotice("This life has no market."); return; }
+    if (quantity < 1) { setNotice("Type how many you want to trade first."); return; }
     setNotice("");
+    setReserveAsked(false);
     setPreview(previewTrade(order));
   }
 
@@ -192,7 +223,7 @@ export default function EconomyPanels({
     : undefined;
 
   function confirmTrade() {
-    if (screen.market.visitUsed || pending || !preview?.confirmLabel) return;
+    if (screen.market.visitUsed || pending || !preview || confirmStage(preview, reserveAsked) !== "go") return;
     if (!beginOrder(slot)) return;
     const reason = onTrade(order);
     setPreview(null);
@@ -205,13 +236,7 @@ export default function EconomyPanels({
   }
 
   function setMaxQuantity() {
-    if (side === "sell") {
-      const cap = counterparty === "army" ? held : Math.min(held, quote?.merchantCanBuy ?? held);
-      setQuantity(Math.max(1, Math.min(500, cap)));
-    } else {
-      const stock = quote?.merchantStock ?? 1;
-      setQuantity(Math.max(1, Math.min(500, stock)));
-    }
+    setQuantity(maxQuantity);
   }
 
   // Tabs that open later carry their opening age, so nothing looks broken before it is meant to work.
@@ -233,51 +258,56 @@ export default function EconomyPanels({
           <h2 id={titleId} className="demo-economy-title">This year in the fields</h2>
         </div>
         <div className="demo-deck-tabs" role="tablist" aria-label="Economy command deck">
-          <button
+          {tabs.includes("market") && <button
             type="button"
             role="tab"
+            data-tab="market"
             aria-selected={activeTab === "market"}
             className={`demo-deck-tab${activeTab === "market" ? " is-active" : ""}`}
             onClick={() => setActiveTab("market")}
           >
             Market &amp; Trade{tradeLockedUntil !== null && <TabLock age={tradeLockedUntil} />}
-          </button>
-          <button
+          </button>}
+          {tabs.includes("farm") && <button
             type="button"
             role="tab"
+            data-tab="farm"
             aria-selected={activeTab === "farm"}
             className={`demo-deck-tab${activeTab === "farm" ? " is-active" : ""}`}
             onClick={() => setActiveTab("farm")}
           >
             Farm &amp; Granary
-          </button>
-          <button
+          </button>}
+          {tabs.includes("service") && <button
             type="button"
             role="tab"
+            data-tab="service"
             aria-selected={activeTab === "service"}
             className={`demo-deck-tab${activeTab === "service" ? " is-active" : ""}`}
             onClick={() => setActiveTab("service")}
           >
             Career &amp; Army{careerLockedUntil !== null && <TabLock age={careerLockedUntil} />}
-          </button>
-          <button
+          </button>}
+          {tabs.includes("people") && <button
             type="button"
             role="tab"
+            data-tab="people"
             aria-selected={activeTab === "people"}
             className={`demo-deck-tab${activeTab === "people" ? " is-active" : ""}`}
             onClick={() => setActiveTab("people")}
           >
             People &amp; Town
-          </button>
-          <button
+          </button>}
+          {tabs.includes("works") && <button
             type="button"
             role="tab"
+            data-tab="works"
             aria-selected={activeTab === "works"}
             className={`demo-deck-tab${activeTab === "works" ? " is-active" : ""}`}
             onClick={() => setActiveTab("works")}
           >
             Works &amp; Stewards
-          </button>
+          </button>}
         </div>
       </header>
 
@@ -650,11 +680,13 @@ export default function EconomyPanels({
             <label>
               Quantity
               <input
+                type="text"
                 inputMode="numeric"
-                min={1}
-                type="number"
-                value={quantity}
-                onChange={event => setQuantity(Math.max(1, Number(event.target.value) || 1))}
+                pattern="[0-9]*"
+                autoComplete="off"
+                value={quantityText}
+                onFocus={event => event.target.select()}
+                onChange={event => setQuantity(event.target.value)}
               />
             </label>
             <button
@@ -675,12 +707,19 @@ export default function EconomyPanels({
             {preview.warnings.length > 0 && <ul className="demo-trade-preview-warnings">
               {preview.warnings.map(line => <li key={line}><PixelIcon name="warn" size={12} label="Warning" />{line}</li>)}
             </ul>}
+            {preview.reserveConfirm && <p className={`demo-trade-preview-reserve${reserveAsked ? " is-asked" : ""}`} role={reserveAsked ? "alert" : undefined}>
+              <PixelIcon name="warn" size={12} label="Warning" /><span><strong>{reserveAsked ? "Are you sure? " : "Careful: "}</strong>{preview.reserveConfirm}</span>
+            </p>}
             <div className="demo-trade-preview-actions">
-              {preview.confirmLabel && <button type="button" className="demo-trade-confirm" disabled={pending || slot.current} onClick={confirmTrade}>{preview.confirmLabel}</button>}
+              {confirmStage(preview, reserveAsked) === "ask" && <button type="button" className="demo-trade-confirm" disabled={pending || slot.current} onClick={() => setReserveAsked(true)}>Sell anyway…</button>}
+              {confirmStage(preview, reserveAsked) === "go" && <button type="button" className="demo-trade-confirm" disabled={pending || slot.current} onClick={confirmTrade}>{preview.reserveConfirm ? `Yes, ${preview.confirmLabel!.charAt(0).toLowerCase()}${preview.confirmLabel!.slice(1)}` : preview.confirmLabel}</button>}
               <button type="button" className="demo-trade-cancel" onClick={() => setPreview(null)}>{preview.confirmLabel ? "Change order" : "Close"}</button>
             </div>
           </div>}
 
+          {spareGrain !== null && grainPlan && <p className="demo-trade-spare" role="note">
+            Grain to spare: <strong>{spareGrain}</strong> (store {grainPlan.store}, minus about {grainPlan.eating} the household eats a year{grainPlan.seed > 0 ? ` and ${grainPlan.seed} kept for seed` : ""}).
+          </p>}
           {world?.capabilities && item === "grain" && side === "sell" && <label className="demo-reserve-override"><input type="checkbox" checked={reserveOverride} onChange={event => setReserveOverride(event.target.checked)} /> Allow this sale to use grain reserved for household food or seed.</label>}
           <div className="demo-batch-row">
             <span>Quick quantity:</span>
@@ -690,7 +729,7 @@ export default function EconomyPanels({
               </button>
             ))}
             <button type="button" onClick={setMaxQuantity}>
-              Max ({side === "sell" ? held : (quote?.merchantStock ?? 0)})
+              Max ({maxQuantity})
             </button>
             <span className="demo-ticket-cash">Your cash: <strong>{cashText}</strong></span>
           </div>

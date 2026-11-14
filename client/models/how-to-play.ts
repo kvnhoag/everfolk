@@ -132,10 +132,10 @@ export function howToPlaySteps(ages: { focus: number; action: number; fields: nu
       opens: `Age ${ages.action}`, warning: "An unused action does not carry over to next year.",
     }),
     step("household", {
-      title: "Plan the household", body: "Inventory & Granary: use − and + to split the plots into grain and flax, then Set planting.",
+      title: "Plan the household", body: "Inventory & Granary: choose All grain or All flax for your plots; your choice is planted at once. Crop allocation later lets you split them.",
       result: "The split counts for the next harvest and stays until you change it.",
       example: householdExample(facts),
-      shot: shot("tasks", 820, 318, "Plan your fields: grain and flax plots with − and + and Set planting"),
+      shot: shot("tasks", 820, 318, "Plan your fields: All grain or All flax, planted at once"),
       opens: ages.fields > 0 ? `Age ${ages.fields}` : undefined, warning: "If the store runs out, the household goes hungry and health drops.",
     }),
     step("town", {

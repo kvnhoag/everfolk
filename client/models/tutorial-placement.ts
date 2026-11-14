@@ -56,42 +56,81 @@ function fitsHorizontally(left: number, card: Size, viewport: Size): boolean {
 function candidates(target: Rect, card: Size, viewport: Size): CardPosition[] {
   const centeredLeft = clamp(target.left + target.width / 2 - card.width / 2, EDGE, viewport.width - card.width - EDGE);
   const centeredTop = clamp(target.top + target.height / 2 - card.height / 2, EDGE, viewport.height - card.height - EDGE);
-  const below = { top: target.top + target.height + GAP, left: centeredLeft, placement: "bottom" as const };
-  const above = { top: target.top - GAP - card.height, left: centeredLeft, placement: "top" as const };
+  const startLeft = clamp(target.left, EDGE, viewport.width - card.width - EDGE);
+  const endLeft = clamp(target.left + target.width - card.width, EDGE, viewport.width - card.width - EDGE);
+  const belowTop = target.top + target.height + GAP;
+  const aboveTop = target.top - GAP - card.height;
   const right = { top: centeredTop, left: target.left + target.width + GAP, placement: "right" as const };
   const left = { top: centeredTop, left: target.left - GAP - card.width, placement: "left" as const };
+  // Beside the target first (centered, then lined up with either edge), so a button under the middle can be dodged.
+  const below = [centeredLeft, startLeft, endLeft].map(x => ({ top: belowTop, left: x, placement: "bottom" as const }));
+  const above = [centeredLeft, startLeft, endLeft].map(x => ({ top: aboveTop, left: x, placement: "top" as const }));
   return [
-    ...(fitsVertically(below.top, card, viewport) ? [below] : []),
-    ...(fitsVertically(above.top, card, viewport) ? [above] : []),
+    ...(fitsVertically(belowTop, card, viewport) ? below.slice(0, 1) : []),
+    ...(fitsVertically(aboveTop, card, viewport) ? above.slice(0, 1) : []),
     ...(fitsHorizontally(right.left, card, viewport) ? [right] : []),
     ...(fitsHorizontally(left.left, card, viewport) ? [left] : []),
+    ...(fitsVertically(belowTop, card, viewport) ? below.slice(1) : []),
+    ...(fitsVertically(aboveTop, card, viewport) ? above.slice(1) : []),
   ];
 }
 
-/**
- * Places the card beside the target without covering it when there is room (below, above, right, left, preferring the
- * side that covers the fewest of the page's controls in `avoid`), otherwise in the bottom-right corner. Without a target it goes to `fallback`. The card always stays fully on screen.
- */
-/** How much of the page's controls a card at `position` would cover. */
-function coveredArea(position: CardPosition, card: Size, avoid: readonly Rect[]): number {
+/** The four corners of the screen, bottom-right first (where a waiting tip has always sat). */
+function corners(card: Size, viewport: Size): CardPosition[] {
+  const maxLeft = Math.max(0, viewport.width - card.width);
+  const maxTop = Math.max(0, viewport.height - card.height);
+  const right = clamp(viewport.width - card.width - EDGE, 0, maxLeft);
+  const bottom = clamp(viewport.height - card.height - EDGE, 0, maxTop);
+  const left = clamp(EDGE, 0, maxLeft);
+  const top = clamp(EDGE, 0, maxTop);
+  return [[bottom, right], [bottom, left], [top, right], [top, left]].map(([y, x]) => ({ top: y, left: x, placement: "corner" as const }));
+}
+
+/** How much of `rects` a card at `position` would cover. */
+function coveredArea(position: CardPosition, card: Size, rects: readonly Rect[]): number {
   const box = { top: position.top, left: position.left, width: card.width, height: card.height };
-  return avoid.reduce((sum, rect) => {
+  return rects.reduce((sum, rect) => {
     const overlap = intersectRect(box, rect);
     return sum + (overlap ? overlap.width * overlap.height : 0);
   }, 0);
 }
 
-export function placeTutorialCard(target: Rect | null, card: Size, viewport: Size, fallback: "center" | "corner" = "center", avoid: readonly Rect[] = []): CardPosition {
+/**
+ * The best of `options` (in preference order): one that covers none of the `protect` controls if any does, then the
+ * fewest of the page's other controls in `avoid`. Ties keep the preference order.
+ */
+function leastCovering(options: readonly CardPosition[], card: Size, protect: readonly Rect[], avoid: readonly Rect[]): CardPosition {
+  const score = (position: CardPosition) => [coveredArea(position, card, protect), coveredArea(position, card, avoid)] as const;
+  return options.reduce((best, next) => {
+    const [bestProtected, bestAvoided] = score(best);
+    const [nextProtected, nextAvoided] = score(next);
+    return nextProtected < bestProtected || (nextProtected === bestProtected && nextAvoided < bestAvoided) ? next : best;
+  });
+}
+
+/**
+ * Places the card beside the target without covering it when there is room (below, above, right, left, then lined up
+ * with the target's edges), else in a corner of the screen. Of those places it never takes one over the target or the
+ * `protect` controls (the time bar, Resume, Begin life, decision buttons) when another place is free of them, and
+ * among the rest it covers the fewest of the page's controls in `avoid`. Without a target it goes to `fallback`
+ * unless that covers a protected control. The card always stays fully on screen.
+ */
+export function placeTutorialCard(target: Rect | null, card: Size, viewport: Size, fallback: "center" | "corner" = "center",
+  avoid: readonly Rect[] = [], protect: readonly Rect[] = []): CardPosition {
   const maxLeft = Math.max(0, viewport.width - card.width);
   const maxTop = Math.max(0, viewport.height - card.height);
-  const corner: CardPosition = { top: clamp(viewport.height - card.height - EDGE, 0, maxTop), left: clamp(viewport.width - card.width - EDGE, 0, maxLeft), placement: "corner" };
-  if (!target && fallback === "corner") return corner;
-  if (!target) return { top: clamp((viewport.height - card.height) / 2, 0, maxTop), left: clamp((viewport.width - card.width) / 2, 0, maxLeft), placement: "center" };
-  const fitting = candidates(target, card, viewport).map(best => ({ ...best, top: clamp(best.top, 0, maxTop), left: clamp(best.left, 0, maxLeft) }));
-  if (fitting.length === 0) return corner;
-  if (avoid.length === 0) return fitting[0];
-  // Of the places beside the target, the one covering the fewest buttons wins; ties keep the usual order.
-  return fitting.reduce((best, next) => coveredArea(next, card, avoid) < coveredArea(best, card, avoid) ? next : best);
+  const screenCorners = corners(card, viewport);
+  if (!target) {
+    const center: CardPosition = { top: clamp((viewport.height - card.height) / 2, 0, maxTop), left: clamp((viewport.width - card.width) / 2, 0, maxLeft), placement: "center" };
+    return leastCovering(fallback === "center" ? [center, ...screenCorners] : screenCorners, card, protect, fallback === "center" ? [] : avoid);
+  }
+  const beside = candidates(target, card, viewport).map(best => ({ ...best, top: clamp(best.top, 0, maxTop), left: clamp(best.left, 0, maxLeft) }));
+  // The target counts as protected: the card never sits over the section it explains when it can sit elsewhere.
+  const guarded = [target, ...protect];
+  const clear = (position: CardPosition) => coveredArea(position, card, guarded) === 0;
+  // Beside the target when a place there is clear, else a clear corner, else whatever covers the least.
+  const tiers = [beside.filter(clear), screenCorners.filter(clear), [...beside, ...screenCorners]];
+  return leastCovering(tiers.find(tier => tier.length > 0)!, card, guarded, avoid);
 }
 
 export interface ScrollPlan { block: "center" | "start"; marginTop: number }
@@ -103,9 +142,31 @@ const VISIBLE_TOP_SHARE = 0.6;
 /** Room kept above a tall target so sticky headers do not cover it. */
 const TOP_ROOM_SHARE = 0.22;
 
-/** How to bring a step's target into view: centered when it fits, top first when it is tall. Null: stay. */
-export function tutorialScrollPlan(target: Rect, viewportHeight: number): ScrollPlan | null {
+/** The target is fully on screen, below anything pinned to the top (`topInset`, the time bar). */
+export function targetOnScreen(target: Rect, viewportHeight: number, topInset = 0): boolean {
+  return target.top >= topInset && target.top + target.height <= viewportHeight;
+}
+
+/**
+ * How to bring a step's target into view: centered when it fits, top first when it is tall. Null: stay, which is
+ * always the answer for a target already on screen, so a tip never moves the page the player is looking at.
+ */
+export function tutorialScrollPlan(target: Rect, viewportHeight: number, topInset = 0): ScrollPlan | null {
+  if (targetOnScreen(target, viewportHeight, topInset)) return null;
   if (target.height <= viewportHeight * TALL_SHARE) return { block: "center", marginTop: 0 };
   if (target.top >= 0 && target.top <= viewportHeight * VISIBLE_TOP_SHARE) return null;
   return { block: "start", marginTop: Math.round(viewportHeight * TOP_ROOM_SHARE) };
+}
+
+/** Frames the target must stay still (after any opening scroll) before the card is pinned where it is. */
+export const CARD_SETTLE_FRAMES = 8;
+
+/**
+ * The card's place while it shows: placed beside its target until the target has stood still for a few frames, then
+ * pinned, so scrolling the page never moves the card. A pinned card is only re-clamped to stay fully on screen.
+ */
+export function pinnedCardPosition(pinned: CardPosition, card: Size, viewport: Size): CardPosition {
+  const top = clamp(pinned.top, 0, Math.max(0, viewport.height - card.height));
+  const left = clamp(pinned.left, 0, Math.max(0, viewport.width - card.width));
+  return top === pinned.top && left === pinned.left ? pinned : { ...pinned, top, left };
 }

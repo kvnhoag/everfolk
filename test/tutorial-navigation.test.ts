@@ -2,9 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { INITIAL_TUTORIAL, resolveManualHint, tutorialKeyAction, tutorialPosition, tutorialReducer, type TutorialState } from "../client/models/tutorial-navigation.ts";
 import { availableHints, type TutorialContext, type TutorialLifeFacts } from "../client/models/tutorial-triggers.ts";
+import { visibleSections } from "../client/models/onboarding-sections.ts";
 
+const AGES = { focus: 6, action: 6, trade: 12, firstJob: 12, fields: 16 };
 function facts(over: Partial<TutorialLifeFacts> = {}): TutorialLifeFacts {
-  return { age: 0, ended: false, decisionPending: false, learnedSkills: 0, focusShown: false, resourcesShown: true, wealthShown: true, deckShown: true, notificationShown: false, tradeAge: 10, ...over };
+  const base = { lifeKey: "life", age: 0, ended: false, decisionPending: false, learnedSkills: 0, notificationShown: false, passed: [], ...over };
+  const sections = over.sections ?? [...visibleSections({ age: base.age, economy: true, learnedSkills: base.learnedSkills, hadDecision: base.decisionPending }, AGES)];
+  return { ...base, sections };
 }
 const game = (over: Partial<TutorialLifeFacts> = {}): TutorialContext => ({ view: "game", characterSection: null, life: facts(over) });
 const home: TutorialContext = { view: "home", characterSection: null, life: facts() };
@@ -23,21 +27,78 @@ test("a first visit shows only the welcome hint, automatically", () => {
   assert.deepEqual(state.queue, ["welcome"]);
 });
 
-test("one card at a time: hints for the same moment queue behind it", () => {
+test("one tip at a time: an automatic tip stands alone, the others wait their turn", () => {
   const state = run(INITIAL_TUTORIAL, game({ age: 12, decisionPending: true, notificationShown: true }), { type: "sync" });
   assert.equal(state.hintId, "time-bar");
-  assert.ok(state.queue.length > 1);
-  assert.deepEqual(tutorialPosition(state), { index: 0, total: state.queue.length });
+  assert.deepEqual(state.queue, ["time-bar"], "no paging through a pile of tips");
+  assert.deepEqual(tutorialPosition(state), { index: 0, total: 1 });
 });
 
-test("Next tip marks the tip seen and moves on; Back returns", () => {
-  const context = game({ age: 12, decisionPending: true });
+test("at most one automatic tip per in-game year: the others wait, in teaching order, for later years", () => {
+  const six = game({ age: 6 });
+  let state = run(INITIAL_TUTORIAL, six, { type: "sync" });
+  assert.equal(state.hintId, "time-bar");
+  state = run(state, six, { type: "close" });
+  assert.equal(state.open, false, "closing a tip never opens another the same year");
+  assert.equal(run(state, six, { type: "sync" }).open, false);
+  const order = ["time-bar"];
+  for (const age of [7, 8, 9, 10]) {
+    state = run(state, game({ age }), { type: "sync" });
+    if (state.open) { order.push(state.hintId!); state = run(state, game({ age }), { type: "close" }); }
+  }
+  assert.deepEqual(order, ["time-bar", "scene", "focus", "yearly-action"]);
+  assert.equal(run(state, game({ age: 11 }), { type: "sync" }).open, false, "nothing comes back once seen");
+});
+
+test("a new life, the home screen and the ending are not held back by the year's tip", () => {
+  const shown = run(INITIAL_TUTORIAL, game({ age: 6 }), { type: "sync" }, { type: "close" });
+  assert.equal(run(shown, game({ age: 6, lifeKey: "next" }), { type: "sync" }).hintId, "scene", "another life starts its own years");
+  assert.equal(run(shown, home, { type: "sync" }).hintId, "welcome");
+  const seen: TutorialState = { ...shown, seen: availableHints(game({ age: 6 })) };
+  assert.equal(run(seen, game({ age: 6, ended: true }), { type: "sync" }).hintId, "ending");
+});
+
+test("Next tip on an automatic tip closes it like Got it; Back does nothing", () => {
+  const context = game({ age: 6 });
   const opened = run(INITIAL_TUTORIAL, context, { type: "sync" });
   const second = run(opened, context, { type: "next" });
-  assert.equal(second.hintId, opened.queue[1]);
+  assert.equal(second.open, false, "the next tip waits for a later year");
   assert.ok(second.seen.includes("time-bar"));
-  assert.equal(run(second, context, { type: "back" }).hintId, "time-bar");
-  assert.equal(run(opened, context, { type: "back" }), opened, "Back on the first tip changes nothing");
+  const nextYear = run(second, game({ age: 7 }), { type: "sync" });
+  assert.equal(nextYear.hintId, "scene");
+  assert.equal(nextYear.mode, "auto");
+  assert.equal(run(opened, context, { type: "back" }), opened);
+});
+
+test("using a section closes its tip and teaches it for good", () => {
+  const six = run({ ...INITIAL_TUTORIAL, seen: ["time-bar", "scene"] }, game({ age: 6 }), { type: "sync" });
+  assert.equal(six.hintId, "focus");
+  const used = run(six, game({ age: 6 }), { type: "used", hintIds: ["focus"] });
+  assert.ok(used.seen.includes("focus"));
+  assert.equal(used.open, false, "the next step waits for next year");
+  assert.equal(run(used, game({ age: 7 }), { type: "sync" }).hintId, "yearly-action", "the guide moves on to the next step");
+  const early = run(INITIAL_TUTORIAL, game({ age: 0 }), { type: "used", hintIds: ["market"] });
+  assert.ok(early.seen.includes("market"), "a section used before its tip showed is never taught");
+  assert.equal(run(early, game({ age: 12 }), { type: "sync" }, { type: "close" }, { type: "close" }).hintId !== "market", true);
+  assert.equal(run(used, game({ age: 6 }), { type: "used", hintIds: ["focus"] }), used, "using it again changes nothing");
+});
+
+test("a manual tip stays open when its section is used", () => {
+  const manual = run(INITIAL_TUTORIAL, game({ age: 6 }), { type: "open", hintId: "focus" });
+  const used = run(manual, game({ age: 6 }), { type: "used", hintIds: ["focus"] });
+  assert.equal(used.open, true);
+  assert.ok(used.seen.includes("focus"));
+});
+
+test("entering a life mid-way treats the tips of passed stages as seen", () => {
+  const thirteen = game({ age: 13, passed: ["time-bar", "scene", "focus", "yearly-action", "wealth", "resources", "market", "character"] });
+  const entered = run(INITIAL_TUTORIAL, thirteen, { type: "enter", passed: thirteen.life!.passed }, { type: "sync" });
+  assert.equal(entered.open, false, "no old tips replay for a loaded save");
+  const open = run(INITIAL_TUTORIAL, game({ age: 6 }), { type: "sync" });
+  const loaded = game({ age: 6, lifeKey: "loaded" });
+  const stale = run(open, loaded, { type: "enter", passed: ["time-bar"] });
+  assert.equal(stale.hintId, "scene", "a passed tip on screen makes way for the next one");
+  assert.equal(run(stale, loaded, { type: "enter", passed: ["time-bar"] }), stale);
 });
 
 test("closing keeps progress and the current step; it never resets to the start", () => {
@@ -54,20 +115,18 @@ test("Next on the last tip closes like Got it", () => {
   assert.ok(closed.seen.includes("time-bar"));
 });
 
-test("after a close the next tip waits for the next stage of life", () => {
-  const closed = run(INITIAL_TUTORIAL, game({ age: 1 }), { type: "sync" }, { type: "close" });
-  assert.equal(closed.hintId, "time-bar");
-  assert.equal(run(closed, game({ age: 1 }), { type: "sync" }).open, false, "same year: stays closed");
-  const nextYear = run(closed, game({ age: 2 }), { type: "sync" });
+test("a tip whose stage has not come yet waits for its year", () => {
+  const closed = run(INITIAL_TUTORIAL, game({ age: 0 }), { type: "sync" }, { type: "close" });
+  assert.equal(closed.open, false, "at birth only the time bar has a tip");
+  const nextYear = run(closed, game({ age: 1 }), { type: "sync" });
   assert.equal(nextYear.open, true);
   assert.equal(nextYear.hintId, "scene");
 });
 
 test("switching the Character popup to Skills is a new moment for the skill tree hint", () => {
   const career: TutorialContext = { view: "character", characterSection: "career", life: facts({ age: 8 }) };
-  const closed = run(INITIAL_TUTORIAL, career, { type: "sync" }, { type: "close" });
-  assert.equal(closed.hintId, "character");
-  assert.equal(run(closed, career, { type: "sync" }).open, false);
+  const closed = run(INITIAL_TUTORIAL, career, { type: "sync" });
+  assert.equal(closed.open, false, "the Character popup itself is help-only");
   const skills = run(closed, character, { type: "sync" });
   assert.equal(skills.open, true);
   assert.equal(skills.hintId, "skills");
@@ -91,9 +150,9 @@ test("the Tutorial button reopens at the current step while it is on screen", ()
 
 test("the Tutorial button opens the hint for the section on screen when the current step is elsewhere", () => {
   const closed: TutorialState = { ...INITIAL_TUTORIAL, hintId: "time-bar", seen: ["time-bar"] };
-  assert.equal(run(closed, character, { type: "open" }).hintId, "character");
+  assert.equal(run(closed, character, { type: "open" }).hintId, "skills");
   assert.equal(run(closed, { view: "nft-market", characterSection: null, life: null }, { type: "open" }).hintId, "nft-market");
-  assert.equal(resolveManualHint(game({ age: 12, notificationShown: true }), "welcome", ["time-bar"]), "notifications", "a fresh event tip is the most relevant");
+  assert.equal(resolveManualHint(game({ age: 12, decisionPending: true }), "welcome", ["time-bar", "scene"]), "decision", "a fresh event tip is the most relevant");
 });
 
 test("screens without tips open a short explanation instead of navigating", () => {
@@ -123,14 +182,14 @@ test("an automatic hint makes way for the new screen's own first-visit hint", ()
   const shown = run(INITIAL_TUTORIAL, game({ age: 0 }), { type: "sync" });
   const moved = run(shown, character, { type: "sync" });
   assert.equal(moved.open, true);
-  assert.equal(moved.hintId, "character");
+  assert.equal(moved.hintId, "skills");
 });
 
 test("an opened tutorial follows the player to the next screen, and closes where there is nothing to explain", () => {
   const opened = run(INITIAL_TUTORIAL, game({ age: 8 }), { type: "open", hintId: "rail" });
   const followed = run(opened, character, { type: "sync" });
   assert.equal(followed.open, true);
-  assert.equal(followed.hintId, "character");
+  assert.equal(followed.hintId, "skills");
   const gone = run(opened, sources, { type: "sync" });
   assert.equal(gone.open, false);
   assert.equal(gone.hintId, "rail", "the step is kept for the next open");
@@ -164,8 +223,9 @@ test("with tips off a new section glows instead of opening a card, once", () => 
   assert.ok(!flashed.flash!.ids.includes("planting"), "a small child is not pointed at the fields");
   assert.ok(flashed.flash!.ids.every(id => flashed.seen.includes(id)), "a glowing section counts as seen");
   assert.equal(run(flashed, game({ age: 4, notificationShown: false }), { type: "sync" }), flashed, "the same sections do not glow twice");
-  const later = run(flashed, game({ age: 5 }), { type: "sync" });
-  assert.deepEqual(later.flash?.ids, ["life-record"]);
+  assert.equal(run(flashed, game({ age: 5 }), { type: "sync" }), flashed, "nothing new opens at 5");
+  const later = run(flashed, game({ age: 6 }), { type: "sync" });
+  assert.deepEqual(later.flash?.ids, ["focus", "yearly-action"]);
   assert.equal(later.flash!.run, flashed.flash!.run + 1);
   const grown = run(later, game({ age: 16 }), { type: "sync" });
   assert.ok(grown.flash?.ids.includes("planting"), "the fields glow once they are the player's to plan");
@@ -190,14 +250,25 @@ test("turning tips off keeps the open card until the player closes it", () => {
   assert.equal(off.hintId, "welcome");
 });
 
-test("Next tip on an automatic card shows the next tip even when its section is not drawn right now", () => {
+test("paging a manual tour shows the next tip even when its section is not drawn right now", () => {
   const context = game({ age: 12, decisionPending: true, notificationShown: true });
-  const opened = run(INITIAL_TUTORIAL, context, { type: "sync" });
-  assert.equal(opened.mode, "auto");
+  const opened = run(INITIAL_TUTORIAL, context, { type: "open", hintId: "time-bar" });
   assert.ok(opened.queue.length > 1);
   const next = run(opened, context, { type: "next" });
   assert.equal(next.open, true);
   assert.equal(next.hintId, opened.queue[1]);
   assert.equal(next.mode, "manual", "a paged tip never waits invisibly for its section");
   assert.equal(run(next, context, { type: "back" }).mode, "manual");
+});
+
+test("a tip pushed aside keeps its year, and a tip read late counts for the year it was closed in", () => {
+  const shown = run(INITIAL_TUTORIAL, game({ age: 6 }), { type: "sync" });
+  const away = run(shown, sources, { type: "sync" });
+  assert.equal(away.open, false);
+  assert.equal(run(away, game({ age: 6 }), { type: "sync" }).hintId, "time-bar", "the same tip comes back the same year");
+  // Opened at 6, read at 7: the year 7 has had its tip.
+  const late = run(shown, game({ age: 7 }), { type: "close" });
+  assert.equal(late.open, false);
+  assert.equal(run(late, game({ age: 7 }), { type: "sync" }).open, false);
+  assert.equal(run(late, game({ age: 8 }), { type: "sync" }).hintId, "scene");
 });

@@ -1,12 +1,15 @@
 import { displayProse } from "../models/display-prose.ts";
-import { useEffect, useId, useMemo, useRef, useState, type RefObject } from "react";
+import { useId, useMemo, useRef, useState, type RefObject } from "react";
 import type { Choice, LifeEvent, LifeState, WorldPack } from "../../src/types.ts";
 import { formatYear } from "../../src/index.ts";
 import { resolvePartner } from "../../src/people.ts";
 import ChoiceImpact from "./ChoiceImpact.tsx";
+import { useGameModal } from "../hooks/useGameModal.ts";
 import { ChoicePreview } from "./CompactSkillPanel.tsx";
 import type { DemoScreen, TownFigureView } from "../demo/screen.ts";
+import PixelIcon from "./PixelIcon.tsx";
 import PixelPortrait from "./PixelPortrait.tsx";
+import { hasReturningIllness } from "../models/health-risk.ts";
 import {
   moneylenderPortraitState,
   personPortraitState,
@@ -100,10 +103,9 @@ function OpenDecisionDialog({
   const involvedCloseness = involvedPerson ? life.character?.relationships?.partners[involvedPerson.id]?.closeness : undefined;
   const involvedTags = involvedPerson ? relationshipLabels(world, life, involvedPerson.id) : [];
 
-  useEffect(() => {
+  // The page behind stays still while the decision is on view; focus returns where it was when the decision closes.
+  useGameModal(dialog, true, previousFocus => {
     const element = dialog.current;
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    if (element && !element.open) element.showModal();
     heading.current?.focus({ preventScroll: true });
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -114,7 +116,7 @@ function OpenDecisionDialog({
       const target = previousFocus?.isConnected ? previousFocus : returnFocusRef?.current;
       if (restoreFocus && target?.isConnected) target.focus({ preventScroll: true });
     };
-  }, [returnFocusRef]);
+  });
   const sources = (event.sourceIds ?? []).map(sourceId => world.sources?.find(source => source.id === sourceId)).filter(source => source !== undefined);
   return <dialog ref={dialog} className={`life-decision-dialog choice-popup${event.rarity === "rare" ? " is-rare" : ""}`} aria-labelledby={`${id}-title`} aria-describedby={`${id}-body`} onCancel={event => { event.preventDefault(); onSetAside(); }}>
     <header className="life-decision-meta"><span>{event.rarity === "rare" ? "Rare encounter" : demoView?.activeOffer ? "Town offer" : isLoanDecision || isLoanOffer ? "Moneylender" : "Turning point"}</span><span>Age {life.age} · {formatYear(life.year)}</span><button type="button" onClick={onSetAside}>Set aside</button></header>
@@ -187,6 +189,7 @@ function OpenDecisionDialog({
     <div className="life-decision-content">
       <h2 ref={heading} tabIndex={-1} id={`${id}-title`}>{displayProse(event.title)}</h2>
       <p id={`${id}-body`}>{displayProse(event.text)}</p>
+      {Boolean(world.health && event.id === world.health.careDecision && hasReturningIllness(life)) && <p className="life-decision-danger" role="status"><PixelIcon name="warn" size={14} />Your illness is getting worse.</p>}
       <div className="life-decision-board-grid">
         <div className="life-decision-options" aria-label="Options">{choices.map((choice, index) => <button className={`life-choice-commit${preview?.id === choice.id ? " is-previewed" : ""}`} key={choice.id} type="button" aria-controls={`${id}-choice-preview`} aria-keyshortcuts="ArrowRight" onPointerEnter={event => { if (event.pointerType !== "touch") setPreviewId(choice.id); }} onFocus={() => setPreviewId(choice.id)} onKeyDown={event => {
           if (event.key === "ArrowRight") {

@@ -1,5 +1,5 @@
 import type { CharacterActivity, LifeState, WorldPack } from "../../src/types.ts";
-import { avatarStage } from "./life-background.ts";
+import { lifeAvatarStage } from "./life-background.ts";
 import type { AvatarStage } from "./life-background.ts";
 import { resolveLifeScenes } from "./scene-model.ts";
 import type { EventVisuals, MotionId, SceneContext, SceneId } from "./scene-model.ts";
@@ -317,8 +317,9 @@ function fallbackSituation(life: LifeState): BannerSituationId {
   if (life.flags.retired) return "retirement";
   const job = life.character?.jobId;
   if (job && JOB_SITUATIONS[job]) return JOB_SITUATIONS[job];
-  if (life.age < 13) return "courtyard";
-  if (life.age < 18) return "study";
+  const stage = lifeAvatarStage(life.age);
+  if (stage === "child") return "courtyard";
+  if (stage === "youth") return "study";
   if (life.character?.children.length || life.flags.parent) return "parenthood";
   if (life.character?.relationshipStatus === "married" || life.flags.partnered) return "marriage";
   if (life.character?.relationshipStatus === "courting") return "courtship";
@@ -375,7 +376,7 @@ function concept1SituationPlate(
 
 /** Presentation only. No mutation, random draw, stored progress or engine command. */
 export function resolveLifeBanner(life: LifeState, world: WorldPack, context?: SceneContext, options: BannerOptions = {}): LifeBanner {
-  const stage = avatarStage(life.age), stageLabel = BANNER_STAGE_LABELS[stage];
+  const stage = lifeAvatarStage(life.age), stageLabel = BANNER_STAGE_LABELS[stage];
   let situation: BannerSituationId;
   let caption: string | undefined;
   let situationLabel: string | undefined;

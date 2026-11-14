@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createEngine } from "../src/index.ts";
 import { severeEpisodeFatalityProbability } from "../src/health.ts";
-import { severeHealthRisk, formatHealthRisk } from "../client/models/health-risk.ts";
+import { choiceDeathRisk, formatDeathRiskText, formatHealthRisk, hasReturningIllness, severeHealthRisk } from "../client/models/health-risk.ts";
 import { selectAutomaticChoice } from "../client/models/yearly-focus.ts";
 import current from "../worlds/alexandria-sample.json" with { type: "json" };
 
@@ -28,4 +28,32 @@ test("ordinary episodes and older worlds keep their existing health display", ()
   const engine = createEngine(current), life = structuredClone(engine.start("ordinary-preview"));
   life.health!.conditions = [{ id: "pneumonia", sinceAge: 0, lastProgressAge: -1, care: 0 }];
   assert.equal(severeHealthRisk(life, engine.world), undefined);
+});
+
+test("turning-point death risk formatting and returning-illness worsening flag work cleanly", () => {
+  const engine = createEngine(current);
+  const onset = structuredClone(engine.start("onset-flag"));
+  onset.age = 23;
+  onset.health!.conditions = [{ id: "pneumonia", sinceAge: 23, lastProgressAge: 22, care: 0, severe: { healthBefore: 80 } }];
+  assert.equal(hasReturningIllness(onset), false);
+
+  const returning = structuredClone(onset);
+  returning.age = 24;
+  returning.health!.conditions = [{ id: "pneumonia", sinceAge: 23, lastProgressAge: 23, care: 0, severe: { healthBefore: 72, lingered: 1 } }];
+  assert.equal(hasReturningIllness(returning), true);
+
+  assert.equal(formatDeathRiskText({ min: 0.56, max: 0.56, expected: 0.56 }), "Risk of death: 56%");
+  assert.equal(formatDeathRiskText({ min: 0, max: 0, expected: 0 }), null);
+
+  // Low-health ordinary illness choice predicts ordinary fatal deterioration upfront.
+  const lowHealth = structuredClone(engine.start("ordinary-fatal-risk"));
+  lowHealth.age = 25;
+  lowHealth.phase = "choice";
+  lowHealth.pendingEventId = current.health.careDecision;
+  lowHealth.stats.health = 10;
+  lowHealth.health!.conditions = [{ id: "pneumonia", sinceAge: 25, lastProgressAge: 24, care: 0 }];
+  const careChoices = engine.world.events.find(event => event.id === current.health.careDecision)!.choices;
+  const ignore = careChoices.find(choice => choice.id === "carry-on")!;
+  const risk = choiceDeathRisk(lowHealth, engine.world, ignore);
+  assert.ok(risk && risk.expected > 0, "Carry-on on critical ordinary pneumonia warns of death risk");
 });

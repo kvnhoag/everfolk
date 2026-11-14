@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { useGameModal } from "../hooks/useGameModal.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { getHouseholdWelcome } from "../models/household-welcome.ts";
 import type { HouseholdWelcomeModel } from "../models/household-welcome.ts";
@@ -24,16 +25,13 @@ function OpenHouseholdWelcome({ introduction, world, onClose, onOpenCouncil }: {
   const step = page > 0 ? introduction.steps[page - 1] : undefined;
   const lastPage = page === introduction.steps.length;
 
-  useEffect(() => {
+  useGameModal(dialogRef, true, previousFocus => {
     const dialog = dialogRef.current;
-    if (!dialog) return;
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    if (!dialog.open) dialog.showModal();
     return () => {
-      if (dialog.open) dialog.close();
+      if (dialog?.open) dialog.close();
       if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
     };
-  }, []);
+  });
 
   useEffect(() => {
     headingRef.current?.focus({ preventScroll: true });

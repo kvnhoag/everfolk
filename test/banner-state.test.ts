@@ -180,11 +180,11 @@ test("all banner IDs have a stable asset path and reading the banner leaves life
   assert.deepEqual(life, before); assert.deepEqual(world, pack);
 });
 
-test("a child with an established apprenticeship keeps the childhood phase and the actual work setting", () => {
-  const life = lifeAt(12);
+test("a young apprentice shows the youth stage that begins at 13 and the actual work setting", () => {
+  const life = lifeAt(13);
   life.character!.jobId = "apprentice";
   const banner = resolveLifeBanner(life, world, context());
-  assert.equal(banner.title, "Childhood");
-  assert.equal(banner.stage, "child");
+  assert.equal(banner.title, "Youth");
+  assert.equal(banner.stage, "youth");
   assert.equal(banner.situation, "workshop");
 });

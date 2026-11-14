@@ -1,13 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import type { PlantingCheck } from "../models/planting-check.ts";
-import { LockedArea } from "../components/Locked.tsx";
 import "./resource-bar.css";
 import { TRADE_ITEMS, type TradeItem } from "../../src/demo/types.ts";
 import PixelIcon from "../components/PixelIcon.tsx";
-import SectionHelp from "../components/SectionHelp.tsx";
 import { itemLabel } from "./labels.ts";
 import type { DemoScreen } from "./screen.ts";
 import ResourceYearDetails from "./Storehouse.tsx";
+import { PlantingTask } from "./PlantingTask.tsx";
 import type { StorehouseRow } from "./storehouse-model.ts";
 
 export interface InventoryDrawerProps {
@@ -22,54 +21,6 @@ export interface InventoryDrawerProps {
   /** The age the player starts planning the fields; null once it is open. */
   plantingLockedUntil?: number | null;
   onTrade?(item: TradeItem): void;
-}
-
-/** The split of the household's plots, one square per plot, grain first. */
-function PlotSquares({ plots, flax }: { plots: number; flax: number }) {
-  return <span className="aoe-plot-squares" aria-hidden="true">
-    {Array.from({ length: plots }, (_, index) => <span key={index} className={index < plots - flax ? "is-grain" : "is-flax"} />)}
-  </span>;
-}
-
-/** Plan your fields: the split, what it would do (checked before the click) and Set planting. Shared with Farm & Granary. */
-export function PlantingTask({ screen, onPlan, checkPlan, lockedUntil = null }: { screen: DemoScreen; onPlan(flaxPlots: number): string | null; checkPlan?(flaxPlots: number): PlantingCheck; lockedUntil?: number | null }) {
-  const { plots } = screen.household;
-  const [flax, setFlax] = useState(screen.household.flaxPlots);
-  const [notice, setNotice] = useState("");
-  useEffect(() => { setFlax(screen.household.flaxPlots); }, [screen.household.flaxPlots]);
-  const change = (next: number) => { setFlax(Math.max(0, Math.min(plots, next))); setNotice(""); };
-  const unchanged = flax === screen.household.flaxPlots;
-  // Checked as the split changes, so a plan the game would refuse never needs a click to find out.
-  const check = useMemo(() => checkPlan?.(flax) ?? { reason: null, warnings: [] }, [checkPlan, flax, screen]);
-  if (lockedUntil !== null) return <article className="aoe-task aoe-planting-row" aria-labelledby="aoe-task-planting">
-    <h4 id="aoe-task-planting"><PixelIcon name="res-grain" size={14} />Plan your fields</h4>
-    <LockedArea locked title="Plan your fields" unlock={`Unlocks at age ${lockedUntil}`} note="Your family plans the fields until then.">
-      <p className="aoe-task-how">Split the plots between grain and flax.</p>
-    </LockedArea>
-  </article>;
-  return <article className="aoe-task aoe-planting-row has-section-help" aria-labelledby="aoe-task-planting">
-    <SectionHelp hint="planting" />
-    <h4 id="aoe-task-planting"><PixelIcon name="res-grain" size={14} />Plan your fields</h4>
-    <p className="aoe-task-how">Grain plots feed {screen.household.mouths} {screen.household.mouths === 1 ? "mouth" : "mouths"} and pay the rent. Flax plots grow flax to spin into linen and sell. The split counts for the next harvest.</p>
-    <div className="aoe-plot-plan">
-      <PlotSquares plots={plots} flax={flax} />
-      <span className="aoe-plot-count"><strong>{plots - flax}</strong> grain · <strong>{flax}</strong> flax</span>
-      <span className="aoe-stepper" role="group" aria-label="Flax plots next year">
-        <button type="button" aria-label="One less flax plot" disabled={flax <= 0} onClick={() => change(flax - 1)}>−</button>
-        <output aria-live="polite">{flax} flax</output>
-        <button type="button" aria-label="One more flax plot" disabled={flax >= plots} onClick={() => change(flax + 1)}>+</button>
-      </span>
-    </div>
-    {(check.reason || check.warnings.length > 0) && <ul className="aoe-plan-check" aria-label="Before you set this plan">
-      {check.reason && <li className="is-blocked"><PixelIcon name="lock" size={12} label="Cannot set" />{check.reason}</li>}
-      {check.warnings.map(line => <li key={line}><PixelIcon name="warn" size={12} label="Warning" />{line}</li>)}
-    </ul>}
-    <div className="aoe-task-actions">
-      <button type="button" className="aoe-task-primary" disabled={unchanged || Boolean(check.reason)} onClick={() => setNotice(onPlan(flax) ?? "Planting set for the next harvest.")}>Set planting</button>
-      {notice && <span className="aoe-plan-notice" role="status">{notice}</span>}
-      {!notice && unchanged && <span className="aoe-task-hint">Use − and + to change the split.</span>}
-    </div>
-  </article>;
 }
 
 function TradeTask({ screen, onTrade }: { screen: DemoScreen; onTrade?(item: TradeItem): void }) {

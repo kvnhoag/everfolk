@@ -12,6 +12,11 @@ import { focusActivity, YEARLY_FOCUSES, type YearlyFocusId } from "./yearly-focu
 const YEARLY_KINDS: readonly string[] = ["training", "relationship", "family", "career"];
 const OTHER_OPTIONS = 3;
 
+/** Opening years after the yearly action opens (ages 6 and 7) always pause if unused. */
+export const YEAR_END_INTRO_YEARS = 2;
+/** After the opening years, pause at most once every 5 consecutive unused years. */
+export const YEAR_END_UNUSED_STRETCH = 5;
+
 export interface YearEndOption {
   id: string;
   text: string;
@@ -24,6 +29,10 @@ export function yearEndKeyOf(life: Pick<LifeState, "seed" | "age">): string {
   return `${life.seed}:${life.age}`;
 }
 
+export function yearEndStopStorageKey(life: Pick<LifeState, "worldFingerprint" | "seed">): string {
+  return `everfolk:year-end-stop:v1:${life.worldFingerprint}:${encodeURIComponent(life.seed)}`;
+}
+
 /** Actions that spend the yearly action. Free ones (ending a friendship, resting while ill) would leave it unspent. */
 function yearlyChoices(world: WorldPack, activities: readonly ActivityAvailability[]): ActivityAvailability[] {
   return activities.filter(activity => activity.available && activity.usesYearlyActivity !== false
@@ -34,6 +43,25 @@ function yearlyChoices(world: WorldPack, activities: readonly ActivityAvailabili
 export function yearEndChoiceNeeded(engine: Pick<LifeEngine, "world" | "getActivities">, life: LifeState): boolean {
   if (life.phase !== "ready" || life.age < YEARLY_ACTION_AGE || life.character?.lastActivityAge === life.age) return false;
   return yearlyChoices(engine.world, engine.getActivities(life)).length > 0;
+}
+
+/**
+ * Whether Next decision and the year clock should pause at year end for "Choose this year's action".
+ * Stops in the first 2 years after the yearly action opens (ages 6 and 7), then at most once every 5 years,
+ * and only if the action went unused for that whole stretch.
+ */
+export function yearEndShouldStop(
+  engine: Pick<LifeEngine, "world" | "getActivities">,
+  life: LifeState,
+  lastStoppedAge: number | null = null,
+): boolean {
+  if (!yearEndChoiceNeeded(engine, life)) return false;
+  const stoppedAge = lastStoppedAge !== null && lastStoppedAge <= life.age ? lastStoppedAge : null;
+  if (stoppedAge === life.age) return false;
+  const introEndAge = YEARLY_ACTION_AGE + YEAR_END_INTRO_YEARS - 1;
+  if (life.age <= introEndAge) return true;
+  const stretchStart = Math.max(introEndAge, life.character?.lastActivityAge ?? -Infinity, stoppedAge ?? -Infinity);
+  return life.age - stretchStart >= YEAR_END_UNUSED_STRETCH;
 }
 
 /**

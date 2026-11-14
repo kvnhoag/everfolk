@@ -1,61 +1,102 @@
-import { PLANTING_HINT_AGE } from "./tutorial-triggers.ts";
-
 /** The age the yearly personal action board appears. */
 export const YEARLY_ACTION_AGE = 6;
 
-/** What the current year leaves for the player to do, read from the life. */
+/**
+ * The yearly "Plan this year" notice and its callout. It names at most one thing, and only something the player can
+ * do now: the next step they have not learned yet (focus, then the yearly action, the market, the fields), or a
+ * problem a click can fix. A step is pointed at once at most, and a problem once while it lasts, so nothing repeats
+ * year after year. Pure, so every rule is tested.
+ */
+
+/** In teaching order. */
+export const YEAR_TASKS = ["focus", "action", "market", "planting"] as const;
+export type YearTask = typeof YEAR_TASKS[number];
+
 export interface YearTaskFacts {
-  age: number;
-  /** "ready" while the year runs; reminders wait during decisions and stop when the life ends. */
+  /** "ready" while the year runs; nothing is named during a decision or after the life ends. */
   phase: "ready" | "choice" | "ended";
-  /** The household has fields to plan (the free-play economy is on). */
-  hasFields: boolean;
-  /** The yearly focus buttons are shown at this age. */
-  focusShown: boolean;
-  /** The yearly action has already been spent this year. */
-  actionUsed: boolean;
-  /**
-   * The field plan needs a look this year: the first year it opens, or the store or the plan has a problem (overfull,
-   * no seed, no grain plots). A plan carries over by itself, so a good plan is not asked about again.
-   */
-  plantingAttention: boolean;
+  /** Steps the player can use right now (the action not spent, the market visit not used). */
+  open: readonly YearTask[];
+  /** Steps the player has used at least once in this life. */
+  learned: readonly YearTask[];
+  /** Steps an earlier year's notice already pointed at. */
+  pointed: readonly YearTask[];
+  /** Steps whose tip introduces them this year; the tip does the pointing. */
+  introduced: readonly YearTask[];
+  /** The field plan has a problem a new plan fixes (no seed, no grain plots). */
+  planProblem: boolean;
+  /** The grain store is, or after this harvest will be, over its limit: selling grain fixes it. */
+  overfull: boolean;
+  /** Problems already named and not solved since. */
+  ongoing: readonly YearTask[];
 }
 
-export type YearTask = "planting" | "focus" | "action";
+export interface YearReminderPick {
+  task: YearTask;
+  reason: "learn" | "problem";
+}
 
-/** Each task's section, as selector alternatives (the planting card when the drawer is open, else its toggle). */
+/** Each step's section, as selector alternatives (the first one drawn is pointed at). */
 export const YEAR_TASK_TARGETS: Record<YearTask, readonly string[]> = {
-  planting: [".aoe-planting-row", ".aoe-inventory-toggle"],
   focus: [".yearly-focus"],
   action: [".life-yearly-action-deck"],
+  market: [".demo-economy section[aria-label='Grain market']:not([hidden])", ".demo-economy .demo-deck-tab[data-tab='market']"],
+  planting: [".aoe-planting-row", ".aoe-inventory-toggle"],
 };
 
-const LABELS: Record<YearTask, string> = { planting: "plan your fields in Inventory & Granary", focus: "check your focus", action: "choose this year's action" };
-
-/** The tasks still open this year, in the order they appear on screen. */
-export function yearTasks(facts: YearTaskFacts): YearTask[] {
-  if (facts.phase !== "ready") return [];
-  return [
-    ...(facts.hasFields && facts.age >= PLANTING_HINT_AGE && facts.plantingAttention ? ["planting" as const] : []),
-    ...(facts.focusShown ? ["focus" as const] : []),
-    ...(facts.age >= YEARLY_ACTION_AGE && !facts.actionUsed ? ["action" as const] : []),
-  ];
+function problem(facts: YearTaskFacts): YearReminderPick | null {
+  const open = (task: YearTask) => facts.open.includes(task) && !facts.ongoing.includes(task);
+  if (facts.planProblem && open("planting")) return { task: "planting", reason: "problem" };
+  // Selling grain empties an overfull store; a new field plan cannot, so the fields are never named for it.
+  if (facts.overfull && open("market")) return { task: "market", reason: "problem" };
+  return null;
 }
 
-/** "Plan your fields", for the label on the section being pointed at. */
-export function yearTaskLabel(task: YearTask): string {
-  const text = LABELS[task];
-  return `${text.charAt(0).toUpperCase()}${text.slice(1)}`;
+/** The one thing to name this year, or null when there is nothing new for the player to do. */
+export function yearTask(facts: YearTaskFacts): YearReminderPick | null {
+  if (facts.phase !== "ready") return null;
+  const learn = YEAR_TASKS.find(task => facts.open.includes(task) && !facts.learned.includes(task)
+    && !facts.pointed.includes(task) && !facts.introduced.includes(task));
+  return problem(facts) ?? (learn ? { task: learn, reason: "learn" } : null);
 }
 
-/** "Plan your fields, check your focus and choose this year's action." */
-export function yearReminderText(tasks: readonly YearTask[]): string {
-  const parts = tasks.map(task => LABELS[task]);
-  const joined = parts.length > 1 ? `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}` : parts[0] ?? "";
-  return joined ? `${joined.charAt(0).toUpperCase()}${joined.slice(1)}.` : "";
+export interface YearReminderLine {
+  /** The thing named, as it appears in both the notice and the callout. */
+  thing: string;
+  /** The notice's sentence. */
+  body: string;
+  /** The words on the section the callout points at. */
+  label: string;
 }
 
-/** One reminder per life and year; the key never repeats, so a year is only announced once. */
+const LINES: Record<YearReminderPick["reason"], Record<YearTask, Omit<YearReminderLine, "label"> | null>> = {
+  learn: {
+    focus: { thing: "focus", body: "Choose a focus: what you practise this year." },
+    action: { thing: "action", body: "Choose this year's action: people, training or work." },
+    market: { thing: "market", body: "Visit the market once this year to buy or sell." },
+    planting: { thing: "fields", body: "Plan your fields in Inventory & Granary." },
+  },
+  problem: {
+    focus: null,
+    action: null,
+    market: { thing: "sell grain", body: "Your grain store is over its limit: sell grain at the market." },
+    planting: { thing: "field plan", body: "Your field plan has a problem: check your field plan." },
+  },
+};
+
+const LABELS: Record<YearTask, Record<YearReminderPick["reason"], string>> = {
+  focus: { learn: "This year: choose a focus", problem: "" },
+  action: { learn: "This year: choose an action", problem: "" },
+  market: { learn: "This year: visit the market", problem: "Sell grain here" },
+  planting: { learn: "This year: plan your fields", problem: "Fix your field plan here" },
+};
+
+export function yearReminderLine(pick: YearReminderPick): YearReminderLine {
+  const line = LINES[pick.reason][pick.task] ?? LINES.learn[pick.task]!;
+  return { ...line, label: LABELS[pick.task][pick.reason] || LABELS[pick.task].learn };
+}
+
+/** One notice per life and year; the key never repeats, so a year is only announced once. */
 export function yearReminderKey(lifeKey: string, age: number): string {
   return `year-reminder:${lifeKey}:${age}`;
 }

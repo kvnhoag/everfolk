@@ -1,13 +1,18 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
-  availableHints, chainTutorialView, gameTutorialContext, hintAvailable, hintTriggered, triggeredHints,
+  availableHints, chainTutorialView, gameTutorialContext, hintAvailable, hintTriggered, triggeredHints, tutorialYearKey, yearAllowsTip,
   type TutorialContext, type TutorialLifeFacts,
 } from "../client/models/tutorial-triggers.ts";
 import { TUTORIAL_HINTS } from "../client/models/tutorial-hints.ts";
+import { visibleSections } from "../client/models/onboarding-sections.ts";
 
+const AGES = { focus: 6, action: 6, trade: 12, firstJob: 12, fields: 16 };
+/** A life's facts with the sections the age map draws at that age (unless given). */
 function facts(over: Partial<TutorialLifeFacts> = {}): TutorialLifeFacts {
-  return { age: 0, ended: false, decisionPending: false, learnedSkills: 0, focusShown: false, resourcesShown: true, wealthShown: true, deckShown: true, notificationShown: false, tradeAge: 10, ...over };
+  const base = { lifeKey: "life", age: 0, ended: false, decisionPending: false, learnedSkills: 0, notificationShown: false, passed: [], ...over };
+  const sections = over.sections ?? [...visibleSections({ age: base.age, economy: true, learnedSkills: base.learnedSkills, hadDecision: base.decisionPending }, AGES)];
+  return { ...base, sections };
 }
 function game(over: Partial<TutorialLifeFacts> = {}): TutorialContext {
   return { view: "game", characterSection: null, life: facts(over) };
@@ -28,14 +33,28 @@ test("when a life first begins only the time bar fires", () => {
   assert.deepEqual(triggeredHints(game({ age: 0 }), []), ["time-bar"]);
 });
 
-test("layout hints arrive one stage at a time as the child grows", () => {
+test("section tips arrive when their section first appears, one stage at a time", () => {
   assert.ok(!hintTriggered("scene", game({ age: 0 })));
   assert.ok(hintTriggered("scene", game({ age: 1 })));
-  assert.ok(!hintTriggered("rail", game({ age: 1 })) && hintTriggered("rail", game({ age: 2 })));
-  assert.ok(!hintTriggered("resources", game({ age: 2 })) && hintTriggered("resources", game({ age: 3 })));
-  assert.ok(!hintTriggered("wealth", game({ age: 3 })) && hintTriggered("wealth", game({ age: 4 })));
-  assert.ok(!hintTriggered("life-record", game({ age: 4 })) && hintTriggered("life-record", game({ age: 5 })));
-  assert.ok(!hintTriggered("command-deck", game({ age: 7 })) && hintTriggered("command-deck", game({ age: 8 })));
+  assert.ok(!hintTriggered("planting", game({ age: 15 })) && hintTriggered("planting", game({ age: 16 })));
+  assert.ok(!hintAvailable("wealth", game({ age: 5 })) && hintAvailable("wealth", game({ age: 6 })), "health and wealth appear with the yearly action");
+  assert.ok(!hintAvailable("resources", game({ age: 11 })) && hintAvailable("resources", game({ age: 12 })), "the household bar appears with trading");
+  // Health and wealth, the household's goods, the Character popup and notifications only open from their "?".
+  for (const id of ["rail", "life-record", "command-deck", "wealth", "resources", "character", "notifications"] as const) {
+    assert.ok(hintAvailable(id, game({ age: 30 })), `${id} still opens from its ?`);
+    assert.ok(!hintTriggered(id, game({ age: 30 })), `${id} is introduced by another tip, so it never opens by itself`);
+  }
+});
+
+test("a tip never opens for a section the age map has not drawn yet", () => {
+  for (const age of [0, 3, 5, 6, 11, 12, 15, 16, 40]) {
+    const context = game({ age });
+    const drawn = context.life!.sections;
+    if (!drawn.includes("focus")) assert.ok(!hintAvailable("focus", context), `focus at ${age}`);
+    if (!drawn.includes("resources")) assert.ok(!hintAvailable("resources", context), `resources at ${age}`);
+    if (!drawn.includes("deck-market")) assert.ok(!hintAvailable("market", context), `market at ${age}`);
+    if (!drawn.includes("planting")) assert.ok(!hintAvailable("planting", context), `planting at ${age}`);
+  }
 });
 
 test("the yearly action box fires at age 6, not before", () => {
@@ -45,22 +64,18 @@ test("the yearly action box fires at age 6, not before", () => {
 });
 
 test("This year's focus fires when the focus box first appears", () => {
-  assert.equal(hintTriggered("focus", game({ age: 3, focusShown: false })), false);
-  assert.equal(hintTriggered("focus", game({ age: 3, focusShown: true })), true);
+  assert.equal(hintTriggered("focus", game({ age: 3, sections: ["time-bar"] })), false);
+  assert.equal(hintTriggered("focus", game({ age: 3, sections: ["time-bar", "focus"] })), true);
 });
 
-test("the market hint fires exactly when trading opens, using the world's trading age", () => {
-  assert.equal(hintTriggered("market", game({ age: 9 })), false);
-  assert.equal(hintTriggered("market", game({ age: 10 })), true);
-  assert.equal(hintTriggered("market", game({ age: 10, tradeAge: 12 })), false);
-  assert.equal(hintTriggered("market", game({ age: 12, tradeAge: 12 })), true);
-  assert.equal(hintTriggered("market", game({ age: 20, deckShown: false })), false, "never without the command deck on screen");
-  assert.equal(hintTriggered("market", game({ age: 20, tradeAge: null })), false, "worlds without a market never show it");
+test("the market hint fires exactly when the market tab is drawn", () => {
+  assert.equal(hintTriggered("market", game({ age: 11 })), false);
+  assert.equal(hintTriggered("market", game({ age: 12 })), true);
+  assert.equal(hintTriggered("market", game({ age: 20, sections: ["time-bar", "command-deck"] })), false, "never without the market tab on screen");
 });
 
 test("notifications, turning points, skills and the ending fire on their events", () => {
-  assert.equal(hintTriggered("notifications", game({ age: 1 })), false);
-  assert.equal(hintTriggered("notifications", game({ age: 1, notificationShown: true })), true);
+  assert.equal(hintTriggered("notifications", game({ age: 1, notificationShown: true })), false, "notifications are help-only");
   assert.equal(hintTriggered("decision", game({ age: 1 })), false);
   assert.equal(hintTriggered("decision", game({ age: 1, decisionPending: true })), true);
   assert.equal(hintAvailable("decision", game({ age: 1 })), true, "the Next decision button is always on the time bar");
@@ -70,12 +85,12 @@ test("notifications, turning points, skills and the ending fire on their events"
   assert.equal(hintTriggered("ending", game({ age: 40, ended: true })), true);
 });
 
-test("the Character popup and the skill tree fire when they first open", () => {
-  const character: TutorialContext = { view: "character", characterSection: "career", life: facts({ age: 8 }) };
-  assert.deepEqual(triggeredHints(character, []), ["character"]);
+test("the skill tree fires when the Character popup first opens on Skills; the popup itself is help-only", () => {
+  const character: TutorialContext = { view: "character", characterSection: "career", life: facts({ age: 12 }) };
+  assert.deepEqual(triggeredHints(character, []), []);
+  assert.ok(hintAvailable("character", character), "its ? still explains it");
   const skills: TutorialContext = { ...character, characterSection: "skills" };
-  assert.deepEqual(triggeredHints(skills, []), ["character", "skills"], "two hints for the same moment queue up");
-  assert.deepEqual(triggeredHints(skills, ["character"]), ["skills"]);
+  assert.deepEqual(triggeredHints(skills, []), ["skills"]);
 });
 
 test("each Weave screen fires the first time it is visited", () => {
@@ -103,23 +118,25 @@ test("a hint never fires for a section that is not on screen", () => {
   assert.deepEqual(availableHints({ view: "game", characterSection: null, life: null }), [], "no life, no game hints");
 });
 
-test("event hints come before layout hints; seen hints are skipped", () => {
-  const busy = game({ age: 12, notificationShown: true, decisionPending: true, focusShown: true });
+test("event hints come before section tips, and section tips follow the teaching order; seen hints are skipped", () => {
+  const busy = game({ age: 12, notificationShown: true, decisionPending: true });
   const queue = triggeredHints(busy, []);
-  assert.deepEqual(queue.slice(0, 3), ["time-bar", "decision", "notifications"]);
+  assert.deepEqual(queue.slice(0, 3), ["time-bar", "decision", "scene"]);
+  const sections = triggeredHints(game({ age: 16, learnedSkills: 1 }), ["time-bar", "scene"]);
+  assert.deepEqual(sections, ["focus", "yearly-action", "market", "skills", "planting"]);
   assert.ok(!triggeredHints(busy, ["decision"]).includes("decision"));
   assert.equal(new Set(queue).size, queue.length);
 });
 
 test("available hints follow the screen from top to bottom", () => {
   const ids = TUTORIAL_HINTS.map(hint => hint.id);
-  const available = availableHints(game({ age: 12, focusShown: true }));
+  const available = availableHints(game({ age: 12 }));
   assert.deepEqual(available, [...available].sort((a, b) => ids.indexOf(a) - ids.indexOf(b)));
   assert.equal(available[0], "time-bar");
 });
 
 test("the game's own state maps to the screen the player sees", () => {
-  const life = facts({ age: 4 });
+  const life = facts({ age: 12 });
   const base = { menuOpen: false, birthPopoverOpen: false, hasBegun: true, panel: null, characterSection: "career", decisionOpen: false, blockingDialog: false, life };
   assert.equal(gameTutorialContext(base).view, "game");
   assert.equal(gameTutorialContext({ ...base, menuOpen: true }).view, "home");
@@ -137,4 +154,19 @@ test("the game's own state maps to the screen the player sees", () => {
 test("the yearly-action tip waits while a decision is pending, because its cards are not drawn then", () => {
   assert.equal(hintAvailable("yearly-action", game({ age: 7 })), true);
   assert.equal(hintAvailable("yearly-action", game({ age: 7, decisionPending: true })), false);
+});
+
+test("one automatic tip per in-game year: the year key counts only a life in play, and the ending is never held back", () => {
+  const year6 = game({ age: 6, lifeKey: "a" });
+  assert.equal(tutorialYearKey(year6), "a:6");
+  assert.equal(tutorialYearKey({ view: "home", characterSection: null, life: facts() }), null, "the home screen is not a year");
+  assert.equal(tutorialYearKey({ view: "character", characterSection: null, life: facts({ age: 6, lifeKey: "a" }) }), "a:6");
+  assert.equal(yearAllowsTip("yearly-action", year6, null), true);
+  const focusAt6 = { key: "a:6", hintId: "focus" as const };
+  assert.equal(yearAllowsTip("yearly-action", year6, focusAt6), false, "a second tip in the same year waits");
+  assert.equal(yearAllowsTip("focus", year6, focusAt6), true, "the year's own tip may come back after being pushed aside");
+  assert.equal(yearAllowsTip("yearly-action", game({ age: 7, lifeKey: "a" }), focusAt6), true, "and opens the next year");
+  assert.equal(yearAllowsTip("yearly-action", game({ age: 6, lifeKey: "b" }), focusAt6), true, "a new life starts fresh");
+  assert.equal(yearAllowsTip("ending", game({ age: 6, lifeKey: "a", ended: true }), focusAt6), true);
+  assert.equal(yearAllowsTip("welcome", { view: "home", characterSection: null, life: facts() }, { key: "life:0", hintId: "time-bar" }), true);
 });

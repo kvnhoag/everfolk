@@ -1,3 +1,5 @@
+import { LIFE_PHASES } from "./life-phases.ts";
+
 /** Presentation-only variation, independent of every gameplay random draw. */
 export function portraitVariant(seed: string): number {
   let hash = 2166136261;
@@ -32,6 +34,33 @@ export function avatarArtworkOrigin(originId?: string): typeof AVATAR_ORIGIN_IDS
 
 export function avatarStage(age: number): AvatarStage {
   return age < 3 ? "infant" : age < 13 ? "child" : age < 18 ? "youth" : age < 40 ? "adult" : age < 60 ? "middle" : "elder";
+}
+
+/** The first age with child art; the registry has no toddler portrait, so early years show the infant, then the child. */
+const CHILD_FROM_AGE = 3;
+/** Middle age is not a How to Play stage: it sits inside Adulthood and keeps its own portrait stage. */
+const MIDDLE_FROM_AGE = 40;
+
+function phaseStart(id: string): number {
+  const phase = LIFE_PHASES.find(item => item.id === id);
+  if (!phase) throw new Error(`The life stages have no "${id}" stage.`);
+  return phase.fromAge;
+}
+const YOUTH_FROM_AGE = phaseStart("youth");
+const ADULT_FROM_AGE = phaseStart("adulthood");
+const ELDER_FROM_AGE = phaseStart("later-life");
+
+/**
+ * The stage a person looks like in game, with the same turning ages as the How to Play life stages (youth from 12,
+ * adulthood from 18, later life from 60), so a portrait changes exactly where its stage does. The older
+ * `avatarStage` keeps its bands for retained lives and NFT card art.
+ */
+export function lifeAvatarStage(age: number): AvatarStage {
+  if (age < CHILD_FROM_AGE) return "infant";
+  if (age < YOUTH_FROM_AGE) return "child";
+  if (age < ADULT_FROM_AGE) return "youth";
+  if (age < MIDDLE_FROM_AGE) return "adult";
+  return age < ELDER_FROM_AGE ? "middle" : "elder";
 }
 
 /** Three complete lifetime identities; the picker never draws gameplay RNG. */
