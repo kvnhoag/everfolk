@@ -2,6 +2,7 @@ import type { LifeEngine, LifeState, WorldPack } from "../../src/types.ts";
 import type { DemoDefinition, LifeStateWithDemo, TradeCommand, TradeItem } from "../../src/demo/contracts.ts";
 import { orderValue, priceText } from "../../src/demo/market-depth.ts";
 import { householdView } from "../../src/demo/household.ts";
+import { grainSalePlan, leavesGrain } from "./grain-sale-plan.ts";
 
 /**
  * What a market order will do, shown before anything changes hands: what you give and get, how the price moves as
@@ -17,6 +18,19 @@ export interface TradePreview {
   confirmLabel: string | null;
   lines: string[];
   warnings: string[];
+  /**
+   * Set when a grain sale would cut into the household's eating and seed: the words of a second confirmation, "This
+   * leaves N grain; your household eats about M a year.". Confirm waits for it. Null for every other order.
+   */
+  reserveConfirm: string | null;
+}
+
+/** Where Confirm stands: nothing to confirm, a second question to ask first, or ready to go. */
+export type ConfirmStage = "none" | "ask" | "go";
+
+export function confirmStage(preview: TradePreview, reserveAsked: boolean): ConfirmStage {
+  if (!preview.confirmLabel) return "none";
+  return preview.reserveConfirm && !reserveAsked ? "ask" : "go";
 }
 
 const UNITS: Record<TradeItem, readonly [string, string]> = {
@@ -74,7 +88,7 @@ function refusal(engine: Pick<LifeEngine, "demo">, life: LifeState, order: Trade
 
 export function tradePreview(engine: Pick<LifeEngine, "demo" | "world">, state: LifeState, order: TradeCommand): TradePreview {
   const def = engine.world.demo, life = state as LifeStateWithDemo;
-  if (!def || !state.demo) return { blocked: "This life has no market.", total: 0, confirmLabel: null, lines: [], warnings: [] };
+  if (!def || !state.demo) return { blocked: "This life has no market.", total: 0, confirmLabel: null, lines: [], warnings: [], reserveConfirm: null };
   const world = engine.world;
   const blocked = refusal(engine, state, order);
   const lines: string[] = [];
@@ -97,5 +111,7 @@ export function tradePreview(engine: Pick<LifeEngine, "demo" | "world">, state: 
   if (order.item === "grain") grainWarnings(def, life, world, order, lines, warnings);
   if (order.reserveOverride) warnings.push("This sale uses grain set aside for the household's food or seed.");
   lines.push("This is your only market visit this year.");
-  return { blocked, total, confirmLabel: blocked ? null : verb, lines, warnings };
+  const plan = order.item === "grain" && order.side === "sell" ? grainSalePlan(world, life) : null;
+  const reserveConfirm = !blocked && plan ? leavesGrain(plan, order.quantity) : null;
+  return { blocked, total, confirmLabel: blocked ? null : verb, lines, warnings, reserveConfirm };
 }

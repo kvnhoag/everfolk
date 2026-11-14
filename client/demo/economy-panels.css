@@ -1055,6 +1055,10 @@
 .demo-trade-preview-warnings { list-style: none; padding: 0 !important; }
 .demo-trade-preview-warnings li { display: flex; gap: 6px; align-items: flex-start; padding: 3px 7px; border-left: 3px solid #a3361f; background: #f8e3dc; color: #7a2413; }
 .demo-trade-preview-warnings svg { flex: none; margin-top: 2px; }
+.demo-trade-preview-reserve { display: flex; gap: 6px; align-items: flex-start; margin: 0; padding: 4px 8px; border-left: 3px solid #a3361f; background: #f8e3dc; color: #7a2413; }
+.demo-trade-preview-reserve.is-asked { font-weight: 700; }
+.demo-trade-preview-reserve svg { flex: none; margin-top: 2px; }
+.demo-trade-spare { margin: 4px 0 0; font-size: 0.85em; }
 .demo-trade-preview-blocked { margin: 0; color: #7a2413; font-weight: 700; }
 .demo-trade-preview-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
 .demo-trade-confirm, .demo-trade-cancel { min-height: 34px; padding: 0 14px; border-radius: 2px; font-weight: 700; cursor: pointer; }
