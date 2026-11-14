@@ -59,6 +59,28 @@ function merchantPrice(def: DemoDefinition, life: LifeStateWithDemo, order: Trad
   return { total: order.quantity * unit, from: unit, to: unit, text: price => String(price) };
 }
 
+function measureWord(item: TradeItem): string {
+  return item === "grain" ? "measure" : item === "flax" ? "bundle" : UNITS[item][0];
+}
+
+/** The average price of one unit, from the total actually paid: whole drachmas, or two places when it is a fraction. */
+function averagePrice(total: number, quantity: number): string {
+  const average = total / quantity;
+  return Number.isInteger(average) ? String(average) : average.toFixed(2);
+}
+
+/**
+ * What the order pays or costs in one plain line. The total is the very number Confirm uses; where the price slides
+ * as the order fills, the line says it is an average and that each extra unit does worse.
+ */
+function totalLine(order: TradeCommand, priced: Priced): string {
+  const selling = order.side === "sell";
+  const verb = selling ? "You get" : "You pay";
+  const each = averagePrice(priced.total, order.quantity);
+  if (priced.from === priced.to) return `${verb} ${priced.total} dr (${each} dr each).`;
+  return `${verb} about ${priced.total} dr (${each} dr each on average); each extra ${measureWord(order.item)} ${selling ? "sells for less" : "costs more"}.`;
+}
+
 function priceLine(order: TradeCommand, priced: Priced): string {
   const at = `${priced.text(priced.from)} dr ${per(order.item)}`;
   if (priced.from === priced.to) return `Price: ${at}.`;
@@ -105,7 +127,7 @@ export function tradePreview(engine: Pick<LifeEngine, "demo" | "world">, state: 
     const priced = merchantPrice(def, life, order);
     total = priced.total;
     verb = `${order.side === "sell" ? "Sell" : "Buy"} ${amount(order.item, order.quantity)} for ${total} dr`;
-    lines.push(order.side === "sell" ? `You get ${total} dr.` : `You pay ${total} dr.`);
+    lines.push(totalLine(order, priced));
     lines.push(priceLine(order, priced));
   }
   if (order.item === "grain") grainWarnings(def, life, world, order, lines, warnings);
