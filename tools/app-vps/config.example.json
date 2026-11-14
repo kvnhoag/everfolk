@@ -1,0 +1,25 @@
+{
+  "root": "/opt/everfolk/deploy",
+  "repository": "https://github.com/kvnhoag/everfolk.git",
+  "network": "app_default",
+  "assetBaseUrl": "https://everfolk.life/releases/media-20261114-v1/payload/",
+  "branches": {
+    "main": {
+      "hostname": "everfolk.life",
+      "project": "everfolk-main",
+      "container": "everfolk-main",
+      "volume": "app_everfolk-data",
+      "port": 8790,
+      "envFile": "/opt/everfolk/deploy/env/main.env",
+      "legacyContainer": "app-everfolk-1"
+    },
+    "dev": {
+      "hostname": "beta.everfolk.life",
+      "project": "everfolk-beta",
+      "container": "everfolk-beta",
+      "volume": "everfolk-beta-data",
+      "port": 8789,
+      "envFile": "/opt/everfolk/deploy/env/beta.env"
+    }
+  }
+}

@@ -44,3 +44,6 @@ __pycache__/
 
 # Complete authoring sources are restored explicitly from private asset storage.
 /artwork/
+
+# Deployment metadata is generated for each immutable app image.
+/public/build-info.json
