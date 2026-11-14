@@ -33,8 +33,9 @@ export function useYearReminder({ guide, lifeKey, enabled, persistent }: YearRem
   useEffect(() => {
     if (!ready || !pick || announced.current.has(key)) return;
     announced.current.add(key);
-    if (pick.reason === "learn") guidePointers.add(lifeKey, pick.task, persistent);
-    else ongoing.current = [...ongoing.current, pick.task];
+    // Any notice about a step is its one pointer: a market named for an overfull store is not named again to learn it.
+    guidePointers.add(lifeKey, pick.task, persistent);
+    if (pick.reason === "problem") ongoing.current = [...ongoing.current, pick.task];
     const line = yearReminderLine(pick);
     setReminder({ key, title: "Plan this year", body: line.body });
     // The glow is not cancelled when the year moves on, so it always fades by itself.
