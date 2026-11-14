@@ -49,9 +49,10 @@ test("the game header forms its own layer above the time bar, so the sound drawe
 });
 
 test("the sound player and its drawer use the shared scale, not their own numbers", () => {
+  // dev's sound player sets no stacking of its own; it lives in the header, which sits one layer above the time bar.
   const zIndexes = [...read("client/styles/audio-player.css").matchAll(/z-index:\s*([^;}]+)/g)].map(match => match[1].trim());
-  assert.ok(zIndexes.length > 0);
   for (const value of zIndexes) assert.match(value, /^var\(--ef-layer-[a-z-]+\)$/);
+  assert.match(read("client/styles/gameplay-layout.css"), /\.site-header\{position:relative;z-index:var\(--ef-layer-header\)\}/);
 });
 
 test("page-level layers (fixed, sticky or 20 and up) take their z-index from the scale", () => {
