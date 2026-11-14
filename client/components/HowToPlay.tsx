@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
+import { useGameModal } from "../hooks/useGameModal.ts";
 import { useIdle } from "../hooks/useIdle.ts";
 import type { PlayStep } from "../models/how-to-play.ts";
 import type { RoadmapStage } from "../models/life-roadmap.ts";
@@ -42,12 +43,8 @@ export default function HowToPlay({ open, steps, stages, guides, portrait, tipsO
   const idle = useIdle(HOW_TO_PLAY_IDLE_MS, open, String(page));
   const last = page === PAGES.length - 1;
 
-  useEffect(() => {
-    const element = dialog.current;
-    if (!element) return;
-    if (open && !element.open) { setPage(0); setStageId(current); element.showModal(); }
-    else if (!open && element.open) element.close();
-  }, [open]);
+  // Each opening starts on the first page, at the player's current stage of life.
+  useGameModal(dialog, open, () => { setPage(0); setStageId(current); });
 
   return <dialog ref={dialog} className="how-to-play" aria-labelledby={titleId} onCancel={event => { event.preventDefault(); onClose(); }}>
     <header className="htp-header">

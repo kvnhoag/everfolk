@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef } from "react";
+import { useId, useRef } from "react";
+import { useGameModal } from "../hooks/useGameModal.ts";
 import type { LifeState, WorldPack } from "../../src/types.ts";
 import { loanDeadlineWarning } from "../models/loan-summary.ts";
 import { formatMoney } from "../models/wealth.ts";
@@ -17,10 +18,8 @@ function OpenLoanDeadlineDialog({ life, world, onDismiss, onManage }: Omit<Props
   const heading = useRef<HTMLHeadingElement>(null);
   const id = useId();
   const warning = loanDeadlineWarning(world, life);
-  useEffect(() => {
+  useGameModal(dialog, true, previousFocus => {
     const element = dialog.current;
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    if (element && !element.open) element.showModal();
     heading.current?.focus({ preventScroll: true });
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -29,7 +28,7 @@ function OpenLoanDeadlineDialog({ life, world, onDismiss, onManage }: Omit<Props
       document.body.style.overflow = previousOverflow;
       if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
     };
-  }, []);
+  });
   if (!warning) return null;
   return <dialog ref={dialog} className={`loan-deadline-dialog loan-warning-${warning.urgency}`} aria-labelledby={`${id}-title`} aria-describedby={`${id}-body`} onCancel={event => { event.preventDefault(); onDismiss(); }}>
     <header><span>REPAYMENT REMINDER</span><span>Age {life.age}</span></header>

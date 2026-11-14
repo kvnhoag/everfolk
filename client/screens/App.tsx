@@ -99,6 +99,8 @@ import { lifePhaseAt } from "../models/life-phases.ts";
 import { focusLabel, yearEndOptions } from "../models/year-end-choice.ts";
 import YearEndDialog from "../components/YearEndDialog.tsx";
 import PackMilestoneDialog from "../components/PackMilestoneDialog.tsx";
+import { GameScreenContext } from "../hooks/useGameModal.ts";
+import { gameScreenShown } from "../models/game-modal.ts";
 import { packMilestone, type PackMilestone } from "../models/pack-milestones.ts";
 import { lifeRoadmap } from "../models/life-roadmap.ts";
 import { yearChecklist } from "../models/year-checklist.ts";
@@ -650,7 +652,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     }
   }
 
-  return <>
+  // Game dialogs open only while the game screen is on view: a modal left open behind the home page makes it inert.
+  return <GameScreenContext value={gameScreenShown({ homeOpen: menuOpen, coveredByScreen: worldPickerOpen })}>
     {game.unreadableSave !== null && <aside className="save-recovery" role="alert">
       <strong>Your previous save is protected</strong>
       <p>This version could not open it. You can try the game in memory; the original save will stay unchanged until you choose to replace it.</p>
@@ -900,7 +903,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     {loanRequest && loanRequest.snapshot === life && requestedLoanChoice && <LoanOfferDialog request={loanRequest} choice={requestedLoanChoice} life={life} world={world} onCancel={() => setLoanRequest(null)} onConfirm={confirmLoan} />}
     <LoanDeadlineDialog open={loanWarningOpen && Boolean(repaymentWarning)} life={life} world={world} onDismiss={dismissLoanWarning} onManage={() => { dismissLoanWarning(); setCharacterSection("wealth"); setPanel("character"); }} />
     {!game.isPreview && <FreePlayBoosterModal open={freePlayBoosterOpen} life={life} world={world} onClose={() => setFreePlayBoosterOpen(false)} />}
-  </>;
+  </GameScreenContext>;
 }
 
 export default App;
