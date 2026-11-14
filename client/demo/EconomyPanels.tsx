@@ -32,6 +32,7 @@ import { SectionStep } from "../components/YearChecklist.tsx";
 import { LockedArea } from "../components/Locked.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 import type { TradePreview } from "../models/trade-preview.ts";
+import { cleanQuantityText, quantityOf, tradeLimit } from "../models/trade-quantity.ts";
 import type { PlantingCheck } from "../models/planting-check.ts";
 import FarmGranary from "./FarmGranary.tsx";
 
@@ -134,7 +135,9 @@ export default function EconomyPanels({
   const activeTab: EconomyTabId = tabs.includes(chosenTab) ? chosenTab : tabs[0] ?? chosenTab;
   const [item, setItem] = useState<TradeItem>("grain");
   const [side, setSide] = useState<"buy" | "sell">("sell");
-  const [quantity, setQuantity] = useState(1);
+  // The quantity box is text so it can be empty while typing; the number is read from it.
+  const [quantityText, setQuantityText] = useState("1");
+  const quantity = quantityOf(quantityText);
   const [reserveOverride, setReserveOverride] = useState(false);
   const [counterparty, setCounterparty] = useState<"merchant" | "army">("merchant");
   const [notice, setNotice] = useState("");
@@ -144,6 +147,9 @@ export default function EconomyPanels({
   const quote = screen.market.quotes.find(entry => entry.item === item);
   const order: TradeCommand = { type: "trade", item, side, quantity, counterparty, ...(reserveOverride ? { reserveOverride: true } : {}) };
   const held = heldQuantity(screen, item);
+  const maxQuantity = tradeLimit({ side, counterparty, held, merchantCanBuy: quote?.merchantCanBuy, merchantStock: quote?.merchantStock, maxOrder: world?.demo?.market.maxOrderQuantity });
+  // Every way of setting the quantity goes through the same clean-up: digits only, never above what is available.
+  const setQuantity = (value: number | string) => setQuantityText(cleanQuantityText(String(value), maxQuantity));
   const unitPrice =
     counterparty === "army" && item === "grain"
       ? screen.market.armyGrainPrice
@@ -152,12 +158,16 @@ export default function EconomyPanels({
         : (quote?.buy ?? 1);
 
   useEffect(() => { setReserveOverride(false); }, [item, side, counterparty, life?.age]);
+  // A new good, side or counterparty starts again from one; a shrinking limit (a sale, a new year) trims what was typed.
+  useEffect(() => { setQuantityText(cleanQuantityText("1", maxQuantity)); }, [item, side, counterparty, life?.age]);
+  useEffect(() => { setQuantityText(text => cleanQuantityText(text, maxQuantity)); }, [maxQuantity]);
   // The preview always shows the order on screen; any change to it closes the preview.
   const [preview, setPreview] = useState<TradePreview | null>(null);
   // Any change to the life (cash spent, a decision, a new year) also closes it, so it never shows stale numbers.
   useEffect(() => { setPreview(null); }, [item, side, quantity, counterparty, reserveOverride, life, screen.market.visitUsed]);
   function openPreview() {
     if (!previewTrade) { setNotice("This life has no market."); return; }
+    if (quantity < 1) { setNotice("Type how many you want to trade first."); return; }
     setNotice("");
     setPreview(previewTrade(order));
   }
@@ -211,13 +221,7 @@ export default function EconomyPanels({
   }
 
   function setMaxQuantity() {
-    if (side === "sell") {
-      const cap = counterparty === "army" ? held : Math.min(held, quote?.merchantCanBuy ?? held);
-      setQuantity(Math.max(1, Math.min(500, cap)));
-    } else {
-      const stock = quote?.merchantStock ?? 1;
-      setQuantity(Math.max(1, Math.min(500, stock)));
-    }
+    setQuantity(maxQuantity);
   }
 
   // Tabs that open later carry their opening age, so nothing looks broken before it is meant to work.
@@ -661,11 +665,13 @@ export default function EconomyPanels({
             <label>
               Quantity
               <input
+                type="text"
                 inputMode="numeric"
-                min={1}
-                type="number"
-                value={quantity}
-                onChange={event => setQuantity(Math.max(1, Number(event.target.value) || 1))}
+                pattern="[0-9]*"
+                autoComplete="off"
+                value={quantityText}
+                onFocus={event => event.target.select()}
+                onChange={event => setQuantity(event.target.value)}
               />
             </label>
             <button
@@ -701,7 +707,7 @@ export default function EconomyPanels({
               </button>
             ))}
             <button type="button" onClick={setMaxQuantity}>
-              Max ({side === "sell" ? held : (quote?.merchantStock ?? 0)})
+              Max ({maxQuantity})
             </button>
             <span className="demo-ticket-cash">Your cash: <strong>{cashText}</strong></span>
           </div>
