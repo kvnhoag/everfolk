@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import "../client/styles/typography.css";
+import "../client/styles/layers.css";
 import "../client/styles/styles.css";
 import "../client/styles/interface-refinements.css";
 import "../client/styles/loading-screen.css";

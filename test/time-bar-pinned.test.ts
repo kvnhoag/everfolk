@@ -6,7 +6,7 @@ const css = readFileSync(new URL("../client/styles/gameplay-layout.css", import.
 const app = readFileSync(new URL("../client/screens/App.tsx", import.meta.url), "utf8");
 
 test("the time bar stays pinned to the top, and scrolled-to sections stop below it", () => {
-  assert.match(css, /\.everfolk-game \.page-shell \.life-session-bar\{position:sticky;top:0;z-index:35/);
+  assert.match(css, /\.everfolk-game \.page-shell \.life-session-bar\{position:sticky;top:0;z-index:var\(--ef-layer-time-bar\)/);
   assert.match(css, /html:has\(\.everfolk-game \.life-session-bar\)\{scroll-padding-top:\d+px\}/);
 });
 

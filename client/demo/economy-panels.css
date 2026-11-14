@@ -950,7 +950,7 @@
   left: 0;
   right: 0;
   min-width: 210px;
-  z-index: 45;
+  z-index: var(--ef-layer-dropdown);
   list-style: none;
   margin: 0;
   padding: 4px;

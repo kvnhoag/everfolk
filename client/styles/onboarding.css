@@ -26,7 +26,7 @@
 .tab-lock{display:inline-flex;align-items:center;gap:3px;margin-left:5px;padding:1px 5px;border-radius:2px;background:#0000001f;font-size:10px;font-weight:700}
 
 /* The idle hint: a pulsing ring on the button to press and a short bubble beside it. */
-.idle-nudge{position:fixed;inset:auto;top:0;left:0;z-index:60;margin:0;padding:0;border:0;background:transparent;overflow:visible;pointer-events:none}
+.idle-nudge{position:fixed;inset:auto;top:0;left:0;z-index:var(--ef-layer-overlay);margin:0;padding:0;border:0;background:transparent;overflow:visible;pointer-events:none}
 .idle-nudge-ring{position:fixed;border:3px solid #e2a93b;border-radius:6px;box-shadow:0 0 0 4px #e2a93b55,0 0 24px 6px #e2a93b88;animation:idle-ring 1.3s ease-in-out infinite}
 @keyframes idle-ring{0%,100%{box-shadow:0 0 0 2px #e2a93b66,0 0 14px 2px #e2a93b77}50%{box-shadow:0 0 0 8px #e2a93b22,0 0 30px 10px #e2a93b55}}
 .idle-nudge-bubble{position:fixed;width:max-content;max-width:min(280px,calc(100vw - 24px));padding:9px 11px;border:1px solid #b39c68;border-top:3px solid #173b44;border-radius:3px;background:#f8eed8;color:#263b43;box-shadow:0 8px 22px #10262c40;font:500 12.5px/1.45 var(--ef-font-body);pointer-events:none}

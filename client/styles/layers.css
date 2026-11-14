@@ -1,0 +1,25 @@
+/*
+ * One stacking order for page-level layers, lowest first. A menu or drawer that drops from a header belongs to that
+ * header's layer, so it always opens above the pinned time bar. Dialogs and popovers use the browser's top layer and
+ * sit above all of these. Small numbers (1–4) inside a single component stay local to it.
+ */
+:root{
+  /* Lifts a piece above its neighbours inside one section or header. */
+  --ef-layer-raised:1;
+  /* Menus that open inside the page; they pass under the pinned time bar when the page scrolls. */
+  --ef-layer-dropdown:30;
+  /* The game's time bar, pinned to the top of the screen. */
+  --ef-layer-time-bar:35;
+  /* Site headers with their menus and drawers (sound, account). */
+  --ef-layer-header:38;
+  /* The tutorial's dimming around a highlighted section. */
+  --ef-layer-spotlight:40;
+  /* "Look here" words and help tips on a section. */
+  --ef-layer-callout:42;
+  /* Notices at the screen edge. */
+  --ef-layer-toast:45;
+  /* Full-screen stages and hints over everything else. */
+  --ef-layer-overlay:60;
+  /* The keyboard skip link, above everything while focused. */
+  --ef-layer-skip-link:100;
+}
