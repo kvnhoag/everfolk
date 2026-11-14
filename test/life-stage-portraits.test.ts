@@ -61,13 +61,13 @@ test("How to Play shows a different portrait for every life stage, for both sexe
   }
 });
 
-test("youth starts at 12, in step with the How to Play stages, not a year later", () => {
+test("youth starts at 13, in step with the How to Play stages", () => {
   const youth = LIFE_PHASES.find(phase => phase.id === "youth")!;
-  assert.equal(youth.fromAge, 12);
+  assert.equal(youth.fromAge, 13);
   for (const sex of SEXES) {
-    assert.notEqual(srcAt(11, sex), srcAt(12, sex), `${sex}: the portrait changes when youth begins`);
-    assert.equal(resolvePortraitState({ age: 11, sex }).stage, "child");
-    assert.equal(resolvePortraitState({ age: 12, sex }).stage, "youth");
+    assert.notEqual(srcAt(12, sex), srcAt(13, sex), `${sex}: the portrait changes when youth begins`);
+    assert.equal(resolvePortraitState({ age: 12, sex }).stage, "child");
+    assert.equal(resolvePortraitState({ age: 13, sex }).stage, "youth");
   }
 });
 
@@ -101,7 +101,7 @@ test("a job or household role still wins for adults, and a younger stage ignores
   assert.equal(file(scientistAdult.src), "scholar-clerk-m01.png");
   assert.equal(resolvePortraitState({ age: 30, sex: "male", role: "royalty" }).selectionReason, "royalty");
   assert.equal(resolvePortraitState({ age: 30, sex: "female", role: "aristocrat" }).selectionReason, "aristocrat");
-  const youthWithAdultJob = resolvePortraitState({ age: 12, sex: "male", jobId: "scientist" });
+  const youthWithAdultJob = resolvePortraitState({ age: 13, sex: "male", jobId: "scientist" });
   assert.equal(youthWithAdultJob.selectionReason, "age-default");
   assert.equal(youthWithAdultJob.stage, "youth");
 });
@@ -115,10 +115,10 @@ test("NFT card portraits keep their earlier age bands", () => {
 
 test("the life banner names the same stage the portrait shows", () => {
   const life: LifeState = structuredClone(createEngine(world).start("stage-banner"));
-  for (const [age, label, stage] of [[11, "Childhood", "child"], [12, "Youth", "youth"], [17, "Youth", "youth"], [18, "Adulthood", "adult"]] as const) {
+  for (const [age, label, stage] of [[12, "Childhood", "child"], [13, "Youth", "youth"], [17, "Youth", "youth"], [18, "Adulthood", "adult"]] as const) {
     const banner = resolveLifeBanner({ ...life, age, phase: "ready", pendingEventId: null }, world);
     assert.equal(banner.stage, stage, `age ${age}`);
     assert.equal(banner.stageLabel, label, `age ${age}`);
   }
-  assert.deepEqual(stageStarts, [0, 6, 12, 18, 60], "the roadmap this test follows");
+  assert.deepEqual(stageStarts, [0, 6, 13, 18, 60], "the roadmap this test follows");
 });
