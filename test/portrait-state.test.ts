@@ -37,7 +37,7 @@ test("the state convention reaches every shipped combination through real age/jo
 
 test("age and minimum work ages select existing clothes without changing the face", () => {
   const person = { personKey: "persistent-person", sex: "female" as const, avatarVariant: 2 };
-  const stages = [[0, "infant"], [2, "infant"], [3, "child"], [12, "child"], [13, "youth"], [17, "youth"], [18, "adult"], [39, "adult"], [40, "middle"], [59, "middle"], [60, "elder"]] as const;
+  const stages = [[0, "infant"], [2, "infant"], [3, "child"], [11, "child"], [12, "youth"], [17, "youth"], [18, "adult"], [39, "adult"], [40, "middle"], [59, "middle"], [60, "elder"]] as const;
   const first = resolvePortraitState(person);
   for (const [age, stage] of stages) {
     const state = resolvePortraitState({ ...person, age });

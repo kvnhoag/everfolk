@@ -3,7 +3,7 @@ import type { NpcPerson } from "../../src/npc/types.ts";
 import { familyMemberAge } from "../../src/family.ts";
 import { isRoyalLife } from "../../src/royalty.ts";
 import { isAristocratLife } from "../../src/aristocracy.ts";
-import { avatarStage, portraitVariant } from "./life-background.ts";
+import { avatarStage, lifeAvatarStage, portraitVariant } from "./life-background.ts";
 import type { AvatarSex, AvatarStage } from "./life-background.ts";
 import v3Registry from "./portrait-asset-registry.json" with { type: "json" };
 import concept1Registry from "./portrait-concept1-registry.json" with { type: "json" };
@@ -134,7 +134,8 @@ export function resolvePortraitState(input: PortraitInput = {}): PortraitState {
   const avatarVariant = recordedVariant ? input.avatarVariant! : portraitVariant(`${subjectKey}:portrait-variant`);
   const identity = registry.identities.find(item => item.sex === bodyTemplate && item.avatarVariant === avatarVariant)!;
   const age = Number.isFinite(input.age) ? Math.max(0, Math.floor(input.age!)) : 18;
-  const stage = avatarStage(age);
+  // In-game portraits follow the How to Play life stages; NFT card art keeps its earlier age bands.
+  const stage = portraitSet === "ordinary-v3" ? avatarStage(age) : lifeAvatarStage(age);
   let wardrobeId: PortraitWardrobe = registry.defaultWardrobes[stage] as PortraitWardrobe;
   let selectionReason: PortraitState["selectionReason"] = "age-default";
   const available = (wardrobe: string) =>

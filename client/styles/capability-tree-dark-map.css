@@ -1,0 +1,52 @@
+/* The left-to-right skill tree on the dark map first drawn for the skill fan. Only colours change from the paper
+   tree: shapes, lanes and links keep their places. Loaded after capability-tree.css and capability-tree-layout.css,
+   so each rule below names the viewport to outweigh the paper-coloured rules it replaces. */
+
+/* The map itself: the fan's dark gradient, no paper dots. */
+.capability-tree .capability-map-area .capability-viewport{background:radial-gradient(circle at 50% 50%,#1b3139 0%,#122228 55%,#0b1518 100%);background-image:radial-gradient(circle at 50% 50%,#1b3139 0%,#122228 55%,#0b1518 100%);background-size:auto;border-color:#0b1518}
+
+/* Branch titles, depth numbers and rules sit straight on the map, so they turn light. */
+.capability-tree .capability-viewport .capability-band-title{fill:#f3e7cc}
+.capability-tree .capability-viewport .capability-band-subtitle,.capability-tree .capability-viewport .capability-depth-label{fill:#cfc4aa}
+.capability-tree .capability-viewport .capability-band-rule{stroke:#cfc4aa;opacity:.5}
+
+/* Links: cool grey, learned in light green, the selected path in gold; off-path links fade but stay visible. */
+.capability-tree .capability-viewport .capability-link{stroke:#a9b5b0}
+.capability-tree .capability-viewport .capability-link.is-learned{stroke:#7fcf93}
+.capability-tree .capability-viewport .capability-link.is-lineage{stroke:#f0c24e;opacity:1}
+.capability-tree .capability-viewport .capability-link.is-off-path{opacity:.5}
+
+/* Skill names live under the shape, outside it, so they turn light too; the shapes keep their paper fills. */
+.capability-tree .capability-viewport .capability-node-name{color:#d8d2c0}
+.capability-tree .capability-viewport .capability-node.tier-learnable .capability-node-name{color:#f6efdc}
+.capability-tree .capability-viewport .capability-node.tier-learned .capability-node-name{color:#b9e6c3}
+.capability-tree .capability-viewport .capability-node.tier-unavailable{opacity:.72}
+.capability-tree .capability-viewport .capability-node.tier-unavailable .capability-node-name{color:#d8d2c0}
+.capability-tree .capability-viewport .capability-node.tier-unavailable.is-off-path{opacity:.5}
+.capability-tree .capability-viewport .capability-node.is-lineage .capability-node-name{color:#f0c24e}
+.capability-tree .capability-viewport .capability-node.is-selected .capability-node-name{color:#fff8e6}
+
+/* Outlines must separate from the dark map: a bright rim on learned nodes, gold on hover, focus and selection. */
+.capability-tree .capability-viewport .capability-node.is-learned .capability-node-shape{stroke:#9fd8ab;stroke-width:2.5}
+.capability-tree .capability-viewport .capability-node:hover .capability-node-shape{stroke:#f0c24e}
+.capability-tree .capability-viewport .capability-node.is-selected .capability-node-shape,.capability-tree .capability-viewport .capability-node:focus-visible .capability-node-shape,.capability-tree .capability-viewport .capability-node.is-selected .capability-node-shape>path:first-child{stroke:#f0c24e;stroke-width:3.6}
+.capability-tree .capability-viewport .capability-node:focus-visible{outline-color:#f3e7cc}
+
+/* The Skills tab fills the screen; the map and the chosen skill's details share it. */
+.detail-dialog.character-dialog:has(.character-management.is-skills){width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;border:0;border-radius:0}
+.detail-dialog.character-dialog:has(.character-management.is-skills) .dialog-content{padding:12px 20px}
+.detail-dialog.character-dialog:has(.character-management.is-skills) .dialog-content>.eyebrow{display:none}
+.detail-dialog.character-dialog:has(.character-management.is-skills) .dialog-content>h2{margin:0 0 6px;font-size:24px}
+/* The heading shrinks to one line so the map gets the height. The legend sits on paper above the map: darker text. */
+/* The right edge stays free for the section help button. */
+.character-management.is-skills .capability-tree .capability-heading{padding:0 34px 6px 0}
+.character-management.is-skills .capability-tree .capability-heading h3{margin:0;font-size:24px}
+.character-management.is-skills .capability-tree .capability-heading p{display:none}
+.character-management.is-skills .capability-tree .capability-total strong{font-size:24px}
+.character-management.is-skills .capability-tree .capability-map-help{margin:0 0 8px}
+.capability-tree .capability-legend{color:#4a4539}
+.capability-tree .capability-legend .is-unavailable{opacity:.8}
+@media(min-width:1180px){
+  .character-management.is-skills .capability-tree .capability-viewport{height:clamp(480px,calc(100dvh - 290px),1400px)}
+  .character-management.is-skills .capability-tree .capability-inspector{max-height:clamp(480px,calc(100dvh - 290px),1400px)}
+}
