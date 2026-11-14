@@ -411,10 +411,6 @@
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
-.aoe-plan-notice {
-  font-size: 11px;
-  color: #28593a;
-}
 .aoe-holdings-note { margin: 8px 0 0; font-size: 11px; color: #8c3322; }
 .aoe-holding-trade:disabled { opacity: .5; cursor: not-allowed; }
 .aoe-inventory-drawer .aoe-holdings-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
