@@ -173,7 +173,8 @@ test("Alexandria supports chosen marriages, named children, care, divorce, remar
 
 test("varied complete Alexandria lives can exercise available activities without invalid transitions", () => {
   const engine = createEngine(pack);
-  for (let seed = 0; seed < 35; seed++) {
+  // Three fixed trajectories cover different choices; bulk pacing belongs in the audits.
+  for (const seed of [0, 11, 34]) {
     let state = engine.start(`character-coverage-${seed}`);
     for (let step = 0; step < 700 && state.phase !== "ended"; step++) {
       if (state.phase === "choice") {

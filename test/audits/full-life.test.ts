@@ -1,14 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createEngine } from "../src/index.ts";
-import type { LifeEngine, LifeState } from "../src/types.ts";
+import { createEngine } from "../../src/index.ts";
+import type { LifeEngine, LifeState } from "../../src/types.ts";
 // Retain the original Roman-era chronology and evidence audit under its exact release.
-import pack from "../worlds/alexandria-0.31.0.json" with { type: "json" };
-import namedCatalog from "../worlds/alexandria-0.28.0.json" with { type: "json" };
-import comparisonPack from "../worlds/alexandria-0.14.0.json" with { type: "json" };
-import registry from "../research/sources.json" with { type: "json" };
-import mortalityModel from "../research/mortality-model.json" with { type: "json" };
-import gameBalance from "../research/game-balance.json" with { type: "json" };
+import pack from "../../worlds/alexandria-0.31.0.json" with { type: "json" };
+import namedCatalog from "../../worlds/alexandria-0.28.0.json" with { type: "json" };
+import comparisonPack from "../../worlds/alexandria-0.14.0.json" with { type: "json" };
+import registry from "../../research/sources.json" with { type: "json" };
+import mortalityModel from "../../research/mortality-model.json" with { type: "json" };
+import gameBalance from "../../research/game-balance.json" with { type: "json" };
 
 function complete(engine: LifeEngine, seed: string, career = "stay", manageFamily = false): LifeState {
   let state = engine.start(seed);

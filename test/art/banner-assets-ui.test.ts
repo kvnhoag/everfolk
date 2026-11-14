@@ -7,11 +7,11 @@ import { registerHooks } from "node:module";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
-import { createEngine, yearAtAge } from "../src/index.ts";
-import { BANNER_SITUATION_IDS, resolveLifeBanner } from "../client/models/banner-state.ts";
-import { bannerActorSource } from "../client/models/banner-actor.ts";
-import pack from "../worlds/alexandria-sample.json" with { type: "json" };
-import manifest from "../public/assets/pixel/banners/manifest.json" with { type: "json" };
+import { createEngine, yearAtAge } from "../../src/index.ts";
+import { BANNER_SITUATION_IDS, resolveLifeBanner } from "../../client/models/banner-state.ts";
+import { bannerActorSource } from "../../client/models/banner-actor.ts";
+import pack from "../../worlds/alexandria-sample.json" with { type: "json" };
+import manifest from "../../public/assets/pixel/banners/manifest.json" with { type: "json" };
 
 const hooks = registerHooks({ load(url, context, next) {
   if (url.endsWith(".css")) return { format: "module", shortCircuit: true, source: "export {};" };
@@ -20,7 +20,7 @@ const hooks = registerHooks({ load(url, context, next) {
   }).outputText };
   return next(url, context);
 } });
-const { default: PaperScene } = await import("../client/components/PaperScene.tsx");
+const { default: PaperScene } = await import("../../client/components/PaperScene.tsx");
 hooks.deregister();
 
 test("every banner and pose has a real web export and a native master with editable vector layers", () => {
@@ -29,12 +29,12 @@ test("every banner and pose has a real web export and a native master with edita
   assert.deepEqual(manifest.scenes.map(scene => scene.id), [...BANNER_SITUATION_IDS]);
   const hashes = new Set<string>();
   for (const record of [...manifest.scenes, ...manifest.actors]) {
-    const svg = readFileSync(new URL(`../public${record.asset}`, import.meta.url), "utf8");
+    const svg = readFileSync(new URL(`../../public${record.asset}`, import.meta.url), "utf8");
     assert.match(svg, /viewBox="0 0 240 112"/);
     assert.match(svg, /shape-rendering="crispEdges"/);
     assert.doesNotMatch(svg, /<image\b|<script\b|<foreignObject\b|https?:\/\/(?!www\.w3\.org)/);
     if (record.kind === "scene") hashes.add(createHash("sha256").update(svg).digest("hex"));
-    const native = JSON.parse(gunzipSync(readFileSync(new URL(`../${record.source}`, import.meta.url))).toString("utf8"));
+    const native = JSON.parse(gunzipSync(readFileSync(new URL(`../../${record.source}`, import.meta.url))).toString("utf8"));
     assert.equal(native.format, "vectorcraft");
     const layers = native.document.layers.filter((layer: { kind: { children?: unknown[] } }) => layer.kind.children?.length);
     assert.equal(layers.length, record.layers.length, record.id);

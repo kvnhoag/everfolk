@@ -8,7 +8,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "test": "node --test test/*.test.ts && node --test tools/character-creator/tests/*.test.mjs",
+    "test": "node --test --test-concurrency=4 test/*.test.ts",
     "demo": "node examples/play.ts",
     "dev": "node scripts/run-framework.mjs dev",
     "check": "node scripts/check-english-only.mjs && node scripts/check-structure.mjs && node --max-old-space-size=6144 node_modules/typescript/bin/tsc --noEmit",
@@ -28,7 +28,10 @@
     "deep:world": "node scripts/deep-capabilities/build-world.mjs",
     "portraits:sync": "node scripts/sync-portrait-assets.mjs",
     "resources:world": "node scripts/vocations/build-household-resources.mjs",
-    "figures:contributions": "node scripts/figures/build-contribution-world.mjs"
+    "figures:contributions": "node scripts/figures/build-contribution-world.mjs",
+    "test:art": "node --test --test-concurrency=2 test/art/*.test.ts && node --test tools/character-creator/tests/*.test.mjs",
+    "test:audit": "node --test test/audits/*.test.ts",
+    "build:app": "node scripts/run-framework.mjs build"
   },
   "packageManager": "pnpm@11.25.0",
   "dependencies": {

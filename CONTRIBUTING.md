@@ -28,12 +28,20 @@ A clean checkout uses the portable Vinext build path. Local `.sites-runtime` con
 ## Verify a change
 
 ```sh
-pnpm check
 pnpm test
 pnpm build
 ```
 
-CI runs these commands on Ubuntu with Node.js 24 and the pinned pnpm version. It installs with `--frozen-lockfile` and checks that verification does not change tracked source. The regression suite uses shipped world packs, research inputs, web assets and editable banner masters. Include those files in a checkout; an ArtCraft installation is not needed to run the suite.
+`pnpm test` runs focused behavior and regression tests, including deterministic replay, save protection, API authorization and ranked reward verification. `pnpm build` runs language, architecture and TypeScript checks once, then builds the application. Use `pnpm check` for validation without a build; `pnpm build:app` compiles an already-checked checkout.
+
+The specialist suites are explicit:
+
+- `pnpm test:art` checks image tooling, delivery hashes and the character creator.
+- `pnpm test:audit` runs exhaustive multi-life balance cohorts and historical-content audits. Use it when changing distributions, pacing or authored routes.
+
+CI runs on pushes to `main` and `dev` and on pull requests. It installs with `--frozen-lockfile`, runs the same default tests, checks source once, then uses `build:app`. Contract tests run for contract changes, and art tests run for artwork, delivered assets or art-tooling changes. Documentation-only changes skip these jobs. Missing comparison history runs every job. A manual CI run can also enable the exhaustive audits.
+
+Art and historical audits use shipped world packs, research inputs, web assets and editable banner masters. Include those files for those suites; an ArtCraft installation is unnecessary.
 
 To inspect a built application locally:
 
@@ -51,7 +59,7 @@ The preview command runs Wrangler in local mode. CI builds the application; it d
 - `server/`, `db/`, `drizzle/`, `app/` and `worker/` own the content service and application routing.
 - `public/` contains delivered artwork and fonts; `artwork/` contains editable native banner masters.
 
-Keep commits focused on a reviewable behavior and its required data, interface and verification. Explain the trigger, resulting behavior, checks run and any remaining limitation. Run focused checks while iterating, then the full commands above for an integrated change.
+Keep commits focused on a reviewable behavior and its required data, interface and verification. Explain the trigger, resulting behavior, checks run and any remaining limitation. Run focused checks while iterating, then the default verification commands above for an integrated change. Run the relevant specialist audit when changing its inputs.
 
 ## Change historical content safely
 

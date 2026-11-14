@@ -30,7 +30,16 @@ const RPC_URL = "https://rpc.testnet.test";
 const VERIFIER_SECRET = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
 
 const lives8 = JSON.parse(readFileSync(new URL("../worlds/demo/alexandria-lives-8.json", import.meta.url), "utf8")) as WorldPack;
-const npcWorld = buildNpcWorld(lives8);
+// Exercise live-provider trust, checkpoints and adult rewards with a bounded life.
+// Full-world longevity and balance are covered by the engine tests and optional audits.
+const npcWorld = buildNpcWorld({
+  ...lives8,
+  events: [...lives8.events, {
+    id: "npc-protocol-fixture-end", title: "Protocol fixture complete", text: "The test record ends.",
+    trigger: { type: "age", at: 21 }, stages: ["adulthood"], mode: "automatic",
+    effects: [{ type: "end", ending: lives8.defaultEnding }], choices: [],
+  }],
+});
 const npcEngine = createEngine(npcWorld);
 
 function memoryStorage(): SessionStorage & { items: Map<string, string> } {
