@@ -100,6 +100,7 @@ import { focusLabel, yearEndOptions } from "../models/year-end-choice.ts";
 import YearEndDialog from "../components/YearEndDialog.tsx";
 import PackMilestoneDialog from "../components/PackMilestoneDialog.tsx";
 import { GameScreenContext } from "../hooks/useGameModal.ts";
+import { CashNoteSuppressedContext } from "../components/ChoiceImpact.tsx";
 import { gameScreenShown } from "../models/game-modal.ts";
 import { packMilestone, type PackMilestone } from "../models/pack-milestones.ts";
 import { lifeRoadmap } from "../models/life-roadmap.ts";
@@ -310,6 +311,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     otherOverlayOpen: helpOpen || packMoment !== null,
   }, () => { setReadingPause(false); game.continueLife(); });
   const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== deferredDecision && !game.autoDecisions && (game.isPlaying || decisionKey === requestedDecision));
+  const dashboardCovered = !dashboardVisible || decisionOpen || game.yearEndPending || Boolean(packMoment) || freePlayBoosterOpen || tipShown || tutorial.open;
   useTutorialGameContext(game.isPreview ? NO_TUTORIAL_CONTEXT : gameTutorialContext({
     menuOpen, birthPopoverOpen, hasBegun: game.hasBegun, panel, characterSection: panel === "character" ? characterTab ?? characterSection : null, decisionOpen,
     blockingDialog: restartOpen || worldPickerOpen || householdWelcomeOpen || howToPlayOpen || loanRequest !== null || loanWarningOpen || freePlayBoosterOpen,
@@ -733,6 +735,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && shows("resources") && <ResourceBar rows={storehouse} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={shows("planting") ? flaxPlots => game.runDemo({ type: "plan", flaxPlots }) : undefined} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} showConditions={shows("conditions")} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
 
+      <CashNoteSuppressedContext value={dashboardCovered}>
       <div className={`life-layout ${!game.hasBegun ? "life-layout-birth" : demoView ? "life-layout-weave" : "life-layout-classic"} ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">
           {game.hasBegun && <div className="life-scene-frame has-section-help" ref={sceneRef} tabIndex={-1} aria-label={life.phase === "ended" ? "Life summary" : "Your life now"}>
@@ -828,6 +831,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           </>}
         </section>
       </div>
+      </CashNoteSuppressedContext>
       {npcStatusNotice && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{npcStatusNotice}</span></div>}
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
