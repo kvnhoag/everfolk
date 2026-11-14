@@ -1,5 +1,6 @@
 """Bounded tests for the destructive boundaries of branch deployment preparation."""
 import copy
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import importlib.util
 import io
 import json
@@ -9,7 +10,10 @@ import shutil
 import subprocess
 import tarfile
 import tempfile
+import threading
+import time
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("everfolk_app_deploy", ROOT / "deploy.py")
@@ -313,6 +317,106 @@ class DeploymentPreparationTests(unittest.TestCase):
             self.assertFalse((context / ".env.production").exists())
             self.assertEqual((context / "public/asset-269.txt").read_text(), "public fixture 269\n")
             self.assertEqual(json.loads((context / "public/build-info.json").read_text())["commit"], commit)
+
+    @unittest.skipUnless(shutil.which("git"), "Git is required for tree-diff integration")
+    def test_operator_only_diff_rejects_app_changes_moves_empty_and_missing_trees(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            source = Path(temporary)
+
+            def git(*arguments):
+                return subprocess.run(["git", *arguments], cwd=source, check=True,
+                                      text=True, capture_output=True).stdout.strip()
+
+            git("init", "--initial-branch=dev")
+            git("config", "user.name", "Everfolk fixture")
+            git("config", "user.email", "fixture@example.invalid")
+            for name in ["tools/app-vps/deploy.py", "client/app.ts", "public/icon.svg"]:
+                path = source / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("initial fixture\n")
+            git("add", ".")
+            git("commit", "-m", "initial")
+            base = git("rev-parse", "HEAD")
+            (source / "tools/app-vps/deploy.py").write_text("operator fix\n")
+            git("commit", "-am", "operator fix")
+            operator = git("rev-parse", "HEAD")
+            self.assertTrue(deploy.operator_only_change(source / ".git", base, operator))
+            for name in ["client/app.ts", "public/icon.svg"]:
+                (source / name).write_text("application change\n")
+                git("commit", "-am", "app change")
+                self.assertFalse(deploy.operator_only_change(source / ".git", base, git("rev-parse", "HEAD")))
+            before_move = git("rev-parse", "HEAD")
+            git("mv", "client/app.ts", "tools/app-vps/moved-app.ts")
+            git("commit", "-m", "move app into operator directory")
+            moved = git("rev-parse", "HEAD")
+            self.assertFalse(deploy.operator_only_change(source / ".git", before_move, moved))
+            git("commit", "--allow-empty", "-m", "empty")
+            self.assertFalse(deploy.operator_only_change(source / ".git", moved, git("rev-parse", "HEAD")))
+            self.assertFalse(deploy.operator_only_change(source / ".git", "f" * 40, operator))
+
+    def test_operator_only_deploy_preserves_app_image_and_records_tracked_head(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            config = self.config()
+            config["root"] = temporary
+            previous = {"commit": "a" * 40, "image": "everfolk-app:dev-old",
+                        "assetBaseUrl": config["assetBaseUrl"], "deployedAt": "original"}
+            state_path = Path(temporary) / "state/dev.json"
+            deploy.json_write(state_path, previous)
+            head = "b" * 40
+            with mock.patch.object(deploy, "fetch_commit", return_value=(Path(temporary) / "repo.git", head)), \
+                 mock.patch.object(deploy, "managed_container", return_value={"State": {"Running": True}}), \
+                 mock.patch.object(deploy, "operator_only_change", return_value=True), \
+                 mock.patch.object(deploy, "health") as health, \
+                 mock.patch.object(deploy, "prepare_context", side_effect=AssertionError("must not build")), \
+                 mock.patch.object(deploy, "run", side_effect=AssertionError("must not invoke Docker")), \
+                 mock.patch.object(deploy, "stop_if_running", side_effect=AssertionError("must not restart")):
+                result = deploy.deploy(config, "dev")
+            health.assert_called_once_with(config["branches"]["dev"], previous["commit"])
+            self.assertEqual({key: result[key] for key in previous}, previous)
+            self.assertEqual(result["trackedCommit"], head)
+            self.assertEqual(deploy.json_read(state_path), result)
+
+    def test_health_reads_complete_streamed_homepage_with_cold_start_budget(self):
+        commit = "c" * 40
+        home_finished = threading.Event()
+        requests = []
+
+        class Handler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.end_headers()
+                if self.path == "/":
+                    self.wfile.write(b"<html>")
+                    self.wfile.flush()
+                    time.sleep(0.08)
+                    self.wfile.write(b"complete</html>")
+                    self.wfile.flush()
+                    home_finished.set()
+                else:
+                    self.wfile.write(json.dumps({"commit": commit}).encode())
+
+            def log_message(self, *arguments):
+                pass
+
+        server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        worker = threading.Thread(target=server.serve_forever, daemon=True)
+        worker.start()
+        original_open = deploy.urllib.request.urlopen
+
+        def recording_open(request, timeout):
+            requests.append((request.selector, timeout))
+            return original_open(request, timeout=timeout)
+
+        try:
+            with mock.patch.object(deploy.urllib.request, "urlopen", side_effect=recording_open):
+                deploy.health({"port": server.server_port, "hostname": "beta.everfolk.life"}, commit)
+            self.assertTrue(home_finished.is_set(), "readiness must wait for the final streamed HTML bytes")
+            self.assertEqual(requests[0], ("/", 120))
+            self.assertTrue(all(timeout == 20 for _, timeout in requests[1:]))
+        finally:
+            server.shutdown()
+            server.server_close()
+            worker.join()
 
     def test_compose_has_separate_external_data_and_loopback_only_port(self):
         config = self.config()

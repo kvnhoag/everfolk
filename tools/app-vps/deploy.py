@@ -304,6 +304,17 @@ def fetch_commit(config, branch):
     return repo, commit
 
 
+def operator_only_change(repo, previous_commit, commit):
+    """Compare complete trees; never treat an uncertain or empty diff as safe."""
+    if not SHA.fullmatch(previous_commit or "") or not SHA.fullmatch(commit or ""):
+        return False
+    changed = run(["git", "--git-dir", repo, "diff", "--no-renames", "--no-ext-diff",
+                   "--no-textconv", "--name-only", "-z", previous_commit, commit, "--"],
+                  capture=True, check=False)
+    return (changed.returncode == 0 and bool(changed.stdout) and changed.stdout.endswith("\0")
+            and all(path.startswith("tools/app-vps/") for path in changed.stdout[:-1].split("\0")))
+
+
 def compose_spec(config, item, image):
     return {"services": {"app": {
         "image": image, "container_name": item["container"], "restart": "unless-stopped",
@@ -353,17 +364,22 @@ def backup_volume(config, item, branch, commit):
     return str(backup)
 
 
-def health(item, commit, timeout=120):
+def health(item, commit, timeout=300):
     deadline = time.monotonic() + timeout
     last = "application not ready"
     while True:
         try:
             for path in ["/", "/api/session", "/api/worlds", "/api/signin/config", "/build-info.json"]:
                 request = urllib.request.Request(f"http://127.0.0.1:{item['port']}{path}", headers={"Host": item["hostname"], "User-Agent": "Everfolk-Deployment-Health/1"})
-                with urllib.request.urlopen(request, timeout=10) as response:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise RuntimeError("readiness deadline elapsed")
+                with urllib.request.urlopen(request, timeout=min(120 if path == "/" else 20, remaining)) as response:
                     if response.status != 200:
                         raise RuntimeError(f"{path} status {response.status}")
-                    if path != "/":
+                    if path == "/":
+                        response.read()  # SSR can stream for a minute after sending HTTP headers.
+                    else:
                         value = json.load(response)
                         if path == "/build-info.json" and value.get("commit") != commit:
                             raise RuntimeError("served commit does not match requested Git ref")
@@ -372,7 +388,7 @@ def health(item, commit, timeout=120):
             last = str(error)
         if time.monotonic() >= deadline:
             raise RuntimeError(f"health check failed: {last}")
-        time.sleep(2)
+        time.sleep(min(2, max(0, deadline - time.monotonic())))
 
 
 def deploy(config, branch, force=False, build_only=False):
@@ -382,10 +398,16 @@ def deploy(config, branch, force=False, build_only=False):
     previous = json_read(state_path)
     repo, commit = fetch_commit(config, branch)
     current = managed_container(item)
-    if not build_only and not force and previous and previous.get("commit") == commit and previous.get("assetBaseUrl") == config["assetBaseUrl"] and current and current["State"]["Running"]:
+    if (not build_only and not force and previous
+            and previous.get("assetBaseUrl") == config["assetBaseUrl"]
+            and current and current["State"]["Running"]
+            and (previous.get("commit") == commit or operator_only_change(repo, previous.get("commit"), commit))):
         try:
-            health(item, commit, timeout=10)
-            print(f"{branch}: unchanged and healthy at {commit}", flush=True)
+            health(item, previous["commit"])
+            if previous.get("trackedCommit") != commit:
+                previous = {**previous, "trackedCommit": commit, "trackedAt": now()}
+                json_write(state_path, previous)
+            print(f"{branch}: healthy app {previous['commit']}; tracked head {commit} (no app change)", flush=True)
             return previous
         except RuntimeError:
             print(f"{branch}: running ref failed health; reapplying {commit}", flush=True)
@@ -448,7 +470,7 @@ def deploy(config, branch, force=False, build_only=False):
             rollback = run([*prefix, "up", "--detach", "--no-deps", "app"], check=False)
             if rollback.returncode == 0:
                 try:
-                    health(item, previous["commit"], timeout=45)
+                    health(item, previous["commit"])
                     print(f"{branch}: previous image restored; database migration rollback was NOT attempted", file=sys.stderr)
                 except Exception:
                     print(f"{branch}: previous image also failed health; operator must inspect database backup", file=sys.stderr)
@@ -459,7 +481,7 @@ def deploy(config, branch, force=False, build_only=False):
         elif stopped_current:
             print("No successful deployment receipt exists; inspect the stopped container and backup", file=sys.stderr)
         raise
-    result = {"branch": branch, "hostname": item["hostname"], "commit": commit, "version": version,
+    result = {"branch": branch, "hostname": item["hostname"], "commit": commit, "trackedCommit": commit, "version": version,
               "image": image, "assetBaseUrl": config["assetBaseUrl"], "deployedAt": now(),
               "dataVolume": item["volume"], "backup": backup, "context": str(context), "buildOverlays": build_overlays}
     json_write(state_path, result)
