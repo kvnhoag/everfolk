@@ -1,11 +1,12 @@
 import ArtworkImage from "../components/ArtworkImage.tsx";
 import { useEffect, useId, useRef, useState } from "react";
-import { formatYear } from "../../src/calendar.ts";
 import type { LifeState } from "../../src/types.ts";
+import type { LifeView } from "../../chain/types.ts";
 import SiteNav from "../components/SiteNav.tsx";
 import RankedMenuEntry from "../chain/RankedMenuEntry.tsx";
-import { errorText, type ChainBackend } from "../chain/chain-backend.ts";
-import SignInPanel, { EMAIL_UNAVAILABLE } from "../chain/SignInPanel.tsx";
+import type { ChainBackend } from "../chain/chain-backend.ts";
+import { WeaveAccountDetails } from "../chain/WeaveMenu.tsx";
+import MenuLifeCard from "../components/MenuLifeCard.tsx";
 import LivingCoast, { useCoastMotion } from "../homepage/LivingCoast.tsx";
 import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import "../homepage/homepage.css";
@@ -14,15 +15,19 @@ import "../homepage/typeset.css";
 import { useLuminousLight } from "../homepage/useLuminousLight.ts";
 import GameMusicPlayer from "../components/GameMusicPlayer.tsx";
 import TutorialButton from "../components/TutorialButton.tsx";
+import { readWeaveMode, writeWeaveMode } from "../storage/weave-mode.ts";
 
 export interface MainMenuProps {
-  /** A ranked life is in progress: it can only be continued, never replaced from here. */
+  /** A ranked life stays saved when the player starts a separate guest life. */
   rankedLife?: boolean;
   life: LifeState;
   hasBegun: boolean;
   hasRevealedStats: boolean;
   onBegin(): void;
   onContinue(): void;
+  onContinueWeave?(life: LifeView): Promise<void>;
+  weaveEnabled?: boolean;
+  onWeaveChange?(enabled: boolean): void;
   notice?: string;
   active?: boolean;
   chainBackend?: ChainBackend | null;
@@ -31,94 +36,51 @@ export interface MainMenuProps {
 /** The home header also reaches the NPC companions and the wiki, which have no place in the game header. */
 const HOME_EXTRA_LINKS = [{ href: "/npc", label: "NPC companions" }, { href: "/wiki", label: "Wiki" }] as const;
 
-function HomeNotice({ notice, error }: { notice?: string; error?: string }) {
-  if (!notice && !error) return null;
-  return <div className="ef-home-notice-stack">
-    {notice && <p className="ef-home-notice" role="status">{notice}</p>}
-    {error && <p className="ef-home-notice" role="alert">{error}</p>}
+function HomeNotice({ notice }: { notice?: string }) {
+  return notice ? <div className="ef-home-notice-stack"><p className="ef-home-notice" role="status">{notice}</p></div> : null;
+}
+
+function NewLifeChoice({ rankedLife = false, life, hasBegun, hasRevealedStats, onBegin, onContinue, weaveEnabled }: Pick<MainMenuProps, "rankedLife" | "life" | "hasBegun" | "hasRevealedStats" | "onBegin" | "onContinue"> & { weaveEnabled: boolean }) {
+  const ended = life.phase === "ended";
+  const pendingBirth = !hasBegun && hasRevealedStats;
+  return <div className="ef-home-mode-actions">
+    <button className={`ef-home-primary ${weaveEnabled ? "is-weave" : "is-guest"}`} type="button" onClick={weaveEnabled ? () => { window.location.hash = "#weave/new"; } : !rankedLife && pendingBirth ? onContinue : onBegin}>
+      <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>Start a new life<small>{weaveEnabled ? "Weave Mode" : "Without an account"}</small></span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
+    </button>
+    {!weaveEnabled && hasBegun && ended && !rankedLife && <button className="ef-home-secondary" type="button" onClick={onContinue}>Revisit your last life<span aria-hidden="true"> →</span></button>}
   </div>;
 }
 
-const unavailableEmailFlow = {
-  async sendCode() { throw new Error(EMAIL_UNAVAILABLE); },
-  async verify() { throw new Error(EMAIL_UNAVAILABLE); },
-};
-
-function WeaveSignIn({ backend, notice }: { backend?: ChainBackend | null; notice?: string }) {
-  const [emailOpen, setEmailOpen] = useState(false);
-  const [connecting, setConnecting] = useState(false);
-  const [error, setError] = useState("");
-  const live = backend?.mode === "live" ? backend : null;
-  const signIn = live?.signin;
-  const enterWeave = () => { window.location.hash = "#weave"; };
-
-  async function connectWallet() {
-    if (!live) return;
-    setConnecting(true);
-    setError("");
-    try {
-      await (signIn?.useWallet ?? live.connect)();
-      enterWeave();
-    } catch (cause) {
-      setError(errorText(cause, "The NEAR wallet could not connect."));
-    } finally {
-      setConnecting(false);
-    }
-  }
-
-  // Signed in, Weave Mode has one way in: a new life recorded on NEAR.
-  if (live?.accountId) return <>
-    <button className="ef-home-primary is-weave" type="button" onClick={enterWeave}>
-      <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>Begin a new life<small>Weave Mode · recorded on NEAR</small></span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
-    </button>
-    <HomeNotice notice={notice} />
-  </>;
-
-  const signInNotice = !live ? "Weave Mode sign-in is unavailable right now."
-    : !signIn?.available.email ? "Email sign-in is unavailable on this server." : undefined;
-
-  return <>
-    <button className="ef-home-auth-button" type="button" disabled={!live || connecting || emailOpen} onClick={() => { void connectWallet(); }}>
-      {connecting ? "Connecting…" : "Connect with NEAR wallet"}
-    </button>
-    <div className="ef-home-auth-divider"><span>or</span></div>
-    <button className="ef-home-auth-button ef-home-auth-email" type="button" disabled={connecting || emailOpen} onClick={() => { setError(""); setEmailOpen(true); }}>
-      Log in with email
-    </button>
-    <HomeNotice notice={notice || signInNotice} error={error} />
-    {emailOpen && <dialog className="ef-home-email-dialog" aria-label="Email sign-in" data-tutorial="hide"
-      ref={dialog => { if (dialog && !dialog.open) dialog.showModal(); }}
-      onClose={() => setEmailOpen(false)}>
-      <SignInPanel available={signIn?.available ?? { email: false }} onEmail={signIn?.emailFlow ?? unavailableEmailFlow}
-        onSuccess={() => { setEmailOpen(false); enterWeave(); }}
-        onWallet={async () => {
-          if (!live) throw new Error("Sign-in could not connect. Please try again.");
-          await (signIn?.useWallet ?? live.connect)(); enterWeave();
-        }} onClose={() => setEmailOpen(false)} />
-    </dialog>}
-  </>;
-}
-
 /** Presentation only: opening the menu never advances, rolls or replaces a life. */
-export default function MainMenu({ rankedLife = false, life, hasBegun, hasRevealedStats, onBegin, onContinue, notice, active = true, chainBackend }: MainMenuProps) {
+export default function MainMenu({ rankedLife = false, life, hasBegun, hasRevealedStats, onBegin, onContinue, onContinueWeave, weaveEnabled: selectedWeaveMode, onWeaveChange, notice, active = true, chainBackend }: MainMenuProps) {
   const lightRoot = useRef<HTMLElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
 
   const headingId = useId();
-  const saveId = useId();
-  const [weaveEnabled, setWeaveEnabled] = useState(true);
+  const [menuWeaveEnabled, setMenuWeaveEnabled] = useState(readWeaveMode);
+  const weaveEnabled = selectedWeaveMode ?? menuWeaveEnabled;
   const motion = useCoastMotion();
   const running = motion.enabled && !motion.reduced;
   useLuminousLight(lightRoot, running && active);
   const ended = life.phase === "ended";
   const continuing = hasBegun && !ended;
   const pendingBirth = !hasBegun && hasRevealedStats;
-  const openWeave = !rankedLife && weaveEnabled;
-  // Signed in with Weave Mode on, the guest life is put aside: one button, not two ways to start.
-  const signedIn = chainBackend?.mode === "live" && Boolean(chainBackend.accountId);
-  const guestShown = !openWeave || !signedIn;
-  const primaryLabel = rankedLife || continuing ? "Continue your life" : ended ? "Begin a new life" : "Play as guest";
-  const enterFreeLife = rankedLife || continuing || pendingBirth ? onContinue : onBegin;
+  const showGuestSave = hasBegun && !rankedLife && !weaveEnabled;
+  const enterFreeLife = !rankedLife && (continuing || pendingBirth) ? onContinue : onBegin;
+
+  function changeWeaveMode(enabled: boolean) {
+    if (onWeaveChange) onWeaveChange(enabled);
+    else {
+      setMenuWeaveEnabled(enabled);
+      writeWeaveMode(enabled);
+    }
+  }
+
+  function enterSelectedMode() {
+    if (!weaveEnabled) { enterFreeLife(); return; }
+    if (rankedLife) onContinue();
+    else window.location.hash = "#weave";
+  }
 
   useEffect(() => { if (active) heading.current?.focus({ preventScroll: true }); }, [active]);
 
@@ -131,7 +93,7 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
           <a className="ef-home-weave-brand" href="#" aria-label="Everfolk home">
             <EverfolkBrand tone="cream" />
           </a>
-          <SiteNav className="ef-home-weave-links" onPlay={enterFreeLife} extra={HOME_EXTRA_LINKS} />
+          <SiteNav className="ef-home-weave-links" onPlay={enterSelectedMode} extra={HOME_EXTRA_LINKS} />
         </div>
         <div className="ef-home-settings">
           <TutorialButton tone="dark" />
@@ -143,7 +105,7 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
       </header>
       <div className="ef-home-body">
         <section className="ef-home-content">
-          {rankedLife && <p className="ef-home-eyebrow">WEAVE MODE · NEAR TESTNET</p>}
+          {rankedLife && weaveEnabled && <p className="ef-home-eyebrow">WEAVE MODE · NEAR TESTNET</p>}
           <h1 id={headingId} ref={heading} aria-label="Everfolk" tabIndex={-1}>
             <span className="ef-title-wrap">
               <ArtworkImage className="ef-home-wordmark" src="/assets/branding/everfolk-wordmark-cream.svg" alt="" width={1280} height={291} />
@@ -151,23 +113,12 @@ export default function MainMenu({ rankedLife = false, life, hasBegun, hasReveal
             </span>
           </h1>
           <div className="ef-home-logo-rule" aria-hidden="true"><span /><i>✦</i><span /></div>
-          {hasBegun && (guestShown || rankedLife) && <div className="ef-home-save" id={saveId}>
-            <span className="ef-home-save-mark" aria-hidden="true" />
-            <div><span>{ended ? "YOUR LAST STORY" : "A STORY IN PROGRESS"}</span><strong>{life.character?.name ?? "Your character"}</strong></div>
-            <span className="ef-home-save-age">Age {life.age}<small>{formatYear(life.year)}</small></span>
-          </div>}
           <div className="ef-home-actions">
-            {!rankedLife && <div className="ef-home-ranked"><RankedMenuEntry checked={weaveEnabled} onChange={setWeaveEnabled} /></div>}
-            <div className="ef-home-mode-actions">
-              {openWeave && <WeaveSignIn backend={chainBackend} notice={notice} />}
-              {openWeave && guestShown && <div className="ef-home-auth-divider ef-home-guest-divider"><span>or play without an account</span></div>}
-              {/* Without an account, guest play stays on the first screen; Weave Mode only adds the sign-in choices above it. */}
-              {guestShown && <button className={`ef-home-primary${openWeave ? " is-guest" : ""}`} type="button" onClick={enterFreeLife} aria-describedby={continuing ? saveId : undefined}>
-                <span className="ef-home-button-mark" aria-hidden="true">✦</span><span>{primaryLabel}</span><span className="ef-home-button-arrow" aria-hidden="true">→</span>
-              </button>}
-              {!openWeave && <HomeNotice notice={notice} />}
-            </div>
-            {hasBegun && !rankedLife && guestShown && <button className="ef-home-secondary" type="button" onClick={ended ? onContinue : onBegin}>{ended ? "Revisit your last life" : "Begin a different story"}<span aria-hidden="true"> →</span></button>}
+            <div className="ef-home-ranked"><RankedMenuEntry checked={weaveEnabled} onChange={changeWeaveMode} /></div>
+            {showGuestSave && <MenuLifeCard label={ended ? "YOUR LAST STORY" : "Continue your life"} name={life.character?.name ?? "Your character"} age={life.age} year={life.year} onContinue={continuing ? onContinue : undefined} />}
+            {weaveEnabled && <WeaveAccountDetails backend={chainBackend} life={rankedLife ? life : undefined} onContinue={rankedLife ? onContinue : undefined} onContinueWeave={onContinueWeave} />}
+            <NewLifeChoice life={life} rankedLife={rankedLife} hasBegun={hasBegun} hasRevealedStats={hasRevealedStats} onBegin={onBegin} onContinue={onContinue} weaveEnabled={weaveEnabled} />
+            <HomeNotice notice={notice} />
           </div>
         </section>
       </div>

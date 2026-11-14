@@ -6,10 +6,16 @@ import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import { createEngine } from "../src/index.ts";
-import { builtinEngine, selectWorldPack } from "../client/lib/world-session.ts";
+import { builtinEngine, registerLifeEngine, selectWorldPack } from "../client/lib/world-session.ts";
 import { createDifferentSampleLife, createSampleLife } from "../client/mutations/lives.ts";
-import type { WorldPack } from "../src/types.ts";
+import { buildWeaveWorld } from "../chain/weave-world.ts";
+import { createMockContract } from "../client/chain/mock-contract.ts";
+import { startRankedSession } from "../client/chain/ranked-session.ts";
+import { getBirthRollStats, getBirthRollYear, getVisibleBirthRollResources } from "../client/models/birth-stat-roll.ts";
+import { isUnplayedBirth } from "../client/models/life-start.ts";
+import type { LifeState, WorldPack } from "../src/types.ts";
 import pack from "../worlds/alexandria-sample.json" with { type: "json" };
+import lives11 from "../worlds/demo/alexandria-lives-11.json" with { type: "json" };
 
 // Load the real JSX components in Node; styles have no effect on server rendering.
 const hooks = registerHooks({
@@ -82,4 +88,61 @@ test("fresh birth rerolls replace the identity and stats and automatically start
     assert.match(html, /<button(?=[^>]*class="birth-popover-continue")(?=[^>]*disabled="")[^>]*>/);
     life = fresh;
   }
+});
+
+test("Weave births show their fixed starting information before play, including assigned figures", async () => {
+  const world = buildWeaveWorld(lives11 as unknown as WorldPack), engine = createEngine(world);
+  registerLifeEngine(engine);
+  const values = new Map<string, string>();
+  const session = await startRankedSession({
+    world, contract: createMockContract({ worldVersions: [world.version] }), contractId: "birth-roll.testnet", verifyUrl: "/api/ranked/verify",
+    storage: { getItem: key => values.get(key) ?? null, setItem: (key, value) => { values.set(key, value); }, removeItem: key => { values.delete(key); } },
+  });
+  const life = session.state, saved = session.save();
+  assert.ok(life.commands.some(command => command.type === "influence" && command.mode === "activate"));
+  assert.ok(isUnplayedBirth(life), "assigning birth figures must not skip the introduction");
+  let submissions = 0;
+  const connected = { initial: life, current: () => life,
+    sync: async (next: LifeState) => { submissions++; return next; },
+    dispatch: async () => { submissions++; return life; },
+  };
+  for (const mode of ["ranked", "online"] as const) {
+    const html = renderToStaticMarkup(createElement(App, { [mode]: connected }));
+    assert.match(html, /<dialog[^>]*class="birth-roll-popover"/);
+    assert.match(html, /Starting stats ready/);
+    assert.match(html, /aria-busy="false"/);
+    assert.ok(html.includes(life.character!.name));
+    assert.ok(html.includes(world.origins.find(origin => origin.id === life.originId)!.title));
+    for (const value of [getBirthRollYear(world, life), ...getBirthRollStats(world, life), ...getVisibleBirthRollResources(world, life)]) {
+      assert.ok(html.includes(`data-final-value="${value.value}"`), `assigned ${value.label} is visible`);
+    }
+    assert.match(html, /Starting resources/);
+    assert.match(html, /<button class="birth-popover-continue" type="button">Begin life/);
+    assert.doesNotMatch(html, /class="birth-popover-reborn"|Skip animation|Final value hidden|class="ef-home"|class="page-shell game-dashboard"/);
+    assert.equal(submissions, 0, "reviewing pre-rolled values must not submit gameplay commands");
+    assert.equal(session.save(), saved, "showing the introduction preserves the seed, figures, command log and RNG");
+  }
+});
+
+test("resumed Weave lives enter the paused dashboard without replaying their birth", () => {
+  const engine = builtinEngine;
+  const life = engine.advance(engine.start("weave-resume-after-first-advance"));
+  assert.ok(!isUnplayedBirth(life));
+  const connected = { initial: life, current: () => life, sync: async (next: LifeState) => next, dispatch: async () => life };
+  for (const mode of ["ranked", "online"] as const) {
+    const html = renderToStaticMarkup(createElement(App, { [mode]: connected }));
+    assert.match(html, /class="page-shell game-dashboard"/);
+    assert.match(html, /role="timer" aria-live="off">Paused</);
+    assert.doesNotMatch(html, /class="birth-roll-popover"/);
+  }
+});
+
+test("only pre-play avatar and figure assignments leave a birth introduction pending", () => {
+  const life = builtinEngine.start("weave-birth-presentation");
+  assert.ok(isUnplayedBirth(life));
+  assert.ok(isUnplayedBirth({ ...life, commands: [{ type: "avatar", variant: 1 }] }));
+  assert.ok(!isUnplayedBirth({ ...life, commands: [{ type: "advance" }] }), "an age-zero decision reached by advancing is already in play");
+  assert.ok(!isUnplayedBirth({ ...life, commands: [{ type: "influence", mode: "apply", entry: "granary.release", power: 1, source: { contractId: "birth-roll.testnet", tokenId: "1" } }] }));
+  assert.ok(!isUnplayedBirth({ ...life, age: 1 }));
+  assert.ok(!isUnplayedBirth({ ...life, phase: "ended" }));
 });

@@ -1,5 +1,5 @@
 import EmailSignIn from "../demo/EmailSignIn.tsx";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { LifeView } from "../../chain/types.ts";
 import ActiveLifeCard, { useActiveRankedLife } from "./ActiveLifeCard.tsx";
 import { DEFAULT_MINT_FEE_YOCTO, formatNear } from "./near-amount.ts";
@@ -17,6 +17,7 @@ import SectionHelp from "../components/SectionHelp.tsx";
 
 export interface RankedEntryProps {
   backend: ChainBackend;
+  startNew?: boolean;
   onClosed?(): void;
   /** Hands the started life to the ranked session. Absent until the session is wired (Task 17). */
   onBegin?(life: LifeView): void | Promise<void>;
@@ -28,7 +29,7 @@ async function ownersOf(contract: LivesContract, life: LifeView): Promise<Owners
 }
 
 /** Start (or return to) a ranked life, then show the world it is born into. */
-export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryProps) {
+export default function RankedEntry({ backend, startNew = false, onBegin, onClosed }: RankedEntryProps) {
   const { contract, accountId } = backend;
   const headingId = useId();
   const current = useActiveRankedLife(backend);
@@ -36,6 +37,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   const [life, setLife] = useState<LifeView | null>(null);
   const [owners, setOwners] = useState<OwnersByToken>({});
   const [closing, setClosing] = useState(false);
+  const newLifeChecked = useRef(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -51,6 +53,11 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
     setLife(current.active?.life ?? null);
     if (current.active) void ownersOf(contract, current.active.life).then(setOwners).catch(() => {});
   }, [current.active, contract]);
+  useEffect(() => {
+    if (!startNew || !accountId || current.loading || current.error || newLifeChecked.current) return;
+    newLifeChecked.current = true;
+    if (current.active && current.active.life.status !== "minting") setClosing(true);
+  }, [startNew, accountId, current.loading, current.error, current.active]);
   useEffect(() => {
     let cancelled = false;
     void contract.mintTerms().then(value => { if (!cancelled) setTerms(value); }).catch(() => {});
@@ -76,6 +83,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
     const started = await contract.startLife(worldVersion);
     setOwners(await ownersOf(contract, started));
     setLife(started);
+    setNotice("");
   }, "Your ranked life could not start. Try again in a moment.");
 
   const giveUp = () => run(async () => {
@@ -85,7 +93,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
     setLife(null);
     setClosing(false);
     onClosed?.();
-    setNotice("That life is closed. It can't be kept, and a new one opens after a short wait.");
+    setNotice("That life is closed. It can't be kept, and a new Weave life opens after a short wait. Your account and Weave Mode stay selected.");
   }, "That life could not be closed.");
 
   const recover = () => run(async () => {
@@ -104,6 +112,7 @@ export default function RankedEntry({ backend, onBegin, onClosed }: RankedEntryP
   }
 
   return <div className="ranked-entry">
+    {startNew && <section className="chain-card"><p className="chain-kicker">New Weave life</p><h2>Start another life in Weave Mode</h2><p>Your account stays connected. If you have a life in progress, finish or close it before starting another.</p></section>}
     {life && life.status !== "minting" && current.active && current.active.progress.status !== "new" && <ActiveLifeCard walletPath={walletPath} needsPlayKey={signin?.needsPlayKey} life={life} progress={current.active.progress} busy={busy} onOpen={begin} onGiveUp={() => setClosing(true)} />}
     {closing && <section className="chain-card"><h2>Close this life permanently?</h2><p>You will lose the chance to mint this life. If you already paid for a pack, that fee is shared with its source lives and the protocol treasury; it is not refunded.</p><div className="chain-actions"><button type="button" className="chain-secondary" disabled={busy} onClick={() => setClosing(false)}>Keep this life</button><button type="button" className="chain-primary" disabled={busy} onClick={() => { void giveUp(); }}>Close permanently</button></div></section>}
 

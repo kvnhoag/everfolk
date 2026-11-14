@@ -22,8 +22,8 @@
 .ef-home-intro em{color:#ffe8b3;font-style:normal;font-weight:700}
 .ef-home-save{display:flex;align-items:center;gap:12px;padding:12px 14px;margin:0 auto 20px;border-block:1px solid #d0af7d35;background:#16283278;width:min(100%,360px);text-align:left}
 .ef-home-save-mark{font-size:27px;color:#c7aa7b}
-.ef-home-save>div{display:grid;gap:4px;min-width:0}
-.ef-home-save>div>span{font-size:7px;letter-spacing:1.8px;color:#baad99}
+.ef-home-save-details{display:grid;gap:4px;min-width:0}
+.ef-home-save-details>span{font-size:7px;letter-spacing:1.8px;color:#baad99;text-transform:uppercase}
 .ef-home-save strong{font-size:13px;font-weight:500;color:#f0dcba;overflow-wrap:anywhere}
 .ef-home-save-age{margin-left:auto;text-align:right;font-size:11px;color:#ecdbbe;flex-shrink:0}
 .ef-home-save-age small{display:block;font-size:9px;line-height:1.8;color:#b6ae9f}

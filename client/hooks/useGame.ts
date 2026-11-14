@@ -22,6 +22,7 @@ import "../demo/start.ts";
 import { releaseOrder, sendDemoCommand } from "../demo/screen.ts";
 import { isUnavailable } from "../../src/demo/availability.ts";
 import type { GamePreviewSession } from "../types/game-preview.ts";
+import { isUnplayedBirth } from "../models/life-start.ts";
 
 export type SaveStatus = "saving" | "saved" | "unavailable";
 import { DEFAULT_PLAYBACK_SPEED, YEAR_DURATION_MS, type PlaybackSpeed } from "../models/playback.ts";
@@ -139,7 +140,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   onlineRef.current = online;
   const externalOnlineLifeRef = useRef(online?.initial);
   const [initial] = useState(() => online || ranked
-    ? { life: (online ?? ranked)!.initial, notice: "", hasBegun: true, hasRevealedStats: true, unreadableSave: null }
+    ? { life: (online ?? ranked)!.initial, notice: "", hasBegun: !isUnplayedBirth((online ?? ranked)!.initial), hasRevealedStats: true, unreadableSave: null }
     : initialSession(startFresh, startFreshFrom, previewSession));
   const [unreadableSave, setUnreadableSave] = useState<string | null>(() => initial.unreadableSave ?? null);
   const unreadableSaveRef = useRef(unreadableSave);

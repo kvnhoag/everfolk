@@ -94,7 +94,7 @@ export default function ChainLayer({ backend, onBeginRanked, rankedSession, onRa
     if (pack) { window.location.hash = `#pack/${life.life_id}`; return; }
     await onBeginRanked(life, backend); leaveChainRoute();
   } : undefined;
-  if (backend && route.kind === "ranked") content = <RankedEntry backend={backend} onBegin={begin} onClosed={onRankedClosed} />;
+  if (backend && route.kind === "ranked") content = <RankedEntry key={`${backend.accountId}:${Boolean(route.startNew)}`} backend={backend} startNew={route.startNew} onBegin={begin} onClosed={onRankedClosed} />;
   if (backend && route.kind === "pack") content = <PackPage key={route.lifeId} backend={backend} lifeId={route.lifeId} />;
   if (backend && route.kind === "figures") content = <Figures backend={backend} />;
   if (backend && route.kind === "market") content = <Market backend={backend} />;

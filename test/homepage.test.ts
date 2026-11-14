@@ -17,6 +17,7 @@ const hooks = registerHooks({ load(url, context, nextLoad) {
   return nextLoad(url, context);
 } });
 const { default: MainMenu } = await import('../client/screens/MainMenu.tsx');
+const { WeaveAccountDetails } = await import('../client/chain/WeaveMenu.tsx');
 hooks.deregister();
 const engine = createEngine(world);
 const noop = () => {};
@@ -42,21 +43,25 @@ test('homepage renders the historical world with live canvas and retains all men
   assert.match(html, /<header[^>]*>.*href="\/npc".*href="\/wiki".*<\/header>/);
   assert.match(html, /<header[^>]*>.*href="#market".*href="\/cards".*href="#mine".*<\/header>/);
   assert.match(html, /ef-home-ranked.*role="switch" aria-checked="true"/);
-  assert.match(html, /Connect with NEAR wallet.*ef-home-auth-divider.*Log in with email/);
+  assert.match(html, /Account details.*Connect with NEAR wallet.*ef-home-auth-divider.*Log in with email/);
   assert.doesNotMatch(html, /class="ef-home-auth-button ef-home-auth-email"[^>]*disabled/);
+  assert.doesNotMatch(html, /Your Weave world|ef-home-weave-world|<span>Continue<\/span>/);
   assert.doesNotMatch(html, /Choose a world|Past lives|Explore for free/);
   assert.doesNotMatch(html, /medieval-europe|ottoman-constantinople|A STORY IN PROGRESS/);
   assert.deepEqual(life,before,'opening the menu cannot advance, reroll or replace the life');
 });
 
-test('homepage preserves pending birth, continuing and ended-life states', () => {
-  assert.match(render({hasRevealedStats:true}), /Connect with NEAR wallet/);
-  const continuing = render({hasBegun:true});
-  assert.match(continuing,/Connect with NEAR wallet/);
-  assert.match(continuing,/Begin a different story/);
-  assert.match(continuing,/A STORY IN PROGRESS/);
-  const ended = render({hasBegun:true,life:{...life,phase:'ended'}});
-  assert.match(ended,/Connect with NEAR wallet/);
+test('guest choices preserve pending birth, continuing and ended-life states', () => {
+  assert.match(render({weaveEnabled:false,hasRevealedStats:true}), /Start a new life<small>Without an account/);
+  const continuing = render({weaveEnabled:false,hasBegun:true});
+  assert.doesNotMatch(continuing,/Begin a different story/);
+  assert.match(continuing, /<button class="ef-home-save" type="button">.*Continue your life.*ef-home-save-age.*<\/button>/);
+  assert.equal(continuing.match(/Continue your life/g)?.length, 1, 'the save card is the single continue action');
+  assert.match(continuing, /Start a new life<small>Without an account<\/small>/);
+  const ranked = render({ hasBegun: true, rankedLife: true, weaveEnabled: true });
+  assert.equal(ranked.match(/Continue your life/g)?.length, 1);
+  assert.match(ranked, /Start a new life<small>Weave Mode<\/small>/);
+  const ended = render({weaveEnabled:false,hasBegun:true,life:{...life,phase:'ended'}});
   assert.match(ended,/Revisit your last life/);
   assert.match(ended,/YOUR LAST STORY/);
 });
@@ -74,11 +79,45 @@ test('coastal sprites have fixed pivots, distinct animation frames and bounded i
   }
 });
 
-test('signed in with Weave Mode on, the menu has one way in: Begin a new life, with no guest button beside it', () => {
-  const chainBackend = { mode: 'live', accountId: 'reader.testnet', signin: { available: { email: true } } } as never;
-  const signedIn = render({ chainBackend, hasBegun: true, life: { ...life, phase: 'ended' } });
-  assert.match(signedIn, /class="ef-home-primary is-weave"[^>]*>.*Begin a new life.*Weave Mode · recorded on NEAR/);
-  for (const text of ['or play without an account', '>Play as guest<', 'Enter Weave Mode', 'Revisit your last life', 'YOUR LAST STORY']) assert.ok(!signedIn.includes(text), `signed in, the menu has no ${text}`);
+test('Weave toggle keeps life details and continue together, above the account details', () => {
+  const chainBackend = { mode: 'live', accountId: 'reader.testnet', walletId: 'meteor-wallet', signin: { available: { email: true } } } as never;
+  const html = render({ chainBackend, rankedLife: true, hasBegun: true });
+  assert.match(html, /role="switch" aria-checked="true".*<button class="ef-home-save"[^>]*>.*Continue your life.*ef-home-save-age.*<\/button>.*Account details.*reader.testnet.*Start a new life/);
+  assert.equal(html.match(/Continue your life/g)?.length, 1, 'the saved-life card remains the single continue action');
+  assert.doesNotMatch(html, /Your Weave world|<span>Continue<\/span>/);
+
+  const account = renderToStaticMarkup(createElement(WeaveAccountDetails, { backend: chainBackend }));
+  assert.match(account, /Account details.*Testnet.*reader.testnet.*Meteor Wallet/);
+  assert.match(account, /<button[^>]*disabled=""[^>]*>.*Finding your Weave life/);
+  assert.doesNotMatch(account, /Begin a Weave life|Begin a new life/);
+
+  const playing = renderToStaticMarkup(createElement(WeaveAccountDetails, { backend: chainBackend, life, onContinue: noop }));
+  assert.match(playing, /<button class="ef-home-save" type="button">.*Continue your life.*Age 0.*<\/button>.*reader.testnet/);
   const signedOut = render({ hasBegun: true });
-  assert.match(signedOut, /Connect with NEAR wallet.*or play without an account.*Continue your life/, 'without an account, guest play stays on the first screen');
+  assert.match(signedOut, /Account details.*Connect with NEAR wallet.*Start a new life<small>Weave Mode/);
+  assert.doesNotMatch(signedOut, /ef-home-save|Without an account|or play without an account/);
+});
+
+test('account details offer wallet and email sign-in with a clear signed-out status', () => {
+  const html = renderToStaticMarkup(createElement(WeaveAccountDetails, { backend: { mode: 'live', accountId: null, signin: { available: { email: true } } } as never }));
+  assert.match(html, /Account details.*Not signed in.*Connect with NEAR wallet.*Log in with email/);
+  assert.doesNotMatch(html, /<button[^>]*disabled/);
+  const unavailable = renderToStaticMarkup(createElement(WeaveAccountDetails));
+  assert.match(unavailable, /Weave Mode sign-in is unavailable right now/);
+  assert.match(unavailable, /<button class="ef-home-auth-button" type="button" disabled/);
+  assert.match(render({weaveEnabled:false}), /Start a new life<small>Without an account/);
+});
+
+test('new lives follow the selected mode and keep guest play behind the off toggle', () => {
+  for (const rankedLife of [false, true]) {
+    const weave = render({ weaveEnabled: true, rankedLife, hasBegun: true });
+    assert.match(weave, /role="switch" aria-checked="true"/);
+    assert.match(weave, /class="ef-home-primary is-weave"[^>]*>.*Start a new life<small>Weave Mode/);
+    assert.doesNotMatch(weave, /Without an account|or play without an account|is-guest/);
+
+    const guest = render({ weaveEnabled: false, rankedLife, hasBegun: true });
+    assert.match(guest, /role="switch" aria-checked="false"/);
+    assert.match(guest, /class="ef-home-primary is-guest"[^>]*>.*Start a new life<small>Without an account/);
+    assert.doesNotMatch(guest, /Weave account details|Connect with NEAR wallet|is-weave/);
+  }
 });

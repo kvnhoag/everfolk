@@ -494,6 +494,7 @@ test("a completed unminted save is recognized as ended when the chain still call
   const progress = await rankedProgress(session.life, storage, world, { contractId: CONTRACT });
   assert.equal(progress.status, "ended");
   assert.equal(progress.age, session.state.age);
+  assert.equal(progress.year, session.state.year, "the menu card keeps the saved life's exact calendar date");
   const wrong = await rankedProgress({ ...session.life, seed: "0".repeat(64) }, storage, world, { contractId: CONTRACT });
   assert.equal(wrong.status, "unavailable", "a save from a different deployment cannot masquerade as a finished life");
 });

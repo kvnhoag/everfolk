@@ -24,7 +24,7 @@ function action(id: string, patch: Partial<ActivityAvailability> = {}): Activity
 
 test("newborn management shows family and relationship records without adult activity prompts", () => {
   const life = lifeAt(0), before = structuredClone(life);
-  assert.deepEqual(ids(life), ["skills", "figures", "wealth", "relationships", "children"]);
+  assert.deepEqual(ids(life), ["figures", "wealth", "relationships", "children"]);
   assert.equal(characterActivitySummary(life, engine.getActivities(life)), "Activities unlock as you grow.");
   assert.deepEqual(visibleFamilyActivities(life, engine.getActivities(life)), []);
   assert.deepEqual(life, before);
@@ -49,7 +49,7 @@ test("retained .41 lives keep their original family and relationship section unl
     oldLife.age = age;
     return visibleCharacterSections(oldLife, oldEngine.world, known).map(section => section.id);
   };
-  assert.deepEqual(sections(0), ["skills", "wealth"]);
+  assert.deepEqual(sections(0), ["wealth"]);
   assert.deepEqual(sections(11), ["skills", "wealth"]);
   assert.deepEqual(sections(12), ["career", "skills", "wealth", "children"]);
   assert.equal(sections(17, true).includes("relationships"), false);
@@ -106,14 +106,19 @@ test("minor payments remain clickable after the yearly action without bypassing 
 });
 
 
-test("historical figures have a dedicated section immediately after Skills in figure worlds", () => {
+test("historical figures stay available before training opens and follow Skills once it does", () => {
   const world = figurePack as unknown as WorldPack;
   const life = createEngine(world).start("dedicated-figure-section");
   const before = structuredClone(life);
   const sections = visibleCharacterSections(life, world, false);
-  const skillsIndex = sections.findIndex(section => section.id === "skills");
-  assert.deepEqual(sections[skillsIndex + 1], { id: "figures", label: "Historical Figures" });
+  assert.equal(sections.some(section => section.id === "skills"), false);
+  assert.deepEqual(sections[0], { id: "figures", label: "Historical Figures" });
   assert.equal(sections.filter(section => section.id === "figures").length, 1);
+  const child = { ...life, age: 6 };
+  const trainingSections = visibleCharacterSections(child, world, false);
+  const skillsIndex = trainingSections.findIndex(section => section.id === "skills");
+  assert.ok(skillsIndex >= 0);
+  assert.deepEqual(trainingSections[skillsIndex + 1], { id: "figures", label: "Historical Figures" });
   assert.deepEqual(life, before);
 });
 

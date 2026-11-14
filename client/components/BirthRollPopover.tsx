@@ -9,18 +9,20 @@ export interface BirthRollPopoverProps {
   life: LifeState;
   world: WorldPack;
   revealed: boolean;
+  /** Connected lives arrive with fixed values and show them immediately. */
+  preRolled?: boolean;
   onReveal(): void;
   onContinue(): void;
   onClose(): void;
   onReborn?(): void;
 }
 
-function OpenBirthRollPopover({ life, world, revealed, onReveal, onContinue, onClose, onReborn }: Omit<BirthRollPopoverProps, "open">) {
+function OpenBirthRollPopover({ life, world, revealed, preRolled = false, onReveal, onContinue, onClose, onReborn }: Omit<BirthRollPopoverProps, "open">) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const id = useId();
-  // Saved reveal history must not skip the animation for this popup opening.
-  const [rollComplete, setRollComplete] = useState(false);
+  // Free-play openings replay the animation; connected lives already have their assigned results.
+  const [rollComplete, setRollComplete] = useState(preRolled);
   function completeRoll() {
     setRollComplete(true);
     if (!revealed) onReveal();
@@ -41,7 +43,7 @@ function OpenBirthRollPopover({ life, world, revealed, onReveal, onContinue, onC
     </header>
     <div className="birth-popover-content"><BirthStatRoll life={life} world={world} revealed={rollComplete} onComplete={completeRoll} autoStart /></div>
     <footer className="birth-popover-footer">
-      {onReborn && <button className="birth-popover-reborn" type="button" title="Roll a new name, background and starting stats" onClick={onReborn}><PixelIcon name="restart" size={16} />Reborn</button>}
+      {!preRolled && onReborn && <button className="birth-popover-reborn" type="button" title="Roll a new name, background and starting stats" onClick={onReborn}><PixelIcon name="restart" size={16} />Reborn</button>}
       <button className="birth-popover-continue" type="button" disabled={!rollComplete} onClick={() => { if (rollComplete) onContinue(); }}>Begin life <span aria-hidden="true">↗</span></button>
     </footer>
   </dialog>;

@@ -106,18 +106,21 @@
   background:none}
 .ef-home .ef-home-intro em{display:inline-block;margin-top:6px;font-style:normal;font-weight:500;color:var(--tx-gold)}
 
-/* Save card ("A story in progress"): elevated gently above the water with luminous dawn depth. */
+/* Saved life: the whole card resumes a story in progress. */
 .ef-home .ef-home-save{gap:12px;width:var(--home-menu-width);margin:0 auto 9px;padding:8px 13px;border:1px solid #71664d;border-radius:2px;background:#103038}
+.ef-home button.ef-home-save{cursor:pointer;color:var(--tx-cream)}
+.ef-home button.ef-home-save:hover{border-color:var(--tx-gold);background:#173e45}
+.ef-home button.ef-home-save:active{background:#0b252c}
 .ef-home .ef-home-save-mark{flex:0 0 auto;width:13px;height:13px;margin:0 4px;border:1.5px solid var(--tx-gold);transform:rotate(45deg)}
-.ef-home .ef-home-save>div{gap:4px}
-.ef-home .ef-home-save>div>span{font-size:10px;font-weight:500;letter-spacing:2.4px;color:var(--tx-gold)}
+.ef-home .ef-home-save-details{gap:4px}
+.ef-home .ef-home-save-details>span{font-size:10px;font-weight:500;letter-spacing:2.4px;color:var(--tx-gold)}
 .ef-home .ef-home-save strong{font-size:16px;font-weight:600;line-height:1.3;color:var(--tx-cream);overflow-wrap:anywhere}
 .ef-home .ef-home-save-age{font-size:14px;font-weight:500;line-height:1.4;color:var(--tx-cream)}
 .ef-home .ef-home-save-age small{font-size:12px;font-weight:400;line-height:1.6;color:#e6dcc6}
 
 /* Primary action: a single fill and outline. */
 .ef-home .ef-home-actions{position:relative;width:var(--home-menu-width);gap:16px}
-.ef-home .ef-home-mode-actions{display:grid;grid-template-rows:50px 46px;gap:48px}
+.ef-home .ef-home-mode-actions{display:grid;gap:10px}
 .ef-home .ef-home-mode-actions:has(>.ef-home-auth-divider){grid-template-rows:48px 12px 48px;gap:18px}
 .ef-home .ef-home-mode-actions:has(>.ef-home-auth-divider)>.ef-home-auth-button{min-height:0;padding-block:5px}
 .ef-home .ef-home-auth-divider{display:flex;align-items:center;gap:8px;color:var(--tx-cream);font-size:10px;line-height:1}
@@ -244,6 +247,25 @@
   filter:none !important;
   backdrop-filter:none !important;
 }
-/* Signed in with Weave Mode on: one button, with where the life is kept underneath. */
-.ef-home .ef-home-primary.is-weave>span:not([aria-hidden]){display:grid;gap:2px}
-.ef-home .ef-home-primary.is-weave small{font-size:12px;font-weight:600;letter-spacing:.04em;color:#5b4c38}
+/* Weave entry keeps the life-details continue card above the account details. */
+.ef-home .ef-home-weave-account{display:grid;gap:8px;min-width:0;padding:12px 14px;border:1px solid #71664d;border-radius:3px;background:var(--tx-panel);text-align:start}
+.ef-home .ef-home-step{margin:0;color:var(--tx-gold);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.ef-home .ef-home-account-status{margin:0;color:var(--tx-cream);font-size:14px;line-height:1.5}
+.ef-home .ef-home-primary:disabled{opacity:.65;cursor:default}
+.ef-home button.ef-home-save:disabled{opacity:.65;cursor:default}
+.ef-home .ef-home-primary:is(.is-weave,.is-guest)>span:not([aria-hidden]){display:grid;gap:3px}
+.ef-home .ef-home-primary:is(.is-weave,.is-guest) small{font-size:12px;font-weight:500;letter-spacing:.02em;color:#5b4c38}
+.ef-home .ef-home-weave-account .ef-home-primary{font-size:19px;grid-template-columns:16px minmax(0,1fr) 16px;padding-inline:8px}
+.ef-home .ef-home-weave-account .account-bar-wrap{margin:0}
+.ef-home .ef-home-weave-account .account-bar{display:flex;flex-wrap:wrap;gap:6px 10px;padding:0;border:0;background:transparent;color:var(--tx-cream);font-size:13px;overflow-wrap:anywhere}
+.ef-home .ef-home-weave-account .account-net{justify-self:start}
+.ef-home .ef-home-weave-account :is(.account-name,.account-details a,.account-link){color:var(--tx-gold)}
+.ef-home .ef-home-weave-account :is(.account-muted,.account-balance strong,.account-details){color:var(--tx-cream)}
+.ef-home .ef-home-weave-account .account-link{margin:0 0 0 auto;min-height:28px}
+.ef-home .ef-home-weave-account .account-details summary{cursor:pointer;min-height:26px;color:var(--tx-gold)}
+.ef-home .ef-home-weave-account .account-details p{margin:4px 0;overflow-wrap:anywhere}
+.ef-home .ef-home-weave-account .ef-home-notice{margin:0;font-size:12px}
+.ef-home .ef-home-mode-actions .ef-home-save{width:100%;margin:0}
+.ef-home .ef-home-actions>.ef-home-save{margin-bottom:0}
+.ef-home .ef-home-actions:has(.ef-home-weave-account){gap:12px}
+.ef-home .ef-home-notice-stack{position:static;max-height:none}

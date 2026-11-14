@@ -14,6 +14,8 @@
   <a href="https://everfolk.life/test/weave/granary"><img src="https://img.shields.io/badge/WEAVE_MODE-TRY_DEMO-9b553e?style=for-the-badge" alt="Try Weave Mode Demo"></a>
   <a href="https://everfolk.life/#market"><img src="https://img.shields.io/badge/NFT_MARKET-RHAKOTIS_BAZAAR-263b43?style=for-the-badge" alt="Rhakotis Bazaar NFT Market"></a>
   <a href="https://everfolk.life/skills"><img src="https://img.shields.io/badge/SKILL_ATLAS-74_NODES-3a6b65?style=for-the-badge" alt="74-Node Skill Atlas"></a>
+  <a href="https://beta.everfolk.life/cards"><img src="https://img.shields.io/badge/CARD_GALLERY-117_DESIGNS-9b553e?style=for-the-badge" alt="117-Design Card Gallery"></a>
+  <a href="https://beta.everfolk.life/showcase/pack"><img src="https://img.shields.io/badge/PACK_SHOWCASE-OPEN_A_PACK-284744?style=for-the-badge" alt="Try the Card Pack Showcase"></a>
   <a href="https://testnet.nearblocks.io/address/everfolk-cards-11140224.testnet"><img src="https://img.shields.io/badge/NEAR_TESTNET-EXPLORER-1d3534?style=for-the-badge&logo=near&logoColor=e7e0c9" alt="NEAR Testnet Explorer"></a>
 </p>
 
@@ -27,6 +29,7 @@
 
 <p>
   <a href="#product-showcase">Showcase</a> &middot;
+  <a href="#current-artwork--illustrated-guide">Artwork &amp; Guide</a> &middot;
   <a href="#current-gameplay">Current Gameplay</a> &middot;
   <a href="#how-living-legacies-work">How It Works</a> &middot;
   <a href="#nfts--historical-collectibles">NFTs &amp; Figures</a> &middot;
@@ -34,6 +37,7 @@
   <a href="#architecture--system-design">Architecture</a> &middot;
   <a href="#skill-atlas--economy">Skill Atlas</a> &middot;
   <a href="#npc-companions--agent-runtime">NPC Agents</a> &middot;
+  <a href="#assets-typography--attributions">Asset Library</a> &middot;
   <a href="#quickstart">Quickstart</a> &middot;
   <a href="#development--deployment">Deployment</a>
 </p>
@@ -44,7 +48,7 @@
 
 **Everfolk** is a deterministic browser-based life simulation set around Rhakotis and the emerging city of Alexandria. Begin a life between 400 and 300 BCE, grow into a livelihood, care for a household, and pursue historical work whose consequences outlast the character.
 
-This README describes the current `dev` branch. Play its latest deployed build at [beta.everfolk.life](https://beta.everfolk.life); [everfolk.life](https://everfolk.life) follows `main`. New free-play births use `alexandria-lives-11`; existing lives retain their exact world revision. Weave Mode uses `alexandria-weave-1`, built from the same current figure-path world with NEAR-backed draws and verification.
+This README describes the current `dev` branch. The `dev` branch deploys to [beta.everfolk.life](https://beta.everfolk.life); [everfolk.life](https://everfolk.life) follows `main`. New free-play births use `alexandria-lives-11`; existing lives retain their exact world revision. Weave Mode uses `alexandria-weave-1`, built from the same current figure-path world with NEAR-backed draws and verification.
 
 In **Free Play**, every life runs locally from a seed and command log with zero account setup. In **Weave Mode**, the same historical achievements can become **Living-Legacy NFTs** on NEAR testnet:
 
@@ -57,7 +61,16 @@ In **Free Play**, every life runs locally from a seed and command log with zero 
 
 ## Product Showcase
 
-These screenshots show earlier testnet and UI builds. The current `dev` rules, card editions and fees are described below.
+The current `dev` branch includes these entry points; use the beta deployment for published changes or the same paths on your local server:
+
+| Experience | What to Explore |
+|---|---|
+| [Card gallery (`/cards`)](https://beta.everfolk.life/cards) | Browse 117 illustrated figure and contributor designs, their ranks and card details. |
+| [Pack showcase (`/showcase/pack`)](https://beta.everfolk.life/showcase/pack) | Open five distinct random preview cards with at least one Legendary, inspect them and open another pack. Preview draws do not award or mint cards. |
+| [Household showcase (`/showcase/royalty`)](https://beta.everfolk.life/showcase/royalty) | Choose among six royal and aristocratic scenarios, explore council decisions or try the newborn welcome. Progress stays in the showcase session. |
+| [Skill Atlas (`/skills`)](https://beta.everfolk.life/skills) | Explore the 74-node map, prerequisites, demonstrated work and practical rewards. |
+
+The homepage image below is retained from an earlier build. The four showcase panels are fresh captures from the beta on **15 November 2026**, showing the current scene artwork, pack reveal, skill map and card gallery.
 
 <a href="https://everfolk.life">
   <img src="assets/readme/hero-homepage.png" alt="Everfolk Alexandria Harbor Entry Screen with Weave Mode and Sign-In" width="100%">
@@ -66,31 +79,65 @@ These screenshots show earlier testnet and UI builds. The current `dev` rules, c
 <table>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://everfolk.life/test/weave/granary">
-        <img src="assets/readme/gameplay-alexandria.png" alt="Active Weave Mode Life in Alexandria showing Past-Life Granary NFT trigger" width="100%">
+      <a href="https://beta.everfolk.life/">
+        <img src="assets/readme/gameplay-current.jpg" alt="Current Alexandria life with sunlit scene artwork, household inventory and yearly actions" width="100%">
       </a>
-      <p align="center"><b>Active Simulation &amp; Cross-Life Weave</b><br><sub>Past-life NFTs intervene at crises (e.g., unlocking stored grain during a low Nile flood) while tracking 1x–16x pacing, family ledger, and local markets.</sub></p>
+      <p align="center"><b>Storybook Life &amp; Household Choices</b><br><sub>New scene artwork frames a life's timeline, household resources and yearly choices for study, work and relationships.</sub></p>
     </td>
     <td width="50%" valign="top">
-      <a href="https://everfolk.life/test/weave/convoy">
-        <img src="assets/readme/soldier-convoy-ui.png" alt="Soldier Convoy Weave and Commodity Market Trend Table" width="100%">
+      <a href="https://beta.everfolk.life/showcase/pack">
+        <img src="assets/readme/pack-reveal-current.jpg" alt="Current five-card reveal with a Legendary Alexander card and four contributor designs" width="100%">
       </a>
-      <p align="center"><b>Convoy Distinction &amp; Commodity Quotes</b><br><sub>Soldier patrol deeds reduce road ambushes while household grain &amp; flax quotes react dynamically to city shocks.</sub></p>
+      <p align="center"><b>Five-Card Pack Reveal (<code>/showcase/pack</code>)</b><br><sub>Tear the foil pack and inspect five preview cards, including at least one Legendary. Played lives earn their cards through historical paths.</sub></p>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://everfolk.life/skills">
-        <img src="assets/readme/skill-atlas-ui.png" alt="74-Node Interactive Skill Atlas" width="100%">
+      <a href="https://beta.everfolk.life/skills">
+        <img src="assets/readme/skill-atlas-current.jpg" alt="Current dark skill map showing Physique, Knowledge and military crossover connections" width="100%">
       </a>
-      <p align="center"><b>74-Node Capability Atlas (<code>/skills</code>)</b><br><sub>Four branches and ten depth tiers uniting Physique, Handmade, Knowledge, Trade, and military crossovers.</sub></p>
+      <p align="center"><b>74-Node Skill Atlas (<code>/skills</code>)</b><br><sub>Explore prerequisites, demonstrated work and military crossovers across four branches and ten depths on the current dark skill map.</sub></p>
     </td>
     <td width="50%" valign="top">
-      <a href="https://everfolk.life/#market">
-        <img src="assets/readme/nft-market.png" alt="Rhakotis Bazaar On-Chain NFT Marketplace" width="100%">
+      <a href="https://beta.everfolk.life/cards">
+        <img src="assets/readme/card-gallery-current.jpg" alt="Current v14 card gallery with illustrated Alexander, Aristotle, Euclid, Lysippos and Pytheas cards" width="100%">
       </a>
-      <p align="center"><b>Rhakotis Bazaar NFT Market (<code>#market</code>)</b><br><sub>Filter by career group, rarity tier, and deed; every resale routes source royalties transparently on-chain.</sub></p>
+      <p align="center"><b>117-Design Card Gallery (<code>/cards</code>)</b><br><sub>Browse 13 historical figures and four contributor ranks in male and female variants, with rarity filters and individual card stories.</sub></p>
     </td>
+  </tr>
+</table>
+
+### Current Artwork & Illustrated Guide
+
+The delivered v3 portrait library follows six character identities through six visual stages, with clothing for work, scholarship, seafaring, military service, performance, commerce and elite households. These examples follow one identity from infancy to later life:
+
+<table>
+  <tr>
+    <td width="16%" align="center"><img src="public/assets/portraits/ordinary-v3/ef-p-f01-infant-infant-v3.png" alt="Infant portrait" width="110"><br><sub>Infant</sub></td>
+    <td width="16%" align="center"><img src="public/assets/portraits/ordinary-v3/ef-p-f01-child-child-v3.png" alt="Child portrait" width="110"><br><sub>Child</sub></td>
+    <td width="16%" align="center"><img src="public/assets/portraits/ordinary-v3/ef-p-f01-youth-scholarly-v3.png" alt="Young scholar portrait" width="110"><br><sub>Youth</sub></td>
+    <td width="16%" align="center"><img src="public/assets/portraits/ordinary-v3/ef-p-f01-adult-scholarly-v3.png" alt="Adult scholar portrait" width="110"><br><sub>Adult</sub></td>
+    <td width="16%" align="center"><img src="public/assets/portraits/ordinary-v3/ef-p-f01-middle-scholarly-v3.png" alt="Middle-aged scholar portrait" width="110"><br><sub>Middle age</sub></td>
+    <td width="16%" align="center"><img src="public/assets/portraits/ordinary-v3/ef-p-f01-elder-scholarly-v3.png" alt="Elder scholar portrait" width="110"><br><sub>Elder</sub></td>
+  </tr>
+</table>
+
+The current Concept 1 scene library supplies 24 illustrated plates and 1,296 transparent actor sprites on a 480×224 canvas. The sunlit scene artwork covers six life stages and four career roles, with variants for eight household origins, both sexes and three appearances. The retained SVG library supplies 24 scene plates and 864 actor poses as fallbacks, with editable native masters and provenance preserved separately.
+
+<table>
+  <tr>
+    <td width="33%" align="center"><img src="public/assets/pixel/banners-concept1/bg_harbor_quay_480x224.png" alt="Sunlit Alexandria harbor scene plate" width="100%"><br><sub>Harbor</sub></td>
+    <td width="33%" align="center"><img src="public/assets/pixel/banners-concept1/bg_mouseion_study_480x224.png" alt="Sunlit Mouseion study scene plate" width="100%"><br><sub>Study</sub></td>
+    <td width="33%" align="center"><img src="public/assets/pixel/banners-concept1/bg_craft_workshop_480x224.png" alt="Sunlit craft workshop scene plate" width="100%"><br><sub>Workshop</sub></td>
+  </tr>
+</table>
+
+The in-game **How to play** guide uses six screenshots of the actual controls and examples calculated from the current life. Its second page, **Your life**, maps the five gameplay stages and opens a guide for each one. The clock waits while the guide is open; its settings control contextual tips and whether it opens at each start.
+
+<table>
+  <tr>
+    <td width="50%" valign="top"><img src="public/assets/how-to-play/action.webp" alt="Illustrated guide showing yearly action cards and their costs and effects" width="100%"><p align="center"><sub>Choose a yearly action</sub></p></td>
+    <td width="50%" valign="top"><img src="public/assets/how-to-play/market.webp" alt="Illustrated guide showing a market order preview and the remaining grain reserve" width="100%"><p align="center"><sub>Preview a market order</sub></p></td>
   </tr>
 </table>
 
@@ -98,13 +145,15 @@ These screenshots show earlier testnet and UI builds. The current `dev` rules, c
 
 ## Current Gameplay
 
+- **Choose a mode:** Start Free Play without an account, or use the home menu's Weave Mode option to connect a NEAR wallet or sign in by email. Return to an existing life through the menu's continuation controls.
 - **A life that opens gradually:** Roll a character and household, then reveal controls as they become useful. The visible timeline groups early years (0–5), childhood (6–12), youth (13–17), adulthood (18–59) and later life (60+), with a portrait for each stage. The world's finer decision rules govern when personal, work and household choices become yours.
 - **One year, meaningful work:** Choose a yearly focus, use the annual action, and build skills through practice and recorded work. Study, employment, farming, trade, relationships and care compete for time and resources. Household farming decisions open from age 16.
-- **Guidance as you play:** Sections appear with usable actions, and short contextual tips explain the next step. Automatic tips appear at most once per game year; acting on their highlighted target performs the action and closes the tip. The clock resumes after the tip closes. Auto mode requires confirmation and continues without tutorial pauses.
+- **Guidance as you play:** The illustrated How to play guide explains a year and the roadmap of a life. Sections appear with usable actions, and short contextual tips explain the next step. Automatic tips appear at most once per game year; acting on their highlighted target performs the action and closes the tip. The clock resumes after the tip closes. Yearly reminders point to an unlearned step or a fixable household problem. Auto mode requires confirmation and continues without tutorial pauses.
 - **Control the pace:** Pause, resume, change speed or advance to the next decision. An unused annual action prompts at ages 6 and 7, then only after a five-year stretch of unused actions. Turning-point options display lethal risks before selection.
-- **A household economy:** Track food, money, inventory, fields and work. Trading previews show the total received as prices move with quantity. Grain sales protect the household's food by default; selling that reserve requires an explicit choice. The planting panel reports inherited fields, pending plans and remaining work.
+- **A household economy:** Track food, money, inventory, fields and work. Flood, army and road condition controls explain the year's conditions on hover, focus or touch. Trading previews show the total received as prices move with quantity. Grain sales protect the household's food by default; selling that reserve requires an explicit choice. The planting panel reports inherited fields, pending plans and remaining work.
 - **Eleven historical paths:** Work toward contribution ranks and separately assessed capstones associated with Alexander, Aristotle, Euclid, Lysippos, Pytheas, Menander, Demetrius, Theophrastus, Zeno, Ptolemy and Cleomenes. Skills, materials, completed work and historical windows determine progress; meeting a figure alone earns no card.
 - **Records and reference tools:** Browse the family and relationship ledgers, Works & deeds, earned collections, the interactive [Skill Atlas](https://beta.everfolk.life/skills), [card gallery](https://beta.everfolk.life/cards) and [wiki](https://beta.everfolk.life/wiki). Browser saves and JSON import/export preserve a life with its original rules.
+- **Earned Free Play albums:** A completed free-play life can reveal up to five cards earned on historical paths and keep them in the browser collection. It uses the same eligibility rules as current Weave packs; age milestones alone grant no cards. Minting on NEAR belongs to Weave Mode.
 - **Presentation and sound:** Illustrated loading progress tracks module and world preparation. The sound drawer controls volume, mute and click effects; the selected ten-minute *Macedonian Garden* ambience repeats during play. Source credits and individual license terms are retained with the audio assets.
 
 Historical dates and source-backed context are distinct from authored encounters, household probabilities, prices and alternate outcomes. See the [figure-path design](design/figure-paths.md) for chronology, requirements and evidence boundaries.
@@ -144,6 +193,10 @@ Historical dates and source-backed context are distinct from authored encounters
     </td>
   </tr>
 </table>
+
+The updated opening lets you rotate the foil pack, drag its top seal left or right to tear it, and inspect revealed cards in 3D. Keyboard opening uses **hold Space + repeated Left or Right Arrow**; double-click a revealed card for a close look. Legendary cards have dedicated lighting and rainbow effects, with reduced-motion handling and a fallback when WebGL is unavailable.
+
+Try the standalone [pack showcase](https://beta.everfolk.life/showcase/pack) for repeatable five-card preview draws with at least one Legendary. Its random previews are separate from the cards a played life earns and from contract edition supply.
 
 ---
 
@@ -191,6 +244,8 @@ A figure card requires completed contributions and a separately assessed capston
 </p>
 
 The full playable roster also includes **Lysippos, Pytheas of Massalia, Menander, Demetrius the Besieger, Theophrastus, Zeno of Citium and Ptolemy I Soter**. Each has its own contribution work, resource costs and capstone. Alexander's decisive campaign and the Legendary promotions for Demetrius, Ptolemy and Zeno use one-shot outcomes. A failed outcome preserves earlier contribution progress without granting the final title; Demetrius's successful capture of Rhodes is explicitly alternate history.
+
+The [card gallery](https://beta.everfolk.life/cards) contains artwork for 13 figures, including **Nearchus** and **Eumenes of Cardia** beyond the eleven current playable paths. Each illustrated figure has a principal design and four contributor ranks in male and female variants, making 117 gallery designs in total.
 
 ### Earned Cards, Career Groups & Deeds
 
@@ -401,7 +456,7 @@ Strict unidirectional imports across modules are mechanically verified in CI by 
 Everfolk models livelihoods through connected prerequisites, proficiency gates, and **demonstrated-work proof** rather than abstract XP bars:
 
 - **74-node Skill Atlas (`/skills`):** **Physique**, **Handmade**, **Knowledge** and **Trade** span ten depth tiers. The interactive map runs left to right on a dark background; each node explains prerequisites, required proof and practical rewards. Military crossovers connect physical conditioning and inquiry to command ([progression guide](guide/SKILL_CROSSOVERS.md)).
-- **Practice with proof:** Learn through qualified actions and demonstrated work. Historical projects consume real materials, school or workshop funds and annual actions; completed contributions and capstones retain their provenance in the life record.
+- **Practice with proof:** Learn through qualified actions and demonstrated work. Newly learned skills appear in the notification feed and are marked in the skill trees. Historical projects consume real materials, school or workshop funds and annual actions; completed contributions and capstones retain their provenance in the life record.
 - **Current household resources (`alexandria-lives-11`):** Working households begin with modest reserves, while merchant and estate backgrounds have different resources. Grain, flax, linen, animals, supplies and market depth connect production, food security and trade. The trade preview explains quantity-dependent prices and the total before confirmation.
 - **Retained benchmark (`alexandria-lives-8`):** The [800-life seeded evaluation](guide/SKILL_TREE.md) reported depth-10 specialization rates of **55.0%–64.0%** under its disclosed policies. Those figures describe that revision and evaluation. Current historical-card completion rates require separate measurement.
 
@@ -438,6 +493,8 @@ pnpm dev
 Free play works out of the box with no account or secrets (browser storage and JSON import/export). Local Weave verification needs `RANKED_VERIFIER_SECRET=<64-hex>` in an ignored `.dev.vars`, with the matching public key registered on the selected testnet contract. Configure the contract and optional sign-in/funder settings using [.env.production.example](.env.production.example) and the [contract guide](contract/README.md).
 
 For an isolated browser preview of current historical lives, run `node scripts/preview-lives.mjs --world-pack worlds/demo/alexandria-lives-11.json` and open `http://localhost:5175/`. The bundled world works without a database. `/test-aristocrat` and `/test-royalty` open class scenarios without writing personal saves. The regular `pnpm dev` server also provides `/loading-preview` to inspect the loading screen.
+
+On the regular development server, `/showcase/pack` opens the repeatable card reveal and `/showcase/royalty` opens the six household scenarios. These showcases can be explored without changing a personal life or minting an NFT.
 
 Editable artwork and authoring libraries live in private VPS storage outside this repository. Normal development, builds and CI use delivered assets and compact retained metadata; they do not need the full source archive. See [Artwork Storage](guide/artwork-storage.md) for the pinned releases and explicit authoring-source retrieval.
 
@@ -553,13 +610,25 @@ The portrait libraries retain their source manifests, QA records and dependencie
 | [Smart Contract Reference](contract/README.md) | Method catalog, gas floors, storage economics &amp; failure recovery |
 | [Branch Deployment](tools/app-vps/README.md) | Beta/production branch mapping, immutable builds, health checks, backups and rollback |
 | [Artwork Storage](guide/artwork-storage.md) &middot; [Artwork Delivery](guide/artwork-delivery.md) | Private authoring archives, public media releases, CDN configuration and local fallback |
+| [Card Source Metadata](assets/source/cards/README.md) &middot; [Banner Provenance](assets/source/banners/README.md) | Reviewed card identities, authoring-source requirements and structural/hash evidence for delivered banners |
 | [Architecture &amp; Contributing](ARCHITECTURE.md) &middot; [CONTRIBUTING.md](CONTRIBUTING.md) &middot; [ROADMAP.md](ROADMAP.md) | Module dependencies, PR-free branch rules &amp; development phases |
 
 ---
 
 ## Assets, Typography & Attributions
 
-- **Card collection:** `/cards` presents 117 v14 designs: 13 figures and four contributor ranks in male/female variants. The same approved art appears in earned collections, market cards, mint/reveal screens and 3D pack reviews. Recorded NFT rarity and serials stay authoritative; 16 additional parent-frame variants cover the retained onchain ranks. The 484 lossless WebP assets and their hashes are registered in `client/models/card-art-registry.json` and `public/assets/cards/collection-v14/manifest.json`. `pnpm art:cards` rebuilds delivery from the reviewed native library using the locally installed VectorCraft CLI. Full SVG/native masters and verification are retained in the private [artwork source archive](guide/artwork-storage.md); compact card catalogues and provenance remain in `assets/source/cards/`.
+| Delivered Library | Current Contents | Inventory / Provenance |
+|---|---|---|
+| **v14 cards** | 117 designs plus 19 principal-card rarity variants; 487 lossless WebP files, including full cards, thumbnails, footerless frames and portrait crops. Full cards are 900×1260; thumbnails are 450×630. | [Runtime registry](client/models/card-art-registry.json) &middot; [Delivery manifest](public/assets/cards/collection-v14/manifest.json) |
+| **v3 portraits** | 240 PNGs at 384×480, covering six identities, six visual stages and the applicable livelihood and household wardrobes. | [Delivery manifest](public/assets/portraits/ordinary-v3/manifest.json) &middot; [Reviewed source metadata](assets/source/portraits/ordinary-v3/reviewed-manifest.json) |
+| **Concept 1 scene artwork** | 24 PNG scene plates and 1,296 transparent actor sprites at 480×224, covering six stages, four career roles and household appearance variants. | [Scene manifest](public/assets/pixel/banners-concept1/manifest.json) &middot; [Pinned scene media release](assets/storage/scene-media-lock.json) |
+| **SVG scene fallbacks** | 24 scene plates and 864 actor poses in SVG, on a shared 240×112 canvas. Native masters retain separate editable layers. | [Banner manifest](public/assets/pixel/banners/manifest.json) &middot; [Native provenance](assets/source/banners/native-provenance.json) |
+| **Illustrated play guide** | Six WebP screenshots: time controls, focus, yearly actions, fields, market and life record. | [Delivered screenshots](public/assets/how-to-play) &middot; [Guide content and examples](client/models/how-to-play.ts) |
+| **3D booster pack** | Temple-print pack texture, wordmark and bundled Eczar font, used by the foil-opening and card-inspection scene. | [Pack assets](public/assets/booster) &middot; [Reveal runtime](client/lib/booster/runtime.mjs) |
+| **Skill Atlas** | The 74-node vector map and the bundled open-source skill-icon library. | [Atlas SVG](public/assets/skills/skill-atlas.svg) &middot; [Icon attribution](public/assets/skill-icons/open-source-v3/ATTRIBUTION.md) |
+| **Audio** | Eight delivered audio files, including the selected 600-second *Macedonian Garden* loop, retained music tracks and a UI click. | [Checksums and source records](public/assets/audio/manifest.json) &middot; [Credits and redistribution notices](public/assets/audio/ATTRIBUTION.md) &middot; [License texts](public/assets/audio/LICENSES.txt) |
+
+- **Card integration and authoring:** The same reviewed art appears in earned collections, market cards, mint/reveal screens and 3D pack reviews. Recorded NFT rarity and serials stay authoritative; preview serials are examples. `pnpm art:cards` rebuilds delivery from the reviewed native library using the locally installed VectorCraft CLI; `pnpm portraits:sync` rebuilds portrait delivery. Both require the optional authoring archive selected with `EVERFOLK_ARTWORK_DIR`. Full SVG/native masters and verification are retained in the private [artwork source archive](guide/artwork-storage.md); compact catalogues, reviewed metadata and banner provenance remain in `assets/source/`.
 - **Card symbols:** Twelve professionally drawn Game-icons.net designs by Lorc/Delapouite (CC BY 3.0) and Google's drafting-compass symbol (Apache 2.0) replace the original drawn placeholders. Author/source links, unchanged originals and licenses are bundled at [`icon-credits.html`](public/assets/cards/collection-v14/icon-credits.html). Inter is bundled under the SIL Open Font License for the live edition text. Illustration originals and PixelOE QA remain in the private source archive under `cards/figure-inner-art-v14/`.
 - **Brand System (Printed Folktale):** Bundles `Eczar 600` wordmarks/headings and `DM Sans 500` narrative typography under the SIL Open Font License ([`public/fonts/`](public/fonts), the private [branding source archive](guide/artwork-storage.md)).
-- **Original Artwork &amp; Media:** Original pixel scenes, 480&times;640 figure collectible cards, paper cutout plates, and vector skill atlas remain in `public/assets/`. Bundled audio source records and license texts reside in `public/assets/audio/`. Historical contexts are sourced, while individual characters, prices, probabilities, and scenes remain authored fictional illustrations rather than archaeological reconstructions.
+- **Other artwork and historical context:** Earlier pixel scenes, 480×640 figure art and paper cutout plates remain in `public/assets/` alongside the current libraries. Historical contexts are sourced, while individual characters, prices, probabilities and scenes are authored fiction and illustrations. Per-asset source and license records govern reuse of bundled media.

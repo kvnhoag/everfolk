@@ -9,7 +9,7 @@ import {
 } from "./ranked-session.ts";
 import { loadLifeWorld } from "./life-world.ts";
 
-export type RankedProgress = { status: "new" | "playing" | "ended" | "unavailable"; age?: number; name?: string; pack?: boolean };
+export type RankedProgress = { status: "new" | "playing" | "ended" | "unavailable"; age?: number; year?: number; name?: string; pack?: boolean };
 
 /** Replays this device's save; an on-chain active life can already be finished locally and waiting to mint. */
 export async function rankedProgress(
@@ -24,6 +24,6 @@ export async function rankedProgress(
     const pack = world ?? await loadLifeWorld(life.world_version);
     const state = createEngine(pack).load(found.raw);
     if (state.seed !== life.seed) return { status: "unavailable" };
-    return { status: state.phase === "ended" ? "ended" : "playing", age: state.age, name: state.character?.name };
+    return { status: state.phase === "ended" ? "ended" : "playing", age: state.age, year: state.year, name: state.character?.name };
   } catch { return { status: "unavailable" }; }
 }

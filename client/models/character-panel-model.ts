@@ -14,6 +14,12 @@ export const CHARACTER_SECTIONS: { id: CharacterSection; label: string }[] = [
   { id: "children", label: "Family" },
 ];
 
+/** Open the skill tree with the world's first training activity. Worlds without training keep their reference tab. */
+export function skillTreeUnlockAge(world: WorldPack): number {
+  const training = world.character?.activities.filter(activity => activity.category === "training") ?? [];
+  return training.length ? Math.min(...training.map(activity => activity.minAge ?? 0)) : 0;
+}
+
 /** Show life management when it becomes part of the character's life. */
 export function visibleCharacterSections(life: LifeState, world: WorldPack, hasRelationships: boolean): typeof CHARACTER_SECTIONS {
   const royal = isRoyalLife(world, life);
@@ -21,6 +27,7 @@ export function visibleCharacterSections(life: LifeState, world: WorldPack, hasR
   const privileged = isPrivilegedLife(world, life);
   const firstJobAge = Math.min(...(world.character?.jobs.map(job => job.minAge) ?? []));
   return CHARACTER_SECTIONS.filter(section => {
+    if (section.id === "skills") return life.age >= skillTreeUnlockAge(world);
     if (section.id === "career") return !privileged && (Boolean(life.character?.jobId) || life.age >= firstJobAge);
     if (section.id === "figures") return Boolean(world.figurePaths?.length || world.legacy?.achievements.some(achievement => achievement.figure));
     if (section.id === "path") return Boolean(world.paths && life.paths);

@@ -4,6 +4,8 @@ import { chainHref, parseChainRoute } from "../client/chain/chain-route.ts";
 
 test("hash routes for the ranked screens", () => {
   assert.deepEqual(parseChainRoute("#ranked"), { kind: "ranked" });
+  assert.deepEqual(parseChainRoute("#weave"), { kind: "ranked" });
+  assert.deepEqual(parseChainRoute("#weave/new"), { kind: "ranked", startNew: true });
   assert.deepEqual(parseChainRoute("#market"), { kind: "market" });
   assert.deepEqual(parseChainRoute("#figures"), { kind: "figures" });
   assert.deepEqual(parseChainRoute("#pack/14"), { kind: "pack", lifeId: "14" });
@@ -14,7 +16,7 @@ test("hash routes for the ranked screens", () => {
 });
 
 test("anything else leaves the game alone", () => {
-  for (const hash of ["", "#", "#token/", "#token/abc", "#token/1/2", "#market/1", "#about", "#token/01x"]) {
+  for (const hash of ["", "#", "#token/", "#token/abc", "#token/1/2", "#market/1", "#about", "#token/01x", "#weave/new/extra"]) {
     assert.equal(parseChainRoute(hash), null, hash);
   }
 });
@@ -22,5 +24,7 @@ test("anything else leaves the game alone", () => {
 test("links round-trip", () => {
   assert.equal(chainHref({ kind: "token", tokenId: "7" }), "#token/7");
   assert.equal(chainHref({ kind: "market" }), "#market");
+  assert.equal(chainHref({ kind: "ranked", startNew: true }), "#weave/new");
+  assert.deepEqual(parseChainRoute(chainHref({ kind: "ranked", startNew: true })), { kind: "ranked", startNew: true });
   assert.deepEqual(parseChainRoute(chainHref({ kind: "token", tokenId: "7" })), { kind: "token", tokenId: "7" });
 });

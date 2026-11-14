@@ -35,7 +35,7 @@ import { useLegacyGallery } from "../hooks/useLegacyGallery.ts";
 import PaperScene from "../components/PaperScene.tsx";
 import CharacterPanel from "../components/CharacterPanel.tsx";
 import BirthRollPopover from "../components/BirthRollPopover.tsx";
-import MainMenu from "./MainMenu.tsx";
+import MainMenu, { type MainMenuProps } from "./MainMenu.tsx";
 import DecisionDialog from "../components/DecisionDialog.tsx";
 import LifeEventFeed from "../components/LifeEventFeed.tsx";
 import LifeOverview from "../components/LifeOverview.tsx";
@@ -133,6 +133,7 @@ import YearChecklist, { SectionStep } from "../components/YearChecklist.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 import { useResumeAfterTip } from "../hooks/useResumeAfterTip.ts";
 import { earningFacts, householdCosts } from "../models/earning-step.ts";
+import { isUnplayedBirth } from "../models/life-start.ts";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -212,15 +213,18 @@ function LifeJournal({ life, newestFirst = false }: { life: LifeState; newestFir
 export type AppPanel = "world" | "chronicle" | "sources" | "archive" | "legacy" | "about" | "character" | "figures" | "wiki" | "map" | null;
 export type CharacterSection = "career" | "wealth" | "children" | "skills" | "relationships";
 
-function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, enterGame = false, previewSession, startFresh = false, startFreshFrom, eventVisuals, ranked, online, npcStatusNotice = null, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { chainBackend?: import("../chain/chain-backend.ts").ChainBackend | null; onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; enterGame?: boolean; previewSession?: GamePreviewSession; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; online?: OnlinePlay; npcStatusNotice?: string | null; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
+function App({ chainBackend, onContinueWeave, weaveEnabled, onWeaveChange, onChooseWorld, onNewLife, onImportedLife, worldPickerOpen = false, enterGame = false, previewSession, startFresh = false, startFreshFrom, eventVisuals, ranked, online, npcStatusNotice = null, initialPanel = null, initialCharacterSection = "career", deferInitialDecision = false, demoComparison = null }: { chainBackend?: import("../chain/chain-backend.ts").ChainBackend | null; onContinueWeave?: MainMenuProps["onContinueWeave"]; weaveEnabled?: boolean; onWeaveChange?: MainMenuProps["onWeaveChange"]; onChooseWorld?: () => void; onNewLife?: (previous: LifeState) => void; onImportedLife?: (life: LifeState) => void; worldPickerOpen?: boolean; enterGame?: boolean; previewSession?: GamePreviewSession; startFresh?: boolean; startFreshFrom?: LifeState; worldRoutes?: WorldRoute[]; eventVisuals?: EventVisuals; ranked?: RankedPlay; online?: OnlinePlay; npcStatusNotice?: string | null; initialPanel?: AppPanel; initialCharacterSection?: CharacterSection; deferInitialDecision?: boolean; demoComparison?: { withDeed: ComparisonSide; withoutDeed: ComparisonSide } | null }) {
   const isRanked = Boolean(ranked || online);
   const [panel, setPanel] = useState<AppPanel>(initialPanel);
   const [characterSection, setCharacterSection] = useState<CharacterSection>(initialCharacterSection);
   const [skillFocus, setSkillFocus] = useState<SkillTreeFocus>();
   const [restartOpen, setRestartOpen] = useState(false);
-  // A ranked life opens straight into play; free play starts at the main menu.
+  // Connected births show their assigned stats before play; free play starts at the main menu.
   const [menuOpen, setMenuOpen] = useState(!isRanked && !enterGame);
-  const [birthPopoverOpen, setBirthPopoverOpen] = useState(startFresh || Boolean(previewSession?.atBirth));
+  const [birthPopoverOpen, setBirthPopoverOpen] = useState(() => {
+    const connectedLife = (online ?? ranked)?.initial;
+    return connectedLife ? isUnplayedBirth(connectedLife) : startFresh || Boolean(previewSession?.atBirth);
+  });
   // Adult previews enter through their household guide before the general rules.
   const [householdWelcomeOpen, setHouseholdWelcomeOpen] = useState(() => Boolean(
     previewSession && !previewSession.atBirth && householdManagement(previewSession.engine.world, previewSession.life),
@@ -559,8 +563,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     setReadingPause(false);
     if (!firstVisit) setDeferredDecision(null);
     setRequestedDecision(null);
-    // Keep the experience chooser and wallet accessible on arrival. A requested new free life still opens its roll.
-    setBirthPopoverOpen(!isRanked && (!firstVisit || startFresh || directEntry || Boolean(previewSession?.atBirth)) && !game.hasBegun && life.phase !== "ended");
+    // New connected lives also show their starting information, with the pre-rolled values already revealed.
+    setBirthPopoverOpen((isRanked || !firstVisit || startFresh || directEntry || Boolean(previewSession?.atBirth)) && !game.hasBegun && life.phase !== "ended");
     setHouseholdWelcomeOpen(Boolean(previewSession && !previewSession.atBirth && householdManagement(world, life)));
     setMenuOpen(!isRanked && !directEntry);
   }, [life.worldFingerprint, life.seed, enterGame]);
@@ -635,7 +639,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   }
 
   function beginFromMenu() {
-    if (game.hasBegun) setRestartOpen(true);
+    if (isRanked || game.hasBegun) setRestartOpen(true);
     else setBirthPopoverOpen(true);
   }
 
@@ -742,7 +746,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       <p>This version could not open it. You can try the game in memory; the original save will stay unchanged until you choose to replace it.</p>
       <div><button type="button" onClick={() => downloadLife(game.unreadableSave!, "everfolk-protected-save.json")}>Download original save</button><button type="button" onClick={game.resetUnreadableSave}>Replace protected save with this life</button></div>
     </aside>}
-    {menuOpen && <MainMenu chainBackend={chainBackend} life={life} rankedLife={isRanked} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
+    {menuOpen && <MainMenu chainBackend={chainBackend} weaveEnabled={weaveEnabled} onWeaveChange={onWeaveChange} onContinueWeave={onContinueWeave} life={life} rankedLife={isRanked} hasBegun={game.hasBegun} hasRevealedStats={game.hasRevealedStats} onBegin={beginFromMenu} onContinue={continueFromMenu} notice={game.notice || downloadError} active={!panel && !restartOpen && !birthPopoverOpen && !worldPickerOpen} />}
     <div className="everfolk-game" hidden={menuOpen}>
     <a className="skip-link" href="#life-scene">Skip to your life</a>
     <header className="site-header">
@@ -764,7 +768,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     <nav className="life-tabs" aria-label="Your life">
       <button className={!panel ? "nav-link active" : "nav-link"} onClick={closeDialog}><span className="small-dot" />Your life</button>
       {(!game.hasBegun || shows("character")) && <button className={panel === "character" ? "nav-link active" : "nav-link"} disabled={!game.hasRevealedStats} onClick={() => { setCharacterSection("career"); setPanel("character"); }}>Character</button>}
-      {(!game.hasBegun || shows("skill-tree") || shows("character")) && <button className={panel === "character" && characterSection === "skills" ? "nav-link active" : "nav-link"} data-tutorial="skill-tree" onClick={() => { setCharacterSection("skills"); setPanel("character"); }}>Skill tree</button>}
+      <button className={panel === "character" && characterSection === "skills" ? "nav-link active" : "nav-link"} data-tutorial="skill-tree" onClick={() => { setCharacterSection("skills"); setPanel("character"); }}>Skill tree</button>
       <button className={panel === "world" ? "nav-link active" : "nav-link"} onClick={() => setPanel("world")}>Wiki</button>
       {supportsLocationMap(world) && <button className={panel === "map" ? "nav-link active" : "nav-link"} onClick={() => setPanel("map")}>Map</button>}
       <button className={panel === "archive" ? "nav-link active" : "nav-link"} onClick={() => setPanel("archive")}>Past lives</button>
@@ -924,7 +928,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       </div>
     </footer>
     </div>
-    {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onReborn={game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={beginWithReadingPause} />}
+    {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} preRolled={isRanked} onReveal={game.revealStats} onReborn={isRanked ? undefined : game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={beginWithReadingPause} />}
     {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} returnFocusRef={decisionButtonRef} demoView={demoView} isLoanDecision={Boolean(isLoanDecision)} isLoanOffer={Boolean(isLoanOffer)} loanBalanceText={loanSummary ? `Balance owed: ${formatMoney(loanSummary.balance, world)}` : loanOfferTerms || null} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => requestAutoMode(true, true)} riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null} />}
     <AutoModeConfirmDialog open={autoConfirm !== null} lifeKey={lifeId} onConfirm={confirmAutoMode} onCancel={() => setAutoConfirm(null)} />
     <HouseholdWelcome open={householdWelcomeOpen} life={life} world={world} onClose={() => setHouseholdWelcomeOpen(false)} onOpenCouncil={exploreHouseholdCouncil} />
@@ -933,7 +937,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
         {(dialogError || downloadError) && <p className="dialog-error" role="alert">{dialogError || downloadError}</p>}
         {restartOpen ? <>
           <p className="eyebrow">{game.isPreview ? "TEST LIFE" : "NEW LIFE"}</p><h2 id="dialog-title">{game.isPreview ? "Reset this test life?" : "Start a new life?"}</h2>
-          <p>{game.isPreview ? "Return to this preset’s starting age and values. Your normal saved life is kept separate." : "Your current life will be replaced by a new birth. Completed lives remain in this browser’s past-lives archive. You can download the current life first."}</p>
+          <p>{game.isPreview ? "Return to this preset’s starting age and values. Your normal saved life is kept separate." : isRanked ? "Your Weave life stays saved with your account so you can continue it later. A new life without an account will replace the free-play life saved in this browser." : "Your current life will be replaced by a new birth. Completed lives remain in this browser’s past-lives archive. You can download the current life first."}</p>
           {(world.character?.playerNames?.length ?? 0) > 1 && world.origins.length > 1 && <p>A new name, household and starting stats will be rolled.</p>}
           <div className="dialog-actions"><button className="secondary-button" onClick={() => downloadLife()}><Icon name="download" size={18} /> Download current life</button><button className="primary-button" onClick={() => { game.setPlaying(false); setSkippedAutoConfirm(prev => clearSkippedAutoConfirm(prev, lifeId)); closeDialog(); if (onNewLife) onNewLife(life); else game.restart(); }}>Begin another life <Icon name="arrow" /></button></div>
         </> : panel === "character" ? <>

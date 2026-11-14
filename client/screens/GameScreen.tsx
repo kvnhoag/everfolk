@@ -24,6 +24,8 @@ import {
 } from "../chain/npc-online.ts";
 import type { LifeView } from "../../chain/types.ts";
 import { loadLifeWorld } from "../chain/life-world.ts";
+import { readSavedLife } from "../queries/lives.ts";
+import { readWeaveMode, writeWeaveMode } from "../storage/weave-mode.ts";
 /** Register an exact ranked pack without changing free-play bindings. */
 async function loadRankedWorld(version: string) {
   const ready = await loadLifeWorld(version);
@@ -42,6 +44,22 @@ export default function GameScreen() {
   const [rankedOnline, setRankedOnline] = useState<RankedNpcOnlinePlay | null>(null);
   const [npcNotice, setNpcNotice] = useState<string | null>(null);
   const [, setRankedRevision] = useState(0);
+  const [weaveEnabled, setWeaveEnabled] = useState(readWeaveMode);
+
+  function changeWeaveMode(enabled: boolean) {
+    setWeaveEnabled(enabled);
+    writeWeaveMode(enabled);
+  }
+
+  function startGuestLife() {
+    if (!active) return;
+    let previousLife;
+    try { previousLife = readSavedLife(window.localStorage) ?? undefined; } catch { /* Guest play can start when storage is unavailable. */ }
+    setRankedOnline(null);
+    setNpcNotice(null);
+    setRankedSession(null);
+    void enterWorld(active.world.id, true, previousLife);
+  }
 
   async function beginRanked(life: LifeView, backend: ChainBackend) {
     const isNpc = life.world_version === NPC_WORLD_VERSION;
@@ -105,6 +123,7 @@ export default function GameScreen() {
     }
 
     holdFreePlayForRanked();
+    changeWeaveMode(true);
     setRankedOnline(onlinePlay);
     setNpcNotice(statusNotice);
     setRankedSession(session);
@@ -123,12 +142,12 @@ export default function GameScreen() {
   return <>
     {rankedSession
       ? rankedOnline
-        ? <App key={`ranked-${rankedSession.life.life_id}`} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} online={rankedOnline} npcStatusNotice={npcNotice} />
-        : <App key={`ranked-${rankedSession.life.life_id}`} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} ranked={{
+        ? <App key={`ranked-${rankedSession.life.life_id}`} chainBackend={backend} weaveEnabled={weaveEnabled} onWeaveChange={changeWeaveMode} onNewLife={startGuestLife} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} online={rankedOnline} npcStatusNotice={npcNotice} />
+        : <App key={`ranked-${rankedSession.life.life_id}`} chainBackend={backend} weaveEnabled={weaveEnabled} onWeaveChange={changeWeaveMode} onNewLife={startGuestLife} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} ranked={{
           initial: rankedSession.state, current: () => rankedSession.state,
           sync: next => rankedSession.sync(next), onSynced: () => setRankedRevision(value => value + 1),
         }} />
-      : <App key={active.key} enterGame={enterGame} chainBackend={backend} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />}
+      : <App key={active.key} enterGame={enterGame} chainBackend={backend} weaveEnabled={weaveEnabled} onWeaveChange={changeWeaveMode} onContinueWeave={backend ? life => beginRanked(life, backend) : undefined} onChooseWorld={() => { void openWorlds(); }} onNewLife={previous => { void enterWorld(active.world.id, true, previous); }} onImportedLife={keepImportedWorld} worldPickerOpen={pickerOpen || busy || Boolean(chainRoute)} startFresh={active.fresh} startFreshFrom={active.previousLife} worldRoutes={active.world.routes} eventVisuals={active.world.eventVisuals} />}
     <dialog ref={dialog} className="detail-dialog world-picker" onCancel={() => setPickerOpen(false)} aria-labelledby="world-picker-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close world library" onClick={() => setPickerOpen(false)}>×</button><p className="eyebrow">WORLD SELECT</p><h2 id="world-picker-title">Choose a world</h2><p>Start a life or resume your save.</p>
         {error && <p className="dialog-error" role="alert">{error}</p>}

@@ -30,12 +30,13 @@ function render(section: "skills" | "figures", pack = world) {
   return renderToStaticMarkup(createElement(CharacterPanel, { world: pack, life: state, initialSection: section, onActivity: noop, onMarketOrder: noop, onCancelMarketOrder: noop }));
 }
 
-test("skills offer a separate historical figures tab without mounting figure paths beneath the tree", () => {
+test("opening skills before training unlocks keeps historical figures accessible and the tree hidden", () => {
   const before = JSON.stringify(life);
   const html = render("skills");
-  assert.match(html, /role="tab"[^>]*-tab-figures" aria-selected="false"[^>]*>Historical Figures/);
-  assert.match(html, /role="tabpanel"[^>]*-panel-figures"[^>]*hidden=""/);
-  assert.doesNotMatch(html, /data-figure-path=|class="figure-paths"/);
+  assert.match(html, /Skill tree unlocks when you reach age 6\./);
+  assert.match(html, /role="tab"[^>]*-tab-figures" aria-selected="true"[^>]*>Historical Figures/);
+  assert.match(html, /class="figure-paths"/);
+  assert.doesNotMatch(html, /-tab-skills|-panel-skills|class="(?:deep-)?capability-tree"/);
   assert.equal(JSON.stringify(life), before);
 });
 

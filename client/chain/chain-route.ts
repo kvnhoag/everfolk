@@ -1,8 +1,9 @@
 /** Hash routes for the ranked screens. Any other hash leaves the game as it is. */
-export type ChainRoute = { kind: "ranked" } | { kind: "market" } | { kind: "figures" } | { kind: "mine" } | { kind: "pack"; lifeId: string } | { kind: "token"; tokenId: string };
+export type ChainRoute = { kind: "ranked"; startNew?: boolean } | { kind: "market" } | { kind: "figures" } | { kind: "mine" } | { kind: "pack"; lifeId: string } | { kind: "token"; tokenId: string };
 
 export function parseChainRoute(hash: string): ChainRoute | null {
   if (hash === "#ranked" || hash === "#weave") return { kind: "ranked" };
+  if (hash === "#weave/new") return { kind: "ranked", startNew: true };
   if (hash === "#figures") return { kind: "figures" };
   if (hash === "#market") return { kind: "market" };
   if (hash === "#mine") return { kind: "mine" };
@@ -13,5 +14,6 @@ export function parseChainRoute(hash: string): ChainRoute | null {
 }
 
 export function chainHref(route: ChainRoute): string {
+  if (route.kind === "ranked" && route.startNew) return "#weave/new";
   return route.kind === "pack" ? `#pack/${route.lifeId}` : route.kind === "token" ? `#token/${route.tokenId}` : `#${route.kind}`;
 }

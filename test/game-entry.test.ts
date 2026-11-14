@@ -73,6 +73,7 @@ test("explicit loading-screen entry restores an existing character directly and 
   assert.doesNotMatch(html, /<main[^>]*class="ef-home"/);
   assert.match(html, /<div class="everfolk-game">/);
   assert.match(html, /aria-label="Your life now"/);
+  assert.match(html, /<button[^>]*data-tutorial="skill-tree"[^>]*>Skill tree<\/button>/);
   assert.match(html, /aria-label="Play automatic progression" aria-pressed="false"/);
   assert.match(html, /role="timer" aria-live="off">Paused</);
   assert.doesNotMatch(html, /class="birth-record birth-intro-record"/);

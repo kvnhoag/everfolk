@@ -20,7 +20,7 @@ import { isAristocratLife, isPrivilegedLife } from "../../src/aristocracy.ts";
 import { personPortraitState } from "../models/portrait-state.ts";
 import LifeHealthPanel from "./LifeHealthPanel.tsx";
 import CompactSkillPanel from "./CompactSkillPanel.tsx";
-import { characterActivitySummary, visibleCharacterSections, visibleFamilyActivities } from "../models/character-panel-model.ts";
+import { characterActivitySummary, skillTreeUnlockAge, visibleCharacterSections, visibleFamilyActivities } from "../models/character-panel-model.ts";
 import { careerOpeningNotes } from "../models/career-openings.ts";
 import { occupationBadge } from "../demo/screen.ts";
 import { UNAVAILABLE_REASON } from "../../src/demo/types.ts";
@@ -148,7 +148,6 @@ export default function CharacterPanel({ life, world, onActivity, onAssess, onMa
   focusSkill?: SkillTreeFocus;
 } & MarketActions) {
   const [section, setSection] = useState<Section>(initialSection);
-  useEffect(() => { onSectionChange?.(section); }, [section]); // eslint-disable-line react-hooks/exhaustive-deps
   const [jobSearch, setJobSearch] = useState("");
   const [jobAvailability, setJobAvailability] = useState<AvailabilityFilter>("all");
   const [relationshipFilter, setRelationshipFilter] = useState<RelationshipFilter>("all");
@@ -157,8 +156,18 @@ export default function CharacterPanel({ life, world, onActivity, onAssess, onMa
   const allActivities = useMemo(() => world.character && life.character ? engineForLife(life).getActivities(life) : [], [life, world]);
   const character = life.character;
   const definition = world.character;
+  const knownPartners = visibleRelationshipPeople(world, life);
+  const hasRelationships = definition?.proceduralPartners ? knownPartners.length > 0 : !definition?.requireIntroductions || knownPartners.length > 0;
+  const royal = isRoyalLife(world, life);
+  const aristocrat = isAristocratLife(world, life);
+  const privileged = isPrivilegedLife(world, life);
+  const visibleSections = visibleCharacterSections(life, world, hasRelationships);
+  const activeSection = privileged && section === "career" ? "wealth" : visibleSections.some(item => item.id === section) ? section : visibleSections[0]?.id ?? "skills";
+  useEffect(() => { onSectionChange?.(activeSection); }, [activeSection, onSectionChange]);
   if (!character || !definition) return <div className="character-management"><p className="character-empty">These options are available in newer worlds. Your current life keeps its original rules.</p></div>;
 
+  const skillUnlockAge = skillTreeUnlockAge(world);
+  const skillsLocked = life.age < skillUnlockAge;
   const props = { life, world, onActivity };
   const knownPartnerIds = new Set([
     ...(character.knownPartnerIds ?? []),
@@ -167,14 +176,7 @@ export default function CharacterPanel({ life, world, onActivity, onAssess, onMa
   ]);
   const knowsPartner = (id: string) => !definition.requireIntroductions || knownPartnerIds.has(id);
   const datedPartnerIds = new Set(character.datedPartnerIds ?? []);
-  const knownPartners = visibleRelationshipPeople(world, life);
   const visiblePeopleIds = new Set(knownPartners.map(person => person.id));
-  const hasRelationships = definition.proceduralPartners ? knownPartners.length > 0 : !definition.requireIntroductions || knownPartners.length > 0;
-  const royal = isRoyalLife(world, life);
-  const aristocrat = isAristocratLife(world, life);
-  const privileged = isPrivilegedLife(world, life);
-  const visibleSections = visibleCharacterSections(life, world, hasRelationships);
-  const activeSection = privileged && section === "career" ? "wealth" : visibleSections.some(item => item.id === section) ? section : visibleSections[0]?.id ?? "skills";
   // Keep undiscovered people out of the DOM as well as the visible cards.
   const activities = allActivities.filter(activity => activityPartnerIds(activity).every(knowsPartner));
   const currentJob = definition.jobs.find(job => job.id === character.jobId);
@@ -249,6 +251,7 @@ export default function CharacterPanel({ life, world, onActivity, onAssess, onMa
       <p>{budget}</p>
     </div>
     {recentOutcome && <div className="character-recent-outcome" role="status"><span>Result</span><p>{displayProse(recentOutcome)}</p></div>}
+    {skillsLocked && <p className="character-empty" role="status">Skill tree unlocks when you reach age {skillUnlockAge}.</p>}
     <div className="character-tabs has-section-help" role="tablist" aria-label="Life management sections">
       {visibleSections.map((item, index) => <button type="button" role="tab" id={`${instanceId}-tab-${item.id}`} aria-selected={activeSection === item.id} aria-controls={`${instanceId}-panel-${item.id}`} tabIndex={activeSection === item.id ? 0 : -1} key={item.id} ref={element => { tabRefs.current[item.id] = element; }} onKeyDown={event => navigateTabs(event, index)} onClick={() => setSection(item.id)}>{item.label}</button>)}
       <SectionHelp hint="character" />
@@ -287,11 +290,11 @@ export default function CharacterPanel({ life, world, onActivity, onAssess, onMa
         <ActivityList activities={visibleOtherCareer} {...props} />
         {visibleOtherCareer.length === 0 && jobSearch.trim() && <p className="character-search-empty">No other work activities match this search.</p>}
       </div>}
-      <div className="character-section has-section-help" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
+      {!skillsLocked && <div className="character-section has-section-help" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
         <SectionHelp hint="skills" />
         {/* Proficiency and occupation reference lives in the Wiki; the skill tree and figure paths get the space. */}
         {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} focusSkill={focusSkill} /> : <CapabilityTree activities={activities} {...props} onAssess={onAssess} focusSkill={focusSkill} />}
-      </div>
+      </div>}
       {visibleSections.some(item => item.id === "figures") && <div className="character-section historical-figures-panel" role="tabpanel" id={`${instanceId}-panel-figures`} aria-labelledby={`${instanceId}-tab-figures`} tabIndex={0} hidden={activeSection !== "figures"}>
         {activeSection === "figures" && (world.figurePaths?.length ? <FigurePaths activities={activities} {...props} /> : <HistoricalTitlePaths world={world} life={life} />)}
       </div>}
