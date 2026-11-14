@@ -3,7 +3,8 @@ import { createHash, randomUUID } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, realpathSync, renameSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
-import { checkBundle } from '../../artwork/card-art-handoff-v1/tools/card-art.mjs';
+import { checkBundle } from './card-art-kit.mjs';
+import { artworkRoot, requireArtworkSource } from './artwork-source.mjs';
 
 const require = createRequire(import.meta.url);
 const sharp = createRequire(require.resolve('next/package.json'))('sharp');
@@ -12,7 +13,7 @@ const need = (condition, message) => { if (!condition) throw new Error(message);
 const json = value => JSON.stringify(value, null, 2) + '\n';
 const load = path => JSON.parse(readFileSync(path, 'utf8'));
 const digest = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
-const activeLocation = 'artwork/cards/replacements/active.json';
+const activeLocation = 'assets/source/cards/replacements/active.json';
 const allowedFiles = new Set(['full', 'footerless', 'thumbnail', 'portrait', 'standardArt']);
 const fileSuffix = { full: '.webp', footerless: '-footerless.webp', thumbnail: '-thumb.webp', portrait: '-portrait.webp', standardArt: '-standard-art.png' };
 const dimensions = { full: [900, 1260], footerless: [900, 1260], thumbnail: [450, 630], portrait: [840, 1050], standardArt: [592, 740] };
@@ -112,10 +113,11 @@ async function verifyFrame(record, template, kitRoot, decoded) {
 }
 
 /** Returns validated entries and in-memory bytes; no repository writes. */
-export async function validateCardArtBundle({ repo, bundle, registry, kitRoot = resolve(repo, 'artwork/card-art-handoff-v1') }) {
+export async function validateCardArtBundle({ repo, bundle, registry, kitRoot = resolve(artworkRoot(repo), 'card-art-handoff-v1') }) {
   bundle = realpathSync(bundle);
   const manifestPath = beneath(bundle, 'replacement.json');
   const manifestBytes = readFileSync(manifestPath), manifest = JSON.parse(manifestBytes);
+  requireArtworkSource(resolve(kitRoot, 'data/cards.json'), 'Portable card-art source kit');
   const kitBytes = readFileSync(beneath(kitRoot, 'data/cards.json')), kit = JSON.parse(kitBytes);
   need(kit.id === 'everfolk-card-art-handoff-v1' && kit.schemaVersion === 1, 'Unsupported card-art kit');
   need(manifest.type === 'everfolk-card-art-replacement' && manifest.schemaVersion === 1, 'Unsupported replacement bundle');

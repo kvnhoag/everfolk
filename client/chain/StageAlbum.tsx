@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import { useEffect, useState } from "react";
 import type { StageMintQuote, StageMintResult } from "../../chain/types.ts";
 import type { LivesContract, SignedEvidence } from "./types.ts";
@@ -12,7 +13,7 @@ export function StageAlbumReceipt({ result, onClose }: { result: StageMintResult
   return <section className="chain-card"><h1>Your lived stages are kept</h1>
     <p>{result.tokens.length} stage figures minted for {formatNear(result.total_fee)} NEAR.</p>
     <div className="stage-album-grid">{result.tokens.map(token => <article className="stage-album-card" key={token.stage_id}>
-      <span className="stage-album-art"><img className="stage-album-portrait" src={token.portrait_media} alt={token.character_name ?? "Stage portrait"} /></span>
+      <span className="stage-album-art"><ArtworkImage className="stage-album-portrait" src={token.portrait_media} alt={token.character_name ?? "Stage portrait"} /></span>
       <a href={`#token/${token.token_id}`}>{token.character_name} · {token.stage_title}</a>
       <span>{rarityLabel(token.rarity)}{editionLabel(token) && ` · Edition ${editionLabel(token)}`}</span>
     </article>)}</div><button type="button" className="chain-secondary" onClick={onClose}>Back to My lives</button></section>;
@@ -60,7 +61,7 @@ export default function StageAlbum({ signed, contract, onMint, onClose, onDeclin
       {menu.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
     </select></label>
     {quote && <><div className="stage-album-grid">{quote.cards.map(card => <article className="stage-album-card" key={card.stage_id}>
-      <span className="stage-album-art"><img className="stage-album-portrait" src={card.portrait_media} alt={card.character_name} /></span>
+      <span className="stage-album-art"><ArtworkImage className="stage-album-portrait" src={card.portrait_media} alt={card.character_name} /></span>
       <div className="stage-album-body"><span className="chain-kicker">{card.stage_id} · Ages {card.stage_record.fromAge}–{card.stage_record.toAge}</span>
         <strong>{card.character_name} · {card.title}</strong><span>{card.figure_id ? "Historical figure" : "Stage portrait"} · {formatNear(card.fee)} NEAR</span>
         {card.rarity !== undefined && <span>{rarityLabel(card.rarity)}</span>}

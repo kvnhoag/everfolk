@@ -31,7 +31,8 @@
     "figures:contributions": "node scripts/figures/build-contribution-world.mjs",
     "test:art": "node --test --test-concurrency=2 test/art/*.test.ts && node --test tools/character-creator/tests/*.test.mjs",
     "test:audit": "node --test test/audits/*.test.ts",
-    "build:app": "node scripts/run-framework.mjs build"
+    "build:app": "node scripts/run-framework.mjs build",
+    "test:dev": "node scripts/test-dev.mjs"
   },
   "packageManager": "pnpm@11.25.0",
   "dependencies": {

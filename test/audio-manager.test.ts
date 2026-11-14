@@ -3,7 +3,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
-import { AudioManager, CLICK_SFX_CREDIT, PLAYLIST } from '../client/lib/audio-manager.ts';
+import { AudioManager, BACKGROUND_MUSIC, CLICK_SFX_CREDIT, PLAYLIST } from '../client/lib/audio-manager.ts';
 
 class MockAudio extends EventTarget {
   static instances: MockAudio[] = [];
@@ -33,9 +33,7 @@ class MockAudioContext {
   currentTime = 1;
   destination = {};
   oscillators: Array<{ type: string; starts: number; stops: number[] }> = [];
-  constructor() {
-    MockAudioContext.instances.push(this);
-  }
+  constructor() { MockAudioContext.instances.push(this); }
   resume() { return Promise.resolve(); }
   createOscillator() {
     const osc = {
@@ -79,55 +77,117 @@ async function withBrowser(settings: Record<string, string>, run: (browser: Even
   }
 }
 
-test('the first gesture starts music once and later interactions preserve Pause, volume and track', async () => {
-  await withBrowser({}, async (browser, storage) => {
+test('first gesture starts one fixed looping music track and repeated initialization keeps one click pool', async () => {
+  await withBrowser({ 'everfolk:audio:track-id': 'hidden-oasis' }, async browser => {
     const manager = new AudioManager();
     manager.init();
-    manager.setVolume(0.27);
-    manager.selectTrack(2);
-    const music = MockAudio.instances[0];
-    assert.equal(music.playCalls, 0, 'initialization and preferences do not autoplay');
-    browser.dispatchEvent(new Event('pointerdown'));
-    await Promise.resolve();
-    assert.equal(music.playCalls, 1, 'repeated initialization registers a single first-gesture unlock');
-    assert.equal(manager.getState().isPlaying, true);
-    manager.pause();
-    manager.setVolume(0.42);
-    manager.nextTrack();
+    manager.init();
+    const music = MockAudio.instances.find(audio => audio.src === BACKGROUND_MUSIC.src);
+    const clicks = MockAudio.instances.filter(audio => audio.src === CLICK_SFX_CREDIT.src);
+    assert.equal(MockAudio.instances.length, 5, 'one background track plus one pool of four click sounds');
+    assert.equal(clicks.length, 4);
+    assert.ok(music);
+    assert.equal(music.src, '/assets/audio/ancient-macedonian-music.mp3');
+    assert.equal(music.loop, true);
+    assert.equal(music.preload, 'metadata');
+    assert.equal(music.playCalls, 0, 'music waits for a user gesture');
     browser.dispatchEvent(new Event('pointerdown'));
     browser.dispatchEvent(new Event('keydown'));
     await Promise.resolve();
-    assert.equal(manager.getState().isPlaying, false, 'unrelated clicks and keys must not restart paused music');
+    assert.equal(music.playCalls, 1, 'repeated gestures do not restart background music');
+    assert.equal(music.volume, 0.6);
+    assert.equal(music.muted, false);
+    assert.deepEqual(manager.getState(), { volume: 0.6, muted: false, sfxEnabled: true });
+
+    browser.dispatchEvent(new Event('pointerdown'));
     assert.equal(music.playCalls, 1);
-    assert.equal(music.volume, 0.42);
-    assert.equal(music.src, PLAYLIST[3].src);
-    assert.equal(storage.get('everfolk:audio:volume'), '0.42');
-    assert.equal(storage.get('everfolk:audio:track-id'), PLAYLIST[3].id);
-    manager.togglePlay();
+    const click = new Event('click');
+    Object.defineProperty(click, 'target', { value: { closest: () => ({}) } });
+    document.dispatchEvent(click);
     await Promise.resolve();
-    assert.equal(manager.getState().isPlaying, true, 'explicit Play still resumes');
-    assert.equal(music.playCalls, 2);
+    assert.equal(clicks.reduce((sum, audio) => sum + audio.playCalls, 0), 1, 'repeated init does not duplicate global click listeners');
   });
 });
 
-test('keyboard unlock respects saved mute and explicit unmute still works', async () => {
-  await withBrowser({ 'everfolk:audio:muted': '1' }, async (browser, storage) => {
+test('a rejected first playback attempt retries on the next gesture without allocating another music track', async () => {
+  await withBrowser({}, async browser => {
     const manager = new AudioManager();
     manager.init();
-    const music = MockAudio.instances[0];
-    browser.dispatchEvent(new Event('keydown'));
+    const music = MockAudio.instances.find(audio => audio.src === BACKGROUND_MUSIC.src);
+    assert.ok(music);
+    let attempts = 0;
+    music.play = () => {
+      attempts++;
+      return attempts === 1 ? Promise.reject(new Error('NotAllowedError')) : Promise.resolve();
+    };
     browser.dispatchEvent(new Event('pointerdown'));
-    await Promise.resolve();
-    assert.equal(music.playCalls, 0);
-    assert.equal(manager.getState().muted, true);
-    manager.toggleMute();
-    await Promise.resolve();
-    assert.equal(music.playCalls, 1);
-    assert.equal(manager.getState().muted, false);
-    assert.equal(storage.get('everfolk:audio:muted'), '0');
-    manager.pause();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(attempts, 1);
     browser.dispatchEvent(new Event('keydown'));
-    assert.equal(manager.getState().isPlaying, false);
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(attempts, 2);
+    browser.dispatchEvent(new Event('pointerdown'));
+    assert.equal(attempts, 2, 'successful playback removes the gesture retry listeners');
+    assert.equal(MockAudio.instances.filter(audio => audio.src === BACKGROUND_MUSIC.src).length, 1);
+  });
+});
+
+test('saved music volume and mute persist independently of sound-effect settings', async () => {
+  await withBrowser({
+    'everfolk:music:volume': '0.27',
+    'everfolk:music:muted': '1',
+    'everfolk:audio:volume': '0.81',
+    'everfolk:audio:sfx': '0',
+    'everfolk:audio:track-id': 'hidden-oasis',
+  }, async (browser, storage) => {
+    const manager = new AudioManager();
+    assert.deepEqual(manager.getState(), { volume: 0.27, muted: true, sfxEnabled: false });
+    manager.init();
+    browser.dispatchEvent(new Event('keydown'));
+    await Promise.resolve();
+    const music = MockAudio.instances.find(audio => audio.src === BACKGROUND_MUSIC.src);
+    assert.ok(music);
+    assert.equal(music.volume, 0.27);
+    assert.equal(music.muted, true);
+    manager.setVolume(0.42);
+    manager.toggleMute();
+    assert.deepEqual(manager.getState(), { volume: 0.42, muted: false, sfxEnabled: false });
+    assert.equal(music.volume, 0.42);
+    assert.equal(music.muted, false);
+    assert.equal(storage.get('everfolk:music:volume'), '0.42');
+    assert.equal(storage.get('everfolk:music:muted'), '0');
+    assert.equal(storage.get('everfolk:audio:volume'), '0.81', 'music changes preserve saved SFX volume');
+    assert.equal(storage.get('everfolk:audio:sfx'), '0');
+    assert.deepEqual(new AudioManager().getState(), { volume: 0.42, muted: false, sfxEnabled: false });
+    manager.setVolume(2);
+    assert.equal(manager.getState().volume, 1);
+    assert.equal(music.volume, 1);
+    manager.setVolume(-1);
+    assert.equal(manager.getState().volume, 0);
+    assert.equal(music.volume, 0);
+  });
+});
+
+test('muting or lowering music to zero preserves click sound effects', async () => {
+  await withBrowser({}, async () => {
+    const manager = new AudioManager();
+    manager.init();
+    manager.toggleMute();
+    manager.setVolume(0);
+    manager.playClickSound();
+    const clicks = MockAudio.instances.filter(audio => audio.src === CLICK_SFX_CREDIT.src);
+    assert.equal(clicks.reduce((sum, audio) => sum + audio.playCalls, 0), 1, 'music controls do not disable click sounds');
+    assert.ok(clicks[0].volume > 0);
+  });
+});
+
+test('saved disabled sound effects do not play bundled or synthesized audio', async () => {
+  await withBrowser({ 'everfolk:audio:sfx': '0' }, async () => {
+    const manager = new AudioManager();
+    manager.init();
+    manager.playClickSound();
+    assert.equal(MockAudio.instances.reduce((sum, audio) => sum + audio.playCalls, 0), 0);
+    assert.equal(MockAudioContext.instances.length, 0);
   });
 });
 
@@ -135,7 +195,7 @@ test('click sound falls back to Web Audio synthesis when bundled SFX fails to lo
   await withBrowser({}, async () => {
     const manager = new AudioManager();
     manager.init();
-    const sfxItems = MockAudio.instances.slice(1);
+    const sfxItems = MockAudio.instances.filter(audio => audio.src === CLICK_SFX_CREDIT.src);
     assert.equal(sfxItems.length, 4);
     sfxItems[0].play = () => Promise.reject(new Error('NotSupportedError'));
     manager.playClickSound();
@@ -149,26 +209,6 @@ test('click sound falls back to Web Audio synthesis when bundled SFX fails to lo
     manager.playClickSound();
     assert.equal(sfxItems[2].playCalls, sfx2PlayBefore, 'once click asset errors, synthesis handles clicks directly');
     assert.equal(MockAudioContext.instances[0].oscillators.length, 2);
-  });
-});
-
-test('background playback falls back across tracks on load error and stops cleanly if none load', async () => {
-  await withBrowser({}, async () => {
-    const manager = new AudioManager();
-    manager.init();
-    const music = MockAudio.instances[0];
-    manager.play();
-    await Promise.resolve();
-    assert.equal(manager.getState().isPlaying, true);
-    const firstId = manager.getState().currentTrack.id;
-    music.dispatchEvent(new Event('error'));
-    await Promise.resolve();
-    assert.notEqual(manager.getState().currentTrack.id, firstId);
-    for (let i = 0; i < PLAYLIST.length; i++) {
-      music.dispatchEvent(new Event('error'));
-      await Promise.resolve();
-    }
-    assert.equal(manager.getState().isPlaying, false);
   });
 });
 
@@ -220,8 +260,16 @@ test('every bundled audio file has verified SHA-256 provenance, license notices,
   assert.ok(licensesDoc.includes('CC-BY 3.0'));
   assert.ok(licensesDoc.includes('CC0 1.0'));
 
+  assert.ok(
+    fs.existsSync(path.join(audioDir, path.basename(BACKGROUND_MUSIC.src))),
+    'Requested background music MP3 is missing: public/assets/audio/ancient-macedonian-music.mp3',
+  );
   const musicEntries = manifest.assets.filter(a => a.kind === 'music');
-  assert.equal(PLAYLIST.length, musicEntries.length);
+  assert.equal(musicEntries.length, PLAYLIST.length + 1, 'legacy tracks and the fixed local background track have provenance');
+  const background = musicEntries.find(a => a.id === BACKGROUND_MUSIC.id && a.src === BACKGROUND_MUSIC.src);
+  assert.ok(background, 'the new local background track is recorded in the manifest');
+  assert.equal(background.creator, BACKGROUND_MUSIC.composer);
+  assert.equal(background.sourcePageUrl, BACKGROUND_MUSIC.sourceUrl);
   for (const track of PLAYLIST) {
     const record = musicEntries.find(a => a.id === track.id && a.src === track.src);
     assert.ok(record, `${track.id} exists in manifest`);

@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import type { FigureId } from "../../chain/ids.ts";
 import { figureMediaPath } from "../../chain/figure-media.ts";
 import { figureTitle } from "./chain-copy.ts";
@@ -12,5 +13,5 @@ export default function FigureArtwork({ figureId, rarity, editionText, fullCard 
   if (!figureId) return null;
   const art = getFigureCardArt(figureId, rarity);
   if (fullCard && art) return <div className="figure-artwork is-approved-card"><CollectionCardArtwork art={art} editionText={editionText} loading="eager" /></div>;
-  return <img className="figure-artwork" src={art?.portraitSrc ?? figureMediaPath(figureId)} width={art ? 840 : 480} height={art ? 1050 : 640} alt={`${figureTitle(figureId)} collectible card`} />;
+  return <ArtworkImage className="figure-artwork" src={art?.portraitSrc ?? figureMediaPath(figureId)} width={art ? 840 : 480} height={art ? 1050 : 640} alt={`${figureTitle(figureId)} collectible card`} />;
 }

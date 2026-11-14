@@ -6,6 +6,7 @@ import {REFERENCE_MOTION,referenceLaunchRank,sampleReferenceCard,referenceImpact
 import {canCommitTear,tearProgress} from './tear-input.mjs';
 import {resolveBoosterLabels,reviewHint} from './labels.mjs';
 import {drawApprovedCardFace} from './card-face.mjs';
+import {loadArtworkImage} from '../artwork-delivery.ts';
 
 import {RAINBOW,rainbowPalette,sampleRainbowState,rainbowPoint} from './rainbow.mjs';
 
@@ -54,7 +55,7 @@ function setPhase(value){phase=value;document.body.dataset.phase=value;$('stage'
 function makeCanvas(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c;}
 function rounded(c,x,y,w,h,r){c.beginPath();c.roundRect(x,y,w,h,r);}
 function tex(canvas){const t=new THREE.CanvasTexture(canvas);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer?Math.min(8,renderer.capabilities.getMaxAnisotropy()):4;t.magFilter=THREE.LinearFilter;textures.add(t);return t;}
-function loadImage(src){return new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>reject(Error('An embedded artwork could not be decoded.'));i.src=src;});}
+const loadImage=src=>loadArtworkImage(Image,src);
 // Card faces use the selected Everfolk frames (artwork/cards/frame-system-v2-vectorcraft): a 900 × 1260 card,
 // a standard frame with an 800 × 740 art window and ivory text panel, and a full-art frame for Legendary cards.
 const CARD_W=900,CARD_H=1260,ART_WINDOW={x:50,y:190,w:800,h:740};

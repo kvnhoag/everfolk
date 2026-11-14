@@ -46,7 +46,7 @@ dialog.life-decision-dialog.choice-popup .life-choice-preview-stack{
   grid-template-rows:minmax(0,auto);
   min-block-size:var(--preview-min);
   max-block-size:var(--preview-max);
-  margin-top:17px;
+  margin-top:0;
 }
 dialog.life-decision-dialog.choice-popup .life-choice-preview-layer{
   grid-area:1/1;

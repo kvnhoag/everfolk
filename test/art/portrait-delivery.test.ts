@@ -6,13 +6,12 @@ import test from "node:test";
 interface PortraitAsset { id: string; identityId: string; sex: "male" | "female"; stage: string; wardrobeId: string; src: string; sha256: string }
 const runtime = JSON.parse(readFileSync(new URL("../../client/models/portrait-asset-registry.json", import.meta.url), "utf8"));
 const delivery = JSON.parse(readFileSync(new URL("../../public/assets/portraits/ordinary-v3/manifest.json", import.meta.url), "utf8"));
-const sourceBytes = readFileSync(new URL("../../artwork/portraits/ordinary-v3/manifest.json", import.meta.url));
-const source = JSON.parse(sourceBytes.toString("utf8"));
+const source = JSON.parse(readFileSync(new URL("../../assets/source/portraits/ordinary-v3/reviewed-manifest.json", import.meta.url), "utf8"));
 const sha = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
 
 test("all 240 delivered PNGs remain byte-identical to the reviewed source portraits", () => {
   assert.equal(runtime.libraryId, "everfolk-ordinary-portraits-v3");
-  assert.equal(runtime.sourceManifestSha256, sha(sourceBytes));
+  assert.equal(runtime.sourceManifestSha256, source.sourceManifestSha256);
   assert.equal(delivery.sourceManifestSha256, runtime.sourceManifestSha256);
   assert.equal(runtime.assets.length, 240);
   assert.equal(delivery.assets.length, 240);
@@ -50,4 +49,16 @@ test("the runtime lookup covers every identity, age and authored clothing combin
     assert.equal(role.minAge, 16);
     assert.ok(runtime.stageWardrobes.youth.includes(role.wardrobeId));
   }
+});
+
+
+test("retained source provenance preserves the original QA and user-review limits", () => {
+  assert.equal(source.sourceAudit.status, "passed");
+  assert.equal(source.visualReview.status, "reviewed");
+  assert.equal(source.visualReview.manifestSha256, source.sourceManifestSha256);
+  assert.equal(source.userReviewStatus, "awaiting-user-review");
+  assert.equal(source.anatomicalApproval, false);
+  assert.equal(source.pixelProfile.coarseScale, 3);
+  assert.equal(source.pixelProfile.fineScale, 2);
+  assert.equal(source.pixelProfile.commonCell, 6);
 });

@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import FigurePaths from "../components/FigurePaths.tsx";
 import { householdManagement } from "../models/household-management.ts";
 import { playerHouseholdRole, playerPortraitState } from "../models/portrait-state.ts";
@@ -217,7 +218,10 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   // A ranked life opens straight into play; free play starts at the main menu.
   const [menuOpen, setMenuOpen] = useState(!isRanked && !enterGame);
   const [birthPopoverOpen, setBirthPopoverOpen] = useState(startFresh || Boolean(previewSession?.atBirth));
-  const [householdWelcomeOpen, setHouseholdWelcomeOpen] = useState(false);
+  // Adult previews enter through their household guide before the general rules.
+  const [householdWelcomeOpen, setHouseholdWelcomeOpen] = useState(() => Boolean(
+    previewSession && !previewSession.atBirth && householdManagement(previewSession.engine.world, previewSession.life),
+  ));
   const [readingPause, setReadingPause] = useState(false);
   const [deferredDecision, setDeferredDecision] = useState<string | null>(() => {
     const initial = ranked?.initial ?? online?.initial ?? startFreshFrom;
@@ -332,7 +336,9 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const actionUsed = life.character?.lastActivityAge === life.age;
   // Once per entry into a life: from the main menu, after a new birth, or straight into a ranked life. Closing
   // other popups or coming back from Weave screens does not count. Opened before paint, so no tip flashes first.
-  const onGameScreen = game.hasBegun && !menuOpen && !birthPopoverOpen && !worldPickerOpen && !householdWelcomeOpen && !restartOpen;
+  const onGameScreen = game.hasBegun && !menuOpen && panel === null && !birthPopoverOpen && !worldPickerOpen && !householdWelcomeOpen && !restartOpen;
+  // Keep the rules queued behind the household tour and any council it opens.
+  const howToPlayVisible = howToPlayOpen && onGameScreen;
   const lifeId = `${life.worldFingerprint}:${life.seed}`;
   useEffect(() => {
     if (game.isPreview) return;
@@ -372,14 +378,14 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const focusAge = lifeSections.ages.focus;
   // Built when How to Play opens, so its examples use this life's numbers at that moment.
   const howToPlay = useMemo(() => {
-    if (!howToPlayOpen) return { steps: [], stages: [], guides: [] };
+    if (!howToPlayVisible) return { steps: [], stages: [], guides: [] };
     const stages = lifeRoadmap(world, game.hasBegun ? life.age : null);
     const facts = howToPlayFacts(world, life, game.hasRevealedStats ? characterName : "You", game.speed);
     return {
       steps: howToPlaySteps({ focus: focusAge, action: YEARLY_ACTION_AGE, fields: PLANTING_HINT_AGE, trade: tradeAge }, facts),
       stages, guides: stages.map(stage => stageGuide(world, stage)),
     };
-  }, [howToPlayOpen]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [howToPlayVisible]); // eslint-disable-line react-hooks/exhaustive-deps
   const checklist = yearChecklist({
     age: life.age, phase: life.phase, playing: game.isPlaying,
     focusLabel: game.focusId === "everyday" ? null : YEARLY_FOCUSES.find(focus => focus.id === game.focusId)?.label ?? null,
@@ -816,7 +822,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
         <section className="story-column" aria-label="Your life">
           {game.hasBegun && !life.accomplishments?.length && <HistoricalTitlePaths life={life} world={world} />}
           {!game.hasBegun ? <section className="birth-record birth-intro-record" aria-labelledby="birth-title">
-            <div className="birth-intro-art"><img src="/assets/pixel/scenes/birth.svg" alt="Pixel illustration of a newborn and caregiver" /></div>
+            <div className="birth-intro-art"><ArtworkImage src="/assets/pixel/scenes/birth.svg" alt="Pixel illustration of a newborn and caregiver" /></div>
             <h2 id="birth-title">{game.hasRevealedStats ? `${characterName} is born.` : "A new life begins."}</h2>
             <p>{game.hasRevealedStats ? displayProse(origin.text) : `A new life on Egypt's coast.`}</p>
             <dl className="birth-facts"><div><dt>PLACE</dt><dd>{birthplace}, Egypt</dd></div><div><dt>BORN</dt><dd>{formatYear(birthYearOf(world, life))}</dd></div><div><dt>HOUSEHOLD</dt><dd>{game.hasRevealedStats ? origin.title : "Not revealed yet"}</dd></div></dl>
@@ -867,7 +873,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
     {/* Notifications float at the right edge, so they never reorder or push the main section. */}
-    <HowToPlay open={howToPlayOpen} steps={howToPlay.steps} stages={howToPlay.stages} guides={howToPlay.guides} tipsOn={tutorial.tipsOn}
+    <HowToPlay open={howToPlayVisible} steps={howToPlay.steps} stages={howToPlay.stages} guides={howToPlay.guides} tipsOn={tutorial.tipsOn}
       portrait={{ seed: life.seed, name: game.hasRevealedStats ? characterName : "You", sex: life.character?.sex, avatarVariant: life.character?.avatarVariant, jobId: life.character?.jobId, role: playerHouseholdRole(world, life) }} onTipsChange={tutorialStore.setTipsOn}
       showAtStart={howToPlayAtStart} onShowAtStartChange={on => { setHowToPlayAtStart(on); if (!game.isPreview) writeHowToPlayAtStart(on); }} onClose={() => setHowToPlayOpen(false)} />
     {game.hasBegun && <IdleNudge nudge={howToPlayOpen ? null : nudge} />}
@@ -934,7 +940,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           <div className="evidence-key"><span>Documented history</span><span>Historical context · fictional story</span><span>Fictional personal story</span></div>
           <div className="sources-list">{world.sources?.map(source => <article key={source.id} id={`source-${source.id}`}><span className="eyebrow">{source.kind} · {source.publisher}</span><h3><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a></h3><p className="source-period">{source.period} · {source.geography}</p><p>{sourceSummary(source.summary)}</p><p className="source-limits"><strong>Scope:</strong> {sourceScope(source.limitations)}</p></article>)}</div>
         </> : panel === "world" ? <>
-          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">Wiki</h2><h3>{world.title}</h3><WikiLibrary world={world} onSkills={() => setPanel("wiki")} /><img className="dialog-scene" src="/assets/pixel/worlds/alexandria.svg" alt="Pixel illustration of an imagined ancient Egyptian coastal harbor" />
+          <p className="eyebrow">THE ANCIENT MEDITERRANEAN</p><h2 id="dialog-title">Wiki</h2><h3>{world.title}</h3><WikiLibrary world={world} onSkills={() => setPanel("wiki")} /><ArtworkImage className="dialog-scene" src="/assets/pixel/worlds/alexandria.svg" alt="Pixel illustration of an imagined ancient Egyptian coastal harbor" />
           <p>{worldBeginning(world, birthYearOf(world, life))}</p><p>{intro ?? "You can work at the harbor, learn a trade or study writing. Choose a job, meet a partner and decide whether to have children."}</p>
           <dl className="world-facts"><div><dt>BIRTHPLACE</dt><dd>{birthplace}, Egypt</dd></div><div><dt>BIRTH YEAR</dt><dd>{formatYear(birthYearOf(world, life))}</dd></div><div><dt>YOUR BEGINNING</dt><dd>At birth</dd></div><div><dt>YOUR ENDING</dt><dd>A completed life</dd></div></dl>
           <p className="fine-print">The dates and setting draw on historical sources. Your character is fictional, and the artwork imagines the city. Sources labels evidence from other periods and places.</p><button className="secondary-button" onClick={() => setPanel("sources")}>Read the sources <Icon name="book" size={17} /></button>

@@ -34,12 +34,14 @@ pnpm build
 
 `pnpm test` runs focused behavior and regression tests, including deterministic replay, save protection, API authorization and ranked reward verification. `pnpm build` runs language, architecture and TypeScript checks once, then builds the application. Use `pnpm check` for validation without a build; `pnpm build:app` compiles an already-checked checkout.
 
+`pnpm test:dev` runs the development safety suite: deterministic state and save checks, API and admin access controls, sign-in, ranked verification and core gameplay. It targets the three-minute development CI budget.
+
 The specialist suites are explicit:
 
 - `pnpm test:art` checks image tooling, delivery hashes and the character creator.
 - `pnpm test:audit` runs exhaustive multi-life balance cohorts and historical-content audits. Use it when changing distributions, pacing or authored routes.
 
-CI runs on pushes to `main` and `dev` and on pull requests. It installs with `--frozen-lockfile`, runs the same default tests, checks source once, then uses `build:app`. Contract tests run for contract changes, and art tests run for artwork, delivered assets or art-tooling changes. Documentation-only changes skip these jobs. Missing comparison history runs every job. A manual CI run can also enable the exhaustive audits.
+CI runs on pushes to `main` and `dev` and on pull requests. It installs with `--frozen-lockfile`, checks source once, runs regressions, then uses `build:app`. Pushes to `dev` and pull requests into `dev` use `test:dev` with a three-minute budget per verification job. `main` and pull requests into `main` keep the full `pnpm test` suite. Manual runs can select `full_regression` to run the complete suite with the release time budget. Contract tests run for contract changes, and art tests run for artwork, delivered assets or art-tooling changes. Documentation-only changes skip these jobs. Missing comparison history runs every job. A manual CI run can also enable the exhaustive audits.
 
 Application verification checks out source, world and design data, and delivered public assets. It excludes the large artwork archive. Art jobs additionally fetch the reviewed banner masters, portrait manifest and portable card kit needed by their tests; an ArtCraft installation is unnecessary.
 

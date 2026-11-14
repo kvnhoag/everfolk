@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "privateSource": {
+    "releaseId": "source-20261114-prune-v1",
+    "manifestSha256": "cf0dde42160e812334ea3b2079be2d08793f6e3759101479b8cb57d585e09608",
+    "files": 16936,
+    "bytes": 6035871272,
+    "vpsPath": "~/assets/private/releases/source-20261114-prune-v1/payload",
+    "verification": "published and independently restored; full SHA-256 verification passed"
+  },
+  "publicMedia": {
+    "releaseId": "media-20261114-v1",
+    "manifestSha256": "d95558c21215683b768bbf759e8991ada71c7c769c4fdd0b39fcc9644618579a",
+    "files": 2151,
+    "bytes": 171496583,
+    "baseUrl": "https://everfolk.life/releases/media-20261114-v1/payload/",
+    "vpsPath": "~/assets/public/releases/media-20261114-v1/payload"
+  },
+  "authoringRootEnv": "EVERFOLK_ARTWORK_DIR"
+}

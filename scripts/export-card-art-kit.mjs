@@ -5,13 +5,14 @@ import { createRequire } from 'node:module';
 import { homedir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { artworkRoot, requireArtworkSource } from './lib/artwork-source.mjs';
 
 const repo = fileURLToPath(new URL('../', import.meta.url));
 const require = createRequire(import.meta.url);
 const sharp = createRequire(require.resolve('next/package.json'))('sharp');
-const library = resolve(repo, 'artwork/cards/framed-collection-v14');
+const library = requireArtworkSource(resolve(artworkRoot(repo), 'cards/framed-collection-v14'), 'Reviewed card source library');
 const production = resolve(repo, 'public/assets/cards/collection-v14');
-const destination = resolve(repo, 'artwork/card-art-handoff-v1');
+const destination = resolve(artworkRoot(repo), 'card-art-handoff-v1');
 const catalogBytes = readFileSync(resolve(library, 'catalog.json'));
 const catalog = JSON.parse(catalogBytes);
 const registryBytes = readFileSync(resolve(repo, 'client/models/card-art-registry.json'));

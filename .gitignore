@@ -41,3 +41,6 @@ contract/target/
 # Local Python bytecode caches.
 __pycache__/
 *.py[cod]
+
+# Complete authoring sources are restored explicitly from private asset storage.
+/artwork/

@@ -5,11 +5,15 @@ artist outputs are included. Every source and ZIP entry is checked against SHA25
 """
 import hashlib
 import json
+import os
 from pathlib import Path
 import zipfile
 
 repo = Path(__file__).resolve().parent.parent
-kit = repo / "artwork" / "card-art-handoff-v1"
+artwork = Path(os.environ.get("EVERFOLK_ARTWORK_DIR", "").strip() or repo / "artwork").expanduser().resolve()
+kit = artwork / "card-art-handoff-v1"
+if not (kit / "package-manifest.json").is_file():
+    raise SystemExit("Portable card-art source kit is stored outside Git. Restore the private source archive and set EVERFOLK_ARTWORK_DIR to its artwork directory. Missing: " + str(kit))
 manifest = json.loads((kit / "package-manifest.json").read_text(encoding="utf-8"))
 target = kit.with_suffix(".zip")
 temporary = target.with_suffix(".zip.tmp")
@@ -38,4 +42,4 @@ with zipfile.ZipFile(temporary) as archive:
 temporary.replace(target)
 digest = hashlib.sha256(target.read_bytes()).hexdigest()
 target.with_suffix(".zip.sha256").write_text(f"{digest}  {target.name}\n", encoding="utf-8")
-print(json.dumps({"zip": str(target.relative_to(repo)), "files": len(files), "bytes": target.stat().st_size, "sha256": digest, "readbackVerified": True}))
+print(json.dumps({"zip": str(target), "files": len(files), "bytes": target.stat().st_size, "sha256": digest, "readbackVerified": True}))

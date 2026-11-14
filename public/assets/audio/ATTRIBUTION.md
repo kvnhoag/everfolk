@@ -1,8 +1,18 @@
 # Audio Asset Sources and Redistribution Notices
 
-Every bundled audio file in `public/assets/audio/` was verified byte-for-byte by SHA-256 against its upstream download on 2026-11-13. Individual license terms and full license text references live alongside these files in [`LICENSES.txt`](LICENSES.txt), and machine-checked checksums live in [`manifest.json`](manifest.json).
+The seven legacy bundled audio files in `public/assets/audio/` was verified byte-for-byte by SHA-256 against its upstream download on 2026-11-13. Individual license terms and full license text references live alongside these files in [`LICENSES.txt`](LICENSES.txt), and machine-checked checksums live in [`manifest.json`](manifest.json).
 
-If an audio asset fails to load or play at runtime, [`AudioManager`](../../../client/lib/audio-manager.ts) falls back cleanly: button click feedback switches to Web Audio oscillator synthesis (`synthesizeClickFallback()`), and failing background tracks advance past unavailable files or pause without hanging playback state.
+If an audio asset fails to load or play at runtime, [`AudioManager`](../../../client/lib/audio-manager.ts) falls back cleanly: button click feedback switches to Web Audio oscillator synthesis (`synthesizeClickFallback()`), background music uses one looping native audio element, and a rejected initial play is retried on the next user gesture.
+
+## Selected background music (source file pending)
+
+- **Track:** Relaxing Ancient Macedonian Music & Garden Ambience
+- **Composer:** Atmospherious (Yudha Pratama)
+- **Source:** https://www.youtube.com/watch?v=5ZMLYtJ0KMU
+- **Expected local file:** `public/assets/audio/ancient-macedonian-music.mp3`
+- **Runtime URL:** `/assets/audio/ancient-macedonian-music.mp3`
+
+The native background player and independent music volume/mute controls are configured for this file. Click effects retain their own existing settings. On 2026-11-14, yt-dlp/FFmpeg tools were installed in WSL, but YouTube rejected the audio download with HTTP 403 through both WSL and Windows networking. No MP3 was produced and music playback is not yet available. The source file, its checksum and its actual license must be recorded in `manifest.json` once the audio is supplied. No redistribution license has been inferred from the YouTube URL.
 
 ## Summary Table
 

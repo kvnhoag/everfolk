@@ -6,12 +6,14 @@ import { createRequire } from "node:module";
 import { isAbsolute, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeActiveCardArtReplacements } from "./lib/card-art-replacements.mjs";
+import { artworkRoot, requireArtworkSource } from "./lib/artwork-source.mjs";
 import figurePromotions from "../chain/catalog/figure-promotions.json" with { type: "json" };
 
 const repo = fileURLToPath(new URL("../", import.meta.url));
 const require = createRequire(import.meta.url);
 const sharp = createRequire(require.resolve("next/package.json"))("sharp");
-const library = resolve(repo, "artwork/cards/framed-collection-v14");
+const library = requireArtworkSource(resolve(artworkRoot(repo), "cards/framed-collection-v14"), "Reviewed card source library");
+const sourcePath = path => path.startsWith("artwork/") ? resolve(artworkRoot(repo), path.slice(8)) : resolve(repo, path);
 const catalogPath = resolve(library, "catalog.json");
 const destination = resolve(repo, "public/assets/cards/collection-v14");
 const registryPath = resolve(repo, "client/models/card-art-registry.json");
@@ -179,7 +181,7 @@ async function main() {
       const asset = assets[index], original = catalogSource(asset.id);
       const source = beneath(library, resolve(library, original.export));
       const thumbnail = beneath(library, resolve(library, original.thumbnail));
-      const portrait = resolve(repo, original.sourceArt);
+      const portrait = sourcePath(original.sourceArt);
       need(hash(readFileSync(source)) === original.exportSha256, "Approved PNG changed: " + asset.id);
       need(hash(readFileSync(portrait)) === original.sourceArtSha256, "Approved portrait changed: " + asset.id);
       const overlayFile = resolve(library, original.overlaySvg);
@@ -232,7 +234,7 @@ async function main() {
 function catalogSource(id) { const card = catalog.assets.find(asset => asset.slug === id); need(card, "Unknown card: " + id); return card; }
 
 async function fittedParent(source, rarity, design) {
-  const input = resolve(repo, source.sourceArt);
+  const input = sourcePath(source.sourceArt);
   let layers;
   if (rarity !== "legendary") {
     const art = await sharp(input).resize(592, 740, { kernel: "nearest" }).png().toBuffer();

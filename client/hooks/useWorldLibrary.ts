@@ -13,6 +13,17 @@ import { LIVES_WORLD_VERSION } from "../../src/vocations/ids.ts";
 import { loadLifeWorld } from "../chain/life-world.ts";
 import { keepFreePlayOnRankedStart } from "../models/ranked-return.ts";
 import { entryUsesDefaultLives, startupRefreshesToDefault } from "../models/world-entry.ts";
+import { MODULE_LOADING_END } from "../state/module-loading.ts";
+
+/** Let the updated loader paint before running the next synchronous startup task. */
+function paintLoadingProgress() {
+  return new Promise<void>(resolve => {
+    if (!document.hidden && typeof window.requestAnimationFrame === "function") {
+      window.requestAnimationFrame(() => setTimeout(resolve, 0));
+    } else setTimeout(resolve, 0);
+  });
+}
+
 async function loadDemoWorld() {
   const pack = await loadLifeWorld(LIVES_WORLD_VERSION);
   registerWorldPack(pack);
@@ -27,13 +38,14 @@ export function useWorldLibrary() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("opening");
-  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingProgress, setLoadingProgress] = useState(MODULE_LOADING_END);
 
   useEffect(() => {
     let cancelled = false;
     void (async () => {
       setLoadingPhase("restoring");
-      setLoadingProgress(20);
+      await paintLoadingProgress();
+      if (cancelled) return;
       const builtin = getBuiltinWorld();
       let world = builtin;
       let restored = false;
@@ -58,18 +70,24 @@ export function useWorldLibrary() {
         }
         else if (hasLegacyWorldSave(window.localStorage)) { world = getLegacyWorld(); restored = true; }
       } catch { world = builtin; restored = false; hadSelection = false; }
+      setLoadingPhase("world");
+      setLoadingProgress(90);
+      await paintLoadingProgress();
+      if (cancelled) return;
       if (!restored && !hadSelection) {
-        setLoadingPhase("world");
-        setLoadingProgress(45);
         const demo = await loadDemoWorld();
+        if (cancelled) return;
         world = { id: demo.id, revisionId: `pack-${contentFingerprint(demo)}`, pack: demo, routes: [] };
       }
+      setLoadingProgress(95);
+      await paintLoadingProgress();
       if (cancelled) return;
-      setLoadingProgress(90);
       selectWorldPack(world.pack);
       try { persistSelectedWorld(window.localStorage, world); } catch { /* In-memory play still works. */ }
-      setActive({ world, key: 0, fresh: false });
       setLoadingProgress(100);
+      await paintLoadingProgress();
+      if (cancelled) return;
+      setActive({ world, key: 0, fresh: false });
     })();
     return () => { cancelled = true; };
   }, []);

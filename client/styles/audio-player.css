@@ -1,298 +1,20 @@
-/* Compact Square Icon Trigger & Roguelike Bronze Audio Settings Popover */
 .game-music-player {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  font-family: var(--ef-font-body);
-  font-size: 11px;
-  z-index: var(--ef-layer-raised);
-}
-
-.ef-home .game-music-player {
-  margin-left: auto;
-  position: relative;
-  z-index: var(--ef-layer-raised);
-}
-
-/* Single small square icon button */
-.music-square-trigger {
-  display: inline-grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 2px solid #3a626c;
-  border-radius: 2px;
-  background: #17343d;
-  color: #f9f1dc;
-  box-shadow: inset 0 1px 0 #2d5a66;
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.12s, border-color 0.12s, color 0.12s;
-}
-
-.music-square-trigger:hover,
-.music-square-trigger.is-open {
-  background: #234b55;
-  border-color: #e6c173;
-  color: #fff8e7;
-}
-
-.music-square-trigger.is-playing {
-  border-color: #e6c173;
-  color: #f3cf7a;
-}
-
-.music-square-trigger.is-muted {
-  color: #9fb0b7;
-  border-color: #3a626c;
-}
-
-.ef-home .music-square-trigger {
-  width: 34px;
-  height: 34px;
-  border: 1px solid #d6bc8e66;
-  border-radius: 2px;
-  background: #172a33d9;
-  color: #e7c58c;
-  box-shadow: inset 0 1px 0 #ffffff1a;
-}
-
-.ef-home .music-square-trigger:hover,
-.ef-home .music-square-trigger.is-open {
-  background: #233c47f2;
-  border-color: #f0cb82;
-  color: #fff3d1;
-}
-
-.ef-home .music-square-trigger.is-muted {
-  color: #9fb0b7;
-  border-color: #d6bc8e38;
-}
-
-.music-square-icon {
-  font-size: 14px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-/* Expanded Roguelike Audio Drawer — Lapis Slate & Electrum Gold */
-.music-drawer {
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
-  z-index: var(--ef-layer-raised);
-  width: 320px;
-  max-width: calc(100vw - 24px);
-  max-height: min(600px, calc(100dvh - 100px));
-  overflow-y: auto;
-  scrollbar-color: #587b7c #11282f;
-  scrollbar-width: thin;
-  border: 2px solid #3a626c;
-  border-radius: 2px;
-  background: #17343d;
-  box-shadow: inset 0 1px 0 #2d5a66, 0 10px 28px rgba(10, 24, 28, 0.55);
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: #f5ebd6;
-}
-
-.music-drawer-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  border-bottom: 1px solid #3a626c;
-  padding-bottom: 8px;
-}
-
-.music-drawer-eyebrow {
-  display: block;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #e6c173;
-}
-
-.music-drawer-title {
-  font-family: var(--ef-font-display);
-  font-size: 16px;
-  font-weight: 600;
-  margin: 2px 0 0;
-  color: #fff6e0;
-}
-
-.music-drawer-close {
-  display: inline-grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border: 1px solid #3a626c;
-  border-radius: 2px;
-  background: #10252b;
-  color: #d8edf0;
-  font-size: 14px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0;
-}
-
-.music-drawer-close:hover {
-  border-color: #e6c173;
-  color: #fff;
-  background: #18363e;
-  color: #fff;
-  background: #3a2a19;
-}
-
-/* Now Playing Recessed Cell */
-.music-now-playing-box {
-  display: flex;
-  flex-direction: column;
+  flex: none;
   gap: 8px;
-  padding: 9px 10px;
-  background: #0d1e23;
-  border: 1px solid #3a626c;
-  border-radius: 2px;
-}
-
-.music-now-playing-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.music-now-playing-status {
-  font-size: 8.5px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #e6c173;
-}
-
-.music-track-title {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: #fff8e7;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.music-track-origin {
-  font-size: 10px;
-  color: #9fb0b7;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.music-transport-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.music-action-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 26px;
-  padding: 0 10px;
-  border: 1px solid #3a626c;
-  border-radius: 2px;
-  background: #10252b;
-  color: #d8edf0;
-  font-size: 10.5px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.music-action-btn:hover {
-  border-color: #e6c173;
-  background: #18363e;
-  color: #fff;
-}
-
-.music-action-btn.is-active {
-  background: #23534d;
-  border-color: #5b9987;
-  color: #fff;
-}
-
-.music-action-btn.is-muted {
-  background: #5c2b23;
-  border-color: #b86657;
-  color: #ffe8e2;
-}
-
-.music-stepper-btns {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: auto;
-}
-
-.music-step-btn {
-  display: inline-grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border: 1px solid #3a626c;
-  border-radius: 2px;
-  background: #10252b;
-  color: #d8edf0;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 0;
-}
-
-.music-step-btn:hover {
-  background: #18363e;
-  border-color: #e6c173;
-  color: #fff;
-}
-
-/* Volume Strip */
-.music-volume-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 7px 10px;
-  background: #0d1e23;
-  border: 1px solid #3a626c;
-  border-radius: 2px;
-}
-
-.music-volume-heading {
-  font-size: 9.5px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #d8edf0;
-}
-
-.music-volume-strip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  flex: 1;
-  justify-content: flex-end;
 }
 
 .music-volume-slider {
-  width: 90px;
+  width: 72px;
   height: 6px;
+  margin: 0;
   appearance: none;
-  background: #10252b;
-  border: 1px solid #3a626c;
+  background: #17343d;
+  border: 1px solid #587b7c;
   border-radius: 1px;
-  outline: none;
   cursor: pointer;
+  accent-color: #e6c173;
 }
 
 .music-volume-slider::-webkit-slider-thumb {
@@ -302,184 +24,32 @@
   border-radius: 1px;
   background: #e6c173;
   border: 1px solid #fff3d1;
-  cursor: pointer;
 }
 
-.music-volume-label {
-  font-size: 10.5px;
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  color: #e6c173;
-  min-width: 30px;
-  text-align: right;
+.music-volume-slider::-moz-range-thumb {
+  width: 10px;
+  height: 12px;
+  border-radius: 1px;
+  background: #e6c173;
+  border: 1px solid #fff3d1;
 }
 
-/* Playlist Section */
-.music-playlist-section {
-  flex: none;
-}
-
-.music-section-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin: 2px 0 7px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #f5ebd6;
-}
-
-.music-section-label span {
-  color: #e6c173;
-}
-
-.music-playlist-list {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 6px;
-  max-height: 248px;
-  overflow-y: auto;
-  scrollbar-color: #587b7c #11282f;
-  scrollbar-width: thin;
-  margin: 0;
-  padding: 0 4px 0 0;
-  list-style: none;
-}
-
-.music-track-item {
-  display: grid;
-  grid-template-columns: 26px minmax(0, 1fr);
-  align-items: start;
-  gap: 9px;
-  width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #284752;
-  border-radius: 2px;
-  background: #10252b;
-  color: #d8edf0;
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.1s, border-color 0.1s;
-}
-
-.music-track-item:hover {
-  background: #18363e;
-  border-color: #3d7069;
-}
-
-.music-track-item:focus-visible {
-  outline: 2px solid #f1cf88;
-  outline-offset: -3px;
-}
-
-.music-track-item.is-active {
-  background: #23424a;
-  border-color: #e6c173;
-}
-
-.music-track-badge {
+.music-mute-toggle {
   display: inline-grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 2px;
-  background: #0d1e23;
-  border: 1px solid #3a626c;
-  color: #e6c173;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.music-track-item.is-active .music-track-badge {
-  background: #e6c173;
-  border-color: #fff3d1;
-  color: #10252b;
-}
-
-.music-track-item-info {
-  display: grid;
-  justify-items: start;
-  gap: 3px;
-}
-
-.music-track-item-info strong {
-  font-size: 13px;
-  line-height: 1.25;
-  color: #fff6e0;
-}
-
-.music-track-item-info small {
-  font-size: 11px;
-  line-height: 1.3;
-  color: #bdd1d4;
-}
-
-.music-track-item-tag {
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 2px 5px;
-  border-radius: 2px;
-  background: #0d1e23;
-  border: 1px solid #3a626c;
-  color: #e6c173;
-}
-
-.music-drawer-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 6px;
-  border-top: 1px solid #3a626c;
-  padding-top: 8px;
-}
-
-.game-music-player button:focus-visible,
-.game-music-player input:focus-visible,
-.game-music-player a:focus-visible {
-  outline: 2px solid #f0cb82;
-  outline-offset: 2px;
-}
-
-.music-credits-note {
-  margin: 0;
-  font-size: 10px;
-  line-height: 1.35;
-  color: #9fb0b7;
-}
-
-.music-credits-note a {
-  color: #e6c173;
-  text-decoration: underline;
-}
-
-.music-sfx-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
+  width: 34px;
+  height: 34px;
+  padding: 0;
   border: 1px solid #3a626c;
   border-radius: 2px;
-  background: #10252b;
-  color: #d8edf0;
-  padding: 6px 10px;
-  font-size: 11px;
-  font-weight: 700;
+  background: #17343d;
+  color: #f3cf7a;
   cursor: pointer;
 }
 
-.music-sfx-toggle:hover {
-  border-color: #e6c173;
-  background: #18363e;
-}
-
-.music-sfx-toggle.is-on {
-  background: #23534d;
-  border-color: #5b9987;
-  color: #e9fbf5;
-}
+.music-mute-toggle:hover { background: #234b55; border-color: #e6c173; }
+.music-mute-toggle.is-muted { color: #9fb0b7; }
+.music-volume-slider:focus-visible,
+.music-mute-toggle:focus-visible { outline: 2px solid #b78333; outline-offset: 3px; }
+.ef-home .music-volume-slider:focus-visible,
+.ef-home .music-mute-toggle:focus-visible { outline-color: #f0cb82; }
