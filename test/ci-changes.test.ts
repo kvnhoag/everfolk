@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { changedJobs, jobsForPaths } from "../scripts/ci-changes.mjs";
+import { changedJobs, jobsForPaths, verificationProfile } from "../scripts/ci-changes.mjs";
 
 test("application code, saves, world data, research and unknown inputs retain app verification", () => {
   for (const path of ["src/engine.ts", "client/storage/save.ts", "server/api.ts", "worlds/new.json", "research/sources.json", "test/engine.test.ts", "Dockerfile", "new-feature/config.json"]) {
@@ -45,4 +45,17 @@ test("manual runs, new branches and unavailable history run all checks", () => {
   assert.deepEqual(changedJobs("workflow_dispatch", {}), all);
   assert.deepEqual(changedJobs("push", { before: "0".repeat(40) }), all);
   assert.deepEqual(changedJobs("push", { before: "a".repeat(40) }, () => { throw new Error("base no longer available"); }), all);
+});
+
+
+test("dev pushes and pull requests into dev use the bounded development suite", () => {
+  for (const [ref, base] of [["refs/heads/dev", ""], ["refs/pull/42/merge", "dev"]]) {
+    assert.deepEqual(verificationProfile(ref, base), { test_script: "test:dev", timeout_minutes: 3 });
+  }
+});
+
+test("main, release pull requests and explicit full runs keep full regressions", () => {
+  for (const [ref, base, full] of [["refs/heads/main", "", false], ["refs/pull/42/merge", "main", false], ["refs/heads/dev", "", true]] as const) {
+    assert.deepEqual(verificationProfile(ref, base, full), { test_script: "test", timeout_minutes: 15 });
+  }
 });

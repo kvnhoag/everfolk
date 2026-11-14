@@ -24,6 +24,12 @@ export function jobsForPaths(paths) {
   return jobs;
 }
 
+/** Keep release checks complete; the development branch has a three-minute job budget. */
+export function verificationProfile(ref, baseRef, fullRegression = false) {
+  const development = !fullRegression && (ref === "refs/heads/dev" || baseRef === "dev");
+  return { test_script: development ? "test:dev" : "test", timeout_minutes: development ? 3 : 15 };
+}
+
 export function changedJobs(eventName, event, git = (args) => execFileSync("git", args, { encoding: "utf8", maxBuffer: 16 * 1024 * 1024 })) {
   const base = event.pull_request?.base?.sha ?? event.before;
   if (eventName === "workflow_dispatch" || !/^[a-f0-9]{40}$/i.test(base ?? "") || /^0+$/.test(base)) return allJobs();
@@ -40,6 +46,9 @@ export function changedJobs(eventName, event, git = (args) => execFileSync("git"
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const event = JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH, "utf8"));
   const jobs = changedJobs(process.env.GITHUB_EVENT_NAME, event);
-  appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(jobs).map(([name, run]) => `${name}=${run}\n`).join(""));
-  console.log("Required verification:", jobs);
+  const fullRegression = event.inputs?.full_regression === true || event.inputs?.full_regression === "true";
+  const profile = verificationProfile(process.env.GITHUB_REF, process.env.GITHUB_BASE_REF, fullRegression);
+  const outputs = { ...jobs, ...profile };
+  appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(outputs).map(([name, value]) => `${name}=${value}\n`).join(""));
+  console.log("Required verification:", outputs);
 }

@@ -6,6 +6,10 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
+      full_regression:
+        description: Run full regressions with the release time budget
+        type: boolean
+        default: false
       audits:
         description: Run exhaustive balance and historical-content audits
         type: boolean
@@ -27,6 +31,8 @@ jobs:
       app: ${{ steps.paths.outputs.app }}
       contract: ${{ steps.paths.outputs.contract }}
       art: ${{ steps.paths.outputs.art }}
+      test_script: ${{ steps.paths.outputs.test_script }}
+      timeout_minutes: ${{ steps.paths.outputs.timeout_minutes }}
     steps:
       - name: Check out CI scripts
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -44,7 +50,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.app == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: ${{ fromJSON(needs.changes.outputs.timeout_minutes) }}
     env:
       CI: "true"
       CLOUDFLARE_CF_FETCH_ENABLED: "false"
@@ -81,7 +87,7 @@ jobs:
         run: pnpm check
 
       - name: Run regression suite
-        run: pnpm test
+        run: pnpm ${{ needs.changes.outputs.test_script }}
 
       - name: Build application
         run: pnpm build:app
@@ -94,7 +100,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.contract == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: ${{ fromJSON(needs.changes.outputs.timeout_minutes) }}
     defaults:
       run:
         working-directory: contract
@@ -129,7 +135,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.art == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: ${{ fromJSON(needs.changes.outputs.timeout_minutes) }}
     steps:
       - name: Check out source and art inputs
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
