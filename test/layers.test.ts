@@ -28,7 +28,7 @@ function cssFiles(directory: string): string[] {
 
 test("one stacking order: header menus open above the pinned time bar, below the tutorial and full-screen layers", () => {
   const layer = scale();
-  const order = ["raised", "dropdown", "time-bar", "header", "spotlight", "callout", "toast", "overlay"];
+  const order = ["raised", "notice", "dropdown", "time-bar", "header", "spotlight", "callout", "toast", "overlay"];
   for (const name of order) assert.ok(layer.has(name), `--ef-layer-${name} is defined`);
   for (let index = 1; index < order.length; index++) {
     assert.ok(layer.get(order[index - 1])! < layer.get(order[index])!, `${order[index - 1]} sits below ${order[index]}`);
