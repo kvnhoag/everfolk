@@ -20,3 +20,18 @@ test("a life without learned skills has no notices", () => {
   assert.deepEqual(learnedThisYear(life(3, {}), world), []);
   assert.deepEqual(learnedThisYear({ age: 3, seed: "s" } as LifeState, world), []);
 });
+
+test("deep skills notify in their learned year and use the active tree's titles and IDs", () => {
+  const deepWorld = { deepCapabilities: { rules: [{ id: "A1", title: "Tool practice" }, { id: "A2", title: "Measurement" }] } } as WorldPack;
+  const state = { ...life(20, { A1: { age: 20, year: -330 } }), year: -330,
+    deepCapabilities: { learned: { A1: { year: -330, evidenceIds: [] }, A2: { year: -331, evidenceIds: [] } }, evidence: [] } };
+  const before = structuredClone(state);
+  assert.deepEqual(learnedThisYear(state, deepWorld), [{ key: "skill:s:deep:A1", id: "A1", title: "Tool practice", age: 20, year: -330 }]);
+  assert.deepEqual(state, before, "notices never award skills or alter receipts");
+  assert.deepEqual(learnedThisYear({ ...state, year: -329, age: 21 }, deepWorld), []);
+});
+
+test("current atlases supply their own titles instead of the reference atlas", () => {
+  const currentWorld = { capabilities: { version: 2, nodes: [{ id: "custom", title: "Local field craft" }] } } as WorldPack;
+  assert.equal(learnedThisYear(life(12, { custom: { age: 12, year: -330 } }), currentWorld)[0].title, "Local field craft");
+});

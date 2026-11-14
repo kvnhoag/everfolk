@@ -3,6 +3,19 @@ import test from "node:test";
 import { YEAR_TASK_TARGETS, yearReminderKey, yearReminderLine, yearTask, type YearTaskFacts } from "../client/models/year-reminder.ts";
 import { liveNoticeKeys, nextNoticeFade, startNoticeClocks } from "../client/models/timed-notices.ts";
 
+test("skills waiting behind a full notification stack get their own complete display time", () => {
+  const keys = ["reminder", "skill:A1", "skill:A2", "skill:A3", "skill:A4"];
+  let clock = startNoticeClocks(new Map(), liveNoticeKeys(new Map(), keys, 0, 3), 0, 3000);
+  assert.equal(clock.size, 3);
+  assert.deepEqual(liveNoticeKeys(clock, keys, 2999, 3), keys.slice(0, 3));
+  assert.deepEqual(liveNoticeKeys(clock, keys, 3000, 3), keys.slice(3));
+  clock = startNoticeClocks(clock, liveNoticeKeys(clock, keys, 3000, 3), 3000, 3000);
+  assert.equal(clock.get("skill:A3"), 6000);
+  assert.equal(clock.get("skill:A1"), 3000, "the earlier timer stays expired");
+  assert.deepEqual(liveNoticeKeys(clock, keys, 6000, 3), []);
+  assert.deepEqual(liveNoticeKeys(new Map(), keys, 0, 0), [], "decisions occupying every slot do not consume a skill timer");
+});
+
 const facts = (over: Partial<YearTaskFacts> = {}): YearTaskFacts => ({
   phase: "ready", open: ["focus", "action", "market", "planting"], learned: [], pointed: [], introduced: [],
   planProblem: false, overfull: false, ongoing: [], ...over,

@@ -35,7 +35,7 @@ export function AssetSparkline({
     <span className="demo-sparkline-wrap" title={`${itemLabel(item)}: current ask ${currentSell} dr (base ${basePrice} dr)`}>
       <svg className="demo-sparkline" width={width} height={height} viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
         <line x1={0} y1={baseY} x2={width} y2={baseY} stroke="#b8a98e" strokeDasharray="2 2" strokeWidth={1} />
-        <polyline fill="none" stroke={diffPct > 0 ? "#a64b2a" : diffPct < 0 ? "#2e6f4e" : "#5a4630"} strokeWidth={1.75} points={points} />
+        <polyline fill="none" stroke={diffPct > 0 ? "#2e6f4e" : diffPct < 0 ? "#a64b2a" : "#5a4630"} strokeWidth={1.75} points={points} />
       </svg>
       <span className={`demo-price-delta${diffPct > 0 ? " is-high" : diffPct < 0 ? " is-low" : ""}`}>
         {diffPct > 0 ? `+${diffPct}%` : diffPct < 0 ? `${diffPct}%` : "Base"}

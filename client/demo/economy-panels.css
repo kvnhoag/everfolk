@@ -820,12 +820,12 @@
 }
 
 .demo-price-delta.is-high {
-  color: #9e3b24;
+  color: #2b6640;
   font-weight: 700;
 }
 
 .demo-price-delta.is-low {
-  color: #2b6640;
+  color: #9e3b24;
   font-weight: 700;
 }
 

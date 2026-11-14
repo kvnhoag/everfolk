@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-/** How long the clock rests after the player closes a tip before the year carries on by itself. */
+/** How long the clock rests after the player closes a tooltip or guide before the year carries on by itself. */
 export const TIP_RESUME_DELAY_MS = 2000;
 
 /** What has to be true for a closed tip to start the clock again. */
@@ -21,29 +21,38 @@ export function canResumeAfterTip(state: TipResumeState): boolean {
 }
 
 /**
- * When the player closes a tip ("Got it", × or using its section) and the clock is stopped, waits a short moment and
- * then carries the year on, so nobody has to hunt for Resume after reading. Another tip opening cancels the wait; the
- * last one to close starts it. Returns true while that short wait is running.
+ * Closing the last tooltip or guide resumes a stopped clock after a short rest. Opening more help, leaving the
+ * dashboard, or resuming manually cancels the wait. Returns true while that short wait is running.
  */
-export function useResumeAfterTip(tipShown: boolean, isPlaying: boolean, state: TipResumeState, resume: () => void,
+export function useResumeAfterTip(readingHelpShown: boolean, isPlaying: boolean, state: TipResumeState, resume: () => void,
   delayMs: number = TIP_RESUME_DELAY_MS): boolean {
-  const wasShown = useRef(tipShown);
+  const wasShown = useRef(readingHelpShown);
   const [waiting, setWaiting] = useState(false);
   const latest = useRef({ state, resume, isPlaying });
   latest.current = { state, resume, isPlaying };
+  const resumable = canResumeAfterTip(state);
 
   useEffect(() => {
-    const closed = wasShown.current && !tipShown;
-    wasShown.current = tipShown;
-    if (!closed || latest.current.isPlaying) { setWaiting(false); return undefined; }
+    const closed = wasShown.current && !readingHelpShown;
+    wasShown.current = readingHelpShown;
+    if (!closed || isPlaying || !resumable || document.hidden) { setWaiting(false); return undefined; }
     setWaiting(true);
     const timer = window.setTimeout(() => {
       setWaiting(false);
       const now = latest.current;
-      if (!now.isPlaying && canResumeAfterTip(now.state)) now.resume();
+      if (!document.hidden && !now.isPlaying && canResumeAfterTip(now.state)) now.resume();
     }, delayMs);
-    return () => { window.clearTimeout(timer); };
-  }, [tipShown, delayMs]);
+    const cancelOnHide = () => {
+      if (!document.hidden) return;
+      window.clearTimeout(timer);
+      setWaiting(false);
+    };
+    document.addEventListener("visibilitychange", cancelOnHide);
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", cancelOnHide);
+    };
+  }, [readingHelpShown, isPlaying, resumable, delayMs]);
 
   return waiting && !isPlaying;
 }

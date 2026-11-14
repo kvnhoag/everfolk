@@ -28,6 +28,6 @@ export default function BoosterOpening({ options }: { options: BoosterSceneOptio
   }, [loaded]);
   return <div className="booster-opening">
     <iframe ref={frame} title="Your Everfolk legacy pack" srcDoc={boosterDocument} onLoad={() => setLoaded(true)} />
-    {error && <div className="booster-opening-error" role="alert">{error}<button onClick={options.onClose}>Back to memorial</button></div>}
+    {error && <div className="booster-opening-error" role="alert">{error}<button onClick={options.onClose}>{options.labels?.close ?? "Back to memorial"}</button></div>}
   </div>;
 }

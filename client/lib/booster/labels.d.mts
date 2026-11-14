@@ -6,6 +6,10 @@ export interface BoosterLabels {
   close: string;
   showCount: boolean;
   reviewLabel: string;
+  closeText?: string;
+  revealAction?: string;
+  revealHint?: string;
+  inspectionLabel?: string;
 }
 export const LEGACY_LABELS: Readonly<BoosterLabels>;
 export const NFT_LABELS: Readonly<BoosterLabels>;

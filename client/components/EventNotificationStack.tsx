@@ -10,6 +10,7 @@ import { useEventNotifications } from "../hooks/useEventNotifications.ts";
 import { useNoticeClock } from "../hooks/useNoticeClock.ts";
 import { learnedThisYear } from "../models/skill-learned-notice.ts";
 import "../styles/event-notifications.css";
+import "../styles/skill-learned.css";
 
 /** The once-a-year nudge to plan the fields, pick a focus and spend the yearly action. */
 export interface YearReminder {
@@ -31,7 +32,7 @@ interface ActionItem {
   onDismiss?: () => void;
 }
 
-/** A notice that needs nothing from the player: text only, gone after a few seconds. */
+/** A timed notice, with an optional shortcut to the learned skill. */
 interface InfoItem {
   key: string;
   badge: string;
@@ -41,6 +42,7 @@ interface InfoItem {
   body: string;
   kind: "event" | "legacy" | "skill" | "reminder";
   expiresAt: number;
+  onAction?: () => void;
 }
 
 const MAX_SHOWN = 3;
@@ -70,6 +72,7 @@ function InfoToast({ item }: { item: InfoItem }) {
     </div>
     <strong className="event-toast-title">{item.title}</strong>
     {item.body && <p className="event-toast-body">{item.body}</p>}
+    {item.onAction && <div className="event-toast-footer"><button type="button" className="event-toast-action" aria-label={`View ${item.title} in skill tree`} onClick={item.onAction}>View in skill tree →</button></div>}
     <FadeTimer expiresAt={item.expiresAt} />
   </article>;
 }
@@ -88,7 +91,7 @@ function ActionToast({ item, buttonRef }: { item: ActionItem; buttonRef?: RefObj
 }
 
 export default function EventNotificationStack({ life, world, decisionEvent, demoView, decisionButtonRef, reminder = null,
-  onOpenDecision, onOpenPeopleTab, onShownChange, visible = true, persistent = true, decisionOpen = false,
+  onOpenDecision, onOpenPeopleTab, onOpenSkill, onShownChange, visible = true, persistent = true, decisionOpen = false,
 }: {
   /** The decision window is open: its notice would only repeat it. */
   decisionOpen?: boolean;
@@ -100,6 +103,7 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
   reminder?: YearReminder | null;
   onOpenDecision(): void;
   onOpenPeopleTab?(): void;
+  onOpenSkill?(id: string): void;
   /** Reports whether any notification is on screen (the tutorial explains them the first time). */
   onShownChange?(shown: boolean): void;
   visible?: boolean;
@@ -141,16 +145,17 @@ export default function EventNotificationStack({ life, world, decisionEvent, dem
   // A timed notice starts its clock only once it is actually drawn (the page is in view and a slot is free), so a
   // hidden dashboard or a full stack never uses up a skill notice unseen. Once drawn, it is remembered for reloads.
   const freeSlots = Math.max(0, MAX_SHOWN - Math.min(MAX_SHOWN, actions.length));
-  const timedKeys = visible ? [...(reminder ? [reminder.key] : []), ...skills.map(skill => skill.key)].slice(0, freeSlots) : [];
+  const timedKeys = visible ? [...(reminder ? [reminder.key] : []), ...skills.map(skill => skill.key)] : [];
   const { live, clock } = useNoticeClock(timedKeys, NOTIFICATION_DURATION_MS,
-    keys => { if (persistent) rememberSeenEventNotifications(lifeKey, keys.filter(key => key !== reminder?.key)); });
+    keys => { if (persistent) rememberSeenEventNotifications(lifeKey, keys.filter(key => key !== reminder?.key)); }, freeSlots);
   const expiry = (key: string) => clock.get(key) ?? Date.now() + NOTIFICATION_DURATION_MS;
 
   const infos: InfoItem[] = [];
   if (reminder && live.has(reminder.key)) infos.push({ key: reminder.key, badge: "New year", age: life.age, year: life.year,
     title: reminder.title, body: reminder.body, kind: "reminder", expiresAt: expiry(reminder.key) });
   for (const skill of skills) if (live.has(skill.key)) infos.push({ key: skill.key, badge: "Skill learned", age: skill.age, year: skill.year,
-    title: skill.title, body: "", kind: "skill", expiresAt: expiry(skill.key) });
+    title: skill.title, body: "", kind: "skill", expiresAt: expiry(skill.key),
+    onAction: onOpenSkill ? () => { dismissKey(skill.key)(); onOpenSkill(skill.id); } : undefined });
   for (const event of completed.notifications) {
     // The ending has its own banner at the top of the page.
     if (event.kind === "ending") continue;

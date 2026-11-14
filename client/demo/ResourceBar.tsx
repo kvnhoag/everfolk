@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useId, useRef, useState } from "react";
 import type { PlantingCheck } from "../models/planting-check.ts";
 import type { TradeItem } from "../../src/demo/types.ts";
-import { levelLabel } from "./labels.ts";
 import type { DemoScreen } from "./screen.ts";
 import "./resource-bar.css";
 import PixelIcon from "../components/PixelIcon.tsx";
 import { RESOURCES, type ResourceId } from "./resources.ts";
-import type { StorehouseRow } from "./storehouse-model.ts";
-import InventoryDrawer from "./InventoryDrawer.tsx";
 import SectionHelp from "../components/SectionHelp.tsx";
 import { SectionStep } from "../components/YearChecklist.tsx";
 import { sectionStep } from "../models/section-steps.ts";
+import YearCondition from "./YearCondition.tsx";
+import InventoryDrawer from "./InventoryDrawer.tsx";
+import type { StorehouseRow } from "./storehouse-model.ts";
 
 interface ResourceCell {
   key: string;
@@ -18,9 +18,7 @@ interface ResourceCell {
   word: string;
   parts: { glyph: string; value: string; small?: string }[];
   title: string;
-  selected?: boolean;
   extraClass?: string;
-  onClick(): void;
 }
 
 interface ResourceBarProps {
@@ -32,9 +30,8 @@ interface ResourceBarProps {
   plantingLockedUntil?: number | null;
   /** The year's flood, army and road; drawn once the fields are the player's to plan. */
   showConditions?: boolean;
-  /** Opens the market with this item chosen. */
+  /** Opens the market with this item chosen from the full inventory. */
   onSelectTradeItem?(item: TradeItem): void;
-  /** This year's personal action, for the drawer's Work card; null hides the card. */
 }
 
 const RESOURCE_PIXELS: Record<string, string[]> = {
@@ -103,45 +100,40 @@ function holdingOf(screen: DemoScreen, item: TradeItem): number {
   return 0;
 }
 
-export default function ResourceBar({ rows = null, screen, cashText, onPlan, checkPlan, plantingLockedUntil = null, showConditions = true, onSelectTradeItem }: ResourceBarProps) {
+export default function ResourceBar({ screen, cashText, rows = null, onPlan, checkPlan, plantingLockedUntil = null, showConditions = true, onSelectTradeItem }: ResourceBarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<TradeItem | null>(null);
-
+  const drawerId = useId();
+  const viewFullRef = useRef<HTMLButtonElement>(null);
   const grainPlots = Math.max(0, screen.household.plots - screen.household.flaxPlots);
   const overCapacity = screen.household.grain > screen.household.capacity;
-  const luxuryHeld = holdingOf(screen, "silver") + holdingOf(screen, "gold") + holdingOf(screen, "silk");
   const hasLegacyGranary = (screen.legacyHelp?.length ?? 0) > 0;
 
-  function openItemInDrawer(item: TradeItem) {
-    setSelectedItem(item);
-    setDrawerOpen(true);
-  }
-
-  const open = (item: TradeItem) => drawerOpen && selectedItem === item;
-  const toggle = () => setDrawerOpen(v => !v);
-  // Icons and numbers only: each cell's name and detail are in its tooltip and screen-reader label,
-  // and Inventory & Granary spells everything out.
+  // Every resource stays visible, including empty holdings. These cells only display quantities.
   const cells: ResourceCell[] = [
-    { key: "grain", word: "Grain", parts: [{ glyph: "grain", value: String(screen.household.grain), small: `/${screen.household.capacity}` }], selected: open("grain"),
-      extraClass: `${overCapacity ? " is-warn" : ""}${hasLegacyGranary ? " is-blessed" : ""}`, onClick: () => openItemInDrawer("grain"),
+    { key: "grain", word: "Grain", parts: [{ glyph: "grain", value: String(screen.household.grain), small: `/${screen.household.capacity}` }],
+      extraClass: `${overCapacity ? " is-warn" : ""}${hasLegacyGranary ? " is-blessed" : ""}`,
       title: overCapacity
-        ? `Grain: ${screen.household.grain}, over the store's limit of ${screen.household.capacity}. The extra spoils fast; open for what to do.`
+        ? `Grain: ${screen.household.grain}, over the store's limit of ${screen.household.capacity}. The extra spoils fast.`
         : `Grain: ${screen.household.grain} of ${screen.household.capacity} the store holds (harvest +${screen.household.expectedHarvest}, spoilage −${screen.household.expectedSpoilage})` },
-    { key: "cash", word: "Cash", parts: [{ glyph: "cash", value: cashText }], onClick: toggle, title: `Cash on hand: ${cashText}. Cash pays for lessons, tools and market buys, and for food when the store runs short. Paid work and selling at the market bring it in.` },
-    { key: "flax", word: "Flax", parts: [{ glyph: "flax", value: String(holdingOf(screen, "flax")) }], selected: open("flax"), onClick: () => openItemInDrawer("flax"), title: `Flax: ${holdingOf(screen, "flax")} bundles` },
-    { key: "linen", word: "Linen", parts: [{ glyph: "linen", value: String(holdingOf(screen, "linen")) }], selected: open("linen"), onClick: () => openItemInDrawer("linen"), title: `Linen: ${holdingOf(screen, "linen")} bolts` },
+    { key: "cash", word: "Cash", parts: [{ glyph: "cash", value: cashText }], title: `Cash on hand: ${cashText}. Cash pays for lessons, tools and market buys, and for food when the store runs short. Paid work and selling at the market bring it in.` },
+    { key: "flax", word: "Flax", parts: [{ glyph: "flax", value: String(holdingOf(screen, "flax")) }], title: `Flax: ${holdingOf(screen, "flax")} bundles` },
+    { key: "linen", word: "Linen", parts: [{ glyph: "linen", value: String(holdingOf(screen, "linen")) }], title: `Linen: ${holdingOf(screen, "linen")} bolts` },
+    ...(["silver", "gold", "silk"] as const).map(item => ({
+      key: item, word: item === "silk" ? "Silk" : RESOURCES[item].label,
+      parts: [{ glyph: item, value: String(holdingOf(screen, item)) }], title: `${RESOURCES[item].label}: ${holdingOf(screen, item)}`,
+    })),
     { key: "herd", word: "Herd", parts: [{ glyph: "ox", value: String(holdingOf(screen, "ox")) }, { glyph: "donkey", value: String(holdingOf(screen, "donkey")) }],
-      selected: open("ox") || open("donkey"), onClick: () => openItemInDrawer("ox"), title: `Herd: ${holdingOf(screen, "ox")} oxen, ${holdingOf(screen, "donkey")} donkeys` },
+      title: `Herd: ${holdingOf(screen, "ox")} oxen, ${holdingOf(screen, "donkey")} donkeys` },
     { key: "fields", word: "Fields", parts: [{ glyph: "plots", value: String(grainPlots) }, { glyph: "flax-plots", value: String(screen.household.flaxPlots) }],
-      onClick: toggle, title: `Fields: ${grainPlots} grain plots, ${screen.household.flaxPlots} flax plots (of ${screen.household.plots})` },
-    { key: "reputation", word: "Standing", parts: [{ glyph: "reputation", value: String(screen.works.reputation) }], onClick: toggle, title: `Reputation in town: ${screen.works.reputation}` },
+      title: `Fields: ${grainPlots} grain plots, ${screen.household.flaxPlots} flax plots (of ${screen.household.plots})` },
+    { key: "labour", word: "Labour", parts: [{ glyph: "labour", value: String(screen.household.labour) }], title: `Household labour: ${screen.household.labour} (100 = one adult worker)` },
+    { key: "reputation", word: "Standing", parts: [{ glyph: "reputation", value: String(screen.works.reputation) }], title: `Reputation in town: ${screen.works.reputation}` },
   ];
-  const conditionTitle = (level: string, line?: string) => line ? `${levelLabel(level)}: ${line}` : levelLabel(level);
   const conditions = [
-    { kind: "flood", icon: "flood", level: screen.year.flood, title: conditionTitle(screen.year.flood, screen.year.lines[0]) },
-    { kind: "army", icon: "military", level: screen.year.army, title: conditionTitle(screen.year.army, screen.year.lines[1]) },
-    { kind: "road", icon: "road", level: screen.year.road, title: conditionTitle(screen.year.road, screen.year.lines[2]) },
-  ];
+    { kind: "flood", icon: "flood", level: screen.year.flood, detail: screen.year.lines[0] },
+    { kind: "army", icon: "military", level: screen.year.army, detail: screen.year.lines[1] },
+    { kind: "road", icon: "road", level: screen.year.road, detail: screen.year.lines[2] },
+  ] as const;
 
   return (
     <section className="aoe-resource-hud has-section-help" aria-label="Household resources and inventory">
@@ -149,40 +141,32 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, che
       <div className="aoe-resource-bar">
         <SectionStep step={sectionStep("household")} />
         <div className="aoe-staples" role="list" aria-label="Pinned household resources">
-          {cells.map(cell => <button key={cell.key} type="button" role="listitem"
-            className={`aoe-cell is-icon-only${cell.selected ? " is-selected" : ""}${cell.extraClass ?? ""}`}
-            title={cell.title} aria-label={cell.title} onClick={cell.onClick}>
+          {cells.map(cell => <div key={cell.key} role="listitem"
+            className={`aoe-cell is-icon-only${cell.extraClass ?? ""}`}
+            title={cell.title} aria-label={cell.title}>
             <span className="aoe-cell-parts">{cell.parts.map(part => <span key={part.glyph} className="aoe-cell-part">
               <ResourceGlyph id={part.glyph} />
               <strong className="aoe-cell-value">{part.value}{part.small && <small>{part.small}</small>}</strong>
             </span>)}</span>
             <span className="aoe-cell-word" aria-hidden="true">{cell.word}</span>
-          </button>)}
+          </div>)}
         </div>
 
         {showConditions && <div className="aoe-world-strip" aria-label="This year's conditions">
-          {conditions.map(condition => <span key={condition.kind} className={`aoe-cond is-icon-only aoe-cond-${condition.kind}-${condition.level}`}
-            title={condition.title} aria-label={condition.title} role="img">
-            <PixelIcon name={condition.icon} size={15} />
-            <span className="aoe-cell-word" aria-hidden="true">{condition.kind === "flood" ? "Flood" : condition.kind === "army" ? "Army" : "Road"}</span>
-          </span>)}
+          {conditions.map(condition => <YearCondition key={condition.kind} {...condition} />)}
         </div>}
 
-        <button
-          type="button"
-          className={`aoe-inventory-toggle${drawerOpen ? " is-open" : ""}`}
-          aria-expanded={drawerOpen}
-          onClick={() => setDrawerOpen(v => !v)}
-        >
-          <span>Inventory &amp; Granary</span>
-          {luxuryHeld > 0 && <span className="aoe-inventory-badge">+{luxuryHeld}</span>}
-          <span className="aoe-inventory-chevron" aria-hidden="true">▾</span>
+        <button type="button" className="aoe-inventory-toggle" ref={viewFullRef}
+          aria-expanded={drawerOpen} aria-controls={drawerId} onClick={() => setDrawerOpen(open => !open)}>
+          {drawerOpen ? "View less" : "View full"}
+          <span className="aoe-inventory-chevron" aria-hidden="true">{drawerOpen ? "▴" : "▾"}</span>
         </button>
       </div>
-
-      {drawerOpen && <InventoryDrawer screen={screen} rows={rows} selectedItem={selectedItem} holding={item => holdingOf(screen, item)}
-        onClose={() => setDrawerOpen(false)} onPlan={onPlan} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil}
-        onTrade={onSelectTradeItem && (item => { onSelectTradeItem(item); setSelectedItem(item); })} />}
+      <div id={drawerId} hidden={!drawerOpen}>
+        {drawerOpen && <InventoryDrawer screen={screen} rows={rows} selectedItem={null} holding={item => holdingOf(screen, item)}
+          onClose={() => { setDrawerOpen(false); viewFullRef.current?.focus(); }}
+          onPlan={onPlan} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onTrade={onSelectTradeItem} />}
+      </div>
     </section>
   );
 }

@@ -2,6 +2,8 @@
 
 This package prepares private artwork storage and an isolated public image origin behind a CDN. It includes a detailed [system design](SYSTEM_DESIGN.md), a [design critique](REVIEW.md), an editable workload model, packing/publishing tools, a bounded load probe and optional independent backups.
 
+For an agent changing existing artwork, follow the [retrieval, editing and VPS publication guide](AGENT_WORKFLOW.md). It covers verified source restoration, local edits, immutable publication, separate beta/production pins, frontend delivery and rollback.
+
 The target is a Linux VPS with Bash, Docker Engine, Docker Compose v2, Python 3.10+, curl, iproute2 and GNU coreutils. The scripts do not install Docker, change SSH/firewall settings or replace an existing host web server. The package includes an optional Cloudflare Tunnel adapter. The deployed pilot uses the existing Caddy HTTPS origin instead; see the [deployment record](DEPLOYMENT.md) for its actual routes and activation status. A public CDN hostname needs appropriate DNS configuration and a suitable media-delivery service entitlement. A different CDN can use the same release layout through a separately configured origin adapter.
 
 ## What is ready and what remains

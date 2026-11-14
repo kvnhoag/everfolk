@@ -15,8 +15,8 @@ export function startNoticeClocks(clock: NoticeClock, keys: readonly string[], n
 }
 
 /** The keys still within their time, in the order given. */
-export function liveNoticeKeys(clock: NoticeClock, keys: readonly string[], now: number): string[] {
-  return keys.filter(key => (clock.get(key) ?? Number.POSITIVE_INFINITY) > now);
+export function liveNoticeKeys(clock: NoticeClock, keys: readonly string[], now: number, limit = Number.POSITIVE_INFINITY): string[] {
+  return keys.filter(key => (clock.get(key) ?? Number.POSITIVE_INFINITY) > now).slice(0, limit);
 }
 
 /** Milliseconds until the next of `keys` fades, or null when none is still showing. */

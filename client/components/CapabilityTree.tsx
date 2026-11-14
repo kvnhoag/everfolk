@@ -1,4 +1,4 @@
-import { useId, useMemo, useRef, useState, type KeyboardEvent, type CSSProperties } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type CSSProperties } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import type { CapabilityNode, CapabilityNodeView, CapabilityStatus } from "../../src/capabilities/types.ts";
 import { capabilityView } from "../../src/capabilities/view.ts";
@@ -7,9 +7,11 @@ import CapabilityIcon from "./CapabilityIcon.tsx";
 import { capabilityPresentations, capabilityTier, firstSentence, type CapabilityPresentation } from "../models/capability-presentation.ts";
 import { useSkillMapNavigation } from "../hooks/useSkillMapNavigation.ts";
 import { skillMapStartNode } from "../models/skill-map-camera.ts";
+import type { SkillTreeFocus } from "../models/skill-learned-notice.ts";
 import "../styles/capability-tree.css";
 import "../styles/capability-tree-layout.css";
 import "../styles/capability-tree-dark-map.css";
+import "../styles/skill-learned.css";
 
 const STATUS_LABEL: Record<CapabilityStatus, string> = { learned: "Learned", available: "Ready to work", locked: "Locked", unavailable: "Unavailable" };
 const BRANCH_DESCRIPTIONS: Record<string, string> = {
@@ -118,9 +120,10 @@ export function CapabilityInspector({ node, view, world, life, activities, readO
 }
 
 /** A fixed, inspectable skill DAG. Views only select and display engine-owned work. */
-export default function CapabilityTree({ world, life, activities, onActivity, onAssess, readOnly = false }: {
+export default function CapabilityTree({ world, life, activities, onActivity, onAssess, readOnly = false, focusSkill }: {
   world: WorldPack; life: LifeState; activities: readonly ActivityAvailability[];
   onActivity(id: string, options?: { calendarDeadline?: boolean }): void; onAssess?(nodeId: string, jobIds: readonly string[]): void; readOnly?: boolean;
+  focusSkill?: SkillTreeFocus;
 }) {
   const nodes = (world.capabilities?.version ?? 0) >= 2 ? world.capabilities!.nodes : CAPABILITY_NODES;
   const layout = useMemo(() => buildCapabilityLayout(nodes), [nodes]);
@@ -128,8 +131,9 @@ export default function CapabilityTree({ world, life, activities, onActivity, on
   const view = useMemo(() => capabilityView(world, life), [world, life]);
   const byId = useMemo(() => new Map(view.nodes.map(node => [node.id, node])), [view]);
   // The tree opens zoomed out on the whole atlas; the inspector starts on the player's own progress.
-  const [selectedId, setSelectedId] = useState(() => skillMapStartNode(view.nodes, new Map(nodes.map(node => [node.id, node.depth])), nodes.find(node => node.id === "F1")?.id ?? nodes[0].id));
-  const [pathSelected, setPathSelected] = useState(false);
+  const focusedNode = nodes.find(node => node.id === focusSkill?.id);
+  const [selectedId, setSelectedId] = useState(() => focusedNode?.id ?? skillMapStartNode(view.nodes, new Map(nodes.map(node => [node.id, node.depth])), nodes.find(node => node.id === "F1")?.id ?? nodes[0].id));
+  const [pathSelected, setPathSelected] = useState(Boolean(focusedNode));
   const [calendarDeadlines, setCalendarDeadlines] = useState<Record<string, boolean>>({});
   const [selectedJobsByNode, setSelectedJobsByNode] = useState<Record<string, string[]>>({});
   const { viewport, paper, zoom, minZoom, dragging, focusPoint, pointerHandlers } = useSkillMapNavigation(layout);
@@ -140,6 +144,15 @@ export default function CapabilityTree({ world, life, activities, onActivity, on
   const ancestors = useMemo(() => pathSelected ? capabilityAncestors(nodes, selected.id) : new Set<string>(), [pathSelected, selected.id, nodes]);
   const learned = view.nodes.filter(node => node.state === "learned").length;
   const mastered = nodes.filter(node => node.depth === 10 && byId.get(node.id)?.state === "learned").length;
+  useEffect(() => {
+    if (!focusedNode) return;
+    setSelectedId(focusedNode.id); setPathSelected(true);
+    const frame = requestAnimationFrame(() => {
+      nodeRefs.current.get(focusedNode.id)?.focus({ preventScroll: true });
+      centerNode(focusedNode.id, 1);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [focusedNode?.id, focusSkill?.seq]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function centerNode(id: string, scale?: number) {
     const point = layout.nodes.find(item => item.node.id === id);
@@ -155,7 +168,7 @@ export default function CapabilityTree({ world, life, activities, onActivity, on
     event.preventDefault(); select(next, true);
   }
   return <section className="capability-tree" aria-labelledby={`${instanceId}-title`} data-capability-version={world.capabilities?.version ?? "reference"}>
-    <header className="capability-heading"><div><h3 id={`${instanceId}-title`}>The paths a life can take</h3><p>Learn the craft. Do the work. Let one skill open the next.</p></div><div className="capability-total"><strong>{learned}<span> / {nodes.length}</span></strong><span>skills learned{mastered > 0 ? ` · ${mastered} mastery path${mastered > 1 ? "s" : ""}` : ""}</span></div></header>
+    <header className="capability-heading"><div><h3 id={`${instanceId}-title`}>The paths a life can take</h3><p>Skills are learned automatically when proficiency and demonstrated work meet their requirements.</p></div><div className="capability-total"><strong>{learned}<span> / {nodes.length}</span></strong><span>skills learned{mastered > 0 ? ` · ${mastered} mastery path${mastered > 1 ? "s" : ""}` : ""}</span></div></header>
     {!view.enabled && <p className="capability-world-note" role="note">This life keeps its earlier skill rules. The complete atlas is shown as a reference; begin a new life in the current world to learn these nodes.</p>}
     <div className="capability-legend" aria-label="Tree legend">{(["learned", "available", "locked", "unavailable"] as const).map(state => <span key={state} className={`is-${state}`}><i aria-hidden="true" />{state === "available" ? "Ready" : STATUS_LABEL[state]}</span>)}<span className="capability-legend-crossover"><NodeShape branch="Physique" crossover />Crossover</span><span className="capability-legend-milestone"><NodeShape branch="Physique" milestone />Title / key skill</span><span className="capability-legend-path"><i aria-hidden="true" />Selected path</span></div>
     <p className="capability-map-help" id={`${instanceId}-help`}>The whole tree is shown · Scroll or pinch to zoom in, then drag to move · Click a skill to trace its roots · Arrow keys to navigate</p>
@@ -180,6 +193,7 @@ export default function CapabilityTree({ world, life, activities, onActivity, on
             const feature = presentations.get(node.id)!;
             return <button type="button" key={node.id} ref={element => { if (element) nodeRefs.current.set(node.id, element); else nodeRefs.current.delete(node.id); }} className={`capability-node is-${state} tier-${capabilityTier(state)}${node.id === selected.id ? " is-selected" : ""}${lineage ? " is-lineage" : pathSelected ? " is-off-path" : ""}${node.depth === 10 ? " is-mastery" : ""}${feature.milestone ? " is-milestone" : ""}${feature.crossover ? " is-crossover" : ""}`} style={{ left: x, top: y, ...sourceStyle(feature.sources) }} data-capability-id={node.id} data-node-kind={feature.crossover ? "crossover" : feature.milestone ? "milestone" : "standard"} data-source-branches={feature.crossover ? feature.sources.join(" + ") : undefined} data-state={state} aria-label={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.crossover ? ` · Requires ${feature.sources.join(" and ")}` : ""}${feature.milestone ? " · Title or key skill" : ""}`} aria-pressed={node.id === selected.id} aria-controls={`${instanceId}-detail`} tabIndex={node.id === selected.id ? 0 : -1} title={`${capabilityNodeLabel(node, STATUS_LABEL[state])}${feature.titles.length ? ` · Opens ${feature.titles.join(", ")}` : feature.keySkill ? " · Opens multiple skills" : ""}${feature.crossover ? ` · ${feature.sources.join(" + ")}` : ""}`} onClick={() => select(node.id)} onKeyDown={event => navigate(event, node.id)}>
               <span className="capability-seal"><NodeShape branch={node.branch} milestone={feature.milestone} crossover={feature.crossover} /><CapabilityIcon {...node} /><span className="capability-node-id">{node.id}</span>{state === "learned" && <span className="capability-earned-mark" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3 8 3 3 7-7" /></svg></span>}</span><span className="capability-node-name">{node.title}</span>{feature.crossover && <SourceBranches sources={feature.sources} />}
+              {node.id === focusedNode?.id && selected.id === node.id && <span className="capability-notice-label">Just learned</span>}
             </button>;
           })}
         </div>

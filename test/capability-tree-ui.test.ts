@@ -52,6 +52,15 @@ test("old lives show all 74 inspectable nodes with their original rules retained
   assert.deepEqual(life, before);
 });
 
+test("a skill notification opens the requested node and highlights its prerequisite path", () => {
+  const html = renderToStaticMarkup(createElement(CapabilityTree, { world, life, activities: [], onActivity() {}, focusSkill: { id: "PS10", seq: 1 } }));
+  assert.match(html, /class="capability-node[^\"]*is-selected[^\"]*"[^>]*data-capability-id="PS10"[^>]*aria-pressed="true"/);
+  assert.match(html, /aria-label="Original inquiry details"/);
+  assert.equal((html.match(/class="capability-notice-label"/g) ?? []).length, 1);
+  assert.match(html, /Just learned/);
+  assert.match(html, /capability-link[^\"]*is-lineage/);
+});
+
 test("work details disclose proof, proficiency and reward without turning a score into an unlock", () => {
   const node = CAPABILITY_NODES.find(node => node.id === "PS10")!;
   const view: CapabilityNodeView = { id: node.id, state: "locked", reasons: ["Independent checking must be completed first."], progress: { done: 1, required: 2 }, actionId: null, actionLabel: "Continue inquiry", requirementText: ["Materials are reserved before work starts."] };

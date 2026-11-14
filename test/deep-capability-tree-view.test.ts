@@ -56,6 +56,16 @@ test("recorded learned nodes are shown without automatically promoting an unreco
   assert.match(html, /1 linked evidence records/);
 });
 
+test("a notification selects its deep skill, highlights its family and shows the correct details", () => {
+  const target = CAPABILITY_RULES.find(rule => rule.id === "AT10")!;
+  const html = renderToStaticMarkup(createElement(CapabilityTree, { world, life: life(), activities: [], onActivity() {}, focusSkill: { id: target.id, seq: 1 } }));
+  assert.match(html, /class="deep-capability-node[^\"]*is-selected[^\"]*"[^>]*data-deep-capability-id="AT10"[^>]*aria-pressed="true"/);
+  assert.ok(html.includes(`aria-label="${target.title} requirements"`));
+  assert.equal((html.match(/class="capability-notice-label"/g) ?? []).length, 1);
+  assert.match(html, /Just learned/);
+  assert.match(html, /aria-pressed="true">Artisan<\/button>/);
+});
+
 test("supported locked nodes remain inspectable while future branches are labelled unavailable", () => {
   const html = render();
   for (const path of ["Military", "Seafaring", "Music and performance", "Court and rulership"]) assert.ok(html.includes(path));

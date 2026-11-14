@@ -41,7 +41,7 @@ export const YEAR_TASK_TARGETS: Record<YearTask, readonly string[]> = {
   focus: [".yearly-focus"],
   action: [".life-yearly-action-deck"],
   market: [".demo-economy section[aria-label='Grain market']:not([hidden])", ".demo-economy .demo-deck-tab[data-tab='market']"],
-  planting: [".aoe-planting-row", ".aoe-inventory-toggle"],
+  planting: [".aoe-planting-row", ".demo-economy .demo-deck-tab[data-tab='farm']"],
 };
 
 function problem(facts: YearTaskFacts): YearReminderPick | null {
@@ -74,7 +74,7 @@ const LINES: Record<YearReminderPick["reason"], Record<YearTask, Omit<YearRemind
     focus: { thing: "focus", body: "Choose a focus: what you practise this year." },
     action: { thing: "action", body: "Choose this year's action: people, training or work." },
     market: { thing: "market", body: "Visit the market once this year to buy or sell." },
-    planting: { thing: "fields", body: "Plan your fields in Inventory & Granary." },
+    planting: { thing: "fields", body: "Plan your fields in Farm & Granary." },
   },
   problem: {
     focus: null,
