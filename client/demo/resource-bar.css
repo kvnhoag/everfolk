@@ -435,7 +435,8 @@
 .aoe-cell-part{display:inline-flex;align-items:center;gap:6px}
 .aoe-cell.is-icon-only .aoe-cell-value{font-size:15px}
 .aoe-glyph-flax-plots{color:#8fc27f}
-.aoe-cond.is-icon-only{justify-content:center;width:32px;height:30px;padding:0}
+/* Each condition chip grows to fit its word, so FLOOD, ARMY and ROAD never run into each other. */
+.aoe-cond.is-icon-only{justify-content:center;min-width:44px;min-height:34px;padding:3px 8px}
 .aoe-cond-flood-normal,.aoe-cond-army-quiet,.aoe-cond-road-safe{border-color:#5d7a58;background:#1d2a1b;color:#b7e0a8}
 
 /* Plan your fields: what this split would do, before Set planting (a refusal locks the button). */
@@ -447,5 +448,5 @@
 /* Each icon carries one short word underneath, so the bar reads without hovering. */
 .aoe-cell.is-icon-only { flex-direction: column; align-items: center; gap: 1px; }
 .aoe-cell-parts { display: inline-flex; align-items: center; gap: 8px; }
-.aoe-cell-word { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; line-height: 1.1; text-transform: uppercase; opacity: .85; }
+.aoe-cell-word { font-size: 11px; font-weight: 700; letter-spacing: .04em; line-height: 1.1; text-transform: uppercase; white-space: nowrap; opacity: .85; }
 .aoe-cond.is-icon-only { display: inline-flex; flex-direction: column; align-items: center; gap: 1px; }
