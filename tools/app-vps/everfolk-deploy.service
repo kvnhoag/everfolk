@@ -1,0 +1,14 @@
+[Unit]
+Description=Deploy Everfolk dev and main branch updates
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/everfolk/deploy/bin/deploy.py --all
+TimeoutStartSec=45min
+UMask=0077
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=6

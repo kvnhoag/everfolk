@@ -1,6 +1,6 @@
 {
   "name": "everfolk",
-  "version": "0.1.0",
+  "version": "0.1.1-dev.0",
   "private": true,
   "type": "module",
   "description": "Everfolk — a storybook life simulator set on Egypt's ancient Mediterranean coast.",
@@ -32,7 +32,8 @@
     "test:art": "node --test --test-concurrency=2 test/art/*.test.ts && node --test tools/character-creator/tests/*.test.mjs",
     "test:audit": "node --test test/audits/*.test.ts",
     "build:app": "node scripts/run-framework.mjs build",
-    "test:dev": "node scripts/test-dev.mjs"
+    "test:dev": "node scripts/test-dev.mjs",
+    "build:info": "node scripts/write-build-info.mjs"
   },
   "packageManager": "pnpm@11.25.0",
   "dependencies": {

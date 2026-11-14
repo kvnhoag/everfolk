@@ -1,0 +1,69 @@
+# Everfolk branch deployments
+
+| Host | Tracked Git branch | Runtime | Persistent data |
+|---|---|---|---|
+| `https://beta.everfolk.life` | `dev` | `everfolk-beta` | `everfolk-beta-data` |
+| `https://everfolk.life` | `main` | `everfolk-main` | Existing `app_everfolk-data` |
+
+The beta site is the testing environment. Nothing in this package merges, rebases or pushes a Git branch. Production changes only when `main` changes. Browser saves are origin-specific; beta and production do not share a writable database. Both builds use the already verified immutable artwork release on the apex CDN, with repository public assets retained as fallbacks.
+
+## Installation
+
+This package assumes the existing VPS Docker/Compose installation, the `app_default` network, the independent artwork origin and the existing Caddy service. It does not install Docker, change the firewall, create accounts or configure DNS. The public DNS record for beta must point to the existing proxied origin.
+
+Install `deploy.py` as `/opt/everfolk/deploy/bin/deploy.py` and an edited `config.example.json` as `/opt/everfolk/deploy/config.json`. The deployment root and config must remain root-owned and writable only by root. Create the two configured env files with mode `600`. Keep production secrets in `env/main.env`; configure beta separately. Do not commit real env files. Privy email sign-in needs the beta URL in the Privy application's allowed origins.
+
+Install `everfolk-deploy.service` and `everfolk-deploy.timer` under `/etc/systemd/system/`, then run `systemctl daemon-reload`. Build and verify the initial deployments manually before enabling the timer:
+
+```bash
+python3 /opt/everfolk/deploy/bin/deploy.py --branch main --build-only
+python3 /opt/everfolk/deploy/bin/deploy.py --branch dev --build-only
+python3 /opt/everfolk/deploy/bin/deploy.py --branch dev
+python3 /opt/everfolk/deploy/bin/deploy.py --branch main
+python3 /opt/everfolk/deploy/bin/deploy.py --status
+```
+
+The first main deployment stops only the verified legacy `app-everfolk-1` container after its new image finishes building. It preserves the old container and image, snapshots its production data volume, and starts `everfolk-main` using that same volume. The old Caddy upstream must then be switched to `everfolk-main:8787`. Install and validate the separately supplied `render-caddy.py` output at that cutover; it preserves the verified artwork routes, strips externally supplied trusted identity headers, and sets `no-store` on API and build-info responses. Caddy remains the only public application ingress; health ports `8789` and `8790` bind to loopback.
+
+After checking both HTTPS sites and the expected branch/commit in `/build-info.json`, enable continuous tracking:
+
+```bash
+systemctl enable --now everfolk-deploy.timer
+systemctl list-timers everfolk-deploy.timer
+journalctl -u everfolk-deploy.service -n 100 --no-pager
+```
+
+The timer checks both branches every two minutes after the preceding run finishes, with up to ten seconds of jitter. Deployment latency also includes image build and startup time. A global file lock prevents overlapping manual/timer deployments. The runner itself is root-owned infrastructure and is updated explicitly; fetching application code does not replace the installed runner.
+
+## What a deployment does
+
+The runner shallow-fetches each branch through credential-free public HTTPS into a bare partial repository. It enumerates and bulk-fetches only allowed application blobs, then exports an immutable commit context. Source `artwork/`, local staging, dependencies, generated builds and private env files never enter that context. Selected tar members are validated against traversal, links and special files before extraction.
+
+Current `main` predates the new Docker build arguments. For that branch, the generated build context receives only a deployment Dockerfile overlay for the public CDN argument, plus `public/build-info.json`; the Git branch and application source remain unchanged. Newer dev Dockerfiles already accept the public arguments and generate the same metadata themselves. Dependencies remain pinned by `pnpm-lock.yaml`.
+
+Each image is named `everfolk-app:<branch>-<full-commit>` and labelled with its Git commit, branch, package version and public asset base. The image builds and type checks before an existing application is stopped. Runtime secrets are supplied only through the branch's env file. Each application has a 4 GiB memory limit, 2 CPU limit and bounded Docker logs. Source build contexts, images and database backups are retained for review and rollback; nothing prunes Docker or Git history automatically.
+
+Before replacement, the runner stops the relevant application and makes a compressed archive of its persistent volume under `backups/<branch>/`. It then starts the image and waits for successful homepage, session, worlds, sign-in configuration and exact build-info commit checks. A successful receipt is written atomically to `state/<branch>.json`. An unchanged, running commit is health-checked before being skipped.
+
+## Failure and rollback
+
+A failed image build leaves the running application alone. A failed application start attempts to restore the previous successful image; a first-main failure restarts the preserved legacy container. Database migrations are **not automatically reversed**. If a migration made the old image incompatible, stop the application and review the preserved volume backup before restoring it. Rewinding a database after it has accepted new writes can lose those writes; do not restore a backup casually.
+
+Pause automatic deployments before a manual rollback:
+
+```bash
+systemctl stop everfolk-deploy.timer
+python3 /opt/everfolk/deploy/bin/deploy.py --status
+```
+
+Use the previous immutable image with the branch runtime Compose file, check database compatibility and run the HTTP smoke checks before returning traffic. The timer follows the branch head and would redeploy it if re-enabled; a lasting rollback should normally revert the offending Git commit through the normal review process. No force-push is required.
+
+To keep production frozen while beta is being tested, leave `main` unchanged. Merge into `main` only after beta acceptance; that later merge is outside this setup task.
+
+## Local package validation
+
+```bash
+python3 -m unittest discover -s tools/app-vps -p 'test_deploy.py' -v
+```
+
+The isolated unit tests cover export exclusions, safe extraction, old-main build overlay, exact branch mappings, distinct data/ports, private env boundaries and rejected credentials in public build URLs. They do not replace the real server build, Caddy validation or HTTPS checks.
