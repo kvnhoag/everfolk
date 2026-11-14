@@ -6,10 +6,11 @@
   <img alt="Everfolk" src="public/assets/branding/everfolk-wordmark-ink@2x.png" width="380">
 </picture>
 
-### Deterministic Ancient Alexandria Life Simulation & Living-Legacy NFT Protocol on NEAR
+### A Storybook Life Simulation in Ancient Alexandria & Earned Living-Legacy NFTs on NEAR
 
 <p>
   <a href="https://everfolk.life"><img src="https://img.shields.io/badge/PLAY_LIVE-everfolk.life-284744?style=for-the-badge&logo=vercel&logoColor=e7e0c9" alt="Play Live"></a>
+  <a href="https://beta.everfolk.life"><img src="https://img.shields.io/badge/DEV_BETA-beta.everfolk.life-9b553e?style=for-the-badge" alt="Play the dev beta"></a>
   <a href="https://everfolk.life/test/weave/granary"><img src="https://img.shields.io/badge/WEAVE_MODE-TRY_DEMO-9b553e?style=for-the-badge" alt="Try Weave Mode Demo"></a>
   <a href="https://everfolk.life/#market"><img src="https://img.shields.io/badge/NFT_MARKET-RHAKOTIS_BAZAAR-263b43?style=for-the-badge" alt="Rhakotis Bazaar NFT Market"></a>
   <a href="https://everfolk.life/skills"><img src="https://img.shields.io/badge/SKILL_ATLAS-74_NODES-3a6b65?style=for-the-badge" alt="74-Node Skill Atlas"></a>
@@ -26,30 +27,37 @@
 
 <p>
   <a href="#product-showcase">Showcase</a> &middot;
+  <a href="#current-gameplay">Current Gameplay</a> &middot;
   <a href="#how-living-legacies-work">How It Works</a> &middot;
   <a href="#nfts--historical-collectibles">NFTs &amp; Figures</a> &middot;
   <a href="#smart-contracts--protocol-parameters">Contracts &amp; Tokenomics</a> &middot;
   <a href="#architecture--system-design">Architecture</a> &middot;
   <a href="#skill-atlas--economy">Skill Atlas</a> &middot;
   <a href="#npc-companions--agent-runtime">NPC Agents</a> &middot;
-  <a href="#quickstart">Quickstart</a>
+  <a href="#quickstart">Quickstart</a> &middot;
+  <a href="#development--deployment">Deployment</a>
 </p>
 
 </div>
 
 ---
 
-**Everfolk** is a deterministic browser-based life simulation set around Rhakotis and the emerging city of Alexandria, with new free-play births across 400–300 BCE, paired with an on-chain **Living-Legacy NFT protocol** on NEAR.
+**Everfolk** is a deterministic browser-based life simulation set around Rhakotis and the emerging city of Alexandria. Begin a life between 400 and 300 BCE, grow into a livelihood, care for a household, and pursue historical work whose consequences outlast the character.
 
-In **Free Play**, every life runs locally from a seed and command log with zero account setup. In **Weave Mode**, NEAR coordinates four structural mechanics that cannot live off-chain alone:
-1. **Verifiable Genesis:** `start_life` assigns each life's seed from NEAR validator randomness so no player can farm ideal births.
-2. **Cross-Life Interference:** At pivotal life choices, the contract draws living citizen NFTs (weighted by Affection, scaled by Rarity) and historical figures (Alexander, Aristotle, Euclid, Cleomenes) whose deeds alter your fate.
-3. **Proof-Before-Mint Verification:** A deterministic verifier replays your save against the on-chain seed, 5-year checkpoints, and drawn tokens, issuing an Ed25519 attestation checked on-chain before minting a 1–5 card booster pack.
-4. **Influence Royalty Graph (`NEP-199`):** Every prior NFT whose deed triggered in your life becomes a **source** of your minted NFT — automatically splitting **50% of mint fees** and **5% of secondary sales** to upstream owners in proportion to life impact.
+This README describes the current `dev` branch. Play its latest deployed build at [beta.everfolk.life](https://beta.everfolk.life); [everfolk.life](https://everfolk.life) follows `main`. New free-play births use `alexandria-lives-11`; existing lives retain their exact world revision. Weave Mode uses `alexandria-weave-1`, built from the same current figure-path world with NEAR-backed draws and verification.
+
+In **Free Play**, every life runs locally from a seed and command log with zero account setup. In **Weave Mode**, the same historical achievements can become **Living-Legacy NFTs** on NEAR testnet:
+
+1. **Verifiable Genesis:** `start_life` assigns a seed from NEAR block randomness and records the chosen world revision on chain.
+2. **Cross-Life Influence:** At pivotal choices, `draw_npc` selects prior NFTs by category and Affection; rarity scales the impact of their deeds.
+3. **Proof Before Minting:** The verifier replays the save against its seed, 5-year checkpoints and recorded draws, then signs the cards actually earned on historical paths. Open a pack of up to five earned candidates without a mint fee, inspect them, and pay when minting one selected card. A life with no earned cards has no pack to mint.
+4. **Influence Royalties (`NEP-199`):** Prior NFTs whose deeds affected the life become sources of the minted card. The protocol allocates **50% of mint fees** and **5% of secondary sale proceeds** to upstream owners in proportion to recorded impact.
 
 ---
 
 ## Product Showcase
+
+These screenshots show earlier testnet and UI builds. The current `dev` rules, card editions and fees are described below.
 
 <a href="https://everfolk.life">
   <img src="assets/readme/hero-homepage.png" alt="Everfolk Alexandria Harbor Entry Screen with Weave Mode and Sign-In" width="100%">
@@ -88,20 +96,35 @@ In **Free Play**, every life runs locally from a seed and command log with zero 
 
 ---
 
+## Current Gameplay
+
+- **A life that opens gradually:** Roll a character and household, then reveal controls as they become useful. The visible timeline groups early years (0–5), childhood (6–12), youth (13–17), adulthood (18–59) and later life (60+), with a portrait for each stage. The world's finer decision rules govern when personal, work and household choices become yours.
+- **One year, meaningful work:** Choose a yearly focus, use the annual action, and build skills through practice and recorded work. Study, employment, farming, trade, relationships and care compete for time and resources. Household farming decisions open from age 16.
+- **Guidance as you play:** Sections appear with usable actions, and short contextual tips explain the next step. Automatic tips appear at most once per game year; acting on their highlighted target performs the action and closes the tip. The clock resumes after the tip closes. Auto mode requires confirmation and continues without tutorial pauses.
+- **Control the pace:** Pause, resume, change speed or advance to the next decision. An unused annual action prompts at ages 6 and 7, then only after a five-year stretch of unused actions. Turning-point options display lethal risks before selection.
+- **A household economy:** Track food, money, inventory, fields and work. Trading previews show the total received as prices move with quantity. Grain sales protect the household's food by default; selling that reserve requires an explicit choice. The planting panel reports inherited fields, pending plans and remaining work.
+- **Eleven historical paths:** Work toward contribution ranks and separately assessed capstones associated with Alexander, Aristotle, Euclid, Lysippos, Pytheas, Menander, Demetrius, Theophrastus, Zeno, Ptolemy and Cleomenes. Skills, materials, completed work and historical windows determine progress; meeting a figure alone earns no card.
+- **Records and reference tools:** Browse the family and relationship ledgers, Works & deeds, earned collections, the interactive [Skill Atlas](https://beta.everfolk.life/skills), [card gallery](https://beta.everfolk.life/cards) and [wiki](https://beta.everfolk.life/wiki). Browser saves and JSON import/export preserve a life with its original rules.
+- **Presentation and sound:** Illustrated loading progress tracks module and world preparation. The sound drawer controls volume, mute and click effects; the selected ten-minute *Macedonian Garden* ambience repeats during play. Source credits and individual license terms are retained with the audio assets.
+
+Historical dates and source-backed context are distinct from authored encounters, household probabilities, prices and alternate outcomes. See the [figure-path design](design/figure-paths.md) for chronology, requirements and evidence boundaries.
+
+---
+
 ## How Living Legacies Work
 
 <table>
   <tr>
     <th width="25%">1. Seeded Birth</th>
     <th width="25%">2. Cross-Life Draws</th>
-    <th width="25%">3. Proof &amp; Booster Pack</th>
-    <th width="25%">4. Living Royalties</th>
+    <th width="25%">3. Earned Pack &amp; Proof</th>
+    <th width="25%">4. Mint &amp; Living Royalties</th>
   </tr>
   <tr>
     <td valign="top">Call <code>start_life</code> with an active world revision. NEAR block randomness determines family standing, origin, and initial world conditions.</td>
     <td valign="top">During critical moments (education, war, money, work, fate, spirit, harvest, road), <code>draw_npc</code> picks an active pool token weighted by Affection.</td>
-    <td valign="top">Every 5 game years, <code>checkpoint</code> anchors progress on-chain. At death (age 18+), the verifier signs the full replay for <code>open_mint_pack</code>.</td>
-    <td valign="top">Crack the 1–5 card foil pack, choose 1 NFT slot via <code>choose_mint_slot</code>, pick its deed, and earn <code>50%</code> mint + <code>5%</code> resale shares when future lives draw you.</td>
+    <td valign="top">Every 5 game years, <code>checkpoint</code> anchors progress on-chain. After the life ends, the verifier signs its replay and earned cards. <code>open_mint_pack</code> stores up to five distinct earned candidates without a mint fee.</td>
+    <td valign="top">Reveal the cards, then pay the quoted fee with <code>choose_mint_slot(life_id, slot)</code> to mint one. Source owners receive their mint shares; the card can influence future lives and receive upstream royalty shares.</td>
   </tr>
 </table>
 
@@ -113,11 +136,11 @@ In **Free Play**, every life runs locally from a seed and command log with zero 
       <a href="https://everfolk.life/test/weave/pack">
         <img src="assets/readme/nft-booster-pack.png" alt="3D Holographic Everfolk Living Legacies Foil Booster Pack" width="100%">
       </a>
-      <p align="center"><b>Sealed Living-Legacies Pack (<code>/test/weave/pack</code>)</b><br><sub>Pack size scales from <b>1 to 5 cards</b>: zero below age 18, base 1/2/3 cards at ages 18+/40+/60+ plus bonuses for accomplishments and qualified historical figures.</sub></p>
+      <p align="center"><b>Living-Legacies Pack Preview (<code>/test/weave/pack</code>)</b><br><sub>Current Weave packs contain <b>up to five distinct earned cards</b>, ordered by rarity. Age milestones alone add no cards. Opening has no mint fee; NEAR transaction gas still applies.</sub></p>
     </td>
     <td width="50%" valign="top">
       <img src="assets/readme/nft-pack-cards.png" alt="Opened Three-Card Booster Reveal Stage" width="100%">
-      <p align="center"><b>Confirmed Outcome Reveal &amp; Slot Pick</b><br><sub>All pack candidates reveal interactively in 3D WebGL before committing the final <code>choose_mint_slot</code> transaction on NEAR.</sub></p>
+      <p align="center"><b>Earned Card Reveal &amp; Slot Pick</b><br><sub>Inspect the stored candidates in 3D WebGL, then choose one card to mint. The contract enforces its edition limit and records its title, art, rarity and serial.</sub></p>
     </td>
   </tr>
 </table>
@@ -128,7 +151,7 @@ In **Free Play**, every life runs locally from a seed and command log with zero 
 
 ### Historical Figures (Earned on Their Paths &middot; Legendary 10 / Epic 25 Copies)
 
-A figure's card is never dropped by chance. The life must meet the figure within its historical window, climb the contribution ladder, and complete the figure's separately assessed capstone (`design/figure-paths.md`). Each card design is limited on chain: Legendary 10 copies, Epic 25.
+A figure card requires completed contributions and a separately assessed capstone, with the skills, materials and chronology specified by its path. Authored direct encounters, Euclid's teaching circle and later tradition routes have distinct wording and requirements. Meeting someone or reaching a high skill score alone awards no figure card. Each Legendary design is limited to 10 copies; each Epic design to 25. See [Historical Figure Paths](design/figure-paths.md).
 
 <table>
   <tr>
@@ -164,16 +187,18 @@ A figure's card is never dropped by chance. The life must meet the figure within
 </table>
 
 <p align="center">
-  <img src="assets/readme/historical-figures.png" alt="Live NEAR Testnet Historical Figures Registry showing Euclid 3/5 Minted" width="92%">
+  <img src="assets/readme/historical-figures.png" alt="Earlier testnet figure registry, before the current earned-card edition limits" width="92%">
 </p>
+
+The full playable roster also includes **Lysippos, Pytheas of Massalia, Menander, Demetrius the Besieger, Theophrastus, Zeno of Citium and Ptolemy I Soter**. Each has its own contribution work, resource costs and capstone. Alexander's decisive campaign and the Legendary promotions for Demetrius, Ptolemy and Zeno use one-shot outcomes. A failed outcome preserves earlier contribution progress without granting the final title; Demetrius's successful capture of Rhodes is explicitly alternate history.
 
 ### Earned Cards, Career Groups & Deeds
 
-NFTs are **earned, never rolled** (`chain/earned-cards.ts`, `design/figure-paths.md`). A Weave life mints only the v14 cards it earned on a historical figure's path:
+Current Weave NFTs are **earned, never rolled** ([eligibility rules](chain/earned-cards.ts)). A finished life can mint one card selected from its earned v14 pack candidates:
 
 - **Figure card:** the figure's own card, for completing its contribution ladder and the separately assessed capstone. Alexander, Aristotle, Euclid, Lysippos and Menander are Legendary. Demetrius, Ptolemy and Zeno reach Legendary only through a one-shot promotion (Rhodes captured in alternate history, the dynasty founded, an independent Stoa). The rest stay Epic.
 - **Contributor card:** the player's own rank on that path (e.g. *Campaign Soldier* → *Trusted Commander*), in the played character's recorded sex. It is Epic at most, and Rare at most below an Epic figure.
-- **No figure, no card:** a person of the city who followed no figure earns no NFT. Life-stage NFTs are off.
+- **No completed path work, no card:** a life with no earned figure or contributor cards has no mintable pack. Age milestones alone grant no cards, and life-stage NFT minting is disabled for earned-card lives.
 
 Every minted NFT names its card on chain (`card_id`, title, absolute image, serial such as `003/025`, attributes). Its **deed** is chosen by career group and drives the on-chain draw categories:
 
@@ -187,23 +212,23 @@ Every minted NFT names its card on chain (`card_id`, title, absolute image, seri
 | **Performance** | `spirit` | `performance.lift` &middot; `performance.lend-hand` |
 | **Farming** | `harvest` | `farming.stock-granary` &middot; `farming.share-seed` |
 
-Owners can switch an NFT's active deed via `set_action` (except the special-purpose `alexandria-demo-2` demo world when testing isolated granary/convoy triggers), list or buy via `list` / `buy`, and inspect on-chain impact with [`sources_of`](contract/README.md) &amp; [`children_of`](contract/README.md).
+Owners can switch an NFT's active deed via `set_action` (except the special-purpose `alexandria-demo-2` demo world when testing isolated granary/convoy triggers), list or buy via `list` / `buy`, and inspect on-chain impact with `sources_of` and `children_of`. The [contract source](contract/src) defines the current earned-card methods; the [contract guide](contract/README.md) also documents retained legacy interfaces.
 
 ---
 
 ## Smart Contracts & Protocol Parameters
 
-### Verified NEAR Testnet Deployments
+### NEAR Testnet Deployments
 
 | Deployment | Account ID | Explorer | Purpose &amp; Live Rules |
 |---|---|---|---|
-| **Primary Live Contract** | `everfolk-cards-11140224.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-cards-11140224.testnet) | Active testnet contract: **earned cards only**. Weave mode plays `alexandria-weave-1` (the free-play figure-path world); the verifier signs the v14 cards a life earned on a historical figure's path, and the pack holds exactly those. Free pack opening, pay at mint (`mint_terms.pack_version` 2); each NFT carries its card's title, image, serial (`edition_supply`) and attributes; per-card limits Legendary 10, Epic 25, Rare 100. Worlds: `alexandria-weave-1`, `alexandria-npc-1`. |
+| **Current Earned-Card Contract** | `everfolk-cards-11140224.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-cards-11140224.testnet) | Configured by `dev`: earned-card packs, free opening and payment at mint (`mint_terms.pack_version = 2`). Supports `alexandria-weave-1` and `alexandria-npc-1`; NFTs carry card identity, title, image, serial and attributes. |
 | **Previous Contract** | `everfolk-albums-11121956.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-albums-11121956.testnet) | Pay-at-opening packs without rarity caps. Existing tokens remain readable on-chain. |
 | **Legacy v1 Contract** | `everfolk-lives-11101338.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/everfolk-lives-11101338.testnet) | Initial v1 deployment (`1 NEAR` mint fee, `alexandria-ranked-1`, pre-stage-albums). Existing tokens remain readable on-chain. |
 | **Rehearsal / Demo Contract** | `demo.genesis-1794297139-6.testnet` | [NearBlocks &nearr;](https://testnet.nearblocks.io/address/demo.genesis-1794297139-6.testnet) | Isolated demonstration deployment (`100%` qualified figure drop, `0` nobody draw weight, `0` abandon cooldown) used for walkthrough recording. |
 
 - **Standards Implemented:** `NEP-171` (NFT Core), `NEP-177` (Metadata), `NEP-178` (Approvals), `NEP-181` (Enumeration), `NEP-199` (Payouts).
-- **Live Verifier Public Key:** `ed25519:D7qBge3EHhD8NFSwqH1JHLRTLFQQUxQZbiLRDdz3Lkk` (exposed via [`GET /api/ranked/config`](server/ranked/routes.ts)).
+- **Runtime Configuration:** [`GET /api/ranked/config`](server/ranked/routes.ts) reports the configured verifier public key, contract and RPC. Read `mint_terms`, `get_params` and `edition_supply` for the selected contract's current fees and availability; older deployments retain their own rules.
 - **Default Testnet RPC:** `https://test.rpc.fastnear.com` (overridable via `NEAR_RPC_URL`).
 
 ### On-Chain Economics, Rarity & Protocol Bounds
@@ -216,7 +241,7 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
 
 | Parameter | Value | Description |
 |---|---|---|
-| `mint_fee` | `0.001 NEAR` | Paid when the chosen pack card is minted; opening a pack is free (`10^21` yoctoNEAR) |
+| `mint_fee` | `0.001 NEAR` default | Paid when the chosen pack card is minted; opening has no mint fee (`10^21` yoctoNEAR). Transaction gas is separate. |
 | Card limits | `10 / 25 / 100` | Legendary / Epic / Rare copies per card design; Common and Uncommon unlimited; an earned card whose design is sold out cannot be minted |
 | `source_mint_share_bps` | `5000` (`50%`) | Mint fee share distributed by impact to upstream sources |
 | `royalty_sources_bps` | `500` (`5%`) | Secondary sale royalty paid proportionally to sources |
@@ -244,12 +269,12 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
 <details>
 <summary><strong>Smart Contract Methods, Auth &amp; Play-Key Model, and Honest Limits</strong></summary>
 
-#### Contract Interface (`contract/README.md`)
+#### Current Contract Interface ([source](contract/src))
 
 | Area | Methods |
 |---|---|
 | **Lives** | `start_life`, `abandon_life`, `draw_npc`, `checkpoint`, `get_life`, `active_life_of` |
-| **Packs &amp; Mint** | `open_mint_pack` (earned cards only), `choose_mint_slot` (payable), `mint_result`, `set_action`, `edition_supply`, `rarity_supply`, `figure_supply` |
+| **Packs &amp; Mint** | `mint_terms`, `open_mint_pack` (earned-card evidence), `get_mint_pack`, `choose_mint_slot` (payable), `mint_result`, `set_action`, `edition_supply`, `rarity_supply`, `figure_supply` |
 | **Earnings &amp; Graph** | `withdraw`, `balance_of`, `sources_of`, `children_of`, `token_stats` |
 | **Market (`NEP-199`)** | `list`, `unlist`, `buy` (payable), `listing`, `listings`, `nft_payout`, `nft_transfer_payout` |
 | **Pools &amp; Admin** | `active_pool`, `figure_copies`, `set_verifier_keys`, `set_catalog`, `set_card_art`, `set_params`, `set_world_versions` |
@@ -261,7 +286,7 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
 
 #### Honest Limits
 
-- **Randomness:** Relies on NEAR block randomness (`env::random_seed()`, validator VRF), suitable for testnet; offline lookahead between 5-year checkpoints is constrained by future-block draws.
+- **Randomness:** Birth seeds and cross-life draws use NEAR block randomness (`env::random_seed()`). Earned-card eligibility comes from replayed achievements; the current figure-path pack does not roll random rewards.
 - **Verifier Trust Model:** Currently operated as a signed Edge Worker service (`RANKED_VERIFIER_SECRET`) behind a modular `LifeVerifier` interface so a TEE verifier can swap in without changing contract verification.
 - **External vs. In-Game Marketplaces:** External `NEP-199` marketplaces receive payout maps truncated to their `max_len_payout` (unfitted remainder routes to treasury); Everfolk's native market pays every source up to the 64-source cap.
 
@@ -276,7 +301,7 @@ Owners can switch an NFT's active deed via `set_action` (except the special-purp
 ```mermaid
 flowchart TB
     subgraph Browser["Browser Client (React 19 · Vinext · Three.js Booster)"]
-        UI["Screens & Weave UI<br/>(Play · /skills · #market · #figures)"]
+        UI["Screens & Weave UI<br/>(Play · /skills · /cards · /wiki · #market)"]
         Engine["Pure Deterministic Engine (src/)<br/>seed + commands[] -> state + evidence"]
         Auth["Unified Session Router<br/>(NEAR Connect · Privy Play Key)"]
         UI --> Engine
@@ -292,7 +317,7 @@ flowchart TB
     end
 
     subgraph Chain["NEAR Protocol Testnet (Rust near-sdk)"]
-        Contract["everfolk-albums-11121956.testnet<br/>Lives · Packs · Albums · NEP-199 Escrow"]
+        Contract["everfolk-cards-11140224.testnet<br/>Lives · Earned Cards · Packs · NEP-199 Escrow"]
     end
 
     subgraph Agents["Optional Live NPC Planners"]
@@ -330,10 +355,11 @@ sequenceDiagram
     P->>V: POST /api/ranked/verify { life_id, save_json }
     V->>C: view get_life(life_id)
     Note over V: Replays save from on-chain seed,<br/>checks draws + 5-yr checkpoints + world rules
-    V-->>P: Signed Evidence JSON + Ed25519 Signature
-    P->>C: open_mint_pack(evidence, sig) + 0.001 NEAR (150-200 Tgas)
-    C->>C: Verify Ed25519 sig & commit outcomes in resolver receipt
-    P->>C: choose_mint_slot(life_id, slot, action_id)
+    V-->>P: Signed evidence with earned_cards + Ed25519 signature
+    P->>C: open_mint_pack(life_id, evidence, signature, npc_action_id)
+    Note over C: Verify signature and store up to five earned cards<br/>Opening has no mint fee, transaction gas applies
+    C-->>P: Stored pack with card IDs, edition previews and quoted fee
+    P->>C: choose_mint_slot(life_id, slot) + quoted mint fee
     C->>S: Distribute 50% mint share by impact weight (remainder to treasury)
     C-->>P: Minted NEP-171 / NEP-199 Living-Legacy NFT
 ```
@@ -344,7 +370,7 @@ sequenceDiagram
 flowchart LR
     Src["Upstream Source NFTs<br/>(Fired during player's life)"] --> Weight["Impact Computation (chain/impact.ts)<br/>impact_weight × RARITY_POWER_BPS (1.0x–3.0x)"]
     Weight --> Graph["On-Chain Source Graph<br/>(up to 64 sources per minted NFT)"]
-    Mint["Mint / Pack Fee (0.001 NEAR)"] --> MintSrc["50% (5000 bps) -> Source Owner Balances"]
+    Mint["Selected Card Mint Fee (default 0.001 NEAR)"] --> MintSrc["50% (5000 bps) -> Source Owner Balances"]
     Mint --> MintTrea["Treasury & Storage Coverage"]
     Sale["Secondary Market Sale (list / buy)"] --> Seller["90% (9000 bps) -> Seller Proceeds"]
     Sale --> SaleSrc["5% (500 bps) -> Source Owner Balances"]
@@ -362,9 +388,9 @@ Strict unidirectional imports across modules are mechanically verified in CI by 
 | Directory | Responsibility &amp; Allowed Dependencies |
 |---|---|
 | [`src/`](src) | Pure headless deterministic simulation (calendar, RNG, stats, skills, family, commerce, war, command reducer, serialization). Zero React, browser DOM, or server dependencies. |
-| [`chain/`](chain) | Shared immutable rules, action/figure catalogs (`contract-catalog.json`), impact math, pack-size formula, save verification helpers used by both client and verifier. |
+| [`chain/`](chain) | Shared rules and catalogs, current Weave world, earned-card eligibility, impact math and replay verification used by client and verifier. Retained legacy worlds keep their earlier pack rules. |
 | [`client/`](client) | UI layer organized strictly as `types` &rarr; `lib` &rarr; `models` &rarr; `state` &rarr; `queries` &rarr; `mutations` &rarr; `hooks` &rarr; `components` &rarr; `screens`, plus `chain/` Weave screens and `demo/`. |
-| [`contract/`](contract/README.md) | Rust `near-sdk` workspace implementing `Everfolk` lives, packs, stage albums, market escrow, and `NEP-171`–`NEP-199` views/callbacks. |
+| [`contract/`](contract/README.md) | Rust `near-sdk` workspace implementing lives, earned-card packs, per-design editions, market escrow and NEAR NFT standards, plus retained legacy mint interfaces. |
 | [`server/`](server) &middot; [`db/`](db) &middot; [`worker/`](worker) | Vinext route handlers, D1/SQLite Drizzle schema, Ed25519 `LifeVerifier`, rate limits, and standalone/ranked `/npc` companion services. |
 | [`worlds/`](worlds) &middot; [`scripts/`](scripts) | Versioned immutable world JSON packs (retaining historical saves) and CLI generators/evaluators (`ranked:world`, `demo:world`, skill cohort evaluation). |
 
@@ -374,9 +400,10 @@ Strict unidirectional imports across modules are mechanically verified in CI by 
 
 Everfolk models livelihoods through connected prerequisites, proficiency gates, and **demonstrated-work proof** rather than abstract XP bars:
 
-- **74-Node Attribute Atlas (`/skills`):** Spans **Physique**, **Handmade**, **Knowledge**, and **Trade** across 10 depth tiers, with two explicit crossovers bridging intellectual inquiry and physical conditioning into **Military Foundations** and **Tactical Command** ([Military progression guide](guide/SKILL_CROSSOVERS.md)).
-- **Classic Alexandria Economy (`alexandria-lives-8`):** Players manage grain reserves, flax fields, linen production, herds, and household rations. Year-end bulk commodity contracts execute against merchant stock and event-reactive quotes (capped at `50` units/order &amp; `100` units/year for ordinary households, expanded to `100` units/order &amp; `300` units/year and full catalog browsing for traders, shopkeepers, merchants, estate stewards, and quartermasters).
-- **Calibrated Cohort Benchmarks (`alexandria-lives-8`):** Across an **800-life seeded evaluation** (100 seeds &times; 8 terminal paths under disclosed balanced policies, reported in [`guide/SKILL_TREE.md`](guide/SKILL_TREE.md)), depth-10 specialization rates fall consistently within **55.0%–64.0%**, with zero artificial state injection.
+- **74-node Skill Atlas (`/skills`):** **Physique**, **Handmade**, **Knowledge** and **Trade** span ten depth tiers. The interactive map runs left to right on a dark background; each node explains prerequisites, required proof and practical rewards. Military crossovers connect physical conditioning and inquiry to command ([progression guide](guide/SKILL_CROSSOVERS.md)).
+- **Practice with proof:** Learn through qualified actions and demonstrated work. Historical projects consume real materials, school or workshop funds and annual actions; completed contributions and capstones retain their provenance in the life record.
+- **Current household resources (`alexandria-lives-11`):** Working households begin with modest reserves, while merchant and estate backgrounds have different resources. Grain, flax, linen, animals, supplies and market depth connect production, food security and trade. The trade preview explains quantity-dependent prices and the total before confirmation.
+- **Retained benchmark (`alexandria-lives-8`):** The [800-life seeded evaluation](guide/SKILL_TREE.md) reported depth-10 specialization rates of **55.0%–64.0%** under its disclosed policies. Those figures describe that revision and evaluation. Current historical-card completion rates require separate measurement.
 
 <p align="center">
   <img src="public/assets/skills/skill-atlas.svg" alt="Full 74-Node Vector Skill Atlas" width="100%">
@@ -408,7 +435,9 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Free play works out of the box with no account or secrets (`LocalStorage` + JSON import/export). For local Weave Mode testing, set `RANKED_VERIFIER_SECRET=<64-hex>` in `.dev.vars`.
+Free play works out of the box with no account or secrets (browser storage and JSON import/export). Local Weave verification needs `RANKED_VERIFIER_SECRET=<64-hex>` in an ignored `.dev.vars`, with the matching public key registered on the selected testnet contract. Configure the contract and optional sign-in/funder settings using [.env.production.example](.env.production.example) and the [contract guide](contract/README.md).
+
+For an isolated browser preview of current historical lives, run `node scripts/preview-lives.mjs --world-pack worlds/demo/alexandria-lives-11.json` and open `http://localhost:5175/`. The bundled world works without a database. `/test-aristocrat` and `/test-royalty` open class scenarios without writing personal saves. The regular `pnpm dev` server also provides `/loading-preview` to inspect the loading screen.
 
 Editable artwork and authoring libraries live in private VPS storage outside this repository. Normal development, builds and CI use delivered assets and compact retained metadata; they do not need the full source archive. See [Artwork Storage](guide/artwork-storage.md) for the pinned releases and explicit authoring-source retrieval.
 
@@ -428,11 +457,17 @@ Put a TLS reverse proxy (Caddy or nginx) in front of port `8787` and add the pub
 <summary><strong>Development Commands, Contract Testing &amp; Testnet Deployment Scripts</strong></summary>
 
 ```sh
-# Workspace verification (matches GitHub Actions verify job)
+# Workspace validation and regression suites
 pnpm check              # TypeScript typecheck + English-only check + architecture boundaries
-pnpm test               # Unit, replay, figure calibration & world invariant test suites
-pnpm build              # Production Vinext + Cloudflare Worker bundle
+pnpm test:dev           # Focused development safety suite used by dev CI
+pnpm test               # Full default regression suite used by main CI
+pnpm build              # Checks, then production Vinext + Cloudflare Worker bundle
+pnpm build:app          # Build an already-checked checkout (the CI build step)
 pnpm preview            # Preview production build locally
+
+# Specialist verification when the changed inputs require it
+pnpm test:art           # Delivered assets, art tooling and character creator
+pnpm test:audit         # Exhaustive balance cohorts and historical-content audits
 ```
 
 ```sh
@@ -449,15 +484,35 @@ CONTRACT_ID=everfolk-albums-demo.testnet KEEP_VERIFIER_KEY=ed25519:... scripts/r
 ```
 
 ```sh
-# Regenerate active world packs (retain previous immutable worlds/*.json for existing saves)
-pnpm content
+# Regenerate content from its owning generators; retain previous immutable packs for existing saves
+pnpm content           # Classic Alexandria content
+pnpm resources:world   # Household-resource worlds, including current alexandria-lives-11 births
 ```
 
 </details>
 
+CI selects checks from the changed paths. `dev` uses `test:dev` with a three-minute verification budget; `main` uses the full default regression suite. Art and contract jobs run when their inputs change. Documentation-only changes skip application jobs. Manual runs can request full regressions and exhaustive audits. See [Contributing](CONTRIBUTING.md) for the complete workflow.
+
+---
+
+## Development & Deployment
+
+| Environment | Branch | Address | Data |
+|---|---|---|---|
+| Development beta | `dev` | [beta.everfolk.life](https://beta.everfolk.life) | Separate beta D1 volume and origin-local browser saves |
+| Production | `main` | [everfolk.life](https://everfolk.life) | Existing production D1 volume and origin-local browser saves |
+
+The VPS deployment runner tracks both branch heads, builds an immutable application image, and replaces that environment after checks pass. It records the package version, branch and full commit in `/build-info.json`. The timer checks for changes about every two minutes after the previous run completes; build and startup time add to that interval. After beta acceptance, merging `dev` into `main` makes the change eligible for production deployment.
+
+Beta and production use separate databases but can share testnet contracts, wallets and external-service quotas. Both use a pinned public media release. The [deployment guide](tools/app-vps/README.md) covers installation, health checks, data backups and rollback; [deployment records](tools/app-vps/DEPLOYMENT.md) describe the configured environments.
+
+Application source, delivered media and editable artwork have separate storage roles. Normal builds use repository delivery assets and retained metadata. Large authoring libraries are retrieved explicitly through `EVERFOLK_ARTWORK_DIR`. A public `VITE_EVERFOLK_ASSET_BASE_URL` can select an immutable CDN release; image requests retry their original local file if delivery fails. See [Artwork Storage](guide/artwork-storage.md) and [Artwork Delivery](guide/artwork-delivery.md).
+
 ---
 
 ## Classic Alexandria households and portraits
+
+The retained classic world revisions include the household systems below. Their birth probabilities, council rules and bulk-contract limits belong to those packs; current historical-lives births and existing saves use their own revision's rules.
 
 Classic Alexandria lives record named parents and grandparents with their household backgrounds and occupations. Living grandparents are rare: 10% of new households start with one. Open Family for a table of living relatives, your spouse and children, with deceased relatives kept under Remembered family. Relationships lists friends, business partners, teachers, disciples, enemies and romantic relationships as they form, alongside backgrounds, work and recorded bonds.
 
@@ -469,7 +524,7 @@ In new classic Alexandria lives, royal births follow a separate household counci
 
 Aristocrats born into the landowning estate household manage an Estate council: invest in land and storage, settle tenant agreements, maintain local patronage, collect rents and plan the family's inheritance. Estate prosperity and tenant loyalty affect annual returns. Their staff handle ordinary trade and paid work. New lives have a 6% chance of an aristocratic birth and a 2% chance of a royal birth; these are authored game probabilities, increased from 3% and 1%. Begun lives keep their original world revision.
 
-For a local preview of the full game and ready-to-play class scenarios, run `node scripts/preview-lives.mjs`. The game opens at `http://localhost:5175/`, with isolated adult scenarios at `/test-aristocrat` and `/test-royalty`. Both test routes use the regular life screen, year controls, event feed and management dialog, with a small preset selector. Test sessions do not write personal saves; normal play at the root uses browser saves. The preview serves the bundled worlds locally without a database.
+The `/test-aristocrat` and `/test-royalty` previews use the regular life screen, year controls, event feed and management dialog, with a small preset selector. Normal play at the preview root uses browser saves.
 
 Royal and aristocratic births receive a congratulations popup after the starting-stat reveal and **Begin life**. A skippable four-step tour introduces their treasury, household conditions, yearly council decisions and earned titles; time waits while the tour is open. **Household guide** in the character panel reopens it. Both class test pages show the introduction and include **Try birth welcome** to test the complete newborn reveal and tutorial without personal saves.
 
@@ -489,12 +544,15 @@ The portrait libraries retain their source manifests, QA records and dependencie
 |---|---|
 | [Project Report](guide/REPORT.md) | Protocol design rationale, 4 on-chain mechanics, figure calibration &amp; honest limits |
 | [How to Play (Tutorial)](guide/TUTORIAL.md) | Step-by-step Alexandria life walkthrough &amp; UI controls |
-| [Example Euclid Life (#12)](guide/EXAMPLE_LIFE.md) | Verifiable real playthrough that unlocked &amp; minted Euclid on NEAR testnet |
+| [Historical Figure Paths](design/figure-paths.md) | Eleven contribution ladders, capstones, chronology, resource requirements and conditional Legendary outcomes |
+| [Example Euclid Life (#12)](guide/EXAMPLE_LIFE.md) | Earlier testnet playthrough; documents the legacy figure-mint rules used by that life |
 | [Skill Tree &amp; Benchmarks](guide/SKILL_TREE.md) | 74-node progression model &amp; 800-life seeded mastery data |
 | [Military Crossovers](guide/SKILL_CROSSOVERS.md) | Requirements joining Physique and Knowledge into military command |
 | [NPC Companions &amp; MCP](guide/NPC_AGENTS.md) | Local Laya, OpenAI-compatible setup, REST API &amp; MCP tool specification |
 | [Judge Readiness](guide/JUDGE_READINESS.md) | Verification boundaries between standalone `/npc` preview and Weave Mode |
 | [Smart Contract Reference](contract/README.md) | Method catalog, gas floors, storage economics &amp; failure recovery |
+| [Branch Deployment](tools/app-vps/README.md) | Beta/production branch mapping, immutable builds, health checks, backups and rollback |
+| [Artwork Storage](guide/artwork-storage.md) &middot; [Artwork Delivery](guide/artwork-delivery.md) | Private authoring archives, public media releases, CDN configuration and local fallback |
 | [Architecture &amp; Contributing](ARCHITECTURE.md) &middot; [CONTRIBUTING.md](CONTRIBUTING.md) &middot; [ROADMAP.md](ROADMAP.md) | Module dependencies, PR-free branch rules &amp; development phases |
 
 ---
