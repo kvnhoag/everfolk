@@ -38,23 +38,23 @@ function verifyPng(path, width, height) {
 }
 
 const PORTRAIT_SPECS = [
-  { id: "merchant-heron", file: "merchant-heron.png", role: "Harbor merchant Heron / male adult commerce" },
-  { id: "banker-syros", file: "banker-syros.png", role: "Harbor banker Syros / moneylender / elder male commerce" },
-  { id: "pakhom-grower", file: "pakhom-grower.png", role: "Nile grower Pakhom / male farm and craft work" },
-  { id: "ptolemaios-military", file: "ptolemaios-military.png", role: "Army quartermaster Ptolemaios / military" },
-  { id: "teacher-scholar", file: "teacher-scholar.png", role: "Female philosophy teacher / scholarly / mentor NPC" },
-  { id: "scholar-clerk-m01", file: "scholar-clerk-m01.png", role: "Male scholar and clerk / scientist / scholarly" },
-  { id: "citizen-mother-f01", file: "citizen-mother-f01.png", role: "Adult female citizen and mother / caregiver-a" },
-  { id: "citizen-adult-m02", file: "citizen-adult-m02.png", role: "Adult male citizen / caregiver-b / peer" },
-  { id: "merchant-woman-f03", file: "merchant-woman-f03.png", role: "Adult female merchant / commerce" },
-  { id: "elite-citizen-m02", file: "elite-citizen-m02.png", role: "Noble citizen / politician / aristocrat / royalty / elite" },
-  { id: "youth-student", file: "youth-student.png", role: "Male youth student" },
-  { id: "youth-girl-f02", file: "youth-girl-f02.png", role: "Female youth" },
-  { id: "child-boy-m01", file: "child-boy-m01.png", role: "Male child" },
-  { id: "child-girl-f01", file: "child-girl-f01.png", role: "Female child" },
-  { id: "infant-c1", file: "infant-c1.png", role: "Infant" },
-  { id: "elder-woman-f01", file: "elder-woman-f01.png", role: "Elder woman" },
-  { id: "elder-man-m01", file: "elder-man-m01.png", role: "Elder man" },
+  { id: "merchant-heron", sex: "male", stages: ["adult", "middle"], file: "merchant-heron.png", role: "Harbor merchant Heron / male adult commerce" },
+  { id: "banker-syros", sex: "male", stages: ["middle", "elder"], file: "banker-syros.png", role: "Harbor banker Syros / moneylender / elder male commerce" },
+  { id: "pakhom-grower", sex: "male", stages: ["adult", "middle"], file: "pakhom-grower.png", role: "Nile grower Pakhom / male farm and craft work" },
+  { id: "ptolemaios-military", sex: "male", stages: ["adult", "middle"], file: "ptolemaios-military.png", role: "Army quartermaster Ptolemaios / military" },
+  { id: "teacher-scholar", sex: "female", stages: ["middle"], file: "teacher-scholar.png", role: "Female philosophy teacher / scholarly / mentor NPC" },
+  { id: "scholar-clerk-m01", sex: "male", stages: ["adult", "middle"], file: "scholar-clerk-m01.png", role: "Male scholar and clerk / scientist / scholarly" },
+  { id: "citizen-mother-f01", sex: "female", stages: ["adult", "middle"], file: "citizen-mother-f01.png", role: "Adult female citizen and mother / caregiver-a" },
+  { id: "citizen-adult-m02", sex: "male", stages: ["adult", "middle"], file: "citizen-adult-m02.png", role: "Adult male citizen / caregiver-b / peer" },
+  { id: "merchant-woman-f03", sex: "female", stages: ["middle"], file: "merchant-woman-f03.png", role: "Adult female merchant / commerce" },
+  { id: "elite-citizen-m02", sex: "male", stages: ["middle", "elder"], file: "elite-citizen-m02.png", role: "Noble citizen / politician / aristocrat / royalty / elite" },
+  { id: "youth-student", sex: "male", stages: ["youth"], file: "youth-student.png", role: "Male youth student" },
+  { id: "youth-girl-f02", sex: "female", stages: ["youth"], file: "youth-girl-f02.png", role: "Female youth" },
+  { id: "child-boy-m01", sex: "male", stages: ["child"], file: "child-boy-m01.png", role: "Male child" },
+  { id: "child-girl-f01", sex: "female", stages: ["child"], file: "child-girl-f01.png", role: "Female child" },
+  { id: "infant-c1", sex: "any", stages: ["infant"], file: "infant-c1.png", role: "Infant" },
+  { id: "elder-woman-f01", sex: "female", stages: ["elder"], file: "elder-woman-f01.png", role: "Elder woman" },
+  { id: "elder-man-m01", sex: "male", stages: ["elder"], file: "elder-man-m01.png", role: "Elder man" },
 ];
 
 const EXPANDED_JOBS = [
@@ -143,6 +143,8 @@ for (const spec of PORTRAIT_SPECS) {
     height: 480,
     nativeGrid: { width: 64, height: 80, scale: 6 },
     role: spec.role,
+    sex: spec.sex,
+    stages: spec.stages,
     sha256: meta.sha256,
   };
 }
@@ -151,12 +153,33 @@ for (const override of Object.values(PERSON_OVERRIDES)) {
   need(portraits[override.file], `Person override references unknown portrait ${override.file}`);
 }
 
+function compatiblePortrait(file, sex, stage) {
+  const portrait = portraits[file];
+  return portrait && (portrait.sex === "any" || portrait.sex === sex) && portrait.stages.includes(stage);
+}
+
+/** A profession never overrides the visible age or sex of the complete model. */
+function selectCompatiblePortraitFile(sex, stage, wardrobeId) {
+  const preferred = selectPortraitFile(sex, stage, wardrobeId);
+  if (compatiblePortrait(preferred, sex, stage)) return preferred;
+  // Young/female bankers can use commerce artwork without inheriting Syros's face.
+  if (wardrobeId === "banker") {
+    const commerce = selectPortraitFile(sex, stage, "commerce");
+    if (compatiblePortrait(commerce, sex, stage)) return commerce;
+  }
+  // The small delivered library has no young variant for every outfit. Keep the
+  // existing age-specific complete person rather than aging them to fit a role.
+  const fallback = selectPortraitFile(sex, stage, v3.defaultWardrobes[stage]);
+  need(compatiblePortrait(fallback, sex, stage), `Missing age-appropriate Concept 1 portrait: ${sex}:${stage}`);
+  return fallback;
+}
+
 const combinationRoutes = {};
 const usedFiles = new Set();
 for (const sex of ["male", "female"]) {
   for (const [stage, wardrobes] of Object.entries(stageWardrobes)) {
     for (const wardrobeId of wardrobes) {
-      const file = selectPortraitFile(sex, stage, wardrobeId);
+      const file = selectCompatiblePortraitFile(sex, stage, wardrobeId);
       need(portraits[file], `Route ${sex}:${stage}:${wardrobeId} points to missing portrait ${file}`);
       usedFiles.add(file);
       combinationRoutes[`${sex}:${stage}:${wardrobeId}`] = {

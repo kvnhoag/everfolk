@@ -1,5 +1,6 @@
 import DeepCapabilityTree from "./DeepCapabilityTree.tsx";
 import FigurePaths from "./FigurePaths.tsx";
+import HistoricalTitlePaths from "./HistoricalTitlePaths.tsx";
 import { vocationInventory } from "../../src/vocations/view.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
@@ -290,7 +291,7 @@ export default function CharacterPanel({ life, world, onActivity, onAssess, onMa
         {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} onAssess={onAssess} />}
       </div>
       {visibleSections.some(item => item.id === "figures") && <div className="character-section historical-figures-panel" role="tabpanel" id={`${instanceId}-panel-figures`} aria-labelledby={`${instanceId}-tab-figures`} tabIndex={0} hidden={activeSection !== "figures"}>
-        {activeSection === "figures" && <FigurePaths activities={activities} {...props} />}
+        {activeSection === "figures" && (world.figurePaths?.length ? <FigurePaths activities={activities} {...props} /> : <HistoricalTitlePaths world={world} life={life} />)}
       </div>}
       {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>
         <LifePathPanel life={life} world={world} />

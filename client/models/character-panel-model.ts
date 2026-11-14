@@ -22,7 +22,7 @@ export function visibleCharacterSections(life: LifeState, world: WorldPack, hasR
   const firstJobAge = Math.min(...(world.character?.jobs.map(job => job.minAge) ?? []));
   return CHARACTER_SECTIONS.filter(section => {
     if (section.id === "career") return !privileged && (Boolean(life.character?.jobId) || life.age >= firstJobAge);
-    if (section.id === "figures") return Boolean(world.figurePaths?.length);
+    if (section.id === "figures") return Boolean(world.figurePaths?.length || world.legacy?.achievements.some(achievement => achievement.figure));
     if (section.id === "path") return Boolean(world.paths && life.paths);
     if (section.id === "wealth") return privileged || Boolean(world.economy && life.economy);
     if (section.id === "relationships") return world.character?.extendedSocialRoles === true || life.age >= 18 && hasRelationships;

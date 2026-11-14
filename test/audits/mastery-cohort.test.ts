@@ -1,11 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { createEngine } from "../src/engine.ts";
-import { runFocusedPolicy, FOCUSED_TARGETS } from "../scripts/skills/focused-policy.ts";
-import { buildCohortReport } from "../scripts/skills/evaluate-focus.mjs";
-import type { WorldPack } from "../src/types.ts";
-import shipped from "../worlds/demo/alexandria-lives-8.json" with { type: "json" };
-import evidence from "../design/skill-tree/mastery-cohort-evidence.json" with { type: "json" };
+import { createEngine } from "../../src/engine.ts";
+import { runFocusedPolicy, FOCUSED_TARGETS } from "../../scripts/skills/focused-policy.ts";
+import { buildCohortReport } from "../../scripts/skills/evaluate-focus.mjs";
+import type { WorldPack } from "../../src/types.ts";
+import shipped from "../../worlds/demo/alexandria-lives-8.json" with { type: "json" };
+import evidence from "../../design/skill-tree/mastery-cohort-evidence.json" with { type: "json" };
 
 const world = shipped as unknown as WorldPack;
 

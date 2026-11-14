@@ -4,11 +4,11 @@ import { createRequire } from "node:module";
 import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { checkBundle, kitRoot, loadKit, renderBatch, sha256, verifyKit } from "../artwork/card-art-handoff-v1/tools/card-art.mjs";
+import { checkBundle, kitRoot, loadKit, renderBatch, sha256, verifyKit } from "../../artwork/card-art-handoff-v1/tools/card-art.mjs";
 
 const require = createRequire(import.meta.url);
 const sharp = createRequire(require.resolve("next/package.json"))("sharp");
-const repo = fileURLToPath(new URL("../", import.meta.url));
+const repo = fileURLToPath(new URL("../../", import.meta.url));
 const artifacts = resolve(repo, "artifacts");
 const rgba = async (input: Buffer) => sharp(input).ensureAlpha().raw().toBuffer();
 const load = (file: string) => JSON.parse(readFileSync(file, "utf8"));

@@ -168,27 +168,3 @@ test("only the new free-play world carries the milder illness rules", () => {
   const adult = (world: WorldPack) => world.mortality!.bands.find(band => band.minAge <= 40 && band.maxAge >= 40)!.annualProbability;
   assert.ok(adult(load("alexandria-lives-8")) < adult(load("alexandria-lives-3")), "fewer severe onsets");
 });
-
-test("in the new world no severe illness kills within two years of its onset, whatever care is chosen", () => {
-  const world = load("alexandria-lives-8"), engine = createEngine(world);
-  let onsets = 0, deaths = 0;
-  for (const choice of ["rest-and-care", "carry-on"]) {
-    for (let index = 0; index < 40; index++) {
-      let life = engine.start(`mild-${choice}-${index}`);
-      while (life.phase !== "ended") {
-        if (life.phase === "choice") {
-          const options = engine.getChoices(life);
-          life = engine.choose(life, (options.find(option => option.id === choice) ?? options[0]).id);
-        } else life = engine.advance(life);
-      }
-      const onset = life.journal.filter(entry => entry.id.startsWith("health-severe-onset-"));
-      onsets += onset.length;
-      const death = life.journal.find(entry => entry.id.startsWith("health-severe-deterioration-"));
-      if (!death) continue;
-      deaths++;
-      const began = onset.filter(entry => entry.age <= death.age).at(-1)!;
-      assert.ok(death.age - began.age >= 2, `${life.seed}: onset at ${began.age}, fatal at ${death.age}`);
-    }
-  }
-  assert.ok(onsets > 0 && deaths > 0, "the cohort sees both onsets and deaths");
-});

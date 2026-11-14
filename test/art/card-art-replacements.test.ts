@@ -5,8 +5,8 @@ import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test from 'node:test';
-import { mergeActiveCardArtReplacements, stageCardArtImport, validateCardArtBundle } from '../scripts/lib/card-art-replacements.mjs';
-import { fitArtwork } from '../artwork/card-art-handoff-v1/tools/card-art.mjs';
+import { mergeActiveCardArtReplacements, stageCardArtImport, validateCardArtBundle } from '../../scripts/lib/card-art-replacements.mjs';
+import { fitArtwork } from '../../artwork/card-art-handoff-v1/tools/card-art.mjs';
 
 const require = createRequire(import.meta.url);
 const sharp = createRequire(require.resolve('next/package.json'))('sharp');
@@ -107,7 +107,7 @@ test('a parent replacement missing a runtime rarity frame is rejected before sta
 
 test('path traversal and changed image bytes fail bundle verification', async () => withFixture(async context => {
   const { repo, bundle, registry, manifest } = context;
-  manifest.assets[0].files.full.path = '../outside.webp';
+  manifest.assets[0].files.full.path = '../../outside.webp';
   save(resolve(bundle, 'replacement.json'), manifest);
   await assert.rejects(validateCardArtBundle({ repo, bundle, registry }), /traverse/);
   manifest.assets[0].files.full.path = 'euclid-parent-full.webp';

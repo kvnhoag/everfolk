@@ -87,6 +87,48 @@ test("all 17 Concept 1 portrait PNGs and 17 Concept 1 480x224 scene PNGs match t
   }
 });
 
+test("young adult and youth portraits cannot inherit older faces from professional or household roles", () => {
+  const prefix = "/assets/portraits/concept1-v4/";
+  for (const role of ["royalty", "aristocrat"] as const) {
+    assert.equal(resolvePortraitState({ age: 16, sex: "male", role }).src, prefix + "youth-student.png");
+    for (const age of [18, 25, 39]) {
+      const state = resolvePortraitState({ age, sex: "male", avatarVariant: 1, role });
+      assert.equal(state.src, prefix + "citizen-adult-m02.png", `${role}, age ${age}`);
+      assert.equal(state.wardrobeId, role, "age-appropriate art must preserve the recorded household role");
+      assert.equal(state.identityId, "m02");
+    }
+    assert.equal(resolvePortraitState({ age: 40, sex: "male", role }).src, prefix + "elite-citizen-m02.png");
+  }
+  assert.equal(resolvePortraitState({ age: 25, sex: "male", jobId: "politician" }).src, prefix + "citizen-adult-m02.png");
+  assert.equal(resolvePortraitState({ age: 25, sex: "male", jobId: "banker" }).src, prefix + "merchant-heron.png");
+  assert.equal(resolvePortraitState({ age: 25, sex: "female", jobId: "banker" }).src, prefix + "citizen-mother-f01.png");
+  assert.equal(resolvePortraitState({ age: 25, sex: "female", jobId: "scientist" }).src, prefix + "citizen-mother-f01.png");
+  assert.equal(resolvePortraitState({ age: 25, sex: "female", jobId: "merchant" }).src, prefix + "citizen-mother-f01.png");
+  assert.equal(resolvePortraitState({ age: 25, sex: "female", role: "royalty" }).src, prefix + "citizen-mother-f01.png");
+  assert.equal(resolvePortraitState({ age: 25, sex: "male", personKey: "town:moneylender" }).src, prefix + "merchant-heron.png");
+  assert.equal(resolvePortraitState({ age: 52, sex: "female", personKey: "town:moneylender" }).src, prefix + "merchant-woman-f03.png");
+  assert.equal(resolvePortraitState({ age: 70, sex: "male", jobId: "scientist" }).src, prefix + "elder-man-m01.png");
+  assert.equal(resolvePortraitState({ age: 70, sex: "female", jobId: "banker" }).src, prefix + "elder-woman-f01.png");
+});
+
+test("every Concept 1 role route and named override uses a compatible age and sex", () => {
+  const portraits = new Map(Object.values(concept1Registry.portraits).map(portrait => [portrait.src, portrait]));
+  for (const [key, route] of Object.entries(concept1Registry.combinationRoutes)) {
+    const [sex, stage] = key.split(":");
+    const portrait = portraits.get(route.src)!;
+    assert.ok(portrait.stages.includes(stage), `${key} must not use ${portrait.file}'s older or younger model`);
+    assert.ok(portrait.sex === "any" || portrait.sex === sex, `${key} must not change sex for a job`);
+  }
+  for (const personKey of Object.keys(concept1Registry.personOverrides)) {
+    for (const sex of ["male", "female"] as const) for (const age of [0, 7, 16, 25, 39, 40, 52, 60, 70]) {
+      const state = resolvePortraitState({ age, sex, personKey });
+      const portrait = portraits.get(state.src)!;
+      assert.ok(portrait.stages.includes(state.stage), `${personKey}, ${sex}, ${age}`);
+      assert.ok(portrait.sex === "any" || portrait.sex === sex, `${personKey}, ${sex}, ${age}`);
+    }
+  }
+});
+
 test("Gap 1 & Gap 2: DecisionDialog and portrait mapping resolve Heron, Pakhom, Ptolemaios, and Syros to Concept 1", () => {
   const demoWorld = lives11World;
   const demoEngine = createEngine(demoWorld);
@@ -159,7 +201,7 @@ test("Gap 3: all 45 alexandria-lives-11 job IDs and HowToPlayPages resolve to pr
     "grain-dealer": { age: 24, wardrobe: "commerce", maleSrc: "/assets/portraits/concept1-v4/merchant-heron.png" },
     "trading-house-manager": { age: 24, wardrobe: "commerce", maleSrc: "/assets/portraits/concept1-v4/merchant-heron.png" },
     scientist: { age: 24, wardrobe: "scholarly", maleSrc: "/assets/portraits/concept1-v4/scholar-clerk-m01.png" },
-    politician: { age: 24, wardrobe: "elite", maleSrc: "/assets/portraits/concept1-v4/elite-citizen-m02.png" },
+    politician: { age: 24, wardrobe: "elite", maleSrc: "/assets/portraits/concept1-v4/citizen-adult-m02.png" },
   } as const;
 
   const allJobs = new Map<string, { id: string; title: string; minAge: number }>();
@@ -213,7 +255,10 @@ test("Gap 4: NpcSessionLab NPC portrait helper maps all 5 NPC roles cleanly to C
   assert.equal(caregiverB.bodyTemplate, "male");
   assert.match(caregiverB.src, /^\/assets\/portraits\/concept1-v4\/.+\.png$/);
   assert.equal(mentor.wardrobeId, "scholarly");
-  assert.equal(mentor.src, "/assets/portraits/concept1-v4/teacher-scholar.png");
+  assert.equal(mentor.stage, "adult");
+  assert.equal(mentor.src, "/assets/portraits/concept1-v4/citizen-mother-f01.png");
+  const olderMentor = npcPortraitState(lives11World, session.player, { ...session.people[session.slots.mentor], name: "Thais", born: session.player.year - 52 });
+  assert.equal(olderMentor.src, "/assets/portraits/concept1-v4/teacher-scholar.png");
   assert.equal(merchant.wardrobeId, "commerce");
   assert.equal(merchant.src, "/assets/portraits/concept1-v4/merchant-heron.png");
   assert.equal(peer.wardrobeId, "everyday");

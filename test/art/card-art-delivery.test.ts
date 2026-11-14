@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { mergeActiveCardArtReplacements } from "../scripts/lib/card-art-replacements.mjs";
+import { mergeActiveCardArtReplacements } from "../../scripts/lib/card-art-replacements.mjs";
 
 interface CardArt {
   id: string;
@@ -30,9 +30,9 @@ interface CardArt {
 interface DeliveredFile { src: string; width: number; height: number; sha256: string; rgbaSha256: string; bytes: number }
 interface Delivery { id: string; symbolSha256: string; editionRemovedPixels: number; outsideEditionChangedPixels: number; full: DeliveredFile; thumbnail: DeliveredFile; footerless: DeliveredFile; portrait: DeliveredFile }
 interface VariantDelivery { id: string; variantOf: string; rarity: string; symbolSha256: string; uncoveredPixelDifferences: number; uncoveredPixelsChecked: number; footerless: DeliveredFile }
-const registry = JSON.parse(readFileSync(new URL("../client/models/card-art-registry.json", import.meta.url), "utf8"));
-const manifest = JSON.parse(readFileSync(new URL("../public/assets/cards/collection-v14/manifest.json", import.meta.url), "utf8"));
-const symbolCredits = JSON.parse(readFileSync(new URL("../public/assets/cards/collection-v14/icon-credits.json", import.meta.url), "utf8"));
+const registry = JSON.parse(readFileSync(new URL("../../client/models/card-art-registry.json", import.meta.url), "utf8"));
+const manifest = JSON.parse(readFileSync(new URL("../../public/assets/cards/collection-v14/manifest.json", import.meta.url), "utf8"));
+const symbolCredits = JSON.parse(readFileSync(new URL("../../public/assets/cards/collection-v14/icon-credits.json", import.meta.url), "utf8"));
 // The reviewed v14 source library remains testable after a versioned pixel-art
 // import changes the app's active artwork URLs.
 const assets = manifest.assets as CardArt[];
@@ -53,16 +53,16 @@ test("active artwork preserves every reviewed card identity, biography, rank and
       for (const key of Object.keys(original)) if (!allowed.has(key)) assert.deepEqual(active[key], original[key as keyof CardArt], `${original.id}/${key}`);
     }
   }
-  const repo = fileURLToPath(new URL("../", import.meta.url));
+  const repo = fileURLToPath(new URL("../../", import.meta.url));
   const expected = mergeActiveCardArtReplacements({ repo, registry: { ...registry, assets, parentVariants: variants } });
   assert.deepEqual(registry.assets, expected.assets);
   assert.deepEqual(registry.parentVariants, expected.parentVariants);
-  const activePath = new URL("../artwork/cards/replacements/active.json", import.meta.url);
+  const activePath = new URL("../../artwork/cards/replacements/active.json", import.meta.url);
   if (existsSync(activePath)) {
     const active = JSON.parse(readFileSync(activePath, "utf8"));
     assert.equal(registry.artReplacements.count, active.entries.length);
     for (const entry of active.entries) for (const [key, file] of Object.entries(entry.files) as [string, DeliveredFile][]) {
-      const bytes = readFileSync(new URL("../public" + file.src, import.meta.url));
+      const bytes = readFileSync(new URL("../../public" + file.src, import.meta.url));
       assert.equal(bytes.length, file.bytes);
       assert.equal(sha(bytes), file.sha256);
       if (key !== "standardArt") assert.deepEqual(losslessWebPSize(bytes), [file.width, file.height]);
@@ -118,9 +118,9 @@ test("all 487 production images have intact hashes, lossless encoding and approv
   const files = deliveries.flatMap(asset => [asset.full, asset.thumbnail, asset.footerless, asset.portrait]).concat(variantDeliveries.map(variant => variant.footerless));
   assert.equal(files.length, 487);
   assert.equal(new Set(files.map(file => file.src)).size, 487);
-  assert.equal(readdirSync(new URL("../public/assets/cards/collection-v14/", import.meta.url)).filter(name => name.endsWith(".webp")).length, 487);
+  assert.equal(readdirSync(new URL("../../public/assets/cards/collection-v14/", import.meta.url)).filter(name => name.endsWith(".webp")).length, 487);
   for (const file of files) {
-    const bytes = readFileSync(new URL("../public" + file.src, import.meta.url));
+    const bytes = readFileSync(new URL("../../public" + file.src, import.meta.url));
     assert.equal(bytes.length, file.bytes, file.src);
     assert.equal(sha(bytes), file.sha256, file.src);
     assert.match(file.rgbaSha256, /^[a-f0-9]{64}$/);

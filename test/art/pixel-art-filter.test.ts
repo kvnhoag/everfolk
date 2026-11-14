@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { enlargeNearest, parsePalette, pixelArt, sampleCells } from "../scripts/lib/pixel-art-filter.mjs";
+import { enlargeNearest, parsePalette, pixelArt, sampleCells } from "../../scripts/lib/pixel-art-filter.mjs";
 
 type RGBA = [number, number, number, number];
 
@@ -154,11 +154,11 @@ test("CLI applies the authored preset and refuses to overwrite inputs or existin
   const sourcePath = path.join(directory, "input.png"), outputPath = path.join(directory, "result.png");
   const source = await sharp(image(8, 8, (x, y) => [x * 30, y * 30, 64, 255]), { raw: { width: 8, height: 8, channels: 4 } }).png().toBuffer();
   await writeFile(sourcePath, source);
-  const cli = fileURLToPath(new URL("../scripts/pixel-art-filter.mjs", import.meta.url));
+  const cli = fileURLToPath(new URL("../../scripts/pixel-art-filter.mjs", import.meta.url));
   const flags = ["--preset", "chiaroscuro", "--width", "4", "--height", "4", "--scale", "2"];
   const run = (...args: string[]) => execFileSync(process.execPath, [cli, ...args], { encoding: "utf8", stdio: "pipe", timeout: 10000 });
   run(sourcePath, outputPath, ...flags);
-  const preset = JSON.parse(await readFile(new URL("../scripts/pixel-art-presets/chiaroscuro.json", import.meta.url), "utf8"));
+  const preset = JSON.parse(await readFile(new URL("../../scripts/pixel-art-presets/chiaroscuro.json", import.meta.url), "utf8"));
   const saved = JSON.parse(await readFile(path.join(directory, "result.palette.json"), "utf8"));
   assert.deepEqual(saved.colors, preset.palette);
   const output = await readFile(outputPath), decoded = await sharp(output).ensureAlpha().raw().toBuffer();

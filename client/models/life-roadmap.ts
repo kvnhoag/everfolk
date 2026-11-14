@@ -96,7 +96,7 @@ export function lifeRoadmap(world: WorldPack, age: number | null): RoadmapStage[
   });
 }
 
-/** "Ages 6–11", "Age 60+". */
+/** "Ages 6–12", "Age 60+". */
 export function stageAges(stage: Pick<RoadmapStage, "fromAge" | "toAge">): string {
   if (stage.toAge === null) return `Age ${stage.fromAge}+`;
   return stage.toAge === stage.fromAge ? `Age ${stage.fromAge}` : `Ages ${stage.fromAge}–${stage.toAge}`;
