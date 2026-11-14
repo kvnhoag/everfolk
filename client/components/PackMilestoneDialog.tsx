@@ -10,7 +10,7 @@ export default function PackMilestoneDialog({ milestone, onClose }: { milestone:
   useGameModal(dialog, true, () => { button.current?.focus(); });
   return <dialog ref={dialog} className="pack-milestone-dialog" aria-labelledby="pack-milestone-title" data-tutorial="hide" onCancel={event => { event.preventDefault(); onClose(); }}>
     <div className="pack-milestone-cards" aria-hidden="true">
-      {Array.from({ length: 3 }, (_, index) => <span key={index} className={`pack-milestone-card${index < milestone.cards ? " is-earned" : ""}`}>{index < milestone.cards ? "✦" : "?"}</span>)}
+      {Array.from({ length: Math.max(3, milestone.cards) }, (_, index) => <span key={index} className={`pack-milestone-card${index < milestone.cards ? " is-earned" : ""}`}>{index < milestone.cards ? "✦" : "?"}</span>)}
     </div>
     <p className="pack-milestone-eyebrow">Age {milestone.age}</p>
     <h2 id="pack-milestone-title">{milestone.title}</h2>

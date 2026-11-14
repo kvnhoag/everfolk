@@ -1,6 +1,7 @@
 import { sha256Hex } from "../../chain/hash.ts";
 import { FIGURE_ACTIONS, FIGURE_IDS, NPC_ACTIONS, type FigureId } from "../../chain/ids.ts";
 import { earnedCards } from "../../chain/earned-cards.ts";
+import { MAX_PACK_CARDS } from "../../chain/pack-count.ts";
 import { figuresForWorld } from "../../chain/catalog/demo-figures.ts";
 import { careerGroupOf, matchFigures, peakJobOf } from "../../chain/match.ts";
 import type { CareerGroup } from "../../chain/ids.ts";
@@ -72,7 +73,7 @@ export async function generateFreePlayEvidence(life: LifeState, world: WorldPack
 async function earnedPackCards(seed: string, hash: string, evidence: Evidence, groupActions: readonly string[]): Promise<MintCard[]> {
   const cards: MintCard[] = [];
   for (const earned of evidence.earned_cards ?? []) {
-    if (cards.length >= 5 || cards.some(card => card.card_id === earned.card_id)) continue;
+    if (cards.length >= MAX_PACK_CARDS || cards.some(card => card.card_id === earned.card_id)) continue;
     const slot = cards.length;
     const figure = earned.kind === "principal" && (FIGURE_IDS as readonly string[]).includes(earned.figure_id) ? earned.figure_id as FigureId : null;
     const bonds = Math.trunc(Math.max(-1e6, Math.min(1e6, evidence.stats.bonds ?? 50)));

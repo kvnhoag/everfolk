@@ -1,18 +1,25 @@
 import { MAX_PACK_CARDS, MIN_PACK_AGE } from "../../chain/pack-count.ts";
 
 /**
- * The moments a life's card pack grows, shown as they happen: from 18 the life opens a pack when it ends, and living
- * to 40 and 60 adds a card each (titles add one more each, up to the maximum). Mirrors chain/pack-count.ts. Pure.
+ * Duration-based pack milestones (ages 18, 40, 60 -> 1, 2, 3 cards) apply only to legacy ranked worlds that size
+ * packs by longevity (`chain/pack-count.ts`). Free-play packs and figure-path worlds award cards only when earned on
+ * a historical figure's path (`chain/earned-cards.ts`), so reaching 18, 40 or 60 promises no cards there. Pure.
  */
 
 export interface PackMilestone { age: number; cards: number; title: string; body: string }
 
+export interface PackMilestoneOptions {
+  /** True when packs hold only cards earned on figure paths (free play and all figure-path worlds). Defaults to true. */
+  earnedOnly?: boolean;
+}
+
 const STEPS: readonly { age: number; cards: number }[] = [{ age: MIN_PACK_AGE, cards: 1 }, { age: 40, cards: 2 }, { age: 60, cards: 3 }];
 
-export function packMilestone(age: number, ranked: boolean): PackMilestone | null {
+export function packMilestone(age: number, ranked: boolean, options: PackMilestoneOptions = {}): PackMilestone | null {
+  if (!ranked || (options.earnedOnly ?? true)) return null;
   const step = STEPS.find(candidate => candidate.age === age);
   if (!step) return null;
-  const where = ranked ? "Weave Mode mints it as real cards on NEAR." : "This guest life shows you the pack; a Weave Mode life mints it as real cards.";
+  const where = "Weave Mode mints it as real cards on NEAR.";
   const next = STEPS.find(candidate => candidate.age > age);
   const grow = next ? `Live to ${next.age} for ${next.cards} cards. ` : "";
   return age === MIN_PACK_AGE

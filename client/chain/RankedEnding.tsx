@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { LifeView, MintResult, MintPack as Pack, MintTerms, StageMintResult } from "../../chain/types.ts";
+import { countEarnedPackCards } from "../../chain/earned-cards.ts";
 import { packCardCount } from "../../chain/pack-count.ts";
 import type { OwnersByToken } from "./born-into-model.ts";
 import { errorText } from "./chain-backend.ts";
@@ -116,7 +117,7 @@ export default function RankedEnding({ session, walletPath = true, practice = fa
   const evidence = stage.signed.evidence;
   // Figure-path worlds sign the cards a life earned; only those open (chain/earned-cards.ts).
   const earned = evidence.earned_cards;
-  const cardCount = earned ? Math.min(new Set(earned.map(card => card.card_id)).size, 5) : packCardCount(evidence);
+  const cardCount = earned ? countEarnedPackCards(earned) : packCardCount(evidence);
   if (stage.kind === "declining") return <DeclineChoice cooldownMinutes={COOLDOWN_MINUTES} busy={busy} error={error}
     onKeep={onClose} onClose={() => { void closeLife(); }} onBack={() => { setError(""); setStage({ kind: "report", signed: stage.signed }); }} />;
   if (stage.kind === "pack") return <MintPack walletPath={walletPath} practice={practice} initialPack={stage.pack} evidence={evidence} contract={contract} careerGroup={evidence.career_group} onChoose={slot => session.chooseMint(slot)} onClose={onClose} txHash={lastTxHash} />;

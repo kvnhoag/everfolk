@@ -7,7 +7,7 @@ export interface LifeEndingBannerProps {
   lived: string;
   cause?: string;
   ranked: boolean;
-  /** Cards a free life would have opened: 0 before age 18, otherwise 1–5. */
+  /** Earned cards a free life can preview: 0 when none were earned on a figure path, otherwise 1–5. */
   packCards: number;
   onChronicle(): void;
   onOpenPack(): void;
@@ -27,8 +27,11 @@ export default function LifeEndingBanner({ name, dates, lived, cause, ranked, pa
     <div className="life-ending-next">
       {ranked ? <p>Your Weave life is complete. Its pack and mint continue in Weave Mode.</p> : <>
         {packCards > 0
-          ? <button type="button" className="primary-button" onClick={onOpenPack}>Open your pack · {packCards} {packCards === 1 ? "card" : "cards"} <span aria-hidden="true">✦</span></button>
-          : <p className="life-ending-no-pack">No pack this time. Lives that reach age 18 open 1 to 5 cards.</p>}
+          ? <>
+              <p className="life-ending-preview">You could have gotten {packCards} {packCards === 1 ? "card" : "cards"} as NFTs.</p>
+              <button type="button" className="primary-button" onClick={onOpenPack}>Preview pack · {packCards} {packCards === 1 ? "card" : "cards"} <span aria-hidden="true">✦</span></button>
+            </>
+          : <p className="life-ending-no-pack">No pack this time. Cards are earned, not drawn — earn a contributor title on a historical figure’s path to preview what you could have gotten.</p>}
         <a className="life-ending-weave" href="#weave"><strong>Play Weave Mode to get real NFTs</strong><span>A free life shows what you could have gotten. Weave lives are verified and minted on NEAR.</span></a>
       </>}
       <div className="life-ending-links">
