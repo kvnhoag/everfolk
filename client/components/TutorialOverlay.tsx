@@ -13,6 +13,7 @@ import { flashSections } from "../lib/section-flash.ts";
 import { usedSectionTips } from "../lib/section-use.ts";
 import { blockedByTipLock } from "../lib/tip-lock.ts";
 import { completeAfterClick, tipsCompletedByClick } from "../lib/tip-click.ts";
+import { reportBlockedClick } from "../lib/tip-nudge.ts";
 import { guidedStepLocked } from "../models/guided-step.ts";
 import { useTipShield } from "../hooks/useTipShield.ts";
 import TutorialCard from "./TutorialCard.tsx";
@@ -76,7 +77,7 @@ export default function TutorialOverlay() {
   // completes, so one click does both.
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
-      if (blockedByTipLock(event.target)) { event.preventDefault(); event.stopImmediatePropagation(); return; }
+      if (blockedByTipLock(event.target)) { event.preventDefault(); event.stopImmediatePropagation(); reportBlockedClick(event); return; }
       completeAfterClick(tipsCompletedByClick(event.target, usedSectionTips(event.target), tutorialStore.getSnapshot()), tutorialStore.used);
     };
     document.addEventListener("click", onClick, true);

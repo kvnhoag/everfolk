@@ -29,9 +29,14 @@
 .everfolk-tutorial-layer.is-closing{pointer-events:none}
 /* A guided step: the rest of the page is veiled and does not take clicks; the hover title says why. */
 .tutorial-shield{position:fixed;inset:0;z-index:-2;background:#f4ead466;cursor:not-allowed;animation:tutorial-fade-in .2s ease}
+/* A click on the veil: a short note at the click point says why nothing happened (about 1.5 s). */
+.tutorial-blocked-note{position:fixed;z-index:-1;box-sizing:border-box;width:max-content;max-width:260px;margin:0;padding:8px 11px;border:1px solid var(--tour-gold);border-radius:3px;background:var(--tour-teal);color:var(--tour-papyrus-light);font:600 12.5px/1.35 var(--ef-font-body);pointer-events:none;animation:tutorial-blocked-note 1.5s ease forwards}
+@keyframes tutorial-blocked-note{0%{opacity:0;translate:0 4px}12%{opacity:1;translate:0}80%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.tutorial-blocked-note{animation:none}}
 /* Next decision waits for a tip on screen: the card shakes once to show where the game is waiting. */
-.everfolk-tutorial-layer.is-nudged .tutorial-card-panel{animation:tutorial-nudge .45s ease}
+.everfolk-tutorial-layer.is-nudged .tutorial-card-panel{animation:tutorial-nudge .45s ease,tutorial-flash .6s ease}
 @keyframes tutorial-nudge{0%,100%{translate:0}20%{translate:-7px}40%{translate:6px}60%{translate:-4px}80%{translate:2px}}
+@keyframes tutorial-flash{0%,100%{outline:3px solid transparent;outline-offset:2px}25%,60%{outline:3px solid var(--tour-gold);outline-offset:2px}}
 @media(prefers-reduced-motion:reduce){.everfolk-tutorial-layer.is-nudged .tutorial-card-panel{animation:none;outline:3px solid var(--tour-gold)}}
 /* The highlight fades while the card flies home. */
 .everfolk-tutorial-layer>.tutorial-dim,.everfolk-tutorial-layer>.tutorial-spotlight{animation:tutorial-fade-in .2s ease}
