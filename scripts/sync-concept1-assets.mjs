@@ -26,12 +26,12 @@ function writeChanged(path, value) {
   return true;
 }
 
-function verifyPng(path, width, height) {
+function verifyPng(path, width, height, colorType = 2) {
   need(existsSync(path), `Missing Concept 1 PNG: ${path}`);
   const bytes = readFileSync(path);
   need(bytes.subarray(0, 8).equals(PNG_SIGNATURE) && bytes.toString("ascii", 12, 16) === "IHDR", `Invalid PNG: ${path}`);
   need(
-    bytes.readUInt32BE(16) === width && bytes.readUInt32BE(20) === height && bytes[24] === 8 && bytes[25] === 2,
+    bytes.readUInt32BE(16) === width && bytes.readUInt32BE(20) === height && bytes[24] === 8 && bytes[25] === colorType,
     `Concept 1 asset must be an unmodified ${width}x${height} RGB PNG: ${path}`,
   );
   return { sha256: sha256(bytes), bytes: bytes.length };
@@ -228,15 +228,22 @@ const SCENE_SPECS = [
   { id: "event_succession_guard", file: "event_succession_guard_480x224.png", mode: "event", bakedActor: true, events: ["classical-succession-guard", "classical-garrison-account", "royal-general-supply-order", "era-cleruch-serving", "era-cleruch-veteran"] },
   { id: "event_royal_harvest_tax", file: "event_royal_harvest_tax_480x224.png", mode: "event", bakedActor: true, events: ["era-royal-land-lease", "era-royal-rent-due", "era-royal-linen", "era-royal-oil", "era-royal-licence-trade"] },
   { id: "event_vessel_packing", file: "event_vessel_packing_480x224.png", mode: "event", bakedActor: true, events: ["early-training-potters-bench", "inspire-ceramics-child", "inspire-ceramics-young", "inspire-ceramics-adult", "inspire-ceramics-elder", "holdings-gift-of-tools-ceramics"] },
-  { id: "bg_harbor_quay", file: "bg_harbor_quay_480x224.png", mode: "backdrop", bakedActor: false, situations: ["harbor", "market", "business", "debt"] },
+  { id: "bg_harbor_quay", file: "bg_harbor_quay_480x224.png", mode: "backdrop", bakedActor: false, situations: ["harbor", "market", "business"] },
   { id: "bg_nile_farm", file: "bg_nile_farm_480x224.png", mode: "backdrop", bakedActor: false, situations: ["farming"] },
-  { id: "bg_military_garrison", file: "bg_military_garrison_480x224.png", mode: "backdrop", bakedActor: false, situations: ["military", "war", "danger"] },
-  { id: "bg_mouseion_study", file: "bg_mouseion_study_480x224.png", mode: "backdrop", bakedActor: false, situations: ["study", "philosophy", "astronomy", "civic"] },
-  { id: "bg_home_courtyard", file: "bg_home_courtyard_480x224.png", mode: "backdrop", bakedActor: false, situations: ["home", "courtyard", "parenthood", "illness", "recovery", "retirement"] },
+  { id: "bg_military_garrison", file: "bg_military_garrison_480x224.png", mode: "backdrop", bakedActor: false, situations: ["military"] },
+  { id: "bg_city_unrest", file: "bg_city_unrest_480x224.png", mode: "backdrop", bakedActor: false, situations: ["war", "danger"] },
+  { id: "bg_mouseion_study", file: "bg_mouseion_study_480x224.png", mode: "backdrop", bakedActor: false, situations: ["study", "philosophy", "astronomy"] },
+  { id: "bg_alexandria_street", file: "bg_alexandria_street_480x224.png", mode: "backdrop", bakedActor: false, situations: ["civic"] },
+  { id: "bg_home_courtyard", file: "bg_home_courtyard_480x224.png", mode: "backdrop", bakedActor: false, situations: ["home", "courtyard", "retirement"] },
+  { id: "bg_home_interior", file: "bg_home_interior_480x224.png", mode: "backdrop", bakedActor: false, situations: ["parenthood", "debt"] },
+  { id: "bg_rest_chamber", file: "bg_rest_chamber_480x224.png", mode: "backdrop", bakedActor: false, situations: ["illness", "recovery"] },
   { id: "bg_craft_workshop", file: "bg_craft_workshop_480x224.png", mode: "backdrop", bakedActor: false, situations: ["workshop", "sculpture"] },
   { id: "bg_pottery_kiln", file: "bg_pottery_kiln_480x224.png", mode: "backdrop", bakedActor: false, situations: ["pottery"] },
   { id: "bg_temple_shrine", file: "bg_temple_shrine_480x224.png", mode: "backdrop", bakedActor: false, situations: ["shrine", "memorial"] },
   { id: "bg_festival_feast", file: "bg_festival_feast_480x224.png", mode: "backdrop", bakedActor: false, situations: ["feast", "music", "marriage", "courtship", "friendship"] },
+  { id: "bg_reed_basin", file: "bg_reed_basin_480x224.png", mode: "backdrop", bakedActor: false, events: ["child-route-care-floating-reed"] },
+  { id: "bg_shadow_terrace", file: "bg_shadow_terrace_480x224.png", mode: "backdrop", bakedActor: false, events: ["child-route-learning-shadow-marks"] },
+  { id: "bg_vessel_packing", file: "bg_vessel_packing_480x224.png", mode: "backdrop", bakedActor: false, events: ["child-route-training-vessel-packing"] },
 ];
 
 const sceneManifest = {
@@ -248,6 +255,67 @@ const sceneManifest = {
     return { ...spec, src: `/assets/pixel/banners-concept1/${spec.file}`, width: 480, height: 224, sha256: meta.sha256 };
   }),
 };
+
+const ACTOR_ORIGIN_FAMILIES = [
+  null,
+  "artisan-household",
+  "bakery-household",
+  "clerk-household",
+  "delta-newcomers",
+  "fishing-household",
+  "harbor-household",
+  "merchant-household",
+  "weaver-household",
+];
+
+const ACTOR_SUBJECT_POSES = [
+  ["infant", ["cradle"]],
+  ["child", ["standing", "seated", "reclined"]],
+  ["youth", ["standing", "seated", "reclined"]],
+  ["adult", ["standing", "seated", "reclined"]],
+  ["middle", ["standing", "seated", "reclined"]],
+  ["elder", ["standing", "seated", "reclined"]],
+  ["military", ["standing", "seated"]],
+  ["scholar", ["standing", "seated"]],
+  ["commerce", ["standing", "seated"]],
+  ["work", ["standing", "seated"]],
+];
+
+function collectConcept1Actors() {
+  const actorRoot = resolve(sceneDir, "actors");
+  need(existsSync(actorRoot), `Missing Concept 1 actors directory: ${actorRoot}`);
+  const actors = [];
+  for (const originId of ACTOR_ORIGIN_FAMILIES) {
+    for (const sex of ["male", "female"]) {
+      for (const variant of [0, 1, 2]) {
+        for (const [subject, poses] of ACTOR_SUBJECT_POSES) {
+          for (const pose of poses) {
+            const relFile = originId
+              ? `${originId}/${sex}/${subject}-${variant}-${pose}.png`
+              : `${subject}-${sex}-${variant}-${pose}.png`;
+            const meta = verifyPng(resolve(actorRoot, relFile), 480, 224, 6);
+            actors.push({
+              id: relFile.replace(/\.png$/, ""),
+              originId,
+              sex,
+              subject,
+              variant,
+              pose,
+              file: relFile,
+              asset: `/assets/pixel/banners-concept1/actors/${relFile}`,
+              width: 480,
+              height: 224,
+              sha256: meta.sha256,
+            });
+          }
+        }
+      }
+    }
+  }
+  return actors.sort((a, b) => a.asset.localeCompare(b.asset));
+}
+
+sceneManifest.actors = collectConcept1Actors();
 
 const registryChanged = writeChanged(portraitRegistryPath, concept1Registry);
 const portraitManifestChanged = writeChanged(resolve(portraitDir, "manifest.json"), concept1Registry);

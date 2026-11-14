@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "media-dev-20261115-hibit-v1",
+  "baseUrl": "https://everfolk.life/releases/media-dev-20261115-hibit-v1/payload/",
+  "sceneManifestSha256": "072c0aa2dba09dd32c5478512c72dfcb570f1bbc5491e1de9cdc8ab6d26d9ed8",
+  "scenes": 24,
+  "actors": 1296
+}
