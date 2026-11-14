@@ -1,7 +1,8 @@
 # Audio Asset Licenses
 
-Bundled audio assets under public/assets/audio/ are redistributed under their
-respective upstream creator licenses recorded in ATTRIBUTION.md and manifest.json:
+Creator license and copyright notices for audio assets under public/assets/audio/
+are recorded here, in ATTRIBUTION.md and in manifest.json. The original seven
+assets use the licenses below; the YouTube excerpt has a separate copyright notice.
 
 1. CC0 1.0 Universal (Public Domain Dedication)
    Canonical URL: https://creativecommons.org/publicdomain/zero/1.0/legalcode
@@ -114,3 +115,12 @@ For the avoidance of doubt, this Public License does not, and shall not be inter
 To the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.
 No term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.
 Nothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.
+
+
+Copyright notice: ancient-macedonian-music.mp3
+Creator: Atmospherious (Yudha Pratama)
+Copyright © Yudha Pratama
+Source: https://www.youtube.com/watch?v=5ZMLYtJ0KMU&t=1239s
+Excerpt: 20:39–30:39, converted to MP3 with 40 ms edge fades.
+No redistribution license is documented in the source metadata. The Creative
+Commons and Soundimage licenses above do not apply to this recording.
