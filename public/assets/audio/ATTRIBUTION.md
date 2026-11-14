@@ -1,23 +1,14 @@
 # Audio Asset Sources and Redistribution Notices
 
-The seven legacy bundled audio files in `public/assets/audio/` was verified byte-for-byte by SHA-256 against its upstream download on 2026-11-13. Individual license terms and full license text references live alongside these files in [`LICENSES.txt`](LICENSES.txt), and machine-checked checksums live in [`manifest.json`](manifest.json).
+The original seven audio files were verified byte-for-byte by SHA-256 against their upstream downloads on 2026-11-13. The edited YouTube excerpt added on 2026-11-14 records its source range and conversion below; its checksum identifies the converted MP3. Creator license and copyright notices are recorded in [`LICENSES.txt`](LICENSES.txt), and bundled file checksums are recorded in [`manifest.json`](manifest.json).
 
-If an audio asset fails to load or play at runtime, [`AudioManager`](../../../client/lib/audio-manager.ts) falls back cleanly: button click feedback switches to Web Audio oscillator synthesis (`synthesizeClickFallback()`), background music uses one looping native audio element, and a rejected initial play is retried on the next user gesture.
-
-## Selected background music (source file pending)
-
-- **Track:** Relaxing Ancient Macedonian Music & Garden Ambience
-- **Composer:** Atmospherious (Yudha Pratama)
-- **Source:** https://www.youtube.com/watch?v=5ZMLYtJ0KMU
-- **Expected local file:** `public/assets/audio/ancient-macedonian-music.mp3`
-- **Runtime URL:** `/assets/audio/ancient-macedonian-music.mp3`
-
-The native background player and independent music volume/mute controls are configured for this file. Click effects retain their own existing settings. On 2026-11-14, yt-dlp/FFmpeg tools were installed in WSL, but YouTube rejected the audio download with HTTP 403 through both WSL and Windows networking. No MP3 was produced and music playback is not yet available. The source file, its checksum and its actual license must be recorded in `manifest.json` once the audio is supplied. No redistribution license has been inferred from the YouTube URL.
+If the click asset cannot load or play, [`AudioManager`](../../../client/lib/audio-manager.ts) provides synthesized click feedback. Background music uses one looping native audio element; a rejected initial play is retried on the next user gesture. Music volume and mute are independent of click sound settings.
 
 ## Summary Table
 
 | Bundled file | In-game title | Upstream source title | Creator | License | SHA-256 |
 |---|---|---|---|---|---|
+| `ancient-macedonian-music.mp3` | Macedonian Garden | Relaxing Ancient Macedonian Music & Garden Ambience \| Phorminx \| music for sleep, meditation, study | Atmospherious (Yudha Pratama) | Copyright © Yudha Pratama | `ece57417fb2ec98680db5741c0d5eb7e44087e2b554afafc0bd8b12504fcc698` |
 | `egyptian-meditation.ogg` | Egyptian Meditation | Egyptian meditation music (`v312.ogg`) | brandon75689 (submitted by HaelDB) | CC0 1.0 / OGA-BY 3.0 | `e180b3990ef5bf86382d19a47183fc66d71a9cfbe5614a7877169c0b7ccf89b5` |
 | `temple-of-the-mystics.mp3` | Temple of the Mystics | Temple of the Mystics (`Temple of the Mystics.mp3`) | Jason Dagenet (jdagenet) | CC-BY-SA 3.0 | `9bace906a13155d72224da81c87fa7e8f8c2f58d75f71744195ca3832bac3012` |
 | `hidden-oasis.mp3` | Hidden Oasis | Hidden Oasis (`Hidden Oasis_4.mp3`) | Trevor Lentz | CC-BY-SA 3.0 | `a5b41116e678666925ce7fab0a18b13c57deb80c06aca9393b1d5b21c3d2dae8` |
@@ -90,3 +81,16 @@ The native background player and independent music volume/mute controls are conf
 - **File details:** 11,562 bytes, 0.287s MP3 (embedded ID3v2 tags: `TYER=2012`, `TENC=LAME in FL Studio 9`, `TBPM=140`, LAME trailer `LAME3.98.2`).
 - **Required attribution notice:** Credit `Menu Selection Click` by `NenadSimic` (`CC-BY 3.0`), retain license link, and note file rename if redistributed.
 - **Changes made:** Renamed locally from `Menu Selection Click (preview).mp3` to `button-click.mp3`; audio stream unmodified. Web Audio click synthesis provides automatic fallback when playback or loading is unavailable.
+
+### 8. `ancient-macedonian-music.mp3`
+
+- **Source video:** https://www.youtube.com/watch?v=5ZMLYtJ0KMU&t=1239s
+- **Source title:** Relaxing Ancient Macedonian Music & Garden Ambience | Phorminx | music for sleep, meditation, study
+- **Creator:** Atmospherious (Yudha Pratama)
+- **Copyright:** Copyright © Yudha Pratama. The source metadata does not document a redistribution license.
+- **Excerpt:** 20:39–30:39 (600 seconds), as requested.
+- **File details:** 9,601,349 bytes; 600.000000s MP3 container duration; 600.000s decoded audio; 128 kb/s stereo at 44.1 kHz.
+- **SHA-256:** `ece57417fb2ec98680db5741c0d5eb7e44087e2b554afafc0bd8b12504fcc698`
+- **Credit:** Music by Atmospherious (Yudha Pratama) · Copyright © Yudha Pratama.
+- **Changes made:** Extracted audio from 20:39 to 30:39; converted AAC to 128 kb/s stereo MP3 at 44.1 kHz, with 40 ms fades at both edges and gapless playback metadata. Runtime repeats this selected track.
+- **Verification:** Full MP3 decode passed on 2026-11-14; duration, non-silent content and quiet loop edges checked.

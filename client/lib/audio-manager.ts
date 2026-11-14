@@ -31,7 +31,7 @@ export const CLICK_SFX_CREDIT: AudioSfxCredit = {
   sourceUrl: "https://opengameart.org/content/menu-selection-click",
 };
 
-// Retained only for bundled asset provenance; music uses the YouTube player.
+// Retained for bundled asset provenance; background music uses the fixed MP3 below.
 export const PLAYLIST: readonly MusicTrack[] = [
   {
     id: "egyptian-meditation",
@@ -109,10 +109,13 @@ export const PLAYLIST: readonly MusicTrack[] = [
 
 export const BACKGROUND_MUSIC = {
   id: "ancient-macedonian-music",
-  title: "Relaxing Ancient Macedonian Music & Garden Ambience",
-  composer: "Atmospherious",
+  title: "Macedonian Garden",
+  sourceTitle: "Relaxing Ancient Macedonian Music & Garden Ambience | Phorminx | music for sleep, meditation, study",
+  composer: "Atmospherious (Yudha Pratama)",
   src: "/assets/audio/ancient-macedonian-music.mp3",
-  sourceUrl: "https://www.youtube.com/watch?v=5ZMLYtJ0KMU",
+  sourceUrl: "https://www.youtube.com/watch?v=5ZMLYtJ0KMU&t=1239s",
+  license: "Copyright © Yudha Pratama",
+  attribution: "Music by Atmospherious (Yudha Pratama) · Copyright © Yudha Pratama",
 } as const;
 
 export interface AudioState {
@@ -259,7 +262,7 @@ export class AudioManager {
         if (AudioContextClass) this.audioCtx = new AudioContextClass();
       }
       if (!this.audioCtx) return;
-      if (this.audioCtx.state === "suspended") void this.audioCtx.resume();
+      if (this.audioCtx.state === "suspended") void this.audioCtx.resume().catch(() => {});
       const osc = this.audioCtx.createOscillator();
       const gain = this.audioCtx.createGain();
       osc.type = "sine";
