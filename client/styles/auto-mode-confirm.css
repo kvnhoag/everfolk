@@ -1,0 +1,11 @@
+/* Confirm box before enabling Auto mode: concise warning with safe default focus on keeping control. */
+dialog.auto-mode-confirm-dialog{width:min(460px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:22px 24px;border:2px solid #886447;border-radius:0;background:#f8eed8;color:#263b43;box-shadow:6px 6px 0 #263b4366;overflow:auto}
+dialog.auto-mode-confirm-dialog::backdrop{background:#10262cc4;backdrop-filter:blur(2px)}
+dialog.auto-mode-confirm-dialog h2{margin:0 0 10px;font-family:var(--ef-font-display);font-size:28px;font-weight:600;line-height:1.15;color:#173b44}
+.auto-mode-confirm-body{margin:0 0 16px;font-size:15px;line-height:1.55;color:#3d4d48}
+.auto-mode-confirm-remember{display:inline-flex;align-items:center;gap:9px;margin:0 0 18px;font-size:14px;line-height:1.4;color:#3d2f1d;cursor:pointer}
+.auto-mode-confirm-remember input{width:17px;height:17px;accent-color:#17343d;cursor:pointer}
+.auto-mode-confirm-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.auto-mode-confirm-actions>button{min-height:42px;padding:10px 16px;font-size:13px;font-weight:600;cursor:pointer}
+.auto-mode-confirm-dialog button:focus-visible,.auto-mode-confirm-remember input:focus-visible{outline:2px solid #41637b;outline-offset:3px}
+@media(max-width:520px){dialog.auto-mode-confirm-dialog{padding:18px 16px}.auto-mode-confirm-actions{flex-direction:column-reverse}.auto-mode-confirm-actions>button{width:100%;justify-content:center}}

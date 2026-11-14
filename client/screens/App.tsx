@@ -99,6 +99,9 @@ import { lifePhaseAt } from "../models/life-phases.ts";
 import { focusLabel, yearEndOptions } from "../models/year-end-choice.ts";
 import YearEndDialog from "../components/YearEndDialog.tsx";
 import PackMilestoneDialog from "../components/PackMilestoneDialog.tsx";
+import AutoModeConfirmDialog from "../components/AutoModeConfirmDialog.tsx";
+import { autoModeToggleAction, clearSkippedAutoConfirm, recordSkippedAutoConfirm } from "../models/auto-mode-confirm.ts";
+import { readSkippedAutoConfirmLives, writeSkippedAutoConfirmLives } from "../storage/auto-mode-confirm.ts";
 import { GameScreenContext } from "../hooks/useGameModal.ts";
 import { gameScreenShown } from "../models/game-modal.ts";
 import { packMilestone, type PackMilestone } from "../models/pack-milestones.ts";
@@ -242,7 +245,9 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const [howToPlayOpen, setHowToPlayOpen] = useState(false);
   // Read after mount (never during render) and never for preview lives, which must not touch personal storage.
   const [howToPlayAtStart, setHowToPlayAtStart] = useState(true);
-  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || householdWelcomeOpen || howToPlayOpen || tipShown || helpOpen || packMoment !== null || loanRequest !== null || loanWarningOpen, startFresh, startFreshFrom, ranked, online, previewSession });
+  const [autoConfirm, setAutoConfirm] = useState<{ lifeKey: string; resumeOnConfirm: boolean } | null>(null);
+  const [skippedAutoConfirm, setSkippedAutoConfirm] = useState<ReadonlySet<string>>(() => new Set());
+  const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || householdWelcomeOpen || howToPlayOpen || tipShown || helpOpen || packMoment !== null || loanRequest !== null || loanWarningOpen || autoConfirm !== null, startFresh, startFreshFrom, ranked, online, previewSession });
   const { life } = game;
   useEffect(() => {
     if (game.isPreview || !game.hasBegun || life.phase === "ended") return;
@@ -299,7 +304,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     : decisionEvent && isLoanDecision && loanSummary ? { ...decisionEvent, text: `Remaining balance: ${formatMoney(loanSummary.balance, world)}. ${loanSummary.description} ${decisionEvent.text}` }
     : decisionEvent && isLoanOffer && lender ? { ...decisionEvent, text: `${loanOfferTerms} ${decisionEvent.text}` } : decisionEvent;
   const decisionDisplayEvent = contextualDecisionEvent ? { ...contextualDecisionEvent, title: personText(contextualDecisionEvent.title, world, life), text: personText(contextualDecisionEvent.text, world, life) } : undefined;
-  const dashboardVisible = game.hasBegun && !menuOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !householdWelcomeOpen && !howToPlayOpen && !loanRequest && !loanWarningOpen;
+  const dashboardVisible = game.hasBegun && !menuOpen && !panel && !restartOpen && !worldPickerOpen && !birthPopoverOpen && !householdWelcomeOpen && !howToPlayOpen && !loanRequest && !loanWarningOpen && !autoConfirm;
   // After "Got it" on a tip, a stopped clock rests a moment and then carries the year on by itself.
   const resumingAfterTip = useResumeAfterTip(tipShown, game.isPlaying, {
     phase: life.phase, hasBegun: game.hasBegun, visible: dashboardVisible, yearEndPending: game.yearEndPending,
@@ -308,7 +313,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== deferredDecision && !game.autoDecisions && (game.isPlaying || decisionKey === requestedDecision));
   useTutorialGameContext(game.isPreview ? NO_TUTORIAL_CONTEXT : gameTutorialContext({
     menuOpen, birthPopoverOpen, hasBegun: game.hasBegun, panel, characterSection: panel === "character" ? characterTab ?? characterSection : null, decisionOpen,
-    blockingDialog: restartOpen || worldPickerOpen || householdWelcomeOpen || howToPlayOpen || loanRequest !== null || loanWarningOpen || freePlayBoosterOpen,
+    blockingDialog: restartOpen || worldPickerOpen || householdWelcomeOpen || howToPlayOpen || loanRequest !== null || loanWarningOpen || freePlayBoosterOpen || autoConfirm !== null,
     life: {
       lifeKey: `${life.worldFingerprint}:${life.seed}`, age: life.age, ended: life.phase === "ended", decisionPending: life.phase === "choice",
       learnedSkills: lifeSections.facts.learnedSkills, sections: [...lifeSections.sections], notificationShown: notificationShown && Boolean(demoView), passed: lifeSections.passed,
@@ -320,6 +325,31 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   // other popups or coming back from Weave screens does not count. Opened before paint, so no tip flashes first.
   const onGameScreen = game.hasBegun && !menuOpen && !birthPopoverOpen && !worldPickerOpen && !householdWelcomeOpen && !restartOpen;
   const lifeId = `${life.worldFingerprint}:${life.seed}`;
+  useEffect(() => {
+    if (game.isPreview) return;
+    const stored = readSkippedAutoConfirmLives();
+    if (stored.size > 0) setSkippedAutoConfirm(prev => new Set([...prev, ...stored]));
+  }, [game.isPreview]);
+  useEffect(() => {
+    if (autoConfirm && (autoConfirm.lifeKey !== lifeId || life.phase === "ended")) setAutoConfirm(null);
+  }, [autoConfirm, lifeId, life.phase]);
+  function requestAutoMode(target: boolean, resumeOnConfirm = false) {
+    const action = autoModeToggleAction(game.autoDecisions, target, lifeId, skippedAutoConfirm);
+    if (action === "off") { setAutoConfirm(null); game.setAutoDecisions(false); return; }
+    if (action === "on") { game.setAutoDecisions(true); if (resumeOnConfirm) game.setPlaying(true); return; }
+    setAutoConfirm({ lifeKey: lifeId, resumeOnConfirm });
+  }
+  function confirmAutoMode(dontAskAgain: boolean) {
+    if (dontAskAgain) {
+      const next = recordSkippedAutoConfirm(skippedAutoConfirm, lifeId, true);
+      setSkippedAutoConfirm(next);
+      if (!game.isPreview) writeSkippedAutoConfirmLives(next);
+    }
+    const shouldResume = autoConfirm?.resumeOnConfirm ?? false;
+    setAutoConfirm(null);
+    game.setAutoDecisions(true);
+    if (shouldResume) game.setPlaying(true);
+  }
   const howToPlayFor = useRef<string | null>(null);
   useLayoutEffect(() => {
     if (menuOpen || birthPopoverOpen) { howToPlayFor.current = null; return; }
@@ -712,8 +742,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           <div className="playback-label"><span className={`status-dot ${game.isClockRunning ? "running" : ""}`} /><span role="timer" aria-live="off">{resumingAfterTip ? "Resuming…" : readingPause ? "Reading pause" : game.yearEndPending ? "Waiting for this year's action" : life.phase === "ready" && game.isPlaying && !game.isClockRunning && (tipShown || helpOpen || howToPlayOpen) ? "Waiting while you read" : life.phase === "choice" ? game.autoDecisions ? game.isPlaying ? "Auto choosing…" : "Auto mode paused" : "Decision waiting" : life.phase === "ended" ? "Life complete" : game.isClockRunning ? `Next year in ${(game.clockRemainingMs / 1000).toFixed(1)}s` : "Paused"}</span></div>
           <div className="playback-controls"><button className={`play-button session-play ${game.isPlaying ? "selected" : ""}`} aria-label={game.isPlaying ? "Pause automatic progression" : "Play automatic progression"} aria-pressed={game.isPlaying} disabled={life.phase === "ended"} onClick={() => { if (game.isPlaying) game.pauseLife(); else { setReadingPause(false); game.continueLife(); } }}><Icon name={game.isPlaying ? "pause" : "play"} size={14} /><span>{game.isPlaying ? "Pause" : "Resume"}</span></button>{([1, 2, 4, 8, 12, 16] as const).map(speed => <button key={speed} className={`speed-button ${speed > 8 ? "advanced-speed " : ""}${game.speed === speed ? "selected" : ""}`} aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => game.setSpeed(speed)}>{speed}×</button>)}</div>
           {shows("decisions") && <button className="text-button turning-point-button" ref={decisionButtonRef} disabled={life.phase !== "ready" && life.phase !== "choice"} onClick={nextDecision}>{life.phase === "choice" ? "Open decision" : "Next decision"} <Icon name="arrow" size={15} /></button>}
-          <div className="session-desktop-actions">{shows("decisions") && <button type="button" className={`session-auto${game.autoDecisions ? " is-on" : ""}`} aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => game.setAutoDecisions(value => !value)}>Auto mode</button>}{characterButton && <button className="session-manage" onClick={openCharacterButton}>{characterButton}</button>}{shows("spend") && <button className="session-manage" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button>}</div>
-          <details ref={playbackMenuRef} className="session-more"><summary aria-label="More controls">⋯</summary><div className="session-more-options">{shows("decisions") && <button type="button" aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => { game.setAutoDecisions(value => !value); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>Auto mode {game.autoDecisions ? "on" : "off"}</button>}{characterButton && <button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; openCharacterButton(); }}>{characterButton}</button>}{shows("spend") && <button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button>}{([12, 16] as const).map(speed => <button key={speed} type="button" aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => { game.setSpeed(speed); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>{speed}× speed</button>)}</div></details>
+          <div className="session-desktop-actions">{shows("decisions") && <button type="button" className={`session-auto${game.autoDecisions ? " is-on" : ""}`} aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => requestAutoMode(!game.autoDecisions)}>Auto mode</button>}{characterButton && <button className="session-manage" onClick={openCharacterButton}>{characterButton}</button>}{shows("spend") && <button className="session-manage" onClick={() => { setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button>}</div>
+          <details ref={playbackMenuRef} className="session-more"><summary aria-label="More controls">⋯</summary><div className="session-more-options">{shows("decisions") && <button type="button" aria-pressed={game.autoDecisions} disabled={life.phase === "ended"} onClick={() => { requestAutoMode(!game.autoDecisions); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>Auto mode {game.autoDecisions ? "on" : "off"}</button>}{characterButton && <button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; openCharacterButton(); }}>{characterButton}</button>}{shows("spend") && <button onClick={() => { if (playbackMenuRef.current) playbackMenuRef.current.open = false; setCharacterSection("wealth"); setPanel("character"); }}>{management?.title ?? "Spend"}</button>}{([12, 16] as const).map(speed => <button key={speed} type="button" aria-label={`Playback speed ${speed} times`} aria-pressed={game.speed === speed} onClick={() => { game.setSpeed(speed); if (playbackMenuRef.current) playbackMenuRef.current.open = false; }}>{speed}× speed</button>)}</div></details>
           {life.phase === "ready" && <div className="year-clock-track" role="progressbar" aria-label="Progress to the next year" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(game.clockProgress * 100)}><span style={{ width: `${game.clockProgress * 100}%` }} /></div>}
         </div>
         {actionReminder && <div className="action-nudge" role="status">
@@ -794,7 +824,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
               onActivity={requestActivity}
               onOpenPeopleTab={demoView && shows("deck-people") ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined}
             />
-            {demoView && life.phase !== "ended" && shows("command-deck") && <EconomyPanels screen={demoView} tabs={deckTabs} life={life} world={world} activities={activities} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} comparison={demoComparison} externalTradeItem={selectedTradeItem} externalTab={selectedEconomyTab} onAutoPlay={game.setAutoDecisions} onTrade={order => game.runDemo(order)} previewTrade={previewTrade} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
+            {demoView && life.phase !== "ended" && shows("command-deck") && <EconomyPanels screen={demoView} tabs={deckTabs} life={life} world={world} activities={activities} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} comparison={demoComparison} externalTradeItem={selectedTradeItem} externalTab={selectedEconomyTab} onAutoPlay={next => requestAutoMode(next)} onTrade={order => game.runDemo(order)} previewTrade={previewTrade} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
               onActivity={requestActivity} onOpenCharacterSection={sec => { setCharacterSection(sec); setPanel("character"); }} training={activities.filter(item => ["train-farming", "train-craft", "train-warfare", "train-reckoning"].includes(item.id)).map(item => ({ id: item.id, label: item.text, reason: item.available ? null : item.reason ?? "Locked" }))}
               onOccupation={jobId => { const activity = activities.find(item => item.category === "career" && item.outcomes.some(outcome => outcome.effects.some(effect => effect.type === "job" && effect.job === jobId))); if (activity) requestActivity(activity.id); }} occupations={(world.character?.jobs ?? []).filter(job => job.id === "farmhand" || job.id === "tenant-farmer" || job.id === "grain-dealer" || job.id === "soldier").map(job => { const badge = occupationBadge(world, job.id, life.character?.jobId === job.id, activities.some(item => item.available && item.outcomes.some(effect => effect.effects.some(e => e.type === "job" && e.job === job.id)))); return { id: job.id, label: job.title, unavailable: badge.label === "Unavailable", reason: badge.detail }; })} />}
             </> : <>
@@ -834,7 +864,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       showAtStart={howToPlayAtStart} onShowAtStartChange={on => { setHowToPlayAtStart(on); if (!game.isPreview) writeHowToPlayAtStart(on); }} onClose={() => setHowToPlayOpen(false)} />
     {game.hasBegun && <IdleNudge nudge={howToPlayOpen ? null : nudge} />}
     {packMoment && <PackMilestoneDialog milestone={packMoment} onClose={() => setPackMoment(null)} />}
-    {game.yearEndPending && !howToPlayOpen && !packMoment && !tipShown && <YearEndDialog key={`${life.seed}:${life.age}`} age={life.age} life={life} world={world} activities={activities}
+    {game.yearEndPending && !howToPlayOpen && !packMoment && !tipShown && !autoConfirm && <YearEndDialog key={`${life.seed}:${life.age}`} age={life.age} life={life} world={world} activities={activities}
       options={yearEndOptions(world, activities, game.focusId)} focus={focusLabel(game.focusId)}
       onChoose={id => { game.closeYearEnd(); requestActivity(id); }} onLetGo={game.letYearEndGo} />}
     {game.hasBegun && demoView && <EventNotificationStack persistent={!game.isPreview} visible={dashboardVisible} decisionOpen={decisionOpen} decisionButtonRef={decisionButtonRef} life={life} world={world} decisionEvent={decisionDisplayEvent} demoView={demoView} onOpenDecision={() => { setReadingPause(false); game.setAutoDecisions(false); setDeferredDecision(null); setRequestedDecision(decisionKey); }} reminder={yearReminder} onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined} onShownChange={setNotificationShown} />}
@@ -849,7 +879,8 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     </footer>
     </div>
     {!game.hasBegun && <BirthRollPopover key={`${life.worldFingerprint}:${life.seed}`} open={birthPopoverOpen} life={life} world={world} revealed={game.hasRevealedStats} onReveal={game.revealStats} onReborn={game.restart} onClose={() => { setBirthPopoverOpen(false); setMenuOpen(true); }} onContinue={beginWithReadingPause} />}
-    {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} returnFocusRef={decisionButtonRef} demoView={demoView} isLoanDecision={Boolean(isLoanDecision)} isLoanOffer={Boolean(isLoanOffer)} loanBalanceText={loanSummary ? `Balance owed: ${formatMoney(loanSummary.balance, world)}` : loanOfferTerms || null} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => { game.setAutoDecisions(true); game.setPlaying(true); }} riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null} />}
+    {decisionDisplayEvent && <DecisionDialog open={decisionOpen} event={decisionDisplayEvent} life={life} world={world} choices={choices} returnFocusRef={decisionButtonRef} demoView={demoView} isLoanDecision={Boolean(isLoanDecision)} isLoanOffer={Boolean(isLoanOffer)} loanBalanceText={loanSummary ? `Balance owed: ${formatMoney(loanSummary.balance, world)}` : loanOfferTerms || null} onChoose={selectChoice} onSetAside={() => setDeferredDecision(decisionKey)} onEnableAuto={() => requestAutoMode(true, true)} riskPreview={demoView?.convoy ? { knownCosts: demoView.convoy.knownCosts, routes: demoView.convoy.routes, chance: "Expected loss " + demoView.convoy.expectedLossBps / 100 + "%." } : null} />}
+    <AutoModeConfirmDialog open={autoConfirm !== null} lifeKey={lifeId} onConfirm={confirmAutoMode} onCancel={() => setAutoConfirm(null)} />
     <HouseholdWelcome open={householdWelcomeOpen} life={life} world={world} onClose={() => setHouseholdWelcomeOpen(false)} onOpenCouncil={exploreHouseholdCouncil} />
     <dialog ref={dialogRef} className={`detail-dialog ${panel === "sources" ? "sources-dialog" : panel === "legacy" ? "legacy-dialog" : panel === "wiki" ? "skill-wiki-dialog" : panel === "map" ? "location-map-dialog" : (panel === "character" || panel === "figures") ? "character-dialog" : ""}`} onCancel={e => { e.preventDefault(); closeDialog(); }} onClick={e => { if (e.target === e.currentTarget) closeDialog(); }} aria-labelledby="dialog-title">
       <div className="dialog-content"><button className="dialog-close" aria-label="Close panel" onClick={closeDialog}><Icon name="close" /></button><input ref={importRef} type="file" accept="application/json,.json" className="sr-only" tabIndex={-1} aria-label="Import a saved life" onChange={e => { void importFile(e.target.files?.[0]); }} />
@@ -858,7 +889,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           <p className="eyebrow">{game.isPreview ? "TEST LIFE" : "NEW LIFE"}</p><h2 id="dialog-title">{game.isPreview ? "Reset this test life?" : "Start a new life?"}</h2>
           <p>{game.isPreview ? "Return to this preset’s starting age and values. Your normal saved life is kept separate." : "Your current life will be replaced by a new birth. Completed lives remain in this browser’s past-lives archive. You can download the current life first."}</p>
           {(world.character?.playerNames?.length ?? 0) > 1 && world.origins.length > 1 && <p>A new name, household and starting stats will be rolled.</p>}
-          <div className="dialog-actions"><button className="secondary-button" onClick={() => downloadLife()}><Icon name="download" size={18} /> Download current life</button><button className="primary-button" onClick={() => { game.setPlaying(false); closeDialog(); if (onNewLife) onNewLife(life); else game.restart(); }}>Begin another life <Icon name="arrow" /></button></div>
+          <div className="dialog-actions"><button className="secondary-button" onClick={() => downloadLife()}><Icon name="download" size={18} /> Download current life</button><button className="primary-button" onClick={() => { game.setPlaying(false); setSkippedAutoConfirm(prev => clearSkippedAutoConfirm(prev, lifeId)); closeDialog(); if (onNewLife) onNewLife(life); else game.restart(); }}>Begin another life <Icon name="arrow" /></button></div>
         </> : panel === "character" ? <>
           <p className="eyebrow">CHARACTER</p><h2 id="dialog-title">{characterName}</h2>
           {management && <button type="button" className="text-button" onClick={replayHouseholdGuide}><Icon name="book" size={16} /> Household guide</button>}
