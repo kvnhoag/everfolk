@@ -1,9 +1,9 @@
-import { useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import { usePlanDraft, writePlanDraft } from "../hooks/usePlanDraft.ts";
 import { LockedArea } from "../components/Locked.tsx";
 import PixelIcon from "../components/PixelIcon.tsx";
 import SectionHelp from "../components/SectionHelp.tsx";
-import { cropChoices, MIX_LOCKED_NOTE, mixedCurrentNote, pendingLine, plantedLine, splitText } from "../models/field-plan.ts";
+import { cropChoices, MIX_LOCKED_NOTE, mixedCurrentNote, pendingLine, plantedLine, sendingLine, splitText } from "../models/field-plan.ts";
 import type { PlantingCheck } from "../models/planting-check.ts";
 import type { DemoScreen } from "./screen.ts";
 import "./planting-task.css";
@@ -52,6 +52,13 @@ function OpenPlanting({ screen, onPlan, checkPlan }: Omit<PlantingTaskProps, "lo
   const [draft, setDraft] = usePlanDraft(plots, current);
   const [justSet, setJustSet] = useState(false);
   const [refusal, setRefusal] = useState("");
+  // A plan on its way (online play answers after a moment): named as sent until the game confirms it.
+  const [sent, setSent] = useState<number | null>(null);
+  useEffect(() => {
+    if (sent === null || sent !== current) return;
+    writePlanDraft(null);
+    setSent(null);
+  }, [sent, current]);
   const checks = useMemo(() => {
     const check = (flaxPlots: number) => checkPlan?.(flaxPlots) ?? NO_CHECK;
     return { pending: check(draft), current: check(current), grain: check(0), flax: check(plots) };
@@ -61,8 +68,7 @@ function OpenPlanting({ screen, onPlan, checkPlan }: Omit<PlantingTaskProps, "lo
   const shown = split ? draft : current;
   const plan = (flax: number) => {
     const error = onPlan(flax);
-    setRefusal(error ?? ""); setJustSet(!error);
-    if (!error) writePlanDraft(null);
+    setRefusal(error ?? ""); setJustSet(!error); setSent(error ? null : flax);
   };
   const change = (next: number) => { setDraft(Math.max(0, Math.min(plots, next))); setJustSet(false); setRefusal(""); };
   const { reason, warnings } = split ? checks.pending : checks.current;
@@ -78,7 +84,8 @@ function OpenPlanting({ screen, onPlan, checkPlan }: Omit<PlantingTaskProps, "lo
     </ul>}
     <div className="aoe-task-actions">
       {split && <button type="button" className="aoe-task-primary" disabled={draft === current || Boolean(reason)} onClick={() => plan(draft)}>Set planting</button>}
-      <PlanStatus refusal={refusal} pending={shown !== current} fresh={justSet} plots={plots} flax={shown} forecast={checks.current.forecast} />
+      <PlanStatus refusal={refusal} sending={sent !== null && sent !== current ? sent : null} pending={shown !== current} fresh={justSet}
+        plots={plots} flax={shown} forecast={checks.current.forecast} />
     </div>
   </article>;
 }
@@ -128,10 +135,11 @@ function SplitPlan({ screen, flax, onChange }: { screen: DemoScreen; flax: numbe
 }
 
 /** What was planted, or the draft still to set: always one line, so the card never goes quiet after a click. */
-function PlanStatus({ refusal, pending, fresh, plots, flax, forecast }: {
-  refusal: string; pending: boolean; fresh: boolean; plots: number; flax: number; forecast: PlantingCheck["forecast"];
+function PlanStatus({ refusal, sending, pending, fresh, plots, flax, forecast }: {
+  refusal: string; sending: number | null; pending: boolean; fresh: boolean; plots: number; flax: number; forecast: PlantingCheck["forecast"];
 }) {
   if (refusal) return <span className="aoe-plan-status is-refused" role="alert">{refusal}</span>;
+  if (sending !== null) return <span className="aoe-plan-status is-draft" role="status">{sendingLine(plots - sending, sending)}</span>;
   if (pending) return <span className="aoe-plan-status is-draft" role="status">{pendingLine(plots - flax, flax)}</span>;
   return <span className={`aoe-plan-status is-planted${fresh ? " is-fresh" : ""}`} role="status">
     <PixelIcon name="check" size={12} />{plantedLine(plots - flax, flax, forecast)}

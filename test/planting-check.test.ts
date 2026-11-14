@@ -134,3 +134,12 @@ test("after Crop allocation the same recommendation names grain on every plot, s
   const line = plantingCheck(engine, life, life.demo!.household.plots).warnings.find(text => /flax seed/.test(text));
   assert.equal(line, "No flax seed and no money to buy it: plant grain on every plot so these fields feed the household.");
 });
+
+test("a mixed plan already in effect before Crop allocation stands: no refusal, and the forecast says what is sown", () => {
+  const life = structuredClone(engine.demo(liveTo("plant-inherited", 13), { type: "plan", flaxPlots: 2 }));
+  life.demo!.household.plots = 3;
+  life.vocations!.inventory["flax-seed"] = 0;
+  const check = plantingCheck(engine, life, 2);
+  assert.equal(check.reason, null, "the card never says a plan in effect cannot be set");
+  assert.deepEqual([check.forecast?.grainPlots, check.forecast?.flaxPlots], [3, 0], "without flax seed every plot grows grain");
+});

@@ -57,6 +57,11 @@ export function pendingLine(grainPlots: number, flaxPlots: number): string {
   return `Not set yet: press Set planting to plant ${splitText(grainPlots, flaxPlots)} for the next harvest.`;
 }
 
+/** A plan sent to the game and not yet confirmed (online play answers after a moment). */
+export function sendingLine(grainPlots: number, flaxPlots: number): string {
+  return `Setting your plan: ${splitText(grainPlots, flaxPlots)}…`;
+}
+
 /** A plan set before mixing needed Crop allocation stays until the player picks one crop. */
 export function mixedCurrentNote(grainPlots: number, flaxPlots: number): string {
   return `Your fields are planned as ${splitText(grainPlots, flaxPlots)}. Choose All grain or All flax to change the plan.`;

@@ -109,9 +109,13 @@ function forecastOf(world: WorldPack, planned: LifeState): PlanForecast | null {
 }
 
 export function plantingCheck(engine: SeedEngine, life: LifeState, flaxPlots: number): PlantingCheck {
-  let reason: string | null = null, planned: LifeState | null = null;
-  try { planned = engine.demo(life, { type: "plan", flaxPlots }); }
-  catch (error) { reason = error instanceof Error ? error.message : "This plan cannot be set."; }
+  // The plan already in effect needs no replay: it stands even if a rule learned since would refuse it now.
+  const inEffect = flaxPlots === life.demo?.household.flaxPlots;
+  let reason: string | null = null, planned: LifeState | null = inEffect ? life : null;
+  if (!inEffect) {
+    try { planned = engine.demo(life, { type: "plan", flaxPlots }); }
+    catch (error) { reason = error instanceof Error ? error.message : "This plan cannot be set."; }
+  }
   const seed = plannedSeed(engine.world, life, flaxPlots);
   return {
     reason, warnings: planWarnings(engine, life, flaxPlots, seed), mixedUnlocked: mixedPlanUnlocked(engine.world, life), seed,
