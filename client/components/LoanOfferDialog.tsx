@@ -1,4 +1,5 @@
-import { useEffect, useId, useRef } from "react";
+import { useId, useRef } from "react";
+import { useGameModal } from "../hooks/useGameModal.ts";
 import type { Choice, LifeState, WorldPack } from "../../src/types.ts";
 import { birthYearOf, formatYear, yearAtAge } from "../../src/calendar.ts";
 import { formatMoney } from "../models/wealth.ts";
@@ -24,15 +25,14 @@ export default function LoanOfferDialog({ request, choice, life, world, onCancel
   const ref = useRef<HTMLDialogElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const titleId = useId();
-  useEffect(() => {
+  useGameModal(ref, true, () => {
     const dialog = ref.current;
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const overflow = document.body.style.overflow;
-    dialog?.showModal();
     document.body.style.overflow = "hidden";
     heading.current?.focus({ preventScroll: true });
     return () => { dialog?.close(); document.body.style.overflow = overflow; previousFocus?.focus({ preventScroll: true }); };
-  }, []);
+  });
   const lender = world.economy?.moneylender;
   if (!lender || !life.economy) return null;
   const cost = requiredCash(choice, world);

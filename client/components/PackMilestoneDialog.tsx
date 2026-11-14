@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useGameModal } from "../hooks/useGameModal.ts";
 import type { PackMilestone } from "../models/pack-milestones.ts";
 import "../styles/pack-milestone.css";
 
@@ -6,12 +7,7 @@ import "../styles/pack-milestone.css";
 export default function PackMilestoneDialog({ milestone, onClose }: { milestone: PackMilestone; onClose(): void }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const button = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    const element = dialog.current;
-    if (element && !element.open) element.showModal();
-    button.current?.focus();
-    return () => { if (element?.open) element.close(); };
-  }, []);
+  useGameModal(dialog, true, () => { button.current?.focus(); });
   return <dialog ref={dialog} className="pack-milestone-dialog" aria-labelledby="pack-milestone-title" data-tutorial="hide" onCancel={event => { event.preventDefault(); onClose(); }}>
     <div className="pack-milestone-cards" aria-hidden="true">
       {Array.from({ length: 3 }, (_, index) => <span key={index} className={`pack-milestone-card${index < milestone.cards ? " is-earned" : ""}`}>{index < milestone.cards ? "✦" : "?"}</span>)}
