@@ -9,7 +9,7 @@ import type { WorldPack } from "../src/types.ts";
 import { lifeRoadmap, stageAges, worldUnlocks } from "../client/models/life-roadmap.ts";
 import { avatarStage } from "../client/models/life-background.ts";
 import { nextTodo, yearChecklist, type YearFacts } from "../client/models/year-checklist.ts";
-import { idleNudge, IDLE_NUDGE_MS, type IdleFacts } from "../client/models/idle-nudge.ts";
+import { idleNudge, IDLE_NUDGE_MS, placeIdleBubble, type IdleFacts } from "../client/models/idle-nudge.ts";
 import { BAR_LEGEND, HOW_TO_WIN, howToPlayFacts, howToPlaySteps, YEAR_RHYTHM, YEAR_SCRIPT } from "../client/models/how-to-play.ts";
 import { createEngine } from "../src/index.ts";
 import { SECTION_STEPS, sectionStep } from "../client/models/section-steps.ts";
@@ -236,4 +236,33 @@ test("Farm & Granary shows every number as an icon tile and locks planting until
   }
   assert.match(html, /Unlocks at age 4/);
   assert.doesNotMatch(html, />Set planting</, "no planting button before it opens");
+});
+
+test("placeIdleBubble keeps turning-point hints clear of the options and popup bottom edge", () => {
+  const bubble = { width: 280, height: 107 };
+  const overlaps = (a: { top: number; left: number; width: number; height: number }, b: { top: number; left: number; width: number; height: number }) =>
+    a.left < b.left + b.width && a.left + a.width > b.left && a.top < b.top + b.height && a.top + a.height > b.top;
+
+  // Desktop 1440x900: placed beside the dialog outside the options and bottom edge.
+  const desktopDialog = { top: 132, left: 410, width: 620, height: 636 };
+  const desktopOptions = { top: 442, left: 434, width: 321, height: 227 };
+  const desktopSpot = placeIdleBubble(desktopOptions, { width: 1440, height: 900 }, bubble, desktopDialog);
+  const desktopRect = { ...desktopSpot, ...bubble };
+  assert.equal(overlaps(desktopRect, desktopDialog), false);
+  assert.equal(overlaps(desktopRect, desktopOptions), false);
+
+  // Medium desktop where side gutters are narrow but bottom has room: sits below the popup bottom edge.
+  const midDialog = { top: 60, left: 100, width: 620, height: 400 };
+  const midOptions = { top: 240, left: 120, width: 320, height: 180 };
+  const midSpot = placeIdleBubble(midOptions, { width: 820, height: 700 }, bubble, midDialog);
+  assert.ok(midSpot.top >= midDialog.top + midDialog.height);
+
+  // Mobile 390x844 full-height popup: placed above the options and well clear of the popup bottom edge.
+  const mobileDialog = { top: 19, left: 19, width: 352, height: 806 };
+  const mobileOptions = { top: 441, left: 35, width: 320, height: 217 };
+  const mobileSpot = placeIdleBubble(mobileOptions, { width: 390, height: 844 }, bubble, mobileDialog);
+  const mobileRect = { ...mobileSpot, ...bubble };
+  assert.equal(overlaps(mobileRect, mobileOptions), false);
+  assert.ok(mobileRect.top + mobileRect.height <= mobileOptions.top);
+  assert.ok(mobileRect.top + mobileRect.height < mobileDialog.top + mobileDialog.height - 50);
 });

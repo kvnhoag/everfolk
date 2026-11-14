@@ -22,6 +22,7 @@ dialog.life-decision-dialog.choice-popup .life-decision-meta>button{min-height:3
 dialog.life-decision-dialog.choice-popup .life-decision-content{padding:23px 23px 20px}
 dialog.life-decision-dialog.choice-popup .life-decision-content>h2{margin:0 0 15px;font:700 29px/1.22 var(--ef-font-numeric);letter-spacing:-.6px;color:#24464b;outline:none;overflow-wrap:anywhere}
 dialog.life-decision-dialog.choice-popup .life-decision-content>p{margin:0 0 20px;color:#595e50;font:400 14px/1.8 var(--ef-font-body)}
+dialog.life-decision-dialog.choice-popup .life-decision-content>.life-decision-danger{display:flex;align-items:center;gap:8px;margin:-6px 0 18px;padding:9px 12px;border:1px solid #d48275;border-left:4px solid #a82418;border-radius:2px;background:#fae6e1;color:#8a1d14;font:600 13.5px/1.45 var(--ef-font-body)}
 dialog.life-decision-dialog.choice-popup .life-decision-options{gap:11px}
 dialog.life-decision-dialog.choice-popup .life-choice-commit{width:100%;min-height:49px;gap:12px;padding:13px 14px;border:1px solid #baa47c;border-radius:2px;background:#f7edda;box-shadow:0 3px 0 #ded0b5;color:#2e3e3d;text-align:left;align-items:flex-start}
 dialog.life-decision-dialog.choice-popup .life-choice-commit.is-previewed{border-color:#8a9e88;box-shadow:inset 3px 0 #6d886f,0 3px 0 #ded0b5}
