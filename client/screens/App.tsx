@@ -548,12 +548,13 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
 
   function beginWithReadingPause() {
     if (!game.hasRevealedStats || game.hasBegun) return;
-    setReadingPause(true);
+    const held = holdForFirstStep();
+    setReadingPause(!held);
     setBirthPopoverOpen(false);
     setMenuOpen(false);
     setHouseholdWelcomeOpen(Boolean(management));
     game.beginLife();
-    if (holdForFirstStep()) game.pauseLife();
+    if (held) game.pauseLife();
   }
 
   function replayHouseholdGuide() {
@@ -782,7 +783,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
               world={world}
               activities={activities}
               onActivity={requestActivity}
-              onOpenPeopleTab={demoView ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined}
+              onOpenPeopleTab={demoView && shows("deck-people") ? () => setSelectedEconomyTab(prev => ({ tab: "people", seq: (prev?.seq ?? 0) + 1 })) : undefined}
             />
             {demoView && life.phase !== "ended" && shows("command-deck") && <EconomyPanels screen={demoView} tabs={deckTabs} life={life} world={world} activities={activities} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} autoPlay={game.autoDecisions} comparison={demoComparison} externalTradeItem={selectedTradeItem} externalTab={selectedEconomyTab} onAutoPlay={game.setAutoDecisions} onTrade={order => game.runDemo(order)} previewTrade={previewTrade} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} onPlan={flaxPlots => game.runDemo({ type: "plan", flaxPlots })} onDelegate={agent => game.runDemo({ type: "delegate", agent })}
               onActivity={requestActivity} onOpenCharacterSection={sec => { setCharacterSection(sec); setPanel("character"); }} training={activities.filter(item => ["train-farming", "train-craft", "train-warfare", "train-reckoning"].includes(item.id)).map(item => ({ id: item.id, label: item.text, reason: item.available ? null : item.reason ?? "Locked" }))}
