@@ -21,8 +21,21 @@ test("public skill reference defaults to its skill tab without mounting figure p
   assert.match(html, /role="tablist" aria-label="Reference sections"/);
   assert.match(html, /aria-selected="true" tabindex="0">Skill tree/);
   assert.match(html, /aria-selected="false" tabindex="-1">Historical Figures/);
-  assert.match(html, /class="capability-tree(?: is-radial)?"/);
+  assert.match(html, /class="capability-tree"/);
   assert.doesNotMatch(html, /class="figure-paths"|data-figure-path=/);
+});
+
+test("the public skill tab draws the left-to-right tree: depth columns, branch bands and shaped nodes", () => {
+  const html = renderToStaticMarkup(createElement(SkillTreePreview));
+  assert.doesNotMatch(html, /is-radial|radial-/, "the circular fan is gone");
+  const depthLabels = [...html.matchAll(/<text[^>]*class="capability-depth-label"[^>]*>(\d+)<\/text>/g)].map(match => Number(match[1]));
+  assert.deepEqual(depthLabels, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "ten depth columns, left to right");
+  const bands = [...html.matchAll(/class="capability-band-title"[^>]*>([^<]+)</g)].map(match => match[1]);
+  assert.deepEqual(bands, ["Physique", "Knowledge", "Handmade", "Trade"], "one titled band per branch");
+  const nodes = (html.match(/data-capability-id=/g) ?? []).length;
+  assert.ok(nodes > 0);
+  assert.equal((html.match(/class="capability-node-shape"/g) ?? []).length, nodes + 2, "every node has a branch shape, plus the two legend keys");
+  assert.match(html, /class="capability-paper"/);
 });
 
 test("the historical reference has its own panel with eleven figures and read-only work", () => {
