@@ -41,7 +41,7 @@ The specialist suites are explicit:
 
 CI runs on pushes to `main` and `dev` and on pull requests. It installs with `--frozen-lockfile`, runs the same default tests, checks source once, then uses `build:app`. Contract tests run for contract changes, and art tests run for artwork, delivered assets or art-tooling changes. Documentation-only changes skip these jobs. Missing comparison history runs every job. A manual CI run can also enable the exhaustive audits.
 
-Art and historical audits use shipped world packs, research inputs, web assets and editable banner masters. Include those files for those suites; an ArtCraft installation is unnecessary.
+Application verification checks out source, world and design data, and delivered public assets. It excludes the large artwork archive. Art jobs additionally fetch the reviewed banner masters, portrait manifest and portable card kit needed by their tests; an ArtCraft installation is unnecessary.
 
 To inspect a built application locally:
 
