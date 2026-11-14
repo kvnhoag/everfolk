@@ -121,3 +121,14 @@ test("illness uses a reclining character while death removes the actor and stops
   assert.match(ended, /<h2>Life ended<\/h2>/);
   assert.doesNotMatch(ended, /banners(?:-concept1)?\/actors\//);
 });
+
+test("all high-bit scene and actor PNGs match their published hashes and dimensions", () => {
+  for (const record of [...concept1Manifest.scenes.map(scene => ({ path: scene.src, sha256: scene.sha256, colorType: 2 })),
+    ...concept1Manifest.actors.map(actor => ({ path: actor.asset, sha256: actor.sha256, colorType: 6 }))]) {
+    const bytes = readFileSync(new URL(`../../public${record.path}`, import.meta.url));
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), record.sha256, record.path);
+    assert.equal(bytes.readUInt32BE(16), 480, record.path);
+    assert.equal(bytes.readUInt32BE(20), 224, record.path);
+    assert.equal(bytes[25], record.colorType, record.path);
+  }
+});
