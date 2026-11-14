@@ -120,19 +120,28 @@ const CONCEPT1_BANNERS = "/assets/pixel/banners-concept1";
 const NILE_FARM_PLATE = `${CONCEPT1_BANNERS}/bg_nile_farm_480x224.png`;
 const POTTERY_KILN_PLATE = `${CONCEPT1_BANNERS}/bg_pottery_kiln_480x224.png`;
 const HOME_COURTYARD_PLATE = `${CONCEPT1_BANNERS}/bg_home_courtyard_480x224.png`;
+const HOME_INTERIOR_PLATE = `${CONCEPT1_BANNERS}/bg_home_interior_480x224.png`;
+const REST_CHAMBER_PLATE = `${CONCEPT1_BANNERS}/bg_rest_chamber_480x224.png`;
 const CRAFT_WORKSHOP_PLATE = `${CONCEPT1_BANNERS}/bg_craft_workshop_480x224.png`;
 const TEMPLE_SHRINE_PLATE = `${CONCEPT1_BANNERS}/bg_temple_shrine_480x224.png`;
 const FESTIVAL_FEAST_PLATE = `${CONCEPT1_BANNERS}/bg_festival_feast_480x224.png`;
 const HARBOR_QUAY_PLATE = `${CONCEPT1_BANNERS}/bg_harbor_quay_480x224.png`;
 const MILITARY_GARRISON_PLATE = `${CONCEPT1_BANNERS}/bg_military_garrison_480x224.png`;
+const CITY_UNREST_PLATE = `${CONCEPT1_BANNERS}/bg_city_unrest_480x224.png`;
 const MOUSEION_STUDY_PLATE = `${CONCEPT1_BANNERS}/bg_mouseion_study_480x224.png`;
+const ALEXANDRIA_STREET_PLATE = `${CONCEPT1_BANNERS}/bg_alexandria_street_480x224.png`;
+const REED_BASIN_PLATE = `${CONCEPT1_BANNERS}/bg_reed_basin_480x224.png`;
+const SHADOW_TERRACE_PLATE = `${CONCEPT1_BANNERS}/bg_shadow_terrace_480x224.png`;
+const VESSEL_PACKING_PLATE = `${CONCEPT1_BANNERS}/bg_vessel_packing_480x224.png`;
+
+const SOLDIER_JOBS = new Set(["soldier", "officer", "general"]);
 
 const CONCEPT1_SITUATION_PLATES: Partial<Record<BannerSituationId, string>> = {
   home: HOME_COURTYARD_PLATE,
   courtyard: HOME_COURTYARD_PLATE,
-  parenthood: HOME_COURTYARD_PLATE,
-  illness: HOME_COURTYARD_PLATE,
-  recovery: HOME_COURTYARD_PLATE,
+  parenthood: HOME_INTERIOR_PLATE,
+  illness: REST_CHAMBER_PLATE,
+  recovery: REST_CHAMBER_PLATE,
   retirement: HOME_COURTYARD_PLATE,
   workshop: CRAFT_WORKSHOP_PLATE,
   sculpture: CRAFT_WORKSHOP_PLATE,
@@ -143,14 +152,14 @@ const CONCEPT1_SITUATION_PLATES: Partial<Record<BannerSituationId, string>> = {
   harbor: HARBOR_QUAY_PLATE,
   market: HARBOR_QUAY_PLATE,
   business: HARBOR_QUAY_PLATE,
-  debt: HARBOR_QUAY_PLATE,
+  debt: HOME_INTERIOR_PLATE,
   military: MILITARY_GARRISON_PLATE,
-  war: MILITARY_GARRISON_PLATE,
-  danger: MILITARY_GARRISON_PLATE,
+  war: CITY_UNREST_PLATE,
+  danger: CITY_UNREST_PLATE,
   study: MOUSEION_STUDY_PLATE,
   philosophy: MOUSEION_STUDY_PLATE,
   astronomy: MOUSEION_STUDY_PLATE,
-  civic: MOUSEION_STUDY_PLATE,
+  civic: ALEXANDRIA_STREET_PLATE,
   memorial: TEMPLE_SHRINE_PLATE,
 };
 
@@ -178,28 +187,28 @@ function concept1BackdropGroup(
 
 const EVENT_BACKDROPS: Readonly<Partial<Record<string, BackdropSpec>>> = {
   "child-route-care-floating-reed": {
-    src: "/assets/pixel/banners/events/reed-washing-court.svg",
+    src: REED_BASIN_PLATE,
     label: "A reed on the water",
-    width: 240,
-    height: 112,
+    width: 480,
+    height: 224,
     bakedActor: false,
-    bannerStyle: "legacy-svg",
+    bannerStyle: "concept1-plate",
   },
   "child-route-learning-shadow-marks": {
-    src: "/assets/pixel/banners/events/shadow-mark-terrace.svg",
+    src: SHADOW_TERRACE_PLATE,
     label: "Measuring shadows on the terrace",
-    width: 240,
-    height: 112,
+    width: 480,
+    height: 224,
     bakedActor: false,
-    bannerStyle: "legacy-svg",
+    bannerStyle: "concept1-plate",
   },
   "child-route-training-vessel-packing": {
-    src: "/assets/pixel/banners/events/pottery-packing-room.svg",
+    src: VESSEL_PACKING_PLATE,
     label: "Packing a vessel in the workshop",
-    width: 240,
-    height: 112,
+    width: 480,
+    height: 224,
     bakedActor: false,
-    bannerStyle: "legacy-svg",
+    bannerStyle: "concept1-plate",
   },
   ...concept1BackdropGroup("event_alexander_332bce_480x224.png", true, [
     ["classical-alexander-egypt", "Alexander arrives in Egypt"],
@@ -281,7 +290,8 @@ function latestActivity(context: SceneContext, life: LifeState, world: WorldPack
 /** Only inspect accepted state: a tempting option or a high skill is not a career. */
 function situationForContext(context: SceneContext, life: LifeState, world: WorldPack): BannerSituationId {
   const id = context.eventId ?? "";
-  if (id.startsWith("lender-")) return ["lender-threat", "lender-confrontation"].includes(id) ? "danger" : "debt";
+  if (id === "lender-offer") return getLoanSummary(world, life) ? "debt" : fromScene(context.scene, life);
+  if (id.startsWith("lender-")) return ["lender-threat", "lender-confrontation"].includes(id) ? "danger" : getLoanSummary(world, life) ? "debt" : fromScene(context.scene, life);
   if (["rare-abduction", "rare-scaffold-collapse", "adult-a-warehouse-fire", "adult-robbers-in-a-lane"].includes(id)) return "danger";
   if (id.startsWith("business-proposal-person-")) {
     const person = id.slice("business-proposal-".length);
@@ -369,6 +379,11 @@ function concept1SituationPlate(
   accepted: SceneContext | undefined,
   options: BannerOptions,
 ): string | undefined {
+  if (situation === "illness" || situation === "recovery") return REST_CHAMBER_PLATE;
+  if (situation === "home" && (options.birthReveal || life.age < 3)) return HOME_INTERIOR_PLATE;
+  if ((situation === "war" || situation === "danger") && SOLDIER_JOBS.has(life.character?.jobId ?? "")) {
+    return MILITARY_GARRISON_PLATE;
+  }
   if (isAgriculturalBackdrop(life, world, situation, accepted, options)) return NILE_FARM_PLATE;
   if (isPotteryBackdrop(life, situation, accepted, options)) return POTTERY_KILN_PLATE;
   return CONCEPT1_SITUATION_PLATES[situation];
