@@ -102,9 +102,8 @@ function OpenDecisionDialog({
   const involvedTags = involvedPerson ? relationshipLabels(world, life, involvedPerson.id) : [];
 
   // The page behind stays still while the decision is on view; focus returns where it was when the decision closes.
-  useGameModal(dialog, true, () => {
+  useGameModal(dialog, true, previousFocus => {
     const element = dialog.current;
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     heading.current?.focus({ preventScroll: true });
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";

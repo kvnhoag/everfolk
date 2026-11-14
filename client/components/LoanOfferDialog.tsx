@@ -25,9 +25,8 @@ export default function LoanOfferDialog({ request, choice, life, world, onCancel
   const ref = useRef<HTMLDialogElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const titleId = useId();
-  useGameModal(ref, true, () => {
+  useGameModal(ref, true, previousFocus => {
     const dialog = ref.current;
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     heading.current?.focus({ preventScroll: true });

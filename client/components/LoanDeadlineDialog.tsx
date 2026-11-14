@@ -18,9 +18,8 @@ function OpenLoanDeadlineDialog({ life, world, onDismiss, onManage }: Omit<Props
   const heading = useRef<HTMLHeadingElement>(null);
   const id = useId();
   const warning = loanDeadlineWarning(world, life);
-  useGameModal(dialog, true, () => {
+  useGameModal(dialog, true, previousFocus => {
     const element = dialog.current;
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     heading.current?.focus({ preventScroll: true });
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";

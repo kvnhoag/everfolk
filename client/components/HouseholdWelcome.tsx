@@ -25,9 +25,8 @@ function OpenHouseholdWelcome({ introduction, world, onClose, onOpenCouncil }: {
   const step = page > 0 ? introduction.steps[page - 1] : undefined;
   const lastPage = page === introduction.steps.length;
 
-  useGameModal(dialogRef, true, () => {
+  useGameModal(dialogRef, true, previousFocus => {
     const dialog = dialogRef.current;
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     return () => {
       if (dialog?.open) dialog.close();
       if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
