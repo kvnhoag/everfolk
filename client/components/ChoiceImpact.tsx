@@ -1,3 +1,4 @@
+import { createContext, useContext } from "react";
 import type { Choice, LifeState, WorldPack } from "../../src/types.ts";
 import { getAccomplishmentPreviews, getAristocratImpact, getChoiceImpact, getRoyalImpact } from "../models/choice-impact.ts";
 import ImpactValue from "./ImpactValue.tsx";
@@ -77,8 +78,12 @@ function healthEffects(choice: Choice, life: LifeState, world: WorldPack): { tex
   return changes;
 }
 
+/** Suppresses inline purse warnings for background surfaces covered by a modal dialog. */
+export const CashNoteSuppressedContext = createContext(false);
+
 /** Immediate outcome effects only: reading a preview never advances the simulation. */
-export default function ChoiceImpact({ choice, life, world, hideSkills = true, showSkillChanges = false, emptyText }: { choice: Choice; life: LifeState; world: WorldPack; hideSkills?: boolean; showSkillChanges?: boolean; emptyText?: string }) {
+export default function ChoiceImpact({ choice, life, world, hideSkills = true, showSkillChanges = false, showCashNote = true, emptyText }: { choice: Choice; life: LifeState; world: WorldPack; hideSkills?: boolean; showSkillChanges?: boolean; showCashNote?: boolean; emptyText?: string }) {
+  const cashNotesHidden = useContext(CashNoteSuppressedContext);
   const impact = getChoiceImpact(choice, life, world);
   const changedStats = impact.stats.filter(stat => (stat.min !== 0 || stat.max !== 0) && !(world.economy && life.economy && stat.id === world.economy.stat));
   const moneyImpact = getMoneyImpact(choice, life, world);
@@ -95,7 +100,7 @@ export default function ChoiceImpact({ choice, life, world, hideSkills = true, s
   const early = hideSkills ? [] : previewEarlyInfluences(choice, world, life);
   const social = socialRoleImpact(choice, life, world);
   // The purse beside the cost, so a paid action never drains cash unseen and an unaffordable one says so.
-  const purse = cashNote(choice, life, world);
+  const purse = showCashNote && !cashNotesHidden ? cashNote(choice, life, world) : null;
   const hasRange = royalImpact.some(item => item.variable) || changedStats.some(stat => stat.variable) || skillImpact.some(item => item.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
   if (royalImpact.length === 0 && accomplishments.length === 0 && changedStats.length === 0 && skillImpact.length === 0 && mastery.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife && !opportunity && !severeRisk && loanNotes.length === 0 && early.length === 0 && social.length === 0 && !purse) return emptyText ? <span className="compact-skill-empty">{emptyText}</span> : null;
   return <span className="choice-impact">

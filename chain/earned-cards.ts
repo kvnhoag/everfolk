@@ -1,6 +1,7 @@
 import type { LifeState, WorldPack } from "../src/types.ts";
 import type { FigurePathDefinition, FigurePathProgress } from "../src/figures/types.ts";
 import { getFigurePathProgress } from "../src/figures/progress.ts";
+import { MAX_PACK_CARDS } from "./pack-count.ts";
 
 /**
  * The v14 collection cards a finished life earned (design/figure-paths.md). Nothing is rolled:
@@ -54,6 +55,16 @@ function cardsFor(path: FigurePathDefinition, progress: FigurePathProgress, sex:
 export function earnedCards(world: WorldPack, life: LifeState): EarnedCard[] {
   const cards = (world.figurePaths ?? []).flatMap(path => cardsFor(path, getFigurePathProgress(world, path, life), life.character?.sex));
   return cards.sort((a, b) => b.rarity - a.rarity || (a.kind === b.kind ? 0 : a.kind === "principal" ? -1 : 1));
+}
+
+/** Number of distinct booster cards (`0`–`MAX_PACK_CARDS`) held by a list of earned cards. */
+export function countEarnedPackCards(cards: readonly EarnedCard[]): number {
+  return Math.min(new Set(cards.map(card => card.card_id)).size, MAX_PACK_CARDS);
+}
+
+/** Exact number of booster cards a finished or ongoing life would open from its earned figure cards. */
+export function earnedPackCardCount(world: WorldPack, life: LifeState): number {
+  return countEarnedPackCards(earnedCards(world, life));
 }
 
 /** Every card id a life could earn in this world, for the contract's card table and art checks. */

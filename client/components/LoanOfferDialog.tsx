@@ -51,7 +51,7 @@ export default function LoanOfferDialog({ request, choice, life, world, onCancel
       </dl>
       {shortfall > 0 && <p>The loan covers the upfront cash requirement. Any additional earnings or costs depend on the result.</p>}
       <p className="loan-offer-risk">Repayment is manual. An overdue loan brings demands, threats and possible violence. Borrowing does not guarantee future earnings.</p>
-      <div className="loan-offer-impact"><ChoiceImpact choice={choice} world={world} life={life} /></div>
+      <div className="loan-offer-impact"><ChoiceImpact choice={choice} world={world} life={life} showCashNote={false} /></div>
       <div className="loan-offer-actions">
         <button type="button" className="secondary-button" onClick={onCancel}>No, go back</button>
         <button type="button" className="primary-button" onClick={onConfirm}>{request.kind === "fund-activity" || shortfall > 0 ? "Accept loan and continue" : "Accept loan"}</button>

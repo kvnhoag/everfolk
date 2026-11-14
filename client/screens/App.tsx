@@ -62,7 +62,7 @@ import EverfolkBrand from "../components/EverfolkBrand.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
 import SiteNav from "../components/SiteNav.tsx";
 import LifeEndingBanner from "../components/LifeEndingBanner.tsx";
-import { lifePackCardCount } from "../../chain/pack-count.ts";
+import { earnedPackCardCount } from "../../chain/earned-cards.ts";
 import { readBoosterCollection } from "../storage/booster-collection.ts";
 import { legacyLifeKey as boosterLifeKey } from "../storage/legacy-store.ts";
 import { displayProse } from "../models/display-prose.ts";
@@ -104,6 +104,7 @@ import AutoModeConfirmDialog from "../components/AutoModeConfirmDialog.tsx";
 import { autoModeToggleAction, clearSkippedAutoConfirm, recordSkippedAutoConfirm } from "../models/auto-mode-confirm.ts";
 import { readSkippedAutoConfirmLives, writeSkippedAutoConfirmLives } from "../storage/auto-mode-confirm.ts";
 import { GameScreenContext } from "../hooks/useGameModal.ts";
+import { CashNoteSuppressedContext } from "../components/ChoiceImpact.tsx";
 import { gameScreenShown } from "../models/game-modal.ts";
 import { packMilestone, type PackMilestone } from "../models/pack-milestones.ts";
 import { lifeRoadmap } from "../models/life-roadmap.ts";
@@ -254,13 +255,6 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const [skippedAutoConfirm, setSkippedAutoConfirm] = useState<ReadonlySet<string>>(() => new Set());
   const game = useGame({ isOverlayOpen: readingPause || menuOpen || panel !== null || restartOpen || worldPickerOpen || birthPopoverOpen || householdWelcomeOpen || howToPlayOpen || tipShown || helpOpen || packMoment !== null || loanRequest !== null || loanWarningOpen || autoConfirm !== null, startFresh, startFreshFrom, ranked, online, previewSession });
   const { life } = game;
-  useEffect(() => {
-    if (game.isPreview || !game.hasBegun || life.phase === "ended") return;
-    const key = `${life.seed}:${life.age}`, milestone = packMilestone(life.age, Boolean(ranked));
-    if (!milestone || packMomentsSeen.current.has(key)) return;
-    packMomentsSeen.current.add(key);
-    setPackMoment(milestone);
-  }, [life.age, life.seed, life.phase, game.hasBegun]); // eslint-disable-line react-hooks/exhaustive-deps
   const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
@@ -269,6 +263,17 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const checkPlan = useCallback((flaxPlots: number) => plantingCheck(lifeEngine, life, flaxPlots), [lifeEngine, life]);
   const previewTrade = useCallback((order: TradeCommand) => tradePreview(lifeEngine, life, order), [lifeEngine, life]);
   const world = lifeEngine.world;
+  useEffect(() => {
+    if (game.isPreview || !game.hasBegun || life.phase === "ended") return;
+    const key = `${life.seed}:${life.age}`, milestone = packMilestone(life.age, isRanked, { earnedOnly: !isRanked || Boolean(world.figurePaths?.length) });
+    if (!milestone || packMomentsSeen.current.has(key)) return;
+    packMomentsSeen.current.add(key);
+    setPackMoment(milestone);
+  }, [life.age, life.seed, life.phase, game.hasBegun, game.isPreview, isRanked, world.figurePaths?.length]);
+  const freePackCards = useMemo(
+    () => (life.phase === "ended" && !isRanked && !game.isPreview ? earnedPackCardCount(world, life) : 0),
+    [life, world, isRanked, game.isPreview],
+  );
   const management = householdManagement(world, life);
   const demoView = useMemo(() => demoScreen(world, life), [world, life]);
   // Each section of the life screen appears at the first age the player can act on it (see onboarding-sections).
@@ -323,6 +328,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     tutorialStore.setAutoPlay(game.autoDecisions && !game.isPreview);
     return () => tutorialStore.setAutoPlay(false);
   }, [game.autoDecisions, game.isPreview]);
+  const dashboardCovered = !dashboardVisible || decisionOpen || game.yearEndPending || Boolean(packMoment) || freePlayBoosterOpen || tipShown || tutorial.open;
   useTutorialGameContext(game.isPreview ? NO_TUTORIAL_CONTEXT : gameTutorialContext({
     menuOpen, birthPopoverOpen, hasBegun: game.hasBegun, panel, characterSection: panel === "character" ? characterTab ?? characterSection : null, decisionOpen,
     blockingDialog: restartOpen || worldPickerOpen || householdWelcomeOpen || howToPlayOpen || loanRequest !== null || loanWarningOpen || freePlayBoosterOpen || autoConfirm !== null,
@@ -559,15 +565,14 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   }, [game.hasBegun, menuOpen, life.pendingEventId, life.phase, isBirthSituation, panel, restartOpen, birthPopoverOpen, householdWelcomeOpen]);
 
   useEffect(() => {
-    if (game.isPreview || isRanked || life.phase !== "ended" || menuOpen || panel || restartOpen || birthPopoverOpen) return;
-    if (lifePackCardCount(life, world) === 0) return; // Lives that end before 18 have no pack to offer.
+    if (game.isPreview || isRanked || life.phase !== "ended" || freePackCards === 0 || menuOpen || panel || restartOpen || birthPopoverOpen) return;
     const key = boosterLifeKey(life);
     if (offeredBooster.current === key) return;
     offeredBooster.current = key;
     try {
       if (!readBoosterCollection(window.localStorage).some(pack => pack.lifeKey === key)) setFreePlayBoosterOpen(true);
     } catch { /* Keep the memorial and manual pack action available when storage fails. */ }
-  }, [isRanked, game.isPreview, life, world, menuOpen, panel, restartOpen, birthPopoverOpen]);
+  }, [isRanked, game.isPreview, life, freePackCards, menuOpen, panel, restartOpen, birthPopoverOpen]);
 
   function openMainMenu() {
     game.pauseLife();
@@ -769,11 +774,12 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       </section>}
       {game.hasBegun && life.phase !== "ended" && shows("checklist") && <YearChecklist items={checklist} />}
 
-      {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={isRanked} packCards={isRanked || game.isPreview ? 0 : lifePackCardCount(life, world)}
+      {game.hasBegun && life.phase === "ended" && <LifeEndingBanner name={characterName} dates={`${formatYear(birthYearOf(world, life))} – ${formatYear(life.year)}`} lived={yearsLived(life.age)} cause={deathCause?.title} ranked={isRanked} packCards={freePackCards}
         onChronicle={openChronicle} onOpenPack={() => setFreePlayBoosterOpen(true)} onNewLife={() => setRestartOpen(true)} />}
       {game.hasBegun && <LifeYearRail life={life} />}
       {game.hasBegun && demoView && shows("resources") && <ResourceBar rows={storehouse} screen={demoView} cashText={life.economy ? formatMoney(life.economy.cash, world) : "0"} onPlan={shows("planting") ? flaxPlots => game.runDemo({ type: "plan", flaxPlots }) : undefined} checkPlan={checkPlan} plantingLockedUntil={plantingLockedUntil} showConditions={shows("conditions")} onSelectTradeItem={item => setSelectedTradeItem(prev => ({ item, seq: (prev?.seq ?? 0) + 1 }))} />}
 
+      <CashNoteSuppressedContext value={dashboardCovered}>
       <div className={`life-layout ${!game.hasBegun ? "life-layout-birth" : demoView ? "life-layout-weave" : "life-layout-classic"} ${isDead ? "life-has-ended" : ""}`}>
         <div className="life-visual-column">
           {game.hasBegun && <div className="life-scene-frame has-section-help" ref={sceneRef} tabIndex={-1} aria-label={life.phase === "ended" ? "Life summary" : "Your life now"}>
@@ -869,6 +875,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
           </>}
         </section>
       </div>
+      </CashNoteSuppressedContext>
       {npcStatusNotice && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{npcStatusNotice}</span></div>}
       {(game.notice || downloadError) && <div className="notice" role="status"><Icon name="feather" size={16} /><span>{downloadError || game.notice}</span><button aria-label="Dismiss notification" onClick={() => { game.setNotice(""); setDownloadError(""); }}><Icon name="close" size={15} /></button></div>}
     </main>
