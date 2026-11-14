@@ -30,6 +30,8 @@ interface ResourceBarProps {
   onPlan?(flaxPlots: number): string | null;
   checkPlan?(flaxPlots: number): PlantingCheck;
   plantingLockedUntil?: number | null;
+  /** The year's flood, army and road; drawn once the fields are the player's to plan. */
+  showConditions?: boolean;
   /** Opens the market with this item chosen. */
   onSelectTradeItem?(item: TradeItem): void;
   /** This year's personal action, for the drawer's Work card; null hides the card. */
@@ -101,7 +103,7 @@ function holdingOf(screen: DemoScreen, item: TradeItem): number {
   return 0;
 }
 
-export default function ResourceBar({ rows = null, screen, cashText, onPlan, checkPlan, plantingLockedUntil = null, onSelectTradeItem }: ResourceBarProps) {
+export default function ResourceBar({ rows = null, screen, cashText, onPlan, checkPlan, plantingLockedUntil = null, showConditions = true, onSelectTradeItem }: ResourceBarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<TradeItem | null>(null);
 
@@ -158,13 +160,13 @@ export default function ResourceBar({ rows = null, screen, cashText, onPlan, che
           </button>)}
         </div>
 
-        <div className="aoe-world-strip" aria-label="This year's conditions">
+        {showConditions && <div className="aoe-world-strip" aria-label="This year's conditions">
           {conditions.map(condition => <span key={condition.kind} className={`aoe-cond is-icon-only aoe-cond-${condition.kind}-${condition.level}`}
             title={condition.title} aria-label={condition.title} role="img">
             <PixelIcon name={condition.icon} size={15} />
             <span className="aoe-cell-word" aria-hidden="true">{condition.kind === "flood" ? "Flood" : condition.kind === "army" ? "Army" : "Road"}</span>
           </span>)}
-        </div>
+        </div>}
 
         <button
           type="button"

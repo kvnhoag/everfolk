@@ -93,7 +93,7 @@ test("every ? button renders for its section", () => {
 });
 
 test("clicking a ? opens the tutorial at that section's hint", () => {
-  tutorialStore.setGameContext({ view: "game", characterSection: null, life: { age: 11, ended: false, decisionPending: false, learnedSkills: 0, focusShown: false, resourcesShown: true, wealthShown: true, deckShown: true, notificationShown: false, tradeAge: 10 } });
+  tutorialStore.setGameContext({ view: "game", characterSection: null, life: { lifeKey: "life", age: 11, ended: false, decisionPending: false, learnedSkills: 0, sections: ["time-bar", "story", "rail", "focus", "yearly-action", "wealth"], notificationShown: false, passed: [] } });
   tutorialStore.close();
   tutorialStore.openHint("wealth");
   assert.equal(tutorialStore.getSnapshot().hintId, "wealth");

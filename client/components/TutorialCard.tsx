@@ -27,6 +27,8 @@ export interface TutorialCardProps {
   onNext(): void;
   onClose(): void;
   onReveal?(): void;
+  /** A guided step locks the rest of the page: a veil with this clip-path (holes for the section and the Tutorial switch). */
+  shield?: string | null;
 }
 
 function classes(mode: TutorialMode, ready: boolean, settled: boolean, closing: boolean): string {
@@ -37,7 +39,7 @@ function classes(mode: TutorialMode, ready: boolean, settled: boolean, closing: 
  * One tutorial hint: a manual popover in the browser's top layer, labelled by its title. It is not modal, so the game
  * stays playable underneath. "Got it" and × mark the hint seen; Back and Next tip appear only when hints are queued.
  */
-export default function TutorialCard({ hint, index, total, mode, missing, ready = true, settled = false, closing = false, offscreen = false, position, spotlight = null, cardRef, panelRef, tipsOn = true, onTipsChange, onBack, onNext, onClose, onReveal }: TutorialCardProps) {
+export default function TutorialCard({ hint, index, total, mode, missing, ready = true, settled = false, closing = false, offscreen = false, position, spotlight = null, cardRef, panelRef, tipsOn = true, onTipsChange, onBack, onNext, onClose, onReveal, shield = null }: TutorialCardProps) {
   const paged = total > 1;
   const last = index >= total - 1;
   function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
@@ -53,6 +55,7 @@ export default function TutorialCard({ hint, index, total, mode, missing, ready 
   return <div ref={cardRef} className={classes(mode, ready, settled, closing)} data-placement={position?.placement ?? "center"} data-hint={hint.id}
     popover="manual" role="dialog" aria-modal="false" aria-labelledby="tutorial-card-title" aria-describedby="tutorial-card-body" tabIndex={-1} style={style}
     onKeyDown={onKeyDown}>
+    {shield && <div className="tutorial-shield" title="Finish the tip first" style={{ clipPath: shield }} />}
     {spotlight
       ? <div className="tutorial-spotlight" aria-hidden="true" style={{ top: spotlight.top, left: spotlight.left, width: spotlight.width, height: spotlight.height }} />
       : mode === "manual" && <div className="tutorial-dim" aria-hidden="true" />}

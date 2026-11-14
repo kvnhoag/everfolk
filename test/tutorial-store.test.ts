@@ -3,6 +3,9 @@ import test from "node:test";
 import { createTutorialStore } from "../client/state/tutorial-store.ts";
 import { LEGACY_TUTORIAL_STORAGE_KEY, readTutorialProgress, TUTORIAL_STORAGE_KEY, writeTutorialProgress } from "../client/storage/tutorial-storage.ts";
 import type { TutorialContext, TutorialLifeFacts } from "../client/models/tutorial-triggers.ts";
+import { visibleSections } from "../client/models/onboarding-sections.ts";
+
+const AGES = { focus: 6, action: 6, trade: 12, firstJob: 12, fields: 16 };
 
 function memoryStorage(initial: Record<string, string> = {}) {
   const data = new Map(Object.entries(initial));
@@ -11,7 +14,9 @@ function memoryStorage(initial: Record<string, string> = {}) {
 const brokenStorage = { getItem(): string | null { throw new Error("blocked"); }, setItem(): void { throw new Error("blocked"); } };
 
 function facts(over: Partial<TutorialLifeFacts> = {}): TutorialLifeFacts {
-  return { age: 0, ended: false, decisionPending: false, learnedSkills: 0, focusShown: false, resourcesShown: true, wealthShown: true, deckShown: true, notificationShown: false, tradeAge: 10, ...over };
+  const base = { lifeKey: "life", age: 0, ended: false, decisionPending: false, learnedSkills: 0, notificationShown: false, passed: [], ...over };
+  const sections = over.sections ?? [...visibleSections({ age: base.age, economy: true, learnedSkills: base.learnedSkills, hadDecision: base.decisionPending }, AGES)];
+  return { ...base, sections };
 }
 const game = (over: Partial<TutorialLifeFacts> = {}): TutorialContext => ({ view: "game", characterSection: null, life: facts(over) });
 const home: TutorialContext = { view: "home", characterSection: null, life: facts() };
@@ -136,4 +141,16 @@ test("the saved On/Off is shown before any screen reports in", () => {
   const store = createTutorialStore({ storage: () => storage });
   assert.equal(store.getSnapshot().tipsOn, false, "no reset to On while the page is still starting");
   assert.deepEqual(store.getSnapshot().seen, ["welcome"]);
+});
+
+test("a save opened mid-life shows its current sections without replaying old tips; a new birth does not seed anything", () => {
+  const store = createTutorialStore({ storage: () => undefined });
+  store.setGameContext(game({ lifeKey: "loaded", age: 13, passed: ["time-bar", "scene", "focus", "yearly-action", "wealth", "resources", "market", "character"] }));
+  assert.equal(store.getSnapshot().open, false, "nothing from earlier ages opens");
+  assert.ok(store.getSnapshot().seen.includes("market"));
+  store.setGameContext(game({ lifeKey: "loaded", age: 16, passed: ["planting"] }));
+  assert.equal(store.getSnapshot().hintId, "planting", "the same life growing up still gets its new tip");
+  const fresh = createTutorialStore({ storage: () => undefined });
+  fresh.setGameContext(game({ lifeKey: "newborn", age: 0 }));
+  assert.equal(fresh.getSnapshot().hintId, "time-bar", "a new life starts with the first step at once");
 });

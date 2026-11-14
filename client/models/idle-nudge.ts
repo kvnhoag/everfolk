@@ -17,6 +17,8 @@ export interface IdleFacts {
   decisionOpen: boolean;
   /** A tip card is open; the hint never stacks on top of it. */
   tipOpen: boolean;
+  /** Time has moved at least once in this life; Resume is pointed at only before that, so it never nags. */
+  timeStarted?: boolean;
 }
 
 export interface IdleNudge {
@@ -36,7 +38,7 @@ export function idleNudge(facts: IdleFacts): IdleNudge | null {
   if (!facts.onGame) return null;
   if (facts.phase === "choice") return { key: "open-decision", target: [".turning-point-button"], hint: "decision",
     title: "A decision is waiting", text: "Press Open decision to choose, or turn on Auto mode to let it choose for you." };
-  if (!facts.playing) return { key: "resume", target: [".session-play"], hint: "time-bar",
+  if (!facts.playing && !facts.timeStarted) return { key: "resume", target: [".session-play"], hint: "time-bar",
     title: "Press Resume", text: "The game is paused. Resume to let the next year of your life begin." };
   return null;
 }

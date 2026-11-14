@@ -2,6 +2,7 @@ import { useEffect, useId, useLayoutEffect, useRef, useState, type KeyboardEvent
 import { placeHelpTip } from "../models/tutorial-flight.ts";
 import { tutorialHint, type TutorialHintId } from "../models/tutorial-hints.ts";
 import { tutorialStore } from "../state/tutorial-store.ts";
+import { clockHoldStore } from "../state/clock-hold-store.ts";
 import "../styles/tutorial.css";
 
 function showTip(tip: HTMLElement, anchor: HTMLElement): void {
@@ -27,8 +28,9 @@ function hideTip(tip: HTMLElement): void {
 export type SectionHelpPlacement = "corner" | "edge" | "inset";
 
 /**
- * A small "?" in the top-right corner of a section. Hover or keyboard focus shows a one-line tooltip; a click opens
- * the tutorial at that section's hint, even one already seen. The parent section needs the `has-section-help` class.
+ * A small "?" in the top-right corner of a section. Hover or keyboard focus shows a one-line tooltip and holds the life
+ * clock until it closes; a click opens the tutorial at that section's hint, even one already seen. The parent section
+ * needs the `has-section-help` class.
  */
 export default function SectionHelp({ hint: hintId, placement = "corner" }: { hint: TutorialHintId; placement?: SectionHelpPlacement }) {
   const hint = tutorialHint(hintId);
@@ -43,6 +45,9 @@ export default function SectionHelp({ hint: hintId, placement = "corner" }: { hi
     if (open) showTip(tip.current, button.current);
     else hideTip(tip.current);
   }, [open]);
+
+  // The life clock waits while the tooltip is open and carries on when the pointer leaves or the tooltip closes.
+  useEffect(() => open ? clockHoldStore.hold(`help:${id}`) : undefined, [open, id]);
 
   useEffect(() => {
     if (!open) return;

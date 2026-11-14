@@ -416,13 +416,18 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     }
   }, [commit, hasBegun, life, submitOnline, waitsForYearEnd, isPreview]);
 
-  const nextTurningPoint = useCallback(() => {
+  /**
+   * Runs to the next decision. `stopAt` (tips on) also stops at a skipped year with something new to try; that stop
+   * comes before the year-end box, so the player meets the new section first.
+   */
+  const nextTurningPoint = useCallback((stopAt?: (next: LifeState) => boolean) => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life || life.phase !== "ready") return;
+    const teaches = (state: LifeState) => state !== life && Boolean(stopAt?.(state));
     if (submitOnline(async play => {
       let next = life;
       const maxAge = engineForLife(life).world.maxAge;
       for (let years = 0; years <= maxAge; years++) {
-        if (next.phase !== "ready") return next;
+        if (next.phase !== "ready" || teaches(next)) return next;
         if (waitsForYearEnd(next)) { setYearEndKey(yearEndKeyOf(next)); return next; }
         const focus = letGoRef.current === yearEndKeyOf(next) || !isPreview && !autoIntentRef.current ? "everyday" : focusIdRef.current;
         next = await advanceOnlineYearWithFocus(play, next, focus);
@@ -433,9 +438,9 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     })) return;
     try {
       const focus = letGoRef.current === yearEndKeyOf(life) || !isPreview && !autoIntentRef.current ? "everyday" : focusIdRef.current;
-      const next = advanceToDecisionWithFocus(engineForLife(life), life, focus, waitsForYearEnd);
+      const next = advanceToDecisionWithFocus(engineForLife(life), life, focus, state => teaches(state) || waitsForYearEnd(state));
       commit(next);
-      if (waitsForYearEnd(next)) setYearEndKey(yearEndKeyOf(next));
+      if (!teaches(next) && waitsForYearEnd(next)) setYearEndKey(yearEndKeyOf(next));
       setNotice("");
     } catch (error) { setNotice(message(error)); }
   }, [commit, hasBegun, life, submitOnline, waitsForYearEnd, isPreview]);

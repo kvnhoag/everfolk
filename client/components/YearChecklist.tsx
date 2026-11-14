@@ -1,11 +1,9 @@
 import { focusSection } from "../lib/section-flash.ts";
 import { SECTION_TARGETS, SECTION_TITLES, sectionStep, type SectionStepId } from "../models/section-steps.ts";
 import type { ChecklistItem } from "../models/year-checklist.ts";
-import PixelIcon from "./PixelIcon.tsx";
 import "../styles/onboarding.css";
 
 function Mark({ state }: { state: ChecklistItem["state"] }) {
-  if (state === "locked") return <PixelIcon name="lock" size={11} />;
   return <>{state === "todo" ? "!" : state === "done" ? "✓" : "·"}</>;
 }
 
@@ -20,8 +18,8 @@ export function SectionStep({ step }: { step: number }) {
 }
 
 /**
- * "This year": the sections in the order to check them, each with what it needs now. A click scrolls to the
- * section and lights it up. Locked lines say when they open.
+ * "This year": the open sections in the order to check them, each with what it needs now. A click scrolls to the
+ * section and lights it up.
  */
 export default function YearChecklist({ items }: { items: readonly ChecklistItem[] }) {
   return <nav className="year-checklist" aria-label="This year, in order">

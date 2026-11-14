@@ -27,6 +27,12 @@
 [popover].everfolk-tutorial-layer.is-settled{transition:top .28s ease,left .28s ease}
 .everfolk-tutorial-layer .tutorial-card-panel{transform-origin:0 0}
 .everfolk-tutorial-layer.is-closing{pointer-events:none}
+/* A guided step: the rest of the page is veiled and does not take clicks; the hover title says why. */
+.tutorial-shield{position:fixed;inset:0;z-index:-2;background:#f4ead466;cursor:not-allowed;animation:tutorial-fade-in .2s ease}
+/* Next decision waits for a tip on screen: the card shakes once to show where the game is waiting. */
+.everfolk-tutorial-layer.is-nudged .tutorial-card-panel{animation:tutorial-nudge .45s ease}
+@keyframes tutorial-nudge{0%,100%{translate:0}20%{translate:-7px}40%{translate:6px}60%{translate:-4px}80%{translate:2px}}
+@media(prefers-reduced-motion:reduce){.everfolk-tutorial-layer.is-nudged .tutorial-card-panel{animation:none;outline:3px solid var(--tour-gold)}}
 /* The highlight fades while the card flies home. */
 .everfolk-tutorial-layer>.tutorial-dim,.everfolk-tutorial-layer>.tutorial-spotlight{animation:tutorial-fade-in .2s ease}
 .everfolk-tutorial-layer.is-closing>.tutorial-dim,.everfolk-tutorial-layer.is-closing>.tutorial-spotlight{opacity:0;transition:opacity .25s ease}

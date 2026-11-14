@@ -18,6 +18,8 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
   let chain: TutorialView | null = null;
   let context: TutorialContext = NO_TUTORIAL_CONTEXT;
   let contextKey = JSON.stringify(context);
+  /** The life the tutorial last saw; entering another one (a loaded save) marks its passed tips seen. */
+  let enteredLife: string | null = null;
   const listeners = new Set<() => void>();
 
   function emit(): void {
@@ -50,6 +52,11 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     if (key === contextKey) return;
     context = next;
     contextKey = key;
+    const life = game.life;
+    if (life && life.lifeKey !== enteredLife) {
+      enteredLife = life.lifeKey;
+      dispatch({ type: "enter", passed: life.passed });
+    }
     dispatch({ type: "sync" });
   }
 
@@ -79,6 +86,8 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     next: () => dispatch({ type: "next" }),
     back: () => dispatch({ type: "back" }),
     close: () => dispatch({ type: "close" }),
+    /** The player used these sections: their tips count as learned, and an automatic tip on one of them closes. */
+    used: (hintIds: readonly TutorialHintId[]) => { if (hintIds.length) dispatch({ type: "used", hintIds }); },
     /** Turns automatic tip cards on or off. Off: new sections glow instead. The Tutorial and "?" buttons always open cards. */
     setTipsOn: (on: boolean) => dispatch({ type: "tips", on }),
   };
