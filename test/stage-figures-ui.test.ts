@@ -185,7 +185,7 @@ test("MintPack renders booster pack seal and stage figure choices", () => {
     }),
   );
   assert.ok(htmlUnopened.includes("Your Everfolk legacy pack"), "Should render the production scene");
-  assert.ok(htmlUnopened.includes("Hold the top seal and drag right"), "Should explain drag-to-tear input");
+  assert.ok(htmlUnopened.includes("Hold the top seal and drag left or right"), "Should explain drag-to-tear input");
   assert.ok(!htmlUnopened.includes("Open your pack →"), "Click-to-open must not bypass the tear gesture");
   assert.ok(!/reroll/i.test(htmlUnopened), "Pack UI should not offer rerolls");
 
