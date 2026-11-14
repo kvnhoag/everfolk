@@ -19,9 +19,10 @@
 .life-session-bar{flex-wrap:wrap}
 .life-session-bar .playback-bar.life-clock{flex-wrap:wrap;row-gap:8px;justify-content:flex-end}
 
-/* The yearly action box always reserves three rows of cards, whatever the tab holds. */
-.life-yearly-action-deck .life-action-cards{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,96px);grid-auto-rows:96px}
-.life-yearly-action-deck .life-action-card{height:96px;overflow:hidden}
+/* Reserve three rows, allowing each row and button to grow with wrapped action text. */
+.life-yearly-action-deck .life-action-cards{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(96px,auto));grid-auto-rows:minmax(96px,auto)}
+.life-yearly-action-deck .life-action-card{min-width:0;min-height:96px;height:auto;overflow:visible}
+@media(max-width:600px){.life-yearly-action-deck .life-action-cards{grid-template-columns:minmax(0,1fr)}}
 .life-yearly-action-deck .life-action-empty{min-height:calc(3 * 96px + 2 * 8px);margin:0}
 /* The time bar stays pinned to the top of the screen, so Resume and the clock are always in reach, whatever scrolled. */
 .everfolk-game .page-shell .life-session-bar{position:sticky;top:0;z-index:35;box-shadow:0 6px 14px #0f262d55}

@@ -198,7 +198,11 @@ export function resolvePortraitState(input: PortraitInput = {}): PortraitState {
   }
 
   const override = concept1PersonOverrides.get(subjectKey);
-  const route = (override && wardrobeId === override.wardrobeId ? concept1Portraits.get(override.file) : undefined)
+  const overridePortrait = override && concept1Portraits.get(override.file);
+  // A named outfit can never replace a young or female subject with an older man.
+  const compatibleOverride = overridePortrait && overridePortrait.stages.includes(stage) &&
+    (overridePortrait.sex === "any" || overridePortrait.sex === bodyTemplate);
+  const route = (compatibleOverride && wardrobeId === override?.wardrobeId ? overridePortrait : undefined)
     ?? concept1Routes.get(`${bodyTemplate}:${stage}:${wardrobeId}`);
   if (!route) throw new Error(`Concept 1 portrait registry is missing ${bodyTemplate}:${stage}:${wardrobeId}.`);
   return Object.freeze({

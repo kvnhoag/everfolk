@@ -24,16 +24,16 @@ function action(id: string, patch: Partial<ActivityAvailability> = {}): Activity
 
 test("newborn management shows family and relationship records without adult activity prompts", () => {
   const life = lifeAt(0), before = structuredClone(life);
-  assert.deepEqual(ids(life), ["skills", "wealth", "relationships", "children"]);
+  assert.deepEqual(ids(life), ["skills", "figures", "wealth", "relationships", "children"]);
   assert.equal(characterActivitySummary(life, engine.getActivities(life)), "Activities unlock as you grow.");
   assert.deepEqual(visibleFamilyActivities(life, engine.getActivities(life)), []);
   assert.deepEqual(life, before);
 });
 
 test("career unlocks with age while family and social records remain visible throughout the current life", () => {
-  assert.deepEqual(ids(lifeAt(11)), ["skills", "wealth", "relationships", "children"]);
-  assert.deepEqual(ids(lifeAt(12)), ["career", "skills", "wealth", "relationships", "children"]);
-  assert.deepEqual(ids(lifeAt(16)), ["career", "skills", "wealth", "relationships", "children"]);
+  assert.deepEqual(ids(lifeAt(11)), ["skills", "figures", "wealth", "relationships", "children"]);
+  assert.deepEqual(ids(lifeAt(12)), ["career", "skills", "figures", "wealth", "relationships", "children"]);
+  assert.deepEqual(ids(lifeAt(16)), ["career", "skills", "figures", "wealth", "relationships", "children"]);
   assert.equal(ids(lifeAt(17), true).includes("relationships"), true);
   assert.equal(ids(lifeAt(18)).includes("relationships"), true);
   assert.equal(ids(lifeAt(18), true).includes("relationships"), true);

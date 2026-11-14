@@ -9,9 +9,9 @@ export interface LifePhase { id: string; title: string; fromAge: number; toAge: 
 export const LIFE_PHASES: readonly LifePhase[] = [
   { id: "early-years", title: "Early years", fromAge: 0, toAge: 5,
     todo: "Your family decides for you. From age 3 you answer small turning points yourself. Press Resume and let the first years pass." },
-  { id: "childhood", title: "Childhood", fromAge: 6, toAge: 11,
+  { id: "childhood", title: "Childhood", fromAge: 6, toAge: 12,
     todo: "Pick a focus (Study is a good start) and spend your yearly action every year. The market opens to you during these years." },
-  { id: "youth", title: "Youth", fromAge: 12, toAge: 17,
+  { id: "youth", title: "Youth", fromAge: 13, toAge: 17,
     todo: "Take your first work and practise the trade you want to grow into. From 16 the household's decisions, fields included, are yours." },
   { id: "adulthood", title: "Adulthood", fromAge: 18, toAge: 59,
     todo: "Work, court, marry and build your household. Reaching 18 earns a card pack." },

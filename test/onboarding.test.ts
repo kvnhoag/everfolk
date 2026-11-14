@@ -7,6 +7,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
 import type { WorldPack } from "../src/types.ts";
 import { lifeRoadmap, stageAges, worldUnlocks } from "../client/models/life-roadmap.ts";
+import { avatarStage } from "../client/models/life-background.ts";
 import { nextTodo, yearChecklist, type YearFacts } from "../client/models/year-checklist.ts";
 import { idleNudge, IDLE_NUDGE_MS, type IdleFacts } from "../client/models/idle-nudge.ts";
 import { BAR_LEGEND, HOW_TO_WIN, howToPlayFacts, howToPlaySteps, YEAR_RHYTHM, YEAR_SCRIPT } from "../client/models/how-to-play.ts";
@@ -35,7 +36,7 @@ const world = JSON.parse(readFileSync(new URL("../worlds/demo/alexandria-lives-9
 test("the roadmap has five long stages with clear turning ages, and what opens in each comes from the world", () => {
   const stages = lifeRoadmap(world, 9);
   assert.deepEqual(stages.map(stage => [stage.title, stageAges(stage)]), [
-    ["Early years", "Ages 0–5"], ["Childhood", "Ages 6–11"], ["Youth", "Ages 12–17"], ["Adulthood", "Ages 18–59"], ["Later life", "Age 60+"],
+    ["Early years", "Ages 0–5"], ["Childhood", "Ages 6–12"], ["Youth", "Ages 13–17"], ["Adulthood", "Ages 18–59"], ["Later life", "Age 60+"],
   ]);
   assert.deepEqual(stages.map(stage => stage.state), ["past", "current", "future", "future", "future"]);
   for (const [index, stage] of stages.entries()) if (index > 0) assert.equal(stage.fromAge, stages[index - 1].toAge! + 1, "no gaps between stages");
@@ -187,6 +188,37 @@ test("Your life: every stage is a tab, and the chosen one opens its role, unlock
   assert.match(html, /Opens in this stage/);
   assert.match(html, /Read and practise writing/);
   assert.match(html, /Turning points you may meet/);
+});
+
+test("Your life uses the portrait age rule for childhood and youth tabs and details", async () => {
+  const { stageGuide } = await import("../client/models/stage-guide.ts");
+  const stages = lifeRoadmap(world, 12);
+  const guides = stages.map(stage => stageGuide(world, stage));
+  const childhood = stages.find(stage => stage.id === "childhood")!;
+  const youth = stages.find(stage => stage.id === "youth")!;
+  assert.equal(childhood.state, "current", "age 12 still uses the childhood portrait");
+  assert.equal(lifeRoadmap(world, 13).find(stage => stage.state === "current")?.id, "youth");
+  for (const [stage, expected] of [[childhood, "child"], [youth, "youth"]] as const) {
+    for (let age = stage.fromAge; age <= stage.toAge!; age++) assert.equal(avatarStage(age), expected, `${stage.title}, age ${age}`);
+  }
+  for (const sex of ["male", "female"] as const) for (const avatarVariant of [0, 1, 2]) {
+    const portrait = { seed: "roadmap-portrait", name: "Roadmap character", sex, avatarVariant };
+    const identity = `${sex === "female" ? "f" : "m"}${String(avatarVariant + 1).padStart(2, "0")}`;
+    const childSrc = `/assets/portraits/concept1-v4/${sex === "female" ? "child-girl-f01" : "child-boy-m01"}.png`;
+    const youthSrc = `/assets/portraits/concept1-v4/${sex === "female" ? "youth-girl-f02" : "youth-student"}.png`;
+    for (const selected of ["childhood", "youth"]) {
+      const html = renderToStaticMarkup(createElement(LifePage, { stages, guides, portrait, selected, onSelect() {} }));
+      const tabs = html.match(/<ol class="htp-road"[\s\S]*?<\/ol>/)?.[0] ?? "";
+      const images = tabs.match(/<img\b[^>]*>/g) ?? [];
+      assert.equal(images.length, stages.length);
+      assert.ok(images[1].includes(`src="${childSrc}"`), `${sex} childhood tab`);
+      assert.ok(images[2].includes(`src="${youthSrc}"`), `${sex} youth tab`);
+      assert.ok(images[1].includes(`data-portrait-key="${identity}:child:child"`));
+      assert.ok(images[2].includes(`data-portrait-key="${identity}:youth:youth"`));
+      const detail = html.match(/<section class="htp-stage-detail"[\s\S]*$/)?.[0] ?? "";
+      assert.ok(detail.includes(`src="${selected === "childhood" ? childSrc : youthSrc}"`), `${sex} ${selected} detail`);
+    }
+  }
 });
 
 test("Farm & Granary shows every number as an icon tile and locks planting until it opens", async () => {
