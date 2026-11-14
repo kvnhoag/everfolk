@@ -70,7 +70,7 @@ The current `dev` branch includes these entry points; use the beta deployment fo
 | [Household showcase (`/showcase/royalty`)](https://beta.everfolk.life/showcase/royalty) | Choose among six royal and aristocratic scenarios, explore council decisions or try the newborn welcome. Progress stays in the showcase session. |
 | [Skill Atlas (`/skills`)](https://beta.everfolk.life/skills) | Explore the 74-node map, prerequisites, demonstrated work and practical rewards. |
 
-The screenshots below show earlier testnet and UI builds. Current artwork, gameplay, card editions and fees are described in the following sections.
+The homepage image below is retained from an earlier build. The four showcase panels are fresh captures from the beta on **15 November 2026**, showing the current scene artwork, pack reveal, skill map and card gallery.
 
 <a href="https://everfolk.life">
   <img src="assets/readme/hero-homepage.png" alt="Everfolk Alexandria Harbor Entry Screen with Weave Mode and Sign-In" width="100%">
@@ -79,30 +79,30 @@ The screenshots below show earlier testnet and UI builds. Current artwork, gamep
 <table>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://everfolk.life/test/weave/granary">
-        <img src="assets/readme/gameplay-alexandria.png" alt="Active Weave Mode Life in Alexandria showing Past-Life Granary NFT trigger" width="100%">
+      <a href="https://beta.everfolk.life/">
+        <img src="assets/readme/gameplay-current.jpg" alt="Current Alexandria life with sunlit scene artwork, household inventory and yearly actions" width="100%">
       </a>
-      <p align="center"><b>Active Simulation &amp; Cross-Life Weave</b><br><sub>Past-life NFTs intervene at crises (e.g., unlocking stored grain during a low Nile flood) while tracking 1x–16x pacing, family ledger, and local markets.</sub></p>
+      <p align="center"><b>Storybook Life &amp; Household Choices</b><br><sub>New scene artwork frames a life's timeline, household resources and yearly choices for study, work and relationships.</sub></p>
     </td>
     <td width="50%" valign="top">
-      <a href="https://everfolk.life/test/weave/convoy">
-        <img src="assets/readme/soldier-convoy-ui.png" alt="Soldier Convoy Weave and Commodity Market Trend Table" width="100%">
+      <a href="https://beta.everfolk.life/showcase/pack">
+        <img src="assets/readme/pack-reveal-current.jpg" alt="Current five-card reveal with a Legendary Alexander card and four contributor designs" width="100%">
       </a>
-      <p align="center"><b>Convoy Distinction &amp; Commodity Quotes</b><br><sub>Soldier patrol deeds reduce road ambushes while household grain &amp; flax quotes react dynamically to city shocks.</sub></p>
+      <p align="center"><b>Five-Card Pack Reveal (<code>/showcase/pack</code>)</b><br><sub>Tear the foil pack and inspect five preview cards, including at least one Legendary. Played lives earn their cards through historical paths.</sub></p>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://everfolk.life/skills">
-        <img src="assets/readme/skill-atlas-ui.png" alt="74-Node Interactive Skill Atlas" width="100%">
+      <a href="https://beta.everfolk.life/skills">
+        <img src="assets/readme/skill-atlas-current.jpg" alt="Current dark skill map showing Physique, Knowledge and military crossover connections" width="100%">
       </a>
-      <p align="center"><b>74-Node Capability Atlas (<code>/skills</code>)</b><br><sub>Four branches and ten depth tiers uniting Physique, Handmade, Knowledge, Trade, and military crossovers.</sub></p>
+      <p align="center"><b>74-Node Skill Atlas (<code>/skills</code>)</b><br><sub>Explore prerequisites, demonstrated work and military crossovers across four branches and ten depths on the current dark skill map.</sub></p>
     </td>
     <td width="50%" valign="top">
-      <a href="https://everfolk.life/#market">
-        <img src="assets/readme/nft-market.png" alt="Rhakotis Bazaar On-Chain NFT Marketplace" width="100%">
+      <a href="https://beta.everfolk.life/cards">
+        <img src="assets/readme/card-gallery-current.jpg" alt="Current v14 card gallery with illustrated Alexander, Aristotle, Euclid, Lysippos and Pytheas cards" width="100%">
       </a>
-      <p align="center"><b>Rhakotis Bazaar NFT Market (<code>#market</code>)</b><br><sub>Filter by career group, rarity tier, and deed; every resale routes source royalties transparently on-chain.</sub></p>
+      <p align="center"><b>117-Design Card Gallery (<code>/cards</code>)</b><br><sub>Browse 13 historical figures and four contributor ranks in male and female variants, with rarity filters and individual card stories.</sub></p>
     </td>
   </tr>
 </table>
