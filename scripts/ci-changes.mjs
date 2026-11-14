@@ -19,7 +19,7 @@ export function jobsForPaths(paths) {
     }
     jobs.app = true;
     if (/^(?:package\.json|pnpm-lock\.yaml|pnpm-workspace\.yaml)$/.test(path) ||
-        (path.startsWith("public/") || path.startsWith("assets/")) || /^(?:scripts\/.*(?:art|portrait|avatar|pixel)|client\/models\/(?:card-art|portrait-|avatar-|banner-|life-background))/.test(path)) jobs.art = true;
+        (path.startsWith("public/") || path.startsWith("assets/") || path.startsWith("chain/catalog/") || path === "chain/ids.ts") || /^(?:scripts\/.*(?:art|portrait|avatar|pixel)|client\/models\/(?:card-art|portrait-|avatar-|banner-|life-background))/.test(path)) jobs.art = true;
   }
   return jobs;
 }

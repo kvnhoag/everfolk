@@ -19,7 +19,7 @@ test("documentation and manual balance audits do not start application or contra
 test("art tooling and delivered assets retain their own audits", () => {
   assert.deepEqual(jobsForPaths(["test/art/portrait-delivery.test.ts", "artwork/cards/frame.svg", "tools/character-creator/src/compose.mjs"]), { app: false, contract: false, art: true });
   assert.deepEqual(jobsForPaths(["public/assets/portraits/new.png"]), { app: true, contract: false, art: true });
-  for (const path of ["scripts/lib/card-art-replacements.mjs", "client/models/avatar-appearance.ts", "client/models/banner-state.ts", "assets/source/frame.svg"]) assert.equal(jobsForPaths([path]).art, true, path);
+  for (const path of ["scripts/lib/card-art-replacements.mjs", "client/models/avatar-appearance.ts", "client/models/banner-state.ts", "assets/source/frame.svg", "chain/catalog/figures.ts", "chain/ids.ts"]) assert.equal(jobsForPaths([path]).art, true, path);
 });
 
 test("workflow changes run every job and combined changes retain both application and contract tests", () => {
