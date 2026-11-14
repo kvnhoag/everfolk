@@ -11,6 +11,8 @@ The protected operator installation is `/opt/everfolk/deploy`; its installed run
 
 `everfolk-deploy.timer` polls both branch heads two minutes after the previous check completes, with up to ten seconds of jitter. Changes build sequentially before replacing their branch container. An unchanged healthy commit is skipped. Build failures keep the existing container. The package records each image's branch, full Git revision, package version and public CDN pin; `/build-info.json` exposes only version, branch and commit with `no-store`.
 
+The current main revision requires the documented `main-world-types-v1` type-only build-context overlay to avoid unbounded world-JSON type inference. It adds declaration files and `allowArbitraryExtensions` only; runtime TypeScript, world JSON and the main Git branch stay unchanged. The context receipt, image label and deployment receipt identify this compatibility overlay.
+
 Main retains the original production D1 volume. Beta starts with its own empty database and origin-local browser saves. Both initially use the existing testnet integrations; the beta database does not isolate shared testnet contracts, wallets or external service quotas. Email login requires the Privy app to permit `https://beta.everfolk.life`.
 
 The existing Caddy deployment stays at `/opt/everfolk/app`. Its host configuration uses `everfolk-main:8787` and `everfolk-beta:8787`, removes incoming `oai-authenticated-user-*`, and preserves all verified artwork routes and anonymous fallback behavior. Beta sends `X-Robots-Tag: noindex, nofollow`. Cloudflare's immutable and runtime media rules include both hosts and respect origin cache TTLs. Public media remains pinned to `media-20261114-v1` on the independent static origin.

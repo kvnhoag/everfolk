@@ -128,6 +128,67 @@ def overlay_dockerfile(source):
     return source.replace(anchor, anchor + overlay)
 
 
+
+MAIN_WORLD_TYPES_OVERLAY = "main-world-types-v1"
+
+
+def apply_main_world_type_overlay(context, branch):
+    """Bound main's JSON type inference without changing runtime source/data."""
+    context = Path(context).resolve()
+    if branch != "main":
+        return None
+    config_path = context / "tsconfig.json"
+    worlds = context / "worlds"
+    receipt_path = context.parent / "type-overlay.json"
+    if not config_path.is_file() or not worlds.is_dir():
+        return None
+    config = json_read(config_path)
+    options = config.setdefault("compilerOptions", {})
+    if options.get("allowArbitraryExtensions") is True:
+        return json_read(receipt_path)
+    packs = sorted(worlds.rglob("*.json"))
+    if not packs:
+        return None
+    types = context / "src" / "types.ts"
+    if not types.is_file():
+        raise ValueError("main world-type overlay requires the branch's own src/types.ts")
+    writes = []
+    for pack in packs:
+        if pack.is_symlink() or not pack.resolve().is_relative_to(context):
+            raise ValueError("world pack escaped the disposable build context")
+        target = pack.with_name(pack.name[:-5] + ".d.json.ts")
+        relative = os.path.relpath(types, pack.parent).replace(os.sep, "/")
+        if not relative.startswith("."):
+            relative = "./" + relative
+        source = ('// VPS type-only overlay: bound JSON inference using this branch\'s WorldPack.\n'
+                  f'import type {{ WorldPack }} from "{relative}";\n'
+                  'declare const pack: WorldPack;\nexport default pack;\n')
+        if target.is_symlink() or target.exists() and target.read_text() != source:
+            raise ValueError(f"refusing to overwrite an existing world declaration: {target}")
+        writes.append((target, source))
+    for target, source in writes:
+        if not target.exists():
+            target.write_text(source)
+            target.chmod(0o644)
+    options["allowArbitraryExtensions"] = True
+    json_write(config_path, config, 0o644)
+    receipt = {"id": MAIN_WORLD_TYPES_OVERLAY, "scope": "type-check-only",
+               "typeFiles": [str(path.relative_to(context)) for path, _ in writes],
+               "compilerOption": "allowArbitraryExtensions"}
+    json_write(receipt_path, receipt)
+    ready_path = context.parent / "context-ready.json"
+    if ready_path.exists():
+        ready = json_read(ready_path)
+        ready["buildOverlays"] = [MAIN_WORLD_TYPES_OVERLAY]
+        json_write(ready_path, ready)
+    return receipt
+
+
+def context_build_overlays(context):
+    receipt = json_read(Path(context).parent / "type-overlay.json")
+    return [receipt["id"]] if receipt else []
+
+
 def export_blobs(repo, records, destination):
     """Write only explicitly selected regular Git blobs, without archive prefetch."""
     destination = destination.resolve()
@@ -186,6 +247,7 @@ def prepare_context(config, repo, branch, commit):
     release = root / "releases" / branch / commit
     context = release / "context"
     if (release / "context-ready.json").exists():
+        apply_main_world_type_overlay(context, branch)
         return context
     if context.exists():
         raise RuntimeError(f"partial context requires operator review: {context}")
@@ -216,10 +278,11 @@ def prepare_context(config, repo, branch, commit):
     ignore = context / ".dockerignore"
     with ignore.open("a") as output:
         output.write("\n# VPS deployment boundary\nartwork\nartifacts\n.git\nnode_modules\ndist\n.wrangler\n.env*\n!.env.production.example\n")
+    apply_main_world_type_overlay(context, branch)
     package = json_read(context / "package.json")
     metadata = {"schemaVersion": 1, "version": package["version"], "branch": branch, "commit": commit}
     json_write(context / "public" / "build-info.json", metadata, 0o644)
-    json_write(release / "context-ready.json", metadata)
+    json_write(release / "context-ready.json", {**metadata, "buildOverlays": context_build_overlays(context)})
     return context
 
 
@@ -328,6 +391,7 @@ def deploy(config, branch, force=False, build_only=False):
             print(f"{branch}: running ref failed health; reapplying {commit}", flush=True)
     context = prepare_context(config, repo, branch, commit)
     version = json_read(context / "package.json")["version"]
+    build_overlays = context_build_overlays(context)
     image = f"everfolk-app:{branch}-{commit}"
     existing = run(["docker", "image", "inspect", image], capture=True, check=False)
     if existing.returncode:
@@ -337,15 +401,18 @@ def deploy(config, branch, force=False, build_only=False):
              "--label", f"org.opencontainers.image.ref.name={branch}",
              "--label", f"org.opencontainers.image.version={version}",
              "--label", f"io.everfolk.asset-base-url={config['assetBaseUrl']}",
+             "--label", f"io.everfolk.build-overlays={','.join(build_overlays)}",
              "--build-arg", f"VITE_EVERFOLK_ASSET_BASE_URL={config['assetBaseUrl']}",
              "--build-arg", f"EVERFOLK_BUILD_BRANCH={branch}",
              "--build-arg", f"EVERFOLK_BUILD_COMMIT={commit}", context])
     else:
         labels = json.loads(existing.stdout)[0]["Config"].get("Labels", {})
-        if labels.get("org.opencontainers.image.revision") != commit or labels.get("io.everfolk.asset-base-url") != config["assetBaseUrl"]:
+        if (labels.get("org.opencontainers.image.revision") != commit
+                or labels.get("io.everfolk.asset-base-url") != config["assetBaseUrl"]
+                or labels.get("io.everfolk.build-overlays", "") != ",".join(build_overlays)):
             raise RuntimeError("existing immutable image has incompatible build metadata")
     if build_only:
-        result = {"branch": branch, "commit": commit, "version": version, "image": image, "context": str(context), "buildOnly": True}
+        result = {"branch": branch, "commit": commit, "version": version, "image": image, "context": str(context), "buildOverlays": build_overlays, "buildOnly": True}
         print(json.dumps(result), flush=True)
         return result
     env_file = Path(item["envFile"])
@@ -394,7 +461,7 @@ def deploy(config, branch, force=False, build_only=False):
         raise
     result = {"branch": branch, "hostname": item["hostname"], "commit": commit, "version": version,
               "image": image, "assetBaseUrl": config["assetBaseUrl"], "deployedAt": now(),
-              "dataVolume": item["volume"], "backup": backup, "context": str(context)}
+              "dataVolume": item["volume"], "backup": backup, "context": str(context), "buildOverlays": build_overlays}
     json_write(state_path, result)
     print(json.dumps(result), flush=True)
     return result

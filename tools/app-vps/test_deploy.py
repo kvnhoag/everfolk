@@ -109,6 +109,83 @@ class DeploymentPreparationTests(unittest.TestCase):
             with self.subTest(source=source), self.assertRaises(ValueError):
                 deploy.overlay_dockerfile(source)
 
+    def make_world_context(self, directory, arbitrary_extensions=False):
+        context = directory / "context"
+        for name, content in {
+            "tsconfig.json": json.dumps({"compilerOptions": {
+                "strict": True, "resolveJsonModule": True,
+                **({"allowArbitraryExtensions": True} if arbitrary_extensions else {})},
+                "include": ["src/**/*.ts", "app/**/*.tsx"]}),
+            "src/types.ts": "export interface WorldPack { id: string }\n",
+            "app/page.tsx": "export default function Page() { return <main>Unchanged</main>; }\n",
+            "worlds/sample.json": '{ "id": "current", "events": [] }\n',
+            "worlds/demo/older.json": '{"id":"retained","events":[]}\n',
+        }.items():
+            target = context / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(content)
+        return context
+
+    def test_old_main_gets_only_type_declarations_and_config_option(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            context = self.make_world_context(directory)
+            original = {p.relative_to(context): p.read_bytes() for p in context.rglob("*") if p.is_file()}
+            receipt = deploy.apply_main_world_type_overlay(context, "main")
+            self.assertEqual(receipt["id"], "main-world-types-v1")
+            self.assertEqual(receipt["scope"], "type-check-only")
+            self.assertEqual(set(receipt["typeFiles"]), {
+                "worlds/sample.d.json.ts", "worlds/demo/older.d.json.ts"})
+            for name, payload in original.items():
+                if str(name) != "tsconfig.json":
+                    self.assertEqual((context / name).read_bytes(), payload, f"runtime source changed: {name}")
+            previous = json.loads(original[Path("tsconfig.json")])
+            previous["compilerOptions"]["allowArbitraryExtensions"] = True
+            self.assertEqual(json.loads((context / "tsconfig.json").read_text()), previous)
+            for name, relative in [("worlds/sample.d.json.ts", "../src/types.ts"),
+                                   ("worlds/demo/older.d.json.ts", "../../src/types.ts")]:
+                source = (context / name).read_text()
+                self.assertIn(f'import type {{ WorldPack }} from "{relative}";', source)
+                self.assertIn("declare const pack: WorldPack;", source)
+                self.assertIn("export default pack;", source)
+            self.assertEqual(json.loads((directory / "type-overlay.json").read_text()), receipt)
+            self.assertEqual(deploy.context_build_overlays(context), ["main-world-types-v1"])
+
+    def test_main_type_overlay_is_idempotent_and_updates_existing_context_receipt(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            context = self.make_world_context(directory)
+            (directory / "context-ready.json").write_text('{"branch":"main","commit":"unchanged"}\n')
+            first = deploy.apply_main_world_type_overlay(context, "main")
+            before = {p.relative_to(directory): p.read_bytes() for p in directory.rglob("*") if p.is_file()}
+            self.assertEqual(deploy.apply_main_world_type_overlay(context, "main"), first)
+            after = {p.relative_to(directory): p.read_bytes() for p in directory.rglob("*") if p.is_file()}
+            self.assertEqual(after, before)
+            self.assertEqual(json.loads((directory / "context-ready.json").read_text()), {
+                "branch": "main", "commit": "unchanged", "buildOverlays": ["main-world-types-v1"]})
+
+    def test_dev_and_already_typed_main_contexts_are_untouched(self):
+        for branch, typed in [("dev", False), ("dev", True), ("main", True)]:
+            with self.subTest(branch=branch, typed=typed), tempfile.TemporaryDirectory() as temporary:
+                directory = Path(temporary)
+                context = self.make_world_context(directory, typed)
+                before = {p.relative_to(directory): p.read_bytes() for p in directory.rglob("*") if p.is_file()}
+                self.assertIsNone(deploy.apply_main_world_type_overlay(context, branch))
+                after = {p.relative_to(directory): p.read_bytes() for p in directory.rglob("*") if p.is_file()}
+                self.assertEqual(after, before)
+                self.assertEqual(deploy.context_build_overlays(context), [])
+
+    def test_main_type_overlay_does_not_overwrite_existing_declarations(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            context = self.make_world_context(directory)
+            (context / "worlds/sample.d.json.ts").write_text("// Different branch-authored declaration.\n")
+            before = {p.relative_to(directory): p.read_bytes() for p in directory.rglob("*") if p.is_file()}
+            with self.assertRaisesRegex(ValueError, "refusing to overwrite"):
+                deploy.apply_main_world_type_overlay(context, "main")
+            after = {p.relative_to(directory): p.read_bytes() for p in directory.rglob("*") if p.is_file()}
+            self.assertEqual(after, before)
+
     def test_expected_branch_host_mapping_is_accepted(self):
         config = self.config()
         self.assertIs(deploy.validate_config(config), config)
