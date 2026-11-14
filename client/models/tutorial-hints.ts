@@ -3,7 +3,7 @@
 export const TUTORIAL_HINT_IDS = [
   "welcome", "home-begin", "home-weave", "home-header",
   "roll",
-  "time-bar", "decision", "ending", "rail", "resources", "planting", "scene", "focus", "wealth", "life-record", "yearly-action", "command-deck", "market", "notifications",
+  "time-bar", "decision", "ending", "rail", "resources", "planting", "scene", "focus", "wealth", "life-record", "yearly-action", "earning", "command-deck", "market", "notifications",
   "character", "skills",
   "weave", "nft-market", "figures", "mine",
   "about",
@@ -69,6 +69,9 @@ export const TUTORIAL_HINTS: readonly TutorialHint[] = [
     help: "One personal action a year: people, training or work.",
     body: "Each year you get one action: pick a tab (people, training or work) and press Do on a card. Training and work grow the skills shown on the card; time with people raises your bonds.",
     missingBody: "Each year you get one action: time with people, training or work. The box returns once this year's decision is made." },
+  // The Work tab is the deck's third tab; the whole deck is the fallback once this year's action is spent.
+  { id: "earning", targets: [".life-yearly-action-deck .life-action-tabs [role='tab']:nth-child(3)", ".life-yearly-action-deck"], title: "Earning money",
+    body: "Work actions pay cash. A job pays every year. Open the Career & Work tab and press Do on a card, or take a job in Character once one is open to you." },
   { id: "command-deck", targets: [".demo-economy .demo-deck-header"], title: "Household & Town command deck",
     help: "Your household's market, farm, career, people and works.",
     body: "These tabs run your household: Market & Trade, Farm & Granary, Career & Army, People & Town, and Works & Stewards." },

@@ -126,6 +126,7 @@ import { focusSection } from "../lib/section-flash.ts";
 import YearChecklist, { SectionStep } from "../components/YearChecklist.tsx";
 import { sectionStep } from "../models/section-steps.ts";
 import { useResumeAfterTip } from "../hooks/useResumeAfterTip.ts";
+import { earningFacts, householdCosts } from "../models/earning-step.ts";
 
 type IconName = "hourglass" | "arrow" | "sun" | "heart" | "book" | "coin" | "bonds" | "pin" | "feather" | "ship" | "home" | "check" | "pause" | "play" | "close" | "download" | "restart";
 
@@ -254,6 +255,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const decisionKey = life.phase === "choice" ? `${life.seed}:${life.age}:${life.pendingEventId}` : null;
   const menuLifeRef = useRef<string | null>(null);
   const lifeEngine = engineForLife(life);
+  const activities = useMemo(() => lifeEngine.getActivities(life), [lifeEngine, life]);
   // A field plan is tried on a copy of this life, so the planting card shows the game's own answer before the click.
   const checkPlan = useCallback((flaxPlots: number) => plantingCheck(lifeEngine, life, flaxPlots), [lifeEngine, life]);
   const previewTrade = useCallback((order: TradeCommand) => tradePreview(lifeEngine, life, order), [lifeEngine, life]);
@@ -312,6 +314,7 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     life: {
       lifeKey: `${life.worldFingerprint}:${life.seed}`, age: life.age, ended: life.phase === "ended", decisionPending: life.phase === "choice",
       learnedSkills: lifeSections.facts.learnedSkills, sections: [...lifeSections.sections], notificationShown: notificationShown && Boolean(demoView), passed: lifeSections.passed,
+      ...earningFacts(activities, life.economy?.cash, householdCosts(demoView)),
     },
   }));
   // Auto mode never waits for a tip: the one on screen closes as seen and new ones are marked seen as they come.
@@ -421,7 +424,6 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
   const importantEventCount = useMemo(() => buildImportantLifeEvents(life, world).reduce((count, year) => count + year.events.length, 0), [life, world]);
   const previousProgressLife = useRef(life);
   const { legacyEntries, legacyNotice } = useLegacyGallery(life, world, game.archivedLives, !game.isPreview);
-  const activities = useMemo(() => lifeEngine.getActivities(life), [lifeEngine, life]);
   // Halfway through the year, an unused action is offered in the pinned bar so the year-end box seldom has to ask.
   const actionReminder = game.hasBegun && !game.isPreview ? actionNudge(world, life, activities, game.focusId, game.clockProgress) : null;
   const repaymentWarning = loanDeadlineWarning(world, life);

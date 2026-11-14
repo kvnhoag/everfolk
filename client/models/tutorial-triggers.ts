@@ -21,6 +21,10 @@ export interface TutorialLifeFacts {
   sections: readonly GameSection[];
   /** At least one notification is on screen. */
   notificationShown: boolean;
+  /** Work actions are on offer in the yearly-action deck. */
+  workOffered?: boolean;
+  /** The household's cash is below about a year of its costs. */
+  cashShort?: boolean;
   /** Tips whose stage passed before this year; seen at once when a life is entered mid-way (a loaded save). */
   passed: readonly TutorialHintId[];
 }
@@ -73,6 +77,11 @@ const RULES: Record<TutorialHintId, HintRule> = {
   "life-record": helpOnly({ available: onGame }),
   // The action cards are drawn only when no decision is waiting, so the tip waits for that too.
   "yearly-action": { available: (context, life) => shows("yearly-action")(context, life) && !life!.ended && !life!.decisionPending },
+  // Earning money: once, the first year work is offered or the purse falls below a year of costs.
+  "earning": {
+    available: (context, life) => shows("yearly-action")(context, life) && !life!.ended && !life!.decisionPending,
+    triggered: (_context, life) => Boolean(life.workOffered || life.cashShort),
+  },
   // The market tip introduces the deck; the deck's own tip stays behind its "?".
   "command-deck": helpOnly({ available: (context, life) => shows("command-deck")(context, life) && !life!.ended }),
   "market": { available: (context, life) => shows("deck-market")(context, life) && !life!.ended },
@@ -96,7 +105,7 @@ const RULES: Record<TutorialHintId, HintRule> = {
 const AUTO_ORDER: readonly TutorialHintId[] = [
   "welcome", "roll", "weave", "nft-market", "figures", "mine",
   "time-bar", "decision", "ending", "scene",
-  "focus", "yearly-action", "market", "skills", "planting",
+  "focus", "yearly-action", "earning", "market", "skills", "planting",
 ];
 
 /** Screens of a life in play: at most one automatic tip opens on them per in-game year. */
