@@ -54,7 +54,7 @@ test("resolved events select their authored backdrop without changing the actor 
 test("the banner phase follows all six exact age boundaries and a high skill never creates a career", () => {
   for (const [age, stage, label, situation] of [
     [0, "infant", "Infancy", "home"], [2, "infant", "Infancy", "home"], [3, "child", "Childhood", "courtyard"],
-    [11, "child", "Childhood", "courtyard"], [12, "youth", "Youth", "study"], [17, "youth", "Youth", "study"],
+    [12, "child", "Childhood", "courtyard"], [13, "youth", "Youth", "study"], [17, "youth", "Youth", "study"],
     [18, "adult", "Adulthood", "civic"], [39, "adult", "Adulthood", "civic"],
     [40, "middle", "Middle years", "civic"], [59, "middle", "Middle years", "civic"], [60, "elder", "Later life", "home"],
   ] as const) {
@@ -180,8 +180,8 @@ test("all banner IDs have a stable asset path and reading the banner leaves life
   assert.deepEqual(life, before); assert.deepEqual(world, pack);
 });
 
-test("a young apprentice shows the youth stage that begins at 12 and the actual work setting", () => {
-  const life = lifeAt(12);
+test("a young apprentice shows the youth stage that begins at 13 and the actual work setting", () => {
+  const life = lifeAt(13);
   life.character!.jobId = "apprentice";
   const banner = resolveLifeBanner(life, world, context());
   assert.equal(banner.title, "Youth");
