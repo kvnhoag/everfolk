@@ -145,10 +145,10 @@ export function advanceYearWithFocus(engine: LifeEngine, life: LifeState, focusI
   return next.phase === "ready" ? engine.advance(next) : next;
 }
 
-export function advanceToDecisionWithFocus(engine: LifeEngine, life: LifeState, focusId: YearlyFocusId): LifeState {
+export function advanceToDecisionWithFocus(engine: LifeEngine, life: LifeState, focusId: YearlyFocusId, stopBeforeYear?: (life: LifeState) => boolean): LifeState {
   let next = life;
   for (let years = 0; years <= engine.world.maxAge; years++) {
-    if (next.phase !== "ready") return next;
+    if (next.phase !== "ready" || stopBeforeYear?.(next)) return next;
     next = advanceYearWithFocus(engine, next, focusId);
     // Fast-forward must stop where the repayment reminder can be seen.
     const loan = next.economy?.loan;
