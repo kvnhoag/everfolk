@@ -18,6 +18,7 @@ import LateSkillRoutes from "./LateSkillRoutes.tsx";
 import CareerEconomyTree from "./CareerEconomyTree.tsx";
 import CapabilityTree from "./CapabilityTree.tsx";
 import { formatSkillValue as skillNumber } from "../models/skill-growth.ts";
+import type { SkillTreeFocus } from "../models/skill-learned-notice.ts";
 import "../styles/skill-tree.css";
 import "../styles/skill-river.css";
 import "../styles/skill-river-contrast.css";
@@ -75,6 +76,7 @@ function SkillWorkAction({ activity, life, world, onActivity, occupation = false
 }
 
 type SkillTreeProps = {
+  focusSkill?: SkillTreeFocus;
   life: LifeState; world: WorldPack; activities: readonly ActivityAvailability[]; onActivity: (id: string, options?: { calendarDeadline?: boolean }) => void; onAssess?: (nodeId: string, jobIds: readonly string[]) => void; initialView?: "current" | "wiki";
 };
 

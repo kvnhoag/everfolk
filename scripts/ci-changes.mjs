@@ -13,7 +13,8 @@ export function jobsForPaths(paths) {
     if (path.startsWith(".github/") || path === "scripts/ci-changes.mjs") return allJobs();
     if (path.startsWith("contract/")) { jobs.contract = true; continue; }
     if (path.startsWith("test/audits/")) continue;
-    if (path.startsWith("test/art/") || path.startsWith("tools/character-creator/") || path.startsWith("artwork/")) {
+    if (path.startsWith("test/art/") || path === "test/fixtures/card-art-kit.mjs" ||
+        path.startsWith("test/fixtures/card-art-kit/") || path.startsWith("tools/character-creator/") || path.startsWith("artwork/")) {
       jobs.art = true;
       continue;
     }
@@ -22,6 +23,12 @@ export function jobsForPaths(paths) {
         (path.startsWith("public/") || path.startsWith("assets/") || path.startsWith("chain/catalog/") || path === "chain/ids.ts") || /^(?:scripts\/.*(?:art|portrait|avatar|pixel)|client\/models\/(?:card-art|portrait-|avatar-|banner-|life-background))/.test(path)) jobs.art = true;
   }
   return jobs;
+}
+
+/** Keep release checks complete; the development branch has a three-minute job budget. */
+export function verificationProfile(ref, baseRef, fullRegression = false) {
+  const development = !fullRegression && (ref === "refs/heads/dev" || baseRef === "dev");
+  return { test_script: development ? "test:dev" : "test", timeout_minutes: development ? 3 : 15 };
 }
 
 export function changedJobs(eventName, event, git = (args) => execFileSync("git", args, { encoding: "utf8", maxBuffer: 16 * 1024 * 1024 })) {
@@ -40,6 +47,9 @@ export function changedJobs(eventName, event, git = (args) => execFileSync("git"
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const event = JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH, "utf8"));
   const jobs = changedJobs(process.env.GITHUB_EVENT_NAME, event);
-  appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(jobs).map(([name, run]) => `${name}=${run}\n`).join(""));
-  console.log("Required verification:", jobs);
+  const fullRegression = event.inputs?.full_regression === true || event.inputs?.full_regression === "true";
+  const profile = verificationProfile(process.env.GITHUB_REF, process.env.GITHUB_BASE_REF, fullRegression);
+  const outputs = { ...jobs, ...profile };
+  appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(outputs).map(([name, value]) => `${name}=${value}\n`).join(""));
+  console.log("Required verification:", outputs);
 }

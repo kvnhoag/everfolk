@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { builtinEngine } from "../client/lib/world-session.ts";
 import type { JournalEntry, LifeState } from "../src/types.ts";
-import { NOTIFICATION_DURATION_MS, dismissEventNotification, eventNotificationLifeKey, expireEventNotifications, isKeyLifeEvent, notificationExpiry, syncEventNotifications } from "../client/models/event-notifications.ts";
+import { NOTIFICATION_DURATION_MS, dismissEventNotification, eventNotificationLifeKey, expireEventNotifications, isObviousNotice, notificationExpiry, syncEventNotifications } from "../client/models/event-notifications.ts";
 import type { LifeEventRow } from "../client/models/life-events.ts";
 import { createEventNotificationStore } from "../client/state/event-notification-store.ts";
 
@@ -13,26 +13,32 @@ function withEvents(life: LifeState, ...ids: string[]): LifeState {
   return { ...life, journal: [...life.journal, ...additions] };
 }
 
-test("routine life events show for five seconds; health, milestones and endings stay until dismissed", () => {
-  assert.equal(NOTIFICATION_DURATION_MS, 5_000);
+test("every life-event notice shows for three seconds; none waits to be closed", () => {
+  assert.equal(NOTIFICATION_DURATION_MS, 3_000);
   const row = (kind: LifeEventRow["kind"], key = "7-3-event-road") => ({ key, kind, text: "x", sourceIds: [] });
-  assert.equal(isKeyLifeEvent(row("history")), false);
-  assert.equal(isKeyLifeEvent(row("event")), false);
-  assert.equal(isKeyLifeEvent(row("activity")), false);
-  assert.equal(isKeyLifeEvent(row("event", "7-3-event-health-onset-fever")), true);
-  assert.equal(isKeyLifeEvent(row("milestone")), true);
-  assert.equal(isKeyLifeEvent(row("ending")), true);
-  assert.equal(notificationExpiry(row("history"), 1000), 6000);
-  assert.equal(notificationExpiry(row("milestone"), 1000), Number.POSITIVE_INFINITY);
+  for (const kind of ["history", "event", "milestone", "ending", "influence"] as const) assert.equal(notificationExpiry(row(kind), 1000), 4000);
+  assert.equal(notificationExpiry(row("event", "7-3-event-health-onset-fever"), 1000), 4000);
 });
 
-test("a key health event stays until dismissed, even without another life update", () => {
+test("obvious notices are cut: the player's own yearly action results and trades", () => {
+  const row = (kind: LifeEventRow["kind"], key: string) => ({ key, kind, text: "x", sourceIds: [] });
+  assert.equal(isObviousNotice(row("activity", "9-4-outcome-studied")), true);
+  assert.equal(isObviousNotice(row("event", "12-8-activity-market-trade")), true);
+  assert.equal(isObviousNotice(row("event", "12-9-activity-army-sale")), true);
+  assert.equal(isObviousNotice(row("event", "12-9-event-health-onset-fever")), false);
+  assert.equal(isObviousNotice(row("milestone", "6-2-event-first-lessons")), false);
+  assert.equal(isObviousNotice(row("activity", "30-12-activity-child-2")), false, "a child born still notifies");
+  assert.equal(isObviousNotice(row("activity", "19-7-activity-met-nikias")), false, "meeting someone still notifies");
+});
+
+test("a health notice fades by itself after three seconds", () => {
   const life = withEvents(base, "first");
   const state = syncEventNotifications(null, life, world, 1000);
-  assert.equal(expireEventNotifications(state, 10_000_000).notifications.length, 1);
-  const dismissed = dismissEventNotification(state, state.notifications[0].key);
-  assert.equal(syncEventNotifications(dismissed, { ...life }, world, 32_000).notifications.length, 0,
-    "A paused render or phase change cannot recreate a closed notification.");
+  assert.equal(state.notifications.length, 1);
+  assert.equal(expireEventNotifications(state, 3_999).notifications.length, 1);
+  assert.equal(expireEventNotifications(state, 4_000).notifications.length, 0);
+  assert.equal(syncEventNotifications(expireEventNotifications(state, 4_000), { ...life }, world, 32_000).notifications.length, 0,
+    "A paused render or phase change cannot recreate a faded notification.");
 });
 
 test("the third newer event closes an old notification, including a single batch", () => {
@@ -71,9 +77,9 @@ test("quiet birthdays and pending decision prompts neither count nor extend dead
       { type: "event", age: 1, year: firstLife.year + 1, id: decision.id, text: decision.text },
     ],
   };
-  const updated = syncEventNotifications(first, quiet, world, 20_000);
+  const updated = syncEventNotifications(first, quiet, world, 2_000);
   assert.equal(updated.createdCount, 1);
-  assert.equal(updated.notifications[0].expiresAt, Number.POSITIVE_INFINITY, "A health event is key and is never extended or shortened.");
+  assert.equal(updated.notifications[0].expiresAt, 3_000, "A quiet year never extends or shortens an open notice.");
 });
 
 test("routine events do not notify or push an important notification out of the queue", () => {
@@ -84,10 +90,10 @@ test("routine events do not notify or push an important notification out of the 
       type: "event" as const, id, text: "An ordinary moment.", age: 3, year: firstLife.year + 3,
     })),
   ] };
-  const updated = syncEventNotifications(first, quietLife, world, 20_000);
+  const updated = syncEventNotifications(first, quietLife, world, 2_000);
   assert.equal(updated.createdCount, 1);
   assert.deepEqual(updated.notifications.map(item => item.text), ["Completed first."]);
-  assert.equal(updated.notifications[0].expiresAt, Number.POSITIVE_INFINITY);
+  assert.equal(updated.notifications[0].expiresAt, 3_000);
   assert.equal(syncEventNotifications(null, { ...quietLife, journal: quietLife.journal.slice(1) }, world, 0).notifications.length, 0);
 });
 
@@ -116,7 +122,8 @@ test("closed notifications stay closed after reload, remount and switching away 
   const shown = syncEventNotifications(null, life, world, 0);
   store.rememberSeenEventNotifications(shown.lifeKey, shown.observedKeys, storage);
   const dismissed = dismissEventNotification(shown, shown.notifications[0].key);
-  assert.equal(expireEventNotifications(dismissed, 30_000).notifications.length, 2);
+  assert.equal(expireEventNotifications(dismissed, 2_000).notifications.length, 2);
+  assert.equal(expireEventNotifications(dismissed, 30_000).notifications.length, 0);
 
   const reloadedStore = createEventNotificationStore();
   const seen = reloadedStore.readSeenEventNotifications(eventNotificationLifeKey(life), storage);
@@ -141,7 +148,7 @@ test("different facts at the same journal position can notify without replaying 
   assert.equal(syncEventNotifications(changed, life, world, 2000).notifications.length, 0);
 });
 
-test("only timed notifications schedule an expiry check", async () => {
+test("the stack schedules its next fade from the soonest notice", async () => {
   const { nextExpiryDelay } = await import("../client/models/event-notifications.ts");
   const at = (expiresAt: number) => ({ key: String(expiresAt), kind: "event" as const, text: "x", sourceIds: [], year: 0, sequence: 1, expiresAt });
   assert.equal(nextExpiryDelay([at(Number.POSITIVE_INFINITY)], 1000), null);

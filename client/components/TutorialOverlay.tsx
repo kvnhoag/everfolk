@@ -8,6 +8,14 @@ import { useTutorialSpotlight } from "../hooks/useTutorialSpotlight.ts";
 import { tutorialHint } from "../models/tutorial-hints.ts";
 import { tutorialPosition, type TutorialState } from "../models/tutorial-navigation.ts";
 import { tutorialStore } from "../state/tutorial-store.ts";
+import { tipShownStore } from "../state/tip-shown.ts";
+import { flashSections } from "../lib/section-flash.ts";
+import { usedSectionTips } from "../lib/section-use.ts";
+import { blockedByTipLock, setTipLock } from "../lib/tip-lock.ts";
+import { completeAfterClick, completesShownTip, tipsCompletedByClick } from "../lib/tip-click.ts";
+import { reportBlockedClick } from "../lib/tip-nudge.ts";
+import { guidedStepLocked } from "../models/guided-step.ts";
+import { useTipShield } from "../hooks/useTipShield.ts";
 import TutorialCard from "./TutorialCard.tsx";
 
 function showOnTop(card: HTMLDivElement): void {
@@ -30,19 +38,27 @@ function ShownTutorial({ state, host, closing, onClosed }: ShownProps) {
   const hint = tutorialHint(state.hintId) ?? tutorialHint("about")!;
   const hintKey = `${state.run}:${hint.id}`;
   const manual = state.mode === "manual";
-  const layout = useTutorialSpotlight(hint, hintKey, card, { waitForTarget: !manual, scroll: manual });
+  // A tip whose section is off screen scrolls to it once as it opens; a section already in view never moves the page.
+  const layout = useTutorialSpotlight(hint, hintKey, card, { waitForTarget: !manual, scroll: true });
   const settled = useTutorialFlight({ panel, ready: layout.ready, closing, run: state.run, onClosed: useCallback(() => {
     // Focus follows the card back to the Tutorial button, so keyboard players do not lose their place.
     if (card.current?.contains(document.activeElement)) findTutorialButton(card.current, false)?.focus({ preventScroll: true });
     onClosed();
   }, [onClosed]) });
+  // The life clock waits only while the card is really on screen (not while an automatic tip waits for its section).
+  useEffect(() => { tipShownStore.set(!closing && layout.ready); }, [closing, layout.ready]);
+  useEffect(() => () => tipShownStore.set(false), []);
   // A manual popover sits in the top layer without making the page inert, so the game stays playable.
   useEffect(() => { if (card.current) showOnTop(card.current); }, [host]);
   // Only a tutorial the player opened takes focus, once it is visible; automatic tips never pull focus from the game.
   useEffect(() => { if (manual && !closing && layout.ready) card.current?.focus({ preventScroll: true }); }, [hintKey, layout.ready]); // eslint-disable-line react-hooks/exhaustive-deps
+  // A guided step on the page locks everything but its section and the tip; the veil shows that and says why.
+  const locked = guidedStepLocked({ tipsOn: state.tipsOn, tipShown: layout.ready && !closing, mode: state.mode, hosted: host !== null });
+  const shield = useTipShield(locked, hint.targets, card.current, layout.spotlight);
   const { index, total } = tutorialPosition(state);
   return <TutorialCard cardRef={card} panelRef={panel} hint={hint} index={index} total={total} mode={state.mode} missing={layout.missing}
     ready={layout.ready} settled={settled} closing={closing} offscreen={layout.offscreen} position={layout.card} spotlight={layout.spotlight}
+    tipsOn={state.tipsOn} onTipsChange={tutorialStore.setTipsOn} shield={shield}
     onBack={tutorialStore.back} onNext={tutorialStore.next} onClose={tutorialStore.close} onReveal={layout.reveal} />;
 }
 
@@ -56,6 +72,26 @@ export default function TutorialOverlay() {
   const host = useTutorialHost();
   const [settledRun, setSettledRun] = useState(0);
   const onClosed = useCallback(() => setSettledRun(state.run), [state.run]);
+  // During a guided step, clicks outside its section are stopped. Otherwise, using a section once teaches it: its tip
+  // closes if open and is never shown later. The click does its own work first (Resume, Study, Do), then the tip
+  // completes, so one click does both.
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      if (blockedByTipLock(event.target)) { event.preventDefault(); event.stopImmediatePropagation(); reportBlockedClick(event); return; }
+      const tips = tutorialStore.getSnapshot();
+      const completed = tipsCompletedByClick(event.target, usedSectionTips(event.target), tips);
+      if (completesShownTip(completed, tips)) setTipLock(null);
+      completeAfterClick(completed, tutorialStore.used);
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, []);
+  // Tips off: a new section's border glows and fades instead of opening a card.
+  const flashRun = state.flash?.run ?? 0;
+  useEffect(() => {
+    if (!state.flash) return;
+    return flashSections(state.flash.ids.map(id => ({ selectors: tutorialHint(id)?.targets ?? [], label: `New here: ${tutorialHint(id)?.title ?? "a new section"}` })));
+  }, [flashRun]); // eslint-disable-line react-hooks/exhaustive-deps
   if (typeof document === "undefined") return null;
   const visible = state.hintId !== null && (state.open || settledRun !== state.run) && !hidesTutorial(host);
   const announcement = state.open && state.mode === "auto" ? `New tip: ${tutorialHint(state.hintId)?.title ?? ""}` : "";

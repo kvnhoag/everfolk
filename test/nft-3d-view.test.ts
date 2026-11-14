@@ -1,17 +1,17 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import type { MintCard, MintResult } from "../chain/types.ts";
-import { boosterArtwork, keptCardView, packCardView, refreshSavedBoosterCard, resultCardView } from "../client/chain/nft-card-view.ts";
+import { FIGURE_CARD_ART, boosterArtwork, figureCardArt, keptCardView, packCardView, refreshSavedBoosterCard, resultCardView } from "../client/chain/nft-card-view.ts";
 import { keptRows } from "../client/chain/token-page-model.ts";
 import { actionName, figureTitle } from "../client/chain/chain-copy.ts";
 import { figureMediaPath } from "../chain/figure-media.ts";
 import { getFigureCardArt } from "../client/models/card-art.ts";
-import { LEGACY_LABELS, NFT_LABELS, resolveBoosterLabels, reviewHint } from "../client/lib/booster/labels.mjs";
+import { LEGACY_LABELS, NFT_LABELS, WEAVE_PACK_LABELS, resolveBoosterLabels, reviewHint } from "../client/lib/booster/labels.mjs";
 
 const npcCard: MintCard = { kind: "npc", figure_id: null, rarity: 1, affection: 60, action_id: "craft.weave" };
 const figureCard: MintCard = { kind: "figure", figure_id: "alexander", rarity: 3, affection: 80, action_id: "alexander.levy" };
 
-test("a pack card becomes a 3D card with its figure art, rarity and deed", () => {
+test("a pack card becomes a 3D card with its figure's card art, rarity, role and deed", () => {
   const card = packCardView(figureCard, 0, "f".repeat(64), "letters");
   const art = getFigureCardArt("alexander", 3)!;
   assert.equal(card.name, figureTitle("alexander"));
@@ -20,6 +20,13 @@ test("a pack card becomes a 3D card with its figure art, rarity and deed", () =>
   assert.equal(card.art, art.portraitSrc);
   assert.equal(card.framedArt, art.footerlessSrc);
   assert.equal(card.editionText, "—/025", "an unminted draw must not acquire the creator's example 001 serial");
+  assert.equal(card.role, "Historical figure");
+});
+
+test("a figure's card portrait prefers the approved collection portrait, then its card painting", () => {
+  assert.equal(figureCardArt("alexander"), getFigureCardArt("alexander")!.portraitSrc);
+  assert.equal(figureCardArt("euclid"), getFigureCardArt("euclid")?.portraitSrc ?? figureMediaPath("euclid"));
+  for (const art of Object.values(FIGURE_CARD_ART)) assert.match(art, /^\/assets\/cards\/figures\/[a-z-]+\.png$/);
 });
 
 test("a person-of-the-city card uses its stage portrait, or a stable generated portrait", () => {
@@ -27,7 +34,10 @@ test("a person-of-the-city card uses its stage portrait, or a stable generated p
   assert.equal(staged.name, "Kallias");
   assert.equal(staged.art, "/assets/pixel/portraits/a.svg");
   const plain = packCardView(npcCard, 2, "e".repeat(64), "craft");
-  assert.match(plain.art, /^\/assets\/pixel\/portraits\/.+\.svg$/);
+  assert.match(plain.art, /^\/assets\/portraits\/ordinary-v3\/ef-p-[mf]\d\d-[a-z]+-work-v3\.png$/, "a craft card wears work clothes from the v3 portraits");
+  assert.equal(plain.role, "Person of the city");
+  assert.match(packCardView(npcCard, 2, "e".repeat(64), "military").art, /-military-v3\.png$/);
+  assert.match(packCardView(npcCard, 2, "e".repeat(64), "letters").art, /-scholarly-v3\.png$/);
   assert.deepEqual(packCardView(npcCard, 2, "e".repeat(64), "craft"), plain, "the same slot always draws the same portrait");
 });
 
@@ -49,6 +59,7 @@ test("an owned NFT in My lives opens as its own 3D card", () => {
   assert.equal(view.framedArt, getFigureCardArt("alexander", 2)!.footerlessSrc);
   assert.equal(view.sub, row.actionName);
   assert.equal(view.editionText, "—/100");
+  assert.equal(view.role, "Historical figure");
 });
 
 test("retained NFT ranks and recorded editions select matching approved faces", () => {
@@ -90,4 +101,11 @@ test("NFT views name NEAR, not the free Legacy collection", () => {
   assert.doesNotMatch(JSON.stringify(NFT_LABELS), /Legacy|memorial|FREE TO PLAY/);
   assert.equal(reviewHint(NFT_LABELS, 1, "Alexander", 0), "Your NFT · Alexander");
   assert.equal(reviewHint(LEGACY_LABELS, 3, "Kallias", 1), "3 saved to Legacy · Kallias · 2 / 3");
+});
+
+test("a Weave pack is labelled as a verified pack, not the free Legacy collection", () => {
+  assert.equal(WEAVE_PACK_LABELS.tag, "WEAVE MODE PACK");
+  assert.equal(WEAVE_PACK_LABELS.footer, "WEAVE MODE · VERIFIED PACK");
+  assert.equal(WEAVE_PACK_LABELS.showCount, false);
+  assert.doesNotMatch(JSON.stringify(WEAVE_PACK_LABELS), /Legacy|PERSONAL|FREE TO PLAY/);
 });

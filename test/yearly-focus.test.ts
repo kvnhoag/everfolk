@@ -73,7 +73,7 @@ test("an explicitly chosen activity wins over the automatic focus", () => {
   const next = advanceYearWithFocus(engine, life, "study");
   assert.deepEqual(next, engine.advance(life));
   assert.equal(next.character!.skills.literacy, 0);
-  assert.match(focusStatus(life, engine.world, "study", engine.getActivities(life)), /already chose an activity/);
+  assert.match(focusStatus(life, engine.world, "study", engine.getActivities(life)), /already chose an action/);
 });
 
 test("an unaffordable focus is skipped without borrowing, substitution, or failure", () => {
@@ -86,7 +86,22 @@ test("an unaffordable focus is skipped without borrowing, substitution, or failu
   assert.equal(next.economy!.cash, 0);
   assert.equal(next.economy!.debt, 0);
   assert.equal(next.character!.lastActivityAge, null);
-  assert.match(focusStatus(life, engine.world, "study", engine.getActivities(life)), /Skipped this year:/);
+  const status = focusStatus(life, engine.world, "study", engine.getActivities(life));
+  assert.match(status, /^Can't do this year: /, "says plainly that it cannot happen, not that it was silently skipped");
+  assert.match(status, /cash/i);
+  assert.match(status, /Pick another focus/);
+});
+
+test("a focus that will soon drain the purse says how many years the cash lasts", () => {
+  const world = controlledWorld();
+  const engine = createEngine(world), base = ageTo(engine, 8);
+  const cost = Math.abs(world.character!.activities.find(activity => activity.id === "train-literacy")!.outcomes[0].effects
+    .filter(effect => effect.type === "stat" && effect.stat === "wealth").reduce((sum, effect) => sum + (effect as { delta: number }).delta, 0)) * world.economy!.unitsPerPoint;
+  assert.ok(cost > 0, "studying costs money in this world");
+  const low = { ...base, economy: { ...base.economy!, cash: cost * 2 } };
+  assert.match(focusStatus(low, engine.world, "study", engine.getActivities(low)), new RegExp(`costs ${cost} dr a year; your ${cost * 2} dr covers 2 more years`));
+  const rich = { ...base, economy: { ...base.economy!, cash: cost * 20 } };
+  assert.doesNotMatch(focusStatus(rich, engine.world, "study", engine.getActivities(rich)), /covers/);
 });
 
 test("a repeating focus respects its real cooldown instead of inventing yearly effects", () => {
@@ -96,7 +111,7 @@ test("a repeating focus respects its real cooldown instead of inventing yearly e
   assert.equal(age9.character!.lastActivityAges["take-an-easy-walk"], 8);
   const age10 = advanceYearWithFocus(engine, age9, "health");
   assert.deepEqual(age10, engine.advance(age9));
-  assert.match(focusStatus(age9, engine.world, "health", engine.getActivities(age9)), /Skipped this year:.*age 10/);
+  assert.match(focusStatus(age9, engine.world, "health", engine.getActivities(age9)), /Can't do this year:.*age 10/);
   assert.equal(advanceYearWithFocus(engine, age10, "health").character!.lastActivityAges["take-an-easy-walk"], 10);
 });
 

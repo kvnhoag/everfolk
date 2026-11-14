@@ -36,6 +36,18 @@ hooks.deregister();
 
 const engine = demoEngine();
 
+test("a learned skill notice offers a named shortcut to its place in the tree", () => {
+  const life = structuredClone(engine.start("linked-skill-notice"));
+  life.capabilities = { learned: { F1: { age: life.age, year: life.year } }, evidence: [], costBasis: {}, reservedPayment: 0 };
+  const before = structuredClone(life);
+  const html = renderToStaticMarkup(createElement(EventNotificationStack, { life, world: engine.world, persistent: false,
+    onOpenDecision() {}, onOpenSkill() { assert.fail("Rendering must not navigate"); } }));
+  assert.match(html, /Skill learned/);
+  assert.match(html, /aria-label="View [^\"]+ in skill tree"/);
+  assert.match(html, /View in skill tree →/);
+  assert.deepEqual(life, before);
+});
+
 test("opening the economy panels shows the engine view and changes nothing", () => {
   const life = engine.start("ui-open");
   const before = structuredClone(life);
@@ -210,11 +222,13 @@ test("the inventory details coexist with the command deck without duplicating it
     onDelegate() { assert.fail("Rendering delegated decisions"); },
   }));
   const details = renderToStaticMarkup(createElement(ResourceYearDetails, { rows: storehouse }));
-  const bar = renderToStaticMarkup(createElement(ResourceBar, { screen, rows: storehouse, cashText: "12 drachmas" }));
+  const bar = renderToStaticMarkup(createElement(ResourceBar, { screen, cashText: "12 drachmas" }));
   assert.doesNotMatch(html, /aria-label="Storehouse"|storehouse-row/);
-  assert.match(bar, /Inventory &amp; Granary/);
-  assert.equal((details.match(/class="storehouse-row"/g) ?? []).length, storehouse.length);
-  assert.match(details, /Coming year/);
+  assert.match(bar, /aria-label="Pinned household resources"/);
+  const moving = storehouse.filter(row => row.coming.length > 0 || row.lastYearFlows.length > 0);
+  assert.equal((details.match(/class="storehouse-row"/g) ?? []).length, moving.length);
+  assert.match(details, /Next harvest/);
+  assert.match(details, /No change last year/, "resources that did not move sit together as grey tiles");
   for (const label of ["Market &amp; Trade", "Farm &amp; Granary", "Career &amp; Army", "People &amp; Town", "Works &amp; Stewards"]) {
     assert.ok(html.includes(label), label);
   }

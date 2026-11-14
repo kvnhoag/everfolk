@@ -1,5 +1,6 @@
 import DeepCapabilityTree from "./DeepCapabilityTree.tsx";
 import FigurePaths from "./FigurePaths.tsx";
+import HistoricalTitlePaths from "./HistoricalTitlePaths.tsx";
 import { vocationInventory } from "../../src/vocations/view.ts";
 import { displayProse } from "../models/display-prose.ts";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
@@ -36,6 +37,7 @@ import type { CharacterSection } from "../models/character-panel-model.ts";
 import type { MarketActions } from "../types/market.ts";
 import "../styles/character-panel.css";
 import LifePathPanel from "./LifePathPanel.tsx";
+import type { SkillTreeFocus } from "../models/skill-learned-notice.ts";
 
 type Section = CharacterSection;
 type AvailabilityFilter = "all" | "available" | "unavailable";
@@ -139,10 +141,11 @@ function SearchControls({ id, label, placeholder, value, onChange, filter, onFil
 }
 
 /** Personal actions share the simulation's yearly budget and command history. */
-export default function CharacterPanel({ life, world, onActivity, onAssess, onMarketOrder, onCancelMarketOrder, initialSection = "career", onSectionChange }: {
+export default function CharacterPanel({ life, world, onActivity, onAssess, onMarketOrder, onCancelMarketOrder, initialSection = "career", onSectionChange, focusSkill }: {
   life: LifeState; world: WorldPack; onActivity: (id: string, options?: { calendarDeadline?: boolean }) => void; onAssess?: (nodeId: string, jobIds: readonly string[]) => void; initialSection?: Section;
   /** Reports the open tab, so tutorial hints know when the skill tree is on screen. */
   onSectionChange?: (section: Section) => void;
+  focusSkill?: SkillTreeFocus;
 } & MarketActions) {
   const [section, setSection] = useState<Section>(initialSection);
   useEffect(() => { onSectionChange?.(section); }, [section]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -287,10 +290,10 @@ export default function CharacterPanel({ life, world, onActivity, onAssess, onMa
       <div className="character-section has-section-help" role="tabpanel" id={`${instanceId}-panel-skills`} aria-labelledby={`${instanceId}-tab-skills`} tabIndex={0} hidden={activeSection !== "skills"}>
         <SectionHelp hint="skills" />
         {/* Proficiency and occupation reference lives in the Wiki; the skill tree and figure paths get the space. */}
-        {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} /> : <CapabilityTree activities={activities} {...props} onAssess={onAssess} />}
+        {world.deepCapabilities ? <DeepCapabilityTree activities={activities} {...props} focusSkill={focusSkill} /> : <CapabilityTree activities={activities} {...props} onAssess={onAssess} focusSkill={focusSkill} />}
       </div>
       {visibleSections.some(item => item.id === "figures") && <div className="character-section historical-figures-panel" role="tabpanel" id={`${instanceId}-panel-figures`} aria-labelledby={`${instanceId}-tab-figures`} tabIndex={0} hidden={activeSection !== "figures"}>
-        {activeSection === "figures" && <FigurePaths activities={activities} {...props} />}
+        {activeSection === "figures" && (world.figurePaths?.length ? <FigurePaths activities={activities} {...props} /> : <HistoricalTitlePaths world={world} life={life} />)}
       </div>}
       {visibleSections.some(item => item.id === "path") && <div className="character-section" role="tabpanel" id={`${instanceId}-panel-path`} aria-labelledby={`${instanceId}-tab-path`} tabIndex={0} hidden={activeSection !== "path"}>
         <LifePathPanel life={life} world={world} />

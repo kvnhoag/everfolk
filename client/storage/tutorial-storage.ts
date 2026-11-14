@@ -7,6 +7,8 @@ export const LEGACY_TUTORIAL_STORAGE_KEY = "everfolk:tutorial:v1";
 export interface TutorialProgress {
   seen: readonly string[];
   current: string | null;
+  /** The player turned automatic tips off; new sections only glow. Absent in older saves (tips on). */
+  tipsOff?: boolean;
 }
 
 export interface TutorialStorage {
@@ -26,10 +28,11 @@ function parseProgress(raw: string): TutorialProgress {
   try {
     const value: unknown = JSON.parse(raw);
     if (!value || typeof value !== "object") return EMPTY;
-    const { seen, current } = value as { seen?: unknown; current?: unknown };
+    const { seen, current, tipsOff } = value as { seen?: unknown; current?: unknown; tipsOff?: unknown };
     return {
       seen: Array.isArray(seen) ? seen.filter((id): id is string => typeof id === "string") : [],
       current: typeof current === "string" ? current : null,
+      ...(tipsOff === true ? { tipsOff: true } : {}),
     };
   } catch { return EMPTY; }
 }
@@ -45,6 +48,6 @@ export function readTutorialProgress(storage: TutorialStorage | undefined): Tuto
 }
 
 export function writeTutorialProgress(storage: TutorialStorage | undefined, progress: TutorialProgress): void {
-  try { storage?.setItem(TUTORIAL_STORAGE_KEY, JSON.stringify({ seen: progress.seen, current: progress.current })); }
+  try { storage?.setItem(TUTORIAL_STORAGE_KEY, JSON.stringify({ seen: progress.seen, current: progress.current, ...(progress.tipsOff ? { tipsOff: true } : {}) })); }
   catch { /* Without storage, hints may show again next visit; the tutorial still works now. */ }
 }

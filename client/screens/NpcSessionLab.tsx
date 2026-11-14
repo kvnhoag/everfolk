@@ -5,9 +5,11 @@ import type { NpcPerson } from "../../src/npc/types.ts";
 import type { NpcSnapshot } from "../types/npc.ts";
 import "../styles/npc-session.css";
 import EverfolkBrand from "../components/EverfolkBrand.tsx";
+import PixelPortrait from "../components/PixelPortrait.tsx";
 import FreePlayBoosterModal from "../chain/FreePlayBoosterModal.tsx";
 import { engineForLife } from "../lib/world-session.ts";
-import { lifePackCardCount } from "../../chain/pack-count.ts";
+import { earnedPackCardCount } from "../../chain/earned-cards.ts";
+import { npcPortraitState } from "../models/portrait-state.ts";
 function NpcCard({
   npc,
   session,
@@ -36,20 +38,25 @@ function NpcCard({
           account: "Shop",
         }
       : { cash: npc.cash, grain: npc.grain, account: "Personal" };
+  const portrait = npcPortraitState(engineForLife(session.life).world, session.life, npc);
+  const avatarName = npc.introduced ? npc.name : npc.role.replaceAll("-", " ");
   return (
     <article className="npc-person">
-      <header>
-        <p>
-          {npc.role.replaceAll("-", " ")} · {session.life.year - npc.born} years
-        </p>
-        <h2>{npc.introduced ? npc.name : "Not met yet"}</h2>
-        <small>
-          {npc.introduced
-            ? external
-              ? "External controller"
-              : "Server controller"
-            : "Will enter your life as you grow"}
-        </small>
+      <header className="npc-person-head">
+        <PixelPortrait portrait={portrait} name={avatarName} className="npc-person-avatar" />
+        <div>
+          <p>
+            {npc.role.replaceAll("-", " ")} · {session.life.year - npc.born} years
+          </p>
+          <h2>{npc.introduced ? npc.name : "Not met yet"}</h2>
+          <small>
+            {npc.introduced
+              ? external
+                ? "External controller"
+                : "Server controller"
+              : "Will enter your life as you grow"}
+          </small>
+        </div>
       </header>
       <p>{npc.goal}</p>
       <dl>
@@ -250,13 +257,13 @@ export default function NpcSessionLab() {
             </section>
           )}
           {session.life.phase === "ended" && (() => {
-            const cardCount = lifePackCardCount(session.life, engineForLife(session.life).world);
+            const cardCount = earnedPackCardCount(engineForLife(session.life).world, session.life);
             return <section>
               <h2>A life remembered</h2>
               <p>
                 {cardCount > 0
                   ? `Your NPCs do not mint NFTs. Open this life's ${cardCount}-card legacy pack and keep local collectible cards.`
-                  : "This life ended before adulthood (age 18), so no legacy pack was earned."}
+                  : "No legacy pack this time. Cards are earned, not drawn — earn a contributor title on a historical figure's path."}
               </p>
               {cardCount > 0 && (
                 <button onClick={() => setBooster(true)}>

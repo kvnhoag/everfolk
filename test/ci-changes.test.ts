@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { changedJobs, jobsForPaths } from "../scripts/ci-changes.mjs";
+import { changedJobs, jobsForPaths, verificationProfile } from "../scripts/ci-changes.mjs";
 
 test("application code, saves, world data, research and unknown inputs retain app verification", () => {
   for (const path of ["src/engine.ts", "client/storage/save.ts", "server/api.ts", "worlds/new.json", "research/sources.json", "test/engine.test.ts", "Dockerfile", "new-feature/config.json"]) {
@@ -20,6 +20,13 @@ test("art tooling and delivered assets retain their own audits", () => {
   assert.deepEqual(jobsForPaths(["test/art/portrait-delivery.test.ts", "artwork/cards/frame.svg", "tools/character-creator/src/compose.mjs"]), { app: false, contract: false, art: true });
   assert.deepEqual(jobsForPaths(["public/assets/portraits/new.png"]), { app: true, contract: false, art: true });
   for (const path of ["scripts/lib/card-art-replacements.mjs", "client/models/avatar-appearance.ts", "client/models/banner-state.ts", "assets/source/frame.svg", "chain/catalog/figures.ts", "chain/ids.ts"]) assert.equal(jobsForPaths([path]).art, true, path);
+});
+
+test("retained card fixtures run the art suite without unrelated application or contract work", () => {
+  for (const path of ["test/fixtures/card-art-kit.mjs", "test/fixtures/card-art-kit/frames/approved.png", "test/fixtures/card-art-kit/frames/nested/frame.svg", "test/fixtures/card-art-kit/LICENSE.txt"]) {
+    assert.deepEqual(jobsForPaths([path]), { app: false, contract: false, art: true }, path);
+  }
+  assert.deepEqual(jobsForPaths(["test/fixtures/another-kit/input.json"]), { app: true, contract: false, art: false });
 });
 
 test("workflow changes run every job and combined changes retain both application and contract tests", () => {
@@ -45,4 +52,17 @@ test("manual runs, new branches and unavailable history run all checks", () => {
   assert.deepEqual(changedJobs("workflow_dispatch", {}), all);
   assert.deepEqual(changedJobs("push", { before: "0".repeat(40) }), all);
   assert.deepEqual(changedJobs("push", { before: "a".repeat(40) }, () => { throw new Error("base no longer available"); }), all);
+});
+
+
+test("dev pushes and pull requests into dev use the bounded development suite", () => {
+  for (const [ref, base] of [["refs/heads/dev", ""], ["refs/pull/42/merge", "dev"]]) {
+    assert.deepEqual(verificationProfile(ref, base), { test_script: "test:dev", timeout_minutes: 3 });
+  }
+});
+
+test("main, release pull requests and explicit full runs keep full regressions", () => {
+  for (const [ref, base, full] of [["refs/heads/main", "", false], ["refs/pull/42/merge", "main", false], ["refs/heads/dev", "", true]] as const) {
+    assert.deepEqual(verificationProfile(ref, base, full), { test_script: "test", timeout_minutes: 15 });
+  }
 });

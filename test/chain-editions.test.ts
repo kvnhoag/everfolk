@@ -26,6 +26,9 @@ test("edition caps and card identities keep rarities and designs independent", (
   assert.throws(() => editionLimit(5), /rarity/);
   assert.equal(editionKey({ figure_id: "euclid", career_group: "letters", rarity: 4 }), "figure:euclid:rarity:4");
   assert.equal(editionKey({ figure_id: null, career_group: "letters", rarity: 0 }), "npc:letters:rarity:0");
+  // An earned v14 card is its own design, as the contract counts it (contract/src/card_art.rs).
+  assert.equal(editionKey({ figure_id: "euclid", career_group: "letters", rarity: 4, card_id: "euclid-parent" }), "card:euclid-parent:rarity:4");
+  assert.equal(editionKey({ figure_id: null, career_group: "letters", rarity: 2, card_id: "aristotle-rare-female" }), "card:aristotle-rare-female:rarity:2");
   const stage = { figure_id: null, career_group: "letters", rarity: 1, stage_id: "adult", stage_record: { district: "rhakotis", field: null, tier: "learner" } };
   assert.equal(editionKey(stage), 'stage:["adult","rhakotis",null,"learner"]:rarity:1');
   assert.notEqual(editionKey(stage), editionKey({ ...stage, stage_record: { ...stage.stage_record, tier: 1 } }));

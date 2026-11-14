@@ -1,0 +1,12 @@
+[Unit]
+Description=Check Everfolk dev and main branches every two minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=2min
+RandomizedDelaySec=10s
+Persistent=true
+Unit=everfolk-deploy.service
+
+[Install]
+WantedBy=timers.target

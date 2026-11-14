@@ -35,7 +35,7 @@ test("both new contribution releases reproduce exactly without changing their re
 });
 
 test("new births load the balanced successor while retained figure revisions keep their own rules", async () => {
-  assert.equal(LIVES_WORLD_VERSION, "alexandria-lives-10");
+  assert.equal(LIVES_WORLD_VERSION, "alexandria-lives-11", "lives-10 born across 400–300 BCE (test/history-household-world.test.ts)");
   for (const pack of [retainedLives, currentLives, commonLives, retainedFigures, currentFigures, commonFigures]) {
     const loaded = engineForLife(createEngine(pack as unknown as WorldPack).start("retained-contribution-world")).world;
     assert.equal(loaded.version, pack.version);

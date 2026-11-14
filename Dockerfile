@@ -8,7 +8,14 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 # The type check and bundling hold several multi-megabyte world packs in memory.
 ENV NODE_OPTIONS=--max-old-space-size=6144
-RUN pnpm build
+# Public build settings identify the immutable deployment; runtime secrets stay outside the image.
+ARG VITE_EVERFOLK_ASSET_BASE_URL=
+ARG EVERFOLK_BUILD_BRANCH=unknown
+ARG EVERFOLK_BUILD_COMMIT=unknown
+ENV VITE_EVERFOLK_ASSET_BASE_URL=${VITE_EVERFOLK_ASSET_BASE_URL} \
+    EVERFOLK_BUILD_BRANCH=${EVERFOLK_BUILD_BRANCH} \
+    EVERFOLK_BUILD_COMMIT=${EVERFOLK_BUILD_COMMIT}
+RUN pnpm build:info && pnpm build
 
 FROM node:24-bookworm-slim
 WORKDIR /app

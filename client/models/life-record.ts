@@ -3,7 +3,12 @@ import { getNetWorth } from "../../src/economy.ts";
 import type { LifeEngine, LifeState } from "../../src/types.ts";
 import type { LifeEventRow } from "./life-events.ts";
 
-export interface YearChange { id: string; label: string; delta: number; unit?: string }
+export interface YearChange { id: string; label: string; delta: number; unit?: string; icon?: string }
+
+/** Cash is tracked beside total wealth, so the record can tell money spent from goods losing value. */
+const CASH = "economy:cash";
+/** The value of grain and goods: harvests, spoilage and price moves, never a story's cost. */
+export const GOODS = "economy:goods";
 
 /** Prefer a personal outcome over background history or routine work. */
 export function lifeYearHeadline(events: readonly LifeEventRow[]): string {
@@ -21,7 +26,10 @@ export function lifeYearHeadline(events: readonly LifeEventRow[]): string {
 
 function values(state: LifeState, engine: LifeEngine): Record<string, number> {
   const result = { ...state.stats };
-  if (engine.world.economy && state.economy) result[engine.world.economy.stat] = getNetWorth(engine.world, state);
+  if (engine.world.economy && state.economy) {
+    result[engine.world.economy.stat] = getNetWorth(engine.world, state);
+    result[CASH] = state.economy.cash;
+  }
   for (const [id, value] of Object.entries(state.character?.skills ?? {})) result[`skill:${id}`] = value;
   return result;
 }
@@ -61,14 +69,27 @@ export function lifeRecordChanges(life: LifeState, engine: LifeEngine): { years:
     projection.commands.push(commands[index]);
   }
   cache.set(engine, projection);
-  const format = (totals: Record<string, number>): YearChange[] => Object.entries(totals).flatMap(([id, amount]) => {
-    const delta = Math.round(amount * 100) / 100;
-    if (!delta) return [];
+  const round = (amount: number) => Math.round(amount * 100) / 100;
+  // Wealth is split in two honest parts: cash that changed hands, and the value of grain and goods (harvests,
+  // spoilage and price moves). A price fall is never shown as the cost of that year's story.
+  // Per-entry effects only move cash; a year's totals also carry the goods' value, measured as wealth minus cash.
+  const moneyChanges = (totals: Record<string, number>): YearChange[] => {
+    const economy = engine.world.economy;
+    if (!economy || !(economy.stat in totals || CASH in totals)) return [];
+    const yearly = CASH in totals, unit = economy.currency.short;
+    const cash = round(yearly ? totals[CASH] : totals[economy.stat] ?? 0);
+    const goods = yearly ? round((totals[economy.stat] ?? 0) - totals[CASH]) : 0;
+    return [
+      ...(cash ? [{ id: economy.stat, label: "Cash", delta: cash, unit, icon: "coin" }] : []),
+      ...(goods ? [{ id: GOODS, label: "Value of grain and goods", delta: goods, unit, icon: "res-grain" }] : []),
+    ];
+  };
+  const format = (totals: Record<string, number>): YearChange[] => [...Object.entries(totals).flatMap(([id, amount]) => {
+    const delta = round(amount);
+    if (!delta || id === CASH || id === engine.world.economy?.stat) return [];
     const skill = id.startsWith("skill:") ? id.slice(6) : undefined;
-    const money = !skill && id === engine.world.economy?.stat;
-    return [{ id, label: skill ? engine.world.character?.skills[skill]?.label ?? skill : money ? "Total wealth" : engine.world.stats[id]?.label ?? id,
-      delta, unit: money ? engine.world.economy?.currency.short : undefined }];
-  });
+    return [{ id, label: skill ? engine.world.character?.skills[skill]?.label ?? skill : engine.world.stats[id]?.label ?? id, delta }];
+  }), ...moneyChanges(totals)];
   return {
     years: new Map([...projection.totals].map(([age, totals]) => [age, format(totals)])),
     entries: new Map([...projection.entries].map(([index, totals]) => [index, format(totals)])),

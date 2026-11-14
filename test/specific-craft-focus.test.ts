@@ -51,7 +51,7 @@ test("a locked specialism reports its engine requirements and never substitutes 
   for (const id of ["pottery", "carving", "sculpture"] as const) {
     const action = engine.getActivities(life).find(action => action.id === focusActivity(engine.world, id)!.id)!;
     assert.equal(action.available, false);
-    assert.equal(focusStatus(life, engine.world, id, engine.getActivities(life)), `Skipped this year: ${action.reason}`);
+    assert.ok(focusStatus(life, engine.world, id, engine.getActivities(life)).startsWith(`Can't do this year: ${action.reason}`));
     const actual = advanceYearWithFocus(engine, life, id);
     assert.deepEqual(actual, engine.advance(life));
     assert.equal(actual.character!.lastActivityAge, null);

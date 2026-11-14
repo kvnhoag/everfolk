@@ -1,0 +1,23 @@
+/* Plan your fields: one crop for every plot until Crop allocation, the plan in effect marked, and what was planted. */
+.aoe-crop-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:8px}
+.aoe-crop-choice{position:relative;display:flex;flex-direction:column;gap:4px;padding:9px 10px 9px 34px;border:1px solid #cbbba0;border-radius:3px;background:#fffdf7;color:#3a2c1a;cursor:pointer}
+.aoe-crop-choice:hover{border-color:#8a7350}
+.aoe-crop-choice:has(input:disabled){cursor:not-allowed;opacity:.6}
+.aoe-crop-choice.is-selected{padding:8px 9px 8px 33px;border:2px solid #405849;background:#eef3ea}
+.aoe-crop-choice input{position:absolute;top:11px;left:10px;width:16px;height:16px;margin:0;accent-color:#405849;cursor:pointer}
+.aoe-crop-choice.is-selected input{top:10px;left:9px}
+.aoe-crop-choice:has(input:focus-visible){outline:2px solid #c89d54;outline-offset:2px}
+.aoe-crop-choice-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13.5px}
+.aoe-crop-choice-line{font-size:12.5px;line-height:1.4;color:#5b4c38}
+.aoe-crop-current{display:inline-block;margin-left:2px;padding:1px 6px;border-radius:2px;background:#405849;color:#fff8eb;font-size:11px;font-weight:700;line-height:1.5;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.aoe-plot-count .aoe-crop-current{margin-left:8px}
+.aoe-crop-mix-note{margin:0;font-size:12px;font-style:italic;color:#7a6a52}
+.aoe-plan-current{margin:0;font-size:12.5px;line-height:1.4;color:#5b4c38}
+.aoe-plan-status{display:inline-flex;align-items:flex-start;gap:6px;flex:1 1 220px;min-width:0;padding:2px 4px;border-radius:2px;font-size:12.5px;line-height:1.4;color:#5b4c38}
+.aoe-plan-status.is-planted{font-weight:600;color:#28593a}
+.aoe-plan-status svg{flex:none;margin-top:3px}
+.aoe-plan-status.is-fresh{animation:aoe-planted 1.2s ease-out}
+.aoe-plan-status.is-refused{font-weight:600;color:#8c3322}
+.aoe-plan-status.is-draft{font-weight:600;color:#7a4f0e;background:#fbefd2}
+@keyframes aoe-planted{from{background:#cfe6cb}to{background:transparent}}
+@media(prefers-reduced-motion:reduce){.aoe-plan-status.is-fresh{animation:none}}

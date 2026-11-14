@@ -247,16 +247,20 @@ test("new debt after a reserve assessment begins cannot count as debt-free resil
   assert.equal(life.capabilities!.evidence.find(e => e.kind === "farm-settlement")!.data.debtIncreased, true);
 });
 
-test("without the paid seed, a new-world field cannot supply a free full harvest", () => {
+test("without seed in store, a new-world field is sown with seed borrowed from the royal granary and repaid from the harvest, never free", () => {
   const { world, life } = fixture();
   life.demo.household.grain = 0;
   life.economy!.cash = 0;
   life.demo.town.merchant.grain = 0;
   settle(world, life);
   const ledger = life.capabilities!.evidence.find(e => e.kind === "farm-ledger")!;
-  assert.equal(ledger.data.grainSeedBps, 0);
-  assert.equal(ledger.data.grainHarvest, 0);
-  assert.equal(life.demo.household.lastShortfallBps > 0, true);
+  const loan = Number(/borrows (\d+) measures/.exec(life.journal.find(e => e.id === "household-seed-loan")!.text)![1]);
+  assert.equal(ledger.data.grainSeedBps, 10_000, "the field is fully sown");
+  assert.ok(Number(ledger.data.grainHarvest) > loan, "it grows a harvest");
+  assert.ok(life.journal.some(e => e.id === "household-seed-loan-repaid"), "the loan goes back from that harvest");
+  assert.ok(Number(ledger.data.rent) >= loan, "the repaid seed leaves the store with the rent");
+  const settlement = life.capabilities!.evidence.find(e => e.kind === "farm-settlement");
+  assert.equal(settlement?.data.reconciled ?? true, true, "the store's ledger still balances");
 });
 
 

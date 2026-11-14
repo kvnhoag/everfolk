@@ -128,11 +128,15 @@ hooks.deregister();
 
 test("the actual portrait component renders the selected lifetime and retains accessible stage text", () => {
   const female = renderToStaticMarkup(createElement(PixelPortrait, { age: 62, name: "Isidora", seed: "stable", originId: "weaver-household", sex: "female", avatarVariant: 1 }));
-  assert.match(female, /src="\/assets\/portraits\/ordinary-v3\/ef-p-f02-elder-everyday-v3.png"/);
+  assert.match(female, /src="\/assets\/portraits\/concept1-v4\/elder-woman-f01\.png"/);
+  assert.match(female, /data-portrait-key="f02:elder:everyday"/);
   assert.match(female, /Pixel portrait of Isidora, in later life/);
   assert.match(female, /width="384" height="480"/);
+  const femaleV3 = renderToStaticMarkup(createElement(PixelPortrait, { age: 62, name: "Isidora", seed: "stable", originId: "weaver-household", sex: "female", avatarVariant: 1, portraitSet: "ordinary-v3" }));
+  assert.match(femaleV3, /src="\/assets\/portraits\/ordinary-v3\/ef-p-f02-elder-everyday-v3\.png"/);
   const legacy = renderToStaticMarkup(createElement(PixelPortrait, { age: 6, name: "Legacy", seed: "old-life" }));
-  assert.match(legacy, /src="\/assets\/portraits\/ordinary-v3\/ef-p-[mf]0[123]-child-child-v3.png"/);
+  assert.match(legacy, /src="\/assets\/portraits\/concept1-v4\/child-(boy-m01|girl-f01)\.png"/);
+  assert.match(legacy, /data-portrait-key="[mf]0[123]:child:child"/);
   assert.match(legacy, /Pixel portrait of Legacy, a child/);
   assert.equal(legacy, renderToStaticMarkup(createElement(PixelPortrait, { age: 6, name: "Legacy", seed: "old-life" })), "Missing recorded appearance must remain deterministic.");
 });

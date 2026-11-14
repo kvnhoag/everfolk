@@ -16,7 +16,7 @@ test("the state convention reaches every shipped combination through real age/jo
   for (const asset of registry.assets) {
     const age = ages[asset.stage as keyof typeof ages];
     const identity = registry.identities.find(i => i.id === asset.identityId)!;
-    const input: PortraitInput = { age, sex: identity.sex as "male" | "female", avatarVariant: identity.avatarVariant };
+    const input: PortraitInput = { age, sex: identity.sex as "male" | "female", avatarVariant: identity.avatarVariant, portraitSet: "ordinary-v3" };
     let state;
     if (asset.wardrobeId === registry.defaultWardrobes[asset.stage as keyof typeof ages]) state = resolvePortraitState(input);
     else if (asset.wardrobeId === "royalty" || asset.wardrobeId === "aristocrat") state = resolvePortraitState({ ...input, role: asset.wardrobeId });
@@ -103,7 +103,8 @@ test("remembered family stops aging at death; missing fields get stable cosmetic
   assert.equal(childFirst.identityKey, childOlder.identityKey);
   assert.equal(childFirst.bodyTemplate, childOlder.bodyTemplate);
   assert.equal(childFirst.stage, "infant");
-  assert.ok(registry.assets.some(a => a.src === childFirst.src));
+  assert.match(childFirst.src, /^\/assets\/portraits\/concept1-v4\/infant-c1\.png$/);
+  assert.ok(registry.assets.some(a => a.src === childFirst.fallbackSrc));
   for (const variant of [-1, .5, 3, Infinity, NaN]) assert.equal(resolvePortraitState({ personKey: "invalid", avatarVariant: variant }).identityKey, resolvePortraitState({ personKey: "invalid" }).identityKey);
   assert.equal(resolvePortraitState({ age: -1 }).stage, "infant");
   assert.equal(resolvePortraitState({ age: NaN }).stage, "adult");

@@ -1,11 +1,13 @@
-import { useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import type { ActivityAvailability, LifeState, WorldPack } from "../../src/types.ts";
 import type { CapabilityProgress, CapabilityRule } from "../../src/deep-capabilities/types.ts";
 import { evaluateCapabilities } from "../../src/deep-capabilities/evaluate.ts";
 import { CAPABILITY_OPERATIONS } from "../../src/deep-capabilities/operations.ts";
 import { displayProse } from "../models/display-prose.ts";
+import type { SkillTreeFocus } from "../models/skill-learned-notice.ts";
 import "../styles/deep-capability-tree.css";
+import "../styles/skill-learned.css";
 
 const FAMILIES = ["Farming", "Artisan", "Philosophy", "Trade"] as const;
 const LANES = ["Cultivation", "Resilience", "Clothing", "Ceramics", "Sculpture", "Research", "Civic practice", "Commercial planning"];
@@ -65,16 +67,29 @@ export interface CapabilityTreeProps {
   activities: readonly ActivityAvailability[];
   onActivity: (id: string) => void;
   readOnly?: boolean;
+  focusSkill?: SkillTreeFocus;
 }
 
 /** Full learned-capability graph; numeric proficiencies stay in the node details. */
-export default function CapabilityTree({ world, life, activities, onActivity, readOnly = false }: CapabilityTreeProps) {
+export default function CapabilityTree({ world, life, activities, onActivity, readOnly = false, focusSkill }: CapabilityTreeProps) {
   const rules = world.deepCapabilities?.rules ?? [];
   const recorded = life.deepCapabilities ?? { learned: {}, evidence: [] };
   const evaluation = useMemo(() => evaluateCapabilities({ skills: life.character?.skills ?? {}, stats: life.stats,
     reputation: life.demo?.reputation, year: life.year, state: recorded, rules }), [life, rules]);
-  const [family, setFamily] = useState<string>("All");
-  const [selectedId, setSelectedId] = useState(rules[0]?.id ?? "");
+  const focusedNode = rules.find(rule => rule.id === focusSkill?.id);
+  const [family, setFamily] = useState<string>(focusedNode?.branch ?? "All");
+  const [selectedId, setSelectedId] = useState(focusedNode?.id ?? rules[0]?.id ?? "");
+  const nodeRefs = useRef(new Map<string, HTMLButtonElement>());
+  useEffect(() => {
+    if (!focusedNode) return;
+    setSelectedId(focusedNode.id); setFamily(focusedNode.branch);
+    const frame = requestAnimationFrame(() => {
+      const node = nodeRefs.current.get(focusedNode.id);
+      node?.scrollIntoView({ block: "nearest", inline: "center", behavior: "instant" });
+      node?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [focusedNode?.id, focusSkill?.seq]); // eslint-disable-line react-hooks/exhaustive-deps
   const id = useId(), byId = new Map(rules.map(rule => [rule.id, rule]));
   const selected = byId.get(selectedId) ?? rules[0];
   const learned = (node: string) => Object.prototype.hasOwnProperty.call(recorded.learned, node);
@@ -91,7 +106,7 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
   return <section className="deep-capability-tree" aria-labelledby={`${id}-heading`}>
     <header className="deep-capability-heading">
       <div><span className="deep-capability-eyebrow">{readOnly ? "Reference" : "Learning through work"}</span><h3 id={`${id}-heading`}>Your capability paths</h3>
-        <p>Practice builds proficiency. Completed work and evidence earn the next capability.</p></div>
+        <p>Skills are learned automatically when proficiency and demonstrated work meet their requirements.</p></div>
       <p className="deep-capability-tally"><strong>{learnedCount} / {rules.length}</strong> learned{masteredCount > 0 && <span> · {masteredCount} specializations mastered</span>}</p>
     </header>
     <div className="deep-capability-toolbar" role="group" aria-label="Highlight a skill family">
@@ -117,10 +132,12 @@ export default function CapabilityTree({ world, life, activities, onActivity, re
           {rules.map(rule => {
             const position = point(rule), status = stateFor(rule), dim = family !== "All" && rule.branch !== family;
             return <button type="button" key={rule.id} className={`deep-capability-node is-${status}${dim ? " is-dim" : ""}${selected.id === rule.id ? " is-selected" : ""}`}
+              ref={element => { if (element) nodeRefs.current.set(rule.id, element); else nodeRefs.current.delete(rule.id); }}
               data-deep-capability-id={rule.id} data-depth={rule.depth} style={{ left: position.x, top: position.y, width: CARD_WIDTH, height: CARD_HEIGHT } as CSSProperties}
               aria-label={`${rule.title}, depth ${rule.depth}, ${status}`} aria-pressed={selected.id === rule.id} aria-controls={`${id}-details`} onClick={() => select(rule)}>
               <span className="deep-capability-node-code">{rule.id}<span>{status === "learned" ? "✓ Learned" : status === "ready" ? "○ Ready" : "Locked"}</span></span>
               <strong>{rule.title}</strong><span className="deep-capability-node-family">{rule.specialization ?? `${rule.branch} foundation`}</span>
+              {rule.id === focusedNode?.id && selected.id === rule.id && <span className="capability-notice-label">Just learned</span>}
             </button>;
           })}
         </div>

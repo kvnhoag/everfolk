@@ -1,13 +1,23 @@
+import { useTutorial } from "../hooks/useTutorial.ts";
 import { tutorialStore } from "../state/tutorial-store.ts";
 import "../styles/tutorial.css";
 
 /**
- * The always-available way back into the tutorial, at the top right of every screen. It opens the tip for the
- * screen on view (or the step the tutorial was last on), and never leaves the screen or resets anything.
+ * The tutorial switch at the top right of every screen. It shows whether tips are On or Off (remembered in this
+ * browser) and flips them: switching on opens the tip for the screen on view, switching off closes any open tip.
+ * The "?" on each section still opens that section's tip either way.
  */
 export default function TutorialButton({ tone = "light" }: { tone?: "light" | "dark" }) {
-  return <button type="button" className={`tutorial-button is-${tone}`} data-tutorial-button="" aria-label="Open the tutorial for this screen" title="Show the tips for this screen" onClick={() => tutorialStore.openFromButton()}>
+  const { tipsOn } = useTutorial();
+  function toggle() {
+    tutorialStore.setTipsOn(!tipsOn);
+    if (tipsOn) tutorialStore.close();
+    else tutorialStore.openFromButton();
+  }
+  return <button type="button" role="switch" aria-checked={tipsOn} className={`tutorial-button is-${tone}${tipsOn ? " is-on" : " is-off"}`} data-tutorial-button=""
+    aria-label="Tutorial tips" title={tipsOn ? "Tutorial is on: tips open as new things unlock. Click to turn off." : "Tutorial is off. Click to turn tips on."} onClick={toggle}>
     <span className="tutorial-button-mark" aria-hidden="true">?</span>
     <span className="tutorial-button-label">Tutorial</span>
+    <span className="tutorial-button-state" aria-hidden="true">{tipsOn ? "On" : "Off"}</span>
   </button>;
 }

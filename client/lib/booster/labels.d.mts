@@ -6,8 +6,13 @@ export interface BoosterLabels {
   close: string;
   showCount: boolean;
   reviewLabel: string;
+  closeText?: string;
+  revealAction?: string;
+  revealHint?: string;
+  inspectionLabel?: string;
 }
 export const LEGACY_LABELS: Readonly<BoosterLabels>;
 export const NFT_LABELS: Readonly<BoosterLabels>;
+export const WEAVE_PACK_LABELS: Readonly<BoosterLabels>;
 export function resolveBoosterLabels(labels?: Partial<BoosterLabels>): BoosterLabels;
 export function reviewHint(labels: BoosterLabels, count: number, name: string, position: number): string;

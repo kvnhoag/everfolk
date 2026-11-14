@@ -3,9 +3,11 @@ import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { artworkRoot, requireArtworkSource } from './lib/artwork-source.mjs';
 
 const repo = fileURLToPath(new URL('../', import.meta.url));
-const root = resolve(repo, 'artwork/card-art-handoff-v1');
+const root = requireArtworkSource(resolve(artworkRoot(repo), 'card-art-handoff-v1'), 'Portable card-art source kit');
+const sourcePath = path => path.startsWith('artwork/') ? resolve(artworkRoot(repo), path.slice(8)) : resolve(repo, path);
 const kit = JSON.parse(readFileSync(resolve(root, 'data/cards.json'), 'utf8'));
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const esc = value => String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -28,7 +30,7 @@ for (const [sourceName, filename, purpose, archivedSource] of anchors) {
   const destination = resolve(root, 'reference/brief', filename);
   const source = resolve(process.env.TEMP ?? 'C:/Users/Legion/AppData/Local/Temp', sourceName);
   if (existsSync(source)) copyFileSync(source, destination);
-  else if (existsSync(resolve(repo, archivedSource))) copyFileSync(resolve(repo, archivedSource), destination);
+  else if (existsSync(sourcePath(archivedSource))) copyFileSync(sourcePath(archivedSource), destination);
   if (existsSync(destination)) anchorRecords.push({ path: 'reference/brief/' + filename, provenance: 'User-provided attachment in the card-art conversation', purpose, sha256: sha256(readFileSync(destination)) });
 }
 json('reference/brief/references.json', { schemaVersion: 1, references: anchorRecords });

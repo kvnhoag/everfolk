@@ -1,2 +1,6 @@
-import type { BoosterSceneOptions } from "../../types/booster.ts";
-export function mountBooster(hostWindow: Window, config: BoosterSceneOptions): () => void;
+import type { BoosterCardView, BoosterSceneOptions } from "../../types/booster.ts";
+export interface BoosterController {
+  replay(cards: readonly BoosterCardView[]): Promise<void>;
+  dispose(): void;
+}
+export function mountBooster(hostWindow: Window, config: BoosterSceneOptions): BoosterController;

@@ -47,6 +47,11 @@ export function isDemoVersion(version: string): boolean {
 export function isNpcVersion(version: string): boolean {
   return version === NPC_WORLD_VERSION;
 }
+/** Weave mode's world: the current free-play figure-path world with the on-chain deeds (chain/weave-world.ts). */
+export const WEAVE_WORLD_VERSION = "alexandria-weave-1";
+export function isWeaveVersion(version: string): boolean {
+  return version === WEAVE_WORLD_VERSION;
+}
 export function usesDemoCatalog(version: string): boolean {
-  return isDemoVersion(version) || isNpcVersion(version);
+  return isDemoVersion(version) || isNpcVersion(version) || isWeaveVersion(version);
 }

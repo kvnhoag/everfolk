@@ -1,3 +1,4 @@
+import ArtworkImage from "../components/ArtworkImage.tsx";
 import FigureArtwork from "./FigureArtwork.tsx";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import SignInPanel from "./SignInPanel.tsx";
@@ -320,7 +321,7 @@ export function MarketBody({
               <div className="ledger-value">
                 <span className="market-thumb">
                   {row.portraitMedia ? (
-                    <img src={row.portraitMedia} alt={row.title} className="stage-market-portrait" />
+                    <ArtworkImage src={row.portraitMedia} alt={row.title} className="stage-market-portrait" />
                   ) : row.figureId ? (
                     <FigureArtwork figureId={row.figureId} />
                   ) : (

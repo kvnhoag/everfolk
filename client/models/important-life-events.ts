@@ -41,7 +41,7 @@ function flagReaders(world: WorldPack) {
 /** Demo settlements write many ledger lines; reserve notices for changed stakes. */
 function importantDemoFact(entry: JournalEntry, world: WorldPack): boolean {
   if (!world.demo) return false;
-  if (["household-hand-over", "household-parents-gone", "household-hunger", "household-ox-died", "household-donkey-died",
+  if (["household-hand-over", "household-parents-gone", "household-hunger", "household-sold-for-food", "household-flax-to-grain", "household-seed-loan", "household-ox-died", "household-donkey-died",
     "convoy-assigned", "convoy-contract", "convoy-withdrawn", "convoy-loss", "convoy-delivered", "convoy-pay-shortfall",
     "army-ration-shortfall", "army-wage-shortfall", "army-sale-partial", "offer-settled",
     "year-flood-low", "year-army-war", "year-road-dangerous"].includes(entry.id)) return true;

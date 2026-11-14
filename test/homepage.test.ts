@@ -73,3 +73,12 @@ test('coastal sprites have fixed pivots, distinct animation frames and bounded i
     }
   }
 });
+
+test('signed in with Weave Mode on, the menu has one way in: Begin a new life, with no guest button beside it', () => {
+  const chainBackend = { mode: 'live', accountId: 'reader.testnet', signin: { available: { email: true } } } as never;
+  const signedIn = render({ chainBackend, hasBegun: true, life: { ...life, phase: 'ended' } });
+  assert.match(signedIn, /class="ef-home-primary is-weave"[^>]*>.*Begin a new life.*Weave Mode · recorded on NEAR/);
+  for (const text of ['or play without an account', '>Play as guest<', 'Enter Weave Mode', 'Revisit your last life', 'YOUR LAST STORY']) assert.ok(!signedIn.includes(text), `signed in, the menu has no ${text}`);
+  const signedOut = render({ hasBegun: true });
+  assert.match(signedOut, /Connect with NEAR wallet.*or play without an account.*Continue your life/, 'without an account, guest play stays on the first screen');
+});

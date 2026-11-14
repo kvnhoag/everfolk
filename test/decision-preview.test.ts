@@ -161,7 +161,8 @@ test("the decision dialog starts with the first choice's visible effects and has
   assert.match(html, /compact-skill-preview-label">Take the offered work/);
   assert.match(html, /Knowledge/);
   assert.match(html, /Tool handling/);
-  assert.equal((html.match(/Tool handling/g) ?? []).length, 1, "skills appear in the shared preview without duplicating inline summaries");
+  const firstOption = html.match(/<button class="life-choice-commit[^"]*"[\s\S]*?<\/button>/)?.[0] ?? "";
+  assert.match(firstOption, /Tool handling/, "every option shows its own skill changes without hovering");
   assert.doesNotMatch(html, /life-option-preview|aria-pressed=|Preview skills|>Preview[ <]|Early interest|Future practice|compact-skill-node/);
   assert.equal(chosen, 0);
 });
@@ -190,4 +191,47 @@ test("unearned accomplishments never reveal routes in the current run", () => {
   const { world, life } = sample();
   const html = renderToStaticMarkup(createElement(CurrentLegacySummary, { world, life, onOpenGallery() {} }));
   assert.equal(html, "");
+});
+
+test("turning-point option cards show danger-styled death risk upfront and warn when illness returns", () => {
+  const world = structuredClone(pack) as WorldPack;
+  const engine = createEngine(world);
+  const careEvent = world.events.find(event => event.id === world.health!.careDecision)!;
+  world.health!.mortalityCalibration = {
+    minAge: 18,
+    referenceHealth: 50,
+    referenceCare: 0.55,
+    caseFatality: 0.56,
+    onsetHealth: 20,
+    convalescenceLoss: 4,
+    healthInfluence: 0,
+    careInfluence: 0.5,
+    onsetLoss: 25,
+    lingerYears: 2,
+    lingerLoss: 8,
+    lingerRecovery: 0.1,
+  };
+
+  // Initial onset at age 23: should NOT say illness is getting worse.
+  const age23 = structuredClone(engine.start("pneumonia-onset-23"));
+  age23.age = 23;
+  age23.phase = "choice";
+  age23.pendingEventId = careEvent.id;
+  age23.health = { conditions: [{ id: "pneumonia", sinceAge: 23, lastProgressAge: 22, care: 0, severe: { healthBefore: 50 } }], needsCareDecision: false };
+  const html23 = renderToStaticMarkup(createElement(DecisionDialog, {
+    open: true, event: careEvent, life: age23, world, choices: careEvent.choices, onChoose() {}, onSetAside() {},
+  }));
+  assert.doesNotMatch(html23, /Your illness is getting worse/);
+
+  // Returns at age 25 after 2 lingering years with 56% risk on care choice -> shown upfront on the option card itself.
+  const age25 = structuredClone(age23);
+  age25.age = 25;
+  age25.health = { conditions: [{ id: "pneumonia", sinceAge: 23, lastProgressAge: 24, care: 0, severe: { healthBefore: 50, lingered: 2 } }], needsCareDecision: false };
+  const html25 = renderToStaticMarkup(createElement(DecisionDialog, {
+    open: true, event: careEvent, life: age25, world, choices: careEvent.choices, onChoose() {}, onSetAside() {},
+  }));
+  assert.match(html25, /class="life-decision-danger"[^>]*>.*Your illness is getting worse\./);
+  const optionsHtml = html25.split('class="life-choice-preview-stack"')[0]!;
+  assert.match(optionsHtml, /class="choice-impact-ending is-danger"[^>]*>.*Risk of death: 56%/);
+  assert.doesNotMatch(optionsHtml, /Risk of death from severe illness:/);
 });

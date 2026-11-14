@@ -306,9 +306,15 @@ export function getPreviousWorld(): PublishedWorld {
   return { id: world.id, revisionId: `pack-${contentFingerprint(world.pack)}`, pack: world.pack, routes: world.routes };
 }
 
+/**
+ * Every bundled factory pack, oldest first. Typed as plain data on purpose: an untyped array literal of these
+ * very large JSON modules makes TypeScript unify all of their types, which overflows the compiler.
+ */
+const ARCHIVED_PACKS: readonly unknown[] = [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria, narrativeAlexandria, classicalAlexandria, householdAlexandria, lateRoutesAlexandria, startingResourcesAlexandria, leanResourcesAlexandria, cashReservesAlexandria, livelihoodsAlexandria, resourceVarietyAlexandria, marketRolesAlexandria, marketCapacityAlexandria, familyRecordsAlexandria, grandparentRarityAlexandria, royalCouncilAlexandria, aristocraticEstatesAlexandria, historicalTitlesAlexandria, resourceAdjustedAlexandria];
+
 /** Bundled factory revisions are retained even if they were never saved in D1. */
 export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined {
-  for (const pack of [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria, narrativeAlexandria, classicalAlexandria, householdAlexandria, lateRoutesAlexandria, startingResourcesAlexandria, leanResourcesAlexandria, cashReservesAlexandria, livelihoodsAlexandria, resourceVarietyAlexandria, marketRolesAlexandria, marketCapacityAlexandria, familyRecordsAlexandria, grandparentRarityAlexandria, royalCouncilAlexandria, aristocraticEstatesAlexandria, historicalTitlesAlexandria, resourceAdjustedAlexandria]) {
+  for (const pack of ARCHIVED_PACKS) {
     const world = getBuiltinCatalog(pack).worlds[0];
     const revisionId = `pack-${contentFingerprint(world.pack)}`;
     if (id === revisionId) return { id: world.id, revisionId, pack: world.pack, routes: world.routes };
@@ -317,7 +323,7 @@ export function getArchivedBuiltinWorld(id: string): PublishedWorld | undefined 
 
 /** Upgrade only the untouched factory draft; edited and published content stays exact. */
 export function isLegacyFactoryDraft(worlds: unknown): boolean {
-  return [legacyAlexandria, previousAlexandria, specialistAlexandria, namedCausesAlexandria, originRangesAlexandria, longerLivesAlexandria, peopleAlexandria, skillTreeAlexandria, moneyAlexandria, variedAlexandria, birthAlexandria, coherentAlexandria, workTimelineAlexandria, interestCareersAlexandria, causalHealthAlexandria, statDecayAlexandria, specificCraftAlexandria, strictProgressionAlexandria, careerOpeningsAlexandria, adultMortalityAlexandria, moneylenderAlexandria, eventVarietyAlexandria, rareEncountersAlexandria, masteryOpeningsAlexandria, legacyRoutesAlexandria, childhoodRoutesAlexandria, creditOpportunitiesAlexandria, skillCeilingAlexandria, proceduralPeopleAlexandria, socialRolesAlexandria, narrativeAlexandria, classicalAlexandria, householdAlexandria, lateRoutesAlexandria, startingResourcesAlexandria, leanResourcesAlexandria, cashReservesAlexandria, livelihoodsAlexandria, resourceVarietyAlexandria, marketRolesAlexandria, marketCapacityAlexandria, familyRecordsAlexandria, grandparentRarityAlexandria, royalCouncilAlexandria, aristocraticEstatesAlexandria, historicalTitlesAlexandria, resourceAdjustedAlexandria].some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
+  return ARCHIVED_PACKS.some(pack => JSON.stringify(worlds) === JSON.stringify(getBuiltinCatalog(pack).worlds));
 }
 
 export function worldSummary(world: PublishedWorld): WorldSummary {

@@ -86,21 +86,42 @@ test("storehouse is null off the demo world", () => {
   assert.equal(storehouseRows(rankedPack, life), null);
 });
 
-test("Storehouse renders icons and the empty note", () => {
+test("Storehouse shows movements as coloured icon chips, not sentences", () => {
   const html = renderToStaticMarkup(createElement(Storehouse, { rows: rows() }));
   assert.match(html, /aria-label="Yearly resource details"/);
   assert.match(html, /<title[^>]*>Grain<\/title>/);
-  assert.match(html, /Nothing recorded yet\./);
-  assert.match(html, /Coming year/);
+  assert.match(html, /Next harvest/);
+  assert.match(html, /class="flow-chip is-gain"[^>]*>.*?<strong>\+\d+<\/strong><span>Harvest<\/span>/);
+  assert.match(html, /class="flow-chip is-loss"[^>]*>.*?<strong>−\d+<\/strong><span>Rent<\/span>/);
+  assert.match(html, /No change last year/);
+  assert.doesNotMatch(html, /Nothing recorded yet/);
 });
 
-test("a row without a forecast shows no Coming year block", () => {
+test("a resource that did not move is a grey tile without a Next harvest line", () => {
   const gold = rows().filter(row => row.id === "gold");
   assert.deepEqual(gold[0].coming, []);
   const html = renderToStaticMarkup(createElement(Storehouse, { rows: gold }));
-  assert.doesNotMatch(html, /Coming year/);
-  assert.doesNotMatch(html, /No change expected/);
-  assert.match(html, /Last year/);
+  assert.doesNotMatch(html, /Next harvest/);
+  assert.doesNotMatch(html, /storehouse-row/);
+  assert.match(html, /No change last year/);
+  assert.match(html, /Gold/);
+});
+
+test("a settled year reads as signed chips: harvest in, rent, eating and spoilage out", () => {
+  let life = engine.start("storehouse-chips");
+  for (let i = 0; i < 40 && life.phase !== "ended"; i++) {
+    life = life.phase === "choice" ? engine.choose(life, engine.getChoices(life)[0].id) : engine.advance(life);
+    if (life.journal.some(entry => entry.id === "household-eat" && entry.age === life.age)) break;
+  }
+  const grain = rows(life).find(row => row.id === "grain")!;
+  assert.equal(grain.lastYearFlows.length, grain.lastYear.length, "every line becomes one chip");
+  const byLabel = new Map(grain.lastYearFlows.map(flow => [flow.label, flow]));
+  const harvest = life.journal.find(entry => entry.id === "household-harvest" && entry.age === life.age)!;
+  const harvested = Number(harvest.text.match(/harvest of (\d+)/)?.[1] ?? 0);
+  if (harvested > 0) assert.deepEqual([byLabel.get("Harvest")?.delta, byLabel.get("Harvest")?.tone], [harvested, "gain"]);
+  const eaten = Number(life.journal.find(entry => entry.id === "household-eat" && entry.age === life.age)!.text.match(/eats (\d+)/)![1]);
+  assert.deepEqual([byLabel.get("Eating")?.delta, byLabel.get("Eating")?.tone], [-eaten, "loss"]);
+  for (const flow of grain.lastYearFlows) assert.ok(flow.text.length > 0, "each chip keeps its sentence as a tooltip");
 });
 
 test("trade text is matched by whole word, tolerating plurals", () => {

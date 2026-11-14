@@ -9,7 +9,7 @@ export interface TutorialStoreOptions {
 
 /**
  * The tutorial controller: an external store for useSyncExternalStore. Screens report what is on screen;
- * the store opens the hint for each new stage. It never navigates and never pauses the game.
+ * the store opens the hint for each new stage. It never navigates; the game holds its clock while a tip is open.
  */
 export function createTutorialStore({ storage }: TutorialStoreOptions) {
   let state: TutorialState = INITIAL_TUTORIAL;
@@ -18,6 +18,8 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
   let chain: TutorialView | null = null;
   let context: TutorialContext = NO_TUTORIAL_CONTEXT;
   let contextKey = JSON.stringify(context);
+  /** The life the tutorial last saw; entering another one (a loaded save) marks its passed tips seen. */
+  let enteredLife: string | null = null;
   const listeners = new Set<() => void>();
 
   function emit(): void {
@@ -31,16 +33,16 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     const saved = readTutorialProgress(storage());
     const seen = saved.seen.filter(isTutorialHintId);
     const hintId = isTutorialHintId(saved.current) ? saved.current : null;
-    if (seen.length || hintId) state = { ...state, seen, hintId };
+    if (seen.length || hintId || saved.tipsOff) state = { ...state, seen, hintId, tipsOn: !saved.tipsOff };
   }
 
   function dispatch(action: TutorialAction): void {
     load();
     const next = tutorialReducer(state, action, context);
     if (next === state) return;
-    const persist = next.seen !== state.seen || next.hintId !== state.hintId;
+    const persist = next.seen !== state.seen || next.hintId !== state.hintId || next.tipsOn !== state.tipsOn;
     state = next;
-    if (persist) writeTutorialProgress(storage(), { seen: state.seen, current: state.hintId });
+    if (persist) writeTutorialProgress(storage(), { seen: state.seen, current: state.hintId, tipsOff: !state.tipsOn });
     emit();
   }
 
@@ -50,11 +52,17 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     if (key === contextKey) return;
     context = next;
     contextKey = key;
+    const life = game.life;
+    if (life && life.lifeKey !== enteredLife) {
+      enteredLife = life.lifeKey;
+      dispatch({ type: "enter", passed: life.passed });
+    }
     dispatch({ type: "sync" });
   }
 
   return {
-    getSnapshot: (): TutorialState => state,
+    /** Reads saved progress on first use, so the switch shows the remembered On/Off before any screen reports in. */
+    getSnapshot: (): TutorialState => { load(); return state; },
     getServerSnapshot: (): TutorialState => INITIAL_TUTORIAL,
     getContext: (): TutorialContext => context,
     subscribe(listener: () => void): () => void {
@@ -78,6 +86,12 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     next: () => dispatch({ type: "next" }),
     back: () => dispatch({ type: "back" }),
     close: () => dispatch({ type: "close" }),
+    /** The player used these sections: their tips count as learned, and an automatic tip on one of them closes. */
+    used: (hintIds: readonly TutorialHintId[]) => { if (hintIds.length) dispatch({ type: "used", hintIds }); },
+    /** Turns automatic tip cards on or off. Off: new sections glow instead. The Tutorial and "?" buttons always open cards. */
+    setTipsOn: (on: boolean) => dispatch({ type: "tips", on }),
+    /** Auto mode on or off. On: the automatic tip on screen closes and new ones are marked seen, so play never waits. */
+    setAutoPlay: (on: boolean) => dispatch({ type: "auto-play", on }),
   };
 }
 

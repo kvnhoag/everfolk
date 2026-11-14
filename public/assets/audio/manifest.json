@@ -1,6 +1,30 @@
 {
-  "verifiedAt": "2026-11-13",
+  "verifiedAt": "2026-11-14",
   "assets": [
+    {
+      "id": "ancient-macedonian-music",
+      "file": "ancient-macedonian-music.mp3",
+      "src": "/assets/audio/ancient-macedonian-music.mp3",
+      "kind": "music",
+      "title": "Macedonian Garden",
+      "sourceTitle": "Relaxing Ancient Macedonian Music & Garden Ambience | Phorminx | music for sleep, meditation, study",
+      "creator": "Atmospherious (Yudha Pratama)",
+      "submittedBy": "Atmospherious",
+      "license": "Copyright © Yudha Pratama",
+      "licenseUrl": "https://www.youtube.com/watch?v=5ZMLYtJ0KMU&t=1239s",
+      "sourcePageUrl": "https://www.youtube.com/watch?v=5ZMLYtJ0KMU&t=1239s",
+      "sourceFileUrl": "https://www.youtube.com/watch?v=5ZMLYtJ0KMU",
+      "attribution": "Music by Atmospherious (Yudha Pratama) · Copyright © Yudha Pratama",
+      "bytes": 9601349,
+      "sha256": "ece57417fb2ec98680db5741c0d5eb7e44087e2b554afafc0bd8b12504fcc698",
+      "durationSec": 600,
+      "decodedDurationSec": 600,
+      "sourceStartSec": 1239,
+      "sourceEndSec": 1839,
+      "verifiedAt": "2026-11-14",
+      "rightsStatus": "Copyrighted; no redistribution license documented in the source metadata.",
+      "modifications": "Extracted audio from 20:39 to 30:39; converted AAC to 128 kb/s stereo MP3 at 44.1 kHz, with 40 ms fades at both edges and gapless playback metadata. Runtime repeats this selected track."
+    },
     {
       "id": "egyptian-meditation",
       "file": "egyptian-meditation.ogg",

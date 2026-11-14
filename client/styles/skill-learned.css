@@ -1,0 +1,9 @@
+.event-toast.is-skill{border-color:#537953;border-left-width:4px;background:#f1f7ed}
+.event-toast-badge.is-skill{background:#365e3c}
+.event-toast.is-skill .event-toast-action{background:#365e3c;border-color:#294a2d}
+.event-toast-action:focus-visible{outline:3px solid #aa7c32;outline-offset:2px}
+.capability-notice-label{position:absolute;top:-10px;right:0;padding:3px 6px;border:1px solid #b48a31;border-radius:3px;background:#f4d784;color:#392c12;font-size:9px;font-weight:700;line-height:1.2;white-space:nowrap;z-index:2;pointer-events:none}
+.capability-node:has(>.capability-notice-label) .capability-seal{filter:drop-shadow(0 0 8px #f0c24e);animation:learnedSkillGlow 1.2s ease-in-out 3}
+.deep-capability-node:has(>.capability-notice-label){border:2px solid #b48a31;box-shadow:0 0 0 3px #f4d78480;animation:learnedSkillGlow 1.2s ease-in-out 3}
+@keyframes learnedSkillGlow{50%{filter:drop-shadow(0 0 12px #f0c24e)}}
+@media(prefers-reduced-motion:reduce){.capability-node:has(>.capability-notice-label) .capability-seal,.deep-capability-node:has(>.capability-notice-label){animation:none}}

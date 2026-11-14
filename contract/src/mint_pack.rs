@@ -1,6 +1,10 @@
-//! Paid, persistent 1–5 card mint packs. Raw keys extend existing deployments without changing Contract's Borsh layout.
+//! Persistent 1–5 card mint packs: opening is free, minting the chosen card pays the fee quoted at opening.
+//! Raw keys extend existing deployments without changing Contract's Borsh layout.
 use crate::mint::Outcome;
 use crate::random::block_seed;
+use crate::card_art::{card_by_id, card_design, design_of, edition_key};
+use crate::mint::affection_roll;
+use crate::rarity_caps::{design_key, RARITY_CAPS};
 use crate::shares::{bps_of, compute_shares};
 use crate::types::*;
 use crate::{Contract, ContractExt};
@@ -22,6 +26,19 @@ pub struct MintCard {
     pub rarity: u8,
     pub affection: u8,
     pub action_id: String,
+    /// The v14 collection card this slot shows; absent when the collection has none for it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub card_id: Option<String>,
+    /// `<design>:rarity:<n>`: the design this slot's rarity is held under. Packs opened before card art omit it and use `design_key`.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub edition_key: Option<String>,
+    /// The rarity's cap (null is unlimited), copies already minted and the serial a mint would get now: a preview, not a reservation.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub edition_limit: Option<Option<u32>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub minted: Option<u32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub next_edition_number: Option<u32>,
 }
 #[near(serializers = [json])]
 #[derive(Clone, Debug)]
@@ -105,15 +122,15 @@ impl Contract {
         MintTerms {
             mint_fee: self.params.mint_fee,
             source_share_bps: self.params.source_mint_share_bps,
-            pack_version: 1,
+            // 2: the fee is paid when a card is minted, not when the pack opens.
+            pack_version: 2,
         }
     }
     pub fn get_mint_pack(&self, life_id: U64) -> Option<MintPack> {
         read(life_id.0).map(|p| p.view)
     }
 
-    /// Only signed, finished lives can open a pack. The cards are rolled and saved atomically with payment; no rerolls.
-    #[payable]
+    /// Only signed, finished lives can open a pack. Opening is free; the cards are rolled and saved once, with no rerolls.
     pub fn open_mint_pack(
         &mut self,
         life_id: U64,
@@ -125,22 +142,22 @@ impl Contract {
         let life = self.owned_alive_life(life_id.0);
         require!(
             read(life_id.0).is_none(),
-            "This life already has an open pack; resume it without paying again"
+            "This life already has an open pack; resume it to choose a card"
         );
-        exact_fee(self.params.mint_fee.0);
         self.assert_signed(&evidence_json, &signature);
         let evidence: Evidence = serde_json::from_str(&evidence_json).expect("life evidence json");
         self.assert_evidence(life_id.0, &life, &evidence, &npc_action_id);
-        let card_count = pack_card_count(&evidence);
-        require!(
-            card_count > 0,
-            "This life ended too early to open a mint pack"
-        );
         let hash = hex::encode(env::sha256_array(evidence_json.as_bytes()));
-        let mut cards = Vec::new();
-        for slot in 0..card_count {
-            cards.push(self.pack_card(life_id.0, &hash, slot, &evidence, &npc_action_id));
-        }
+        let cards = match &evidence.earned_cards {
+            // A figure-path world: exactly the cards this life earned, nothing rolled.
+            Some(earned) => self.earned_pack_cards(life_id.0, &hash, &evidence, &npc_action_id, earned),
+            None => {
+                let card_count = pack_card_count(&evidence);
+                require!(card_count > 0, "This life ended too early to open a mint pack");
+                (0..card_count).map(|slot| self.pack_card(life_id.0, &hash, slot, &evidence, &npc_action_id)).collect()
+            }
+        };
+        require!(!cards.is_empty(), "This life earned no card to mint");
         let pack = StoredPack {
             view: MintPack {
                 life_id,
@@ -160,16 +177,18 @@ impl Contract {
         pack.view
     }
 
-    /// Select exactly one stored outcome from the opened pack, mint it, and distribute the pack fee using the source shares.
+    /// Mint exactly one stored outcome from the opened pack, paying the fee quoted when it opened; the fee is split by the source shares.
     #[payable]
     pub fn choose_mint_slot(&mut self, life_id: U64, slot: u8) -> MintResult {
         gas_floor();
-        exact_fee(1); // wallet approval for the final selection
         let mut life = self.owned_alive_life(life_id.0);
         let pack = read(life_id.0).expect("Open a mint pack first");
+        exact_fee(pack.view.total_fee.0);
         require!((slot as usize) < pack.view.cards.len(), "Unknown mint slot");
         let card = &pack.view.cards[slot as usize];
+        require!(card.card_id.is_none() || card.next_edition_number.is_some(), "This card's edition is sold out");
         let evidence: Evidence = serde_json::from_str(&pack.evidence_json).unwrap();
+        let earned = card.card_id.as_ref().and_then(|id| evidence.earned_cards.as_ref()?.iter().find(|e| &e.card_id == id).cloned());
         let shares = compute_shares(
             &evidence
                 .sources
@@ -185,6 +204,7 @@ impl Contract {
             figure: card.figure_id.clone(),
             rarity: card.rarity,
             affection: card.affection,
+            card: earned,
         };
         let token_id = self.mint_token(
             &life.account_id,
@@ -197,7 +217,7 @@ impl Contract {
             &self.params.clone(),
             &self.catalog.clone(),
         );
-        // Index the source relation once; economics were frozen when the pack opened.
+        // Index the source relation once; the fee was quoted when the pack opened and is paid now.
         self.pay_sources(&token_id, 0, &shares, pack.view.source_share_bps);
         let paid = self.credit_sources(
             &shares,
@@ -205,7 +225,7 @@ impl Contract {
         );
         self.credit(&self.treasury_id.clone(), pack.view.total_fee.0 - paid);
         for c in &pack.view.cards {
-            self.release_card(c);
+            self.release_pack_card(c);
         }
         env::storage_remove(&key(life_id.0));
         life.status = LifeStatus::Minted;
@@ -238,8 +258,15 @@ impl Contract {
             .map(|b| u32::from_le_bytes(b.try_into().unwrap()))
             .unwrap_or(0)
     }
-    fn release_card(&self, card: &MintCard) {
-        if let Some(id) = &card.figure_id {
+    pub(crate) fn release_pack_card(&self, card: &MintCard) {
+        let design = card.edition_key.as_deref().and_then(|key| design_of(key, card.rarity)).map(str::to_string)
+            .unwrap_or_else(|| design_key(card.figure_id.as_deref(), &card.action_id));
+        // An earned card that was sold out when the pack opened held nothing.
+        if card.card_id.is_none() || card.next_edition_number.is_some() {
+            self.release_rarity(&design, card.rarity);
+        }
+        // Only rolled figure cards reserve figure supply; earned cards are limited by their rarity caps.
+        if let (None, Some(id)) = (&card.card_id, &card.figure_id) {
             let count = self
                 .pack_reserved(id)
                 .checked_sub(1)
@@ -251,6 +278,42 @@ impl Contract {
             }
         }
     }
+    /// One slot per earned card that has art, in the signed order, at most five. A sold-out card is shown with no
+    /// next serial and holds nothing. A figure's own card mints as that figure when the catalog lists it; every other
+    /// card is a person of the city carrying the deed the player chose.
+    fn earned_pack_cards(&self, id: u64, hash: &str, evidence: &Evidence, npc: &str, earned: &[EarnedCard]) -> Vec<MintCard> {
+        let art = self.card_art();
+        let mut seen = std::collections::BTreeSet::new();
+        earned
+            .iter()
+            .filter(|e| seen.insert(e.card_id.clone()))
+            .filter_map(|e| card_by_id(&art, &e.card_id).filter(|card| card.rarity == e.rarity).map(|card| (e, card)))
+            .take(MAX_PACK_CARDS as usize)
+            .enumerate()
+            .map(|(slot, (e, card))| {
+                let seed = block_seed(id, format!("mint-pack:{hash}:{slot}").as_bytes());
+                let design = card_design(&card.card_id);
+                let minted = self.minted_count(&design, card.rarity);
+                let open = self.rarity_open(&design, card.rarity);
+                if open {
+                    self.hold_rarity(&design, card.rarity);
+                }
+                let figure = if e.kind == "principal" { self.catalog.figures.iter().find(|f| f.figure_id == e.figure_id) } else { None };
+                MintCard {
+                    kind: if figure.is_some() { TokenKind::Figure } else { TokenKind::Npc },
+                    figure_id: figure.map(|f| f.figure_id.clone()),
+                    rarity: card.rarity,
+                    affection: affection_roll(&seed, evidence),
+                    action_id: figure.map(|f| f.action_ids[0].clone()).unwrap_or_else(|| npc.to_string()),
+                    card_id: Some(card.card_id.clone()),
+                    edition_key: Some(edition_key(&design, card.rarity)),
+                    edition_limit: Some(card.edition_limit),
+                    minted: Some(minted),
+                    next_edition_number: open.then_some(minted + 1),
+                }
+            })
+            .collect()
+    }
     fn pack_card(
         &self,
         id: u64,
@@ -260,7 +323,10 @@ impl Contract {
         npc: &str,
     ) -> MintCard {
         let seed = block_seed(id, format!("mint-pack:{hash}:{slot}").as_bytes());
-        let outcome = self.roll_outcome(&seed, evidence, &self.params, &self.catalog);
+        let outcome = self.roll_outcome(&seed, evidence, &self.params, &self.catalog, npc);
+        let design = design_key(outcome.figure.as_deref(), npc);
+        let minted = self.minted_count(&design, outcome.rarity);
+        self.hold_rarity(&design, outcome.rarity);
         let action_id = outcome
             .figure
             .as_ref()
@@ -288,31 +354,23 @@ impl Contract {
             rarity: outcome.rarity,
             affection: outcome.affection,
             action_id,
+            card_id: None,
+            edition_key: Some(edition_key(&design, outcome.rarity)),
+            edition_limit: Some(RARITY_CAPS[outcome.rarity as usize]),
+            minted: Some(minted),
+            next_edition_number: Some(minted + 1),
         }
     }
-    /// Closing a paid pack forfeits its outcomes but still pays every source and the treasury.
+    /// Closing an unminted pack forfeits its outcomes and frees their supply; nothing was paid, so nothing is split.
     pub(crate) fn close_mint_pack(&mut self, id: u64) {
         if let Some(pack) = read(id) {
-            let evidence: Evidence = serde_json::from_str(&pack.evidence_json).unwrap();
-            let shares = compute_shares(
-                &evidence
-                    .sources
-                    .iter()
-                    .map(|s| (s.token_id.clone(), s.impact))
-                    .collect::<Vec<_>>(),
-            );
-            let paid = self.credit_sources(
-                &shares,
-                bps_of(pack.view.total_fee.0, pack.view.source_share_bps),
-            );
-            self.credit(&self.treasury_id.clone(), pack.view.total_fee.0 - paid);
             for c in &pack.view.cards {
-                self.release_card(c);
+                self.release_pack_card(c);
             }
             env::storage_remove(&key(id));
             event(
                 "mint_pack_closed",
-                serde_json::json!({"life_id":id.to_string(), "total_fee":pack.view.total_fee}),
+                serde_json::json!({"life_id":id.to_string()}),
             );
         }
     }
@@ -345,7 +403,7 @@ mod tests {
         context(
             ALICE,
             START_MS,
-            near_sdk::NearToken::from_yoctonear(BASE),
+            near_sdk::NearToken::from_yoctonear(0),
             [8; 32],
         );
         c.open_mint_pack(
@@ -409,7 +467,7 @@ mod tests {
         open(&mut c, id, &ev);
     }
     #[test]
-    fn pack_is_persistent_then_mints_one_stored_card_and_splits_the_fee() {
+    fn pack_opens_free_then_minting_one_card_pays_and_splits_the_fee() {
         let (mut c, id, e, source) = ready();
         let first = open(&mut c, id, &e);
         assert_eq!(first.cards.len(), 5);
@@ -417,15 +475,12 @@ mod tests {
             c.get_mint_pack(U64(id)).unwrap().evidence_hash,
             first.evidence_hash
         );
-        assert_eq!(
-            c.balance_of(account(CAROL)).0,
-            0,
-            "fees are escrowed until selection or closing"
-        );
+        assert_eq!(first.total_fee.0, BASE, "the pack quotes the mint fee");
+        assert_eq!(c.balance_of(account(CAROL)).0, 0, "opening pays nothing");
         context(
             ALICE,
             START_MS,
-            near_sdk::NearToken::from_yoctonear(1),
+            near_sdk::NearToken::from_yoctonear(BASE),
             [10; 32],
         );
         let result = c.choose_mint_slot(U64(id), 1);
@@ -442,15 +497,14 @@ mod tests {
         assert_eq!(c.pack_reserved("euclid"), 0);
     }
     #[test]
-    fn abandoning_open_pack_distributes_fee_and_releases_reserves() {
+    fn abandoning_open_pack_pays_nothing_and_releases_reserves() {
         let (mut c, id, e, source) = ready();
         let opened = open(&mut c, id, &e);
         assert_eq!(opened.cards.len(), 5);
-        assert_eq!(c.get_mint_pack(U64(id)).unwrap().total_fee.0, BASE);
         as_account(ALICE);
         c.abandon_life(U64(id));
-        assert_eq!(c.balance_of(account(CAROL)).0, BASE / 2);
-        assert_eq!(c.balance_of(account(TREASURY)).0, BASE / 2);
+        assert_eq!(c.balance_of(account(CAROL)).0, 0);
+        assert_eq!(c.balance_of(account(TREASURY)).0, 0);
         assert_eq!(c.token_stats(source).lives_influenced, 0);
         assert_eq!(c.pack_reserved("euclid"), 0);
         assert!(c.get_mint_pack(U64(id)).is_none());
@@ -494,7 +548,7 @@ mod tests {
         context(
             BOB,
             START_MS,
-            near_sdk::NearToken::from_yoctonear(BASE),
+            near_sdk::NearToken::from_yoctonear(0),
             [3; 32],
         );
         let next = c.open_mint_pack(U64(second), ev.clone(), sign(&ev), "letters.teach".into());
@@ -539,7 +593,7 @@ mod tests {
         context(
             ALICE,
             START_MS,
-            near_sdk::NearToken::from_yoctonear(1),
+            near_sdk::NearToken::from_yoctonear(BASE),
             [3; 32],
         );
         c.choose_mint_slot(U64(id), pack.cards.len() as u8);
@@ -551,7 +605,7 @@ mod tests {
         context(
             ALICE,
             START_MS,
-            near_sdk::NearToken::from_yoctonear(BASE),
+            near_sdk::NearToken::from_yoctonear(0),
             [3; 32],
         );
         c.open_mint_pack(U64(id), e, "00".repeat(64), "letters.teach".into());
@@ -581,7 +635,20 @@ mod tests {
     #[should_panic(expected = "Attach at least 150 Tgas")]
     fn low_gas_cannot_retry_pack_outcomes() {
         let (mut c, id, e, _) = ready();
-        with_gas(ALICE, near_sdk::NearToken::from_yoctonear(BASE), 149);
+        with_gas(ALICE, near_sdk::NearToken::from_yoctonear(0), 149);
         c.open_mint_pack(U64(id), e.clone(), sign(&e), "letters.teach".into());
+    }
+    #[test]
+    #[should_panic(expected = "Attach exactly the quoted fee")]
+    fn minting_without_the_quoted_fee_fails() {
+        let (mut c, id, e, _) = ready();
+        open(&mut c, id, &e);
+        context(ALICE, START_MS, near_sdk::NearToken::from_yoctonear(1), [10; 32]);
+        c.choose_mint_slot(U64(id), 0);
+    }
+    #[test]
+    fn mint_terms_say_the_fee_is_paid_at_mint() {
+        let (c, _, _, _) = ready();
+        assert_eq!(c.mint_terms().pack_version, 2);
     }
 }

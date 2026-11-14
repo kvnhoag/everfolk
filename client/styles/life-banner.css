@@ -1,4 +1,4 @@
-/* ArtCraft scene and identity exports share a 240 × 112 pixel coordinate grid. */
+/* ArtCraft exports (240x112 SVGs) and Concept 1 plates (480x224 PNGs) share the 15:7 pixel grid. */
 .scene-image.life-banner::after{display:none}
 .scene-image.paper-scene.paper-motion-scene.life-banner,
 .game-dashboard .scene-image.paper-scene.dashboard-scene.life-banner{position:relative;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;gap:0;padding:0;min-height:0;height:auto;background:#f5e6bf;border:2px solid #baa47a;isolation:isolate}

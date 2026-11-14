@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "daysPerMonth": 30,
+  "averageResponseBytes": 200000,
+  "requestsPerSession": 30,
+  "peakFactor": 10,
+  "linkMbps": 100,
+  "usableLinkFraction": 0.7,
+  "monthlyTransferAllowanceGB": 1000,
+  "scenarios": [
+    { "name": "Launch", "dailySessions": 1000, "requestHitRate": 0.95, "byteHitRate": 0.95 },
+    { "name": "Growing", "dailySessions": 10000, "requestHitRate": 0.99, "byteHitRate": 0.99 },
+    { "name": "Busy", "dailySessions": 100000, "requestHitRate": 0.99, "byteHitRate": 0.99 },
+    { "name": "Viral", "dailySessions": 1000000, "requestHitRate": 0.995, "byteHitRate": 0.995 },
+    { "name": "Degraded cache", "dailySessions": 100000, "requestHitRate": 0.90, "byteHitRate": 0.90 },
+    { "name": "Cold cache", "dailySessions": 100000, "requestHitRate": 0, "byteHitRate": 0 }
+  ]
+}

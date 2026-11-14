@@ -44,9 +44,9 @@ test("hints that point at something name a selector; the welcome card is centere
 
 test("copy matches the game's labels and never asks the player to spend", () => {
   const text = TUTORIAL_HINTS.map(hint => `${hint.title} ${hint.body} ${hint.missingBody ?? ""} ${hint.help ?? ""}`).join(" ");
-  for (const label of ["Begin your life", "Begin life", "Next decision", "Auto mode", "Inventory & Granary", "This year's focus", "Market & Trade", "Farm & Granary", "Career & Army", "People & Town", "Works & Stewards", "Open decision", "Life record", "Skill learned", "Skill tree", "Open your pack", "NEAR testnet", "Tutorial button"]) {
+  for (const label of ["Begin your life", "Begin life", "Next decision", "Auto mode", "This year's focus", "Market & Trade", "Farm & Granary", "Career & Army", "People & Town", "Works & Stewards", "Open decision", "Life record", "Skill learned", "Skill tree", "Open your pack", "NEAR testnet", "Tutorial button"]) {
     assert.ok(text.includes(label), `mentions ${label}`);
   }
   assert.match(text, /mints nothing/);
-  assert.match(tutorialHint("time-bar")!.body, /never pause/i, "tips say they do not pause the game");
+  assert.match(tutorialHint("time-bar")!.body, /clock waits while a tip/i, "tips say the clock waits while they are open");
 });

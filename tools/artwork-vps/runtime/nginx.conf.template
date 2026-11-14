@@ -1,0 +1,97 @@
+# Rendered by setup-vps.sh. The complete /srv/public mount contains public exports only.
+worker_processes 1;
+pid /tmp/nginx.pid;
+error_log /dev/stderr warn;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    types { text/plain md; font/ttf ttf; font/otf otf; }
+    default_type application/octet-stream;
+    server_tokens off;
+    sendfile on;
+    tcp_nopush on;
+    etag on;
+    max_ranges 1;
+    gzip off;
+    autoindex off;
+    disable_symlinks on;
+    keepalive_timeout 15s;
+    keepalive_requests 1000;
+    client_header_timeout 10s;
+    client_body_timeout 10s;
+    send_timeout 30s;
+    client_max_body_size 1k;
+    client_body_temp_path /tmp/client_temp;
+    proxy_temp_path /tmp/proxy_temp;
+    fastcgi_temp_path /tmp/fastcgi_temp;
+    uwsgi_temp_path /tmp/uwsgi_temp;
+    scgi_temp_path /tmp/scgi_temp;
+
+    log_format origin escape=json
+        '{"time":"$time_iso8601","method":"$request_method",'
+        '"uri":"$uri","status":$status,"body_bytes":$body_bytes_sent,'
+        '"request_time":$request_time,"range":"$http_range"}';
+    access_log /dev/stdout origin;
+
+    # Limit the whole origin, not one visitor IP: tunnel traffic shares source addresses.
+    limit_req_zone $server_name zone=origin_rate:1m rate=@@ORIGIN_RPS@@r/s;
+    limit_conn_zone $server_name zone=origin_connections:1m;
+    limit_req_status 429;
+    limit_conn_status 429;
+
+    # Missing, blocked and failed responses must never receive immutable caching.
+    map $status $asset_cache_control {
+        default "no-store";
+        200 "public, max-age=31536000, immutable, no-transform";
+        206 "public, max-age=31536000, immutable, no-transform";
+        304 "public, max-age=31536000, immutable, no-transform";
+    }
+
+    server {
+        listen 8080;
+        server_name _;
+        root /srv/public;
+
+        add_header Cache-Control $asset_cache_control always;
+        add_header X-Content-Type-Options nosniff always;
+        add_header Content-Security-Policy "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; sandbox" always;
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Methods "GET, HEAD, OPTIONS" always;
+        add_header Access-Control-Allow-Headers "Range" always;
+        add_header Access-Control-Expose-Headers "Content-Length, Content-Range, Accept-Ranges, ETag" always;
+        add_header Access-Control-Max-Age "86400" always;
+
+        if ($request_method !~ ^(GET|HEAD|OPTIONS)$) { return 405; }
+        if ($args != "") { return 400; }
+
+        location = /healthz {
+            access_log off;
+            add_header Cache-Control "no-store" always;
+            default_type text/plain;
+            return 200 "ok\n";
+        }
+
+        # Manifests list public payload files only. Source manifests are private.
+        location ~ "^/releases/[a-z0-9][a-z0-9-]{0,63}/manifest\.json$" {
+            limit_req zone=origin_rate burst=@@ORIGIN_BURST@@ nodelay;
+            limit_conn origin_connections @@ORIGIN_CONNECTIONS@@;
+            if ($request_method = OPTIONS) { return 204; }
+            try_files $uri =404;
+        }
+
+        # The publisher rejects traversal, dotfiles and executable formats too.
+        # Parser-validated trusted SVG/CSS/JSON/HTML exports are pinned by manifest hash.
+        location ~* "^/releases/[a-z0-9][a-z0-9-]{0,63}/payload/(?:[A-Za-z0-9_-][A-Za-z0-9_.@-]*/)*[A-Za-z0-9_-][A-Za-z0-9_.@-]*\.(?:webp|png|jpg|jpeg|avif|gif|ico|woff|woff2|ttf|otf|mp3|ogg|wav|svg|css|json|txt|md|html)$" {
+            limit_req zone=origin_rate burst=@@ORIGIN_BURST@@ nodelay;
+            limit_conn origin_connections @@ORIGIN_CONNECTIONS@@;
+            if ($request_method = OPTIONS) { return 204; }
+            try_files $uri =404;
+        }
+
+        location / { return 404; }
+    }
+}

@@ -13,6 +13,7 @@
     "lib": ["ES2022", "DOM"],
     "jsx": "react-jsx",
     "resolveJsonModule": true,
+    "allowArbitraryExtensions": true,
     "types": ["vite/client", "node", "@cloudflare/workers-types"]
   },
   "include": ["src/**/*.ts", "chain/**/*.ts", "client/**/*.ts", "client/**/*.tsx", "server/**/*.ts", "app/**/*.ts", "app/**/*.tsx", "worker/**/*.ts", "scripts/ranked/**/*.ts", "cloudflare-env.d.ts"]

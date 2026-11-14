@@ -1,0 +1,125 @@
+/* How to Play: a rule card in the game's papyrus and teal. Big type, screens shown near their real size. */
+dialog.how-to-play{--htp-teal:#173b44;--htp-gold:#e2bd73;--htp-ink:#263b43;--htp-paper:#f8eed8;--htp-line:#d4c19a;width:min(1240px,calc(100vw - 24px));height:calc(100dvh - 24px);max-height:calc(100dvh - 24px);padding:0;border:2px solid #886447;border-radius:0;background:var(--htp-paper);color:var(--htp-ink);box-shadow:6px 6px 0 #263b4366;display:flex;flex-direction:column;overflow:hidden;font-size:16px}
+dialog.how-to-play:not([open]){display:none}
+dialog.how-to-play::backdrop{background:#10262cc4;backdrop-filter:blur(3px)}
+.htp-header{position:relative;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 64px 12px 22px;background:var(--htp-teal);color:#f8eed8}
+.htp-header h2{margin:0;font-family:var(--ef-font-display);font-size:30px;font-weight:600}
+.htp-pages{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto}
+.htp-pages button{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid #f8eed855;border-radius:2px;background:transparent;color:#f8eed8;font:600 16px/1 var(--ef-font-body);cursor:pointer}
+.htp-pages button span{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#f8eed833;font-size:13px}
+.htp-pages button.is-active{background:var(--htp-gold);border-color:var(--htp-gold);color:var(--htp-teal)}
+.htp-pages button.is-active span{background:var(--htp-teal);color:var(--htp-gold)}
+.htp-close{position:absolute;top:14px;right:16px;width:36px;height:36px;padding:0;border:1px solid #f8eed855;background:transparent;color:#f8eed8;font-size:22px;line-height:1;cursor:pointer}
+.htp-body{flex:1;overflow:auto;padding:18px 22px 14px}
+.htp-shot{display:block;max-width:100%;height:auto;border:1px solid #b9a37a;background:#fff}
+.htp-section-title{margin:22px 0 10px;font-family:var(--ef-font-body) !important;font-size:14px !important;font-weight:700 !important;letter-spacing:.1em;text-transform:uppercase;color:#6d5a37 !important}
+.htp-lead{margin:0 0 12px;font-size:16px;line-height:1.45;color:#3d4b4f}
+.htp-muted{margin:0 0 6px;font-size:14.5px;line-height:1.45;color:#5b4c38}
+
+/* Page 1: the goal, the year in order, then one card per numbered section. */
+.htp-goal{display:flex;gap:12px;align-items:center;margin:0;padding:14px 18px;border:2px solid var(--htp-gold);background:#fff6dd;font-size:18px;line-height:1.4}
+.htp-goal svg{flex:none;color:#b07a19}
+.htp-loop{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px;margin:0 0 14px;padding:0;list-style:none}
+.htp-loop li{position:relative;display:grid;justify-items:center;align-content:start;gap:4px;padding:12px 8px;border:1px solid var(--htp-line);background:#fffaf0;text-align:center}
+.htp-loop li:not(:last-child)::after{content:"→";position:absolute;right:-19px;top:24px;font-size:18px;color:#9a8c6b}
+/* The year is a loop: a line runs back under the boxes from the last to the first, with its arrow pointing up into box 1. */
+.htp-loop-back{position:relative;height:26px;margin:0 calc(100% / 12);border:3px solid #9a8c6b;border-top:0;border-radius:0 0 12px 12px}
+.htp-loop-back::before{content:"";position:absolute;left:-10px;top:-14px;border:8px solid transparent;border-bottom:12px solid #9a8c6b;border-top:0}
+.htp-loop-back span{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);padding:0 10px;background:var(--htp-paper);font-size:13.5px;font-weight:700;color:#6d5a37;white-space:nowrap}
+.htp-loop li.is-you{border-color:#c79a3b;background:#fff3d4}
+.htp-loop-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--htp-teal);color:var(--htp-gold)}
+.htp-loop strong{font-size:15.5px;line-height:1.25}
+.htp-loop small{font-size:13.5px;line-height:1.35;color:#5b4c38}
+.htp-loop em{padding:2px 7px;background:#c79a3b;color:#fff;font:700 11px/1.4 var(--ef-font-body);font-style:normal;letter-spacing:.06em;text-transform:uppercase}
+.htp-steps{display:grid;gap:16px;margin:0;padding:0;list-style:none}
+.htp-step{display:grid;grid-template-columns:minmax(0,auto) minmax(340px,1fr);grid-template-areas:"head head" "shot copy";align-items:start;gap:12px 22px;padding:14px 18px 18px;border:1px solid var(--htp-line);border-top:4px solid var(--htp-teal);background:#fffaf0}
+.htp-step-head{grid-area:head}
+.htp-step-shot{grid-area:shot}
+.htp-step-copy{grid-area:copy;display:grid;gap:10px}
+.htp-step-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.htp-step-number{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:var(--htp-teal);color:var(--htp-gold);font:700 18px/1 var(--ef-font-display)}
+dialog.how-to-play .htp-step-head h3{margin:0;font-size:23px;font-weight:600;line-height:1.15;color:var(--htp-teal)}
+.htp-opens{display:inline-flex;align-items:center;gap:5px;margin-left:auto;padding:3px 9px;border:1px solid #c9b791;border-radius:2px;background:#efe6d2;color:#6d5a37;font-size:13px;font-weight:700}
+.htp-step-shot{margin:0}
+.htp-step-shot .htp-shot{max-width:min(640px,100%)}
+.htp-do-then{display:grid;gap:6px;margin:0}
+.htp-do-then div{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:baseline}
+.htp-do-then dt{padding:2px 0;border-radius:2px;background:var(--htp-teal);color:var(--htp-gold);font:700 12.5px/1.6 var(--ef-font-body);letter-spacing:.06em;text-align:center;text-transform:uppercase}
+.htp-do-then div:last-child dt{background:#c79a3b;color:#fff}
+.htp-do-then dd{margin:0;font-size:16.5px;line-height:1.45}
+.htp-example{display:grid;gap:3px;margin:0;padding:9px 12px;border-left:4px solid var(--htp-gold);background:#fdf3db;font-size:15px;line-height:1.45}
+.htp-example strong{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#8a6420}
+.htp-warning{display:flex;align-items:flex-start;gap:8px;margin:0;padding:7px 11px;border-left:4px solid #a3361f;background:#f8e3dc;color:#7a2413;font-size:15px;line-height:1.4}
+.htp-warning svg{flex:none;margin-top:3px;color:#a3361f}
+.htp-legend ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px 16px;margin:0;padding:12px 16px;border:1px solid var(--htp-line);background:#2d2419;color:#f2e6c8;list-style:none}
+.htp-legend li{display:inline-flex;align-items:center;gap:10px;font-size:15.5px}
+
+/* Page 2: the road of a life; each stage opens its own guide below. */
+.htp-road{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:0 0 16px;padding:0;list-style:none}
+.htp-road::before{content:"";position:absolute;left:4%;right:4%;top:46px;height:4px;background:repeating-linear-gradient(90deg,#c9b791 0 10px,transparent 10px 16px)}
+.htp-stage{position:relative;display:grid;justify-items:center;align-content:start;gap:4px;width:100%;padding:8px 6px 10px;border:1px solid var(--htp-line);border-radius:0;background:#fffaf0;color:var(--htp-ink);font:inherit;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .15s}
+.htp-stage:hover{border-color:#c79a3b;transform:translateY(-2px)}
+.htp-stage.is-past{opacity:.75}
+.htp-stage.is-current{background:#fff3d4}
+.htp-stage.is-selected{border-color:var(--htp-teal);box-shadow:0 0 0 3px var(--htp-teal);opacity:1}
+.htp-stage-portrait{position:relative;z-index:1;display:grid;place-items:center;width:78px;height:78px;border:2px solid var(--htp-teal);border-radius:50%;background:#efe4c8;overflow:hidden}
+.htp-portrait{width:100%;height:100%;object-fit:cover;object-position:top;image-rendering:pixelated}
+.htp-here{display:inline-block;margin-left:8px;padding:2px 8px;background:var(--htp-teal);color:var(--htp-gold);font:700 11px/1.4 var(--ef-font-body);letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
+.htp-stage .htp-here{margin:0}
+.htp-stage-name{font-size:16px;color:var(--htp-teal)}
+.htp-ages{font-size:13.5px;font-weight:700;color:#7a6a4d}
+.htp-stage-detail{display:grid;gap:14px;padding:16px 18px;border:2px solid var(--htp-teal);background:#fffaf0}
+.htp-detail-head{display:grid;grid-template-columns:120px minmax(0,1fr);gap:18px;align-items:center}
+.htp-detail-portrait{width:120px;height:120px;border:3px solid var(--htp-teal);border-radius:50%;background:#efe4c8;overflow:hidden}
+.htp-detail-ages{margin:0;font-size:15px;font-weight:700;color:#7a6a4d}
+dialog.how-to-play .htp-detail-head h3{margin:2px 0 6px;font-size:28px;font-weight:600;color:var(--htp-teal)}
+.htp-detail-role{margin:0;font-size:17px;line-height:1.45}
+.htp-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.htp-detail-block{display:grid;align-content:start;gap:8px;padding:12px 14px;border:1px solid var(--htp-line);background:#fff}
+.htp-detail-block.is-wide{grid-column:1 / -1}
+dialog.how-to-play .htp-detail-block h4{display:flex;align-items:center;gap:8px;margin:0;font-family:var(--ef-font-body);font-size:17px;font-weight:700;color:var(--htp-teal)}
+.htp-unlocks,.htp-actions,.htp-turning{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.htp-unlocks li{display:grid;grid-template-columns:64px 20px minmax(0,1fr);gap:8px;align-items:center;font-size:15.5px;line-height:1.35}
+.htp-unlocks b{padding:2px 6px;border-radius:2px;background:var(--htp-teal);color:var(--htp-gold);font-size:13px;text-align:center}
+.htp-actions li{display:grid;gap:2px}
+.htp-action-kind{display:inline-flex;align-items:center;gap:8px;font-size:15.5px;font-weight:700}
+.htp-action-kind small{font-size:12.5px;font-weight:600;color:#7a6a4d}
+.htp-action-examples{padding-left:24px;font-size:14.5px;line-height:1.4;color:#3d4b4f}
+.htp-jobs{display:flex;gap:8px;align-items:flex-start;margin:4px 0 0;font-size:15px;line-height:1.4}
+.htp-jobs svg{flex:none;margin-top:3px}
+.htp-turning{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.htp-turning > li{display:grid;align-content:start;gap:6px;padding:10px 12px;border:1px solid var(--htp-line);background:#fdf6e6}
+.htp-turning-title{font-size:15.5px;font-weight:700;color:var(--htp-teal)}
+.htp-choices{display:grid;gap:5px;margin:0;padding:0;list-style:none;counter-reset:choice}
+.htp-choices li{counter-increment:choice;display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;font-size:14.5px;line-height:1.35}
+.htp-choices li::before{content:counter(choice);display:grid;place-items:center;width:22px;height:22px;border:1px solid #c9b791;background:#fff;font-size:12px;font-weight:700}
+
+.htp-footer{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;padding:12px 22px;border-top:1px solid var(--htp-line);background:#f3e7cc}
+.htp-switches{display:grid;gap:6px}
+.htp-tips{display:inline-flex;align-items:center;gap:10px;font-size:15px;cursor:pointer}
+.htp-tips input{appearance:none;position:relative;width:34px;height:19px;margin:0;border:1px solid var(--htp-teal);border-radius:10px;background:#e7d8b4;cursor:pointer}
+.htp-tips input::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:var(--htp-teal);transition:transform .15s}
+.htp-tips input:checked{background:var(--htp-teal)}
+.htp-tips input:checked::after{background:var(--htp-gold);transform:translateX(15px)}
+.htp-nav{display:flex;gap:10px;margin-left:auto}
+.htp-nav button{min-height:46px;padding:0 20px;border-radius:2px;font:700 16px/1 var(--ef-font-body);cursor:pointer}
+.htp-back{border:1px solid var(--htp-ink);background:transparent;color:var(--htp-ink)}
+.htp-primary{border:1px solid var(--htp-teal);background:var(--htp-teal);color:#fff;font-weight:800 !important}
+.htp-primary:hover{background:#0f2a32}
+.htp-primary.is-nudged{animation:htp-nudge 1.4s ease-in-out infinite}
+@keyframes htp-nudge{0%,100%{box-shadow:0 0 0 0 #e2bd73cc}50%{box-shadow:0 0 0 8px #e2bd7300}}
+@media(prefers-reduced-motion:reduce){.htp-primary.is-nudged{animation:none;outline:3px solid var(--htp-gold);outline-offset:2px}.htp-stage{transition:none}}
+@media(max-width:1000px){
+  .htp-step{grid-template-columns:1fr;grid-template-areas:"head" "shot" "copy"}
+  .htp-loop{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .htp-loop li::after{display:none}
+  .htp-loop-back{display:none}
+  .htp-detail-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .htp-loop{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .htp-road{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .htp-road::before{display:none}
+  .htp-detail-head{grid-template-columns:80px minmax(0,1fr)}
+  .htp-detail-portrait{width:80px;height:80px}
+}

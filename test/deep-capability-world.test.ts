@@ -3,6 +3,7 @@ import test from "node:test";
 import { createEngine } from "../src/engine.ts";
 import { buildDeepSkillWorld } from "../src/deep-capabilities/world.ts";
 import { validateWorld } from "../src/validate.ts";
+import { learnedThisYear } from "../client/models/skill-learned-notice.ts";
 import { loadLifeWorld } from "../client/chain/life-world.ts";
 import base from "../worlds/demo/alexandria-lives-2.json" with { type: "json" };
 import shipped from "../worlds/demo/alexandria-deep-1.json" with { type: "json" };
@@ -56,6 +57,7 @@ test("high proficiencies do not bypass supervised work, paid preparation or two 
   assert.throws(() => act(engine, life, "make-garment"), /starter|supervis|A3|material preparation/i);
   life = act(engine, life, "cap-tool-practice");
   assert.ok(life.deepCapabilities!.learned.A1);
+  assert.ok(learnedThisYear(life, engine.world).some(notice => notice.id === "A1"), "work automatically learns the skill and makes its linked notice available");
   assert.deepEqual(initial.deepCapabilities!.learned, {});
   assert.throws(() => act(engine, life, "cap-measurement-exercise"), /year|activity|work/i);
   life = act(engine, next(engine, life), "cap-measurement-exercise");

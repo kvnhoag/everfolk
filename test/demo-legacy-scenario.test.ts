@@ -84,6 +84,8 @@ test("prepareWeavePreset prepares every /test/weave/<feature> preset with real p
   assert.equal(pack.session.state.phase, "ended");
   const openedPack = await pack.ledger.mintPack(pack.session.life.life_id);
   assert.ok(openedPack && openedPack.cards.length >= 1 && openedPack.cards.length <= 5);
+  assert.equal(openedPack.cards[0].card_id, "euclid-parent", "the lab previews an earned pack: Euclid's own card");
+  assert.match(openedPack.cards[1].card_id ?? "", /^euclid-epic-(male|female)$/, "and the player's Epic contributor card");
 
   const market = await prepareWeavePreset("market");
   assert.equal(market.initialHash, "#token/1");

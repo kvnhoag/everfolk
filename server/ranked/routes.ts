@@ -1,4 +1,4 @@
-import { DEMO_WORLD_VERSION } from "../../chain/ids.ts";
+import { WEAVE_WORLD_VERSION } from "../../chain/ids.ts";
 import type { SaveFile } from "../../src/types.ts";
 import type { ContentDatabase } from "../db/types.ts";
 import type { NpcEnvironment } from "../npc/composition.ts";
@@ -136,7 +136,7 @@ export async function handleRankedApi(request: Request, env: RankedEnvironment, 
       const rpcUrl = env.NEAR_RPC_URL || DEFAULT_RPC_URL;
       const secret = env.RANKED_VERIFIER_SECRET;
       const publicKey = secret ? (deps.verifier ? (await deps.verifier(env, deps)).publicKey : (await createEvidenceSigner(secret)).publicKey) : null;
-      return json({ contract_id: contractId, rpc_url: rpcUrl, world_version: DEMO_WORLD_VERSION, verifier_public_key: publicKey });
+      return json({ contract_id: contractId, rpc_url: rpcUrl, world_version: WEAVE_WORLD_VERSION, verifier_public_key: publicKey });
     }
     if (path === "/api/ranked/verify") {
       if (request.method !== "POST") return json({ error: "Method not allowed." }, 405);

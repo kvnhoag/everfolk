@@ -4,7 +4,7 @@ import { backendSaveScope, errorText, type ChainBackend } from "./chain-backend.
 import { removeRankedSave } from "./ranked-session.ts";
 import MintPack from "./MintPack.tsx";
 
-/** A paid pack can be completed from chain alone, including on another device. */
+/** An opened pack can be completed from chain alone, including on another device. */
 export default function PackPage({ backend, lifeId }: { backend: ChainBackend; lifeId: string }) {
   const [loaded, setLoaded] = useState<{ pack: Pack; life: LifeView } | null>(null);
   const [error, setError] = useState("");

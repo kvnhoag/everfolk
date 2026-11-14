@@ -155,6 +155,8 @@ impl Contract {
             "Stage evidence is too large"
         );
         let evidence: Evidence = serde_json::from_str(&evidence_json).expect("life evidence json");
+        // Life-stage NFTs are off for figure-path worlds: only earned cards are minted, through the pack.
+        require!(evidence.earned_cards.is_none(), "Life-stage NFTs are turned off; mint an earned card from this life's pack");
         let life = self.lives.get(&life_id.0).expect("Life not found");
         self.assert_evidence(life_id.0, life, &evidence, &npc_action_id);
         let stages: StageEvidence = serde_json::from_str(&evidence_json)
@@ -372,6 +374,7 @@ impl Contract {
                 figure: card.figure_id.clone(),
                 rarity,
                 affection,
+                card: None,
             };
             let id = self.mint_token(
                 &life.account_id,

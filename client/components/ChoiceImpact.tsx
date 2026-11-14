@@ -1,10 +1,12 @@
+import { createContext, useContext } from "react";
 import type { Choice, LifeState, WorldPack } from "../../src/types.ts";
 import { getAccomplishmentPreviews, getAristocratImpact, getChoiceImpact, getRoyalImpact } from "../models/choice-impact.ts";
 import ImpactValue from "./ImpactValue.tsx";
 import PixelIcon from "./PixelIcon.tsx";
 import { getMoneyImpact } from "../models/wealth.ts";
+import { cashNote } from "../models/cash-note.ts";
 import { getOpportunityPreview } from "../../src/outcomes.ts";
-import { severeHealthRisk, formatHealthRisk } from "../models/health-risk.ts";
+import { choiceDeathRisk, formatDeathRiskText } from "../models/health-risk.ts";
 import { loanEffectNotes } from "../models/loan-summary.ts";
 import { getMasteryPreviews } from "../models/mastery.ts";
 import { getSkillImpact } from "../models/skill-impact.ts";
@@ -76,8 +78,12 @@ function healthEffects(choice: Choice, life: LifeState, world: WorldPack): { tex
   return changes;
 }
 
+/** Suppresses inline purse warnings for background surfaces covered by a modal dialog. */
+export const CashNoteSuppressedContext = createContext(false);
+
 /** Immediate outcome effects only: reading a preview never advances the simulation. */
-export default function ChoiceImpact({ choice, life, world, hideSkills = true, showSkillChanges = false, emptyText }: { choice: Choice; life: LifeState; world: WorldPack; hideSkills?: boolean; showSkillChanges?: boolean; emptyText?: string }) {
+export default function ChoiceImpact({ choice, life, world, hideSkills = true, showSkillChanges = false, showCashNote = true, emptyText }: { choice: Choice; life: LifeState; world: WorldPack; hideSkills?: boolean; showSkillChanges?: boolean; showCashNote?: boolean; emptyText?: string }) {
+  const cashNotesHidden = useContext(CashNoteSuppressedContext);
   const impact = getChoiceImpact(choice, life, world);
   const changedStats = impact.stats.filter(stat => (stat.min !== 0 || stat.max !== 0) && !(world.economy && life.economy && stat.id === world.economy.stat));
   const moneyImpact = getMoneyImpact(choice, life, world);
@@ -86,15 +92,19 @@ export default function ChoiceImpact({ choice, life, world, hideSkills = true, s
   const connections = closenessEffects(choice, life, world);
   const health = healthEffects(choice, life, world);
   const opportunity = getOpportunityPreview(world, life, choice);
-  const severeRisk = severeHealthRisk(life, world, choice);
+  const deathRisk = choiceDeathRisk(life, world, choice);
+  const deathRiskText = formatDeathRiskText(deathRisk);
+  const nonFatalEnding = impact.canEndLife && !deathRiskText;
   const loanNotes = loanEffectNotes(choice, life, world);
   const mastery = hideSkills ? [] : getMasteryPreviews(choice, life, world);
   // Immediate proficiency changes can be shown without exposing future growth modifiers.
   const skillImpact = showSkillChanges || !hideSkills ? getSkillImpact(choice, life, world) : [];
   const early = hideSkills ? [] : previewEarlyInfluences(choice, world, life);
   const social = socialRoleImpact(choice, life, world);
+  // The purse beside the cost, so a paid action never drains cash unseen and an unaffordable one says so.
+  const purse = showCashNote && !cashNotesHidden ? cashNote(choice, life, world) : null;
   const hasRange = royalImpact.some(item => item.variable) || changedStats.some(stat => stat.variable) || skillImpact.some(item => item.variable) || moneyImpact.some(item => item.min !== item.max) || connections.some(item => item.min !== item.max);
-  if (royalImpact.length === 0 && accomplishments.length === 0 && changedStats.length === 0 && skillImpact.length === 0 && mastery.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !impact.canEndLife && !opportunity && !severeRisk && loanNotes.length === 0 && early.length === 0 && social.length === 0) return emptyText ? <span className="compact-skill-empty">{emptyText}</span> : null;
+  if (royalImpact.length === 0 && accomplishments.length === 0 && changedStats.length === 0 && skillImpact.length === 0 && mastery.length === 0 && moneyImpact.length === 0 && connections.length === 0 && health.length === 0 && !deathRiskText && !nonFatalEnding && !opportunity && loanNotes.length === 0 && early.length === 0 && social.length === 0 && !purse) return emptyText ? <span className="compact-skill-empty">{emptyText}</span> : null;
   return <span className="choice-impact">
     <span className="sr-only">Direct effects.{hasRange ? " Ranges show possible outcomes." : ""} </span>
     <span className="choice-impact-list">
@@ -113,9 +123,10 @@ export default function ChoiceImpact({ choice, life, world, hideSkills = true, s
       {social.map(note => <span className={`impact-stat impact-${note.gain ? "gain" : "loss"}`} key={note.text}>{note.text}</span>)}
       {accomplishments.map(item => <span className="impact-stat impact-gain" key={`card-${item.id}`}>{item.kind === "ordinary" ? "Work card" : "Title card"}: {item.title} · {item.probability >= 1 ? "Awarded on acceptance" : `${Number((item.probability * 100).toPrecision(3))}% chance`}</span>)}
     </span>
+    {purse && <span className={`choice-cash-note${purse.affordable ? "" : " is-short"}`}><PixelIcon name="coin" size={12} />{purse.text}</span>}
     {early.map(item => <span className="choice-early-influence" key={item.routeId}><span>{item.possible ? "Possible early interest" : item.reinforced ? "Interest reinforced" : "Early interest"}: <strong>{item.title}</strong></span>{item.multiplier > 1 && <small>Future practice gains up to {practiceBonus(item.multiplier)}</small>}</span>)}
     {opportunity && <span className="choice-opportunity"><strong>{opportunity.label}: {Number((opportunity.probability * 100).toFixed(1))}%</strong>{!hideSkills && opportunity.factors.length > 0 && <span className="choice-opportunity-factors">{opportunity.factors.map((factor, index) => <span className={factor.multiplier >= 1 ? "opportunity-help" : "opportunity-hinder"} key={`${factor.reason}-${index}`}>{factor.reason}</span>)}</span>}</span>}
-    {impact.canEndLife && <span className="choice-impact-ending">{impact.deathRisk > 0 ? `Risk of death: ${impact.deathRisk < .0001 ? "less than 0.01" : Number((impact.deathRisk * 100).toFixed(2))}%.` : "A possible outcome ends this life."}</span>}
-    {severeRisk && <span className="choice-impact-ending">Risk of death from severe illness: {formatHealthRisk(severeRisk)} before the next birthday.</span>}
+    {deathRiskText && <span className="choice-impact-ending is-danger"><PixelIcon name="warn" size={12} />{deathRiskText}</span>}
+    {nonFatalEnding && <span className="choice-impact-ending">A possible outcome ends this life.</span>}
   </span>;
 }

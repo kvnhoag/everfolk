@@ -34,6 +34,10 @@
     zoom:var(--home-scale);
     min-height:var(--home-viewport-height);
   }
+  .ef-home .ef-coast {
+    inset: 0 0 auto;
+    height: var(--home-viewport-height);
+  }
   .ef-home .ef-home-shell {
     min-height:var(--home-viewport-height);
   }
@@ -42,8 +46,11 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
-    padding-top: clamp(20px, var(--home-viewport-height) * .06, 72px);
-    padding-bottom: clamp(76px, var(--home-viewport-height) * .15 - 66px, 84px);
+    padding-top: max(
+      clamp(20px, var(--home-viewport-height) * .06, 72px),
+      calc(var(--coast-water-top, var(--home-viewport-height) * .354) - var(--home-header-height, 68px) + clamp(36px, var(--home-viewport-height) * .045, 56px))
+    );
+    padding-bottom: clamp(28px, var(--home-viewport-height) * .038, 42px);
   }
   .ef-home .ef-home-content {
     margin-top: auto;
@@ -54,6 +61,9 @@
     --hero-width: min(57%, 550px, var(--bay-center) * 2);
     margin-left: calc(var(--bay-center) - var(--hero-width) / 2);
     width: var(--hero-width);
+  }
+  .ef-home .ef-home-content:not(:has(.ef-home-guest-divider, .ef-home-save, .ef-home-secondary)) {
+    margin-bottom: clamp(48px, var(--home-viewport-height) * .11, 120px);
   }
 }
 @media (max-width: 700px) {
@@ -72,7 +82,7 @@
   align-items:center;
   justify-content:center;
   width:min(100%, clamp(300px, var(--home-viewport-width) * .33, 510px));
-  min-height:clamp(100px, var(--home-viewport-width) * .11, 164px);
+  min-height:0;
   margin-inline:auto;
 }
 .ef-home .ef-home-wordmark{
@@ -84,7 +94,7 @@
 .ef-home .ef-title-glint:nth-of-type(1){left:14%;top:30%}
 .ef-home .ef-title-glint:nth-of-type(2){left:64%;top:18%}
 .ef-home .ef-title-glint:nth-of-type(3){left:90%;top:70%}
-.ef-home .ef-home-logo-rule{display:flex;align-items:center;justify-content:center;gap:11px;width:min(100%,176px);margin:10px auto 11px;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
+.ef-home .ef-home-logo-rule{display:flex;align-items:center;justify-content:center;gap:11px;width:min(100%,176px);margin:6px auto 8px;filter:drop-shadow(0 2px 6px rgba(10, 32, 42, 0.4))}
 .ef-home .ef-home-logo-rule span{flex:1;height:1px;background:#e7e0c9;opacity:.55}
 .ef-home .ef-home-logo-rule i{font-size:17px;line-height:1;color:#db9c78}
 .ef-home .ef-home-tagline{margin:0 0 10px;padding:0;font-size:clamp(32px, 3.2vw, 46px);line-height:1.15;letter-spacing:.2px;color:var(--tx-cream);
@@ -106,11 +116,16 @@
 .ef-home .ef-home-save-age small{font-size:12px;font-weight:400;line-height:1.6;color:#e6dcc6}
 
 /* Primary action: a single fill and outline. */
-.ef-home .ef-home-actions{position:relative;width:var(--home-menu-width);gap:24px}
+.ef-home .ef-home-actions{position:relative;width:var(--home-menu-width);gap:16px}
 .ef-home .ef-home-mode-actions{display:grid;grid-template-rows:50px 46px;gap:48px}
 .ef-home .ef-home-mode-actions:has(>.ef-home-auth-divider){grid-template-rows:48px 12px 48px;gap:18px}
 .ef-home .ef-home-mode-actions:has(>.ef-home-auth-divider)>.ef-home-auth-button{min-height:0;padding-block:5px}
 .ef-home .ef-home-auth-divider{display:flex;align-items:center;gap:8px;color:var(--tx-cream);font-size:10px;line-height:1}
+/* Weave Mode on: sign-in choices, then guest play below, so a player without an account never has to hunt for it. */
+.ef-home .ef-home-mode-actions:has(>.ef-home-guest-divider){grid-template-rows:none;grid-auto-rows:auto;gap:10px}
+.ef-home .ef-home-mode-actions:has(>.ef-home-guest-divider)>.ef-home-auth-button{min-height:44px;padding-block:5px}
+.ef-home .ef-home-guest-divider{margin-top:2px;font-size:11px;letter-spacing:.06em}
+.ef-home .ef-home-primary.is-guest{min-height:48px;font-size:clamp(18px,1.5vw,22px)}
 .ef-home .ef-home-auth-divider::before,.ef-home .ef-home-auth-divider::after{content:"";flex:1;height:1px;background:#d7b57a}
 .ef-home .ef-home-actions>button,.ef-home .ef-home-mode-actions>button,
 .ef-home .ef-home-primary>span:not([aria-hidden]){font-family:var(--ef-font-body)!important;font-weight:600;line-height:1.2}
@@ -173,6 +188,10 @@
 .ef-home .weave-switch-track::before{content:"";position:absolute;inset-block-start:3px;inset-inline-start:3px;width:10px;height:10px;border-radius:50%;background:#c3aa7c}
 .ef-home [role="switch"][aria-checked="true"] .weave-switch-track{background:#fff;border-color:#fff}
 .ef-home [role="switch"][aria-checked="true"] .weave-switch-track::before{inset-inline-start:19px;background:var(--tx-panel)}
+.ef-home .main-menu-ranked>button{white-space:nowrap;gap:9px}
+.ef-home .main-menu-ranked>button::before,.ef-home .main-menu-ranked>button::after{width:22px}
+.ef-home .weave-switch-state{margin-inline-start:-3px;padding:1px 6px;border:1px solid #e7d0a0;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#e7d0a0}
+.ef-home [role="switch"][aria-checked="true"] .weave-switch-state{border-color:#fff;background:#fff;color:var(--tx-panel)}
 .ef-home .main-menu-ranked>p{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 @media(max-width:1024px){
@@ -183,17 +202,21 @@
   .ef-home .ef-motion-toggle>span:last-child{display:none}
   .ef-home .ef-home-weave-bar-main{flex-wrap:wrap}
 }
+@media(min-width:701px) and (max-height:760px){
+  .ef-home .ef-home-save{padding:6px 12px;margin-bottom:6px}
+  .ef-home .ef-home-secondary{min-height:36px}
+}
 @media(min-width:701px) and (max-height:720px){
   .ef-home .ef-home-tagline{font-size:40px}
   .ef-home .ef-home-intro{font-size:17px;margin-bottom:24px}
 }
 @media(max-width:700px){
-  .ef-home .ef-home-body{padding-top:clamp(40px, 9svh, 82px);padding-bottom:76px}
+  .ef-home .ef-home-body{padding-top:max(54px, calc(var(--coast-water-top, 184px) - var(--home-header-height, 186px) + 114px));padding-bottom:36px}
   .ef-home .ef-home-content{--home-menu-width:min(100%,280px)}
   .ef-home .ef-coast{height:clamp(365px, 62svh, 520px)}
   .ef-home .ef-coast-canvas{object-position:43% center}
   .ef-home .ef-home-eyebrow{font-size:11px;letter-spacing:3.2px}
-  .ef-home h1 .ef-title-wrap{width:min(75%,315px);min-height:clamp(74px, 11svh, 95px)}
+  .ef-home h1 .ef-title-wrap{width:min(75%,315px);min-height:0}
   .ef-home .ef-home-tagline{font-size:34px}
   .ef-home .ef-home-intro{font-size:16px;padding-inline:8px}
   .ef-home .ef-home-save strong{font-size:16px}
@@ -221,3 +244,6 @@
   filter:none !important;
   backdrop-filter:none !important;
 }
+/* Signed in with Weave Mode on: one button, with where the life is kept underneath. */
+.ef-home .ef-home-primary.is-weave>span:not([aria-hidden]){display:grid;gap:2px}
+.ef-home .ef-home-primary.is-weave small{font-size:12px;font-weight:600;letter-spacing:.04em;color:#5b4c38}

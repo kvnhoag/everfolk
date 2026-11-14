@@ -30,7 +30,9 @@ const escape = (text: string) => text.replace(/&/g, "&amp;").replace(/'/g, "&#x2
 test("the Tutorial button is a real button with an accessible label", () => {
   const html = renderToStaticMarkup(createElement(TutorialButton, {}));
   assert.match(html, /^<button[^>]*type="button"/);
-  assert.match(html, /aria-label="Open the tutorial for this screen"/);
+  assert.match(html, /role="switch" aria-checked="true"/, "the header switch shows the tutorial is on");
+  assert.match(html, /aria-label="Tutorial tips"/);
+  assert.match(html, />On</);
   assert.match(html, /data-tutorial-button=""/, "the closing card can find it");
   assert.match(html, />Tutorial</);
   assert.match(renderToStaticMarkup(createElement(TutorialButton, { tone: "dark" })), /tutorial-button is-dark/);
@@ -91,7 +93,7 @@ test("every ? button renders for its section", () => {
 });
 
 test("clicking a ? opens the tutorial at that section's hint", () => {
-  tutorialStore.setGameContext({ view: "game", characterSection: null, life: { age: 11, ended: false, decisionPending: false, learnedSkills: 0, focusShown: false, resourcesShown: true, wealthShown: true, deckShown: true, notificationShown: false, tradeAge: 10 } });
+  tutorialStore.setGameContext({ view: "game", characterSection: null, life: { lifeKey: "life", age: 11, ended: false, decisionPending: false, learnedSkills: 0, sections: ["time-bar", "story", "rail", "focus", "yearly-action", "wealth"], notificationShown: false, passed: [] } });
   tutorialStore.close();
   tutorialStore.openHint("wealth");
   assert.equal(tutorialStore.getSnapshot().hintId, "wealth");
@@ -109,4 +111,14 @@ test("the Weave screen does not fight the tutorial for the top layer", () => {
   const gameDialog = { open: true, classList: { contains: () => false } };
   assert.equal(anotherDialogOpened([{ target: layer }], {}), false);
   assert.equal(anotherDialogOpened([{ target: gameDialog }], {}), true);
+});
+
+test("an open tip holds the life clock, like How to Play, and the time bar says why", () => {
+  const app = readFileSync(new URL("../client/screens/App.tsx", import.meta.url), "utf8");
+  const overlay = app.match(/useGame\(\{ isOverlayOpen: ([^,]+(?:\|\|[^,]+)*),/)?.[1] ?? "";
+  assert.match(overlay, /tipShown/, "a tip on screen is an overlay for the clock");
+  assert.doesNotMatch(overlay, /tutorial\.open/, "an open tip still waiting, unseen, for its section never holds the clock");
+  assert.match(overlay, /howToPlayOpen/);
+  assert.match(app, /"Waiting while you read"/);
+  assert.ok(app.indexOf("const tutorial = useTutorial();") < app.indexOf("const game = useGame("), "the tip state is read before the clock");
 });

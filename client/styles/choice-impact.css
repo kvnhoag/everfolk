@@ -13,9 +13,13 @@
 .impact-loss{color:#a33f32}
 .impact-neutral,.impact-range-separator{color:#737b6a;font-weight:400}
 .choice-impact-ending{display:block;font-size:11px;line-height:1.5;color:#8a4931;margin-top:3px;font-weight:500}
+.choice-impact-ending.is-danger{display:flex;width:fit-content;max-width:100%;align-items:center;gap:6px;margin-top:6px;padding:4px 8px;border:1px solid #d48275;border-left:3px solid #a82418;border-radius:2px;background:#fae6e1;color:#8a1d14;font-weight:700}
 .choice-impact-note{font-size:10px;line-height:1.5;color:#796c59;margin:0 0 4px;max-width:520px}
 .choice-opportunity{display:block;margin-top:5px;font-size:11px;line-height:1.5}
 .choice-opportunity>strong{font-weight:600;color:#425d43;font-variant-numeric:tabular-nums}
 .choice-opportunity-factors{display:flex;flex-wrap:wrap;gap:2px 9px;margin-top:1px}
 .opportunity-help{color:#47714e}
 .opportunity-hinder{color:#a05240}
+/* The purse beside an action's cost: quiet when affordable, plain red when it is not. */
+.choice-cash-note{display:flex;align-items:center;gap:5px;margin-top:5px;font-size:13px;line-height:1.35;font-weight:600;color:#5b5236}
+.choice-cash-note.is-short{color:#9b2f1f}

@@ -1,6 +1,7 @@
 import type { CareerGroup, Category, FigureId } from "./ids.ts";
 import type { MatchedStageFigure, StageRecord } from "./stage-figures.ts";
 import type { NpcSessionAttestation } from "./npc-proof.ts";
+import type { EarnedCard } from "./earned-cards.ts";
 
 /** JSON views returned by the Everfolk lives contract. Rust structs serialize to exactly these shapes. */
 export interface FigurePick { figure_id: FigureId; token_id: string; action_id: string; rarity: number }
@@ -28,6 +29,10 @@ export interface Evidence {
   stage_figures?: MatchedStageFigure[];
   /** Required only for the NPC world; signed with the rest of the finished-life evidence. */
   npc_session?: NpcSessionAttestation;
+  /** The played character's recorded sex; picks a profession card's version (chain/card-art.ts). Older evidence omits it. */
+  sex?: "male" | "female";
+  /** The cards this life earned on historical figure paths (chain/earned-cards.ts); only these can be minted. */
+  earned_cards?: EarnedCard[];
 }
 
 export interface StageMintCard extends EditionPreviewFields {
@@ -94,6 +99,8 @@ export interface MintCard extends EditionPreviewFields {
   tier?: string | number;
   portrait_media?: string;
   stage_record?: StageRecord;
+  /** The v14 collection card this slot shows (chain/card-art.ts); absent when the collection has none. */
+  card_id?: string;
 }
 export interface MintPack { life_id: string; evidence_hash: string; cards: MintCard[]; total_fee: string; source_share_bps: number }
 export interface MintTerms { mint_fee: string; source_share_bps: number; pack_version: number }
@@ -111,6 +118,11 @@ export interface TokenExtra extends EditionFields {
   tier?: string | number;
   portrait_media?: string;
   stage_record?: StageRecord;
+  /** The v14 collection card this NFT shows; absent on tokens minted before card art and on stage portraits. */
+  card_id?: string;
+  sex?: "male" | "female";
+  /** Marketplace traits: Card, Rarity, Edition, Career, Born, Died. */
+  attributes?: { trait_type: string; value: string }[];
 }
 /** `earned` is yoctoNEAR as a decimal string. */
 export interface TokenStats { lives_influenced: number; earned: string }

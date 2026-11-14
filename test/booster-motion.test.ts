@@ -2,13 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {REFERENCE_MOTION,referenceLaunchRank,sampleReferenceCard,referenceImpactTime,advanceSpring,cardDepthOrder} from '../client/lib/booster/motion.mjs';
-import {canCommitTear,tearProgress} from '../client/lib/booster/tear-input.mjs';
+import {canCommitTear,tearProgress,localTearDirection} from '../client/lib/booster/tear-input.mjs';
 import {cardLayout} from '../client/lib/booster/layout.mjs';
 
 test('a click, short seal pull or body rotation cannot open the pack',()=>{
  for(const gesture of [{mode:'tear',distance:0,progress:0},{mode:'tear',distance:12,progress:.99},{mode:'tear',distance:90,progress:.4},{mode:'rotate',distance:300,progress:.99}])assert.equal(canCommitTear(gesture),false);
  for(const mode of ['tear','keyboard-tear'])assert.equal(canCommitTear({mode,distance:240,progress:.9}),true);
- assert.equal(tearProgress(-200,0,1440),0);assert.ok(tearProgress(220,0,1440)>.82);assert.ok(tearProgress(135,0,319)>.82);
+ for(const direction of [-1,1]){assert.ok(tearProgress(direction*220,0,1440)>.82);assert.ok(tearProgress(direction*135,0,319)>.82);assert.equal(tearProgress(-direction*220,0,1440,direction),0);}
+});
+
+test('the physical tear reverses on the back so the peel still follows the screen-space drag',()=>{
+ assert.equal(localTearDirection(1,1),1);
+ assert.equal(localTearDirection(-1,1),-1);
+ assert.equal(localTearDirection(1,-1),-1);
+ assert.equal(localTearDirection(-1,-1),1);
 });
 test('reference burst exposes five independent faces within 0.22 seconds',()=>{
  assert.equal(4*REFERENCE_MOTION.stagger,.22);

@@ -9,6 +9,7 @@ import { selectAutomaticChoice } from "../models/yearly-focus.ts";
 import { orderPreview } from "../demo/screen.ts";
 import { beginRankedSession, type RankedSession, type SessionStorage } from "./ranked-session.ts";
 import { PRACTICE_CONTRACT_ID, practiceVerifier } from "./practice-verifier.ts";
+import type { EarnedCard } from "../../chain/earned-cards.ts";
 import { loadLifeWorld } from "./life-world.ts";
 
 /** Practice account that already holds Life A's Farming NFT. */
@@ -282,6 +283,17 @@ function seedMarketplaceTokens(ledger: MockLivesContract): void {
   void soldier;
 }
 
+/**
+ * The pack and NFT presets preview an earned pack: Euclid's own Legendary card and the player's Epic
+ * contributor card on his path, in the practice life's recorded sex. Lab only; real lives sign what they earned.
+ */
+function previewEarnedCards(evidence: { sex?: "male" | "female" }): EarnedCard[] {
+  return [
+    { card_id: "euclid-parent", figure_id: "euclid", kind: "principal", rarity: 4 },
+    { card_id: `euclid-epic-${evidence.sex ?? "female"}`, figure_id: "euclid", kind: "contribution", rarity: 3 },
+  ];
+}
+
 export async function prepareWeavePreset(
   presetId: WeavePresetId,
   options: { packPreopened?: boolean; weaveBeforeFlood?: boolean } = {},
@@ -364,7 +376,7 @@ export async function prepareWeavePreset(
 
     const session = await beginRankedSession({
       contract: ledger, contractId: PRACTICE_CONTRACT_ID, world,
-      verifyUrl: "", storage: memoryStorage(), verifyLocally: practiceVerifier(world, ledger),
+      verifyUrl: "", storage: memoryStorage(), verifyLocally: practiceVerifier(world, ledger, PRACTICE_CONTRACT_ID, previewEarnedCards),
     }, await ledger.startLife(world.version));
     await fastForwardFarmer(session, world);
     const shouldPreopenPack = presetId === "pack" || presetId === "nft-pack" ? options.packPreopened !== false : Boolean(options.packPreopened);

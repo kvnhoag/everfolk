@@ -1,0 +1,8 @@
+runtime/runtime.env
+runtime/secrets/
+backup/backup.env
+backup/restic-password
+*.zip
+*.tar
+*.tar.gz
+__pycache__/
