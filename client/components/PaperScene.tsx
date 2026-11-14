@@ -8,6 +8,7 @@ import { resolveLifeBanner } from "../models/banner-state.ts";
 import { bannerActorFallbackSource, bannerActorSource } from "../models/banner-actor.ts";
 import { formatYear } from "../../src/calendar.ts";
 import { readEverfolkStorage } from "../lib/brand-storage.ts";
+import { sceneArtworkBaseUrl } from "../lib/scene-artwork.ts";
 import "../styles/paper-motion.css";
 import "../styles/life-banner.css";
 
@@ -64,6 +65,7 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
 
   if (!scene) return null;
   const banner = resolveLifeBanner(life, world, scene, { eventVisuals, birthReveal });
+  const cdnBaseUrl = sceneArtworkBaseUrl();
   const bannerFellBack = failedBannerSrc === banner.assetSrc && banner.assetSrc !== banner.fallbackAssetSrc;
   const activeAssetSrc = bannerFellBack ? banner.fallbackAssetSrc : banner.assetSrc;
   const rawActorSrc = bannerActorSource(life, banner);
@@ -85,11 +87,11 @@ export default function PaperScene({ life, compact, world = engineForLife(life).
   return <figure ref={figure} className={`scene-image paper-scene pixel-scene paper-motion-scene life-banner ${compact ? "paper-in-play" : ""} ${dashboard ? "dashboard-scene" : ""} ${life.phase === "ended" ? "paper-memorial" : ""} ${running ? "motion-running" : "motion-paused"}`} data-scene={scene.scene} data-situation={banner.situation} data-life-stage={banner.stage} data-banner-style={banner.bannerStyle} data-motion={banner.motion} data-motion-state={motionState}>
     <div className="paper-scene-copy" hidden={dashboard}><span className="paper-scene-kicker">Age {life.age} · {formatYear(life.year)}</span><h2>{banner.title}</h2><strong className="life-banner-situation">{banner.situationLabel}</strong><p className="paper-event-caption">{banner.caption}</p></div>
     <div className={`paper-illustration-wrap life-banner-art motion-${banner.motion}`} key={`${banner.assetSrc}-${banner.stage}-${banner.actorPose}`} role="img" aria-label={banner.alt}>
-      <ArtworkImage className="life-banner-background" src={activeAssetSrc} alt="" width={activeWidth} height={activeHeight} fetchPriority="high" onError={() => { if (banner.assetSrc !== banner.fallbackAssetSrc) setFailedBannerSrc(banner.assetSrc); }} />
+      <ArtworkImage className="life-banner-background" src={activeAssetSrc} cdnBaseUrl={cdnBaseUrl} alt="" width={activeWidth} height={activeHeight} fetchPriority="high" onError={() => { if (banner.assetSrc !== banner.fallbackAssetSrc) setFailedBannerSrc(banner.assetSrc); }} />
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} />
       {actorSrc && (
         <div className={`paper-character-layer life-banner-actor pose-${banner.actorPose}`}>
-          <ArtworkImage src={actorSrc} alt="" width={actorWidth} height={actorHeight} onError={() => { if (rawActorSrc && rawActorSrc !== fallbackActorSrc) setFailedActorSrc(rawActorSrc); }} />
+          <ArtworkImage src={actorSrc} cdnBaseUrl={cdnBaseUrl} alt="" width={actorWidth} height={actorHeight} onError={() => { if (rawActorSrc && rawActorSrc !== fallbackActorSrc) setFailedActorSrc(rawActorSrc); }} />
         </div>
       )}
       <PixelAtmosphere motion={banner.motion} water={banner.situation === "harbor" || banner.situation === "war"} front />
