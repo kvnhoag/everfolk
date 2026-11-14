@@ -11,6 +11,8 @@ import { createNpcState } from "../src/npc/runtime.ts";
 import type { WorldPack } from "../src/types.ts";
 import { demoScreen } from "../client/demo/screen.ts";
 import { resolveLifeBanner } from "../client/models/banner-state.ts";
+import { bannerActorFallbackSource, bannerActorSource } from "../client/models/banner-actor.ts";
+import { avatarArtworkOrigin } from "../client/models/life-background.ts";
 import {
   moneylenderPortraitState,
   npcPortraitState,
@@ -67,7 +69,7 @@ function outcomeScene(eventId: string, scene: SceneContext["scene"]): SceneConte
   };
 }
 
-test("all 17 Concept 1 portrait PNGs and 17 Concept 1 480x224 scene PNGs match their manifests", () => {
+test("all 17 Concept 1 portrait PNGs, 24 Concept 1 480x224 scene PNGs, and 1296 Concept 1 actor PNGs match their manifests", () => {
   const portraits = Object.values(concept1Registry.portraits);
   assert.equal(portraits.length, 17);
   for (const portrait of portraits) {
@@ -77,7 +79,7 @@ test("all 17 Concept 1 portrait PNGs and 17 Concept 1 480x224 scene PNGs match t
     assert.equal(bytes[25], 2, portrait.file);
     assert.equal(sha(bytes), portrait.sha256, portrait.file);
   }
-  assert.equal(sceneManifest.scenes.length, 17);
+  assert.equal(sceneManifest.scenes.length, 24);
   for (const scene of sceneManifest.scenes) {
     const bytes = readFileSync(new URL(`../public${scene.src}`, import.meta.url));
     assert.equal(bytes.readUInt32BE(16), 480, scene.file);
@@ -289,6 +291,70 @@ test("NFT citizen fallbacks and collectible card art stay untouched on ordinary-
   assert.match(nftCardHtml, /src="\/assets\/portraits\/ordinary-v3\/ef-p-[mf]0[123]-adult-everyday-v3\.png"/);
 });
 
+test("Concept 1 480x224 actor PNGs match the manifest and swap cleanly across roles and stages", () => {
+  assert.equal(sceneManifest.actors.length, 1296);
+  const seen = new Set<string>();
+  for (const actor of sceneManifest.actors) {
+    assert.equal(seen.has(actor.asset), false, actor.asset);
+    seen.add(actor.asset);
+    const abs = new URL(`../public${actor.asset}`, import.meta.url);
+    const bytes = readFileSync(abs);
+    assert.equal(bytes.readUInt32BE(16), 480, actor.asset);
+    assert.equal(bytes.readUInt32BE(20), 224, actor.asset);
+    assert.equal(bytes[25], 6, `${actor.asset} must remain RGBA`);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), actor.sha256, actor.asset);
+  }
+
+  const base = createEngine(samplePack).start("concept1-actors");
+  const originDir = avatarArtworkOrigin(base.originId);
+  const actorAt = (age: number, jobId: string | null) => ({
+    ...base,
+    age,
+    year: yearAtAge(samplePack.startYear, age),
+    character: { ...base.character!, sex: "male" as const, avatarVariant: 1, jobId },
+  });
+
+  for (const [jobId, expectedRole] of [
+    ["soldier", "military"],
+    ["clerk", "scholar"],
+    ["grain-dealer", "commerce"],
+    ["farmhand", "work"],
+  ] as const) {
+    const adult = actorAt(25, jobId);
+    const banner = resolveLifeBanner(adult, samplePack);
+    assert.equal(
+      bannerActorSource(adult, banner),
+      `/assets/pixel/banners-concept1/actors/${originDir}/male/${expectedRole}-1-${banner.actorPose === "cradle" ? "seated" : banner.actorPose}.png`,
+      jobId,
+    );
+    assert.equal(
+      bannerActorFallbackSource(adult, banner),
+      `/assets/pixel/banners/actors/${originDir}/male/adult-1-${banner.actorPose === "cradle" ? "seated" : banner.actorPose}.svg`,
+      jobId,
+    );
+  }
+
+  const sickSoldier = {
+    ...actorAt(25, "soldier"),
+    health: { conditions: [{ id: samplePack.health!.conditions[0].id, acquiredYear: base.year }] },
+  };
+  const sickBanner = resolveLifeBanner(sickSoldier, samplePack);
+  assert.equal(sickBanner.assetSrc, "/assets/pixel/banners-concept1/bg_rest_chamber_480x224.png");
+  assert.equal(bannerActorSource(sickSoldier, sickBanner), `/assets/pixel/banners-concept1/actors/${originDir}/male/adult-1-reclined.png`);
+
+  const youthApprentice = actorAt(15, "apprentice");
+  assert.equal(
+    bannerActorSource(youthApprentice, resolveLifeBanner(youthApprentice, samplePack)),
+    `/assets/pixel/banners-concept1/actors/${originDir}/male/youth-1-standing.png`,
+  );
+  const elderScholar = actorAt(64, "philosophy-tutor");
+  const elderBanner = resolveLifeBanner(elderScholar, samplePack);
+  assert.equal(
+    bannerActorSource(elderScholar, elderBanner),
+    `/assets/pixel/banners-concept1/actors/${originDir}/male/elder-1-${elderBanner.actorPose}.png`,
+  );
+});
+
 test("Mixed Concept 1 480x224 banners suppress duplicate actors on baked events and preserve swappable actors on generic plates", () => {
   const life = structuredClone(sampleEngine.start("concept1-banners"));
   life.age = 24;
@@ -325,7 +391,7 @@ test("Mixed Concept 1 480x224 banners suppress duplicate actors on baked events 
     ["tenant-farmer", "bg_nile_farm_480x224.png"],
     ["soldier", "bg_military_garrison_480x224.png"],
     ["scientist", "bg_mouseion_study_480x224.png"],
-    ["politician", "bg_mouseion_study_480x224.png"],
+    ["politician", "bg_alexandria_street_480x224.png"],
   ] as const) {
     const worker = { ...life, character: { ...life.character!, jobId } };
     const banner = resolveLifeBanner(worker, lives11World);
@@ -361,7 +427,7 @@ test("Mixed Concept 1 480x224 banners suppress duplicate actors on baked events 
 
   assert.equal(
     resolveLifeBanner(life, lives11World, { id: "infant-home", key: "infant-home", kind: "birth", scene: "birth", motion: "gather", title: "Birth", caption: "Born.", alt: "Birth" }, { birthReveal: true }).assetSrc,
-    "/assets/pixel/banners-concept1/bg_home_courtyard_480x224.png",
+    "/assets/pixel/banners-concept1/bg_home_interior_480x224.png",
   );
   assert.equal(
     resolveLifeBanner(life, lives11World, outcomeScene("later-temple-visit", "history-city")).assetSrc,
