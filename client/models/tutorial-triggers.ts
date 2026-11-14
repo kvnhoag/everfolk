@@ -118,10 +118,16 @@ export function tutorialYearKey(context: TutorialContext): string | null {
   return context.life && IN_GAME_VIEWS.includes(context.view) ? `${context.life.lifeKey}:${context.life.age}` : null;
 }
 
-/** An automatic tip may open now: outside a life in play, for an uncapped tip, or in a year that has had none yet. */
-export function yearAllowsTip(id: TutorialHintId, context: TutorialContext, lastTipYear: string | null): boolean {
+/** The year an automatic tip last opened or was closed in, and which tip it was. */
+export interface TipYear { key: string; hintId: TutorialHintId }
+
+/**
+ * An automatic tip may open now: outside a life in play, for an uncapped tip, in a year that has had none yet, or
+ * when it is that year's own tip coming back (it was pushed aside or hidden before the player read it).
+ */
+export function yearAllowsTip(id: TutorialHintId, context: TutorialContext, last: TipYear | null): boolean {
   const year = tutorialYearKey(context);
-  return year === null || UNCAPPED.includes(id) || year !== lastTipYear;
+  return year === null || UNCAPPED.includes(id) || last === null || year !== last.key || last.hintId === id;
 }
 
 export function hintAvailable(id: TutorialHintId, context: TutorialContext): boolean {

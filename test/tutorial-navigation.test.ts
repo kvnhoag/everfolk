@@ -260,3 +260,15 @@ test("paging a manual tour shows the next tip even when its section is not drawn
   assert.equal(next.mode, "manual", "a paged tip never waits invisibly for its section");
   assert.equal(run(next, context, { type: "back" }).mode, "manual");
 });
+
+test("a tip pushed aside keeps its year, and a tip read late counts for the year it was closed in", () => {
+  const shown = run(INITIAL_TUTORIAL, game({ age: 6 }), { type: "sync" });
+  const away = run(shown, sources, { type: "sync" });
+  assert.equal(away.open, false);
+  assert.equal(run(away, game({ age: 6 }), { type: "sync" }).hintId, "time-bar", "the same tip comes back the same year");
+  // Opened at 6, read at 7: the year 7 has had its tip.
+  const late = run(shown, game({ age: 7 }), { type: "close" });
+  assert.equal(late.open, false);
+  assert.equal(run(late, game({ age: 7 }), { type: "sync" }).open, false);
+  assert.equal(run(late, game({ age: 8 }), { type: "sync" }).hintId, "scene");
+});

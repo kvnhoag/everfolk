@@ -119,13 +119,13 @@ const PROTECTED = [
 ].join(", ");
 
 /** The visible `selector` matches the card should not cover (not its own), measured at most every few hundred ms. */
-function controlRects(selector: string = CONTROLS): { read(card: HTMLElement | null, viewport: { width: number; height: number }): Rect[] } {
+function controlRects(selector: string = CONTROLS): { read(card: HTMLElement | null, viewport: { width: number; height: number }, fresh?: boolean): Rect[] } {
   let cached: Rect[] = [];
   let at = -Infinity;
   return {
-    read(card, viewport) {
+    read(card, viewport, fresh = false) {
       const now = performance.now();
-      if (now - at < CONTROLS_EVERY_MS) return cached;
+      if (!fresh && now - at < CONTROLS_EVERY_MS) return cached;
       at = now;
       cached = Array.from(document.querySelectorAll(selector)).flatMap(element => {
         if (card?.contains(element) || element.closest("[inert], [aria-hidden=true]")) return [];
@@ -154,7 +154,7 @@ export function useTutorialSpotlight(hint: TutorialHint | undefined, hintKey: st
     let frame = 0;
     let previous = INITIAL;
     // Once its target stands still the card is pinned: scrolling the page afterwards never moves it.
-    let pinned: { card: CardPosition; width: number; height: number } | null = null;
+    let pinned: { card: CardPosition; width: number; height: number; missing: boolean } | null = null;
     let stillFrames = 0;
     let lastSpot = "";
     const controls = controlRects();
@@ -172,14 +172,18 @@ export function useTutorialSpotlight(hint: TutorialHint | undefined, hintKey: st
       const spotlight = round(spotlightRect(found?.visible ?? null, viewport, PADDING));
       const missing = !found && !searching && hint.targets.length > 0;
       const offscreen = Boolean(found) && !spotlight;
-      const spotKey = `${JSON.stringify(spotlight)}:${missing}:${offscreen}`;
-      stillFrames = spotKey === lastSpot ? stillFrames + 1 : 0;
+      // Only a target in view (or one truly missing) can settle: one still scrolling in is not counted.
+      const spotKey = `${JSON.stringify(spotlight)}:${missing}`;
+      const settling = (spotlight !== null || missing) && !searching;
+      stillFrames = settling && spotKey === lastSpot ? stillFrames + 1 : 0;
       lastSpot = spotKey;
-      if (pinned && (pinned.width !== viewport.width || pinned.height !== viewport.height)) pinned = null;
+      // A resized window, or a target that appears or vanishes, places the card again.
+      if (pinned && (pinned.width !== viewport.width || pinned.height !== viewport.height || pinned.missing !== missing)) pinned = null;
+      const pinning = !pinned && card !== null && card.offsetWidth > 0 && stillFrames >= CARD_SETTLE_FRAMES;
       const placed = pinned ? pinnedCardPosition(pinned.card, size, viewport)
-        : placeTutorialCard(spotlight, size, viewport, (missing || offscreen) && waitForTarget ? "corner" : "center", controls.read(card, viewport), guarded.read(card, viewport));
+        : placeTutorialCard(spotlight, size, viewport, (missing || offscreen) && waitForTarget ? "corner" : "center", controls.read(card, viewport, pinning), guarded.read(card, viewport, pinning));
       const position = { ...placed, top: Math.round(placed.top), left: Math.round(placed.left) };
-      if (!pinned && !searching && card && card.offsetWidth > 0 && stillFrames >= CARD_SETTLE_FRAMES) pinned = { card: position, ...viewport };
+      if (pinning) pinned = { card: position, ...viewport, missing };
       const next: TutorialLayout = { spotlight, card: position, missing, ready: !searching, offscreen };
       if (!sameLayout(next, previous)) {
         previous = next;

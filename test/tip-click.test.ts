@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { completeAfterClick, tipsCompletedByClick } from "../client/lib/tip-click.ts";
+import { completeAfterClick, completesShownTip, tipsCompletedByClick } from "../client/lib/tip-click.ts";
 import { createTutorialStore } from "../client/state/tutorial-store.ts";
 import type { TutorialHintId } from "../client/models/tutorial-hints.ts";
 import type { TutorialContext } from "../client/models/tutorial-triggers.ts";
@@ -46,4 +46,11 @@ test("nothing is scheduled for a click that completes no tip", () => {
   let scheduled = 0;
   assert.equal(completeAfterClick([], () => {}, () => { scheduled += 1; }), false);
   assert.equal(scheduled, 0);
+});
+
+test("a click that completes the tip on screen lifts its lock at once, so Next decision acts on that click", () => {
+  assert.equal(completesShownTip(["time-bar"], autoTip("time-bar")), true);
+  assert.equal(completesShownTip(["focus"], autoTip("time-bar")), false, "another section's tip leaves the lock in place");
+  assert.equal(completesShownTip(["time-bar"], { open: true, mode: "manual", hintId: "time-bar" }), false, "a manual tip never locks");
+  assert.equal(completesShownTip([], autoTip("time-bar")), false);
 });

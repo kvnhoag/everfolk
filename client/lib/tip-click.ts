@@ -34,6 +34,14 @@ export function tipsCompletedByClick(target: unknown, sectionTips: readonly Tuto
   return hitsActive ? [...sectionTips, active] : [...sectionTips];
 }
 
+/**
+ * The click completes the automatic tip on screen: its lock must lift before the click's own handler runs, so a
+ * control that checks the lock (Next decision) acts on this same click instead of pointing back at the tip.
+ */
+export function completesShownTip(hintIds: readonly TutorialHintId[], state: Pick<TutorialState, "open" | "mode" | "hintId">): boolean {
+  return state.open && state.mode === "auto" && state.hintId !== null && hintIds.includes(state.hintId);
+}
+
 export type Schedule = (run: () => void) => unknown;
 
 const afterHandlers: Schedule = run => setTimeout(run, 0);

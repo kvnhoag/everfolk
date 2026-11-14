@@ -60,3 +60,12 @@ test("the store's Auto mode switch lifts an open guided step", () => {
   assert.equal(store.getSnapshot().open, false);
   assert.ok(store.getSnapshot().seen.includes("time-bar"));
 });
+
+test("turning Auto mode off before a new life syncs leaves that life's first tip on screen", () => {
+  const store = createTutorialStore({ storage: () => undefined });
+  store.setAutoPlay(true);
+  store.setAutoPlay(false);
+  store.setGameContext(game({ age: 0, lifeKey: "next" }));
+  assert.equal(store.getSnapshot().hintId, "time-bar");
+  assert.equal(store.getSnapshot().open, true);
+});

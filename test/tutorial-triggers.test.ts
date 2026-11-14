@@ -162,9 +162,11 @@ test("one automatic tip per in-game year: the year key counts only a life in pla
   assert.equal(tutorialYearKey({ view: "home", characterSection: null, life: facts() }), null, "the home screen is not a year");
   assert.equal(tutorialYearKey({ view: "character", characterSection: null, life: facts({ age: 6, lifeKey: "a" }) }), "a:6");
   assert.equal(yearAllowsTip("yearly-action", year6, null), true);
-  assert.equal(yearAllowsTip("yearly-action", year6, "a:6"), false, "a second tip in the same year waits");
-  assert.equal(yearAllowsTip("yearly-action", game({ age: 7, lifeKey: "a" }), "a:6"), true, "and opens the next year");
-  assert.equal(yearAllowsTip("yearly-action", game({ age: 6, lifeKey: "b" }), "a:6"), true, "a new life starts fresh");
-  assert.equal(yearAllowsTip("ending", game({ age: 6, lifeKey: "a", ended: true }), "a:6"), true);
-  assert.equal(yearAllowsTip("welcome", { view: "home", characterSection: null, life: facts() }, "life:0"), true);
+  const focusAt6 = { key: "a:6", hintId: "focus" as const };
+  assert.equal(yearAllowsTip("yearly-action", year6, focusAt6), false, "a second tip in the same year waits");
+  assert.equal(yearAllowsTip("focus", year6, focusAt6), true, "the year's own tip may come back after being pushed aside");
+  assert.equal(yearAllowsTip("yearly-action", game({ age: 7, lifeKey: "a" }), focusAt6), true, "and opens the next year");
+  assert.equal(yearAllowsTip("yearly-action", game({ age: 6, lifeKey: "b" }), focusAt6), true, "a new life starts fresh");
+  assert.equal(yearAllowsTip("ending", game({ age: 6, lifeKey: "a", ended: true }), focusAt6), true);
+  assert.equal(yearAllowsTip("welcome", { view: "home", characterSection: null, life: facts() }, { key: "life:0", hintId: "time-bar" }), true);
 });

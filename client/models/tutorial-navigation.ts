@@ -1,5 +1,5 @@
 import type { TutorialHintId } from "./tutorial-hints.ts";
-import { availableHints, hintAvailable, triggeredHints, tutorialYearKey, yearAllowsTip, type TutorialContext } from "./tutorial-triggers.ts";
+import { availableHints, hintAvailable, triggeredHints, tutorialYearKey, yearAllowsTip, type TipYear, type TutorialContext } from "./tutorial-triggers.ts";
 
 /** "auto": the game opened a hint at its stage. "manual": the player opened the tutorial (button or "?"). */
 export type TutorialMode = "auto" | "manual";
@@ -26,7 +26,7 @@ export interface TutorialState {
   /** Changes on every opening, so the card animates and takes focus again. */
   run: number;
   /** The in-game year (life and age) of the last automatic tip: at most one opens per year, the rest wait. */
-  tipYear: string | null;
+  tipYear: TipYear | null;
   /** Auto mode plays the life by itself: tips that come due are marked seen instead of stopping it. */
   autoPlay: boolean;
 }
@@ -83,7 +83,8 @@ function autoOpen(state: TutorialState, context: TutorialContext): TutorialState
   if (state.autoPlay && tutorialYearKey(context) !== null) return { ...state, seen: due.reduce(markSeen, state.seen) };
   const next = due.find(id => yearAllowsTip(id, context, state.tipYear));
   if (!next) return state;
-  return { ...state, open: true, mode: "auto", hintId: next, queue: [next], run: state.run + 1, tipYear: tutorialYearKey(context) ?? state.tipYear };
+  const key = tutorialYearKey(context);
+  return { ...state, open: true, mode: "auto", hintId: next, queue: [next], run: state.run + 1, tipYear: key ? { key, hintId: next } : state.tipYear };
 }
 
 /** The screen or the life changed: keep, follow, or quietly drop the open card, then let a new stage's hint open. */
@@ -103,10 +104,15 @@ function sync(state: TutorialState, context: TutorialContext): TutorialState {
   return autoOpen({ ...state, open: false }, context);
 }
 
-/** Closing marks the tip seen; the next waiting tip, if any, takes its place. */
+/**
+ * Closing marks the tip seen; the next waiting tip, if any, takes its place. An automatic tip counts for the year it
+ * is closed in, so one that waited hidden into a new year still leaves that year without another.
+ */
 function close(state: TutorialState, context: TutorialContext): TutorialState {
   if (!state.open) return state;
-  return autoOpen({ ...state, open: false, seen: markSeen(state.seen, state.hintId) }, context);
+  const key = state.mode === "auto" && state.hintId ? tutorialYearKey(context) : null;
+  const tipYear = key && state.hintId ? { key, hintId: state.hintId } : state.tipYear;
+  return autoOpen({ ...state, open: false, seen: markSeen(state.seen, state.hintId), tipYear }, context);
 }
 
 function used(state: TutorialState, context: TutorialContext, hintIds: readonly TutorialHintId[]): TutorialState {

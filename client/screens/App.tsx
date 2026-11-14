@@ -308,6 +308,12 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
     otherOverlayOpen: helpOpen || packMoment !== null,
   }, () => { setReadingPause(false); game.continueLife(); });
   const decisionOpen = Boolean(dashboardVisible && !readingPause && decisionEvent && decisionKey !== deferredDecision && !game.autoDecisions && (game.isPlaying || decisionKey === requestedDecision));
+  // Auto mode never waits for a tip: the one on screen closes as seen and new ones are marked seen as they come.
+  // Declared before the game context, so a new life never syncs with the last life's Auto mode.
+  useEffect(() => {
+    tutorialStore.setAutoPlay(game.autoDecisions && !game.isPreview);
+    return () => tutorialStore.setAutoPlay(false);
+  }, [game.autoDecisions, game.isPreview]);
   useTutorialGameContext(game.isPreview ? NO_TUTORIAL_CONTEXT : gameTutorialContext({
     menuOpen, birthPopoverOpen, hasBegun: game.hasBegun, panel, characterSection: panel === "character" ? characterTab ?? characterSection : null, decisionOpen,
     blockingDialog: restartOpen || worldPickerOpen || householdWelcomeOpen || howToPlayOpen || loanRequest !== null || loanWarningOpen || freePlayBoosterOpen,
@@ -317,8 +323,6 @@ function App({ chainBackend, onChooseWorld, onNewLife, onImportedLife, worldPick
       ...earningFacts(activities, life.economy?.cash, householdCosts(demoView)),
     },
   }));
-  // Auto mode never waits for a tip: the one on screen closes as seen and new ones are marked seen as they come.
-  useEffect(() => { tutorialStore.setAutoPlay(game.autoDecisions && !game.isPreview); }, [game.autoDecisions, game.isPreview]);
   // Once a year: the fields, the focus and the yearly action glow, with a short notice naming them.
   const actionUsed = life.character?.lastActivityAge === life.age;
   // Once per entry into a life: from the main menu, after a new birth, or straight into a ranked life. Closing
