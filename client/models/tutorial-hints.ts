@@ -74,7 +74,7 @@ export const TUTORIAL_HINTS: readonly TutorialHint[] = [
     body: "These tabs run your household: Market & Trade, Farm & Granary, Career & Army, People & Town, and Works & Stewards." },
   { id: "market", targets: [".demo-economy section[aria-label='Grain market']:not([hidden])", ".demo-economy .demo-deck-tabs"], title: "Market & Trade is open",
     help: "Trade grain and goods once a year. This is not the NFT Market.",
-    body: "You are old enough to trade: Market & Trade allows one visit a year to buy or sell grain and goods. The other tabs, Career & Army and People & Town, hold work and the people you deal with." },
+    body: "You are old enough to trade: Market & Trade allows one visit a year to buy or sell grain and goods. The bar above shows what your household owns (grain, cash, flax, linen, herd, fields and standing), and Inventory & Granary what came in and went out. Career & Army and People & Town hold work and the people you deal with." },
   { id: "notifications", targets: [".event-notification-stack"], title: "Notifications",
     body: "Decisions, offers, new skills and life events appear at the right edge. Notices fade after 3 seconds; decisions and offers wait for you.",
     missingBody: "Decisions, offers, new skills and life events appear at the right edge of the screen. Notices fade after 3 seconds; decisions and offers wait for you." },

@@ -1,5 +1,5 @@
 import type { TutorialHintId } from "./tutorial-hints.ts";
-import { availableHints, hintAvailable, triggeredHints, type TutorialContext } from "./tutorial-triggers.ts";
+import { availableHints, hintAvailable, triggeredHints, tutorialYearKey, yearAllowsTip, type TutorialContext } from "./tutorial-triggers.ts";
 
 /** "auto": the game opened a hint at its stage. "manual": the player opened the tutorial (button or "?"). */
 export type TutorialMode = "auto" | "manual";
@@ -25,6 +25,8 @@ export interface TutorialState {
   seen: readonly TutorialHintId[];
   /** Changes on every opening, so the card animates and takes focus again. */
   run: number;
+  /** The in-game year (life and age) of the last automatic tip: at most one opens per year, the rest wait. */
+  tipYear: string | null;
 }
 
 export type TutorialAction =
@@ -39,7 +41,7 @@ export type TutorialAction =
   | { type: "enter"; passed: readonly TutorialHintId[] }
   | { type: "tips"; on: boolean };
 
-export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], run: 0 });
+export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], run: 0, tipYear: null });
 
 /** Shown when the player asks for help on a screen that has no tips of its own. */
 const FALLBACK_HINT: TutorialHintId = "about";
@@ -65,15 +67,17 @@ function manualQueue(context: TutorialContext, hintId: TutorialHintId): Tutorial
 }
 
 /**
- * Opens the next unseen tip that has reached its stage. One tip at a time: the others wait their turn and open, in
- * teaching order, as soon as this one is closed or its section used.
+ * Opens the next unseen tip that has reached its stage. One tip at a time, and at most one per in-game year: the
+ * others wait, in teaching order, for a later year, so the game never stops for several tips in a row.
  */
 function autoOpen(state: TutorialState, context: TutorialContext): TutorialState {
   const due = triggeredHints(context, state.seen);
   if (due.length === 0) return state;
   // Tips off: each new section only glows once. It counts as seen, so it does not glow again.
   if (!state.tipsOn) return { ...state, seen: due.reduce(markSeen, state.seen), flash: { ids: due, run: (state.flash?.run ?? 0) + 1 } };
-  return { ...state, open: true, mode: "auto", hintId: due[0], queue: [due[0]], run: state.run + 1 };
+  const next = due.find(id => yearAllowsTip(id, context, state.tipYear));
+  if (!next) return state;
+  return { ...state, open: true, mode: "auto", hintId: next, queue: [next], run: state.run + 1, tipYear: tutorialYearKey(context) ?? state.tipYear };
 }
 
 /** The screen or the life changed: keep, follow, or quietly drop the open card, then let a new stage's hint open. */

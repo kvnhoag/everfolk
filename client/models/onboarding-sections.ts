@@ -119,12 +119,11 @@ export const SECTION_TIPS: readonly SectionTip[] = [
   { hint: "scene", section: "story", covers: ["story"], fromAge: 1 },
   { hint: "decision", section: "decisions", covers: ["decisions"] },
   { hint: "focus", section: "focus", covers: ["focus", "checklist"] },
-  { hint: "yearly-action", section: "yearly-action", covers: ["yearly-action"] },
-  { hint: "wealth", section: "wealth", covers: ["wealth"] },
+  // Health, knowledge and wealth and the household's goods are introduced by the tips that open with them; the
+  // Character popup has no tip that opens by itself (its "?" still explains it), so the early years stop less often.
+  { hint: "yearly-action", section: "yearly-action", covers: ["yearly-action", "wealth"] },
   { hint: "skills", section: "skill-tree", covers: ["skill-tree"] },
-  { hint: "resources", section: "resources", covers: ["resources", "inventory"] },
-  { hint: "market", section: "deck-market", covers: ["deck-market", "command-deck", "deck-career", "deck-people"] },
-  { hint: "character", section: "character", covers: ["character", "spend"] },
+  { hint: "market", section: "deck-market", covers: ["deck-market", "resources", "inventory", "command-deck", "deck-career", "deck-people"] },
   { hint: "planting", section: "planting", covers: ["planting", "conditions", "deck-farm", "deck-works"] },
 ];
 
