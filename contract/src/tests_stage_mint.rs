@@ -263,4 +263,3 @@ fn second_payment_and_legacy_mint_are_blocked_after_commit() {
     with_gas(ALICE, NearToken::from_yoctonear(GENERIC_FEE), 300);
     c.mint_life(U64(id), e.clone(), sign(&e), "letters.teach".into());
 }
-

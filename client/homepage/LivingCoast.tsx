@@ -34,11 +34,17 @@ export default function LivingCoast({ running, active }: { running: boolean; act
       home.style.setProperty('--coast-rendered-width', `${sceneWidth}px`);
       home.style.setProperty('--coast-viewport-width', `${viewportWidth}px`);
     };
-    const observer = new ResizeObserver(syncSize);
+    // Measure in the next frame so CSS updates cannot feed back into the observer's current delivery.
+    let resizeFrame = 0;
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(syncSize);
+    });
     observer.observe(canvas);
     syncSize();
     return () => {
       observer.disconnect();
+      cancelAnimationFrame(resizeFrame);
       home.style.removeProperty('--coast-rendered-width');
       home.style.removeProperty('--coast-viewport-width');
     };
