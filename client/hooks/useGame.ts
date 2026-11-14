@@ -398,10 +398,15 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     if (yearEndKey !== null && (yearEndKey !== yearEndKeyOf(life) || life.phase !== "ready" || life.character?.lastActivityAge === life.age)) setYearEndKey(null);
   }, [life, yearEndKey]);
 
+  const waitsForYearEnd = useCallback((state: LifeState) =>
+    !isPreview && !autoIntentRef.current && letGoRef.current !== yearEndKeyOf(state)
+      && yearEndChoiceNeeded(engineForLife(state), state), [isPreview]);
+
   const advance = useCallback(() => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
-    // The player let this year's action go: the focus does not act for them.
-    const focus = letGoRef.current === yearEndKeyOf(life) ? "everyday" : focusIdRef.current;
+    if (waitsForYearEnd(life)) { setYearEndKey(yearEndKeyOf(life)); return; }
+    // Manual play recommends a focus action; only Auto mode or lab previews spend it automatically.
+    const focus = letGoRef.current === yearEndKeyOf(life) || !isPreview && !autoIntentRef.current ? "everyday" : focusIdRef.current;
     if (submitOnline(play => advanceOnlineYearWithFocus(play, life, focus))) return;
     try {
       commit(advanceYearWithFocus(engineForLife(life), life, focus));
@@ -409,7 +414,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     } catch (error) {
       setNotice(message(error));
     }
-  }, [commit, hasBegun, life, submitOnline]);
+  }, [commit, hasBegun, life, submitOnline, waitsForYearEnd, isPreview]);
 
   const nextTurningPoint = useCallback(() => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life || life.phase !== "ready") return;
@@ -418,18 +423,22 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       const maxAge = engineForLife(life).world.maxAge;
       for (let years = 0; years <= maxAge; years++) {
         if (next.phase !== "ready") return next;
-        next = await advanceOnlineYearWithFocus(play, next, focusIdRef.current);
+        if (waitsForYearEnd(next)) { setYearEndKey(yearEndKeyOf(next)); return next; }
+        const focus = letGoRef.current === yearEndKeyOf(next) || !isPreview && !autoIntentRef.current ? "everyday" : focusIdRef.current;
+        next = await advanceOnlineYearWithFocus(play, next, focus);
         const loan = next.economy?.loan;
         if (loan && loan.balance > 0 && next.age >= loan.dueAge - 1) return next;
       }
       throw new Error("This life could not reach its next decision.");
     })) return;
     try {
-      const next = advanceToDecisionWithFocus(engineForLife(life), life, focusIdRef.current);
+      const focus = letGoRef.current === yearEndKeyOf(life) || !isPreview && !autoIntentRef.current ? "everyday" : focusIdRef.current;
+      const next = advanceToDecisionWithFocus(engineForLife(life), life, focus, waitsForYearEnd);
       commit(next);
+      if (waitsForYearEnd(next)) setYearEndKey(yearEndKeyOf(next));
       setNotice("");
     } catch (error) { setNotice(message(error)); }
-  }, [commit, hasBegun, life, submitOnline]);
+  }, [commit, hasBegun, life, submitOnline, waitsForYearEnd, isPreview]);
 
   const revealStats = useCallback(() => {
     if (lifeRef.current !== life) return;
@@ -590,7 +599,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
         return;
       }
       // An unspent yearly action is never decided for the player: the year waits for their choice (unless Auto mode is on).
-      if (!isPreview && !autoIntentRef.current && letGoRef.current !== yearEndKeyOf(life) && yearEndChoiceNeeded(engineForLife(life), life)) {
+      if (waitsForYearEnd(life)) {
         setYearEndKey(yearEndKeyOf(life));
         return;
       }
@@ -605,7 +614,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
       window.clearInterval(countdown);
       setClockProgress(yearClock.pause(performance.now()).progress);
     };
-  }, [advance, isClockRunning, life, yearDurationMs, yearClock]);
+  }, [advance, isClockRunning, life, yearDurationMs, yearClock, waitsForYearEnd]);
 
   useEffect(() => {
     if (!canRunAutomaticDecision(pauseState, { hasBegun, phase: life.phase }, isVisible, isOverlayOpen, autoDecisions)) return;
