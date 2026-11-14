@@ -1,5 +1,5 @@
 import type { TutorialHintId } from "./tutorial-hints.ts";
-import { availableHints, hintAvailable, triggeredHints, type TutorialContext } from "./tutorial-triggers.ts";
+import { availableHints, hintAvailable, triggeredHints, tutorialYearKey, yearAllowsTip, type TipYear, type TutorialContext } from "./tutorial-triggers.ts";
 
 /** "auto": the game opened a hint at its stage. "manual": the player opened the tutorial (button or "?"). */
 export type TutorialMode = "auto" | "manual";
@@ -25,6 +25,10 @@ export interface TutorialState {
   seen: readonly TutorialHintId[];
   /** Changes on every opening, so the card animates and takes focus again. */
   run: number;
+  /** The in-game year (life and age) of the last automatic tip: at most one opens per year, the rest wait. */
+  tipYear: TipYear | null;
+  /** Auto mode plays the life by itself: tips that come due are marked seen instead of stopping it. */
+  autoPlay: boolean;
 }
 
 export type TutorialAction =
@@ -37,9 +41,11 @@ export type TutorialAction =
   | { type: "used"; hintIds: readonly TutorialHintId[] }
   /** A life was entered mid-way (a loaded save): tips whose stage already passed count as seen. */
   | { type: "enter"; passed: readonly TutorialHintId[] }
-  | { type: "tips"; on: boolean };
+  | { type: "tips"; on: boolean }
+  /** Auto mode turned on or off. On: the tip on screen closes (seen) and no automatic tip opens in the game. */
+  | { type: "auto-play"; on: boolean };
 
-export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], run: 0 });
+export const INITIAL_TUTORIAL: TutorialState = Object.freeze({ open: false, tipsOn: true, flash: null, mode: "auto", hintId: null, queue: [], seen: [], run: 0, tipYear: null, autoPlay: false });
 
 /** Shown when the player asks for help on a screen that has no tips of its own. */
 const FALLBACK_HINT: TutorialHintId = "about";
@@ -65,15 +71,20 @@ function manualQueue(context: TutorialContext, hintId: TutorialHintId): Tutorial
 }
 
 /**
- * Opens the next unseen tip that has reached its stage. One tip at a time: the others wait their turn and open, in
- * teaching order, as soon as this one is closed or its section used.
+ * Opens the next unseen tip that has reached its stage. One tip at a time, and at most one per in-game year: the
+ * others wait, in teaching order, for a later year, so the game never stops for several tips in a row.
  */
 function autoOpen(state: TutorialState, context: TutorialContext): TutorialState {
   const due = triggeredHints(context, state.seen);
   if (due.length === 0) return state;
   // Tips off: each new section only glows once. It counts as seen, so it does not glow again.
   if (!state.tipsOn) return { ...state, seen: due.reduce(markSeen, state.seen), flash: { ids: due, run: (state.flash?.run ?? 0) + 1 } };
-  return { ...state, open: true, mode: "auto", hintId: due[0], queue: [due[0]], run: state.run + 1 };
+  // Auto mode never waits for a tip: the tips due in the life it plays count as seen and nothing stops the clock.
+  if (state.autoPlay && tutorialYearKey(context) !== null) return { ...state, seen: due.reduce(markSeen, state.seen) };
+  const next = due.find(id => yearAllowsTip(id, context, state.tipYear));
+  if (!next) return state;
+  const key = tutorialYearKey(context);
+  return { ...state, open: true, mode: "auto", hintId: next, queue: [next], run: state.run + 1, tipYear: key ? { key, hintId: next } : state.tipYear };
 }
 
 /** The screen or the life changed: keep, follow, or quietly drop the open card, then let a new stage's hint open. */
@@ -93,10 +104,15 @@ function sync(state: TutorialState, context: TutorialContext): TutorialState {
   return autoOpen({ ...state, open: false }, context);
 }
 
-/** Closing marks the tip seen; the next waiting tip, if any, takes its place. */
+/**
+ * Closing marks the tip seen; the next waiting tip, if any, takes its place. An automatic tip counts for the year it
+ * is closed in, so one that waited hidden into a new year still leaves that year without another.
+ */
 function close(state: TutorialState, context: TutorialContext): TutorialState {
   if (!state.open) return state;
-  return autoOpen({ ...state, open: false, seen: markSeen(state.seen, state.hintId) }, context);
+  const key = state.mode === "auto" && state.hintId ? tutorialYearKey(context) : null;
+  const tipYear = key && state.hintId ? { key, hintId: state.hintId } : state.tipYear;
+  return autoOpen({ ...state, open: false, seen: markSeen(state.seen, state.hintId), tipYear }, context);
 }
 
 function used(state: TutorialState, context: TutorialContext, hintIds: readonly TutorialHintId[]): TutorialState {
@@ -104,6 +120,14 @@ function used(state: TutorialState, context: TutorialContext, hintIds: readonly 
   const closes = state.open && state.mode === "auto" && state.hintId !== null && hintIds.includes(state.hintId);
   if (closes) return close({ ...state, seen: fresh.reduce(markSeen, state.seen) }, context);
   return fresh.length ? { ...state, seen: fresh.reduce(markSeen, state.seen) } : state;
+}
+
+/** Auto mode on: the automatic tip on screen closes as seen (its veil lifts) and others are marked seen as they come. */
+function autoPlay(state: TutorialState, context: TutorialContext, on: boolean): TutorialState {
+  if (state.autoPlay === on) return state;
+  if (!on) return { ...state, autoPlay: false };
+  const shown = state.open && state.mode === "auto";
+  return autoOpen({ ...state, autoPlay: true, open: shown ? false : state.open, seen: shown ? markSeen(state.seen, state.hintId) : state.seen }, context);
 }
 
 function enter(state: TutorialState, context: TutorialContext, passed: readonly TutorialHintId[]): TutorialState {
@@ -139,6 +163,7 @@ export function tutorialReducer(state: TutorialState, action: TutorialAction, co
     }
     // The open card stays open; only the next new section changes how it is shown.
     case "tips": return state.tipsOn === action.on ? state : { ...state, tipsOn: action.on };
+    case "auto-play": return autoPlay(state, context, action.on);
   }
 }
 

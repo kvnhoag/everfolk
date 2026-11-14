@@ -2,6 +2,8 @@ import type { KeyboardEvent, Ref } from "react";
 import type { TutorialHint } from "../models/tutorial-hints.ts";
 import { tutorialKeyAction, type TutorialMode } from "../models/tutorial-navigation.ts";
 import { TUTORIAL_LAYER_CLASS, type CardPosition, type Rect } from "../models/tutorial-placement.ts";
+import { BLOCKED_NOTE_TEXT, useBlockedNote } from "../state/blocked-note.ts";
+import { reportBlockedClick } from "../lib/tip-nudge.ts";
 import "../styles/tutorial.css";
 
 export interface TutorialCardProps {
@@ -52,10 +54,13 @@ export default function TutorialCard({ hint, index, total, mode, missing, ready 
     else onNext();
   }
   const style = position ? { top: position.top, left: position.left } : undefined;
+  const note = useBlockedNote();
   return <div ref={cardRef} className={classes(mode, ready, settled, closing)} data-placement={position?.placement ?? "center"} data-hint={hint.id}
     popover="manual" role="dialog" aria-modal="false" aria-labelledby="tutorial-card-title" aria-describedby="tutorial-card-body" tabIndex={-1} style={style}
     onKeyDown={onKeyDown}>
-    {shield && <div className="tutorial-shield" title="Finish the tip first" style={{ clipPath: shield }} />}
+    {shield && <div className="tutorial-shield" title={BLOCKED_NOTE_TEXT} style={{ clipPath: shield }}
+      onClick={event => { event.preventDefault(); reportBlockedClick(event.nativeEvent); }} />}
+    {shield && note && <p key={note.run} className="tutorial-blocked-note" role="status" style={{ top: note.top, left: note.left }}>{BLOCKED_NOTE_TEXT}</p>}
     {spotlight
       ? <div className="tutorial-spotlight" aria-hidden="true" style={{ top: spotlight.top, left: spotlight.left, width: spotlight.width, height: spotlight.height }} />
       : mode === "manual" && <div className="tutorial-dim" aria-hidden="true" />}

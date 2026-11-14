@@ -57,28 +57,29 @@ test("open ages are listed for every section; event sections have none", () => {
 });
 
 test("every section is introduced by exactly one tip, in teaching order", () => {
-  for (const id of GAME_SECTIONS) assert.equal(SECTION_TIPS.filter(tip => tip.covers.includes(id)).length, 1, `${id} has one tip`);
+  // The Character popup is help-only: its "?" explains it, but no tip stops the game for it.
+  const helpOnly = ["character", "spend"];
+  for (const id of GAME_SECTIONS) assert.equal(SECTION_TIPS.filter(tip => tip.covers.includes(id)).length, helpOnly.includes(id) ? 0 : 1, `${id} has ${helpOnly.includes(id) ? "no" : "one"} tip`);
   for (const tip of SECTION_TIPS) assert.equal(tip.covers[0], tip.section, `${tip.hint} points at its own section first`);
-  assert.deepEqual(SECTION_TIPS.map(tip => tip.hint),
-    ["time-bar", "scene", "decision", "focus", "yearly-action", "wealth", "skills", "resources", "market", "character", "planting"]);
+  assert.deepEqual(SECTION_TIPS.map(tip => tip.hint), ["time-bar", "scene", "decision", "focus", "yearly-action", "skills", "market", "planting"]);
 });
 
 test("Next decision stops at the year a new section with an unseen tip opens", () => {
   const before = visibleSections(facts({ age: 4 }), AGES);
   assert.equal(newGuidedStep(before, visibleSections(facts({ age: 5 }), AGES), []), null, "nothing new at 5");
   assert.equal(newGuidedStep(before, visibleSections(facts({ age: 6 }), AGES), []), "focus", "focus opens at 6");
-  assert.equal(newGuidedStep(before, visibleSections(facts({ age: 6 }), AGES), ["focus", "yearly-action", "wealth"]), null, "seen tips do not stop it");
+  assert.equal(newGuidedStep(before, visibleSections(facts({ age: 6 }), AGES), ["focus", "yearly-action"]), null, "seen tips do not stop it");
   const eleven = visibleSections(facts({ age: 11 }), AGES);
-  assert.equal(newGuidedStep(eleven, visibleSections(facts({ age: 12 }), AGES), []), "resources");
+  assert.equal(newGuidedStep(eleven, visibleSections(facts({ age: 12 }), AGES), []), "market", "the market tip introduces the household's goods too");
   assert.equal(newGuidedStep(eleven, visibleSections(facts({ age: 11, learnedSkills: 1 }), AGES), []), "skills");
-  assert.equal(newGuidedStep(eleven, visibleSections(facts({ age: 12 }), AGES), ["resources"]), "market", "the next unseen tip of that year");
+  assert.equal(newGuidedStep(eleven, visibleSections(facts({ age: 12 }), AGES), ["market"]), null, "nothing else opens a tip that year");
 });
 
 test("a save opened mid-life treats the tips of sections already open before this year as seen", () => {
   assert.deepEqual(tipsPassedOnEntry(facts({ age: 0 }), AGES), []);
   assert.deepEqual(tipsPassedOnEntry(facts({ age: 6 }), AGES), ["time-bar", "scene"], "the tips of this year still show");
   assert.deepEqual(tipsPassedOnEntry(facts({ age: 13, learnedSkills: 2, hadDecision: true }), AGES),
-    ["time-bar", "scene", "decision", "focus", "yearly-action", "wealth", "skills", "resources", "market", "character"]);
+    ["time-bar", "scene", "decision", "focus", "yearly-action", "skills", "market"]);
   assert.deepEqual(tipsPassedOnEntry(facts({ age: 40, learnedSkills: 2, hadDecision: true }), AGES), SECTION_TIPS.map(tip => tip.hint));
 });
 

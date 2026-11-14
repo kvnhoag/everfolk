@@ -90,6 +90,8 @@ export function createTutorialStore({ storage }: TutorialStoreOptions) {
     used: (hintIds: readonly TutorialHintId[]) => { if (hintIds.length) dispatch({ type: "used", hintIds }); },
     /** Turns automatic tip cards on or off. Off: new sections glow instead. The Tutorial and "?" buttons always open cards. */
     setTipsOn: (on: boolean) => dispatch({ type: "tips", on }),
+    /** Auto mode on or off. On: the automatic tip on screen closes and new ones are marked seen, so play never waits. */
+    setAutoPlay: (on: boolean) => dispatch({ type: "auto-play", on }),
   };
 }
 
