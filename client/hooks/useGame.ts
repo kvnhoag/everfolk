@@ -8,7 +8,8 @@ import { engineForLife, loadAnyLife, registerLifeEngine } from "../lib/world-ses
 import { hasBirthStatsBeenRevealed, hasLifeBegun, readArchivedLives, readRawSavedLife, readSavedLife } from "../queries/lives.ts";
 import type { ArchivedLife } from "../types/session.ts";
 import { advanceToDecisionWithFocus, advanceYearWithFocus, focusActivity, normalizeYearlyFocus, selectAutomaticChoice, yearlyFocusStorageKey } from "../models/yearly-focus.ts";
-import { yearEndChoiceNeeded, yearEndKeyOf } from "../models/year-end-choice.ts";
+import { yearEndKeyOf, yearEndShouldStop, yearEndStopStorageKey } from "../models/year-end-choice.ts";
+import { clearYearEndStopAge, readYearEndStopAge, writeYearEndStopAge } from "../storage/year-end-stop.ts";
 import { persistYearlyFocus } from "../mutations/yearly-focus.ts";
 import { readYearlyFocus } from "../queries/yearly-focus.ts";
 import type { YearlyFocusId } from "../models/yearly-focus.ts";
@@ -387,11 +388,22 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
   }, [commit, life, submitOnline]);
 
   const letGoRef = useRef<string | null>(null);
+  const lastYearEndStopRef = useRef(new Map<string, number | null>());
+  const readLastYearEndStop = useCallback((state: Pick<LifeState, "worldFingerprint" | "seed">) => {
+    const key = yearEndStopStorageKey(state);
+    if (lastYearEndStopRef.current.has(key)) return lastYearEndStopRef.current.get(key) ?? null;
+    const stored = isPreview ? null : readYearEndStopAge(state);
+    lastYearEndStopRef.current.set(key, stored);
+    return stored;
+  }, [isPreview]);
   /** The player chose to let this year's action go: the year ends without it. */
   const letYearEndGo = useCallback(() => {
-    letGoRef.current = yearEndKeyOf(lifeRef.current);
+    const current = lifeRef.current;
+    letGoRef.current = yearEndKeyOf(current);
+    lastYearEndStopRef.current.set(yearEndStopStorageKey(current), current.age);
+    if (!isPreview) writeYearEndStopAge(current, current.age);
     setYearEndKey(null);
-  }, []);
+  }, [isPreview]);
   /** The player spent the action (or the life moved on): the year carries on. */
   const closeYearEnd = useCallback(() => setYearEndKey(null), []);
   useEffect(() => {
@@ -400,7 +412,7 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   const waitsForYearEnd = useCallback((state: LifeState) =>
     !isPreview && !autoIntentRef.current && letGoRef.current !== yearEndKeyOf(state)
-      && yearEndChoiceNeeded(engineForLife(state), state), [isPreview]);
+      && yearEndShouldStop(engineForLife(state), state, readLastYearEndStop(state)), [isPreview, readLastYearEndStop]);
 
   const advance = useCallback(() => {
     if (pendingRef.current || !canUseLifeCommands({ hasBegun: hasBegunRef.current, phase: lifeRef.current.phase }) || lifeRef.current !== life) return;
@@ -471,6 +483,8 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
 
   const restart = useCallback(() => {
     if (onlineRef.current || rankedRef.current) return; // Authoritative lives are replaced only by their container.
+    letGoRef.current = null;
+    lastYearEndStopRef.current.delete(yearEndStopStorageKey(lifeRef.current));
     unreadableSaveRef.current = null;
     setUnreadableSave(null);
     setPlaying(false);
@@ -505,6 +519,9 @@ export function useGame({ isOverlayOpen: overlayFromApp = false, startFresh = fa
     }
     try {
       const restored = loadAnyLife(json);
+      letGoRef.current = null;
+      lastYearEndStopRef.current.delete(yearEndStopStorageKey(restored));
+      if (!isPreview) clearYearEndStopAge(restored);
       unreadableSaveRef.current = null;
       setUnreadableSave(null);
       let begun = restored.commands.some(command => command.type !== "avatar") || restored.phase === "ended";

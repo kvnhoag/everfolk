@@ -74,6 +74,7 @@ const GAME_DIALOGS = [
   "client/components/LoanDeadlineDialog.tsx",
   "client/components/HowToPlay.tsx",
   "client/components/HouseholdWelcome.tsx",
+  "client/components/AutoModeConfirmDialog.tsx",
   "client/chain/FreePlayBoosterModal.tsx",
 ];
 

@@ -4,7 +4,8 @@ import { readFileSync } from "node:fs";
 import { createEngine } from "../src/index.ts";
 import { advanceToDecisionWithFocus, focusActivity } from "../client/models/yearly-focus.ts";
 import type { LifeState, WorldPack } from "../src/types.ts";
-import { focusLabel, yearEndChoiceNeeded, yearEndKeyOf, yearEndOptions } from "../client/models/year-end-choice.ts";
+import { focusLabel, yearEndChoiceNeeded, yearEndKeyOf, yearEndOptions, yearEndShouldStop } from "../client/models/year-end-choice.ts";
+import { clearYearEndStopAge, readYearEndStopAge, writeYearEndStopAge } from "../client/storage/year-end-stop.ts";
 
 const world = JSON.parse(readFileSync(new URL("../worlds/demo/alexandria-lives-9.json", import.meta.url), "utf8")) as WorldPack;
 const engine = createEngine(world);
@@ -111,4 +112,88 @@ test("fast-forward from birth stops at an ordinary decision or an unspent yearly
     life = engine.choose(next, engine.getChoices(next)[0].id);
   }
   assert.fail("fast-forward did not reach the yearly action boundary");
+});
+
+function readyStateAt(base: LifeState, age: number, lastActivityAge: number | null = null): LifeState {
+  return {
+    ...base,
+    age,
+    phase: "ready",
+    pendingEventId: null,
+    character: { ...base.character!, lastActivityAge },
+  };
+}
+
+test("year-end box stops at ages 6 and 7, skips 8 to 11, then stops once per 5 consecutive unused years", () => {
+  const base = liveTo("year-end-schedule", 18);
+  const actAges = (life: LifeState) => JSON.parse(engine.save(life)).commands.filter((c: { type: string }) => c.type === "act").length;
+  assert.equal(actAges(base), 0, "baseline life spent no actions");
+
+  for (const age of [0, 3, 5]) {
+    assert.equal(yearEndShouldStop(engine, readyStateAt(base, age), null), false, `age ${age} is before yearly action opens`);
+  }
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 6), null), true, "age 6 stops");
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 6), 6), false, "skipping age 6 does not re-open on age 6");
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 7), 6), true, "age 7 stops");
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 7), 7), false, "skipping age 7 does not re-open on age 7");
+
+  for (const age of [8, 9, 10, 11]) {
+    assert.equal(yearEndShouldStop(engine, readyStateAt(base, age), 7), false, `age ${age} does not stop after skipping at 7`);
+    assert.equal(yearEndShouldStop(engine, readyStateAt(base, age, 7), null), false, `age ${age} does not stop after acting at 7`);
+  }
+
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 12), 7), true, "age 12 stops after 5 unused years (8-12)");
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 12, 7), null), true, "age 12 stops when age 7 was spent and 8-12 were unused");
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 12), 12), false, "skipping age 12 does not re-open on age 12");
+
+  for (const age of [13, 14, 15, 16]) {
+    assert.equal(yearEndShouldStop(engine, readyStateAt(base, age), 12), false, `age ${age} does not stop before 5 more unused years`);
+  }
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 17), 12), true, "age 17 stops after 5 more unused years (13-17)");
+});
+
+test("using a yearly action resets the 5-year stretch so only 5 consecutive unused years trigger a stop", () => {
+  const base = liveTo("year-end-reset", 18);
+  // Skipped at 7, then acted manually at age 10: ages 11-14 have fewer than 5 unused years since 10.
+  for (const age of [11, 12, 13, 14]) {
+    assert.equal(yearEndShouldStop(engine, readyStateAt(base, age, 10), 7), false, `age ${age} is only ${age - 10} unused years after age 10`);
+  }
+  assert.equal(yearEndShouldStop(engine, readyStateAt(base, 15, 10), 7), true, "age 15 stops after 5 unused years (11-15)");
+});
+
+test("advancing through real years 6-18 stops for year-end at 6, 7, 12, 17 and skips 8-11 with nothing spent", () => {
+  let life = engine.start("year-end-schedule");
+  let lastStopped: number | null = null;
+  const stoppedAges: number[] = [];
+
+  for (let step = 0; step < 80 && life.age <= 18 && life.phase !== "ended"; step++) {
+    life = advanceToDecisionWithFocus(engine, life, "everyday", state => yearEndShouldStop(engine, state, lastStopped));
+    if (life.phase === "choice") {
+      life = engine.choose(life, engine.getChoices(life)[0].id);
+    } else if (life.phase === "ready" && yearEndShouldStop(engine, life, lastStopped)) {
+      if (life.age <= 18) stoppedAges.push(life.age);
+      lastStopped = life.age;
+    }
+  }
+  assert.deepEqual(stoppedAges, [6, 7, 12, 17], "stops at 6, 7, 12, and 17 without stopping at 8-11 or 13-16");
+  const acts = JSON.parse(engine.save(life)).commands.filter((c: { type: string }) => c.type === "act");
+  assert.equal(acts.length, 0, "unused years pass with nothing spent");
+});
+
+test("year-end stop storage and useGame integration remember skipped ages safely", () => {
+  const life = liveTo("year-end-storage", 12);
+  const store = new Map<string, string>();
+  const storage = {
+    getItem: (key: string) => store.get(key) ?? null,
+    setItem: (key: string, value: string) => { store.set(key, value); },
+    removeItem: (key: string) => { store.delete(key); },
+  };
+  assert.equal(readYearEndStopAge(life, storage), null);
+  writeYearEndStopAge(life, 12, storage);
+  assert.equal(readYearEndStopAge(life, storage), 12);
+  clearYearEndStopAge(life, storage);
+  assert.equal(readYearEndStopAge(life, storage), null);
+
+  const useGameSource = readFileSync(new URL("../client/hooks/useGame.ts", import.meta.url), "utf8");
+  assert.match(useGameSource, /yearEndShouldStop\(engineForLife\(state\), state, readLastYearEndStop\(state\)\)/);
 });
